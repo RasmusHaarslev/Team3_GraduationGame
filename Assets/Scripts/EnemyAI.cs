@@ -27,7 +27,6 @@ public class EnemyAI : MonoBehaviour {
 		playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;
 		distance = Vector3.Distance (initialPos, transform.position);
 		distanceToLeader = Vector3.Distance (transform.position, playerPos);
-
 		if (distance > 8) 
 		{
 			agent.SetDestination (initialPos);
@@ -38,10 +37,11 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	public void chaseFriendly(Vector3 pos) {
-		agent.SetDestination (playerPos);
+		
 		foreach (GameObject child in children) {
 			child.GetComponent<EnemyMinionAI> ().GetNearestFriendly ();
 		}
+		agent.SetDestination (playerPos);
 		EventManager.Instance.TriggerEvent (new EnemySpottedEvent (transform.position));
 	}
 }
