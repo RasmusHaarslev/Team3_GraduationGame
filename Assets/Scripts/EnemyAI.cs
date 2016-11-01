@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour {
 
@@ -8,12 +9,17 @@ public class EnemyAI : MonoBehaviour {
 	float distance;
 	float distanceToLeader;
 	Vector3 playerPos;
+	public List<GameObject> friendlies;
+	bool getNearest;
+	public List<GameObject> children;
 
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
 		initialPos = transform.position;
-	
+		friendlies.AddRange (GameObject.FindGameObjectsWithTag ("Friendly"));
+		friendlies.Add (GameObject.FindGameObjectWithTag ("Player"));
+		children.AddRange (GameObject.FindGameObjectsWithTag ("Unfriendly"));
 	}
 	
 	// Update is called once per frame
@@ -33,6 +39,9 @@ public class EnemyAI : MonoBehaviour {
 
 	public void chaseFriendly(Vector3 pos) {
 		agent.SetDestination (playerPos);
+		foreach (GameObject child in children) {
+			child.GetComponent<EnemyMinionAI> ().GetNearestFriendly ();
+		}
 		EventManager.Instance.TriggerEvent (new EnemySpottedEvent (transform.position));
 	}
 }
