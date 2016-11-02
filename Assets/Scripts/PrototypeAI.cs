@@ -53,6 +53,7 @@ namespace AIns.FSM
 
 		IEnumerator ChaseState ()
 		{
+            agent.stoppingDistance = 1;
 			agent.SetDestination (enemyPosition);
 
 			yield return new TransitionTo (StartState, DefaultTransition);
@@ -60,7 +61,7 @@ namespace AIns.FSM
 
 		IEnumerator FollowState ()
 		{
-
+            agent.stoppingDistance = 0;
 			if (index == 0) {
 				agent.SetDestination (leader.transform.position + Vector3.left + Vector3.left);
 			} else if (index == 1) {
