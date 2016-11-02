@@ -4,6 +4,7 @@ using System.Collections;
 public class FollowPlayer : MonoBehaviour {
 
 	GameObject player;
+    public Vector3 CameraPositionInRelationToPlayer = new Vector3(0, 12, -13);
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +13,6 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = player.transform.position + new Vector3 (0,12,-13);
+		transform.position = player.transform.position + CameraPositionInRelationToPlayer;
 	}
 }
