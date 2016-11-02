@@ -9,7 +9,7 @@ public class EnemyMinionAI : MonoBehaviour
 	Vector3 initialPos;
 	float distance;
 	public List<float> distancesToFriendly;
-	Vector3 nearestFriendlyPosition;
+	public Vector3 nearestFriendlyPosition;
 	GameObject leader;
 	public List<GameObject> friendlies;
 
@@ -29,7 +29,7 @@ public class EnemyMinionAI : MonoBehaviour
 	void Update ()
 	{
 		distance = Vector3.Distance (initialPos, transform.position);
-		if (distance > 20) 
+		if (distance > 10) 
 		{
 			agent.SetDestination (initialPos);
 		}
@@ -40,9 +40,11 @@ public class EnemyMinionAI : MonoBehaviour
 		float min = float.MaxValue;
 		for (int i = 0; i < friendlies.Count; i++) {
 			distancesToFriendly [i] = Vector3.Distance (transform.position, friendlies [i].transform.position);
-			if(distancesToFriendly [i] < min)
+			if(distancesToFriendly [i] < min) {
+                min = distancesToFriendly[i];
 				nearestFriendlyPosition = friendlies [i].transform.position;
-		}
+            }
+        }
 		Debug.Log ("nearest");
 		agent.SetDestination (nearestFriendlyPosition);
 	}
