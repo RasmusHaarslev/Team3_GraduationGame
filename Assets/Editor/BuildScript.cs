@@ -10,7 +10,7 @@ class BuildScript
     [MenuItem("Build/Android")]
     static void PerformBuild()
     {
-        string[] scenes = { "Assets/_Project/_Scenes/IntroCutscene.unity", "Assets/_Project/_Scenes/Gameplay.unity", "Assets/_Project/_Scenes/WinCutscene.unity" };
+		string[] scenes = { "Assets/TestScenes/EnvironmentPrototype.unity" };
 
         string buildPath = "../Build/Android/";
         string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + "_build.apk";
