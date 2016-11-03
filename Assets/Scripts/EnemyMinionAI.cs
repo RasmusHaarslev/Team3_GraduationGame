@@ -45,7 +45,6 @@ public class EnemyMinionAI : MonoBehaviour
 				nearestFriendlyPosition = friendlies [i].transform.position;
             }
         }
-		Debug.Log ("nearest");
 		agent.SetDestination (nearestFriendlyPosition);
 	}
 }
