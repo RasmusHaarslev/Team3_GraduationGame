@@ -118,3 +118,12 @@ public class DefendStateEvent : GameEvent
     }
 
 }
+
+public class EnemyDeathEvent : GameEvent
+{
+	public EnemyDeathEvent()
+	{
+
+	}
+
+}
