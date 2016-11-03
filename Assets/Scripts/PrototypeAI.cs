@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 
 namespace AIns.FSM
 {
@@ -12,7 +12,7 @@ namespace AIns.FSM
 		public int index;
 		public bool enemySpotted = false;
 		Vector3 enemyPosition;
-
+        bool attack = false;
 
 
 		// Update is called once per frame
@@ -23,7 +23,9 @@ namespace AIns.FSM
 
 		void OnEnable ()
 		{
-			EventManager.Instance.StartListening<EnemySpottedEvent> (EnemySpotted);
+            EventManager.Instance.StartListening<AttackStateEvent>(Attack);
+            EventManager.Instance.StartListening<DefendStateEvent>(Defend);
+            EventManager.Instance.StartListening<EnemySpottedEvent> (EnemySpotted);
 			EventManager.Instance.StartListening<CeaseFightingEvent> (CeaseFighting);
 			agent = GetComponent<NavMeshAgent> ();
 			leader = GameObject.FindGameObjectWithTag ("Player");
@@ -31,11 +33,23 @@ namespace AIns.FSM
 
 		void OnDestroy ()
 		{
-			EventManager.Instance.StopListening<EnemySpottedEvent> (EnemySpotted);
+            EventManager.Instance.StopListening<AttackStateEvent>(Attack);
+            EventManager.Instance.StopListening<DefendStateEvent>(Defend);
+            EventManager.Instance.StopListening<EnemySpottedEvent> (EnemySpotted);
 			EventManager.Instance.StopListening<CeaseFightingEvent> (CeaseFighting);
 		}
 
-		protected override StateRoutine InitialState {
+        private void Defend(DefendStateEvent e)
+        {
+            attack = false;
+        }
+
+        private void Attack(AttackStateEvent e)
+        {
+            attack = true;
+        }
+
+        protected override StateRoutine InitialState {
 
 			get {
 				return StartState;
@@ -53,8 +67,16 @@ namespace AIns.FSM
 
 		IEnumerator ChaseState ()
 		{
-            agent.stoppingDistance = 1;
-			agent.SetDestination (enemyPosition);
+            if (attack)
+            {
+                agent.stoppingDistance = 1;
+                agent.SetDestination(enemyPosition);
+            }
+            else
+            {
+                yield return new TransitionTo(FollowState, DefaultTransition);
+            }
+            
 
 			yield return new TransitionTo (StartState, DefaultTransition);
 		}
@@ -63,21 +85,26 @@ namespace AIns.FSM
 		{
             agent.stoppingDistance = 0;
 			if (index == 0) {
-				agent.SetDestination (leader.transform.position + Vector3.left + Vector3.left);
+				agent.SetDestination(leader.transform.position - leader.transform.right * 2);
 			} else if (index == 1) {
-				agent.SetDestination (leader.transform.position + Vector3.right + Vector3.right);
+				agent.SetDestination (leader.transform.position + leader.transform.right * 2);
 			} else if (index == 2) {
-				agent.SetDestination (leader.transform.position + Vector3.forward + Vector3.forward);
+				agent.SetDestination (leader.transform.position + leader.transform.forward *2);
 			} else if (index == 3) {
-				agent.SetDestination (leader.transform.position + Vector3.back + Vector3.back);
+				agent.SetDestination (leader.transform.position - leader.transform.forward *2);
 			}
 			yield return new TransitionTo (StartState, DefaultTransition);
 		}
 
 		IEnumerator CombatState ()
 		{
-			
-			agent.SetDestination (enemyPosition);
+			if (attack)
+            {
+                agent.SetDestination(enemyPosition);
+            } else
+            {
+
+            }
 
 			yield return new TransitionTo (StartState, DefaultTransition);
 		}
