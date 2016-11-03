@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using Assets.ModuleDesigner.Scripts.BaseClasses;
+using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
     public class TriggerModule : MonoBehaviour
     {
-        public ITriggerReceiver[] Targets;
+        public TriggerReceiver[] Targets;
 
-        void OnCollisionEnter(Collider col)
-        {
+        void OnTriggerEnter(Collider other)
+            {
             foreach (var target in Targets)
             {
                 target.Trigger();
