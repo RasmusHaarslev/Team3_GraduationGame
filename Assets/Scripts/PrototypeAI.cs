@@ -105,7 +105,6 @@ namespace AIns.FSM
             {
 
             }
-			
 
 			yield return new TransitionTo (StartState, DefaultTransition);
 		}
