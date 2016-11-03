@@ -27,6 +27,11 @@ namespace Assets.ModuleDesigner.Scripts
             Gizmos.DrawSphere(transform.position + new Vector3(0, 0.5f, 0), 0.5f);
             Gizmos.color = ObjectsToAffect.Length > 0 ? Color.green : Color.red;
             Gizmos.DrawSphere(transform.position + new Vector3(0,1.5f,0), 0.25f);
+
+            foreach (var obj in ObjectsToAffect)
+            {
+                Gizmos.DrawLine(this.transform.position + new Vector3(0,2,0), obj.transform.position);
+            }
         }
     }
 }
