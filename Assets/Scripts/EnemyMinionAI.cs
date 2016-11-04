@@ -12,6 +12,7 @@ public class EnemyMinionAI : MonoBehaviour
 	public Vector3 nearestFriendlyPosition;
 	GameObject leader;
 	public List<GameObject> friendlies;
+	public int health = 5;
 
 	// Use this for initialization
 	void Start ()
@@ -28,11 +29,30 @@ public class EnemyMinionAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		distance = Vector3.Distance (initialPos, transform.position);
-		if (distance > 10) 
+		leader = GameObject.Find("EnemyLeader");
+		if (leader == null)
 		{
-			agent.SetDestination (initialPos);
+			agent.SetDestination(new Vector3(0, 0, 0));
 		}
+		else
+		{
+			distance = Vector3.Distance(initialPos, transform.position);
+			if (distance > 10)
+			{
+				agent.SetDestination(initialPos);
+			}
+		}
+
+		if (health <= 0)
+		{
+			gameObject.SetActive(false);
+			EventManager.Instance.TriggerEvent(new EnemyDeathEvent());
+		}
+		if (health < 2)
+		{
+			agent.SetDestination(new Vector3(0, 0, 0));
+		}
+
 	}
 
 	public void GetNearestFriendly ()
@@ -45,7 +65,14 @@ public class EnemyMinionAI : MonoBehaviour
 				nearestFriendlyPosition = friendlies [i].transform.position;
             }
         }
-		Debug.Log ("nearest");
 		agent.SetDestination (nearestFriendlyPosition);
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "FriendlyWeapon")
+		{
+			health--;
+		}
 	}
 }

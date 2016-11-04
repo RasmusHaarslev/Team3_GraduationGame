@@ -17,7 +17,6 @@ public class TriggerChase : MonoBehaviour {
 
 	void OnTriggerStay(Collider col) {
 		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly" ) {
-			Debug.Log ("Happening");
 			parentGo.GetComponent<EnemyAI> ().chaseFriendly (col.transform.position);
 		}
 	}

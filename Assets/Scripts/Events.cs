@@ -100,3 +100,30 @@ public class CeaseFightingEvent : GameEvent {
 	}
 
 }
+
+public class AttackStateEvent : GameEvent
+{
+    public AttackStateEvent()
+    {
+    }
+
+}
+
+
+public class DefendStateEvent : GameEvent
+{
+    public DefendStateEvent()
+    {
+
+    }
+
+}
+
+public class EnemyDeathEvent : GameEvent
+{
+	public EnemyDeathEvent()
+	{
+
+	}
+
+}

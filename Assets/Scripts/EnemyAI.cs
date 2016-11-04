@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour {
 	public List<GameObject> friendlies;
 	bool getNearest;
 	public List<GameObject> children;
+	public int health = 8;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,15 @@ public class EnemyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (health <= 0)
+		{
+			gameObject.SetActive(false);
+			EventManager.Instance.TriggerEvent(new EnemyDeathEvent());
+		}
+		if (health < 2)
+		{
+			agent.SetDestination(new Vector3(0, 0, 0));
+		}
 		playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;
 		distance = Vector3.Distance (initialPos, transform.position);
 		distanceToLeader = Vector3.Distance (transform.position, playerPos);
@@ -33,6 +43,14 @@ public class EnemyAI : MonoBehaviour {
 		}
 		if (distanceToLeader > 5) {
 			EventManager.Instance.TriggerEvent (new CeaseFightingEvent());
+		}
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "FriendlyWeapon")
+		{
+			health--;
 		}
 	}
 
