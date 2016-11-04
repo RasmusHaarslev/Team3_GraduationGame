@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class TriggerModule : MonoBehaviour
+    public class SphereTrigger : MonoBehaviour
     {
+        [Header("Trigger options")]
+        public TagEnum TagToTrigger;
+
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
         public Boolean KeepGizmo = true;
@@ -14,8 +17,8 @@ namespace Assets.ModuleDesigner.Scripts
         public TriggerReceiver[] Targets;
 
         void OnTriggerEnter(Collider other)
-        {
-            if (other.tag == "Player")
+        {    
+            if (other.tag == TagToTrigger.ToString())
             {
                 foreach (var target in Targets)
                 {
@@ -44,7 +47,7 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(transform.position, transform.localScale);
+            Gizmos.DrawWireSphere(transform.position, transform.localScale.x/2);
 
             foreach (var obj in Targets)
             {
@@ -56,6 +59,11 @@ namespace Assets.ModuleDesigner.Scripts
 
         void OnValidate()
         {
+            /*foreach (var tag in UnityEditorInternal.InternalEditorUtility.tags)
+            {
+                print(tag);
+            }*/
+
             foreach (var target in Targets)
             {
                 target.Expose(this.gameObject);
