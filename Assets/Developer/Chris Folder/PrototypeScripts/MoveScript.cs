@@ -4,7 +4,7 @@ using System.Collections;
 public class MoveScript : MonoBehaviour {
 
 	NavMeshAgent agent;
-
+	public int health = 1000000;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +16,18 @@ public class MoveScript : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Mouse0))
 			{
 			MoveToClickPosition ();
+		}
+		if (health <= 0)
+		{
+			gameObject.SetActive(false);
+		}
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "EnemyWeapon")
+		{
+			health--;
 		}
 	}
 
