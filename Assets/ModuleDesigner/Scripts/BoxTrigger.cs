@@ -6,6 +6,9 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class BoxTrigger : MonoBehaviour
     {
+        [Header("Trigger options")]
+        public TagEnum TagToTrigger;
+
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
         public Boolean KeepGizmo = true;
@@ -15,7 +18,7 @@ namespace Assets.ModuleDesigner.Scripts
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Player")
+            if (other.tag == TagToTrigger.ToString())
             {
                 foreach (var target in Targets)
                 {
@@ -26,7 +29,7 @@ namespace Assets.ModuleDesigner.Scripts
 
         void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Player")
+            if (other.tag == TagToTrigger.ToString())
             {
                 foreach (var target in Targets)
                 {
