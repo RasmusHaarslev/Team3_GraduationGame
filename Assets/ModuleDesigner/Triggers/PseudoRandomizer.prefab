@@ -19,12 +19,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011397785074}
-  - 135: {fileID: 135000011258984818}
   - 23: {fileID: 23000010639329058}
   - 33: {fileID: 33000013955864336}
-  - 114: {fileID: 114000012226389710}
+  - 114: {fileID: 114000011555849160}
   m_Layer: 0
-  m_Name: Randomizer
+  m_Name: PseudoRandomizer
   m_TagString: ModuleNetwork
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,8 +77,8 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012338234994}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114000012226389710
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114000011555849160
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -87,22 +86,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012338234994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc0cf15b241fd14f8b5fc87c5b01927, type: 3}
+  m_Script: {fileID: 11500000, guid: 4994b9d5303eb434c8fcbe8daf72413b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   KeepGizmo: 1
-  IndividualRolls: 1
-  ChanceForTrigger: 50
+  AmountOfTriggers: 0
   Targets: []
---- !u!135 &135000011258984818
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012338234994}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
