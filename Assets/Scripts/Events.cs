@@ -17,104 +17,77 @@ public class InstantiateGame : GameEvent {
 
 }
 
-public class PlayerSpottedEvent : GameEvent {
 
-	public Vector3 lastSeenPosition { get; private set; }
+// The event called when the attack command is cast
+public class OffensiveStateEvent : GameEvent
+{
+    public OffensiveStateEvent()
+    {
+    }
+}
 
-	public PlayerSpottedEvent(Vector3 lastSeenPosition) {
-		this.lastSeenPosition = lastSeenPosition;
+// The event called when the defend command is cast
+public class DefendStateEvent : GameEvent
+{
+    public DefendStateEvent()
+    {
+    }
+}
+
+// The event called when the flee command is cast
+public class FleeStateEvent : GameEvent
+{
+	public FleeStateEvent()
+	{
+	}
+}
+
+// The event called when the follow command is cast
+public class FollowStateEvent : GameEvent
+{
+	public FollowStateEvent()
+	{
+	}
+}
+
+// The event called when the stay command is cast
+public class StayStateEvent : GameEvent
+{
+	public StayStateEvent()
+	{
+	}
+}
+
+#region Prototype events
+// Events required for functional prototype
+public class EnemyDeathEvent : GameEvent
+{
+	public EnemyDeathEvent()
+	{
+
 	}
 
 }
 
-public class AlarmEvent : GameEvent {
 
-	public Vector3 AlarmAtPosition { get; private set; }
-
-	public AlarmEvent(Vector3 AlarmAtPosition) {
-		this.AlarmAtPosition = AlarmAtPosition;
-	}
-
-}
- 
-public class DeadEvent : GameEvent {
-
-	public DeadEvent() {
-	}
-
-}
-
-public class PickUpKey : GameEvent {
-    public GameObject key;
-
-    public PickUpKey (GameObject key) {
-        this.key = key;
-    }
-}
-
-public class OpenGate : GameEvent {
-
-	public OpenGate () {
-	}
-}
-
-public class CompletedLevel : GameEvent {
-
-    public CompletedLevel () {
-    }
-}
-
-public class StartTimer : GameEvent {
-
-    public float Time;
-
-    public StartTimer(float Time) {
-        this.Time = Time;
-    }
-}
-
-public class RemoveUI : GameEvent {
-
-    public int amountToRemove;
-
-    public RemoveUI(int amountToRemove) {
-        this.amountToRemove = amountToRemove;
-    }
-}
-
-public class EnemySpottedEvent : GameEvent {
+public class EnemySpottedEvent : GameEvent
+{
 
 	public Vector3 pos;
 
-	public EnemySpottedEvent(Vector3 pos) 
+	public EnemySpottedEvent(Vector3 pos)
 	{
 		this.pos = pos;
 	}
 
 }
 
-public class CeaseFightingEvent : GameEvent {
+public class CeaseFightingEvent : GameEvent
+{
 
-	public CeaseFightingEvent() 
+	public CeaseFightingEvent()
 	{
 	}
 
 }
-
-public class AttackStateEvent : GameEvent
-{
-    public AttackStateEvent()
-    {
-    }
-
-}
-
-
-public class DefendStateEvent : GameEvent
-{
-    public DefendStateEvent()
-    {
-
-    }
-
-}
+#endregion
