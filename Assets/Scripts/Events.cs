@@ -36,9 +36,9 @@ public class CeaseFightingEvent : GameEvent {
 
 }
 
-public class AttackStateEvent : GameEvent
+public class OffensiveStateEvent : GameEvent
 {
-    public AttackStateEvent()
+    public OffensiveStateEvent()
     {
     }
 
