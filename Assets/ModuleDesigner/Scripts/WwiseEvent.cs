@@ -13,12 +13,12 @@ namespace Assets.ModuleDesigner.Scripts
 
         public override void TriggerEnter()
         {
-            
+            AkSoundEngine.PostEvent(EnterEvent, this.gameObject);
         }
 
         public override void TriggerExit()
         {
-
+            AkSoundEngine.PostEvent(ExitEvent, this.gameObject);
         }
 
         public override void Expose(GameObject go)
