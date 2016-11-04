@@ -11,7 +11,7 @@ namespace Assets.ModuleDesigner.Scripts
 
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
-        public Boolean KeepGizmo = true;
+        public bool KeepGizmo = true;
 
         [Header("Output objects")]
         public TriggerReceiver[] Targets;
