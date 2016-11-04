@@ -3,76 +3,75 @@ using System.Collections;
 using System;
 
 
-namespace AIns.FSM
+
+public delegate IEnumerator StateRoutine();
+public delegate IEnumerator TransitionRoutine(StateRoutine from, StateRoutine to);
+
+
+public class TransitionTo
 {
-	public delegate IEnumerator StateRoutine ();
-	public delegate IEnumerator TransitionRoutine (StateRoutine from, StateRoutine to);
+	public StateRoutine Target
+	{ get; protected set; }
 
 
-	public class TransitionTo
+	public TransitionRoutine Transition
+	{ get; protected set; }
+
+
+	public TransitionTo(StateRoutine newState, TransitionRoutine transition)
 	{
-		public StateRoutine Target
-		{ get; protected set; }
+		Target = newState;
+		Transition = transition;
+	}
+}
 
 
-		public TransitionRoutine Transition
-		{ get; protected set; }
+public abstract class CoroutineMachine : MonoBehaviour
+{
+	protected abstract StateRoutine InitialState
+	{ get; }
 
 
-		public TransitionTo (StateRoutine newState, TransitionRoutine transition)
+	StateRoutine m_CurrentState;
+
+
+	IEnumerator Start()
+	{
+		m_CurrentState = InitialState;
+
+		if (m_CurrentState == null)
 		{
-			Target = newState;
-			Transition = transition;
+			throw new ArgumentException("Initial state is null");
+		}
+
+		while (m_CurrentState != null)
+		{
+			yield return StartCoroutine(Wrap(m_CurrentState()));
 		}
 	}
 
 
-	public abstract class CoroutineMachine : MonoBehaviour
+	IEnumerator Wrap(IEnumerator coroutine)
 	{
-		protected abstract StateRoutine InitialState
-		{ get; }
-
-
-		StateRoutine m_CurrentState;
-
-
-		IEnumerator Start ()
+		while (true)
 		{
-			m_CurrentState = InitialState;
-
-			if (m_CurrentState == null)
+			if (!coroutine.MoveNext())
 			{
-				throw new ArgumentException ("Initial state is null");
+				Debug.LogError("Broke out of the current state. Will resume.");
+				yield break;
 			}
 
-			while (m_CurrentState != null)
+			TransitionTo transitionTo = coroutine.Current as TransitionTo;
+
+			if (transitionTo != null)
 			{
-				yield return StartCoroutine (Wrap (m_CurrentState ()));
+				yield return StartCoroutine(transitionTo.Transition(m_CurrentState, transitionTo.Target));
+				m_CurrentState = transitionTo.Target;
+				yield break;
 			}
-		}
 
-
-		IEnumerator Wrap (IEnumerator coroutine)
-		{
-			while (true)
-			{
-				if (!coroutine.MoveNext ())
-				{
-					Debug.LogError ("Broke out of the current state. Will resume.");
-					yield break;
-				}
-
-				TransitionTo transitionTo = coroutine.Current as TransitionTo;
-
-				if (transitionTo != null)
-				{
-					yield return StartCoroutine (transitionTo.Transition (m_CurrentState, transitionTo.Target));
-					m_CurrentState = transitionTo.Target;
-					yield break;
-				}
-
-				yield return coroutine.Current;
-			}
+			yield return coroutine.Current;
 		}
 	}
 }
+
