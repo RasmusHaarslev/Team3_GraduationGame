@@ -2,14 +2,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InputScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-
+//public class InputScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InputScript : MonoBehaviour
 {
-    public bool isOver = false; //button is hovered over
+    //public bool isOver = false; //button is hovered over
     public float timeMax = 1f; //time for command to trigger
     float timer = 0f;
     float countdown;
-    bool buttonClicked = false; //if button is clicked
+    public bool buttonClicked = false; //if button is clicked
 
     public GameObject commandPanel;
 
@@ -21,29 +21,29 @@ public class InputScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     //    Debug.Log(commandsManager);
     //}
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Mouse enter");
-        isOver = true;
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    Debug.Log("Mouse enter");
+    //    isOver = true;
+    //}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Mouse exit");
-        isOver = false;
-        buttonClicked = false;
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    Debug.Log("Mouse exit");
+    //    isOver = false;
+    //    //buttonClicked = false;
+    //    Debug.Log("change onpinterexit");
+    //}
 
     public void ButtonDown()
     {
-        Debug.Log("down");
         buttonClicked = true;
         countdown = timeMax;
     }
 
     public void ButtonUp()
     {
-        //test();
+      
         buttonClicked = false;
         timer = 0;
         if (commandPanel.activeSelf == true)
@@ -59,11 +59,11 @@ public class InputScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // Update is called once per frame
     void Update()
     {
-        if (buttonClicked)
+        if (buttonClicked && commandPanel.activeSelf == false)
         {
             timer = Time.deltaTime;
             countdown = countdown - timer;
-            if (countdown < 0)
+            if (countdown < 0 )
             {
                 Debug.Log("do sth");
                 commandPanel.SetActive(true);

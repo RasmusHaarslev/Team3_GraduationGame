@@ -19,7 +19,7 @@ public class CommandsScript : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         Debug.Log("Mouse enter");
         isOver = true;
-        Debug.Log(commandsManager);
+        Debug.Log(isOver);
         commandsManager.FillCurrentCommandList(int.Parse(gameObject.name));
     }
 
@@ -27,5 +27,6 @@ public class CommandsScript : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         Debug.Log("Mouse exit");
         isOver = false;
+        Debug.Log("pointerExit");
     }
 }
