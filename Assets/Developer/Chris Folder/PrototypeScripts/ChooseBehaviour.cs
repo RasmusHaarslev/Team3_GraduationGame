@@ -15,7 +15,7 @@ public class ChooseBehaviour : MonoBehaviour {
 
     public void Attack()
     {
-        EventManager.Instance.TriggerEvent(new AttackStateEvent());
+        EventManager.Instance.TriggerEvent(new OffensiveStateEvent());
     }
     public void Defend()
     {
