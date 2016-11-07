@@ -46,8 +46,10 @@ public class Character : MonoBehaviour
     /// Set the character values passed in the parameter
     /// </summary>
     /// <param name="initValues"></param>
-    void init(CharacterValues initValues)
+    public void init(CharacterValues initValues)
     {
+        characterBaseValues = initValues;
+        /*
         Type typeB = initValues.GetType();
         foreach (PropertyInfo property in GetType().GetProperties())
         {
@@ -58,7 +60,7 @@ public class Character : MonoBehaviour
             if ((other != null) && (other.CanWrite))
                 other.SetValue(initValues, property.GetValue(this, null), null);
         }
-
+        */
     }
 
     /// <summary>

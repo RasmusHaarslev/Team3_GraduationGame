@@ -18,6 +18,10 @@ public class CharacterValues
     public int range { get; set; }
 
     public combatFocusType CombatFocusType { get; set; }
+    public combatFleeType CombatFleeType { get; set; }
+    public outOfCombatMovementType OutOfCombatMovementType { get; set; }
+
+
     public enum combatFocusType 
     {
         PlayerAttackers,

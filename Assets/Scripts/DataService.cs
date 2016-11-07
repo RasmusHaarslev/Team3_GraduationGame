@@ -87,7 +87,7 @@ public class DataService : MonoBehaviour
                 health = 5,
                 damageSpeed = 5,
                 range = 5,
-
+                prefabName = "Player"
             },
          new CharacterValues
             {
@@ -96,7 +96,8 @@ public class DataService : MonoBehaviour
                 damage = 8,
                 health = 5,
                 damageSpeed = 4,
-                range = 2
+                range = 2,
+                prefabName = "Follower1"
             },
          new CharacterValues
             {
@@ -105,7 +106,8 @@ public class DataService : MonoBehaviour
                 damage = 5,
                 health = 6,
                 damageSpeed = 4,
-                range = 7
+                range = 7,
+                prefabName = "Follower2"
             },
          new CharacterValues
             {
@@ -114,7 +116,8 @@ public class DataService : MonoBehaviour
                 damage = 9,
                 health = 2,
                 damageSpeed = 4,
-                range = 2
+                range = 2,
+                prefabName = "Follower3"
             },
          new CharacterValues
             {
@@ -123,7 +126,8 @@ public class DataService : MonoBehaviour
                 damage = 3,
                 health = 7,
                 damageSpeed = 9,
-                range = 3
+                range = 3,
+                prefabName = "Follower4"
             },
           new CharacterValues
             {
@@ -132,7 +136,8 @@ public class DataService : MonoBehaviour
                 damage = 6,
                 health = 1000,
                 damageSpeed = 4,
-                range = 2
+                range = 2,
+                prefabName = "EnemyLeader"
             }
 
         });

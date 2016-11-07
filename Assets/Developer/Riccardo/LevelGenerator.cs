@@ -1,15 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
-public class LevelGenerator : MonoBehaviour {
+public class LevelGenerator : MonoBehaviour
+{
+    private DataService dataService;
 
-    
+    // Use this for initialization
+    void Start () {
 
-	// Use this for initialization
-	void Start () {
-	
+        dataService = new DataService("tempDatabase.db");
+
+        //dataService.CreateDB();
+        GenerateCharacterByName("Daniel", Vector3.zero);
+
         //TODO acquire data from playerprefs
-	}
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,10 +38,21 @@ public class LevelGenerator : MonoBehaviour {
     }
 
 
-    public void getCharacterByName(string characterName)
+    public GameObject GenerateCharacterByName(string characterName, Vector3 position)
     {
-        //get informations from 
+        //get informations from database
+        CharacterValues charValues = dataService.GetCharacterValuesByName(characterName);
+        //load character prefab, weapons prefab and attach them
+        print(StringResources.characterPrefabsPath + charValues.prefabName);
+            //load prefab
+            GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName),position,Quaternion.identity) as GameObject;
+            //assign values to prefab
+            characterGameObject.GetComponent<Character>().init(charValues);
+            //load prefab weapons TODO handle the weapons stats
+        return characterGameObject;
         
+
+       
     }
 
 
