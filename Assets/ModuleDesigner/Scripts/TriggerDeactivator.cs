@@ -55,7 +55,7 @@ namespace Assets.ModuleDesigner.Scripts
             foreach (var obj in ObjectsToAffect)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position + new Vector3(0,2,0), obj.transform.position);
+                Gizmos.DrawLine(this.transform.position + new Vector3(0,0.6f,0), obj.transform.position);
             }
         }
     }
