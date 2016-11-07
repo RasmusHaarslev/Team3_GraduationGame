@@ -12,7 +12,7 @@ namespace Assets.Editor
             string[] scenes = { "Assets/Scenes/Test.unity"};
 
             // Todo
-            string buildPath = "C:\GoogleDrive\DADIU2016T3\Graduation Game\Builds\";
+            string buildPath = "C:/GoogleDrive/DADIU2016T3/Graduation Game/Builds/";
             string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + "_build.apk";
 
             // Create build folder if not yet exists
