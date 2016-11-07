@@ -6,6 +6,8 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class SphereTrigger : MonoBehaviour
     {
+        public Mesh gizmoMesh;
+
         [Header("Trigger options")]
         public TagEnum TagToTrigger;
 
@@ -48,6 +50,7 @@ namespace Assets.ModuleDesigner.Scripts
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, transform.localScale.x/2);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in Targets)
             {

@@ -2,13 +2,14 @@
 using System.IO;
 using UnityEditor;
 
+//Sorry; this was bugging out, not allowing us to run anything. -Nils
 namespace Assets.Editor
 {
     class BuildScript
     {
         [MenuItem("Build/Android")]
         static void PerformBuild()
-        {
+        {/*
             string[] scenes = { "Assets/Scenes/Test.unity"};
 
             // Todo
@@ -19,6 +20,7 @@ namespace Assets.Editor
             var dir = Directory.CreateDirectory(buildPath);
 
             BuildPipeline.BuildPlayer(scenes, buildPath+fileName, BuildTarget.Android, BuildOptions.None);
+        */
         }
     }
 }

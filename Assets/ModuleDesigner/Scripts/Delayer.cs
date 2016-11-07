@@ -10,6 +10,8 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class Delayer : TriggerReceiver
     {
+        public Mesh gizmoMesh;
+
         [Header("Delay options")]
         public int DelayInSeconds = 0;
 
@@ -48,7 +50,8 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawCube(transform.position, transform.localScale);
+            //Gizmos.DrawCube(transform.position, transform.localScale);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in Targets)
             {
