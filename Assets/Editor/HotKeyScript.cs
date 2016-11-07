@@ -24,7 +24,7 @@ namespace Assets.Editor
             {
                 go.transform.Rotate(new Vector3(0, Random.Range(0.0f, 360.0f), 0));
 
-                if(Random.Range(0,1) == 0)
+                if(Random.Range(0, 2) == 0)
                     go.transform.localScale = new Vector3(go.transform.localScale.x * -1, go.transform.localScale.y, go.transform.localScale.z);
                 else
                     go.transform.localScale = new Vector3(go.transform.localScale.x, go.transform.localScale.y, go.transform.localScale.z);
@@ -39,7 +39,7 @@ namespace Assets.Editor
             {
                 go.transform.Rotate(new Vector3(Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f)));
 
-                if (Random.Range(0, 1) == 0)
+                if (Random.Range(0, 2) == 0)
                     go.transform.localScale = new Vector3(go.transform.localScale.x * -1, go.transform.localScale.y, go.transform.localScale.z);
                 else
                     go.transform.localScale = new Vector3(go.transform.localScale.x, go.transform.localScale.y, go.transform.localScale.z);
