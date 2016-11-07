@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class Node : MonoBehaviour
-{
-
-    LineRenderer lr;
+{    
 
     #region VARIABLES
     public const int _MAXCAMPS = 6;
@@ -54,7 +53,6 @@ public class Node : MonoBehaviour
     public void OnCreate(int id)
     {
         NodeId = id;
-        lr = GetComponentInChildren<LineRenderer>();
         GetComponent<Button>().onClick.AddListener(BeginLevel);
         SetupCampsForThisNode();
         SetupResourceForThisNode();
@@ -116,10 +114,7 @@ public class Node : MonoBehaviour
             From = gameObject,
             To = child,
             FoodCost = w
-        });
-
-        // MAKE NICE LINE HERE
-        SetupLine(gameObject, child);
+        });        
 
         if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this))
         {
@@ -129,33 +124,34 @@ public class Node : MonoBehaviour
         return gameObject;
     }
 
-    void SetupLine(GameObject stage1, GameObject stage2)
-    {
-        lr.SetVertexCount(2);
-        lr.SetWidth(0.3f, 0.3f);
-        StartCoroutine(AnimateLineBetween(stage1.GetComponent<RectTransform>(), stage2.GetComponent<RectTransform>()));
-    }
-
-    IEnumerator AnimateLineBetween(RectTransform a, RectTransform b)
-    {
-        // set first point
-        lr.SetPosition(0, a.localPosition);
-        // initialize second point
-        lr.SetPosition(1, a.localPosition);
-
-        // the distance (and direction) between the two points
-        Vector3 distance = b.anchoredPosition3D - a.anchoredPosition3D;
-        for (float i = 0; i < 1; i += 10 / 200)
-        {
-            // each frame, advance a fraction of the way
-            lr.SetPosition(1, distance * i);
-            yield return null;
-        }
-    }
-
     void BeginLevel()
     {
-        Debug.Log("Load Scene : " + sceneSelection);
+        /*           
+               public int Level;
+               public int wolveCamps;
+               public int tribeCamps;
+               public int choiceCamps;
+               public int foodAmount;
+               public int coinAmount;
+               public int itemDropAmount;
+         */
+
+        PlayerPrefs.SetInt("LevelDifficulty", Level);
+        PlayerPrefs.SetInt("WolveCamps", wolveCamps);
+        PlayerPrefs.SetInt("TribeCamps", tribeCamps);
+        PlayerPrefs.SetInt("ChoiceCamps", choiceCamps);
+        PlayerPrefs.SetInt("FoodAmount", foodAmount);
+        PlayerPrefs.SetInt("CoinAmount", coinAmount);
+        PlayerPrefs.SetInt("ItemDropAmount", itemDropAmount);
+
+        if (SceneTransistion.instance != null)
+        {
+            SceneTransistion.instance.LoadScene(2);
+        }
+        else
+        {
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
+        }
     }
 }
 
