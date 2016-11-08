@@ -19,11 +19,11 @@ public class InstantiateGame : GameEvent {
 
 public class EnemySpottedEvent : GameEvent {
 
-	public Vector3 pos;
+	public GameObject parent;
 
-	public EnemySpottedEvent(Vector3 pos) 
+	public EnemySpottedEvent(GameObject parent) 
 	{
-		this.pos = pos;
+		this.parent = parent;
 	}
 
 }

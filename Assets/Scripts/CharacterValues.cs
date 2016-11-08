@@ -10,19 +10,28 @@ public class CharacterValues
     [PrimaryKey, AutoIncrement]
     public int id { get; set; }
     public string name { get; set; }
-    public string type { get; set; }
+    public type Type { get; set; }
     public string description { get; set; }
     public int damage { get; set; }
     public int health { get; set; }
     public int damageSpeed { get; set; }
     public int range { get; set; }
+	public int tier { get; set; }
 
     public combatFocusType CombatFocusType { get; set; }
     public combatFleeType CombatFleeType { get; set; }
     public outOfCombatMovementType OutOfCombatMovementType { get; set; }
 
+	public enum type
+	{
+		Tribesman,
+		Wolf,
+		Hunter,
+		Player
+	}
 
-    public enum combatFocusType 
+
+	public enum combatFocusType 
     {
         PlayerAttackers,
         PlayerFocus,

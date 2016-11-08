@@ -16,9 +16,10 @@ public class Character : MonoBehaviour
 
 	NavMeshAgent agent;
 	GameObject target;
+	GameObject parent;
     
     //Combat state values
-    private bool isInCombat = false;
+    public bool isInCombat = false;
     //model values
     private Dictionary<string, Transform> slots;
 
@@ -27,23 +28,30 @@ public class Character : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		agent.GetComponent<NavMeshAgent>();
-		if (agent == null)
-		{
-			Debug.Log(gameObject.name + " is missing a NavMeshAgent");
-		}
-        slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
+		slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
         {"head", transform },
         {"torso", transform },
         {"leftHand", transform },
         {"rightHand", transform },
-        {"legs", transform }
+
     };
+	}
 
-    }
+	void OnEnable()
+	{
+		agent = gameObject.GetComponent<NavMeshAgent>();
 
-    // Update is called once per frame
-    void Update()
+
+		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombat);
+	}
+
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombat);
+	}
+
+	// Update is called once per frame
+	void Update()
     {
 
     }
@@ -88,13 +96,24 @@ public class Character : MonoBehaviour
 
     }
 
+	// Finds the appropriate target based on traits
 	public void TargetOpponent()
 	{
-
-
+		if (characterBaseValues.CombatFocusType == CharacterValues.combatFocusType.Nearest)
+		{
+			target = FindNearestEnemy();
+		}
 
 	}
 
+	private GameObject FindNearestEnemy()
+	{
+		return gameObject;
+	}
 
+	private void StartCombat(EnemySpottedEvent e)
+	{
+		isInCombat = true;
+	}
 
 }
