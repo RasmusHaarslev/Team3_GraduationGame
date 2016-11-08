@@ -8,8 +8,6 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class PseudoRandomizer : TriggerReceiver
     {
-        public Mesh gizmoMesh;
-
         [Header("Randomizer options")]
         public int AmountOfTriggers = 0;
 
@@ -69,7 +67,7 @@ namespace Assets.ModuleDesigner.Scripts
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position, obj.transform.position);
+                Gizmos.DrawLine(this.transform.position+ new Vector3(0, 0.5f, 0), obj.transform.position - new Vector3(0, 0.5f, 0));
             }
         }
 

@@ -7,8 +7,6 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class Delayer : TriggerReceiver
     {
-        public Mesh gizmoMesh;
-
         [Header("Delay options")]
         public int DelayInSeconds = 0;
 
@@ -54,7 +52,7 @@ namespace Assets.ModuleDesigner.Scripts
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position, obj.transform.position);
+                Gizmos.DrawLine(this.transform.position + new Vector3(0, 0.5f, 0), obj.transform.position - new Vector3(0, 0.5f, 0));
             }
         }
 

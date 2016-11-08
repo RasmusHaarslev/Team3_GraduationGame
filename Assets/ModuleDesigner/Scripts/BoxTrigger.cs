@@ -6,10 +6,9 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class BoxTrigger : MonoBehaviour
     {
-        public Mesh gizmoMesh;
-
         [Header("Trigger options")]
         public TagEnum TagToTrigger;
+        public Mesh gizmoMesh;
 
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
@@ -56,7 +55,7 @@ namespace Assets.ModuleDesigner.Scripts
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position, obj.transform.position);
+                Gizmos.DrawLine(this.transform.position + new Vector3(0, 0.5f, 0), obj.transform.position - new Vector3(0, 0.5f, 0));
             }
         }
 
