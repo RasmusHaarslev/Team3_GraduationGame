@@ -6,8 +6,6 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class CameraModifier : TriggerReceiver
     {
-        public Mesh gizmoMesh;
-
         [Header("Camera options")]
         [Tooltip("Moves the camera to the gizmo position")]
         public Boolean OverridePosition;
