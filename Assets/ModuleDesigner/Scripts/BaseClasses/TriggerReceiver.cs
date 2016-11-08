@@ -5,11 +5,10 @@ namespace Assets.ModuleDesigner.Scripts.BaseClasses
 {
     public abstract class TriggerReceiver : MonoBehaviour
     {
-        //public Mesh gizmoMesh;
-
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
         public Boolean KeepGizmo = true;
+        public Mesh gizmoMesh;
 
         // override these
         public abstract void TriggerEnter();

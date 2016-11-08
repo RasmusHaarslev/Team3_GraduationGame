@@ -4,12 +4,13 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-	GameObject player;
+	private GameObject player;
 
     #region Inspector fields
     [Tooltip("Sets the distance away from the player")] public float Distance = 15f;
     [Tooltip("Sets the height relative to the player")] public float Height = 8f;
     [Tooltip("Sets amount of slerp (higher = faster)")] public float SlerpAmount = 1f;
+    [Tooltip("Sets amount of rotation on X")] public float XRotationOffset = 0f;
     [Tooltip("Sets offset for the camera look direction, relative to the players direction")] public float CameraOffset = 1f;
     #endregion
 
@@ -47,6 +48,7 @@ public class CameraController : MonoBehaviour {
 	{
 	    TransformPosition();
         TransformLook();
+        
     }
 
     void TransformPosition()
@@ -58,15 +60,19 @@ public class CameraController : MonoBehaviour {
         Vector3 clickedTarget = player.GetComponent<NavMeshAgent>().destination;
         Vector3 offset = player.transform.forward.normalized;
 
-        Vector3 positionTarget = OverridePosition ? OverriddenPosition : player.transform.position + (new Vector3(0, height, -distance) + offset * 2f);
+        Vector3 positionTarget = OverridePosition ? OverriddenPosition : player.transform.position + new Vector3(0, height, -distance);
         
-        transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * SlerpAmount);
+        transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * slerp);
     }
 
     void TransformLook()
     {
-        Vector3 offset = player.transform.forward.normalized * CameraOffset;
-        Vector3 lookTarget = player.transform.position + offset;
-        transform.LookAt(lookTarget);
+        float slerp = OverrideSlerp ? OverriddenSlerp : SlerpAmount;
+
+        Vector3 lookTarget = player.transform.position;
+
+        Vector3 relativePos = lookTarget - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relativePos + new Vector3(0, XRotationOffset, 0));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * slerp);
     }
 }
