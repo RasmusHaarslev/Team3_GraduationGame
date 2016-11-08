@@ -72,11 +72,13 @@ public class DataService : MonoBehaviour
 
     public void CreateDB()
     {
-        
+
+        _connection.DropTable<CharacterValues>();
+        _connection.DropTable<EquippableitemValues>();
 
         _connection.CreateTable<CharacterValues>();
         _connection.CreateTable<EquippableitemValues>();
-
+        
         _connection.InsertAll(new[]
         {
             new CharacterValues
@@ -176,20 +178,38 @@ public class DataService : MonoBehaviour
     public CharacterValues GetCharacterValuesByName(string characterName)
     {
         return _connection.Table<CharacterValues>().Where(x => x.name == characterName).FirstOrDefault();
-        // _connection.Table<Person>().Join(_connection.Table<EquippableItem>(), x => x.Id, y => y.PersonId, (x,y) => new ArrayList {x,y});
-        // _connection.Table<Person>().Select(x => x.Name == "Johnny");
-
+        
     }
-    /*
-    public IEnumerable<EquippableitemValues> GetCharacterEquippableItemsValues(string characterName)
+    /**/
+    public IEnumerable<EquippableitemValues> GetCharacterEquippableItemsValues(int characterId)
     {
-        string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
-                   "character on equip.id = character.rightHandEquipId where character.name = 'Daniel'";
-        List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q);
+        string q = "select equip.* from  EquippableitemValues equip where equip.characterId = ?";
+        List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q, characterId);
 
-        return 
+        return equipIds;
     }
-    */
+    /// <summary>
+    /// Gives the gameobject list of equippable items for the given character id.
+    /// </summary>
+    /// <param name="characterId"></param>
+    /// <returns></returns>
+    public IEnumerable<GameObject> GetCharacterEquippableItems(int characterId)
+    {
+        List<EquippableitemValues> equipsValues = GetCharacterEquippableItemsValues(characterId).ToList();
+        List<GameObject> equips = new List<GameObject>();
+        foreach (EquippableitemValues itemValues in equipsValues)
+        {
+            if (itemValues.prefabName != null)
+            {
+                GameObject item = Resources.Load(StringResources.characterPrefabsPath + itemValues.prefabName) as GameObject;
+                //item.GetComponent<EquippableItem>(). //todo init
+            }else print("Prefab of equip item not found!");
+        }
+
+        return equips;
+    }
+
+
     public GameObject GenerateCharacterByName(string characterName, Vector3 position)
     {
         //get informations from database
