@@ -5,8 +5,6 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class WwiseEvent : TriggerReceiver {
 
-        public Mesh gizmoMesh;
-
         [Header("Wwise events")]
         [Tooltip("Wwise event triggered on enter")]
         public string EnterEvent;
