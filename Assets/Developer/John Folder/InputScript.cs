@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class InputScript : MonoBehaviour
 {
     //public bool isOver = false; //button is hovered over
-    public float timeMax = 1f; //time for command to trigger
+    public float timeMax = 0.25f; //time for command to trigger
     float timer = 0f;
     float countdown;
     public bool buttonClicked = false; //if button is clicked

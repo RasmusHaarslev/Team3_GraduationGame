@@ -8,16 +8,19 @@ public class DrawLine : MonoBehaviour {
     CommandsScript commandsScript;
     GameObject lineRenderer;
     List<Vector3> positions;
+    //Vector3[] positions = new Vector3[10];
     public Material LineMaterial;
-    bool first = false;
+ 
     bool isAdded = false;
     const int zDistance = 89;
-    
-    void OnEnable()
+    // int i = 0;
+
+    bool normal = true;
+    void Start()
     {
         positions = new List<Vector3>();
         inputScript = transform.parent.GetComponentInChildren<InputScript>();
-        commandsScript = transform.GetComponentInChildren<CommandsScript>();
+       
         lineRenderer = new GameObject();
         lineRenderer.AddComponent<LineRenderer>();
         lineRenderer.name = "Line";
@@ -39,53 +42,56 @@ public class DrawLine : MonoBehaviour {
        
         if (inputScript.buttonClicked)
         {
-            
-            StartCoroutine(Draw());
+            Draw();
+           // StartCoroutine(Draw());
         }
 	}
 
-    IEnumerator Draw()
+    //IEnumerator Draw()
+    private void Draw()
     {
-        while (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
 
-            //Debug.Log(commandsScript.isOver);
-            if (commandsScript.isOver)
+
+            if (normal)
             {
-                Debug.Log("insiiide");
-                //positions.Add(commandsScript.gameObject.transform.position +Vector3.forward*-10);
-                //lineRenderer.SetVertexCount(positions.Count);
-                //lineRenderer.SetPosition(positions.Count - 1, commandsScript.gameObject.transform.position + Vector3.forward * -10);
-                //AddLinePoint(commandsScript.gameObject.transform.position + Vector3.forward * -10);
-            }
-            else {
-                // Debug.Log("insooooo");
-                //positions.Add(Input.mousePosition + Vector3.forward * -10);
-                //lineRenderer.SetVertexCount(positions.Count);
-                //lineRenderer.SetPosition(positions.Count - 1, Input.mousePosition + Vector3.forward * -10);
                 Vector3 mousePos = Input.mousePosition;
                 mousePos.z = 99;
 
                 AddLinePoint(Camera.main.ScreenToWorldPoint(mousePos));
-                //RemoveLastLinePoint();
+            }
+           
+
+
+            if (commandsScript.isOver)
+            {
+                AddLinePoint(commandsScript.gameObject.transform.position);
+                isAdded = false;
             }
 
-            //lineRenderer.SetVertexCount(positions.Count);
-            //lineRenderer.SetPositions(positions.ToArray());
-            
-            
-           // positions.RemoveAt(1);
-            
-           // Debug.Log(positions.Count);
-            
-            
-            yield return null;
+
         }
+    }
+
+    public  void GetIndexScript(GameObject gameObject)
+    {
+        foreach (Transform child in transform)
+        {
+        
+            if(child.name == gameObject.name)
+            {
+                Debug.Log(child.name);
+                commandsScript = gameObject.transform.GetComponentInChildren<CommandsScript>();
+            }
+            
+        }
+        
     }
 
     void AddLinePoint(Vector3 newPoint)
     {
-        // Debug.Log(newPoint);
+
 
         if (!isAdded)
         {
@@ -99,12 +105,8 @@ public class DrawLine : MonoBehaviour {
         {
             lineRenderer.GetComponent<LineRenderer>().SetVertexCount(positions.Count); // set the line’s vertex count to how many points we now have, which will be 1 more than it is currently
             lineRenderer.GetComponent<LineRenderer>().SetPosition(positions.Count - 1, new Vector3(newPoint.x, newPoint.y, newPoint.z)); // add newPoint as the last point on the line (count -1 because the SetPosition is 0-based and Count is 1-based)    
+
         }
     }
 
-    //void RemoveLastLinePoint()
-    //{
-    //    positions.RemoveAt(positions.Count - 1); // remove the last point from the line
-    //    lineRenderer.SetVertexCount(positions.Count); // set the line’s vertex count to how many points we now have, which will be 1 fewer than it is currently       
-    //}
 }

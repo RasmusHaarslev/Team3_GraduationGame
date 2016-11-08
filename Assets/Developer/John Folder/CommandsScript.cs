@@ -5,21 +5,24 @@ using System.Collections.Generic;
 
 public class CommandsScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool isOver = false; //button is hovered over
+    public bool isOver = true; //button is hovered over
                                 
     CommandsManager commandsManager;
+    DrawLine drawlineScript;
 
     void OnEnable()
     {
         commandsManager = commandsManager == null ? transform.parent.GetComponent<CommandsManager>() : commandsManager ;
+        drawlineScript = drawlineScript == null ? transform.parent.GetComponent<DrawLine>() : drawlineScript;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
 
-        Debug.Log("Mouse enter");
+       
         isOver = true;
         Debug.Log(isOver);
+        drawlineScript.GetIndexScript(gameObject);
         commandsManager.FillCurrentCommandList(int.Parse(gameObject.name));
     }
 
