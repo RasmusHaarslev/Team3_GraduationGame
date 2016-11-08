@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011731378472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.8761425, y: 1.25, z: -3.7165883}
+  m_LocalPosition: {x: -7.3912783, y: 2.5, z: -4.7459693}
   m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -94,8 +94,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   fleePosition: {x: 0, y: 0, z: 0}
-  formationPosition: {fileID: 1000011579073378, guid: 25d11a6d3638eea48bd285a2da998ab1,
-    type: 2}
   partyID: 1
 --- !u!114 &114000011311954550
 MonoBehaviour:
@@ -112,6 +110,8 @@ MonoBehaviour:
   damage: 0
   range: 0
   damageSpeed: 0
+  target: {fileID: 0}
+  currentOpponents: []
   isInCombat: 0
 --- !u!136 &136000014122367744
 CapsuleCollider:
