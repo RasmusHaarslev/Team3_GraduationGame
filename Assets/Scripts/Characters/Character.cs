@@ -63,18 +63,7 @@ public class Character : MonoBehaviour
     public void init(CharacterValues initValues)
     {
         characterBaseValues = initValues;
-        /*
-        Type typeB = initValues.GetType();
-        foreach (PropertyInfo property in GetType().GetProperties())
-        {
-            if (!property.CanRead || (property.GetIndexParameters().Length > 0))
-                continue;
-
-            PropertyInfo other = typeB.GetProperty(property.Name);
-            if ((other != null) && (other.CanWrite))
-                other.SetValue(initValues, property.GetValue(this, null), null);
-        }
-        */
+        
     }
 
     /// <summary>
