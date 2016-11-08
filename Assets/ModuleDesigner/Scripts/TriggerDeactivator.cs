@@ -6,8 +6,6 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class TriggerDeactivator : TriggerReceiver
     {
-        public Mesh gizmoMesh;
-
         [Header("Objects")]
         [Tooltip("Should contain objects the trigger should affect")]
         public GameObject[] ObjectsToAffect;
@@ -55,7 +53,7 @@ namespace Assets.ModuleDesigner.Scripts
             foreach (var obj in ObjectsToAffect)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position + new Vector3(0,0.6f,0), obj.transform.position);
+                Gizmos.DrawLine(this.transform.position + new Vector3(0,0.5f,0), obj.transform.position - new Vector3(0, 0.5f, 0));
             }
         }
     }
