@@ -65,8 +65,8 @@ public class CameraController : MonoBehaviour {
 
     void TransformLook()
     {
-        Vector3 offset = player.transform.forward.normalized;
-        Vector3 lookTarget = player.transform.position + offset * 2f;
+        Vector3 offset = player.transform.forward.normalized * CameraOffset;
+        Vector3 lookTarget = player.transform.position + offset;
         transform.LookAt(lookTarget);
     }
 }
