@@ -151,7 +151,7 @@ public class DataService : MonoBehaviour
              id = 1,
              name = "Stick",
              type = "Polearm",
-             slot = "rightHand",
+             Slot = EquippableitemValues.slot.rightHand,
              characterId = 1
          },
              new EquippableitemValues
@@ -159,7 +159,7 @@ public class DataService : MonoBehaviour
              id = 2,
              name = "Plastic Shield",
              type = "Shield",
-             slot = "leftHand"
+             Slot = EquippableitemValues.slot.leftHand
 
          }
         });
@@ -225,9 +225,12 @@ public class DataService : MonoBehaviour
         characterGameObject.GetComponent<Character>().init(charValues);
         //spawn weapons TODO handle the weapons stats
         List<GameObject> equips = GetCharacterEquippableItems(charValues.id) as List<GameObject>;
+        
         foreach (GameObject equip in equips)
         {
             
+            Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + equip.GetComponent<EquippableItem>().itemValues.prefabName), 
+                position, Quaternion.identity);
         }
         //attach them to the player
 
