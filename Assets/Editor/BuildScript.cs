@@ -9,8 +9,8 @@ namespace Assets.Editor
     {
         [MenuItem("Build/Android")]
         static void PerformBuild()
-        {/*
-            string[] scenes = { "Assets/Scenes/Test.unity"};
+        {
+            string[] scenes = { "Assets/_Scenes/Levels/LevelPrototype.unity"};
 
             // Todo
             string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
@@ -20,7 +20,7 @@ namespace Assets.Editor
             var dir = Directory.CreateDirectory(buildPath);
 
             BuildPipeline.BuildPlayer(scenes, buildPath+fileName, BuildTarget.Android, BuildOptions.None);
-        */
+        
         }
     }
 }
