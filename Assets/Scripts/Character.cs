@@ -14,6 +14,8 @@ public class Character : MonoBehaviour
     public int range = 0;
     public int damageSpeed = 0;
 
+	NavMeshAgent agent;
+	GameObject target;
     
     //Combat state values
     private bool isInCombat = false;
@@ -25,7 +27,11 @@ public class Character : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+		agent.GetComponent<NavMeshAgent>();
+		if (agent == null)
+		{
+			Debug.Log(gameObject.name + " is missing a NavMeshAgent");
+		}
         slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
         {"head", transform },
         {"torso", transform },
@@ -81,6 +87,13 @@ public class Character : MonoBehaviour
 
 
     }
+
+	public void TargetOpponent()
+	{
+
+
+
+	}
 
 
 
