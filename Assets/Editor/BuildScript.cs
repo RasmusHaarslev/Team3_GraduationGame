@@ -17,7 +17,5 @@ class BuildScript
             var dir = Directory.CreateDirectory(buildPath);
 
             BuildPipeline.BuildPlayer(scenes, buildPath+fileName, BuildTarget.Android, BuildOptions.None);
-        
         }
-    
 }
