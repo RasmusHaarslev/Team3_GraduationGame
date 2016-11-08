@@ -15,10 +15,13 @@ public class LevelGenerator : MonoBehaviour
         dataService.CreateDB();
         GameObject daniel = dataService.GenerateCharacterByName("Daniel", Vector3.zero);
         print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
-        //TODO acquire data from playerprefs
+		GameObject john = dataService.GenerateCharacterByName("John", Vector3.left);
+		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", Vector3.right);
+		GameObject peter = dataService.GenerateCharacterByName("Peter", Vector3.forward);
+		//TODO acquire data from playerprefs
 
 
-    }
+	}
 	
 	// Update is called once per frame
 	void Update () {
