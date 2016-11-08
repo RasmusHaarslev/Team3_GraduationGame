@@ -44,7 +44,7 @@ namespace Assets.ModuleDesigner.Scripts
 
         void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.green;
+            Gizmos.color = Color.blue;
             //Gizmos.DrawCube(transform.position, transform.localScale);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 

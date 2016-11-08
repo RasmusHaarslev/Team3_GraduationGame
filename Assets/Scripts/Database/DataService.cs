@@ -72,17 +72,19 @@ public class DataService : MonoBehaviour
 
     public void CreateDB()
     {
-        
+
+        _connection.DropTable<CharacterValues>();
+        _connection.DropTable<EquippableitemValues>();
 
         _connection.CreateTable<CharacterValues>();
         _connection.CreateTable<EquippableitemValues>();
-
+        
         _connection.InsertAll(new[]
         {
             new CharacterValues
             {
                 name = "Daniel",
-                type = "Player",
+                Type = CharacterValues.type.Player,
                 damage = 5,
                 health = 5,
                 damageSpeed = 5,
@@ -92,7 +94,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "John",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 8,
                 health = 5,
                 damageSpeed = 4,
@@ -102,7 +104,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "Nicolai",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 5,
                 health = 6,
                 damageSpeed = 4,
@@ -112,7 +114,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "Peter",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 9,
                 health = 2,
                 damageSpeed = 4,
@@ -122,7 +124,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "Christian",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 3,
                 health = 7,
                 damageSpeed = 9,
@@ -132,7 +134,7 @@ public class DataService : MonoBehaviour
           new CharacterValues
             {
                 name = "Yasmin",
-                type = "AlphaMaleWolf",
+                Type = CharacterValues.type.Wolf,
                 damage = 6,
                 health = 1000,
                 damageSpeed = 4,
@@ -176,22 +178,60 @@ public class DataService : MonoBehaviour
     public CharacterValues GetCharacterValuesByName(string characterName)
     {
         return _connection.Table<CharacterValues>().Where(x => x.name == characterName).FirstOrDefault();
-        // _connection.Table<Person>().Join(_connection.Table<EquippableItem>(), x => x.Id, y => y.PersonId, (x,y) => new ArrayList {x,y});
-        // _connection.Table<Person>().Select(x => x.Name == "Johnny");
-
+        
     }
+    /**/
+    public IEnumerable<EquippableitemValues> GetCharacterEquippableItemsValues(int characterId)
+    {
+        string q = "select equip.* from  EquippableitemValues equip where equip.characterId = ?";
+        List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q, characterId);
+
+        return equipIds;
+    }
+    /// <summary>
+    /// Gives the gameobject list of equippable items for the given character id.
+    /// </summary>
+    /// <param name="characterId"></param>
+    /// <returns></returns>
+    public IEnumerable<GameObject> GetCharacterEquippableItems(int characterId)
+    {
+        List<EquippableitemValues> equipsValues = GetCharacterEquippableItemsValues(characterId).ToList();
+        List<GameObject> equips = new List<GameObject>();
+        foreach (EquippableitemValues itemValues in equipsValues)
+        {
+            if (itemValues.prefabName != null)
+            {
+                GameObject item = Resources.Load(StringResources.characterPrefabsPath + itemValues.prefabName) as GameObject;
+                //item.GetComponent<EquippableItem>(). //todo init
+            }else print("Prefab of equip item not found!");
+        }
+
+        return equips;
+    }
+
+
+    public GameObject GenerateCharacterByName(string characterName, Vector3 position)
+    {
+        //get informations from database
+        CharacterValues charValues = GetCharacterValuesByName(characterName);
+        //load character prefab, weapons prefab and attach them
+        print(StringResources.characterPrefabsPath + charValues.prefabName);
+        //load prefab
+        GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, Quaternion.identity) as GameObject;
+        //assign values to prefab
+        characterGameObject.GetComponent<Character>().init(charValues);
+        //load prefab weapons TODO handle the weapons stats
+        return characterGameObject;
+    }
+
 
     public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
     {
-        /**/
         string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
                    "character on equip.id = character.rightHandEquipId where character.name = 'Daniel'";
         List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q);
 
         return equipIds;
-
-
-
     }
 
 

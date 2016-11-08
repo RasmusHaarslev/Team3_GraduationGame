@@ -10,9 +10,9 @@ public class HunterStateMachine : CoroutineMachine
 
 	void OnEnable()
 	{
+		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
 		leader = GameObject.FindGameObjectWithTag("Player");
-		traits = GetComponent<Hunters>();
 		EventManager.Instance.StartListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StartListening<DefendStateEvent>(Defense);
 	}
@@ -29,33 +29,24 @@ public class HunterStateMachine : CoroutineMachine
 
 	private void Defense(DefendStateEvent e)
 	{
-		inCombatCommand = InCombatCommand.Defense;
+
 	}
 
 	private void Offense(OffensiveStateEvent e)
 	{
-		inCombatCommand = InCombatCommand.Offense;
+
 	}
 
 	#endregion
 
 	public float transitionTime = 0.05f;
 
-	public bool inCombat = false;
-
-	Hunters traits;
-
-	// TODO: Should be in character script:
-	public enum OutOfCombatCommand { Stay, Follow };
-	public enum InCombatCommand { Offense, Defense, Fleeing };
-	public OutOfCombatCommand outOfCombatCommand = OutOfCombatCommand.Follow; // instead get from character script
-	public InCombatCommand inCombatCommand = InCombatCommand.Offense; // instead get from character script
+	Character character;
 
 	public Vector3 fleePosition;
 
 	NavMeshAgent agent;
-	GameObject leader;
-	public GameObject formationPosition;
+	GameObject leader;  
 	public int partyID = 0;
 
 	void Update()
@@ -79,49 +70,35 @@ public class HunterStateMachine : CoroutineMachine
 	//This state will make all checks and transition according to them
 	IEnumerator StartState()
 	{
-		if (inCombat)
+		if (character.isInCombat)
 		{
-			if (inCombatCommand == InCombatCommand.Offense)
-			{
-				yield return new TransitionTo(FindTargetState, DefaultTransition);
-			}
-			else if (inCombatCommand == InCombatCommand.Defense)
-			{
-				// TODO
-			}
-			else if (inCombatCommand == InCombatCommand.Fleeing)
-			{
-				if (fleePosition == null)
-				{
-					Debug.Log("No flee position assigned");
-				}
-				else
-				{
-					agent.SetDestination(fleePosition);
-				}
-				// TODO
-			}
+			yield return new TransitionTo(EngageState, DefaultTransition);
 		}
 		else
 		{
-			if (outOfCombatCommand == OutOfCombatCommand.Follow)
-			{
-				// TODO
-				yield return new TransitionTo(FollowState, DefaultTransition);
-			}
-			else
-			{
-				// TODO
-				yield return new TransitionTo(StayState, DefaultTransition);
-			}
+			yield return new TransitionTo(FollowState, DefaultTransition);
 		}
+
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator FollowState()
 	{
 		agent.stoppingDistance = 0;
-		agent.SetDestination(formationPosition.transform.position);
+		// TODO make these dynamic:
+		if (partyID == 1)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 - leader.transform.right * 2);
+		} else if (partyID == 2)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4);
+		} else if (partyID == 3)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 + leader.transform.right * 2);
+		} else if (partyID == 4)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4 + leader.transform.right * 2);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -138,16 +115,11 @@ public class HunterStateMachine : CoroutineMachine
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-	IEnumerator FindTargetState()
-	{
-
-		yield return new TransitionTo(EngageState, DefaultTransition);
-	}
-
-
 	IEnumerator EngageState()
 	{
-
+		agent.stoppingDistance = character.range;
+		agent.SetDestination(character.target.transform.position);
+		Debug.Log("Attacking");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -157,19 +129,5 @@ public class HunterStateMachine : CoroutineMachine
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-	//private fearfulCheck()
-	//{
-	//	 TODO:
-	//	 if (character.health < character.maxHealth*fearfulFleePercentage) 
-	//	 {
-	//			return true;
-	//	 } else {
-	//			return false;
-	//	}
-		
-	//}
-
-
-	
 }
 

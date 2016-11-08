@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System.Linq;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class LevelGenerator : MonoBehaviour
 
         dataService = new DataService("tempDatabase.db");
 
-        //dataService.CreateDB();
-        GenerateCharacterByName("Daniel", Vector3.zero);
-
+        dataService.CreateDB();
+        GameObject daniel = dataService.GenerateCharacterByName("Daniel", Vector3.zero);
+        print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
         //TODO acquire data from playerprefs
 
 
@@ -43,7 +44,6 @@ public class LevelGenerator : MonoBehaviour
         //get informations from database
         CharacterValues charValues = dataService.GetCharacterValuesByName(characterName);
         //load character prefab, weapons prefab and attach them
-        print(StringResources.characterPrefabsPath + charValues.prefabName);
             //load prefab
             GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName),position,Quaternion.identity) as GameObject;
             //assign values to prefab
@@ -51,8 +51,6 @@ public class LevelGenerator : MonoBehaviour
             //load prefab weapons TODO handle the weapons stats
         return characterGameObject;
         
-
-       
     }
 
 
