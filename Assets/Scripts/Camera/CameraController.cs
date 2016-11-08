@@ -9,8 +9,9 @@ public class CameraController : MonoBehaviour {
     #region Inspector fields
     [Tooltip("Sets the distance away from the player")] public float Distance = 15f;
     [Tooltip("Sets the height relative to the player")] public float Height = 8f;
-    [Tooltip("Sets amount of slerp (higher = faster)")] public float SlerpAmount = 1f;
-    [Tooltip("Sets amount of rotation on X")] public float XRotationOffset = 0f;
+    [Tooltip("Sets amount of slerp (higher = faster)")] public float MoveSlerpAmount = 1f;
+    [Tooltip("Sets amount of slerp (higher = faster)")] public float ModifierSlerpAmount = 1f;
+    [Tooltip("Sets amount of slerp (higher = faster)")] public float RotationSlerpAmount = 1f;
     [Tooltip("Sets offset for the camera look direction, relative to the players direction")] public float CameraOffset = 1f;
     #endregion
 
@@ -35,8 +36,17 @@ public class CameraController : MonoBehaviour {
     [HideInInspector]
     public float OverriddenSlerp = 0f;
 
+    [HideInInspector]
+    public float XRotationOffset = 0f;
+
+    public bool SlerpBack;
     #endregion
 
+    #region Hidden private fields
+    float height;
+    float distance;
+    float slerp;
+    #endregion
 
     // Use this for initialization
     void Start () {
@@ -48,26 +58,71 @@ public class CameraController : MonoBehaviour {
 	{
 	    TransformPosition();
         TransformLook();
-        
     }
 
     void TransformPosition()
     {
-        float height = OverrideHeight ? OverriddenHeight : Height;
-        float distance = OverrideDistance ? OverriddenDistance : Distance;
-        float slerp = OverrideSlerp ? OverriddenSlerp : SlerpAmount;
+        SetSlerp();
+        SetHeight();
+        SetDistance();
 
         Vector3 clickedTarget = player.GetComponent<NavMeshAgent>().destination;
-        Vector3 offset = player.transform.forward.normalized;
+        Vector3 offset = player.transform.forward.normalized * CameraOffset;
 
         Vector3 positionTarget = OverridePosition ? OverriddenPosition : player.transform.position + new Vector3(0, height, -distance);
         
-        transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * slerp);
+        transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * MoveSlerpAmount);
+    }
+
+    private void SetHeight()
+    {
+        if (OverrideHeight)
+        {
+            height = Mathf.Lerp(height, OverriddenHeight, Time.deltaTime * slerp);
+        }
+        else if (SlerpBack)
+        {
+            height = Mathf.Lerp(height, Height, Time.deltaTime * slerp);
+        }
+        else
+        {
+            height = Height;
+        }
+    }
+    private void SetDistance()
+    {
+        if (OverrideDistance)
+        {
+            distance = Mathf.Lerp(distance, OverriddenDistance, Time.deltaTime * slerp) ;
+        }
+        else if (SlerpBack)
+        {
+            distance = Mathf.Lerp(distance, Distance, Time.deltaTime * slerp);
+        }
+        else
+        {
+            distance = Distance;
+        }
+    }
+    private void SetSlerp()
+    {
+        if (OverrideSlerp)
+        {
+            slerp = OverriddenSlerp;
+        }
+        else if (SlerpBack)
+        {
+            slerp = OverriddenSlerp;
+        }
+        else
+        {
+            slerp = MoveSlerpAmount;
+        }
     }
 
     void TransformLook()
     {
-        float slerp = OverrideSlerp ? OverriddenSlerp : SlerpAmount;
+        float slerp = OverrideSlerp ? OverriddenSlerp : RotationSlerpAmount;
 
         Vector3 lookTarget = player.transform.position;
 
