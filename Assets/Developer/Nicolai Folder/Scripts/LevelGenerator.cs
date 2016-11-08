@@ -35,44 +35,14 @@ public class LevelGenerator : MonoBehaviour
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
+    private bool noRoot = false;
+
+    Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
 
     void Awake()
     {
         InstantiateRows(amountOfRows - 1);
-
         SetScrollPosition(0);
-    }
-
-    void initialiseDropDown()
-    {
-        var dropdown = dropDown.GetComponent<Dropdown>();
-        dropdown.options.Clear();
-        for (int i = 0; i <= totalAmountRows - 2; i++)
-        {
-            dropdown.options.Add(new Dropdown.OptionData(i.ToString()));
-        }
-
-        if (totalAmountRows + 1 == amountOfRows)
-        {
-            dropdown.onValueChanged.AddListener(delegate {
-                myDropdownValueChangedHandler(dropdown);
-            });
-        }
-    }
-
-    private void myDropdownValueChangedHandler(Dropdown target)
-    {
-        SetScrollPosition(target.value);
-    }
-
-    void SetScrollPosition(int rowNumber)
-    {
-        /* SETUP SCROLL POSITION */
-        float rowHeight = rowPrefab.GetComponent<RectTransform>().rect.height;
-        float rowToGoTo = rowHeight * rowNumber;
-        float gridYPosition = -(((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight) + rowToGoTo;
-
-        scrollingGrid.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gridYPosition);
     }
 
     /// <summary>
@@ -85,17 +55,20 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i <= rowAmount; i++)
         {
 
-            if (i == 0)
+            if (i == 0 && !noRoot)
             {
                 SetupRootNode();
+                noRoot = true;
                 continue;
             }
+
             totalAmountRows += 1;
 
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
             row.name = (totalAmountRows).ToString();
 
+            int numOfParents = numOfLastLevels;
             numOfLastLevels = randomController(numOfLastLevels);
 
             float startX = 0f;
@@ -121,6 +94,8 @@ public class LevelGenerator : MonoBehaviour
                     break;
             }
 
+            List<GameObject> rowNodes = new List<GameObject>();
+
             for (int j = 0; j < numOfLastLevels; j++)
             {
                 nodeCounter++;
@@ -136,15 +111,19 @@ public class LevelGenerator : MonoBehaviour
 
                 newNode.GetComponent<Node>().OnCreate(nodeCounter);
 
+                rowNodes.Add(newNode);
+
                 startX += increaseX;
             }
+            Debug.Log(totalAmountRows);
+            nodesInRows.Add(totalAmountRows, rowNodes);
         }
         initialiseDropDown();
+        printDict();
     }
 
     void SetupRootNode()
     {
-
         GameObject row = Instantiate(rowPrefab);
         ResetTransform(row, scrollingGrid);
         row.name = "0";
@@ -154,6 +133,17 @@ public class LevelGenerator : MonoBehaviour
 
         SetupValuesInNode(rootNode);
         rootNode.name = "0.0";
+        var rootList = new List<GameObject>() { rootNode };
+        nodesInRows.Add(0, rootList);
+    }
+
+    void printDict()
+    {
+        foreach (KeyValuePair<int, List<GameObject>> kvp in nodesInRows)
+        {
+
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count));
+        }
     }
 
     void SetupValuesInNode(GameObject node)
@@ -202,5 +192,36 @@ public class LevelGenerator : MonoBehaviour
         InstantiateRows(amount);
     }
 
+    void initialiseDropDown()
+    {
+        var dropdown = dropDown.GetComponent<Dropdown>();
+        dropdown.options.Clear();
+        for (int i = 0; i <= totalAmountRows - 2; i++)
+        {
+            dropdown.options.Add(new Dropdown.OptionData(i.ToString()));
+        }
+
+        if (totalAmountRows + 1 == amountOfRows)
+        {
+            dropdown.onValueChanged.AddListener(delegate {
+                myDropdownValueChangedHandler(dropdown);
+            });
+        }
+    }
+
+    private void myDropdownValueChangedHandler(Dropdown target)
+    {
+        SetScrollPosition(target.value);
+    }
+
+    void SetScrollPosition(int rowNumber)
+    {
+        /* SETUP SCROLL POSITION */
+        float rowHeight = rowPrefab.GetComponent<RectTransform>().rect.height;
+        float rowToGoTo = rowHeight * rowNumber;
+        float gridYPosition = -(((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight) + rowToGoTo;
+
+        scrollingGrid.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gridYPosition);
+    }
     #endregion
 }
