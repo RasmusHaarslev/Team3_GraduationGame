@@ -83,7 +83,7 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (inCombatCommand == InCombatCommand.Offense)
 			{
-				// TODO
+				yield return new TransitionTo(FindTargetState, DefaultTransition);
 			}
 			else if (inCombatCommand == InCombatCommand.Defense)
 			{
