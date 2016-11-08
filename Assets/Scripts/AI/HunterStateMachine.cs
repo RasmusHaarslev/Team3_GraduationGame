@@ -46,9 +46,7 @@ public class HunterStateMachine : CoroutineMachine
 	public Vector3 fleePosition;
 
 	NavMeshAgent agent;
-	GameObject leader;
-
-	public GameObject formationPosition;
+	GameObject leader;  
 	public int partyID = 0;
 
 	void Update()
@@ -87,7 +85,20 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FollowState()
 	{
 		agent.stoppingDistance = 0;
-		agent.SetDestination(formationPosition.transform.position);
+		// TODO make these dynamic:
+		if (partyID == 1)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 - leader.transform.right * 2);
+		} else if (partyID == 2)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4);
+		} else if (partyID == 3)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 + leader.transform.right * 2);
+		} else if (partyID == 4)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4 + leader.transform.right * 2);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -106,6 +117,8 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		agent.stoppingDistance = character.range;
+		agent.SetDestination(character.target.transform.position);
 		Debug.Log("Attacking");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
