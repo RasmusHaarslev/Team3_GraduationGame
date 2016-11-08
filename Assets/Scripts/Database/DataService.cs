@@ -202,7 +202,10 @@ public class DataService : MonoBehaviour
             if (itemValues.prefabName != null)
             {
                 GameObject item = Resources.Load(StringResources.characterPrefabsPath + itemValues.prefabName) as GameObject;
-                //item.GetComponent<EquippableItem>(). //todo init
+                //put values into the prefab
+                item.GetComponent<EquippableItem>().init(itemValues); 
+                //add it to the list
+                equips.Add(item);
             }else print("Prefab of equip item not found!");
         }
 
@@ -220,19 +223,26 @@ public class DataService : MonoBehaviour
         GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, Quaternion.identity) as GameObject;
         //assign values to prefab
         characterGameObject.GetComponent<Character>().init(charValues);
-        //load prefab weapons TODO handle the weapons stats
+        //spawn weapons TODO handle the weapons stats
+        List<GameObject> equips = GetCharacterEquippableItems(charValues.id) as List<GameObject>;
+        foreach (GameObject equip in equips)
+        {
+            
+        }
+        //attach them to the player
+
         return characterGameObject;
     }
 
-
-    public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
+    
+    /*public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
     {
         string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
                    "character on equip.id = character.rightHandEquipId where character.name = 'Daniel'";
         List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q);
 
         return equipIds;
-    }
-
+    }*/
+    
 
 }
