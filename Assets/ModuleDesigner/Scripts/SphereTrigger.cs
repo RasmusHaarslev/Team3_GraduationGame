@@ -6,12 +6,14 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class SphereTrigger : MonoBehaviour
     {
+        public Mesh gizmoMesh;
+
         [Header("Trigger options")]
         public TagEnum TagToTrigger;
 
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
-        public Boolean KeepGizmo = true;
+        public bool KeepGizmo = true;
 
         [Header("Output objects")]
         public TriggerReceiver[] Targets;
@@ -48,6 +50,7 @@ namespace Assets.ModuleDesigner.Scripts
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, transform.localScale.x/2);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in Targets)
             {
