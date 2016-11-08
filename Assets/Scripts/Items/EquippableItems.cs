@@ -15,11 +15,10 @@ public class EquippableItem : MonoBehaviour
     /// Set the equippable item values passed in the parameter
     /// </summary>
     /// <param name="initValues"></param>
-    void init(EquippableitemValues initValues)
+    public void init(EquippableitemValues initValues)
     {
         itemValues = initValues;
        
-
     }
 
 
