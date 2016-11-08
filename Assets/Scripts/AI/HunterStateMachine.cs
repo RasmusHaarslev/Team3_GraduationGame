@@ -42,11 +42,11 @@ public class HunterStateMachine : CoroutineMachine
 	public float transitionTime = 0.05f;
 
 	Character character;
+	NavMeshAgent agent;
+	GameObject leader;
 
 	public Vector3 fleePosition;
-
-	NavMeshAgent agent;
-	GameObject leader;  
+	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
 
 	void Update()
@@ -72,7 +72,16 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		if (character.isInCombat)
 		{
-			yield return new TransitionTo(EngageState, DefaultTransition);
+			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
+			if (distanceToTarget < agent.stoppingDistance)
+			{
+				yield return new TransitionTo(CombatState, DefaultTransition);
+			}
+			else
+			{
+				yield return new TransitionTo(EngageState, DefaultTransition);
+			}
+
 		}
 		else
 		{
@@ -89,13 +98,16 @@ public class HunterStateMachine : CoroutineMachine
 		if (partyID == 1)
 		{
 			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 - leader.transform.right * 2);
-		} else if (partyID == 2)
+		}
+		else if (partyID == 2)
 		{
 			agent.SetDestination(leader.transform.position - leader.transform.forward * 4);
-		} else if (partyID == 3)
+		}
+		else if (partyID == 3)
 		{
 			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 + leader.transform.right * 2);
-		} else if (partyID == 4)
+		}
+		else if (partyID == 4)
 		{
 			agent.SetDestination(leader.transform.position - leader.transform.forward * 4 + leader.transform.right * 2);
 		}
@@ -119,13 +131,15 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
-		Debug.Log("Attacking");
+
+		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
-
+		agent.Stop();
+		Debug.Log("Attacking");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
