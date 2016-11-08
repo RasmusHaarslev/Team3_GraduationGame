@@ -5,6 +5,8 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class WwiseEvent : TriggerReceiver {
 
+        public Mesh gizmoMesh;
+
         [Header("Wwise events")]
         [Tooltip("Wwise event triggered on enter")]
         public string EnterEvent;
@@ -39,7 +41,8 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, 0.5f);
+            //Gizmos.DrawSphere(transform.position, 0.5f);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
         }
     }
 }
