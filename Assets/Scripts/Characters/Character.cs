@@ -51,32 +51,14 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
-
-	/// <summary>
-	/// Set the character values passed in the parameter
-	/// </summary>
-	/// <param name="initValues"></param>
-	public void init(CharacterValues initValues)
-	{
-		characterBaseValues = initValues;
-		/*
-        Type typeB = initValues.GetType();
-        foreach (PropertyInfo property in GetType().GetProperties())
-        {
-            if (!property.CanRead || (property.GetIndexParameters().Length > 0))
-                continue;
-
-            PropertyInfo other = typeB.GetProperty(property.Name);
-            if ((other != null) && (other.CanWrite))
-                other.SetValue(initValues, property.GetValue(this, null), null);
-        }
-        */
-	}
+    /// <summary>
+    /// Set the character values passed in the parameter
+    /// </summary>
+    /// <param name="initValues"></param>
+    public void init(CharacterValues initValues)
+    {
+        characterBaseValues = initValues;
+    }
 
 	/// <summary>
 	/// Changes the stats and relocate the item on the right character slot
@@ -93,8 +75,6 @@ public class Character : MonoBehaviour
 																						//parent the item to the character
 		item.transform.parent = slots[item.itemValues.slot];
 		item.transform.localPosition = Vector3.zero;
-
-
 	}
 
 	// Finds the appropriate target based on traits
