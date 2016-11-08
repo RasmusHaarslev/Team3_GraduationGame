@@ -42,11 +42,10 @@ public class HunterStateMachine : CoroutineMachine
 	public float transitionTime = 0.05f;
 
 	Character character;
-
-	public Vector3 fleePosition;
-
 	NavMeshAgent agent;
 	GameObject leader;
+
+	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
 
@@ -133,7 +132,7 @@ public class HunterStateMachine : CoroutineMachine
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
 
-		Debug.Log("Engaging");
+		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

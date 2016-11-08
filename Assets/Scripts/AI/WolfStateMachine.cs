@@ -5,6 +5,11 @@ public class WolfStateMachine : CoroutineMachine {
 
 	public float transitionTime = 0.05f;
 
+	NavMeshAgent agent;
+	Character character;
+
+	public float distanceToTarget = float.MaxValue;
+
 	protected override StateRoutine InitialState
 	{
 		get
@@ -20,6 +25,23 @@ public class WolfStateMachine : CoroutineMachine {
 
 	IEnumerator StartState()
 	{
+		if (character.isInCombat)
+		{
+			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
+			if (distanceToTarget < agent.stoppingDistance)
+			{
+				yield return new TransitionTo(CombatState, DefaultTransition);
+			}
+			else
+			{
+				yield return new TransitionTo(EngageState, DefaultTransition);
+			}
+
+		}
+		else
+		{
+			yield return new TransitionTo(RoamState, DefaultTransition);
+		}
 
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
@@ -36,15 +58,13 @@ public class WolfStateMachine : CoroutineMachine {
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-	IEnumerator FindTargetState()
-	{
-
-		yield return new TransitionTo(EngageState, DefaultTransition);
-	}
 
 	IEnumerator EngageState()
 	{
+		agent.stoppingDistance = character.range;
+		agent.SetDestination(character.target.transform.position);
 
+		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
