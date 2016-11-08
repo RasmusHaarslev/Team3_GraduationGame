@@ -45,13 +45,14 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawCube(transform.position, transform.localScale);
+            //Gizmos.DrawCube(transform.position, transform.localScale);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in Targets)
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position, obj.transform.position);
+                Gizmos.DrawLine(this.transform.position + new Vector3(0, 0.5f, 0), obj.transform.position - new Vector3(0, 0.5f, 0));
             }
         }
 
