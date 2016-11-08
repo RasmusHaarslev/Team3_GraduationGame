@@ -51,8 +51,6 @@ public class LevelGenerator : MonoBehaviour
             //load prefab weapons TODO handle the weapons stats
         return characterGameObject;
         
-
-       
     }
 
 

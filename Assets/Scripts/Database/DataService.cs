@@ -180,18 +180,38 @@ public class DataService : MonoBehaviour
         // _connection.Table<Person>().Select(x => x.Name == "Johnny");
 
     }
+    /*
+    public IEnumerable<EquippableitemValues> GetCharacterEquippableItemsValues(string characterName)
+    {
+        string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
+                   "character on equip.id = character.rightHandEquipId where character.name = 'Daniel'";
+        List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q);
+
+        return 
+    }
+    */
+    public GameObject GenerateCharacterByName(string characterName, Vector3 position)
+    {
+        //get informations from database
+        CharacterValues charValues = GetCharacterValuesByName(characterName);
+        //load character prefab, weapons prefab and attach them
+        print(StringResources.characterPrefabsPath + charValues.prefabName);
+        //load prefab
+        GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, Quaternion.identity) as GameObject;
+        //assign values to prefab
+        characterGameObject.GetComponent<Character>().init(charValues);
+        //load prefab weapons TODO handle the weapons stats
+        return characterGameObject;
+    }
+
 
     public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
     {
-        /**/
         string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
                    "character on equip.id = character.rightHandEquipId where character.name = 'Daniel'";
         List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q);
 
         return equipIds;
-
-
-
     }
 
 
