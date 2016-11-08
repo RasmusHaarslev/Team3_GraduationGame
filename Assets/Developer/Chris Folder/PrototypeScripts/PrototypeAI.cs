@@ -150,8 +150,7 @@ namespace AIns.FSM
 
 		void EnemySpotted(EnemySpottedEvent e)
 		{
-			enemyPosition = e.pos;
-			enemySpotted = true;
+
 		}
 
 		void CeaseFighting(CeaseFightingEvent e)

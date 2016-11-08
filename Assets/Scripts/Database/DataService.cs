@@ -82,7 +82,7 @@ public class DataService : MonoBehaviour
             new CharacterValues
             {
                 name = "Daniel",
-                type = "Player",
+                Type = CharacterValues.type.Player,
                 damage = 5,
                 health = 5,
                 damageSpeed = 5,
@@ -92,7 +92,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "John",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 8,
                 health = 5,
                 damageSpeed = 4,
@@ -102,7 +102,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "Nicolai",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 5,
                 health = 6,
                 damageSpeed = 4,
@@ -112,7 +112,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "Peter",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 9,
                 health = 2,
                 damageSpeed = 4,
@@ -122,7 +122,7 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 name = "Christian",
-                type = "FellowTribesman",
+                Type = CharacterValues.type.Hunter,
                 damage = 3,
                 health = 7,
                 damageSpeed = 9,
@@ -132,7 +132,7 @@ public class DataService : MonoBehaviour
           new CharacterValues
             {
                 name = "Yasmin",
-                type = "AlphaMaleWolf",
+                Type = CharacterValues.type.Wolf,
                 damage = 6,
                 health = 1000,
                 damageSpeed = 4,
