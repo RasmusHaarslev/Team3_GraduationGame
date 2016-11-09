@@ -8,7 +8,7 @@ public class EquippableitemValues
     public int id { get; set; }
     public string name { get; set; }
     public string type { get; set; }
-    public string slot { get; set; }
+    public slot Slot { get; set; }
     public int characterId { get; set; }
     public string rarity { get; set; }
     public string description { get; set; }
@@ -17,6 +17,15 @@ public class EquippableitemValues
     public int damageSpeed { get; set; }
     public int range { get; set; }
     public string prefabName { get; set; }
+
+    public enum slot
+    {
+        head,
+        torso,
+        leftHand,
+        rightHand,
+        legs
+    }
 
     public override string ToString()
     {

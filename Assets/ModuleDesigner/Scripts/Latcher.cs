@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class Delayer : TriggerReceiver
+    public class Latcher : TriggerReceiver
     {
         [Header("Delay options")]
         public int DelayInSeconds = 0;
@@ -15,25 +15,15 @@ namespace Assets.ModuleDesigner.Scripts
 
         public override void TriggerEnter()
         {
-            StartCoroutine(CallForward(true));
+            foreach (var target in Targets)
+            {
+                target.TriggerEnter();
+            }
         }
 
         public override void TriggerExit()
-        {
-            StartCoroutine(CallForward(false));
-        }
-
-        IEnumerator CallForward(Boolean input)
-        {
-            yield return new WaitForSeconds(DelayInSeconds);
-
-            foreach (var target in Targets)
-            {
-                if (input)
-                    target.TriggerEnter();
-                else
-                    target.TriggerExit();
-            }
+        { 
+            // Doesnt send off signal
         }
 
         void OnDrawGizmos()
@@ -45,10 +35,9 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            //Gizmos.DrawCube(transform.position, transform.localScale);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
-            foreach (var obj in Targets)
+            foreach (var obj in Targets) 
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;

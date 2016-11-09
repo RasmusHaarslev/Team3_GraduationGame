@@ -42,13 +42,11 @@ public class HunterStateMachine : CoroutineMachine
 	public float transitionTime = 0.05f;
 
 	Character character;
-
-	public Vector3 fleePosition;
-
 	NavMeshAgent agent;
 	GameObject leader;
 
-	public GameObject formationPosition;
+	public Vector3 fleePosition;
+	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
 
 	void Update()
@@ -74,7 +72,16 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		if (character.isInCombat)
 		{
-			yield return new TransitionTo(EngageState, DefaultTransition);
+			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
+			if (distanceToTarget < agent.stoppingDistance)
+			{
+				yield return new TransitionTo(CombatState, DefaultTransition);
+			}
+			else
+			{
+				yield return new TransitionTo(EngageState, DefaultTransition);
+			}
+
 		}
 		else
 		{
@@ -87,7 +94,23 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FollowState()
 	{
 		agent.stoppingDistance = 0;
-		agent.SetDestination(formationPosition.transform.position);
+		// TODO make these dynamic:
+		if (partyID == 1)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 - leader.transform.right * 2);
+		}
+		else if (partyID == 2)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4);
+		}
+		else if (partyID == 3)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 + leader.transform.right * 2);
+		}
+		else if (partyID == 4)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4 + leader.transform.right * 2);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -106,13 +129,17 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
-		Debug.Log("Attacking");
+		agent.stoppingDistance = character.range;
+		agent.SetDestination(character.target.transform.position);
+
+		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
-
+		agent.Stop();
+		Debug.Log("Attacking");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
