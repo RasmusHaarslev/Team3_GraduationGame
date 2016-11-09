@@ -4,10 +4,12 @@ using UnityEngine;
 public class TakeDamageEvent : GameEvent
 {
     public float damage { get; private set; }
+	public GameObject target;
 
-    public TakeDamageEvent(float damage)
+    public TakeDamageEvent(float damage, GameObject target)
     {
         this.damage = damage;
+		this.target = target;
     }
 }
 
@@ -41,7 +43,6 @@ public class OffensiveStateEvent : GameEvent
     public OffensiveStateEvent()
     {
     }
-
 }
 
 
@@ -49,9 +50,7 @@ public class DefendStateEvent : GameEvent
 {
     public DefendStateEvent()
     {
-
     }
-
 }
 
 public class EnemyDeathEvent : GameEvent

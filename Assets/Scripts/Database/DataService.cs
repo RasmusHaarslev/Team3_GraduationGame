@@ -86,7 +86,7 @@ public class DataService : MonoBehaviour
                 name = "Daniel",
                 Type = CharacterValues.type.Player,
                 damage = 5,
-                health = 5,
+                health = 100,
                 damageSpeed = 5,
                 range = 5,
                 prefabName = "Player"
@@ -96,7 +96,7 @@ public class DataService : MonoBehaviour
                 name = "John",
                 Type = CharacterValues.type.Hunter,
                 damage = 8,
-                health = 5,
+                health = 50,
                 damageSpeed = 4,
                 range = 2,
                 prefabName = "Follower1"
@@ -106,7 +106,7 @@ public class DataService : MonoBehaviour
                 name = "Nicolai",
                 Type = CharacterValues.type.Hunter,
                 damage = 5,
-                health = 6,
+                health = 50,
                 damageSpeed = 4,
                 range = 7,
                 prefabName = "Follower2"
@@ -116,7 +116,7 @@ public class DataService : MonoBehaviour
                 name = "Peter",
                 Type = CharacterValues.type.Hunter,
                 damage = 9,
-                health = 2,
+                health = 50,
                 damageSpeed = 4,
                 range = 2,
                 prefabName = "Follower3"
@@ -126,7 +126,7 @@ public class DataService : MonoBehaviour
                 name = "Christian",
                 Type = CharacterValues.type.Hunter,
                 damage = 3,
-                health = 7,
+                health = 50,
                 damageSpeed = 9,
                 range = 3,
                 prefabName = "Follower4"
@@ -136,10 +136,10 @@ public class DataService : MonoBehaviour
                 name = "Yasmin",
                 Type = CharacterValues.type.Wolf,
                 damage = 6,
-                health = 1000,
-                damageSpeed = 4,
+                health = 50,
+                damageSpeed = 1,
                 range = 2,
-                prefabName = "EnemyLeader"
+                prefabName = "Wolf"
             }
 
         });
