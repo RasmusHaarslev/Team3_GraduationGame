@@ -52,9 +52,7 @@ public class Character : MonoBehaviour
 
 	void OnEnable()
 	{
-		agent = gameObject.GetComponent<NavMeshAgent>();
-
-
+		agent = GetComponent<NavMeshAgent>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 	}

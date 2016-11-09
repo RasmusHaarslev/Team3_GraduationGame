@@ -33,7 +33,10 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator StartState()
 	{
-
+		if (character.isDead)
+		{
+			yield return new TransitionTo(DeadState, DefaultTransition);
+		}
 		if (character.isInCombat)
 		{
 			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
@@ -87,5 +90,10 @@ public class RivalStateMachine : CoroutineMachine
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
 		yield return new WaitForSeconds(transitionTime);
+	}
+
+	IEnumerator DeadState()
+	{
+		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 }

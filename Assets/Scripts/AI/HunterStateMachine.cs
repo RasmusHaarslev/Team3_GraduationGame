@@ -73,6 +73,11 @@ public class HunterStateMachine : CoroutineMachine
 	//This state will make all checks and transition according to them
 	IEnumerator StartState()
 	{
+		if (character.isDead)
+		{
+			yield return new TransitionTo(DeadState, DefaultTransition);
+		}
+
 		if (character.isInCombat)
 		{
 			if (character.currentOpponents.Count != 0)
@@ -111,6 +116,8 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
+		agent.Resume();
+		Debug.Log(gameObject.name + " is following");
 		agent.stoppingDistance = 0;
 		// TODO make these dynamic:
 		if (partyID == 1)
@@ -147,6 +154,8 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		agent.Resume();
+		Debug.Log("hunter engaging");
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
 
@@ -159,6 +168,12 @@ public class HunterStateMachine : CoroutineMachine
 		yield return new WaitForSeconds(1/character.damageSpeed);
 		Debug.Log("hunter dealing damage");
 		character.DealDamage();
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
+	 IEnumerator DeadState()
+	{
+		Debug.Log("dead");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

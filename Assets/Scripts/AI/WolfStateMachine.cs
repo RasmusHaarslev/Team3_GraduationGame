@@ -40,6 +40,11 @@ public class WolfStateMachine : CoroutineMachine
 
 	IEnumerator StartState()
 	{
+		if (character.isDead)
+		{
+			yield return new TransitionTo(DeadState, DefaultTransition);
+		}
+
 
 		if (character.isInCombat)
 		{
@@ -82,6 +87,13 @@ public class WolfStateMachine : CoroutineMachine
 
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
+
+	IEnumerator DeadState()
+	{
+
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
 
 	IEnumerator FleeState()
 	{
