@@ -18,14 +18,18 @@ public class CommandsScript : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("OnPointerEnter");
+
+       
         isOver = true;
+        Debug.Log(isOver);
         drawlineScript.GetIndexScript(gameObject);
         commandsManager.FillCurrentCommandList(int.Parse(gameObject.name));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log("Mouse exit");
         isOver = false;
+        Debug.Log("pointerExit");
     }
 }
