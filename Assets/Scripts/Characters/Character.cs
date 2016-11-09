@@ -58,6 +58,11 @@ public class Character : MonoBehaviour
     public void init(CharacterValues initValues)
     {
         characterBaseValues = initValues;
+        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+        health = initValues.health;
+        range = initValues.range;
+        damage = initValues.damage;
+        damageSpeed = initValues.damageSpeed;
     }
 
 	/// <summary>
