@@ -46,9 +46,9 @@ public class InputScript : MonoBehaviour
             if (countdown < 0)
             {
                 commandPanel.SetActive(true);
-                commandPanel.GetComponent<LineRenderer>().SetVertexCount(1);
-                commandPanel.GetComponent<LineRenderer>().SetPosition(0, new Vector3(0, 0, commandPanel.GetComponent<DrawLine>().zDistance));
                 commandPanel.GetComponent<DrawLine>().countVertices++;
+                commandPanel.GetComponent<LineRenderer>().SetVertexCount(1);
+                   commandPanel.GetComponent<LineRenderer>().SetPosition(0, new Vector3(0, 0, commandPanel.GetComponent<DrawLine>().zDistance));
             }
         }
     }

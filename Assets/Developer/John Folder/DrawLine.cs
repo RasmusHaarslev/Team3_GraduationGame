@@ -8,12 +8,11 @@ public class DrawLine : MonoBehaviour
     InputScript inputScript;
     CommandsScript commandsScript;
 
-    bool isAdded = false;
     public int zDistance = -9;
     bool test = true;
     // Contain current vertex count in line renderer
     public int countVertices = 0;
-    bool notAdded = true;
+    public bool notAdded = true;
 
     void OnEnable()
     {
