@@ -2,15 +2,12 @@
 using System.IO;
 using UnityEditor;
 
-//Sorry; this was bugging out, not allowing us to run anything. -Nils
-namespace Assets.Editor
+class BuildScript
 {
-    class BuildScript
-    {
         [MenuItem("Build/Android")]
         static void PerformBuild()
-        {/*
-            string[] scenes = { "Assets/Scenes/Test.unity"};
+        {
+            string[] scenes = { "Assets/_Scenes/Levels/LevelPrototype.unity"};
 
             // Todo
             string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
@@ -20,7 +17,5 @@ namespace Assets.Editor
             var dir = Directory.CreateDirectory(buildPath);
 
             BuildPipeline.BuildPlayer(scenes, buildPath+fileName, BuildTarget.Android, BuildOptions.None);
-        */
         }
-    }
 }
