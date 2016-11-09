@@ -8,6 +8,7 @@ namespace Assets.ModuleDesigner.Scripts.BaseClasses
         [Header("Gizmo options")]
         [Tooltip("Keep gizmo visible")]
         public Boolean KeepGizmo = true;
+        public Mesh gizmoMesh;
 
         // override these
         public abstract void TriggerEnter();

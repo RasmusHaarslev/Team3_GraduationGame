@@ -24,20 +24,28 @@ namespace Assets.ModuleDesigner.Scripts
         public Boolean OverrideSlerp;
         [Tooltip("The speed of camera movement")]
         public float Slerp;
+        [Space]
+        [Tooltip("The amount of angle added to the camera rotation compared to the player"), Range(-5.0f,5.0f)]
+        public float XRotationOffset;
 
         public override void TriggerEnter()
         {
+            print("Enter!");
             Camera.main.GetComponent<CameraController>().OverridePosition = OverridePosition;
             Camera.main.GetComponent<CameraController>().OverriddenPosition = this.transform.position;
 
             Camera.main.GetComponent<CameraController>().OverrideDistance = OverrideDistance;
             Camera.main.GetComponent<CameraController>().OverriddenDistance = Distance;
 
+            Camera.main.GetComponent<CameraController>().XRotationOffset = XRotationOffset;
+
             Camera.main.GetComponent<CameraController>().OverrideHeight = OverrideHeight;
             Camera.main.GetComponent<CameraController>().OverriddenHeight = Height;
 
             Camera.main.GetComponent<CameraController>().OverrideSlerp = OverrideSlerp;
             Camera.main.GetComponent<CameraController>().OverriddenSlerp = Slerp;
+
+            Camera.main.GetComponent<CameraController>().SlerpBack = false;
         }
 
         public override void TriggerExit()
@@ -46,6 +54,8 @@ namespace Assets.ModuleDesigner.Scripts
             Camera.main.GetComponent<CameraController>().OverrideDistance = false;
             Camera.main.GetComponent<CameraController>().OverrideHeight = false;
             Camera.main.GetComponent<CameraController>().OverrideSlerp = false;
+            Camera.main.GetComponent<CameraController>().XRotationOffset = 0f;
+            Camera.main.GetComponent<CameraController>().SlerpBack = true;
         }
 
         public override void Expose(GameObject go)
@@ -68,8 +78,8 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(1,0,0,0.5f);
-            Gizmos.DrawSphere(transform.position, 0.25f);
-            
+            //Gizmos.DrawSphere(transform.position, 0.25f);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
         }
 
         void OnValidate()
