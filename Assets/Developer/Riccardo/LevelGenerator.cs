@@ -65,9 +65,6 @@ public class LevelGenerator : MonoBehaviour
         {
           dataService.GenerateCharacterByName(characterSpawns[i].characterName, characterSpawns[i].transform.position, characterSpawns[i].transform.rotation);
         }
-
-
-
         
     }
 
