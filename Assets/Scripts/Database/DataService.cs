@@ -237,7 +237,35 @@ public class DataService : MonoBehaviour
         return characterGameObject;
     }
 
-    
+    public IEnumerable<CharacterValues> GetCharactersValuesByType(CharacterValues.type charactersType)
+    {
+        string q = "select * from  CharacterValues where Type = ?";
+        return _connection.Query<CharacterValues>(q, charactersType);     
+    }
+
+    public IEnumerable<GameObject> GenerateCharactersByType(CharacterValues.type charactersType)
+    {
+        List<GameObject> characters = new List<GameObject>();
+        
+        foreach (CharacterValues charValues in GetCharactersValuesByType(charactersType))
+        {
+            characters.Add(GetCharacterFromValues(charValues));
+        }
+
+        return characters;
+    }
+
+    public GameObject GetCharacterFromValues(CharacterValues charValues)
+    {
+        GameObject character = Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName) as GameObject;
+
+        character.GetComponent<Character>().init(charValues);
+
+        //todo handle weapons attached to them!
+
+        return character;
+    }
+
     /*public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
     {
         string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
