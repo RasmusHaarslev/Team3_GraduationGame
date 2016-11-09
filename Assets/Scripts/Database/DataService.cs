@@ -213,14 +213,14 @@ public class DataService : MonoBehaviour
     }
 
 
-    public GameObject GenerateCharacterByName(string characterName, Vector3 position)
+    public GameObject GenerateCharacterByName(string characterName, Vector3 position, Quaternion rotation = new Quaternion())
     {
         //get informations from database
         CharacterValues charValues = GetCharacterValuesByName(characterName);
         //load character prefab, weapons prefab and attach them
-        print(StringResources.characterPrefabsPath + charValues.prefabName);
+        //print(StringResources.characterPrefabsPath + charValues.prefabName);
         //load prefab
-        GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, Quaternion.identity) as GameObject;
+        GameObject characterGameObject = Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
         //assign values to prefab
         characterGameObject.GetComponent<Character>().init(charValues);
         //spawn weapons TODO handle the weapons stats
