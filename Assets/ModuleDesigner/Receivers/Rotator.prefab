@@ -21,8 +21,8 @@ GameObject:
   - 4: {fileID: 4000011223501028}
   - 33: {fileID: 33000012896838572}
   - 23: {fileID: 23000012586681850}
-  - 114: {fileID: 114000013864295634}
-  m_Layer: 0
+  - 114: {fileID: 114000010913365544}
+  m_Layer: 2
   m_Name: Rotator
   m_TagString: ModuleNetwork
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010486736244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.74, y: 6.679, z: -1.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -78,7 +78,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010486736244}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114000013864295634
+--- !u!114 &114000010913365544
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -86,8 +86,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010486736244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e95e45b713599409d75c1fb785561f, type: 3}
+  m_Script: {fileID: 11500000, guid: 35d3b50ba02a2c442b4e0a024e1409b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   KeepGizmo: 1
+  gizmoMesh: {fileID: 4300012, guid: 4a9035eebec08a247b268ea94c995ad6, type: 3}
   ObjectsToAffect: []
+  RotateDegrees: 0
+  RotateRandomly: 0
+  RotateIndividual: 0

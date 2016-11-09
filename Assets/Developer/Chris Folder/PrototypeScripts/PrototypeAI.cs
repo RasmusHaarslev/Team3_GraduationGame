@@ -27,7 +27,7 @@ namespace AIns.FSM
 
 		void OnEnable()
 		{
-			EventManager.Instance.StartListening<AttackStateEvent>(Attack);
+			EventManager.Instance.StartListening<OffensiveStateEvent>(Attack);
 			EventManager.Instance.StartListening<DefendStateEvent>(Defend);
 			EventManager.Instance.StartListening<EnemySpottedEvent>(EnemySpotted);
 			EventManager.Instance.StartListening<CeaseFightingEvent>(CeaseFighting);
@@ -38,7 +38,7 @@ namespace AIns.FSM
 
 		void OnDestroy()
 		{
-			EventManager.Instance.StopListening<AttackStateEvent>(Attack);
+			EventManager.Instance.StopListening<OffensiveStateEvent>(Attack);
 			EventManager.Instance.StopListening<DefendStateEvent>(Defend);
 			EventManager.Instance.StopListening<EnemySpottedEvent>(EnemySpotted);
 			EventManager.Instance.StopListening<CeaseFightingEvent>(CeaseFighting);
@@ -55,7 +55,7 @@ namespace AIns.FSM
 			attack = false;
 		}
 
-		private void Attack(AttackStateEvent e)
+		private void Attack(OffensiveStateEvent e)
 		{
 			attack = true;
 		}
@@ -150,8 +150,7 @@ namespace AIns.FSM
 
 		void EnemySpotted(EnemySpottedEvent e)
 		{
-			enemyPosition = e.pos;
-			enemySpotted = true;
+
 		}
 
 		void CeaseFighting(CeaseFightingEvent e)

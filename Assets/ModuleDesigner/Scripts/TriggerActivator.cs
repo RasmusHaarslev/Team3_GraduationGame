@@ -42,15 +42,16 @@ namespace Assets.ModuleDesigner.Scripts
 
         void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, 0.5f);
+            //Gizmos.color = Color.yellow;
+            //Gizmos.DrawSphere(transform.position, 0.5f);
             Gizmos.color = ObjectsToAffect.Length > 0 ? Color.green : Color.red;
-            Gizmos.DrawSphere(transform.position + new Vector3(0, 0.75f, 0), 0.25f);
+            //Gizmos.DrawSphere(transform.position + new Vector3(0, 0.75f, 0), 0.25f);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in ObjectsToAffect)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position, obj.transform.position);
+                Gizmos.DrawLine(this.transform.position+ new Vector3(0, 0.5f, 0), obj.transform.position- new Vector3(0, 0.5f, 0));
             }
         }
 

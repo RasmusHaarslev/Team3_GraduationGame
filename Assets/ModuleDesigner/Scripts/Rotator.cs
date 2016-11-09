@@ -10,22 +10,43 @@ namespace Assets.ModuleDesigner.Scripts
         [Tooltip("Should contain objects the trigger should affect")]
         public GameObject[] ObjectsToAffect;
 
+        [Header("Rotation settings")]
         public float RotateDegrees;
         public bool RotateRandomly;
+        public bool RotateIndividual;
 
         public override void TriggerEnter()
         {
-            foreach (GameObject obj in ObjectsToAffect)
+            Vector3 globalRotation = new Vector3(UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees));
+
+            foreach (var obj in ObjectsToAffect)
             {
-                
+                if (RotateRandomly)
+                    obj.transform.Rotate(globalRotation);
+                else if (RotateIndividual)
+                {
+                    Vector3 individualRotation = new Vector3(UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees));
+                    obj.transform.Rotate(individualRotation);
+                }
+                obj.transform.Rotate(Vector3.up, RotateDegrees);
             }
         }
 
         public override void TriggerExit()
         {
+            Vector3 globalRotation = new Vector3(UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees));
+
             foreach (var obj in ObjectsToAffect)
             {
-                
+                if (RotateRandomly)
+                    obj.transform.Rotate(globalRotation);
+                else if (RotateIndividual)
+                {
+                    Vector3 individualRotation = new Vector3(UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees));
+                    obj.transform.Rotate(individualRotation);
+                }
+                else
+                    obj.transform.Rotate(Vector3.up, -RotateDegrees);
             }
         }
 
@@ -48,14 +69,12 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, 0.5f);
-            Gizmos.color = ObjectsToAffect.Length > 0 ? Color.green : Color.red;
-            Gizmos.DrawSphere(transform.position + new Vector3(0, 0.75f, 0), 0.25f);
+            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in ObjectsToAffect)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position + new Vector3(0,2,0), obj.transform.position);
+                Gizmos.DrawLine(this.transform.position + new Vector3(0,0.5f,0), obj.transform.position - new Vector3(0, 0.5f, 0));
             }
         }
     }
