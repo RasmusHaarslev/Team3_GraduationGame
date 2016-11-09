@@ -225,6 +225,7 @@ GameObject:
   - 114: {fileID: 175546799}
   - 114: {fileID: 175546801}
   - 114: {fileID: 175546802}
+  - 120: {fileID: 175546803}
   m_Layer: 5
   m_Name: Panel
   m_TagString: CommandPanel
@@ -240,7 +241,7 @@ RectTransform:
   m_GameObject: {fileID: 175546797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1080574249}
@@ -316,7 +317,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88067ae3ea274b944bcc27cc5d988215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LineMaterial: {fileID: 2100000, guid: f574b83dba7f698448a2d85131865635, type: 2}
+  zDistance: -9
+  countVertices: 0
+--- !u!120 &175546803
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175546797}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f574b83dba7f698448a2d85131865635, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions: []
+  m_Parameters:
+    startWidth: 0.01
+    endWidth: 0.01
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!1 &360996292
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +607,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 2018711733}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
