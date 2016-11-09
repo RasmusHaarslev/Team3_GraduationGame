@@ -11,6 +11,7 @@ public class LevelSelectionGenerator : MonoBehaviour
     public GameObject dropDown;
 
     public GameObject rowPrefab;
+    public GameObject rowImagePrefab;
     public GameObject nodePrefab;
 
     public int amountOfRows = 0;
@@ -102,12 +103,15 @@ public class LevelSelectionGenerator : MonoBehaviour
 
                 string levelName = (totalAmountRows) + "." + j;
                 GameObject newNode = Instantiate(nodePrefab);
+                Debug.Log("Position : " + newNode.transform.position.y + " Local Position : " + newNode.transform.localPosition.y);
                 ResetTransform(newNode, row);
 
                 SetupValuesInNode(newNode);
 
+
                 newNode.name = levelName;
-                newNode.transform.localPosition = new Vector3(startX, 0, 0);
+                newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
+                Debug.Log("Position : " + newNode.transform.position.y + " Local Position : " + newNode.transform.localPosition.y);
 
                 newNode.GetComponent<Node>().OnCreate(nodeCounter);
 
@@ -117,7 +121,13 @@ public class LevelSelectionGenerator : MonoBehaviour
             }
             Debug.Log(totalAmountRows);
             nodesInRows.Add(totalAmountRows, rowNodes);
+
+            GameObject imageRow = Instantiate(rowImagePrefab);
+            ResetTransform(imageRow, row);
+            imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
+            imageRow.GetComponent<AddImageRow>().InsertImage(numOfLastLevels, numOfParents);
         }
+
         initialiseDropDown();
         printDict();
     }
@@ -130,9 +140,10 @@ public class LevelSelectionGenerator : MonoBehaviour
 
         GameObject rootNode = Instantiate(nodePrefab);
         ResetTransform(rootNode, row);
-
+        rootNode.transform.localPosition = new Vector3(rootNode.transform.localPosition.x, 92f, 0);
         SetupValuesInNode(rootNode);
         rootNode.name = "0.0";
+
         var rootList = new List<GameObject>() { rootNode };
         nodesInRows.Add(0, rootList);
     }
@@ -177,8 +188,7 @@ public class LevelSelectionGenerator : MonoBehaviour
     void ResetTransform(GameObject from, GameObject to)
     {
         from.transform.SetParent(to.transform);
-
-        from.transform.localPosition = new Vector3(to.transform.position.x, to.transform.position.y, 0f);
+        from.transform.localPosition = new Vector3(to.transform.localPosition.x, 0f, 0f);
         from.transform.localScale = new Vector3(1, 1, 1);
     }
 
