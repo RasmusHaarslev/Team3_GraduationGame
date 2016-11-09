@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 public class DebugUI : MonoBehaviour
 {
@@ -44,6 +48,7 @@ public class DebugUI : MonoBehaviour
         if (type.ToString() == "Exception")
         {
             output += logString + "\n" + stackTrace + "\n";
+            SendMail();
         }
     }
 
@@ -77,6 +82,9 @@ public class DebugUI : MonoBehaviour
 
                 if (GUI.Button(new Rect(220, yPos, width, height), "Clear log", customButton))
                     output = "";
+
+                if (GUI.Button(new Rect(430, yPos, width, height), "Send log", customButton)) 
+                    SendMail();
 
                 GUI.Label(new Rect(10, 120, 2028, 1406), "Debug:", customLabel);
                 GUI.Label(new Rect(10, 170, 2028, 1406), output, customDebug);
@@ -125,6 +133,10 @@ public class DebugUI : MonoBehaviour
                     expandLog = true;
                 }
 
+                yPos += height + 10;
+                if (GUI.Button(new Rect(xPos, yPos, width, height), "Send log", customButton))
+                    SendMail();
+
                 GUI.Label(new Rect(225, 20, 400, height), "Current scene: " + SceneManager.GetActiveScene().name, customLabel);
 
                 GUI.Label(new Rect(10, 976, 200, 50), "Debug:", customLabel);
@@ -137,5 +149,25 @@ public class DebugUI : MonoBehaviour
             if (GUI.Button(new Rect(xPos, yPos, width - 50, height - 50), "Debug", customButton))
                 showDebug = true;
         }
+    }
+
+    private void SendMail()
+    {
+        MailMessage mail = new MailMessage();
+
+        mail.From = new MailAddress("dadiuteam3tester@gmail.com");
+        mail.To.Add("selech07@gmail.com");
+        mail.Subject = "Debug mail";
+        mail.Body = "Debug log \n" + output;
+
+        SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+        smtpServer.Port = 587;
+        smtpServer.Credentials = new System.Net.NetworkCredential("dadiuteam3tester@gmail.com", "team3builder") as ICredentialsByHost;
+        smtpServer.EnableSsl = true;
+        ServicePointManager.ServerCertificateValidationCallback =
+            delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            { return true; };
+        smtpServer.Send(mail);
+        Debug.Log("Mail send!");
     }
 }
