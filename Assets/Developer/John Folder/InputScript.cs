@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,8 +16,10 @@ public class InputScript : MonoBehaviour
 
     public void ButtonDown()
     {
+        Debug.Log("clicked");
         buttonClicked = true;
         countdown = timeMax;
+        
     }
 
     public void ButtonUp()
@@ -30,9 +33,11 @@ public class InputScript : MonoBehaviour
             commandsManager.previousIndex = -1;
 
             commandPanel.GetComponent<LineRenderer>().SetVertexCount(0);
-            commandPanel.GetComponent<DrawLine>().countVertices = 0;
+            commandPanel.GetComponent<DrawLine>().centerAdded = false;
+            commandPanel.GetComponent<DrawLine>().drawArray = new System.Collections.Generic.List<Vector3>();
 
             commandPanel.SetActive(false);
+            
         }
 
     }
