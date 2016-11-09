@@ -11,6 +11,7 @@ public class EquippableItem : MonoBehaviour
     public EquippableitemValues itemValues;
    
 
+
     /// <summary>
     /// Set the equippable item values passed in the parameter
     /// </summary>

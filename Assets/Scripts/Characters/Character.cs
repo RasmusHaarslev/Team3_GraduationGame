@@ -26,18 +26,19 @@ public class Character : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	//model values
-	private Dictionary<string, Transform> slots;
-
+	//private Dictionary<string, Transform> slots;
+    private Transform[] slots;
 	// Use this for initialization
 	void Start()
 	{
-		slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
+        slots = new Transform[5];
+		/*slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
         {"head", transform },
 		{"torso", transform },
 		{"leftHand", transform },
 		{"rightHand", transform },
 
-	};
+	};*/
 	}
 
 	void Update()
@@ -81,22 +82,39 @@ public class Character : MonoBehaviour
 		currentHealth = health;
 	}
 
-	/// <summary>
-	/// Changes the stats and relocate the item on the right character slot
-	/// </summary>
-	/// <param name="item"></param>
-	/// <param name="slot"></param>
-	void equipItem(EquippableItem item, int slot = 0)
-	{
-		//change character parameters
-		health += item.itemValues.health;
-		damage += item.itemValues.damage;
-		damageSpeed += item.itemValues.damageSpeed;
-		if (item.itemValues.type == "hand" && slot == 1) range = item.itemValues.range; //change range only if it is the right hand
-																						//parent the item to the character
-		item.transform.parent = slots[item.itemValues.slot];
-		item.transform.localPosition = Vector3.zero;
-	}
+    /// <summary>
+    /// Changes the stats and spawn the item on the right character slot
+    /// </summary>
+    /// <param name="item"></param>
+    void equipItem(GameObject item)
+    {
+        if (item.GetComponent<EquippableItem>() != null)
+        {
+            EquippableitemValues values = item.GetComponent<EquippableItem>().itemValues;
+            //checking if another item is equipped in the item slot
+
+            //if thats the case, remove the values and remove the old object
+
+            //add the new item values
+
+            //parent and position the item on the right slot
+
+
+        }
+        else
+        {
+            print("Trying to equip "+item.name+" that is not an equippable item!");
+            
+        }
+    }
+
+    void detatchItem(EquippableitemValues.slot slot)
+    {
+        //remove item values from total on the player
+
+        //detatch and remove the item from the game
+
+    }
 
 	// Finds the appropriate target based on traits
 	public void TargetOpponent()

@@ -151,7 +151,7 @@ public class DataService : MonoBehaviour
              id = 1,
              name = "Stick",
              type = "Polearm",
-             slot = "rightHand",
+             Slot = EquippableitemValues.slot.rightHand,
              characterId = 1
          },
              new EquippableitemValues
@@ -159,7 +159,7 @@ public class DataService : MonoBehaviour
              id = 2,
              name = "Plastic Shield",
              type = "Shield",
-             slot = "leftHand"
+             Slot = EquippableitemValues.slot.leftHand
 
          }
         });
@@ -213,21 +213,24 @@ public class DataService : MonoBehaviour
     }
 
 
-    public GameObject GenerateCharacterByName(string characterName, Vector3 position)
+    public GameObject GenerateCharacterByName(string characterName, Vector3 position, Quaternion rotation = new Quaternion())
     {
         //get informations from database
         CharacterValues charValues = GetCharacterValuesByName(characterName);
         //load character prefab, weapons prefab and attach them
-        print(StringResources.characterPrefabsPath + charValues.prefabName);
+        //print(StringResources.characterPrefabsPath + charValues.prefabName);
         //load prefab
-        GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, Quaternion.identity) as GameObject;
+        GameObject characterGameObject = Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
         //assign values to prefab
         characterGameObject.GetComponent<Character>().init(charValues);
         //spawn weapons TODO handle the weapons stats
         List<GameObject> equips = GetCharacterEquippableItems(charValues.id) as List<GameObject>;
+        
         foreach (GameObject equip in equips)
         {
             
+            Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + equip.GetComponent<EquippableItem>().itemValues.prefabName), 
+                position, Quaternion.identity);
         }
         //attach them to the player
 
