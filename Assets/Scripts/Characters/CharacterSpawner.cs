@@ -10,7 +10,7 @@ public class CharacterSpawner : MonoBehaviour
     public Color GizmoColor = Color.red;
     [Range(1.0f, 5.0f)]
     public float gizmoSize = 1.0f;
-
+    public int tier = 1;
     /**/
     void OnDrawGizmos()
     {

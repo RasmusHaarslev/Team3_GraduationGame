@@ -135,13 +135,124 @@ public class DataService : MonoBehaviour
             {
                 name = "Yasmin",
                 Type = CharacterValues.type.Wolf,
+                tier = 6,
                 damage = 6,
                 health = 1000,
                 damageSpeed = 4,
                 range = 2,
                 prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Young wolf",
+                Type = CharacterValues.type.Wolf,
+                tier = 1,
+                damage = 2,
+                health = 3,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            }/*,
+          new CharacterValues
+            {
+                name = "Teen wolf",
+                Type = CharacterValues.type.Wolf,
+                tier = 2,
+                damage = 3,
+                health = 4,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Wolf initiate",
+                Type = CharacterValues.type.Wolf,
+                tier = 3,
+                damage = 4,
+                health = 5,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Mature wolf",
+                Type = CharacterValues.type.Wolf,
+                tier = 4,
+                damage = 5,
+                health = 6,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Leader wolf",
+                Type = CharacterValues.type.Wolf,
+                tier = 5,
+                damage = 6,
+                health = 7,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Young tribesman",
+                Type = CharacterValues.type.Tribesman,
+                tier = 1,
+                damage = 2,
+                health = 3,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Teen tribesman",
+                Type = CharacterValues.type.Tribesman,
+                tier = 2,
+                damage = 3,
+                health = 4,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Tribesman initiate",
+                Type = CharacterValues.type.Tribesman,
+                tier = 3,
+                damage = 4,
+                health = 5,
+                damageSpeed = 2,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Mature tribesman",
+                Type = CharacterValues.type.Tribesman,
+                tier = 4,
+                damage = 5,
+                health = 6,
+                damageSpeed = 3,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+                name = "Leader tribesman",
+                Type = CharacterValues.type.Tribesman,
+                tier = 5,
+                damage = 6,
+                health = 7,
+                damageSpeed = 3,
+                range = 2,
+                prefabName = "EnemyLeader"
             }
-
+            */
         });
 
         _connection.InsertAll(new[]
@@ -152,14 +263,16 @@ public class DataService : MonoBehaviour
              name = "Stick",
              type = "Polearm",
              Slot = EquippableitemValues.slot.rightHand,
-             characterId = 1
+             characterId = 1,
+             prefabName = "Stick"
          },
              new EquippableitemValues
          {
              id = 2,
              name = "Plastic Shield",
              type = "Shield",
-             Slot = EquippableitemValues.slot.leftHand
+             Slot = EquippableitemValues.slot.leftHand,
+             prefabName = "Shield"
 
          }
         });
@@ -201,9 +314,16 @@ public class DataService : MonoBehaviour
         {
             if (itemValues.prefabName != null)
             {
-                GameObject item = Resources.Load(StringResources.characterPrefabsPath + itemValues.prefabName) as GameObject;
+                GameObject item = Resources.Load(StringResources.equippableItemsPrefabsPath + itemValues.prefabName) as GameObject;
+
                 //put values into the prefab
-                item.GetComponent<EquippableItem>().init(itemValues); 
+                if(item != null)
+                    item.GetComponent<EquippableItem>().init(itemValues);
+                else
+                {
+                    print(itemValues.prefabName + " can not retrieve the referred prefab!");
+                    return null;
+                } 
                 //add it to the list
                 equips.Add(item);
             }else print("Prefab of equip item not found!");
@@ -225,15 +345,15 @@ public class DataService : MonoBehaviour
         characterGameObject.GetComponent<Character>().init(charValues);
         //spawn weapons TODO handle the weapons stats
         List<GameObject> equips = GetCharacterEquippableItems(charValues.id) as List<GameObject>;
-        
-        foreach (GameObject equip in equips)
+        /*
+        foreach (GameObject equip in equips) //TODO handle weapons insertion!
         {
             
             Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + equip.GetComponent<EquippableItem>().itemValues.prefabName), 
                 position, Quaternion.identity);
         }
         //attach them to the player
-
+        */
         return characterGameObject;
     }
 
