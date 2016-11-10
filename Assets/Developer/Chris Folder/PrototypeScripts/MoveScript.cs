@@ -5,6 +5,7 @@ public class MoveScript : MonoBehaviour
 {
 
 	NavMeshAgent agent;
+	public bool movement = true;
 
 	// Use this for initialization
 	void Start()
@@ -20,10 +21,14 @@ public class MoveScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.Mouse0))
+		if (movement)
 		{
-			MoveToClickPosition();
+			if (Input.GetKey(KeyCode.Mouse0))
+			{
+				MoveToClickPosition();
+			}
 		}
+		
 
 	}
 
