@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -59,8 +60,29 @@ public class LevelGenerator : MonoBehaviour
 
     public void spawnEnemies()
     {
-       CharacterSpawner[] characterSpawns =  GetComponentsInChildren<CharacterSpawner>();
-        print("Number of enemies " + characterSpawns.Length);
+        //finds all the types of enemies and retrieves all the character tiers for those type
+        PointOfInterestManager[] pointsOfInterests = GetComponentsInChildren<PointOfInterestManager>();
+        PointOfInterestManager.EncounterType[] types = (from poi in pointsOfInterests select poi.type).Distinct().ToArray(); //getting distinct values!
+        
+        Dictionary<CharacterValues.type,GameObject[]> spawnLists = new Dictionary<CharacterValues.type, GameObject[]>();
+
+        foreach (PointOfInterestManager.EncounterType type in types)
+        {
+            switch (type)
+            {
+              case PointOfInterestManager.EncounterType.wolf:
+                    spawnLists.Add(CharacterValues.type.Wolf, dataService.GenerateCharactersByType(CharacterValues.type.Wolf).ToArray());
+                    break;
+              case PointOfInterestManager.EncounterType.rival:
+                    dataService.GetCharactersValuesByType(CharacterValues.type.Tribesman); //TODO continue from this point!!
+                    break;
+            }
+            
+        }
+
+
+        CharacterSpawner[] characterSpawns =  GetComponentsInChildren<CharacterSpawner>();
+        
         for (int i = 0; i < characterSpawns.Length; i++)
         {
           dataService.GenerateCharacterByName(characterSpawns[i].characterName, characterSpawns[i].transform.position, characterSpawns[i].transform.rotation);
