@@ -14,7 +14,7 @@ namespace Assets.ModuleDesigner.Scripts
         public Mesh gizmoMesh;
 
         [Header("Trigger options")]
-        public TriggerType TriggerOnOff;
+        public TriggerType Output;
 
         [Header("Output objects")]
         public TriggerReceiver[] Targets;
