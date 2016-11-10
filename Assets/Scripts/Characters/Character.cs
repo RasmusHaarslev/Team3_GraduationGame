@@ -27,11 +27,11 @@ public class Character : MonoBehaviour
 	public bool isDead = false;
 	//model values
 	//private Dictionary<string, Transform> slots;
-    private Transform[] slots;
+	private Transform[] slots;
 	// Use this for initialization
 	void Start()
 	{
-        slots = new Transform[5];
+		slots = new Transform[5];
 		/*slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
         {"head", transform },
 		{"torso", transform },
@@ -47,7 +47,7 @@ public class Character : MonoBehaviour
 		{
 			isDead = true;
 			GetComponent<MeshRenderer>().enabled = false;
-		} 
+		}
 	}
 
 	void OnEnable()
@@ -80,39 +80,39 @@ public class Character : MonoBehaviour
 		currentHealth = health;
 	}
 
-    /// <summary>
-    /// Changes the stats and spawn the item on the right character slot
-    /// </summary>
-    /// <param name="item"></param>
-    void equipItem(GameObject item)
-    {
-        if (item.GetComponent<EquippableItem>() != null)
-        {
-            EquippableitemValues values = item.GetComponent<EquippableItem>().itemValues;
-            //checking if another item is equipped in the item slot
+	/// <summary>
+	/// Changes the stats and spawn the item on the right character slot
+	/// </summary>
+	/// <param name="item"></param>
+	void equipItem(GameObject item)
+	{
+		if (item.GetComponent<EquippableItem>() != null)
+		{
+			EquippableitemValues values = item.GetComponent<EquippableItem>().itemValues;
+			//checking if another item is equipped in the item slot
 
-            //if thats the case, remove the values and remove the old object
+			//if thats the case, remove the values and remove the old object
 
-            //add the new item values
+			//add the new item values
 
-            //parent and position the item on the right slot
+			//parent and position the item on the right slot
 
 
-        }
-        else
-        {
-            print("Trying to equip "+item.name+" that is not an equippable item!");
-            
-        }
-    }
+		}
+		else
+		{
+			print("Trying to equip " + item.name + " that is not an equippable item!");
 
-    void detatchItem(EquippableitemValues.slot slot)
-    {
-        //remove item values from total on the player
+		}
+	}
 
-        //detatch and remove the item from the game
+	void detatchItem(EquippableitemValues.slot slot)
+	{
+		//remove item values from total on the player
 
-    }
+		//detatch and remove the item from the game
+
+	}
 
 	// Finds the appropriate target based on traits
 	public void TargetOpponent()
@@ -122,11 +122,14 @@ public class Character : MonoBehaviour
 			FindCurrentOpponents();
 		}
 
-		//if (characterBaseValues.CombatFocusType == CharacterValues.combatFocusType.Nearest)
-		//{
-		target = FindNearestEnemy();
-		//}
-
+		if (characterBaseValues.Type == CharacterValues.type.Wolf)
+		{
+			target = FindRandomEnemy();
+		}
+		else
+		{
+			target = FindNearestEnemy();
+		}
 	}
 
 	private void FindCurrentOpponents()
@@ -162,7 +165,7 @@ public class Character : MonoBehaviour
 	public GameObject FindNearestEnemy()
 	{
 		GameObject finalTarget;
-		finalTarget = currentOpponents[0];
+		finalTarget = null;
 		float min = float.MaxValue;
 
 		foreach (var possibleTarget in currentOpponents)
@@ -175,7 +178,15 @@ public class Character : MonoBehaviour
 				finalTarget = possibleTarget;
 			}
 		}
-		Debug.Log("Final target is: " + finalTarget.name);
+		return finalTarget;
+	}
+
+	public GameObject FindRandomEnemy()
+	{
+		GameObject finalTarget;
+		finalTarget = currentOpponents[UnityEngine.Random.Range(0, currentOpponents.Count)];
+
+
 		return finalTarget;
 	}
 
@@ -200,7 +211,7 @@ public class Character : MonoBehaviour
 				target.GetComponent<HunterStateMachine>().attacked = true;
 			}
 		}
-		
+
 	}
 
 	private void TakeDamage(TakeDamageEvent e)
