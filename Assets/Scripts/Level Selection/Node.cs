@@ -7,8 +7,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
-public class Node : MonoBehaviour
-{    
+public class Node : MonoBehaviour {    
 
     #region VARIABLES
     public const int _MAXCAMPS = 6;
@@ -106,18 +105,15 @@ public class Node : MonoBehaviour
     /// Create a new arc, connecting this Node to the Node passed in the parameter
     /// Also, it creates the inversed node in the passed node
     /// </summary>
-    public GameObject AddLink(GameObject child, int w)
-    {
+    public GameObject AddLink(GameObject child, int w) {
 
-        Links.Add(new Link
-        {
+        Links.Add(new Link {
             From = gameObject,
             To = child,
             FoodCost = w
         });        
 
-        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this))
-        {
+        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
             child.GetComponent<Node>().AddLink(gameObject, w);
         }
 
@@ -135,7 +131,7 @@ public class Node : MonoBehaviour
                public int coinAmount;
                public int itemDropAmount;
          */
-
+        
         PlayerPrefs.SetInt("LevelDifficulty", Level);
         PlayerPrefs.SetInt("WolveCamps", wolveCamps);
         PlayerPrefs.SetInt("TribeCamps", tribeCamps);
@@ -148,8 +144,7 @@ public class Node : MonoBehaviour
         {
             SceneTransistion.instance.LoadScene(2);
         }
-        else
-        {
+        else {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
     }

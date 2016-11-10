@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LevelSelectionGenerator : MonoBehaviour
-{
+public class LevelSelectionGenerator : MonoBehaviour {
 
+    #region VARIABLES
     public GameObject scrollRect;
     public GameObject scrollingGrid;
     public GameObject dropDown;
@@ -36,13 +36,13 @@ public class LevelSelectionGenerator : MonoBehaviour
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
-    private bool noRoot = false;
+    #endregion
 
     Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
 
     void Awake()
     {
-        InstantiateRows(amountOfRows - 1);
+        InstantiateRows(amountOfRows);
         SetScrollPosition(0);
     }
 
@@ -50,33 +50,27 @@ public class LevelSelectionGenerator : MonoBehaviour
     /// Building the Rows and randomly selection how many nodes pr. row
     /// </summary>
     /// <param name="rowAmount"></param>
-    public void InstantiateRows(int rowAmount)
-    {
+    public void InstantiateRows(int rowAmount) {
 
-        for (int i = 0; i <= rowAmount; i++)
-        {
-
-            if (i == 0 && !noRoot)
-            {
-                SetupRootNode();
-                noRoot = true;
-                continue;
-            }
-
-            totalAmountRows += 1;
+        for (int i = 0; i <= rowAmount; i++) {
 
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
             row.name = (totalAmountRows).ToString();
 
             int numOfParents = numOfLastLevels;
-            numOfLastLevels = randomController(numOfLastLevels);
+
+            if ( i != 0) { 
+                numOfLastLevels = randomController(numOfLastLevels);
+            } else
+            {
+                numOfLastLevels = 1;
+            }
 
             float startX = 0f;
             float increaseX = 0f;
 
-            switch (numOfLastLevels)
-            {
+            switch (numOfLastLevels) {
                 case 1:
                     startX = 0;
                     increaseX = 0;
@@ -97,21 +91,16 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             List<GameObject> rowNodes = new List<GameObject>();
 
-            for (int j = 0; j < numOfLastLevels; j++)
-            {
+            for (int j = 0; j < numOfLastLevels; j++) {
                 nodeCounter++;
-
-                string levelName = (totalAmountRows) + "." + j;
+                
                 GameObject newNode = Instantiate(nodePrefab);
-                Debug.Log("Position : " + newNode.transform.position.y + " Local Position : " + newNode.transform.localPosition.y);
                 ResetTransform(newNode, row);
 
                 SetupValuesInNode(newNode);
 
-
-                newNode.name = levelName;
+                newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
-                Debug.Log("Position : " + newNode.transform.position.y + " Local Position : " + newNode.transform.localPosition.y);
 
                 newNode.GetComponent<Node>().OnCreate(nodeCounter);
 
@@ -119,34 +108,34 @@ public class LevelSelectionGenerator : MonoBehaviour
 
                 startX += increaseX;
             }
-            Debug.Log(totalAmountRows);
+            
             nodesInRows.Add(totalAmountRows, rowNodes);
 
-            GameObject imageRow = Instantiate(rowImagePrefab);
-            ResetTransform(imageRow, row);
-            imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
-            imageRow.GetComponent<AddImageRow>().InsertImage(numOfLastLevels, numOfParents);
+            if (i != 0) { 
+                GameObject imageRow = Instantiate(rowImagePrefab);
+                ResetTransform(imageRow, row);
+                imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
+                imageRow.GetComponent<AddImageRow>().InsertImage(numOfLastLevels, numOfParents);
+            }
+
+            totalAmountRows += 1;
         }
 
         initialiseDropDown();
-        printDict();
+        //printDict();
     }
 
-    void SetupRootNode()
+    void SetupValuesInNode(GameObject node)
     {
-        GameObject row = Instantiate(rowPrefab);
-        ResetTransform(row, scrollingGrid);
-        row.name = "0";
-
-        GameObject rootNode = Instantiate(nodePrefab);
-        ResetTransform(rootNode, row);
-        rootNode.transform.localPosition = new Vector3(rootNode.transform.localPosition.x, 92f, 0);
-        SetupValuesInNode(rootNode);
-        rootNode.name = "0.0";
-
-        var rootList = new List<GameObject>() { rootNode };
-        nodesInRows.Add(0, rootList);
+        node.GetComponent<Node>().Level = totalAmountRows;
+        node.GetComponent<Node>().sceneSelection = Random.Range(2, numberOfScenes + 2);
+        node.GetComponent<Node>().itemDropAmount = Random.Range(1, itemDropAmount);
+        node.GetComponent<Node>().probabilityWolves = probabilityWolves;
+        node.GetComponent<Node>().probabilityTribes = probabilityTribes;
+        node.GetComponent<Node>().probabilityChoice = probabilityChoices;
     }
+
+    #region Helper function
 
     void printDict()
     {
@@ -155,17 +144,6 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count));
         }
-    }
-
-    void SetupValuesInNode(GameObject node)
-    {
-        node.GetComponent<Node>().Level = totalAmountRows;
-        node.GetComponent<Node>().NodeId = nodeCounter;
-        node.GetComponent<Node>().sceneSelection = Random.Range(2, numberOfScenes + 2);
-        node.GetComponent<Node>().itemDropAmount = Random.Range(1, itemDropAmount);
-        node.GetComponent<Node>().probabilityWolves = probabilityWolves;
-        node.GetComponent<Node>().probabilityTribes = probabilityTribes;
-        node.GetComponent<Node>().probabilityChoice = probabilityChoices;
     }
 
     /// <summary>
@@ -192,7 +170,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         from.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    #region Helper function
     /// <summary>
     /// Button click (Temporary Functionality)
     /// </summary>
