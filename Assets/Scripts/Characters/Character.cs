@@ -192,6 +192,15 @@ public class Character : MonoBehaviour
 	public void DealDamage()
 	{
 		EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
+		if (target.GetComponent<HunterStateMachine>() != null)
+		{
+			if (target.GetComponent<HunterStateMachine>().combatCommandState == HunterStateMachine.CombatCommandState.Defense)
+			{
+				target.GetComponent<Character>().target = gameObject;
+				target.GetComponent<HunterStateMachine>().attacked = true;
+			}
+		}
+		
 	}
 
 	private void TakeDamage(TakeDamageEvent e)

@@ -38,7 +38,7 @@ public class CommandsManager : MonoBehaviour
                     if (command == commandsList[0])
                     {
                         Debug.Log("defend");
-                        //EventManager.Instance.TriggerEvent(new DefendStateEvent());
+                        EventManager.Instance.TriggerEvent(new DefendStateEvent());
                         button.GetComponent<InputScript>().ButtonUp();
                         break;
                     }
