@@ -59,8 +59,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
     /// </summary>
     /// <param name="rowAmount"></param>
     public void InstantiateRows(int rowAmount) {
-
-        for (int i = 0; i <= rowAmount; i++) {
+        Debug.Log(rowAmount);
+        for (int i = 0; i < rowAmount; i++) {
 
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
