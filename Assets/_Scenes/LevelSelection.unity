@@ -130,6 +130,8 @@ MonoBehaviour:
   probabilityChoices: 3
   itemDropAmount: 10
   numberOfScenes: 2
+  LowestTravelCost: 7
+  HighestTravelCost: 28
 --- !u!4 &67718005
 Transform:
   m_ObjectHideFlags: 0
@@ -143,48 +145,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!1001 &115838183
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &249632134
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +295,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 67718004}
         m_MethodName: InstantiateRows
         m_Mode: 3
         m_Arguments:
@@ -460,9 +420,11 @@ GameObject:
   - 222: {fileID: 432686615}
   - 114: {fileID: 432686616}
   - 114: {fileID: 432686614}
+  - 114: {fileID: 432686617}
+  - 61: {fileID: 432686618}
   m_Layer: 5
   m_Name: Scroll View
-  m_TagString: Untagged
+  m_TagString: ScrollView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,6 +497,31 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &432686617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 432686612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03f7f632b8fff6438443c333d973b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &432686618
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 432686612}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 2048, y: 2500}
 --- !u!1 &455309935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1312,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 67718004}
         m_MethodName: InstantiateRows
         m_Mode: 3
         m_Arguments:
@@ -1388,7 +1375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1166020513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1949,14 +1936,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 08785af8aa83ec745b07a1c59fd82d52, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2046,7 +2033,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 67718004}
         m_MethodName: InstantiateRows
         m_Mode: 3
         m_Arguments:
@@ -2235,7 +2222,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010908647316, guid: bc19831a3e2e18e4c95c66fd7eaa2695, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1000014269910288, guid: bc19831a3e2e18e4c95c66fd7eaa2695, type: 2}
       propertyPath: m_IsActive
