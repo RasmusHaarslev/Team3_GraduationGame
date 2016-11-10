@@ -48,7 +48,7 @@ public class DebugUI : MonoBehaviour
         if (type.ToString() == "Exception")
         {
             output += logString + "\n" + stackTrace + "\n";
-            SendMail();
+            //SendMail();
         }
     }
 
@@ -67,23 +67,25 @@ public class DebugUI : MonoBehaviour
         customDebug.fontSize = 30;
         customDebug.normal.textColor = Color.white;
 
-        float width = 200;
+        float width = 250;
         float height = 100;
-        float xPos = 10;
-        float yPos = 10;
+        float xPosLeft = 10;
+        float xPosRight = Screen.width - width - 10;
+        float yPosLeft = 10;
+        float yPosRight = 10;
 
         if (showDebug)
         {
-            if (expandLog)
+            if (expandLog) 
             {
-                yPos = 10;
-                if (GUI.Button(new Rect(xPos, yPos, width, height), "Close log", customButton))
+                yPosLeft = 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Close log", customButton))
                     expandLog = false;
 
-                if (GUI.Button(new Rect(220, yPos, width, height), "Clear log", customButton))
+                if (GUI.Button(new Rect(220, yPosLeft, width, height), "Clear log", customButton))
                     output = "";
 
-                if (GUI.Button(new Rect(430, yPos, width, height), "Send log", customButton)) 
+                if (GUI.Button(new Rect(430, yPosLeft, width, height), "Send log", customButton)) 
                     SendMail();
 
                 GUI.Label(new Rect(10, 120, 2028, 1406), "Debug:", customLabel);
@@ -92,19 +94,27 @@ public class DebugUI : MonoBehaviour
             else
             {
 
-                yPos = 10;
-                if (GUI.Button(new Rect(xPos, yPos, width, height), "Close", customButton))
+                yPosLeft = 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Close", customButton))
                     showDebug = false;
 
-                yPos += height + 10;
-                if (GUI.Button(new Rect(xPos, yPos, width, height), "Reload", customButton))
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                yPosRight = 10;
+                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Gameplay", customButton))
+                    SceneManager.LoadScene("LevelPrototype");
+
+                yPosRight += height + 10;
+                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "To camp", customButton))
+                    SceneManager.LoadScene("CampManagement");
+
+                yPosRight += height + 10;
+                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Level selection", customButton))
+                    SceneManager.LoadScene("LevelSelection");
 
                 #region Freeze
-                yPos += height + 10;
+                yPosLeft += height + 10;
                 if (frozen)
                 {
-                    if (GUI.Button(new Rect(xPos, yPos, width, height), "Unfreeze", customButton))
+                    if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Unfreeze", customButton))
                     {
                         Time.timeScale = 1f;
                         frozen = false;
@@ -112,7 +122,7 @@ public class DebugUI : MonoBehaviour
                 }
                 else
                 {
-                    if (GUI.Button(new Rect(xPos, yPos, width, height), "Freeze", customButton))
+                    if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Freeze", customButton))
                     {
                         Time.timeScale = Mathf.Epsilon;
                         frozen = true;
@@ -120,24 +130,24 @@ public class DebugUI : MonoBehaviour
                 }
                 #endregion
 
-                yPos += height + 10;
-                if (GUI.Button(new Rect(xPos, yPos, width, height), "Screenshot", customButton))
+                yPosLeft += height + 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Screenshot", customButton))
                 {
                     string Name = "Screenshot_" + DateTime.Now.ToString("HH.mm.ss___yyyy-MM-dd") + ".png";
                     Application.CaptureScreenshot(Name);
                 }
 
-                yPos += height + 10;
-                if (GUI.Button(new Rect(xPos, yPos, width, height), "Expand log", customButton))
+                yPosLeft += height + 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Expand log", customButton))
                 {
                     expandLog = true;
                 }
 
-                yPos += height + 10;
-                if (GUI.Button(new Rect(xPos, yPos, width, height), "Send log", customButton))
+                yPosLeft += height + 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Send log", customButton))
                     SendMail();
 
-                GUI.Label(new Rect(225, 20, 400, height), "Current scene: " + SceneManager.GetActiveScene().name, customLabel);
+                GUI.Label(new Rect(width + 25, 20, 400, height), "Current scene: " + SceneManager.GetActiveScene().name, customLabel);
 
                 GUI.Label(new Rect(10, 976, 200, 50), "Debug:", customLabel);
                 GUI.Label(new Rect(10, 1026, 2028, 500), output, customDebug);
@@ -145,8 +155,8 @@ public class DebugUI : MonoBehaviour
         }
         else
         {
-            yPos = 10;
-            if (GUI.Button(new Rect(xPos, yPos, width - 50, height - 50), "Debug", customButton))
+            yPosLeft = 10;
+            if (GUI.Button(new Rect(xPosLeft, yPosLeft, width - 50, height - 50), "Debug", customButton))
                 showDebug = true;
         }
     }

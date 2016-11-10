@@ -10,6 +10,11 @@ namespace Assets.ModuleDesigner.Scripts
         [Tooltip("Should contain objects the trigger should affect")]
         public GameObject[] ObjectsToAffect;
 
+        void Start()
+        {
+            TriggerExit();
+        }
+
         public override void TriggerEnter()
         {
             foreach (var obj in ObjectsToAffect)
