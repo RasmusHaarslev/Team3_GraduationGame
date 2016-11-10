@@ -22,9 +22,9 @@ GameObject:
   - 33: {fileID: 33000011268181016}
   - 136: {fileID: 136000013015857586}
   - 23: {fileID: 23000012757772200}
-  - 195: {fileID: 195000013439218060}
   - 114: {fileID: 114000013915457368}
   - 114: {fileID: 114000014022175080}
+  - 195: {fileID: 195000013851141180}
   m_Layer: 0
   m_Name: Follower4
   m_TagString: Friendly
@@ -96,7 +96,11 @@ MonoBehaviour:
   damage: 0
   range: 0
   damageSpeed: 0
+  currentHealth: 0
+  target: {fileID: 0}
+  currentOpponents: []
   isInCombat: 0
+  isDead: 0
 --- !u!114 &114000014022175080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,8 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   fleePosition: {x: 0, y: 0, z: 0}
-  formationPosition: {fileID: 1000010690569712, guid: 25d11a6d3638eea48bd285a2da998ab1,
-    type: 2}
+  distanceToTarget: 3.4028235e+38
   partyID: 0
 --- !u!136 &136000013015857586
 CapsuleCollider:
@@ -120,13 +123,13 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010732224012}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &195000013439218060
+--- !u!195 &195000013851141180
 NavMeshAgent:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -135,7 +138,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 20
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

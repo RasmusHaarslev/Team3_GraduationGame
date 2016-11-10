@@ -14,18 +14,20 @@ public class Character : MonoBehaviour
 	public int range = 0;
 	public int damageSpeed = 0;
 
+	public float currentHealth;
+
 	NavMeshAgent agent;
 	public GameObject target;
+	GameObject targetParent;
 	GameObject parent;
 	public List<GameObject> currentOpponents = new List<GameObject>();
 
 	//Combat state values
 	public bool isInCombat = false;
+	public bool isDead = false;
 	//model values
 	//private Dictionary<string, Transform> slots;
     private Transform[] slots;
-
-
 	// Use this for initialization
 	void Start()
 	{
@@ -39,32 +41,44 @@ public class Character : MonoBehaviour
 	};*/
 	}
 
+	void Update()
+	{
+		if (currentHealth <= 0)
+		{
+			isDead = true;
+			GetComponent<MeshRenderer>().enabled = false;
+		} 
+	}
+
 	void OnEnable()
 	{
-		agent = gameObject.GetComponent<NavMeshAgent>();
-
-
+		agent = GetComponent<NavMeshAgent>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 	}
+
+
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 	}
 
-    /// <summary>
-    /// Set the character values passed in the parameter
-    /// </summary>
-    /// <param name="initValues"></param>
-    public void init(CharacterValues initValues)
-    {
-        characterBaseValues = initValues;
-        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-        health = initValues.health;
-        range = initValues.range;
-        damage = initValues.damage;
-        damageSpeed = initValues.damageSpeed;
-    }
+	/// <summary>
+	/// Set the character values passed in the parameter
+	/// </summary>
+	/// <param name="initValues"></param>
+	public void init(CharacterValues initValues)
+	{
+		characterBaseValues = initValues;
+		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+		health = initValues.health;
+		range = initValues.range;
+		damage = initValues.damage;
+		damageSpeed = initValues.damageSpeed;
+		currentHealth = health;
+	}
 
     /// <summary>
     /// Changes the stats and spawn the item on the right character slot
@@ -103,10 +117,11 @@ public class Character : MonoBehaviour
 	// Finds the appropriate target based on traits
 	public void TargetOpponent()
 	{
-		if (!isInCombat)
+		if (currentOpponents.Count == 0)
 		{
 			FindCurrentOpponents();
 		}
+
 		//if (characterBaseValues.CombatFocusType == CharacterValues.combatFocusType.Nearest)
 		//{
 		target = FindNearestEnemy();
@@ -116,16 +131,35 @@ public class Character : MonoBehaviour
 
 	private void FindCurrentOpponents()
 	{
-		foreach (Transform child in target.transform)
+		if (gameObject.tag == "Unfriendly")
 		{
-			if (child.gameObject.tag == "Unfriendly")
+
+			if (characterBaseValues.Type == CharacterValues.type.Wolf)
 			{
-				currentOpponents.Add(child.gameObject);
+				List<GameObject> friendlies = new List<GameObject>();
+				friendlies.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+				friendlies.Add(GameObject.FindGameObjectWithTag("Player"));
+
+				foreach (GameObject child in friendlies)
+				{
+					currentOpponents.Add(child);
+				}
+
+			}
+		}
+		else
+		{
+			foreach (Transform child in targetParent.transform)
+			{
+				if (child.gameObject.tag == "Unfriendly")
+				{
+					currentOpponents.Add(child.gameObject);
+				}
 			}
 		}
 	}
 
-	private GameObject FindNearestEnemy()
+	public GameObject FindNearestEnemy()
 	{
 		GameObject finalTarget;
 		finalTarget = currentOpponents[0];
@@ -147,8 +181,34 @@ public class Character : MonoBehaviour
 
 	private void StartCombatState(EnemySpottedEvent e)
 	{
-		target = e.parent;
-		TargetOpponent();
-		isInCombat = true;
+		if (!isInCombat)
+		{
+			targetParent = e.parent;
+			TargetOpponent();
+			isInCombat = true;
+		}
+	}
+
+	public void DealDamage()
+	{
+		EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
+		if (target.GetComponent<HunterStateMachine>() != null)
+		{
+			if (target.GetComponent<HunterStateMachine>().combatCommandState == HunterStateMachine.CombatCommandState.Defense)
+			{
+				target.GetComponent<Character>().target = gameObject;
+				target.GetComponent<HunterStateMachine>().attacked = true;
+			}
+		}
+		
+	}
+
+	private void TakeDamage(TakeDamageEvent e)
+	{
+		if (e.target == gameObject)
+		{
+			currentHealth -= e.damage;
+		}
 	}
 }
+
