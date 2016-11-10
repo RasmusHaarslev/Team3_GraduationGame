@@ -48,7 +48,6 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(transform.position, transform.localScale);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
             foreach (var obj in Targets)

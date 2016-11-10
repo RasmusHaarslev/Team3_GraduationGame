@@ -15,35 +15,49 @@ public class HunterStateMachine : CoroutineMachine
 		leader = GameObject.FindGameObjectWithTag("Player");
 		EventManager.Instance.StartListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StartListening<DefendStateEvent>(Defense);
+
 	}
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StopListening<DefendStateEvent>(Defense);
+
 	}
 
 	#endregion
 
 	#region Functions for events
 
+
 	private void Defense(DefendStateEvent e)
 	{
-
+		combatCommandState = CombatCommandState.Defense;
 	}
 
 	private void Offense(OffensiveStateEvent e)
 	{
-
+		combatCommandState = CombatCommandState.Offense;
 	}
 
 	#endregion
 
 	public float transitionTime = 0.05f;
 
+	public bool attacked = false;
 	Character character;
 	NavMeshAgent agent;
 	GameObject leader;
+
+
+	public enum CombatCommandState
+	{
+		Offense,
+		Defense,
+		Flee
+	}
+	[SerializeField]
+	public CombatCommandState combatCommandState = CombatCommandState.Offense;
 
 	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
@@ -70,21 +84,54 @@ public class HunterStateMachine : CoroutineMachine
 	//This state will make all checks and transition according to them
 	IEnumerator StartState()
 	{
+		if (character.isDead)
+		{
+			yield return new TransitionTo(DeadState, DefaultTransition);
+		}
+
 		if (character.isInCombat)
 		{
-			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
-			if (distanceToTarget < agent.stoppingDistance)
+			if (character.currentOpponents.Count != 0)
 			{
-				yield return new TransitionTo(CombatState, DefaultTransition);
+				if (combatCommandState == CombatCommandState.Offense)
+				{
+					if (!character.target.GetComponent<Character>().isDead)
+					{
+						distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+						if (distanceToTarget < agent.stoppingDistance)
+						{
+							yield return new TransitionTo(CombatState, DefaultTransition);
+						}
+						else
+						{
+							yield return new TransitionTo(EngageState, DefaultTransition);
+						}
+					}
+					else
+					{
+						character.currentOpponents.Remove(character.target);
+						character.target = character.FindNearestEnemy();
+					}
+				}
+				else if (combatCommandState == CombatCommandState.Defense)
+				{
+					if (character.target.GetComponent<Character>().isDead)
+					{
+						character.currentOpponents.Remove(character.target);
+						character.target = character.FindNearestEnemy();
+					}
+					yield return new TransitionTo(DefenseState, DefaultTransition);
+				}
 			}
 			else
 			{
-				yield return new TransitionTo(EngageState, DefaultTransition);
+				character.isInCombat = false;
 			}
 
 		}
 		else
 		{
+			agent.Resume();
 			yield return new TransitionTo(FollowState, DefaultTransition);
 		}
 
@@ -93,6 +140,8 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
+		agent.Resume();
+		Debug.Log(gameObject.name + " is following");
 		agent.stoppingDistance = 0;
 		// TODO make these dynamic:
 		if (partyID == 1)
@@ -129,17 +178,45 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		agent.Resume();
+		Debug.Log("hunter engaging");
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
 
-		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
 		agent.Stop();
-		Debug.Log("Attacking");
+		yield return new WaitForSeconds(1 / character.damageSpeed);
+		Debug.Log("hunter dealing damage");
+		character.DealDamage();
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
+	IEnumerator DeadState()
+	{
+		Debug.Log("dead");
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
+	IEnumerator DefenseState()
+	{
+
+		if (character.isInCombat)
+		{
+			agent.Stop();
+		}
+		else
+		{
+			agent.Resume();
+		}
+
+		if (attacked == true)
+		{
+			yield return new TransitionTo(CombatState, DefaultTransition);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
