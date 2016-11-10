@@ -22,10 +22,6 @@ public class InputScript : MonoBehaviour
 
 	public void ButtonDown()
 	{
-		if (moveScript == null)
-		{
-			moveScript = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>();
-		}
 		Debug.Log("clicked");
 		buttonClicked = true;
 		countdown = timeMax;
@@ -52,6 +48,11 @@ public class InputScript : MonoBehaviour
 
 	void Update()
 	{
+
+		if (moveScript == null)
+		{
+			moveScript = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>();
+		}
 		if (commandPanel.activeSelf == true)
 		{
 			moveScript.movement = false;
