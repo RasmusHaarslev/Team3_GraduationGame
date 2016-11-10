@@ -8,22 +8,30 @@ namespace Assets.ModuleDesigner.Scripts
     {
         [Header("Camera options")]
         [Tooltip("Moves the camera to the gizmo position")]
-        public Boolean OverridePosition;
+        public bool OverridePosition;
         [Space]
         [Tooltip("Check to override height")]
-        public Boolean OverrideHeight;
+        public bool OverrideHeight;
         [Tooltip("The height of the camera")]
         public float Height;
         [Space]
         [Tooltip("Check to override distance")]
-        public Boolean OverrideDistance;
+        public bool OverrideDistance;
         [Tooltip("The distance of the camera")]
         public float Distance;
         [Space]
         [Tooltip("Check to override slerp")]
-        public Boolean OverrideSlerp;
+        public bool OverrideSlerp;
         [Tooltip("The speed of camera movement")]
         public float Slerp;
+
+        [Tooltip("Check to override slerp")]
+        public bool OverrideRotationSlerp;
+        [Tooltip("The speed of camera movement")]
+        public float RotationSlerp;
+        [Tooltip("Check to override slerp")]
+        public bool SlerpBack;
+
         [Space]
         [Tooltip("The amount of angle added to the camera rotation compared to the player"), Range(-5.0f,5.0f)]
         public float XRotationOffset;
@@ -45,6 +53,9 @@ namespace Assets.ModuleDesigner.Scripts
             Camera.main.GetComponent<CameraController>().OverrideSlerp = OverrideSlerp;
             Camera.main.GetComponent<CameraController>().OverriddenSlerp = Slerp;
 
+            Camera.main.GetComponent<CameraController>().OverrideRotationSlerp = OverrideRotationSlerp;
+            Camera.main.GetComponent<CameraController>().OverriddenRotationSlerp = RotationSlerp;
+
             Camera.main.GetComponent<CameraController>().SlerpBack = false;
         }
 
@@ -54,8 +65,9 @@ namespace Assets.ModuleDesigner.Scripts
             Camera.main.GetComponent<CameraController>().OverrideDistance = false;
             Camera.main.GetComponent<CameraController>().OverrideHeight = false;
             Camera.main.GetComponent<CameraController>().OverrideSlerp = false;
+            Camera.main.GetComponent<CameraController>().OverrideRotationSlerp = false;
             Camera.main.GetComponent<CameraController>().XRotationOffset = 0f;
-            Camera.main.GetComponent<CameraController>().SlerpBack = true;
+            Camera.main.GetComponent<CameraController>().SlerpBack = SlerpBack;
         }
 
         public override void Expose(GameObject go)

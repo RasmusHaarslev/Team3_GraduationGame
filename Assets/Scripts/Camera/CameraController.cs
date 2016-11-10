@@ -15,10 +15,8 @@ public class CameraController : MonoBehaviour
 	[Tooltip("Sets amount of slerp (higher = faster)")]
 	public float MoveSlerpAmount = 1f;
 	[Tooltip("Sets amount of slerp (higher = faster)")]
-	public float ModifierSlerpAmount = 1f;
-	[Tooltip("Sets amount of slerp (higher = faster)")]
 	public float RotationSlerpAmount = 1f;
-	[Tooltip("Sets offset for the camera look direction, relative to the players direction")]
+	[HideInInspector,Tooltip("Sets offset for the camera look direction, relative to the players direction")]
 	public float CameraOffset = 1f;
 	#endregion
 
@@ -42,10 +40,14 @@ public class CameraController : MonoBehaviour
 	public Boolean OverrideSlerp = false;
 	[HideInInspector]
 	public float OverriddenSlerp = 0f;
+    [HideInInspector]
+    public Boolean OverrideRotationSlerp = false;
+    [HideInInspector]
+    public float OverriddenRotationSlerp = 0f;
 
-	[HideInInspector]
+    [HideInInspector]
 	public float XRotationOffset = 0f;
-
+    [HideInInspector]
 	public bool SlerpBack;
 	#endregion
 
@@ -53,10 +55,11 @@ public class CameraController : MonoBehaviour
 	float height;
 	float distance;
 	float slerp;
-	#endregion
+    float rotationSlerp;
+    #endregion
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
@@ -77,6 +80,9 @@ public class CameraController : MonoBehaviour
 
 	void TransformPosition()
 	{
+        if (Math.Abs(distance - Distance) < 0.01f && Math.Abs(height - Height) < 0.01f)
+            SlerpBack = false;
+
 		SetSlerp();
 		SetHeight();
 		SetDistance();
@@ -86,7 +92,7 @@ public class CameraController : MonoBehaviour
 
 		Vector3 positionTarget = OverridePosition ? OverriddenPosition : player.transform.position + new Vector3(0, height, -distance);
 
-		transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * MoveSlerpAmount);
+		transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * slerp);
 	}
 
 	private void SetHeight()
@@ -121,28 +127,29 @@ public class CameraController : MonoBehaviour
 	}
 	private void SetSlerp()
 	{
-		if (OverrideSlerp)
+		if (OverrideSlerp || OverrideRotationSlerp)
 		{
-			slerp = OverriddenSlerp;
-		}
-		else if (SlerpBack)
-		{
-			slerp = OverriddenSlerp;
-		}
+            slerp = OverrideSlerp ? OverriddenSlerp : MoveSlerpAmount;
+            rotationSlerp = OverrideRotationSlerp ? OverriddenRotationSlerp : RotationSlerpAmount;
+        }
+        else if(SlerpBack)
+        {
+            slerp = OverriddenSlerp > 0f ? OverriddenSlerp : MoveSlerpAmount;
+            rotationSlerp = OverriddenRotationSlerp > 0f ? OverriddenRotationSlerp : RotationSlerpAmount;
+        }
 		else
 		{
 			slerp = MoveSlerpAmount;
-		}
+            rotationSlerp = RotationSlerpAmount;
+        }
 	}
 
 	void TransformLook()
 	{
-		float slerp = OverrideSlerp ? OverriddenSlerp : RotationSlerpAmount;
-
 		Vector3 lookTarget = player.transform.position;
-
 		Vector3 relativePos = lookTarget - transform.position;
-		Quaternion rotation = Quaternion.LookRotation(relativePos + new Vector3(0, XRotationOffset, 0));
-		transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * slerp);
+
+        Quaternion rotation = Quaternion.LookRotation(relativePos + new Vector3(0, XRotationOffset, 0));
+		transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSlerp);
 	}
 }

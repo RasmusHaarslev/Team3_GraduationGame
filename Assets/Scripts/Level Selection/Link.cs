@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class Link : MonoBehaviour
+public class Link
 {
     public int FoodCost;
     public GameObject From;

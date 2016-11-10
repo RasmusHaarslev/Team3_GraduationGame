@@ -1,38 +1,16 @@
 ﻿using System;
+using System.Collections;
 using Assets.ModuleDesigner.Scripts.BaseClasses;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using Random = UnityEngine.Random;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class OnSceneStarter : MonoBehaviour
+    public class GroupModule : TriggerReceiver
     {
-        [Header("Gizmo options")]
-        [Tooltip("Keep gizmo visible")]
-        public bool KeepGizmo = true;
-        public Mesh gizmoMesh;
-
-        [Header("Trigger options")]
-        public TriggerType Output;
-
         [Header("Output objects")]
         public TriggerReceiver[] Targets;
 
-        public enum TriggerType
-        {
-            On, Off
-        }
-
-        void Start()
-        {
-            if (TriggerOnOff.ToString() == "On")
-                TriggerEnter();
-            else
-                TriggerExit();
-        }
-
-        public void TriggerEnter()
+        public override void TriggerEnter()
         {
             foreach (var target in Targets)
             {
@@ -40,7 +18,7 @@ namespace Assets.ModuleDesigner.Scripts
             }
         }
 
-        public void TriggerExit()
+        public override void TriggerExit()
         {
             foreach (var target in Targets)
             {
@@ -56,11 +34,10 @@ namespace Assets.ModuleDesigner.Scripts
 
         void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.green;
-            //Gizmos.DrawCube(transform.position, transform.localScale);
+            Gizmos.color = Color.blue;
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
-            foreach (var obj in Targets)
+            foreach (var obj in Targets) 
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;
@@ -68,12 +45,14 @@ namespace Assets.ModuleDesigner.Scripts
             }
         }
 
-        void OnValidate()
+        public override void Expose(GameObject go)
         {
-            foreach (var target in Targets)
-            {
-                target.Expose(this.gameObject);
-            }
+
+        }
+
+        public override void ShowGizmos()
+        {
+            OnDrawGizmos();
         }
     }
 }
