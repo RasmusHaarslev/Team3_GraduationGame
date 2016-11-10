@@ -18,13 +18,13 @@ public class Node : MonoBehaviour {
     /* ROW LEVEL (DIFFICULTY) */
     public int Level;
 
+    /* FOOD COST TO GO TO THIS LEVEL */
     public int TravelCost;
 
     /* THE SCENE TO LOAD WHEN PLAYING LEVEL */
     public int sceneSelection;
 
     /* AMOUNT OF CAMPS */
-
     public int CampsInNode;
     [HideInInspector]
     public int probabilityWolves;
@@ -42,6 +42,9 @@ public class Node : MonoBehaviour {
 
     /* AMOUNT OF ITEM DROPS */
     public int itemDropAmount;
+
+    /* BOOLEAN CHECKING IF LEVEL IS DONE */
+    public bool isCompleted = false;
     #endregion
 
     /* ROADS FROM THIS NODE */
@@ -113,11 +116,16 @@ public class Node : MonoBehaviour {
             FoodCost = w
         });        
 
-        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
+       /* if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
             child.GetComponent<Node>().AddLink(gameObject, w);
-        }
+        }*/
 
         return gameObject;
+    }
+
+    public List<Link> GetLinks()
+    {
+        return Links;
     }
 
     void BeginLevel()
@@ -131,6 +139,11 @@ public class Node : MonoBehaviour {
                public int coinAmount;
                public int itemDropAmount;
          */
+
+        /*foreach (var link in GetLinks())
+        {
+            Debug.Log("Node : " + gameObject.name + " Has Link : " + link.To.name + " With foodcost : " + link.FoodCost);
+        }*/
         
         PlayerPrefs.SetInt("LevelDifficulty", Level);
         PlayerPrefs.SetInt("WolveCamps", wolveCamps);
@@ -147,6 +160,7 @@ public class Node : MonoBehaviour {
         else {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
+        
     }
 }
 
