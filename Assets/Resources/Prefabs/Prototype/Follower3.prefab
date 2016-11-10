@@ -22,9 +22,9 @@ GameObject:
   - 33: {fileID: 33000010987789082}
   - 136: {fileID: 136000013605257204}
   - 23: {fileID: 23000013992045746}
-  - 195: {fileID: 195000012431555930}
   - 114: {fileID: 114000012336418474}
   - 114: {fileID: 114000011718853346}
+  - 195: {fileID: 195000012331772372}
   m_Layer: 0
   m_Name: Follower3
   m_TagString: Friendly
@@ -80,7 +80,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013750245402}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 0e5518decb06d2246bd0bc2e769d0b5c, type: 3}
 --- !u!114 &114000011718853346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,7 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTime: 0.05
+  attacked: 0
+  combatCommandState: 0
   fleePosition: {x: 0, y: 0, z: 0}
+  distanceToTarget: 3.4028235e+38
   partyID: 3
 --- !u!114 &114000012336418474
 MonoBehaviour:
@@ -110,9 +113,11 @@ MonoBehaviour:
   damage: 0
   range: 0
   damageSpeed: 0
+  currentHealth: 0
   target: {fileID: 0}
   currentOpponents: []
   isInCombat: 0
+  isDead: 0
 --- !u!136 &136000013605257204
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -120,13 +125,13 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013750245402}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &195000012431555930
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!195 &195000012331772372
 NavMeshAgent:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,8 +139,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1000013750245402}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 20
+  m_Speed: 3
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -143,6 +148,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
