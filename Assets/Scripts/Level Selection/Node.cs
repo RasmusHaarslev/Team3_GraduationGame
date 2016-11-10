@@ -44,7 +44,7 @@ public class Node : MonoBehaviour {
     public int itemDropAmount;
 
     /* BOOLEAN CHECKING IF LEVEL IS DONE */
-    public bool isCompleted = false;
+    public bool open = false;
     #endregion
 
     /* ROADS FROM THIS NODE */
@@ -58,6 +58,9 @@ public class Node : MonoBehaviour {
         GetComponent<Button>().onClick.AddListener(BeginLevel);
         SetupCampsForThisNode();
         SetupResourceForThisNode();
+        if (id > 1) { 
+            ChangeColor();
+        }
     }
 
     /// <summary>
@@ -95,7 +98,6 @@ public class Node : MonoBehaviour {
 
     void SetupResourceForThisNode()
     {
-
         // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
         foodAmount = 10;
 
@@ -108,19 +110,36 @@ public class Node : MonoBehaviour {
     /// Create a new arc, connecting this Node to the Node passed in the parameter
     /// Also, it creates the inversed node in the passed node
     /// </summary>
-    public GameObject AddLink(GameObject child, int w) {
+    public GameObject AddLink(GameObject child, bool passed) {
 
         Links.Add(new Link {
             From = gameObject,
             To = child,
-            FoodCost = w
+            IsCompleted = passed
         });        
 
-       /* if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
+       /*if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
             child.GetComponent<Node>().AddLink(gameObject, w);
         }*/
 
         return gameObject;
+    }
+
+    public void ChangeColor()
+    {
+        var colors = GetComponent<Button>().colors;
+
+        if (colors.normalColor == Color.red)
+        {
+            colors.normalColor = Color.white;
+            open = true;
+        } else
+        {
+            colors.normalColor = Color.red;
+            open = false;
+        }
+        
+        GetComponent<Button>().colors = colors;
     }
 
     public List<Link> GetLinks()
@@ -139,13 +158,13 @@ public class Node : MonoBehaviour {
                public int coinAmount;
                public int itemDropAmount;
          */
-
-        /*foreach (var link in GetLinks())
-        {
-            Debug.Log("Node : " + gameObject.name + " Has Link : " + link.To.name + " With foodcost : " + link.FoodCost);
-        }*/
-        
-        PlayerPrefs.SetInt("LevelDifficulty", Level);
+         if (open) { 
+            foreach (var link in GetLinks())
+            {
+                Debug.Log("Node : " + gameObject.name + " Has Link : " + link.To.name + " With foodcost : " + link.IsCompleted);
+            }
+        }
+        /*PlayerPrefs.SetInt("LevelDifficulty", Level);
         PlayerPrefs.SetInt("WolveCamps", wolveCamps);
         PlayerPrefs.SetInt("TribeCamps", tribeCamps);
         PlayerPrefs.SetInt("ChoiceCamps", choiceCamps);
@@ -160,7 +179,7 @@ public class Node : MonoBehaviour {
         else {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
-        
+        */
     }
 }
 

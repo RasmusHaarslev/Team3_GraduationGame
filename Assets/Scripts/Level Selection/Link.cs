@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Link
 {
-    public int FoodCost;
+    public bool IsCompleted;
     public GameObject From;
     public GameObject To;
 }
