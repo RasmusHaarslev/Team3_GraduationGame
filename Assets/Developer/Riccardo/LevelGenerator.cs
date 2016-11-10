@@ -50,20 +50,6 @@ public class LevelGenerator : MonoBehaviour
 
 	}
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="difficultyLevel">The input variable to determine the strength of characters in the scene.</param>
-    /// <param name="wolfPackCount">How many Points of interests are filled with wolves.</param>
-    /// <param name="tribesmanPackCount">How many Points of interests are filled with tribesmen.</param>
-    /// <param name="lootCount">Quantity of loot acquired if the scene is completed.</param>
-    /// <param name="environmentType">The index for the visual appearance of the environment objects on the scene</param>
-    public void Init(int difficultyLevel, int wolfPackCount, int tribesmanPackCount, int lootCount, int environmentType)
-    {
-        
-    }
-
-
     public GameObject GenerateCharacterByName(string characterName, Vector3 position)
     {
         //get informations from database
