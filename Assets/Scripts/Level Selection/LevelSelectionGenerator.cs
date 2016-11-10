@@ -68,7 +68,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
             int numOfParents = numOfLastLevels;
 
-            if ( i != 0) { 
+            if (nodeCounter > 0) { 
                 numOfLastLevels = randomController(numOfLastLevels);
             } else
             {
@@ -230,6 +230,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
         }
 
         initialiseDropDown();
+        SetScrollPosition(0);
         //printDict();
     }
 
