@@ -2,17 +2,15 @@
 using System.IO;
 using UnityEditor;
 
-namespace Assets.Editor
+class BuildScript
 {
-    class BuildScript
-    {
         [MenuItem("Build/Android")]
         static void PerformBuild()
         {
-            string[] scenes = { "Assets/Scenes/Test.unity"};
+            string[] scenes = { "Assets/_Scenes/CampManagement.unity", "Assets/_Scenes/LevelSelection.unity", "Assets/_Scenes/Levels/LevelPrototype.unity"};
 
             // Todo
-            string buildPath = "C:/GoogleDrive/DADIU2016T3/Graduation Game/Builds/";
+            string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
             string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + "_build.apk";
 
             // Create build folder if not yet exists
@@ -20,5 +18,4 @@ namespace Assets.Editor
 
             BuildPipeline.BuildPlayer(scenes, buildPath+fileName, BuildTarget.Android, BuildOptions.None);
         }
-    }
 }

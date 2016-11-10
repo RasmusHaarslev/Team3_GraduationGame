@@ -60,6 +60,6 @@ public class EnemyAI : MonoBehaviour {
 			child.GetComponent<EnemyMinionAI> ().GetNearestFriendly ();
 		}
 		agent.SetDestination (playerPos);
-		EventManager.Instance.TriggerEvent (new EnemySpottedEvent (transform.position));
+		//EventManager.Instance.TriggerEvent (new EnemySpottedEvent ());
 	}
 }

@@ -10,52 +10,57 @@ public class HunterStateMachine : CoroutineMachine
 
 	void OnEnable()
 	{
+		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
 		leader = GameObject.FindGameObjectWithTag("Player");
-		traits = GetComponent<Hunters>();
 		EventManager.Instance.StartListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StartListening<DefendStateEvent>(Defense);
+
 	}
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StopListening<DefendStateEvent>(Defense);
+
 	}
 
 	#endregion
 
 	#region Functions for events
 
+
 	private void Defense(DefendStateEvent e)
 	{
-		inCombatCommand = InCombatCommand.Defense;
+		combatCommandState = CombatCommandState.Defense;
 	}
 
 	private void Offense(OffensiveStateEvent e)
 	{
-		inCombatCommand = InCombatCommand.Offense;
+		combatCommandState = CombatCommandState.Offense;
 	}
 
 	#endregion
 
 	public float transitionTime = 0.05f;
 
-	public bool inCombat = false;
-
-	Hunters traits;
-
-	// TODO: Should be in character script:
-	public enum OutOfCombatCommand { Stay, Follow };
-	public enum InCombatCommand { Offense, Defense, Fleeing };
-	public OutOfCombatCommand outOfCombatCommand = OutOfCombatCommand.Follow; // instead get from character script
-	public InCombatCommand inCombatCommand = InCombatCommand.Offense; // instead get from character script
-
-	public Vector3 fleePosition;
-
+	public bool attacked = false;
+	Character character;
 	NavMeshAgent agent;
 	GameObject leader;
-	public GameObject formationPosition;
+
+
+	public enum CombatCommandState
+	{
+		Offense,
+		Defense,
+		Flee
+	}
+	[SerializeField]
+	public CombatCommandState combatCommandState = CombatCommandState.Offense;
+
+	public Vector3 fleePosition;
+	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
 
 	void Update()
@@ -79,49 +84,81 @@ public class HunterStateMachine : CoroutineMachine
 	//This state will make all checks and transition according to them
 	IEnumerator StartState()
 	{
-		if (inCombat)
+		if (character.isDead)
 		{
-			if (inCombatCommand == InCombatCommand.Offense)
-			{
-				yield return new TransitionTo(FindTargetState, DefaultTransition);
-			}
-			else if (inCombatCommand == InCombatCommand.Defense)
-			{
-				// TODO
-			}
-			else if (inCombatCommand == InCombatCommand.Fleeing)
-			{
-				if (fleePosition == null)
-				{
-					Debug.Log("No flee position assigned");
-				}
-				else
-				{
-					agent.SetDestination(fleePosition);
-				}
-				// TODO
-			}
+			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
-		else
+
+		if (character.isInCombat)
 		{
-			if (outOfCombatCommand == OutOfCombatCommand.Follow)
+			if (character.currentOpponents.Count != 0)
 			{
-				// TODO
-				yield return new TransitionTo(FollowState, DefaultTransition);
+				if (combatCommandState == CombatCommandState.Offense)
+				{
+					if (!character.target.GetComponent<Character>().isDead)
+					{
+						distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+						if (distanceToTarget < agent.stoppingDistance)
+						{
+							yield return new TransitionTo(CombatState, DefaultTransition);
+						}
+						else
+						{
+							yield return new TransitionTo(EngageState, DefaultTransition);
+						}
+					}
+					else
+					{
+						character.currentOpponents.Remove(character.target);
+						character.target = character.FindNearestEnemy();
+					}
+				}
+				else if (combatCommandState == CombatCommandState.Defense)
+				{
+					if (character.target.GetComponent<Character>().isDead)
+					{
+						character.currentOpponents.Remove(character.target);
+						character.target = character.FindNearestEnemy();
+					}
+					yield return new TransitionTo(DefenseState, DefaultTransition);
+				}
 			}
 			else
 			{
-				// TODO
-				yield return new TransitionTo(StayState, DefaultTransition);
+				character.isInCombat = false;
 			}
+
 		}
+		else
+		{
+			agent.Resume();
+			yield return new TransitionTo(FollowState, DefaultTransition);
+		}
+
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator FollowState()
 	{
+		agent.Resume();
 		agent.stoppingDistance = 0;
-		agent.SetDestination(formationPosition.transform.position);
+		// TODO make these dynamic:
+		if (partyID == 1)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 - leader.transform.right * 2);
+		}
+		else if (partyID == 2)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4);
+		}
+		else if (partyID == 3)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 + leader.transform.right * 2);
+		}
+		else if (partyID == 4)
+		{
+			agent.SetDestination(leader.transform.position - leader.transform.forward * 4 + leader.transform.right * 2);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -138,38 +175,47 @@ public class HunterStateMachine : CoroutineMachine
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-	IEnumerator FindTargetState()
-	{
-
-		yield return new TransitionTo(EngageState, DefaultTransition);
-	}
-
-
 	IEnumerator EngageState()
 	{
+		agent.Resume();
+		agent.stoppingDistance = character.range;
+		agent.SetDestination(character.target.transform.position);
 
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
-
+		agent.Stop();
+		yield return new WaitForSeconds(1 / character.damageSpeed);
+		character.DealDamage();
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-	//private fearfulCheck()
-	//{
-	//	 TODO:
-	//	 if (character.health < character.maxHealth*fearfulFleePercentage) 
-	//	 {
-	//			return true;
-	//	 } else {
-	//			return false;
-	//	}
-		
-	//}
+	IEnumerator DeadState()
+	{
+		Debug.Log(gameObject.name + " dead");
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
 
+	IEnumerator DefenseState()
+	{
 
-	
+		if (character.isInCombat)
+		{
+			agent.Stop();
+		}
+		else
+		{
+			agent.Resume();
+		}
+
+		if (attacked == true)
+		{
+			yield return new TransitionTo(CombatState, DefaultTransition);
+		}
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
 }
 
