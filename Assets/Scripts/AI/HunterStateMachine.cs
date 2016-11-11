@@ -6,6 +6,32 @@ using System;
 
 public class HunterStateMachine : CoroutineMachine
 {
+	public enum TargetTrait
+	{
+		NoTrait,
+		Foolhardy,
+		StubbornDefender,
+		PacifistSoul,
+		Bully,
+		Codependant,
+		Helpful,
+		GlorySeeker,
+		VeryUnlikable,
+		LowAttentionSpan,
+		Loyal,
+
+	}
+	public enum CombatTrait
+	{
+		NoTrait,
+		BraveFool,
+		Fearful,
+		Excitable,
+		Clingy,
+		Desperate,
+		Vengeful
+	}
+
 	#region On Enable and Disable
 
 	void OnEnable()
@@ -15,14 +41,12 @@ public class HunterStateMachine : CoroutineMachine
 		leader = GameObject.FindGameObjectWithTag("Player");
 		EventManager.Instance.StartListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StartListening<DefendStateEvent>(Defense);
-
 	}
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StopListening<DefendStateEvent>(Defense);
-
 	}
 
 	#endregion
@@ -58,6 +82,8 @@ public class HunterStateMachine : CoroutineMachine
 	}
 	[SerializeField]
 	public CombatCommandState combatCommandState = CombatCommandState.Offense;
+	public TargetTrait targetTrait = TargetTrait.NoTrait;
+	public CombatTrait combatTrait = CombatTrait.NoTrait;
 
 	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
@@ -65,6 +91,11 @@ public class HunterStateMachine : CoroutineMachine
 
 	void Update()
 	{
+		if (character.target != null)
+		{
+			character.RotateTowards(character.target.transform);
+		}
+	
 
 	}
 
@@ -93,7 +124,7 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (character.currentOpponents.Count != 0)
 			{
-				if (combatCommandState == CombatCommandState.Offense)
+				if ((combatCommandState == CombatCommandState.Offense || targetTrait == TargetTrait.Foolhardy) && targetTrait != TargetTrait.StubbornDefender)
 				{
 					if (!character.target.GetComponent<Character>().isDead)
 					{
@@ -113,7 +144,7 @@ public class HunterStateMachine : CoroutineMachine
 						character.target = character.FindNearestEnemy();
 					}
 				}
-				else if (combatCommandState == CombatCommandState.Defense)
+				else if (combatCommandState == CombatCommandState.Defense || targetTrait == TargetTrait.StubbornDefender)
 				{
 					if (character.target.GetComponent<Character>().isDead)
 					{
@@ -187,8 +218,10 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator CombatState()
 	{
 		agent.Stop();
-		yield return new WaitForSeconds(1 / character.damageSpeed);
+		character.RotateTowards(character.target.transform);
+		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
+		character.RotateTowards(character.target.transform);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -216,6 +249,8 @@ public class HunterStateMachine : CoroutineMachine
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
+
+
 
 }
 

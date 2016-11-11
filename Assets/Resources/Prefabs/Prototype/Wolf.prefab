@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012950053870}
   - 33: {fileID: 33000011933281856}
-  - 135: {fileID: 135000010912792488}
   - 23: {fileID: 23000010315601846}
   - 114: {fileID: 114000012682501296}
   - 114: {fileID: 114000012694973368}
   - 195: {fileID: 195000012472257536}
+  - 136: {fileID: 136000011830774818}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Unfriendly
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012838779412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4320621, y: 43.63244, z: -64.34044}
+  m_LocalPosition: {x: -11.116924, y: 43.132446, z: -54.36387}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -114,8 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   distanceToTarget: 3.4028235e+38
---- !u!135 &135000010912792488
-SphereCollider:
+--- !u!136 &136000011830774818
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -123,9 +123,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 0.55
+  m_Height: 1.8270919
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.5148128, z: 0}
 --- !u!195 &195000012472257536
 NavMeshAgent:
   m_ObjectHideFlags: 1
