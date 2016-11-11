@@ -24,7 +24,6 @@ public class WolfStateMachine : CoroutineMachine
 
 	}
 
-
 	protected override StateRoutine InitialState
 	{
 		get
@@ -35,7 +34,10 @@ public class WolfStateMachine : CoroutineMachine
 
 	void Update()
 	{
-
+		if (character.target != null)
+		{
+			character.RotateTowards(character.target.transform);
+		}
 	}
 
 	IEnumerator StartState()
@@ -44,7 +46,6 @@ public class WolfStateMachine : CoroutineMachine
 		{
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
-
 
 		if (character.isInCombat)
 		{
@@ -105,20 +106,18 @@ public class WolfStateMachine : CoroutineMachine
 	IEnumerator EngageState()
 	{
 		agent.Resume();
-		Debug.Log("engages");
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
-		Debug.Log("target: " + character.target.name);
-
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
+		character.RotateTowards(character.target.transform);
 		agent.Stop();
-		yield return new WaitForSeconds(1/character.damageSpeed);
-		Debug.Log("yasmin dealing damage");
+		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
+		character.RotateTowards(character.target.transform);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

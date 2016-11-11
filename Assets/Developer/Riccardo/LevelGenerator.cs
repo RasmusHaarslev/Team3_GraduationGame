@@ -21,13 +21,13 @@ public class LevelGenerator : MonoBehaviour
 		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 45, -45));
 		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 45, -45));
 
-		GameObject Yasmin1 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyWeapon").transform.position);
-		GameObject Yasmin2 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyWeapon").transform.position);
-		GameObject Yasmin3 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyWeapon").transform.position);
+		GameObject Yasmin1 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
+		GameObject Yasmin2 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
+		GameObject Yasmin3 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
 
-		Yasmin1.transform.parent = GameObject.FindGameObjectWithTag("EnemyWeapon").transform;
-		Yasmin2.transform.parent = GameObject.FindGameObjectWithTag("EnemyWeapon").transform;
-		Yasmin3.transform.parent = GameObject.FindGameObjectWithTag("EnemyWeapon").transform;
+		Yasmin1.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
+		Yasmin2.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
+		Yasmin3.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
 
 
 

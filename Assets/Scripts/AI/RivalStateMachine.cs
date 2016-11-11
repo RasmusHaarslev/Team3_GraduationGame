@@ -83,7 +83,6 @@ public class RivalStateMachine : CoroutineMachine
 	IEnumerator CombatState()
 	{
 		agent.Stop();
-		Debug.Log("Yasmin Attacking");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
