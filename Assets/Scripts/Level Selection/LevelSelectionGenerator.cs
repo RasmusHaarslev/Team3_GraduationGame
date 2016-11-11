@@ -3,14 +3,15 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LevelSelectionGenerator : MonoBehaviour
-{
+public class LevelSelectionGenerator : MonoBehaviour {
 
+    #region VARIABLES
     public GameObject scrollRect;
     public GameObject scrollingGrid;
     public GameObject dropDown;
 
     public GameObject rowPrefab;
+    public GameObject rowImagePrefab;
     public GameObject nodePrefab;
 
     public int amountOfRows = 0;
@@ -32,16 +33,24 @@ public class LevelSelectionGenerator : MonoBehaviour
     [Tooltip("This should always contain the number of different levels we have")]
     public int numberOfScenes;
 
+    [Tooltip("Lowest amount of food to use to go to a level")]
+    [Range(0, 55)]
+    public int LowestTravelCost;
+
+    [Tooltip("Highest amount of food to use to go to a level")]
+    [Range(0, 55)]
+    public int HighestTravelCost;
+
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
-    private bool noRoot = false;
+    #endregion
 
     Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
 
     void Awake()
     {
-        InstantiateRows(amountOfRows - 1);
+        InstantiateRows(amountOfRows);
         SetScrollPosition(0);
     }
 
@@ -49,33 +58,27 @@ public class LevelSelectionGenerator : MonoBehaviour
     /// Building the Rows and randomly selection how many nodes pr. row
     /// </summary>
     /// <param name="rowAmount"></param>
-    public void InstantiateRows(int rowAmount)
-    {
-
-        for (int i = 0; i <= rowAmount; i++)
-        {
-
-            if (i == 0 && !noRoot)
-            {
-                SetupRootNode();
-                noRoot = true;
-                continue;
-            }
-
-            totalAmountRows += 1;
+    public void InstantiateRows(int rowAmount) {
+        Debug.Log(rowAmount);
+        for (int i = 0; i < rowAmount; i++) {
 
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
             row.name = (totalAmountRows).ToString();
 
             int numOfParents = numOfLastLevels;
-            numOfLastLevels = randomController(numOfLastLevels);
+
+            if (nodeCounter > 0) { 
+                numOfLastLevels = randomController(numOfLastLevels);
+            } else
+            {
+                numOfLastLevels = 1;
+            }
 
             float startX = 0f;
             float increaseX = 0f;
 
-            switch (numOfLastLevels)
-            {
+            switch (numOfLastLevels) {
                 case 1:
                     startX = 0;
                     increaseX = 0;
@@ -95,66 +98,165 @@ public class LevelSelectionGenerator : MonoBehaviour
             }
 
             List<GameObject> rowNodes = new List<GameObject>();
+            Debug.Log("THIS LEVEL COUNT : " + numOfLastLevels);
 
-            for (int j = 0; j < numOfLastLevels; j++)
-            {
+            for (int j = 0; j < numOfLastLevels; j++) {
                 nodeCounter++;
-
-                string levelName = (totalAmountRows) + "." + j;
+                
                 GameObject newNode = Instantiate(nodePrefab);
                 ResetTransform(newNode, row);
 
                 SetupValuesInNode(newNode);
 
-                newNode.name = levelName;
-                newNode.transform.localPosition = new Vector3(startX, 0, 0);
+                newNode.name = (totalAmountRows) + "." + j;
+                newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
                 newNode.GetComponent<Node>().OnCreate(nodeCounter);
 
                 rowNodes.Add(newNode);
 
+                if (nodeCounter > 1) {
+                    int counter = 0;
+                    foreach (var node in nodesInRows[totalAmountRows - 1]) {
+                        if (numOfParents == 1 || numOfLastLevels == 1) { 
+                            node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                        } else if (numOfParents == 4)
+                        {
+                            switch (numOfLastLevels)
+                            {
+                                case 3:
+                                    if(counter == 0 && j == 0) { 
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    } else if (counter == 1 && j < 2)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    } else if (counter == 2 && j > 0 && j < 3)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    } else if (counter == 3 && j == 2)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    break;
+                                case 2:
+                                    if (counter < 2 && j == 0)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    else if (counter > 1 && j == 1)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    break;
+                            }
+                        }
+                        else if (numOfParents == 3)
+                        {
+                            switch (numOfLastLevels)
+                            {
+                                case 4:
+                                    if (counter == 0 && j < 2)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    else if (counter == 1 && j > 0 && j < 3)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    else if (counter == 2 && j > 1 && j < 4)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    break;
+                                case 2:
+                                    if (counter == 0 && j == 0)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    else if (counter == 1)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    } else if (counter == 2 && j > 0)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    break;
+                            }
+                        }
+                        else if (numOfParents == 2)
+                        {
+                            switch (numOfLastLevels)
+                            {
+                                case 4:
+                                    if (counter == 0 && j < 2)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    else if (counter == 1 && j > 1 && j < 4)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    break;
+                                case 3:
+                                    if (counter == 0 && j < 2)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    else if (counter == 1 && j > 1)
+                                    {
+                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
+                                    }
+                                    break;
+                            }
+                        }
+
+                        counter++;
+                    }
+                }
+
                 startX += increaseX;
             }
-            Debug.Log(totalAmountRows);
+            
             nodesInRows.Add(totalAmountRows, rowNodes);
+
+            if (nodeCounter > 1) { 
+                GameObject imageRow = Instantiate(rowImagePrefab);
+                ResetTransform(imageRow, row);
+                imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
+                imageRow.GetComponent<AddImageRow>().InsertImage(numOfLastLevels, numOfParents);
+            } 
+
+            totalAmountRows += 1;
         }
+
         initialiseDropDown();
-        printDict();
-    }
-
-    void SetupRootNode()
-    {
-        GameObject row = Instantiate(rowPrefab);
-        ResetTransform(row, scrollingGrid);
-        row.name = "0";
-
-        GameObject rootNode = Instantiate(nodePrefab);
-        ResetTransform(rootNode, row);
-
-        SetupValuesInNode(rootNode);
-        rootNode.name = "0.0";
-        var rootList = new List<GameObject>() { rootNode };
-        nodesInRows.Add(0, rootList);
-    }
-
-    void printDict()
-    {
-        foreach (KeyValuePair<int, List<GameObject>> kvp in nodesInRows)
-        {
-
-            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count));
-        }
+        SetScrollPosition(0);
+        //printDict();
     }
 
     void SetupValuesInNode(GameObject node)
     {
         node.GetComponent<Node>().Level = totalAmountRows;
-        node.GetComponent<Node>().NodeId = nodeCounter;
+        node.GetComponent<Node>().TravelCost = Random.Range(LowestTravelCost, HighestTravelCost); ;
         node.GetComponent<Node>().sceneSelection = Random.Range(2, numberOfScenes + 2);
         node.GetComponent<Node>().itemDropAmount = Random.Range(1, itemDropAmount);
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
         node.GetComponent<Node>().probabilityTribes = probabilityTribes;
         node.GetComponent<Node>().probabilityChoice = probabilityChoices;
+    }
+
+    #region Helper function
+
+    void printDict(int startFromRow)
+    {
+        for (int key = startFromRow; key < nodesInRows.Count; key++)
+        {
+
+        }
+        foreach (KeyValuePair<int, List<GameObject>> kvp in nodesInRows)
+        {
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count));
+        }
     }
 
     /// <summary>
@@ -177,12 +279,10 @@ public class LevelSelectionGenerator : MonoBehaviour
     void ResetTransform(GameObject from, GameObject to)
     {
         from.transform.SetParent(to.transform);
-
-        from.transform.localPosition = new Vector3(to.transform.position.x, to.transform.position.y, 0f);
+        from.transform.localPosition = new Vector3(to.transform.localPosition.x, 0f, 0f);
         from.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    #region Helper function
     /// <summary>
     /// Button click (Temporary Functionality)
     /// </summary>

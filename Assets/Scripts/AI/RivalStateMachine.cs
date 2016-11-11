@@ -1,11 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RivalStateMachine : CoroutineMachine {
+public class RivalStateMachine : CoroutineMachine
+{
 
 	public float transitionTime = 0.05f;
 
-	public Vector3 fleePosition;
+	NavMeshAgent agent;
+	Character character;
+
+	public float distanceToTarget = float.MaxValue;
+
+	void OnEnable()
+	{
+		character = GetComponent<Character>();
+		agent = GetComponent<NavMeshAgent>();
+	}
+
 
 	protected override StateRoutine InitialState
 	{
@@ -15,14 +26,35 @@ public class RivalStateMachine : CoroutineMachine {
 		}
 	}
 
-	void Update ()
+	void Update()
 	{
-	
+
 	}
 
 	IEnumerator StartState()
 	{
-		
+		if (character.isDead)
+		{
+			yield return new TransitionTo(DeadState, DefaultTransition);
+		}
+		if (character.isInCombat)
+		{
+			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
+			if (distanceToTarget < agent.stoppingDistance)
+			{
+				yield return new TransitionTo(CombatState, DefaultTransition);
+			}
+			else
+			{
+				yield return new TransitionTo(EngageState, DefaultTransition);
+			}
+
+		}
+		else
+		{
+			yield return new TransitionTo(RoamState, DefaultTransition);
+		}
+
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -32,34 +64,35 @@ public class RivalStateMachine : CoroutineMachine {
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-
 	IEnumerator FleeState()
 	{
-		
+
 		yield return new TransitionTo(StartState, DefaultTransition);
-	}
-
-	IEnumerator FindTargetState()
-	{
-
-		yield return new TransitionTo(EngageState, DefaultTransition);
 	}
 
 
 	IEnumerator EngageState()
 	{
+		agent.stoppingDistance = character.range;
+		agent.SetDestination(character.target.transform.position);
 
+		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
-
+		agent.Stop();
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
 		yield return new WaitForSeconds(transitionTime);
+	}
+
+	IEnumerator DeadState()
+	{
+		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 }

@@ -121,6 +121,8 @@ MonoBehaviour:
   scrollingGrid: {fileID: 1631003044}
   dropDown: {fileID: 1166020512}
   rowPrefab: {fileID: 1000010472693558, guid: 4f09a4f10a9ccae4d928dcf974cddc6e, type: 2}
+  rowImagePrefab: {fileID: 1000013617208694, guid: 4bfd8ae4a33af21429a39889f4e3fb74,
+    type: 2}
   nodePrefab: {fileID: 1000012377207796, guid: 93be026c65b142d4783e8eaa4c9ca887, type: 2}
   amountOfRows: 10
   probabilityWolves: 4
@@ -148,35 +150,35 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010074322466, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
+    - target: {fileID: 4000013805507274, guid: 3864daf9919c8a14bb95f9cf1f1f9d24, type: 2}
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
@@ -458,6 +460,7 @@ GameObject:
   - 222: {fileID: 432686615}
   - 114: {fileID: 432686616}
   - 114: {fileID: 432686614}
+  - 114: {fileID: 432686617}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -533,6 +536,33 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &432686617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 432686612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!1 &455309935
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,20 +7,37 @@ using System.Security.Cryptography.X509Certificates;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private DataService dataService;
+	private DataService dataService;
 
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start()
+	{
 
+		dataService = new DataService("tempDatabase.db");
+
+		dataService.CreateDB();
+		GameObject daniel = dataService.GenerateCharacterByName("Daniel", new Vector3(-30, 45, -45));
+		//print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
+		GameObject john = dataService.GenerateCharacterByName("John",new Vector3(-33, 45, -45));
+		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 45, -45));
+		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 45, -45));
+
+		GameObject Yasmin1 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
+		GameObject Yasmin2 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
+		GameObject Yasmin3 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
+
+		Yasmin1.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
+		Yasmin2.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
+		Yasmin3.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
+
+
+<<<<<<< HEAD
         dataService = new DataService(StringResources.databaseName);
+=======
+>>>>>>> 8c5e29ac0e3a4292ba527a136a6d1d4dee359f78
 
-        dataService.CreateDB();
-        GameObject daniel = dataService.GenerateCharacterByName("Daniel", Vector3.zero);
-        //print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
-		GameObject john = dataService.GenerateCharacterByName("John", Vector3.left);
-		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", Vector3.right);
-		GameObject peter = dataService.GenerateCharacterByName("Peter", Vector3.forward);
 		//TODO acquire data from playerprefs
+<<<<<<< HEAD
         
         //spawn the other character from the Points of Interests
         spawnEnemies();
@@ -29,21 +46,25 @@ public class LevelGenerator : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 	
+=======
+
+		//spawn the other character from the Points of Interests
+		spawnEnemies();
+>>>>>>> 8c5e29ac0e3a4292ba527a136a6d1d4dee359f78
 	}
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="difficultyLevel">The input variable to determine the strength of characters in the scene.</param>
-    /// <param name="wolfPackCount">How many Points of interests are filled with wolves.</param>
-    /// <param name="tribesmanPackCount">How many Points of interests are filled with tribesmen.</param>
-    /// <param name="lootCount">Quantity of loot acquired if the scene is completed.</param>
-    /// <param name="environmentType">The index for the visual appearance of the environment objects on the scene</param>
-    public void Init(int difficultyLevel, int wolfPackCount, int tribesmanPackCount, int lootCount, int environmentType)
-    {
-        
-    }
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="difficultyLevel">The input variable to determine the strength of characters in the scene.</param>
+	/// <param name="wolfPackCount">How many Points of interests are filled with wolves.</param>
+	/// <param name="tribesmanPackCount">How many Points of interests are filled with tribesmen.</param>
+	/// <param name="lootCount">Quantity of loot acquired if the scene is completed.</param>
+	/// <param name="environmentType">The index for the visual appearance of the environment objects on the scene</param>
+	public void Init(int difficultyLevel, int wolfPackCount, int tribesmanPackCount, int lootCount, int environmentType)
+	{
 
+	}
 
     public GameObject GenerateCharacterByName(string characterName, Vector3 position)
     {

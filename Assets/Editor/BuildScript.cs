@@ -7,7 +7,7 @@ class BuildScript
         [MenuItem("Build/Android")]
         static void PerformBuild()
         {
-            string[] scenes = { "Assets/_Scenes/Levels/LevelPrototype.unity"};
+            string[] scenes = { "Assets/_Scenes/CampManagement.unity", "Assets/_Scenes/LevelSelection.unity", "Assets/_Scenes/Levels/LevelPrototype.unity"};
 
             // Todo
             string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
