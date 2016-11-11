@@ -140,123 +140,121 @@ public class DataService : MonoBehaviour
                 health = 50,
                 damageSpeed = 1,
                 range = 2,
-<<<<<<< HEAD
+
                 prefabName = "EnemyLeader"
             },
+          
           new CharacterValues
-            {
-                name = "Young wolf",
-                Type = CharacterValues.type.Wolf,
-                tier = 1,
-                damage = 2,
-                health = 3,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            }/*,
+          {
+              name = "Young wolf",
+              Type = CharacterValues.type.Wolf,
+              tier = 1,
+              damage = 2,
+              health = 3,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyLeader"
+          },
           new CharacterValues
-            {
-                name = "Teen wolf",
-                Type = CharacterValues.type.Wolf,
-                tier = 2,
-                damage = 3,
-                health = 4,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Teen wolf",
+              Type = CharacterValues.type.Wolf,
+              tier = 2,
+              damage = 3,
+              health = 4,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyLeader"
+          },
           new CharacterValues
-            {
-                name = "Wolf initiate",
-                Type = CharacterValues.type.Wolf,
-                tier = 3,
-                damage = 4,
-                health = 5,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Wolf initiate",
+              Type = CharacterValues.type.Wolf,
+              tier = 3,
+              damage = 4,
+              health = 5,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyLeader"
+          },
           new CharacterValues
-            {
-                name = "Mature wolf",
-                Type = CharacterValues.type.Wolf,
-                tier = 4,
-                damage = 5,
-                health = 6,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Mature wolf",
+              Type = CharacterValues.type.Wolf,
+              tier = 4,
+              damage = 5,
+              health = 6,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyLeader"
+          },
           new CharacterValues
-            {
-                name = "Leader wolf",
-                Type = CharacterValues.type.Wolf,
-                tier = 5,
-                damage = 6,
-                health = 7,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Leader wolf",
+              Type = CharacterValues.type.Wolf,
+              tier = 5,
+              damage = 6,
+              health = 7,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyLeader"
+          },
           new CharacterValues
-            {
-                name = "Young tribesman",
-                Type = CharacterValues.type.Tribesman,
-                tier = 1,
-                damage = 2,
-                health = 3,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Young tribesman",
+              Type = CharacterValues.type.Tribesman,
+              tier = 1,
+              damage = 2,
+              health = 3,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyMinion"
+          },
           new CharacterValues
-            {
-                name = "Teen tribesman",
-                Type = CharacterValues.type.Tribesman,
-                tier = 2,
-                damage = 3,
-                health = 4,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Teen tribesman",
+              Type = CharacterValues.type.Tribesman,
+              tier = 2,
+              damage = 3,
+              health = 4,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyMinion"
+          },
           new CharacterValues
-            {
-                name = "Tribesman initiate",
-                Type = CharacterValues.type.Tribesman,
-                tier = 3,
-                damage = 4,
-                health = 5,
-                damageSpeed = 2,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Tribesman initiate",
+              Type = CharacterValues.type.Tribesman,
+              tier = 3,
+              damage = 4,
+              health = 5,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "EnemyMinion"
+          },
           new CharacterValues
-            {
-                name = "Mature tribesman",
-                Type = CharacterValues.type.Tribesman,
-                tier = 4,
-                damage = 5,
-                health = 6,
-                damageSpeed = 3,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
+          {
+              name = "Mature tribesman",
+              Type = CharacterValues.type.Tribesman,
+              tier = 4,
+              damage = 5,
+              health = 6,
+              damageSpeed = 3,
+              range = 2,
+              prefabName = "EnemyMinion"
+          },
           new CharacterValues
-            {
-                name = "Leader tribesman",
-                Type = CharacterValues.type.Tribesman,
-                tier = 5,
-                damage = 6,
-                health = 7,
-                damageSpeed = 3,
-                range = 2,
-                prefabName = "EnemyLeader"
-=======
-                prefabName = "Wolf"
->>>>>>> 8c5e29ac0e3a4292ba527a136a6d1d4dee359f78
-            }
-            */
+          {
+              name = "Leader tribesman",
+              Type = CharacterValues.type.Tribesman,
+              tier = 5,
+              damage = 6,
+              health = 7,
+              damageSpeed = 3,
+              range = 2,
+              prefabName = "EnemyMinion"
+          }
+
         });
 
         _connection.InsertAll(new[]
@@ -364,16 +362,19 @@ public class DataService : MonoBehaviour
     public IEnumerable<CharacterValues> GetCharactersValuesByType(CharacterValues.type charactersType)
     {
         string q = "select * from  CharacterValues where Type = ?";
-        return _connection.Query<CharacterValues>(q, charactersType);     
+        return _connection.Query<CharacterValues>(q, charactersType);
     }
 
     public IEnumerable<GameObject> GenerateCharactersByType(CharacterValues.type charactersType)
     {
         List<GameObject> characters = new List<GameObject>();
-        
-        foreach (CharacterValues charValues in GetCharactersValuesByType(charactersType))
+        GameObject charact;
+        List<CharacterValues> charValuesList = GetCharactersValuesByType(charactersType).ToList();
+        foreach (CharacterValues charValues in charValuesList)
         {
-            characters.Add(GetCharacterFromValues(charValues));
+            charact = GetCharacterFromValues(charValues);
+
+            characters.Add(charact);
         }
 
         return characters;
@@ -381,14 +382,16 @@ public class DataService : MonoBehaviour
 
     public GameObject GetCharacterFromValues(CharacterValues charValues)
     {
-        GameObject character = Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName) as GameObject;
-
+        GameObject character = Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName) as GameObject;//Instantiate()  as GameObject;
+                                                                                                                          /*#if UNITY_EDITOR
+                                                                                                                                  PrefabUtility.DisconnectPrefabInstance(gameObject);
+                                                                                                                          #endif*/
         character.GetComponent<Character>().init(charValues);
-
         //todo handle weapons attached to them!
 
         return character;
     }
+
 
     /*public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
     {
@@ -398,6 +401,6 @@ public class DataService : MonoBehaviour
 
         return equipIds;
     }*/
-    
+
 
 }

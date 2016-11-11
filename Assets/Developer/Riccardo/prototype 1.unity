@@ -326,11 +326,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 118312587}
   m_RootOrder: 0
---- !u!1 &110779148 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013942112488, guid: 25d11a6d3638eea48bd285a2da998ab1,
-    type: 2}
-  m_PrefabInternal: {fileID: 1852875399}
 --- !u!1 &112831752
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +710,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!1001 &358508554
 Prefab:
   m_ObjectHideFlags: 0
@@ -767,11 +762,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee3537ff8f1866f47bd6a38fb744978a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &364083343 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011579073378, guid: 25d11a6d3638eea48bd285a2da998ab1,
-    type: 2}
-  m_PrefabInternal: {fileID: 1852875399}
 --- !u!1 &448741297
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,15 +805,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Yasmin
+  tier: 1
   GizmoColor: {r: 1, g: 0, b: 0, a: 1}
   gizmoSize: 1
-  tier: 1
---- !u!1 &526967484 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013841434456, guid: 25d11a6d3638eea48bd285a2da998ab1,
-    type: 2}
-  m_PrefabInternal: {fileID: 1852875399}
 --- !u!1001 &539947898
 Prefab:
   m_ObjectHideFlags: 0
@@ -1476,6 +1460,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 118312587}
   m_RootOrder: 1
+--- !u!4 &1104860953 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000014085619996, guid: ee3537ff8f1866f47bd6a38fb744978a,
+    type: 2}
+  m_PrefabInternal: {fileID: 737760931}
 --- !u!1001 &1191235164
 Prefab:
   m_ObjectHideFlags: 0
@@ -1513,13 +1502,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012116336588, guid: d6b33fea60020cc418439087458653b7, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114000011718853346, guid: d6b33fea60020cc418439087458653b7,
         type: 2}
       propertyPath: formationPosition
       value: 
-      objectReference: {fileID: 110779148}
+      objectReference: {fileID: 0}
     - target: {fileID: 1000013750245402, guid: d6b33fea60020cc418439087458653b7, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -1570,15 +1559,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Yasmin
+  tier: 1
   GizmoColor: {r: 1, g: 0, b: 0, a: 1}
   gizmoSize: 1
-  tier: 1
---- !u!1 &1347469865 stripped
+--- !u!1 &1297065864
 GameObject:
-  m_PrefabParentObject: {fileID: 1000010690569712, guid: 25d11a6d3638eea48bd285a2da998ab1,
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000013169685060, guid: ee3537ff8f1866f47bd6a38fb744978a,
     type: 2}
-  m_PrefabInternal: {fileID: 1852875399}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1297065865}
+  - 114: {fileID: 1297065866}
+  m_Layer: 0
+  m_Name: CharacterA (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1297065865
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000011873723718, guid: ee3537ff8f1866f47bd6a38fb744978a,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1297065864}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.33, y: 0, z: 1.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1104860953}
+  m_RootOrder: 5
+--- !u!114 &1297065866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011361990832, guid: ee3537ff8f1866f47bd6a38fb744978a,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1297065864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 4
+  GizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoSize: 1
 --- !u!1001 &1363876988
 Prefab:
   m_ObjectHideFlags: 0
@@ -1665,10 +1694,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Yasmin
+  tier: 1
   GizmoColor: {r: 1, g: 0, b: 0, a: 1}
   gizmoSize: 1
-  tier: 1
 --- !u!1001 &1391911446
 Prefab:
   m_ObjectHideFlags: 0
@@ -1706,13 +1734,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012758246858, guid: 490ba00b4dea23b4586fe2e484660377, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000012173701250, guid: 490ba00b4dea23b4586fe2e484660377,
         type: 2}
       propertyPath: formationPosition
       value: 
-      objectReference: {fileID: 526967484}
+      objectReference: {fileID: 0}
     - target: {fileID: 1000013716753270, guid: 490ba00b4dea23b4586fe2e484660377, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -1814,9 +1842,12 @@ MonoBehaviour:
   damage: 0
   range: 0
   damageSpeed: 0
+  currentHealth: 0
   target: {fileID: 0}
   currentOpponents: []
+  rotationSpeed: 2
   isInCombat: 0
+  isDead: 0
 --- !u!195 &1432736122
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2147,10 +2178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Yasmin
+  tier: 1
   GizmoColor: {r: 1, g: 0, b: 0, a: 1}
   gizmoSize: 1
-  tier: 1
 --- !u!1 &1551690420
 GameObject:
   m_ObjectHideFlags: 0
@@ -2477,6 +2507,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+--- !u!1 &1771451178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000013169685060, guid: ee3537ff8f1866f47bd6a38fb744978a,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1771451179}
+  - 114: {fileID: 1771451180}
+  m_Layer: 0
+  m_Name: CharacterA (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1771451179
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000011873723718, guid: ee3537ff8f1866f47bd6a38fb744978a,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1771451178}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.47, y: 0, z: -2.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1104860953}
+  m_RootOrder: 4
+--- !u!114 &1771451180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011361990832, guid: ee3537ff8f1866f47bd6a38fb744978a,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1771451178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 2
+  GizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoSize: 1
 --- !u!1001 &1852875399
 Prefab:
   m_ObjectHideFlags: 0
@@ -2625,7 +2701,7 @@ Prefab:
         type: 2}
       propertyPath: formationPosition
       value: 
-      objectReference: {fileID: 1347469865}
+      objectReference: {fileID: 0}
     - target: {fileID: 1000010732224012, guid: 3fc52f36a75962e4da6ff97ba52ccbe8, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -2670,13 +2746,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010770186256, guid: afdb9c555d8e85f49ba84345b8b5e14e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114000010200429582, guid: afdb9c555d8e85f49ba84345b8b5e14e,
         type: 2}
       propertyPath: formationPosition
       value: 
-      objectReference: {fileID: 364083343}
+      objectReference: {fileID: 0}
     - target: {fileID: 1000011731378472, guid: afdb9c555d8e85f49ba84345b8b5e14e, type: 2}
       propertyPath: m_IsActive
       value: 0
