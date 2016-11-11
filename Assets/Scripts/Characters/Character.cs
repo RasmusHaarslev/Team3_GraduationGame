@@ -47,8 +47,13 @@ public class Character : MonoBehaviour
 	{
 		if (currentHealth <= 0)
 		{
+			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+			{
+				EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+			}
 			isDead = true;
 			GetComponent<MeshRenderer>().enabled = false;
+
 		}
 	}
 
@@ -156,9 +161,12 @@ public class Character : MonoBehaviour
 		{
 			foreach (Transform child in targetParent.transform)
 			{
-				if (child.gameObject.tag == "Unfriendly")
+				foreach (Transform child2 in child)
 				{
-					currentOpponents.Add(child.gameObject);
+					if (child2.gameObject.tag == "Unfriendly")
+					{
+						currentOpponents.Add(child2.gameObject);
+					}
 				}
 			}
 		}
@@ -216,7 +224,6 @@ public class Character : MonoBehaviour
 				}
 			}
 		}
-
 	}
 
 	private void TakeDamage(TakeDamageEvent e)

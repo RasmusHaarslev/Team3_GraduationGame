@@ -41,18 +41,35 @@ public class HunterStateMachine : CoroutineMachine
 		leader = GameObject.FindGameObjectWithTag("Player");
 		EventManager.Instance.StartListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StartListening<DefendStateEvent>(Defense);
+		EventManager.Instance.StartListening<FollowStateEvent>(Follow);
+		EventManager.Instance.StartListening<StayStateEvent>(Stay);
+		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StartListening<AllyDeathEvent>(Death);
 	}
+
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StopListening<DefendStateEvent>(Defense);
+		EventManager.Instance.StopListening<FollowStateEvent>(Follow);
+		EventManager.Instance.StopListening<StayStateEvent>(Stay);
+		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StopListening<AllyDeathEvent>(Death);
 	}
+
 
 	#endregion
 
 	#region Functions for events
 
+	private void Death(AllyDeathEvent e)
+	{
+		if (combatTrait == CombatTrait.Vengeful)
+		{
+			character.damage += damageIncrease;
+		}
+	}
 
 	private void Defense(DefendStateEvent e)
 	{
@@ -63,16 +80,33 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		combatCommandState = CombatCommandState.Offense;
 	}
+	private void Follow(FollowStateEvent e)
+	{
+		outOfCombatCommandState = OutOfCombatCommandState.Follow;
+	}
+	private void Stay(StayStateEvent e)
+	{
+		outOfCombatCommandState = OutOfCombatCommandState.Stay;
+	}
+	private void Flee(FleeStateEvent e)
+	{
+		combatCommandState = CombatCommandState.Flee;
+	}
 
 	#endregion
 
 	public float transitionTime = 0.05f;
+	public float fearfulHealthLimit = 25;
+	public int maxLowAttentionSpanCounter = 3;
+	int lowAttentionSpanCounter = 3;
+	public int desperateHealthLimit = 25;
+	public int damageIncrease = 10;
+	bool damageIncreased = false;
 
 	public bool attacked = false;
 	Character character;
 	NavMeshAgent agent;
 	GameObject leader;
-
 
 	public enum CombatCommandState
 	{
@@ -80,10 +114,18 @@ public class HunterStateMachine : CoroutineMachine
 		Defense,
 		Flee
 	}
+
+	public enum OutOfCombatCommandState
+	{
+		Follow,
+		Stay
+	}
+
 	[SerializeField]
 	public CombatCommandState combatCommandState = CombatCommandState.Offense;
 	public TargetTrait targetTrait = TargetTrait.NoTrait;
 	public CombatTrait combatTrait = CombatTrait.NoTrait;
+	public OutOfCombatCommandState outOfCombatCommandState = OutOfCombatCommandState.Follow;
 
 	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
@@ -95,8 +137,19 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			character.RotateTowards(character.target.transform);
 		}
-	
 
+		if (combatTrait == CombatTrait.Desperate && character.currentHealth <= desperateHealthLimit)
+		{
+			if (!damageIncreased)
+			{
+				character.damage += damageIncrease;
+				damageIncreased = true;
+			}
+		}
+		else if (combatTrait == CombatTrait.Desperate && character.currentHealth > desperateHealthLimit)
+		{
+			damageIncreased = false;
+		}
 	}
 
 	protected override StateRoutine InitialState
@@ -119,53 +172,113 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
-
-		if (character.isInCombat)
+		else
 		{
-			if (character.currentOpponents.Count != 0)
+			if (character.isInCombat)
 			{
-				if ((combatCommandState == CombatCommandState.Offense || targetTrait == TargetTrait.Foolhardy) && targetTrait != TargetTrait.StubbornDefender)
+				if (targetTrait == TargetTrait.Bully)
 				{
-					if (!character.target.GetComponent<Character>().isDead)
+					character.target = BullyTarget();
+				}
+				else if (targetTrait == TargetTrait.GlorySeeker)
+				{
+					character.target = GlorySeekerTarget();
+				}
+				if (combatCommandState == CombatCommandState.Flee && combatTrait != CombatTrait.BraveFool || (combatTrait == CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
+				{
+					yield return new TransitionTo(FleeState, DefaultTransition);
+				}
+				else
+				{
+					if (character.currentOpponents.Count != 0)
 					{
-						distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
-						if (distanceToTarget < agent.stoppingDistance)
+						if ((combatCommandState == CombatCommandState.Offense || targetTrait == TargetTrait.Foolhardy || (combatCommandState == CombatCommandState.Flee && combatTrait == CombatTrait.BraveFool)) && targetTrait != TargetTrait.StubbornDefender)
 						{
-							yield return new TransitionTo(CombatState, DefaultTransition);
+							if (!character.target.GetComponent<Character>().isDead)
+							{
+								if (lowAttentionSpanCounter <= 0 && targetTrait == TargetTrait.LowAttentionSpan)
+								{
+									GameObject formerTarget = character.target;
+									lowAttentionSpanCounter = maxLowAttentionSpanCounter;
+									while (formerTarget == character.target)
+									{
+										if (character.currentOpponents.Count <= 1)
+										{
+											break;
+										}
+										else
+										{
+											character.target = character.FindRandomEnemy();
+										}
+									}
+								}
+								distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+								if (distanceToTarget < agent.stoppingDistance)
+								{
+									yield return new TransitionTo(CombatState, DefaultTransition);
+								}
+								else
+								{
+									yield return new TransitionTo(EngageState, DefaultTransition);
+								}
+							}
+							else
+							{
+								character.currentOpponents.Remove(character.target);
+								if (targetTrait == TargetTrait.Bully)
+								{
+									character.target = BullyTarget();
+								}
+								else if (targetTrait == TargetTrait.GlorySeeker)
+								{
+									character.target = GlorySeekerTarget();
+								}
+								else
+								{
+									character.target = character.FindNearestEnemy();
+								}
+							}
 						}
-						else
+						else if (combatCommandState == CombatCommandState.Defense || targetTrait == TargetTrait.StubbornDefender)
 						{
-							yield return new TransitionTo(EngageState, DefaultTransition);
+							if (character.target.GetComponent<Character>().isDead)
+							{
+								character.currentOpponents.Remove(character.target);
+								if (targetTrait == TargetTrait.Bully)
+								{
+									character.target = BullyTarget();
+								}
+								else if (targetTrait == TargetTrait.GlorySeeker)
+								{
+									character.target = GlorySeekerTarget();
+								}
+								else
+								{
+									character.target = character.FindNearestEnemy();
+								}
+							}
+							yield return new TransitionTo(DefenseState, DefaultTransition);
 						}
 					}
 					else
 					{
-						character.currentOpponents.Remove(character.target);
-						character.target = character.FindNearestEnemy();
+						character.isInCombat = false;
 					}
-				}
-				else if (combatCommandState == CombatCommandState.Defense || targetTrait == TargetTrait.StubbornDefender)
-				{
-					if (character.target.GetComponent<Character>().isDead)
-					{
-						character.currentOpponents.Remove(character.target);
-						character.target = character.FindNearestEnemy();
-					}
-					yield return new TransitionTo(DefenseState, DefaultTransition);
 				}
 			}
 			else
 			{
-				character.isInCombat = false;
+				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && combatTrait != CombatTrait.Clingy)
+				{
+					yield return new TransitionTo(StayState, DefaultTransition);
+				}
+				else
+				{
+					agent.Resume();
+					yield return new TransitionTo(FollowState, DefaultTransition);
+				}
 			}
-
 		}
-		else
-		{
-			agent.Resume();
-			yield return new TransitionTo(FollowState, DefaultTransition);
-		}
-
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -195,14 +308,16 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator StayState()
 	{
-
+		agent.Stop();
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
-
 	IEnumerator FleeState()
 	{
-
+		character.target = null;
+		agent.Resume();
+		agent.stoppingDistance = 0;
+		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -221,13 +336,13 @@ public class HunterStateMachine : CoroutineMachine
 		character.RotateTowards(character.target.transform);
 		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
+		lowAttentionSpanCounter--;
 		character.RotateTowards(character.target.transform);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator DeadState()
 	{
-		Debug.Log(gameObject.name + " dead");
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -250,7 +365,34 @@ public class HunterStateMachine : CoroutineMachine
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
+	private GameObject BullyTarget()
+	{
+		int min = int.MaxValue;
+		GameObject target = null;
+		foreach (GameObject opponent in character.currentOpponents)
+		{
+			if (opponent.GetComponent<Character>().characterBaseValues.tier < min)
+			{
+				target = opponent;
+				min = opponent.GetComponent<Character>().characterBaseValues.tier;
+			}
+		}
+		return target;
+	}
 
-
+	private GameObject GlorySeekerTarget()
+	{
+		int max = int.MinValue;
+		GameObject target = null;
+		foreach (GameObject opponent in character.currentOpponents)
+		{
+			if (opponent.GetComponent<Character>().characterBaseValues.tier > max)
+			{
+				target = opponent;
+				max = opponent.GetComponent<Character>().characterBaseValues.tier;
+			}
+		}
+		return target;
+	}
 }
 
