@@ -15,11 +15,11 @@ public class LevelGenerator : MonoBehaviour
 		dataService = new DataService("tempDatabase.db");
 
 		dataService.CreateDB();
-		GameObject daniel = dataService.GenerateCharacterByName("Daniel", new Vector3(-30, 45, -45));
+		GameObject daniel = dataService.GenerateCharacterByName("Daniel", new Vector3(-30, 13, -45));
 		//print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
-		GameObject john = dataService.GenerateCharacterByName("John",new Vector3(-33, 45, -45));
-		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 45, -45));
-		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 45, -45));
+		GameObject john = dataService.GenerateCharacterByName("John",new Vector3(-33, 13, -45));
+		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 13, -45));
+		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 13, -45));
 
 		GameObject Yasmin1 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyWeapon").transform.position);
 		GameObject Yasmin2 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyWeapon").transform.position);

@@ -26,10 +26,10 @@ namespace Assets.ModuleDesigner.Scripts
 
         void Start()
         {
-            if (TriggerOnOff.ToString() == "On")
+            /*if (TriggerOnOff.ToString() == "On")
                 TriggerEnter();
             else
-                TriggerExit();
+                TriggerExit();*/
         }
 
         public void TriggerEnter()
