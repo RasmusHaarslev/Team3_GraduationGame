@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Link
 {
-    public int FoodCost;
     public GameObject From;
     public GameObject To;
+    public bool Hierarchy;
 }
 
