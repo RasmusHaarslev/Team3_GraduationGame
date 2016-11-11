@@ -145,7 +145,8 @@ public class HunterStateMachine : CoroutineMachine
 				character.damage += damageIncrease;
 				damageIncreased = true;
 			}
-		} else if (combatTrait == CombatTrait.Desperate && character.currentHealth > desperateHealthLimit)
+		}
+		else if (combatTrait == CombatTrait.Desperate && character.currentHealth > desperateHealthLimit)
 		{
 			damageIncreased = false;
 		}
@@ -179,6 +180,10 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					character.target = BullyTarget();
 				}
+				else if (targetTrait == TargetTrait.GlorySeeker)
+				{
+					character.target = GlorySeekerTarget();
+				}
 				if (combatCommandState == CombatCommandState.Flee && combatTrait != CombatTrait.BraveFool || (combatTrait == CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
 				{
 					yield return new TransitionTo(FleeState, DefaultTransition);
@@ -200,7 +205,8 @@ public class HunterStateMachine : CoroutineMachine
 										if (character.currentOpponents.Count <= 1)
 										{
 											break;
-										} else
+										}
+										else
 										{
 											character.target = character.FindRandomEnemy();
 										}
@@ -222,7 +228,12 @@ public class HunterStateMachine : CoroutineMachine
 								if (targetTrait == TargetTrait.Bully)
 								{
 									character.target = BullyTarget();
-								} else
+								}
+								else if (targetTrait == TargetTrait.GlorySeeker)
+								{
+									character.target = GlorySeekerTarget();
+								}
+								else
 								{
 									character.target = character.FindNearestEnemy();
 								}
@@ -236,6 +247,10 @@ public class HunterStateMachine : CoroutineMachine
 								if (targetTrait == TargetTrait.Bully)
 								{
 									character.target = BullyTarget();
+								}
+								else if (targetTrait == TargetTrait.GlorySeeker)
+								{
+									character.target = GlorySeekerTarget();
 								}
 								else
 								{
@@ -253,7 +268,7 @@ public class HunterStateMachine : CoroutineMachine
 			}
 			else
 			{
-				if (outOfCombatCommandState == OutOfCombatCommandState.Stay)
+				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && combatTrait != CombatTrait.Clingy)
 				{
 					yield return new TransitionTo(StayState, DefaultTransition);
 				}
@@ -354,12 +369,27 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		int min = int.MaxValue;
 		GameObject target = null;
-		foreach (var opponent in character.currentOpponents)
+		foreach (GameObject opponent in character.currentOpponents)
 		{
 			if (opponent.GetComponent<Character>().characterBaseValues.tier < min)
 			{
 				target = opponent;
 				min = opponent.GetComponent<Character>().characterBaseValues.tier;
+			}
+		}
+		return target;
+	}
+
+	private GameObject GlorySeekerTarget()
+	{
+		int max = int.MinValue;
+		GameObject target = null;
+		foreach (GameObject opponent in character.currentOpponents)
+		{
+			if (opponent.GetComponent<Character>().characterBaseValues.tier > max)
+			{
+				target = opponent;
+				max = opponent.GetComponent<Character>().characterBaseValues.tier;
 			}
 		}
 		return target;

@@ -161,9 +161,12 @@ public class Character : MonoBehaviour
 		{
 			foreach (Transform child in targetParent.transform)
 			{
-				if (child.gameObject.tag == "Unfriendly")
+				foreach (Transform child2 in child)
 				{
-					currentOpponents.Add(child.gameObject);
+					if (child2.gameObject.tag == "Unfriendly")
+					{
+						currentOpponents.Add(child2.gameObject);
+					}
 				}
 			}
 		}
