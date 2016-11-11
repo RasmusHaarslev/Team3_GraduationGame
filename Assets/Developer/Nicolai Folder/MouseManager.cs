@@ -1,35 +1,95 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class MouseManager : MonoBehaviour {
+public class MouseManager : MonoBehaviour
+{
 
     public GameObject selectedObject;
     public GameObject hoveredObject;
+    private GameObject currentActivePanel = null;
+    public List<GameObject> panelList = new List<GameObject>(); 
+    public bool activePanel = false;
+    public GameObject BackPanel;
 
     // Update is called once per frame
     void Update () {
+
+
+        
+        if (Input.GetMouseButtonDown(0) && !activePanel)
+        {
+
+            CheckTarget();
+            ActivatePanel();
+            //HideIfClickedOutside(panelList[0]);
+        }
+        
+	}
+
+    void CheckTarget()
+    {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
-
-        if(Physics.Raycast(ray, out hitInfo))
+        if (Physics.Raycast(ray, out hitInfo))
         {
             GameObject hitObject = hitInfo.transform.gameObject;
-            Debug.Log("mouse is over: " + hitObject.name);
-            Debug.Log("collider is: " + hitInfo.collider.name);
+
             SelectObject(hitObject);
         }
         else
         {
             ClearSelection();
         }
+    }
 
-        if (Input.GetMouseButtonDown(0))
+    void ActivatePanel()
+    {
+        selectedObject = hoveredObject;
+        //Debug.Log("selected object is: " + selectedObject);
+        if (selectedObject.CompareTag("Friendly") || (selectedObject.CompareTag("Player")))
         {
-            selectedObject = hoveredObject;
-            Debug.Log("selected object is: "+ selectedObject);
+            //ActivatePanel(panelList[2]);
+            panelList[2].SetActive(true);
+            activePanel = true;
         }
-	}
+        if (selectedObject.CompareTag("Tent"))
+        {
+            // ActivatePanel(panelList[0]);
+            panelList[0].SetActive(true);
+            activePanel = true;
+        }
+    }
+
+    //void ActivatePanel(GameObject panelToActivate)
+    //{
+    //    if(panelToActivate != currentActivePanel)
+    //    {
+    //        DeactivateCurrentActivePanel();
+    //        panelToActivate.SetActive(true);
+    //        currentActivePanel = panelToActivate;
+    //        activePanel = true;
+    //    }
+    //    else
+    //    { }
+        
+    //}
+
+    //void DeactivateCurrentActivePanel()
+    //{
+    //    foreach(GameObject panel in panelList)
+    //    {        
+    //        if(panel.activeSelf == true)
+    //        {          
+    //            panel.SetActive(false);            
+    //        }
+    //    }
+    //    activePanel = false;
+    //}
+
+ 
 
     void SelectObject(GameObject obj)
     {
@@ -50,4 +110,17 @@ public class MouseManager : MonoBehaviour {
     {
         selectedObject = null;
     }
+
+    private void HideIfClickedOutside(GameObject panel)
+    {
+        if (Input.GetMouseButton(0) && panel.activeSelf &&
+            !RectTransformUtility.RectangleContainsScreenPoint(
+                panel.GetComponent<RectTransform>(),
+                Input.mousePosition,
+                Camera.main))
+        {
+            panel.SetActive(false);
+        }
+    }
+
 }
