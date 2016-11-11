@@ -7,8 +7,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
-public class Node : MonoBehaviour
-{    
+public class Node : MonoBehaviour {    
 
     #region VARIABLES
     public const int _MAXCAMPS = 6;
@@ -19,13 +18,13 @@ public class Node : MonoBehaviour
     /* ROW LEVEL (DIFFICULTY) */
     public int Level;
 
+    /* FOOD COST TO GO TO THIS LEVEL */
     public int TravelCost;
 
     /* THE SCENE TO LOAD WHEN PLAYING LEVEL */
     public int sceneSelection;
 
     /* AMOUNT OF CAMPS */
-
     public int CampsInNode;
     [HideInInspector]
     public int probabilityWolves;
@@ -43,6 +42,9 @@ public class Node : MonoBehaviour
 
     /* AMOUNT OF ITEM DROPS */
     public int itemDropAmount;
+
+    /* BOOLEAN CHECKING IF LEVEL IS DONE */
+    public bool isCompleted = false;
     #endregion
 
     /* ROADS FROM THIS NODE */
@@ -106,22 +108,24 @@ public class Node : MonoBehaviour
     /// Create a new arc, connecting this Node to the Node passed in the parameter
     /// Also, it creates the inversed node in the passed node
     /// </summary>
-    public GameObject AddLink(GameObject child, int w)
-    {
+    public GameObject AddLink(GameObject child, int w) {
 
-        Links.Add(new Link
-        {
+        Links.Add(new Link {
             From = gameObject,
             To = child,
             FoodCost = w
         });        
 
-        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this))
-        {
+       /* if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
             child.GetComponent<Node>().AddLink(gameObject, w);
-        }
+        }*/
 
         return gameObject;
+    }
+
+    public List<Link> GetLinks()
+    {
+        return Links;
     }
 
     void BeginLevel()
@@ -136,6 +140,11 @@ public class Node : MonoBehaviour
                public int itemDropAmount;
          */
 
+        /*foreach (var link in GetLinks())
+        {
+            Debug.Log("Node : " + gameObject.name + " Has Link : " + link.To.name + " With foodcost : " + link.FoodCost);
+        }*/
+        
         PlayerPrefs.SetInt("LevelDifficulty", Level);
         PlayerPrefs.SetInt("WolveCamps", wolveCamps);
         PlayerPrefs.SetInt("TribeCamps", tribeCamps);
@@ -148,10 +157,10 @@ public class Node : MonoBehaviour
         {
             SceneTransistion.instance.LoadScene(2);
         }
-        else
-        {
+        else {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
+        
     }
 }
 
