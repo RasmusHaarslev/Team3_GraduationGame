@@ -202,11 +202,15 @@ public class Character : MonoBehaviour
 
 	private void StartCombatState(EnemySpottedEvent e)
 	{
+		//Debug.Log(e.parent + " " + gameObject.transform.parent.parent.gameObject + " " + characterBaseValues.Type);
 		if (!isInCombat)
 		{
-			targetParent = e.parent;
-			TargetOpponent();
-			isInCombat = true;
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || (characterBaseValues.Type == CharacterValues.type.Wolf && e.parent == gameObject.transform.parent.parent.gameObject))
+			{
+				targetParent = e.parent;
+				TargetOpponent();
+				isInCombat = true;
+			}
 		}
 	}
 
