@@ -17,7 +17,6 @@ public class AddImageRow : MonoBehaviour {
 
     public void InsertImage(int childrenNodes, int parentNodes)
     {
-        Debug.Log(childrenNodes + " " + parentNodes);
         if (parentNodes > childrenNodes)
         {
             GetComponent<RectTransform>().localRotation = Quaternion.Euler(180,0,0);

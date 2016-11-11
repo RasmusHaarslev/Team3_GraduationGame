@@ -17,9 +17,12 @@ public class CommandsManager : MonoBehaviour
     {
         commandsList.Add(new List<int> { 4, 1, 2 }); // DefendStateEvent
         commandsList.Add(new List<int> { 4, 3, 6 }); // OffensiveStateEvent
-        commandsList.Add(new List<int> { 4, 3, 5 });
+        commandsList.Add(new List<int> { 4, 3, 0 }); // FleeStateEvent
 
-    }
+		commandsList.Add(new List<int> { 4, 7, 6 }); // FollowStateEvent
+		commandsList.Add(new List<int> { 4, 5, 2 }); // StayStateEvent
+
+	}
 
     public void FillCurrentCommandList(int index)
     {
@@ -49,9 +52,30 @@ public class CommandsManager : MonoBehaviour
                         button.GetComponent<InputScript>().ButtonUp();
                         break;
                     }
-                  
-                    
-                }
+					if (command == commandsList[2])
+					{
+						EventManager.Instance.TriggerEvent(new FleeStateEvent());
+						Debug.Log("flee");
+						button.GetComponent<InputScript>().ButtonUp();
+						break;
+					}
+					if (command == commandsList[3])
+					{
+						EventManager.Instance.TriggerEvent(new FollowStateEvent());
+						Debug.Log("follow");
+						button.GetComponent<InputScript>().ButtonUp();
+						break;
+					}
+					if (command == commandsList[4])
+					{
+						EventManager.Instance.TriggerEvent(new StayStateEvent());
+						Debug.Log("stay");
+						button.GetComponent<InputScript>().ButtonUp();
+						break;
+					}
+
+
+				}
             }
             
             previousIndex = index;

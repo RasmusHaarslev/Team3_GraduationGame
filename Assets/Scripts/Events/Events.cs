@@ -61,3 +61,35 @@ public class EnemyDeathEvent : GameEvent
 	}
 
 }
+
+public class StayStateEvent : GameEvent
+{
+	public StayStateEvent()
+	{
+
+	}
+}
+
+public class FleeStateEvent : GameEvent
+{
+	public FleeStateEvent()
+	{
+
+	}
+}
+
+public class FollowStateEvent : GameEvent
+{
+	public FollowStateEvent()
+	{
+
+	}
+}
+
+public class AllyDeathEvent : GameEvent
+{
+	public AllyDeathEvent()
+	{
+
+	}
+}
