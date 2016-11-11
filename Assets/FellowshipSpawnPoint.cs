@@ -19,7 +19,7 @@ public class FellowshipSpawnPoint : MonoBehaviour {
     void OnDrawGizmos()
     {
         Gizmos.color = GizmoColor;
-        Gizmos.DrawWireSphere(transform.position, gizmoSize*0.3f);
+        Gizmos.DrawWireSphere(transform.position, gizmoSize*2f);
     }
 
 }
