@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Link
 {
-    public bool IsCompleted;
     public GameObject From;
     public GameObject To;
+    public bool Hierarchy;
 }
 

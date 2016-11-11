@@ -55,6 +55,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
         SetScrollPosition(0);
     }
 
+    public void InstantiateTutorials() { }
+
     /// <summary>
     /// Building the Rows and randomly selection how many nodes pr. row
     /// </summary>
@@ -118,7 +120,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 if (nodeCounter > 1) {
                     int counter = 0;
                     foreach (var node in nodesInRows[totalAmountRows - 1]) {
-                        SetupChildrenNodes(node, newNode, counter, j);                        
+                        SetupChildrenNodes(node, newNode, counter, j);                  
                         counter++;
                     }
                 }
