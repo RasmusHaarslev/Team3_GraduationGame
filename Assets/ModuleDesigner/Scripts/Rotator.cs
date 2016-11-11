@@ -28,7 +28,10 @@ namespace Assets.ModuleDesigner.Scripts
                     Vector3 individualRotation = new Vector3(UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees), UnityEngine.Random.Range(0.0f, RotateDegrees));
                     obj.transform.Rotate(individualRotation);
                 }
-                obj.transform.Rotate(Vector3.up, RotateDegrees);
+                else
+                {
+                    obj.transform.Rotate(Vector3.up, RotateDegrees);
+                }
             }
         }
 
@@ -75,6 +78,14 @@ namespace Assets.ModuleDesigner.Scripts
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(this.transform.position + new Vector3(0,0.5f,0), obj.transform.position - new Vector3(0, 0.5f, 0));
+            }
+        }
+
+        void OnValidate()
+        {
+            foreach(var obj in ObjectsToAffect)
+            {
+                obj.isStatic = false;
             }
         }
     }

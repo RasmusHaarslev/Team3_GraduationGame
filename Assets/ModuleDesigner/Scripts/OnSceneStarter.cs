@@ -14,7 +14,7 @@ namespace Assets.ModuleDesigner.Scripts
         public Mesh gizmoMesh;
 
         [Header("Trigger options")]
-        public TriggerType TriggerOnOff;
+        public TriggerType Output;
 
         [Header("Output objects")]
         public TriggerReceiver[] Targets;
@@ -26,10 +26,11 @@ namespace Assets.ModuleDesigner.Scripts
 
         void Start()
         {
-            if (TriggerOnOff.ToString() == "On")
-                TriggerEnter();
-            else
-                TriggerExit();
+			// TODO: fix this shit
+//            if (TriggerOnOff.ToString() == "On")
+  //              TriggerEnter();
+    //        else
+      //          TriggerExit();
         }
 
         public void TriggerEnter()
