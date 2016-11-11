@@ -5,6 +5,7 @@ using System.Collections;
 /// </summary>
 public class StringResources
 {
+    public static string databaseName = "tempDatabase";
 
     public static string characterPrefabsPath = "Prefabs/Prototype/";
 
