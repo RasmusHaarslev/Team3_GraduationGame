@@ -47,8 +47,13 @@ public class Character : MonoBehaviour
 	{
 		if (currentHealth <= 0)
 		{
+			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+			{
+				EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+			}
 			isDead = true;
 			GetComponent<MeshRenderer>().enabled = false;
+
 		}
 	}
 
