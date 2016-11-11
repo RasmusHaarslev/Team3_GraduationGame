@@ -22,16 +22,7 @@ public class LevelGenerator : MonoBehaviour
 		GameObject john = dataService.GenerateCharacterByName("John",new Vector3(-33, 45, -45));
 		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 45, -45));
 		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 45, -45));
-        
-		GameObject Yasmin1 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
-		GameObject Yasmin2 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
-		GameObject Yasmin3 = dataService.GenerateCharacterByName("Yasmin", GameObject.FindGameObjectWithTag("EnemyParent").transform.position);
-
-		Yasmin1.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
-		Yasmin2.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
-		Yasmin3.transform.parent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
-        /**/
-
+       
 
 		//TODO acquire data from playerprefs
         
@@ -118,6 +109,9 @@ public class LevelGenerator : MonoBehaviour
                         charSpawn.transform.position, charSpawn.transform.rotation) as GameObject;
                     //assign the values ONCE it is istanced
                     currentCharacter.GetComponent<Character>().init(currentTierValues[charSpawn.tier - 1]);
+
+                    //parent the character to the character spawn point
+                    currentCharacter.transform.parent = charSpawn.transform;
 
                 }
             }
