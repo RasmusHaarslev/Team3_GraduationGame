@@ -12,17 +12,19 @@ public class LevelGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-
-        //dataService = new DataService("tempDatabase.db");
+        
         dataService = new DataService(StringResources.databaseName);
 
         dataService.CreateDB();
+        /*
 		GameObject daniel = dataService.GenerateCharacterByName("Daniel", new Vector3(-30, 45, -45));
 		//print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
 		GameObject john = dataService.GenerateCharacterByName("John",new Vector3(-33, 45, -45));
 		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 45, -45));
 		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 45, -45));
-       
+        */
+	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
+        
 
 		//TODO acquire data from playerprefs
         

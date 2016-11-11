@@ -287,15 +287,28 @@ public class DataService : MonoBehaviour
     }
 
     //TODO generalize this function with any number of fellowship and with rotation
-    public IEnumerable<GameObject> GetPlayerFellowshipInPosition(Vector3 position, Quaternion rotation = new Quaternion())
+    public GameObject GetPlayerFellowshipInPosition(Transform fellowshipLocation)
     {
-        List<GameObject> fellowship = new List<GameObject>();
-        //istantiate player
-        GameObject daniel = GenerateCharacterByName("Daniel", position);
-        //istantiate fellows and parent them to player
-        GameObject john = GenerateCharacterByName("John", daniel.transform.position + Vector3.left);
-        GameObject nicolai = GenerateCharacterByName("Nicolai", daniel.transform.position + Vector3.right);
-        GameObject peter = GenerateCharacterByName("Peter", daniel.transform.position + Vector3.down);
+        CharacterSpawner[] spawners = fellowshipLocation.gameObject.GetComponentsInChildren<CharacterSpawner>().ToArray();
+        GameObject fellowship = new GameObject("PlayerFellowship");
+        if (spawners.Length == 4)
+        {
+            //istantiate player
+            GameObject daniel = GenerateCharacterByName("Daniel", spawners[0].transform.position);
+            daniel.transform.parent = fellowship.transform;
+            //istantiate fellows and parent them to player
+            GameObject john = GenerateCharacterByName("John", spawners[1].transform.position);
+            john.transform.parent = fellowship.transform;
+            GameObject nicolai = GenerateCharacterByName("Nicolai", spawners[2].transform.position);
+            nicolai.transform.parent = fellowship.transform;
+            GameObject peter = GenerateCharacterByName("Peter", spawners[3].transform.position);
+            peter.transform.parent = fellowship.transform;
+        }
+        else
+        {
+            print("Missing some character spawners for the player and/or fellows!");
+        }
+
 
         return fellowship;
 
