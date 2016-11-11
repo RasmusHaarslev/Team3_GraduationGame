@@ -175,6 +175,10 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (character.isInCombat)
 			{
+				if (targetTrait == TargetTrait.Bully)
+				{
+					character.target = BullyTarget();
+				}
 				if (combatCommandState == CombatCommandState.Flee && combatTrait != CombatTrait.BraveFool || (combatTrait == CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
 				{
 					yield return new TransitionTo(FleeState, DefaultTransition);
@@ -215,7 +219,13 @@ public class HunterStateMachine : CoroutineMachine
 							else
 							{
 								character.currentOpponents.Remove(character.target);
-								character.target = character.FindNearestEnemy();
+								if (targetTrait == TargetTrait.Bully)
+								{
+									character.target = BullyTarget();
+								} else
+								{
+									character.target = character.FindNearestEnemy();
+								}
 							}
 						}
 						else if (combatCommandState == CombatCommandState.Defense || targetTrait == TargetTrait.StubbornDefender)
@@ -223,7 +233,14 @@ public class HunterStateMachine : CoroutineMachine
 							if (character.target.GetComponent<Character>().isDead)
 							{
 								character.currentOpponents.Remove(character.target);
-								character.target = character.FindNearestEnemy();
+								if (targetTrait == TargetTrait.Bully)
+								{
+									character.target = BullyTarget();
+								}
+								else
+								{
+									character.target = character.FindNearestEnemy();
+								}
 							}
 							yield return new TransitionTo(DefenseState, DefaultTransition);
 						}
@@ -331,6 +348,21 @@ public class HunterStateMachine : CoroutineMachine
 			yield return new TransitionTo(CombatState, DefaultTransition);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
+	private GameObject BullyTarget()
+	{
+		int min = int.MaxValue;
+		GameObject target = null;
+		foreach (var opponent in character.currentOpponents)
+		{
+			if (opponent.GetComponent<Character>().characterBaseValues.tier < min)
+			{
+				target = opponent;
+				min = opponent.GetComponent<Character>().characterBaseValues.tier;
+			}
+		}
+		return target;
 	}
 }
 

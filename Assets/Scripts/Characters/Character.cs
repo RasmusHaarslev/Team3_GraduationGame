@@ -221,7 +221,6 @@ public class Character : MonoBehaviour
 				}
 			}
 		}
-
 	}
 
 	private void TakeDamage(TakeDamageEvent e)

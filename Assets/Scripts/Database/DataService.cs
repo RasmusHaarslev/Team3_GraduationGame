@@ -153,7 +153,7 @@ public class DataService : MonoBehaviour
               health = 3,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyLeader"
+              prefabName = "Wolf"
           },
           new CharacterValues
           {
@@ -164,7 +164,7 @@ public class DataService : MonoBehaviour
               health = 4,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyLeader"
+              prefabName = "Wolf"
           },
           new CharacterValues
           {
@@ -175,7 +175,7 @@ public class DataService : MonoBehaviour
               health = 5,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyLeader"
+              prefabName = "Wolf"
           },
           new CharacterValues
           {
@@ -186,7 +186,7 @@ public class DataService : MonoBehaviour
               health = 6,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyLeader"
+              prefabName = "Wolf"
           },
           new CharacterValues
           {
@@ -197,7 +197,7 @@ public class DataService : MonoBehaviour
               health = 7,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyLeader"
+              prefabName = "Wolf"
           },
           new CharacterValues
           {
