@@ -16,11 +16,11 @@ public class LevelGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-	    difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel);
+	    difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel, difficultyLevel);
         
         dataService = new DataService(StringResources.databaseName);
 
-        dataService.CreateDB();
+        //dataService.CreateDB();
        
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
