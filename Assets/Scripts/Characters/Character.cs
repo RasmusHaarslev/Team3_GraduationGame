@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
 	GameObject parent;
 	public List<GameObject> currentOpponents = new List<GameObject>();
 
+	public float rotationSpeed = 2;
+
 	//Combat state values
 	public bool isInCombat = false;
 	public bool isDead = false;
@@ -45,8 +47,13 @@ public class Character : MonoBehaviour
 	{
 		if (currentHealth <= 0)
 		{
+			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+			{
+				EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+			}
 			isDead = true;
 			GetComponent<MeshRenderer>().enabled = false;
+
 		}
 	}
 
@@ -154,9 +161,12 @@ public class Character : MonoBehaviour
 		{
 			foreach (Transform child in targetParent.transform)
 			{
-				if (child.gameObject.tag == "Unfriendly")
+				foreach (Transform child2 in child)
 				{
-					currentOpponents.Add(child.gameObject);
+					if (child2.gameObject.tag == "Unfriendly")
+					{
+						currentOpponents.Add(child2.gameObject);
+					}
 				}
 			}
 		}
@@ -192,26 +202,32 @@ public class Character : MonoBehaviour
 
 	private void StartCombatState(EnemySpottedEvent e)
 	{
+		//Debug.Log(e.parent + " " + gameObject.transform.parent.parent.gameObject + " " + characterBaseValues.Type);
 		if (!isInCombat)
 		{
-			targetParent = e.parent;
-			TargetOpponent();
-			isInCombat = true;
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || (characterBaseValues.Type == CharacterValues.type.Wolf && e.parent == gameObject.transform.parent.parent.gameObject))
+			{
+				targetParent = e.parent;
+				TargetOpponent();
+				isInCombat = true;
+			}
 		}
 	}
 
 	public void DealDamage()
 	{
 		EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
-		if (target.GetComponent<HunterStateMachine>() != null)
+		if (target != null)
 		{
-			if (target.GetComponent<HunterStateMachine>().combatCommandState == HunterStateMachine.CombatCommandState.Defense)
+			if (target.GetComponent<HunterStateMachine>() != null)
 			{
-				target.GetComponent<Character>().target = gameObject;
-				target.GetComponent<HunterStateMachine>().attacked = true;
+				if (target.GetComponent<HunterStateMachine>().combatCommandState == HunterStateMachine.CombatCommandState.Defense)
+				{
+					target.GetComponent<Character>().target = gameObject;
+					target.GetComponent<HunterStateMachine>().attacked = true;
+				}
 			}
 		}
-
 	}
 
 	private void TakeDamage(TakeDamageEvent e)
@@ -220,6 +236,13 @@ public class Character : MonoBehaviour
 		{
 			currentHealth -= e.damage;
 		}
+	}
+
+	public void RotateTowards(Transform target)
+	{
+		Vector3 direction = (target.position - transform.position).normalized;
+		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
+		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 	}
 }
 

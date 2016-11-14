@@ -44,6 +44,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
+    int numOfParents = 0;
     #endregion
 
     Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
@@ -54,19 +55,21 @@ public class LevelSelectionGenerator : MonoBehaviour {
         SetScrollPosition(0);
     }
 
+    public void InstantiateTutorials() { }
+
     /// <summary>
     /// Building the Rows and randomly selection how many nodes pr. row
     /// </summary>
     /// <param name="rowAmount"></param>
     public void InstantiateRows(int rowAmount) {
-        Debug.Log(rowAmount);
+
         for (int i = 0; i < rowAmount; i++) {
 
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
             row.name = (totalAmountRows).ToString();
 
-            int numOfParents = numOfLastLevels;
+            numOfParents = numOfLastLevels;
 
             if (nodeCounter > 0) { 
                 numOfLastLevels = randomController(numOfLastLevels);
@@ -98,7 +101,6 @@ public class LevelSelectionGenerator : MonoBehaviour {
             }
 
             List<GameObject> rowNodes = new List<GameObject>();
-            Debug.Log("THIS LEVEL COUNT : " + numOfLastLevels);
 
             for (int j = 0; j < numOfLastLevels; j++) {
                 nodeCounter++;
@@ -118,98 +120,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 if (nodeCounter > 1) {
                     int counter = 0;
                     foreach (var node in nodesInRows[totalAmountRows - 1]) {
-                        if (numOfParents == 1 || numOfLastLevels == 1) { 
-                            node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                        } else if (numOfParents == 4)
-                        {
-                            switch (numOfLastLevels)
-                            {
-                                case 3:
-                                    if(counter == 0 && j == 0) { 
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    } else if (counter == 1 && j < 2)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    } else if (counter == 2 && j > 0 && j < 3)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    } else if (counter == 3 && j == 2)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    break;
-                                case 2:
-                                    if (counter < 2 && j == 0)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    else if (counter > 1 && j == 1)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    break;
-                            }
-                        }
-                        else if (numOfParents == 3)
-                        {
-                            switch (numOfLastLevels)
-                            {
-                                case 4:
-                                    if (counter == 0 && j < 2)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    else if (counter == 1 && j > 0 && j < 3)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    else if (counter == 2 && j > 1 && j < 4)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    break;
-                                case 2:
-                                    if (counter == 0 && j == 0)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    else if (counter == 1)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    } else if (counter == 2 && j > 0)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    break;
-                            }
-                        }
-                        else if (numOfParents == 2)
-                        {
-                            switch (numOfLastLevels)
-                            {
-                                case 4:
-                                    if (counter == 0 && j < 2)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    else if (counter == 1 && j > 1 && j < 4)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    break;
-                                case 3:
-                                    if (counter == 0 && j < 2)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    else if (counter == 1 && j > 1)
-                                    {
-                                        node.GetComponent<Node>().AddLink(newNode, HighestTravelCost);
-                                    }
-                                    break;
-                            }
-                        }
-
+                        SetupChildrenNodes(node, newNode, counter, j);                  
                         counter++;
                     }
                 }
@@ -230,8 +141,119 @@ public class LevelSelectionGenerator : MonoBehaviour {
         }
 
         initialiseDropDown();
+        // Need to be changed to the node we are currently on
         SetScrollPosition(0);
         //printDict();
+    }
+
+    /// <summary>
+    /// Link current node with children nodes (newNode) based on a counter where 1 is most left- then 4 is most right.
+    /// </summary>
+    /// <param name="node"></param>
+    /// <param name="newNode"></param>
+    /// <param name="counter"></param>
+    void SetupChildrenNodes(GameObject node, GameObject newNode, int parentFromLeft, int childFromLeft)
+    {
+        // NumOfParent is equal to the amount of nodes in the current level
+        // NumOfLasLevels is equal to the amount of children nodes
+        if (numOfParents == 1 || numOfLastLevels == 1)
+        {
+            node.GetComponent<Node>().AddLink(newNode, false);
+        }
+        else if (numOfParents == 4)
+        {
+            switch (numOfLastLevels)
+            {
+                case 3:
+                    if (parentFromLeft == 0 && childFromLeft == 0)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 1 && childFromLeft < 2)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 2 && childFromLeft > 0 && childFromLeft < 3)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 3 && childFromLeft == 2)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    break;
+                case 2:
+                    if (parentFromLeft < 2 && childFromLeft == 0)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft > 1 && childFromLeft == 1)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    break;
+            }
+        }
+        else if (numOfParents == 3)
+        {
+            switch (numOfLastLevels)
+            {
+                case 4:
+                    if (parentFromLeft == 0 && childFromLeft < 2)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 1 && childFromLeft > 0 && childFromLeft < 3)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 2 && childFromLeft > 1 && childFromLeft < 4)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    break;
+                case 2:
+                    if (parentFromLeft == 0 && childFromLeft == 0)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 1)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 2 && childFromLeft > 0)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    break;
+            }
+        }
+        else if (numOfParents == 2)
+        {
+            switch (numOfLastLevels)
+            {
+                case 4:
+                    if (parentFromLeft == 0 && childFromLeft < 2)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 1 && childFromLeft > 1 && childFromLeft < 4)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    break;
+                case 3:
+                    if (parentFromLeft == 0 && childFromLeft < 2)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    else if (parentFromLeft == 1 && childFromLeft > 0)
+                    {
+                        node.GetComponent<Node>().AddLink(newNode, false);
+                    }
+                    break;
+            }
+        }
     }
 
     void SetupValuesInNode(GameObject node)

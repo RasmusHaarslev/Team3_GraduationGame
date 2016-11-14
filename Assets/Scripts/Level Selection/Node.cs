@@ -44,8 +44,12 @@ public class Node : MonoBehaviour {
     public int itemDropAmount;
 
     /* BOOLEAN CHECKING IF LEVEL IS DONE */
-    public bool isCompleted = false;
+    public bool isCleared = false;
+    public bool isScouted = false;
+    public bool canPlay = false;
     #endregion
+
+    public List<Sprite> activationImages = new List<Sprite>();
 
     /* ROADS FROM THIS NODE */
     public List<Link> Links = new List<Link>();
@@ -54,10 +58,16 @@ public class Node : MonoBehaviour {
 
     public void OnCreate(int id)
     {
+        // If root set playable to true
+        if (id == 1)
+        {
+            canPlay = true;
+        }
         NodeId = id;
         GetComponent<Button>().onClick.AddListener(BeginLevel);
         SetupCampsForThisNode();
         SetupResourceForThisNode();
+        SetupImage();
     }
 
     /// <summary>
@@ -95,7 +105,6 @@ public class Node : MonoBehaviour {
 
     void SetupResourceForThisNode()
     {
-
         // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
         foodAmount = 10;
 
@@ -108,24 +117,19 @@ public class Node : MonoBehaviour {
     /// Create a new arc, connecting this Node to the Node passed in the parameter
     /// Also, it creates the inversed node in the passed node
     /// </summary>
-    public GameObject AddLink(GameObject child, int w) {
+    public GameObject AddLink(GameObject child, bool isParent) {
 
         Links.Add(new Link {
             From = gameObject,
             To = child,
-            FoodCost = w
-        });        
+            Hierarchy = isParent
+        });
 
-       /* if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == this)) {
-            child.GetComponent<Node>().AddLink(gameObject, w);
-        }*/
+       if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
+            child.GetComponent<Node>().AddLink(gameObject, true);
+        }
 
         return gameObject;
-    }
-
-    public List<Link> GetLinks()
-    {
-        return Links;
     }
 
     void BeginLevel()
@@ -140,12 +144,47 @@ public class Node : MonoBehaviour {
                public int itemDropAmount;
          */
 
-        /*foreach (var link in GetLinks())
+        SetupImage();
+
+        Debug.Log(canPlay);
+        Debug.Log(isCleared);
+
+        if (canPlay && !isCleared)
         {
-            Debug.Log("Node : " + gameObject.name + " Has Link : " + link.To.name + " With foodcost : " + link.FoodCost);
-        }*/
-        
-        PlayerPrefs.SetInt("LevelDifficulty", Level);
+            if (isScouted) { 
+                Debug.Log("Show Panel - Can Play - Is Scouted");
+            } else {
+                Debug.Log("Show Panel - Can Play - Not Scouted");
+            }
+        } else if (!canPlay)
+        {
+            if (isScouted)
+            {
+                Debug.Log("Show Panel - Cannot Play - Is Scouted");
+            }
+            else
+            {
+                Debug.Log("Show Panel - Cannot Play - Not Scouted");
+            }
+        } else
+        {
+            Debug.Log("Show Panel - You have cleared this level");
+        }
+
+        foreach (var link in Links)
+        {
+            if(link.Hierarchy)
+            {
+                Debug.Log("Node Id : " + link.From.name + " Has Parent : " + link.To.name);
+                Debug.Log("Parent IsClear : " + link.To.GetComponent<Node>().isCleared + " Parent CanPlay : " + link.To.GetComponent<Node>().canPlay);
+            } else
+            {
+                Debug.Log("Node Id : " + link.From.name + " Has Child : " + link.To.name);
+                Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
+            }
+        }
+            
+        /*PlayerPrefs.SetInt("LevelDifficulty", Level);
         PlayerPrefs.SetInt("WolveCamps", wolveCamps);
         PlayerPrefs.SetInt("TribeCamps", tribeCamps);
         PlayerPrefs.SetInt("ChoiceCamps", choiceCamps);
@@ -160,7 +199,55 @@ public class Node : MonoBehaviour {
         else {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
-        
+        */
     }
+
+    #region Get Functions for this node
+    void SetupImage()
+    {
+        if (isCleared)
+        {
+            GetComponent<Image>().sprite = activationImages[0];
+            GetComponent<Image>().color = Color.green;
+        } else if (!isCleared && canPlay)
+        {
+            GetComponent<Image>().sprite = activationImages[0];
+        } else
+        {
+            GetComponent<Image>().sprite = activationImages[1];
+        }
+    }
+
+    public List<Link> GetParents()
+    {
+        List<Link> parents = new List<Link>();
+
+        foreach (var link in Links)
+        {
+            if (link.Hierarchy)
+            {
+                parents.Add(link);
+                continue;
+            }
+        }
+
+        return parents;
+    }
+    public List<Link> GetChildrens()
+    {
+        List<Link> childrens = new List<Link>();
+
+        foreach (var link in Links)
+        {
+            if (!link.Hierarchy)
+            {
+                childrens.Add(link);
+                continue;
+            }
+        }
+
+        return childrens;
+    }
+    #endregion
 }
 
