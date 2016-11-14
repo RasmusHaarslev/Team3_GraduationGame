@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour {
     private bool PlayerAlive;
 
     private int EnemiesAlive = 0;
+    private int ItemsLeft = 0;
 
     private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
 
@@ -18,10 +19,12 @@ public class LevelManager : MonoBehaviour {
 
     }
 
+    #region Listeners
     void OnEnable()
     {
         //Enemy spawn for counting
         EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
+        EventManager.Instance.StartListening<EnemySpawned>(ItemSpawn);
 
         // -Collecting-
         //Loot received
@@ -42,6 +45,7 @@ public class LevelManager : MonoBehaviour {
     {
         //Enemy spawn for counting
         EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
+        EventManager.Instance.StopListening<EnemySpawned>(ItemSpawn);
 
         // -Collecting-
         //Loot received
@@ -57,10 +61,17 @@ public class LevelManager : MonoBehaviour {
         //Follower dies
         EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
     }
+    #endregion
 
+    #region functions
     private void EnemySpawn(EnemySpawned e)
     {
         EnemiesAlive++;
+    }
+
+    private void ItemSpawn(EnemySpawned e)
+    {
+        ItemsLeft++;
     }
 
     private void AllyDeath(AllyDeathEvent e)
@@ -90,15 +101,20 @@ public class LevelManager : MonoBehaviour {
     void CollectLoot()
     {
         gainedWeapons.Add(new EquippableItem());
+
+        CheckConditions();
     }
+
+    #endregion
 
     void CheckConditions()
     {
         if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
         {
-            //Extra condition for the choice encounters
-
-            WinLevel();
+            if (ItemsLeft <= 0) //Extra condition for the choice encounters
+            {
+                WinLevel();
+            }
         }
     }
 
