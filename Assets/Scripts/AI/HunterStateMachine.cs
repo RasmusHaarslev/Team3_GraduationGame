@@ -331,6 +331,7 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FleeState()
 	{
 		character.target = null;
+		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 0;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
