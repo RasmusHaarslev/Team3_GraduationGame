@@ -119,15 +119,17 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    void LoseLevel()
+    public void LoseLevel()
     {
-        EventManager.Instance.TriggerEvent(new LevelWon());
+        EventManager.Instance.TriggerEvent(new LevelLost());
+        PlayerPrefs.SetInt("LevelResult", 0);
         SceneManager.LoadScene("CampManagement");
     }
 
-    void WinLevel()
+    public void WinLevel()
     {
-        EventManager.Instance.TriggerEvent(new LevelLost());
+        EventManager.Instance.TriggerEvent(new LevelWon());
+        PlayerPrefs.SetInt("LevelResult", 1);
         SceneManager.LoadScene("CampManagement");
     }
 
