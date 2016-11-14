@@ -71,10 +71,10 @@ public class Node : MonoBehaviour {
     public void OnCreate(int id)
     {
         // If root set playable to true
-        if (id == 1)
-        {
+        //if (id == 1)
+        //{
             canPlay = true;
-        }
+        //}
         NodeId = id;
         GetComponent<Button>().onClick.AddListener(OpenPopUp);
         SetupCampsForThisNode();
@@ -151,7 +151,7 @@ public class Node : MonoBehaviour {
             Hierarchy = isParent
         });
 
-       if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
+        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
             child.GetComponent<Node>().AddLink(gameObject, true);
         }
 
