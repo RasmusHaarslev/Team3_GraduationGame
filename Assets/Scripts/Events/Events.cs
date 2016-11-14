@@ -71,11 +71,11 @@ public class DefendStateEvent : GameEvent
 
 public class EnemyDeathEvent : GameEvent
 {
-	public EnemyDeathEvent()
+	public GameObject enemy;
+	public EnemyDeathEvent(GameObject enemy)
 	{
-
+		this.enemy = enemy;
 	}
-
 }
 
 public class StayStateEvent : GameEvent

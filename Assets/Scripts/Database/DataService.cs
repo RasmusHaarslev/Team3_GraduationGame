@@ -213,7 +213,7 @@ public class DataService : MonoBehaviour
               health = 3,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyMinion"
+              prefabName = "Rival"
           },
           new CharacterValues
           {
@@ -224,7 +224,7 @@ public class DataService : MonoBehaviour
               health = 4,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyMinion"
+              prefabName = "Rival"
           },
           new CharacterValues
           {
@@ -235,8 +235,8 @@ public class DataService : MonoBehaviour
               health = 5,
               damageSpeed = 2,
               range = 2,
-              prefabName = "EnemyMinion"
-          },
+              prefabName = "Rival"
+		  },
           new CharacterValues
           {
               name = "Mature tribesman",
@@ -246,8 +246,8 @@ public class DataService : MonoBehaviour
               health = 6,
               damageSpeed = 3,
               range = 2,
-              prefabName = "EnemyMinion"
-          },
+              prefabName = "Rival"
+		  },
           new CharacterValues
           {
               name = "Leader tribesman",
@@ -257,8 +257,8 @@ public class DataService : MonoBehaviour
               health = 7,
               damageSpeed = 3,
               range = 2,
-              prefabName = "EnemyMinion"
-          }
+              prefabName = "Rival"
+		  }
 
         });
 
