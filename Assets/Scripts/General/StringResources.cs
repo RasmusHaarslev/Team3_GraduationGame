@@ -5,11 +5,13 @@ using System.Collections;
 /// </summary>
 public class StringResources
 {
-    public static string databaseName = "tempDatabase";
+    public static string databaseName = "gameDatabase.db";
 
     public static string characterPrefabsPath = "Prefabs/Characters/";
 
     public static string equippableItemsPrefabsPath = "Prefabs/Items/EquippableItems/";
+
+    public static string hardnessLevel = "LevelDifficulty";
 
 
     // Use this for initialization

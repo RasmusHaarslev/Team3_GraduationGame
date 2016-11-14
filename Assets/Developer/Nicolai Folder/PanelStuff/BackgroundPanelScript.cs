@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 
 public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
 {
-
+    public GameObject PopUpPanel;
     PanelClicked panelClickedScript;
 
     void Start()
     {
-        panelClickedScript = GetComponentInChildren<PanelClicked>();
+        panelClickedScript = PopUpPanel.GetComponentInChildren<PanelClicked>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -17,8 +17,8 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
         
         if (panelClickedScript.isClicked)
         {
-
-            foreach (Transform child in transform)
+            // DEACTIVATE POP UP
+            foreach (Transform child in PopUpPanel.transform)
             {
                 if (child.gameObject.activeSelf == true)
                 {
@@ -26,9 +26,11 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
 
                 }
             }
+            PopUpPanel.SetActive(false);
             gameObject.SetActive(false);
         }
        
     }
 
 }
+ 

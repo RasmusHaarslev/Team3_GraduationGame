@@ -76,7 +76,8 @@ public class DataService : MonoBehaviour
         _connection.DropTable<CharacterValues>();
         _connection.DropTable<EquippableitemValues>();
 
-        _connection.CreateTable<CharacterValues>();
+        if(_connection.CreateTable<CharacterValues>() == 0)
+            print("table already existing!!");
         _connection.CreateTable<EquippableitemValues>();
 
         _connection.InsertAll(new[]
@@ -292,7 +293,7 @@ public class DataService : MonoBehaviour
          },
              new EquippableitemValues
          {
-             id = 2,
+             id = 3,
              name = "Laser Rifle 2000",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -506,7 +507,7 @@ public class DataService : MonoBehaviour
 
     }
 
-    void detatchItemFromCharacter(EquippableitemValues.slot slotToDetatch, Character character)
+    public void detatchItemFromCharacter(EquippableitemValues.slot slotToDetatch, Character character)
     {
         //remove item values from total on the player
         EquippableItem itemToDetatch = character.equippableSpots[slotToDetatch].GetComponentInChildren<EquippableItem>();
@@ -519,6 +520,15 @@ public class DataService : MonoBehaviour
         }
     }
 
+
+    public GameObject GenerateNewEquippableItemFromValues(EquippableitemValues values)
+    {
+        values.id = _connection.Insert(values);
+
+        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() {values}).FirstOrDefault();
+
+
+    }
 
     #endregion
 
