@@ -9,48 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000011731378472}
+  m_RootGameObject: {fileID: 1000010732224012}
   m_IsPrefabParent: 1
---- !u!1 &1000011731378472
+--- !u!1 &1000010732224012
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000010770186256}
-  - 33: {fileID: 33000010916058196}
-  - 136: {fileID: 136000014122367744}
-  - 23: {fileID: 23000014084703462}
-  - 114: {fileID: 114000011311954550}
-  - 114: {fileID: 114000010200429582}
-  - 195: {fileID: 195000013973934676}
+  - 4: {fileID: 4000012494751046}
+  - 33: {fileID: 33000011268181016}
+  - 136: {fileID: 136000013015857586}
+  - 23: {fileID: 23000012757772200}
+  - 114: {fileID: 114000013915457368}
+  - 114: {fileID: 114000014022175080}
+  - 195: {fileID: 195000013851141180}
   m_Layer: 0
-  m_Name: Follower1
+  m_Name: Follower4
   m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000010770186256
+--- !u!4 &4000012494751046
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
+  m_GameObject: {fileID: 1000010732224012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.3912783, y: 2.5, z: -4.7459693}
+  m_LocalPosition: {x: -8.3302765, y: 1.25, z: -6.519237}
   m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &23000014084703462
+--- !u!23 &23000012757772200
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
+  m_GameObject: {fileID: 1000010732224012}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -74,36 +74,19 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33000010916058196
+--- !u!33 &33000011268181016
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
+  m_GameObject: {fileID: 1000010732224012}
   m_Mesh: {fileID: 4300000, guid: 0e5518decb06d2246bd0bc2e769d0b5c, type: 3}
---- !u!114 &114000010200429582
+--- !u!114 &114000013915457368
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a62d98b0f1f8d0f49a06fa3913a5a7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transitionTime: 0.05
-  attacked: 0
-  combatCommandState: 0
-  fleePosition: {x: 0, y: 0, z: 0}
-  distanceToTarget: 3.4028235e+38
-  partyID: 1
---- !u!114 &114000011311954550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
+  m_GameObject: {fileID: 1000010732224012}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b2b2dac9f950324291831d449986c37, type: 3}
@@ -116,14 +99,39 @@ MonoBehaviour:
   currentHealth: 0
   target: {fileID: 0}
   currentOpponents: []
+  rotationSpeed: 2
   isInCombat: 0
   isDead: 0
---- !u!136 &136000014122367744
+--- !u!114 &114000014022175080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010732224012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62d98b0f1f8d0f49a06fa3913a5a7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionTime: 0.05
+  fearfulHealthLimit: 25
+  maxLowAttentionSpanCounter: 3
+  desperateHealthLimit: 25
+  damageIncrease: 10
+  attacked: 0
+  combatCommandState: 0
+  targetTrait: 0
+  combatTrait: 0
+  outOfCombatCommandState: 0
+  fleePosition: {x: 0, y: 0, z: 0}
+  distanceToTarget: 3.4028235e+38
+  partyID: 0
+--- !u!136 &136000013015857586
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
+  m_GameObject: {fileID: 1000010732224012}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -131,12 +139,12 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!195 &195000013973934676
+--- !u!195 &195000013851141180
 NavMeshAgent:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011731378472}
+  m_GameObject: {fileID: 1000010732224012}
   m_Enabled: 1
   m_Radius: 0.5
   m_Speed: 3

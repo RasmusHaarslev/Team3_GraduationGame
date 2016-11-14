@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013716753270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.055054, y: 2.5, z: -4.328675}
+  m_LocalPosition: {x: -8.687591, y: 42.908012, z: -45.243126}
   m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 798ce4c8b4f3d26418a11d6a79a90490, type: 2}
+  - {fileID: 2100000, guid: 0138e278e1acac04fa87f94b7be140f0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   currentHealth: 0
   target: {fileID: 0}
   currentOpponents: []
+  rotationSpeed: 2
   isInCombat: 0
   isDead: 0
 --- !u!114 &114000012173701250
@@ -113,8 +114,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTime: 0.05
+  fearfulHealthLimit: 25
+  maxLowAttentionSpanCounter: 3
+  desperateHealthLimit: 25
+  damageIncrease: 10
   attacked: 0
   combatCommandState: 0
+  targetTrait: 0
+  combatTrait: 0
+  outOfCombatCommandState: 0
   fleePosition: {x: 0, y: 0, z: 0}
   distanceToTarget: 3.4028235e+38
   partyID: 2

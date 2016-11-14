@@ -161,7 +161,7 @@ public class Character : MonoBehaviour
 		if (gameObject.tag == "Unfriendly")
 		{
 
-			if (characterBaseValues.Type == CharacterValues.type.Wolf)
+			if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
 			{
 				List<GameObject> friendlies = new List<GameObject>();
 				friendlies.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
@@ -219,7 +219,7 @@ public class Character : MonoBehaviour
 	{
 		if (!isInCombat)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter || (characterBaseValues.Type == CharacterValues.type.Wolf && e.parent == gameObject.transform.parent.parent.gameObject))
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
 			{
 				targetParent = e.parent;
 				TargetOpponent();

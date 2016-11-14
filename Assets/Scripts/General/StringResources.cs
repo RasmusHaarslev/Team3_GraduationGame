@@ -7,7 +7,7 @@ public class StringResources
 {
     public static string databaseName = "tempDatabase";
 
-    public static string characterPrefabsPath = "Prefabs/Prototype/";
+    public static string characterPrefabsPath = "Prefabs/Characters/";
 
     public static string equippableItemsPrefabsPath = "Prefabs/Items/EquippableItems";
 
