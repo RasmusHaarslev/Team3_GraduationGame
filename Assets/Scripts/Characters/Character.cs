@@ -49,11 +49,14 @@ public class Character : MonoBehaviour
 		{
 			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
+				
 				EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+			} else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+			{
+				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 			}
 			isDead = true;
 			GetComponent<MeshRenderer>().enabled = false;
-
 		}
 	}
 
@@ -62,6 +65,7 @@ public class Character : MonoBehaviour
 		agent = GetComponent<NavMeshAgent>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
+		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 	}
 
 
@@ -70,6 +74,7 @@ public class Character : MonoBehaviour
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
+		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 	}
 
 	/// <summary>
@@ -129,9 +134,21 @@ public class Character : MonoBehaviour
 			FindCurrentOpponents();
 		}
 
-		if (characterBaseValues.Type == CharacterValues.type.Wolf)
+		if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
 		{
-			target = FindRandomEnemy();
+			foreach (GameObject opp in currentOpponents)
+			{
+				var hunter = opp.GetComponent<HunterStateMachine>();
+				if (hunter != null && hunter.combatTrait == HunterStateMachine.CombatTrait.VeryUnlikable)
+				{
+					target = opp;
+					break;
+				} else
+				{
+					target = FindRandomEnemy();
+				}
+			}
+			
 		}
 		else
 		{
@@ -195,14 +212,11 @@ public class Character : MonoBehaviour
 	{
 		GameObject finalTarget;
 		finalTarget = currentOpponents[UnityEngine.Random.Range(0, currentOpponents.Count)];
-
-
 		return finalTarget;
 	}
 
 	private void StartCombatState(EnemySpottedEvent e)
 	{
-		//Debug.Log(e.parent + " " + gameObject.transform.parent.parent.gameObject + " " + characterBaseValues.Type);
 		if (!isInCombat)
 		{
 			if (characterBaseValues.Type == CharacterValues.type.Hunter || (characterBaseValues.Type == CharacterValues.type.Wolf && e.parent == gameObject.transform.parent.parent.gameObject))
@@ -243,6 +257,14 @@ public class Character : MonoBehaviour
 		Vector3 direction = (target.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
 		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+	}
+
+	private void EnemyDeath(EnemyDeathEvent e)
+	{
+		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
+		{
+			target = null;
+		}
 	}
 }
 
