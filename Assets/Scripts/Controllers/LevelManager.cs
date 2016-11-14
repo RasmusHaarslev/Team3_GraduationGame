@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class LevelManager : MonoBehaviour {
     private bool PlayerAlive;
 
     private int EnemiesAlive = 0;
+
+    private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
 
     void Start () {
         PlayerAlive = true;
@@ -18,7 +21,11 @@ public class LevelManager : MonoBehaviour {
     void OnEnable()
     {
         //Enemy spawn for counting
-        EventManager.Instance.StartListening<EnemyDeathEvent>(EnemySpawn);
+        EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
+
+        // -Collecting-
+        //Loot received
+        EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
 
         // -Win-
         //Enemy dies for progress
@@ -34,7 +41,11 @@ public class LevelManager : MonoBehaviour {
     void OnDisable()
     {
         //Enemy spawn for counting
-        EventManager.Instance.StopListening<EnemyDeathEvent>(EnemySpawn);
+        EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
+
+        // -Collecting-
+        //Loot received
+        EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
 
         // -Win-
         //Enemy dies for progress
@@ -47,7 +58,7 @@ public class LevelManager : MonoBehaviour {
         EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
     }
 
-    private void EnemySpawn(EnemyDeathEvent e)
+    private void EnemySpawn(EnemySpawned e)
     {
         EnemiesAlive++;
     }
@@ -71,6 +82,16 @@ public class LevelManager : MonoBehaviour {
         LoseLevel();
     }
 
+    void LootReceived(EnemyDeathEvent e)
+    {
+
+    }
+
+    void CollectLoot()
+    {
+        gainedWeapons.Add(new EquippableItem());
+    }
+
     void CheckConditions()
     {
         if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
@@ -83,12 +104,12 @@ public class LevelManager : MonoBehaviour {
 
     void LoseLevel()
     {
-        //EventManager.Instance.TriggerEvent();
+        EventManager.Instance.TriggerEvent(new LevelWon());
     }
 
     void WinLevel()
     {
-        //EventManager.Instance.TriggerEvent();
+        EventManager.Instance.TriggerEvent(new LevelLost());
     }
 
 }
