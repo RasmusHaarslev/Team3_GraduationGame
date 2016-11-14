@@ -399,4 +399,11 @@ public class LevelSelectionGenerator : MonoBehaviour {
         scrollingGrid.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gridYPosition);
     }
     #endregion
+
+    public void ResetDatabase()
+    {
+        DataService dataService = new DataService(StringResources.databaseName);
+
+        dataService.CreateDB();
+    }
 }
