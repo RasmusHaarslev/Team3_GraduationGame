@@ -40,9 +40,8 @@ public class MoveScript : MonoBehaviour
 			}
 			if (attacking)
 			{
-				if (!character.target.GetComponent<Character>().isDead)
+				if (character.target != null && !character.target.GetComponent<Character>().isDead)
 				{
-					
 					agent.SetDestination(character.target.transform.position);
 					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
 					if (distanceToTarget < agent.stoppingDistance)
@@ -52,7 +51,8 @@ public class MoveScript : MonoBehaviour
 						{
 							character.DealDamage();
 							counter = attackSpeed;
-						} else
+						}
+						else
 						{
 							counter -= Time.deltaTime;
 						}
@@ -63,8 +63,8 @@ public class MoveScript : MonoBehaviour
 					agent.Resume();
 					attacking = false;
 				}
-
 			}
+
 		}
 	}
 
@@ -81,7 +81,8 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-			} else if (hit.transform.gameObject.tag == "Player")
+			}
+			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
 				agent.stoppingDistance = 0;
