@@ -109,3 +109,14 @@ public class AllyDeathEvent : GameEvent
 
 	}
 }
+
+public class EnemySpawned : GameEvent
+{
+    private CharacterValues enemyValues;
+    public EnemySpawned(CharacterValues values)
+    {
+        enemyValues = values;
+    }
+
+
+}

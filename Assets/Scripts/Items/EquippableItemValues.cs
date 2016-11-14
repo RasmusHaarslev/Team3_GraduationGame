@@ -7,7 +7,7 @@ public class EquippableitemValues
     [PrimaryKey, AutoIncrement]
     public int id { get; set; }
     public string name { get; set; }
-    public string type { get; set; }
+    public type Type { get; set; }
     public slot Slot { get; set; }
     public int characterId { get; set; }
     public string rarity { get; set; }
@@ -26,7 +26,12 @@ public class EquippableitemValues
         rightHand,
         legs
     }
-
+    public enum type
+    {
+        polearm,
+        shield,
+        rifle
+    }
     public override string ToString()
     {
         return string.Format("[EquippableitemValues: Id={0}, Name={1},  prefabName={2}]", id, name, prefabName);

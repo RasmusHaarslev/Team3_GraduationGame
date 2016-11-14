@@ -9,7 +9,7 @@ public class StringResources
 
     public static string characterPrefabsPath = "Prefabs/Prototype/";
 
-    public static string equippableItemsPrefabsPath = "Prefabs/Items/EquippableItems";
+    public static string equippableItemsPrefabsPath = "Prefabs/Items/EquippableItems/";
 
 
     // Use this for initialization
