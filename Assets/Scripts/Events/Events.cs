@@ -1,6 +1,16 @@
 ﻿
 using UnityEngine;
 
+public class SetupPopUp : GameEvent
+{
+    public GameObject node;
+
+    public SetupPopUp(GameObject node)
+    {
+        this.node = node;
+    }
+}
+
 public class TakeDamageEvent : GameEvent
 {
     public float damage { get; private set; }

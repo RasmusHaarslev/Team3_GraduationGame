@@ -64,7 +64,7 @@ public class Node : MonoBehaviour {
             canPlay = true;
         }
         NodeId = id;
-        GetComponent<Button>().onClick.AddListener(BeginLevel);
+        GetComponent<Button>().onClick.AddListener(OpenPopUp);
         SetupCampsForThisNode();
         SetupResourceForThisNode();
         SetupImage();
@@ -132,44 +132,11 @@ public class Node : MonoBehaviour {
         return gameObject;
     }
 
-    void BeginLevel()
+    void OpenPopUp()
     {
-        /*           
-               public int Level;
-               public int wolveCamps;
-               public int tribeCamps;
-               public int choiceCamps;
-               public int foodAmount;
-               public int coinAmount;
-               public int itemDropAmount;
-         */
-
         SetupImage();
-
-        Debug.Log(canPlay);
-        Debug.Log(isCleared);
-
-        if (canPlay && !isCleared)
-        {
-            if (isScouted) { 
-                Debug.Log("Show Panel - Can Play - Is Scouted");
-            } else {
-                Debug.Log("Show Panel - Can Play - Not Scouted");
-            }
-        } else if (!canPlay)
-        {
-            if (isScouted)
-            {
-                Debug.Log("Show Panel - Cannot Play - Is Scouted");
-            }
-            else
-            {
-                Debug.Log("Show Panel - Cannot Play - Not Scouted");
-            }
-        } else
-        {
-            Debug.Log("Show Panel - You have cleared this level");
-        }
+        
+        EventManager.Instance.TriggerEvent(new SetupPopUp(gameObject));
 
         foreach (var link in Links)
         {
@@ -183,8 +150,9 @@ public class Node : MonoBehaviour {
                 Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
             }
         }
-            
-        /*PlayerPrefs.SetInt("LevelDifficulty", Level);
+
+        /*    
+        PlayerPrefs.SetInt("LevelDifficulty", Level);
         PlayerPrefs.SetInt("WolveCamps", wolveCamps);
         PlayerPrefs.SetInt("TribeCamps", tribeCamps);
         PlayerPrefs.SetInt("ChoiceCamps", choiceCamps);
@@ -196,7 +164,8 @@ public class Node : MonoBehaviour {
         {
             SceneTransistion.instance.LoadScene(2);
         }
-        else {
+        else
+        {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
         */
