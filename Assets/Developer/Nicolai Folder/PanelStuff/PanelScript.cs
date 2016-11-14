@@ -30,8 +30,13 @@ public class PanelScript : MonoBehaviour {
         foreach (var soldier in soldiersList)
         {
             soldier.AddComponent<PanelController>();
+            soldier.GetComponent<NavMeshAgent>().enabled = false;     
         }
- 
+
+        soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
+        soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
+        soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
+        soldiersList[0].GetComponent<MoveScript>().enabled = false;
     }
 
     public void UpdateSoldierStats(GameObject soldier)
@@ -67,10 +72,7 @@ public class PanelScript : MonoBehaviour {
             {
                 stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
             }
-            if (stat.name == "Tier")
-            {
-                stat.GetComponent<Text>().text = "Tier: " + currentSoldier.characterBaseValues.tier.ToString();
-            }
+           
         }
             
     }
