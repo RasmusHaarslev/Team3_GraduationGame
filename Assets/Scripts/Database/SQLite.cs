@@ -422,6 +422,7 @@ namespace SQLite
 			var count = Execute (query);
 			
 			if (count == 0) { //Possible bug: This always seems to return 0?
+			    
 				// Table already exists, migrate it
 				MigrateTable (map);
 			}

@@ -1,6 +1,35 @@
 ﻿
 using UnityEngine;
 
+public class ChangeResources : GameEvent
+{
+    public int food;
+    public int coins;
+    public int villager;
+
+    public ChangeResources(int food = 0, int coins = 0, int villager = 0)
+    {
+        this.food = food;
+        this.coins = coins;
+        this.villager = villager;
+    }
+}
+
+public class ResourcesUpdated : GameEvent
+{
+    public ResourcesUpdated() { }
+}
+
+public class SetupPopUp : GameEvent
+{
+    public GameObject node;
+
+    public SetupPopUp(GameObject node)
+    {
+        this.node = node;
+    }
+}
+
 public class TakeDamageEvent : GameEvent
 {
     public float damage { get; private set; }
