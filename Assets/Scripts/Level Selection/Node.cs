@@ -49,6 +49,18 @@ public class Node : MonoBehaviour {
     public bool canPlay = false;
     #endregion
 
+    #region UI VARIABLES
+
+    public GameObject infoPanel;
+    public GameObject unknownPanel;
+    public Text txtFood;
+    public Text txtCoins;
+    public Text txtTribes;
+    public Text txtWolves;
+    public Text txtIntPoints;
+
+    #endregion
+
     public List<Sprite> activationImages = new List<Sprite>();
 
     /* ROADS FROM THIS NODE */
@@ -68,6 +80,20 @@ public class Node : MonoBehaviour {
         SetupCampsForThisNode();
         SetupResourceForThisNode();
         SetupImage();
+        SetupUIText();
+    }
+
+    public void SetupUIText()
+    {
+        Debug.Log(isScouted);
+        if (isScouted)
+        {
+            infoPanel.SetActive(true);
+        } else
+        {
+            unknownPanel.SetActive(true);
+            txtIntPoints.text = CampsInNode.ToString();
+        }
     }
 
     /// <summary>
