@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour
         
         dataService = new DataService(StringResources.databaseName);
 
-        //dataService.CreateDB();
+        dataService.CreateDB();
        
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
