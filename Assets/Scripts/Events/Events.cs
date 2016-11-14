@@ -19,6 +19,22 @@ public class InstantiateGame : GameEvent {
 
 }
 
+public class LevelWon : GameEvent
+{
+    public LevelWon()
+    {
+
+    }
+}
+
+public class LevelLost : GameEvent
+{
+    public LevelLost()
+    {
+
+    }
+}
+
 public class EnemySpottedEvent : GameEvent {
 
 	public GameObject parent;
