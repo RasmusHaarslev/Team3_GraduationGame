@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -121,11 +122,13 @@ public class LevelManager : MonoBehaviour {
     void LoseLevel()
     {
         EventManager.Instance.TriggerEvent(new LevelWon());
+        SceneManager.LoadScene("CampManagement");
     }
 
     void WinLevel()
     {
         EventManager.Instance.TriggerEvent(new LevelLost());
+        SceneManager.LoadScene("CampManagement");
     }
 
 }
