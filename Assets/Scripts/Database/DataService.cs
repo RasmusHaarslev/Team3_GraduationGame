@@ -78,11 +78,12 @@ public class DataService : MonoBehaviour
 
         _connection.CreateTable<CharacterValues>();
         _connection.CreateTable<EquippableitemValues>();
-        
+
         _connection.InsertAll(new[]
         {
             new CharacterValues
             {
+                id = 1,
                 name = "Daniel",
                 Type = CharacterValues.type.Player,
                 damage = 5,
@@ -93,6 +94,7 @@ public class DataService : MonoBehaviour
             },
          new CharacterValues
             {
+                id = 2,
                 name = "John",
                 Type = CharacterValues.type.Hunter,
                 damage = 8,
@@ -103,6 +105,7 @@ public class DataService : MonoBehaviour
             },
          new CharacterValues
             {
+                id = 3,
                 name = "Nicolai",
                 Type = CharacterValues.type.Hunter,
                 damage = 5,
@@ -113,6 +116,7 @@ public class DataService : MonoBehaviour
             },
          new CharacterValues
             {
+                id = 3,
                 name = "Peter",
                 Type = CharacterValues.type.Hunter,
                 damage = 9,
@@ -123,6 +127,7 @@ public class DataService : MonoBehaviour
             },
          new CharacterValues
             {
+                id = 4,
                 name = "Christian",
                 Type = CharacterValues.type.Hunter,
                 damage = 3,
@@ -143,7 +148,7 @@ public class DataService : MonoBehaviour
 
                 prefabName = "EnemyLeader"
             },
-          
+
           new CharacterValues
           {
               name = "Young wolf",
@@ -262,9 +267,13 @@ public class DataService : MonoBehaviour
              new EquippableitemValues
          {
              id = 1,
-             name = "Stick",
-             type = "Polearm",
+             name = "Toothpick",
+             Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
+             health = 20,
+             damage = 10,
+             damageSpeed = 9,
+             range = 5,
              characterId = 1,
              prefabName = "Stick"
          },
@@ -272,15 +281,32 @@ public class DataService : MonoBehaviour
          {
              id = 2,
              name = "Plastic Shield",
-             type = "Shield",
-             Slot = EquippableitemValues.slot.leftHand,
+             Type = EquippableitemValues.type.shield,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 20,
+             damage = 10,
+             damageSpeed = 9,
+             range = 5,
+             characterId = 2,
              prefabName = "Shield"
-
+         },
+             new EquippableitemValues
+         {
+             id = 2,
+             name = "Laser Rifle 2000",
+             Type = EquippableitemValues.type.rifle,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 20,
+             damage = 10,
+             damageSpeed = 9,
+             range = 20,
+             characterId = 3,
+             prefabName = "Rifle"
          }
         });
 
     }
-
+    #region character methods
     public IEnumerable<CharacterValues> GetFellowshipValues()
     {
         return _connection.Table<CharacterValues>();
@@ -313,13 +339,13 @@ public class DataService : MonoBehaviour
         return fellowship;
 
     }
-   
-    
+
+
 
     public CharacterValues GetCharacterValuesByName(string characterName)
     {
         return _connection.Table<CharacterValues>().Where(x => x.name == characterName).FirstOrDefault();
-        
+
     }
     /**/
     public IEnumerable<EquippableitemValues> GetCharacterEquippableItemsValues(int characterId)
@@ -345,16 +371,17 @@ public class DataService : MonoBehaviour
                 GameObject item = Resources.Load(StringResources.equippableItemsPrefabsPath + itemValues.prefabName) as GameObject;
 
                 //put values into the prefab
-                if(item != null)
+                if (item != null)
                     item.GetComponent<EquippableItem>().init(itemValues);
                 else
                 {
                     print(itemValues.prefabName + " can not retrieve the referred prefab!");
                     return null;
-                } 
+                }
                 //add it to the list
                 equips.Add(item);
-            }else print("Prefab of equip item not found!");
+            }
+            else print("Prefab of equip item not found!");
         }
 
         return equips;
@@ -371,17 +398,11 @@ public class DataService : MonoBehaviour
         GameObject characterGameObject = Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
         //assign values to prefab
         characterGameObject.GetComponent<Character>().init(charValues);
-        //spawn weapons TODO handle the weapons stats
-        List<GameObject> equips = GetCharacterEquippableItems(charValues.id) as List<GameObject>;
-        /*
-        foreach (GameObject equip in equips) //TODO handle weapons insertion!
-        {
-            
-            Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + equip.GetComponent<EquippableItem>().itemValues.prefabName), 
-                position, Quaternion.identity);
-        }
-        //attach them to the player
-        */
+        //spawn weapons 
+        List<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id)) as List<GameObject>; //TODO continue here
+
+        equipItemsToCharacter(equips, characterGameObject.GetComponent<Character>());
+
         return characterGameObject;
     }
 
@@ -417,16 +438,88 @@ public class DataService : MonoBehaviour
 
         return character;
     }
-
-
-    /*public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(string characterName)
+    #endregion
+    /**/
+    #region equippable items methods
+    public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(int characterId)
     {
-        string q = "select equip.* from  EquippableitemValues equip inner join CharacterValues " +
-                   "character on equip.id = character.rightHandEquipId where character.name = 'Daniel'";
-        List<EquippableitemValues> equipIds = _connection.Query<EquippableitemValues>(q);
+        string q = "select * from  EquippableitemValues where characterId = ? ";
+        List<EquippableitemValues> equipsValues = _connection.Query<EquippableitemValues>(q, characterId);
 
-        return equipIds;
-    }*/
+        return equipsValues;
+    }
 
+    public IEnumerable<GameObject> GenerateEquippableItemsFromValues(IEnumerable<EquippableitemValues> equipValues)
+    {
+        List<GameObject> equips = new List<GameObject>();
+        GameObject currentEquip = new GameObject();
+        foreach (EquippableitemValues values in equipValues)
+        {
+            print("Going to istantiate from Resources" + StringResources.equippableItemsPrefabsPath + values.prefabName);
+            currentEquip = Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + values.prefabName)) as GameObject;
+
+            currentEquip.GetComponent<EquippableItem>().init(values);
+
+            equips.Add(currentEquip);
+        }
+
+        return equips;
+    }
+
+    /// <summary>
+    /// Changes the stats and spawn the item on the right character slot
+    /// </summary>
+    /// <param name="item"></param>
+    void equipItemsToCharacter(IEnumerable<GameObject> equips, Character character)
+    {
+        EquippableitemValues currentEquipValues;
+        foreach (GameObject equip in equips)
+        {
+            currentEquipValues = equip.GetComponent<EquippableItem>().itemValues;
+            if (currentEquipValues != null)
+            {
+                //checking if another item is equipped in the item slot
+                if (character.equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null)
+                {
+                    //if thats the case, remove the values and remove the old object
+                    detatchItemFromCharacter(currentEquipValues.Slot, character);
+                }
+                //parent and position the item on the appropriate slot
+                equip.transform.parent = character.equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
+                //add the new item values
+                //to the character prefab
+                character.health += currentEquipValues.health;
+                character.damage += currentEquipValues.damage;
+                character.damageSpeed = currentEquipValues.damageSpeed;
+                character.range = currentEquipValues.range;
+                //into the database
+                currentEquipValues.characterId = character.characterBaseValues.id;
+                _connection.Update(currentEquipValues);
+
+            }
+            else
+            {
+                print("Trying to equip " + equip.name + " that is not an equippable item!");
+
+            }
+        }
+
+    }
+
+    void detatchItemFromCharacter(EquippableitemValues.slot slotToDetatch, Character character)
+    {
+        //remove item values from total on the player
+        EquippableItem itemToDetatch = character.equippableSpots[slotToDetatch].GetComponentInChildren<EquippableItem>();
+        //detatch and remove the item from the game
+        if (itemToDetatch != null)
+        {   //removing from database
+            _connection.Delete(itemToDetatch.itemValues);
+            //removing from scene
+            Destroy(itemToDetatch.transform.gameObject);
+        }
+    }
+
+
+    #endregion
 
 }

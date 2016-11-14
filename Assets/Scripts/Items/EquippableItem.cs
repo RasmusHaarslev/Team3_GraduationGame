@@ -5,11 +5,14 @@ using System.Reflection;
 
 public class EquippableItem : MonoBehaviour
 {
-
+    public int healthIncrease;
+    public int damageIncrease;
+    public int damageSpeed;
+    public int range;
 
     //values gained from the database
     public EquippableitemValues itemValues;
-   
+
 
 
     /// <summary>
@@ -19,7 +22,11 @@ public class EquippableItem : MonoBehaviour
     public void init(EquippableitemValues initValues)
     {
         itemValues = initValues;
-       
+
+        healthIncrease = itemValues.health;
+        damageIncrease = itemValues.damage;
+        damageSpeed = itemValues.damageSpeed;
+        range = itemValues.range;
     }
 
 
