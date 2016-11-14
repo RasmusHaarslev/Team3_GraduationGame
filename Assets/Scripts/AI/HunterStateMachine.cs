@@ -188,6 +188,7 @@ public class HunterStateMachine : CoroutineMachine
 					character.target = CodependantTarget();
 					if (!leader.GetComponent<MoveScript>().attacking)
 					{
+						character.isInCombat = false;
 						yield return new TransitionTo(FollowState, DefaultTransition);
 					}
 				}

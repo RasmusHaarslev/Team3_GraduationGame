@@ -8,20 +8,21 @@ public class WolfStateMachine : CoroutineMachine
 
 	NavMeshAgent agent;
 	Character character;
-
+	Vector3 originalPosition;
 
 	public float distanceToTarget = float.MaxValue;
 
 	void OnEnable()
 	{
+		originalPosition = transform.position;
 		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
-
+		EventManager.Instance.StartListening<FleeStateEvent>(OpponentsFleeing);
 	}
 
 	void OnDisable()
 	{
-
+		EventManager.Instance.StopListening<FleeStateEvent>(OpponentsFleeing);
 	}
 
 	protected override StateRoutine InitialState
@@ -85,7 +86,9 @@ public class WolfStateMachine : CoroutineMachine
 
 	IEnumerator RoamState()
 	{
-
+		agent.Resume();
+		agent.stoppingDistance = 0;
+		agent.SetDestination(originalPosition);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -124,5 +127,11 @@ public class WolfStateMachine : CoroutineMachine
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
 		yield return new WaitForSeconds(transitionTime);
+	}
+
+	private void OpponentsFleeing(FleeStateEvent e)
+	{
+		character.currentOpponents.Clear();
+		character.isInCombat = false;
 	}
 }
