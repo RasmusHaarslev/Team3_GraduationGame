@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour {
 
         // -Collecting-
         //Loot received
-        EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
+        EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
 
         // -Win-
         //Enemy dies for progress
