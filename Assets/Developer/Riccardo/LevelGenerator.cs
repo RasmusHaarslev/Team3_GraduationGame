@@ -16,6 +16,7 @@ public class LevelGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+	    difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel);
         
         dataService = new DataService(StringResources.databaseName);
 
