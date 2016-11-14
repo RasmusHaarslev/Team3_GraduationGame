@@ -45,13 +45,45 @@ public class DebugUI : MonoBehaviour
 
 	void OnEnable()
 	{
+        EventManager.Instance.StartListening<LevelWon>(Won);
+        EventManager.Instance.StartListening<LevelLost>(Lost);
 
-		Application.logMessageReceived += HandleLog;
+        Application.logMessageReceived += HandleLog;
 	}
-	void OnDisable()
-	{
-		Application.logMessageReceived -= HandleLog;
-	}
+
+    void OnDisable()
+    {
+        EventManager.Instance.StopListening<LevelWon>(Won);
+        EventManager.Instance.StopListening<LevelLost>(Lost);
+
+        Application.logMessageReceived -= HandleLog;
+    }
+
+    private void Lost(LevelLost e)
+    {
+        showDebug = false;
+        traitManagement = false;
+        expandLog = false;
+        frozen = false;
+
+        follower1 = false;
+        follower2 = false;
+        follower3 = false;
+    }
+
+    private void Won(LevelWon e)
+    {
+        showDebug = false;
+        traitManagement = false;
+        expandLog = false;
+        frozen = false;
+
+        follower1 = false;
+        follower2 = false;
+        follower3 = false;
+    }
+
+
 
 	void HandleLog(string logString, string stackTrace, LogType type)
 	{
@@ -106,36 +138,54 @@ public class DebugUI : MonoBehaviour
 
                 width = 300;
                 xPosRight = Screen.width - width - 10;
-                GUI.Label(new Rect(xPosRight, yPosLeft, width, height), "Targeting trait", customLabel);
+                GUI.Label(new Rect(xPosRight + 20, yPosLeft, width, height), "Targeting trait", customLabel);
                 yPosLeft += height + 10;
                 foreach (var tar in targeting)
                 {
-                    if (GUI.Button(new Rect(xPosRight, yPosLeft, width, height), tar.ToString(), customButton))
+                    var text = "";
+                    if (follower1)
+                        text = followers[0].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
+                    else if (follower2)
+                        text = followers[1].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
+                    else
+                        text = followers[2].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
+
+                    if (GUI.Button(new Rect(xPosRight, yPosLeft, width, height), text, customButton))
                     {
                         if (follower1)
                         {
-                            followers[0].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait) tar;
+                            followers[0].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
                         }
                         else if (follower2)
                         {
-                            followers[1].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait) tar;
+                            followers[1].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
                         }
                         else
                         {
-                            followers[2].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait) tar;
+                            followers[2].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
                         }
+
+                        //Refresh(customLabel, customButton);
                     }
 
                     yPosLeft += height + 10;
                 }
 
                 // Combat
-                GUI.Label(new Rect(xPosRight - width - 10, yPosRight, width, height), "Combat trait", customLabel);
+                GUI.Label(new Rect(xPosRight - width + 20, yPosRight, width, height), "Combat trait", customLabel);
                 yPosRight += height + 10;
                 var combat = Enum.GetValues(typeof(HunterStateMachine.CombatTrait));
                 foreach (var com in combat)
                 {
-                    if (GUI.Button(new Rect(xPosRight - width - 10, yPosRight, width, height), com.ToString(), customButton))
+                    var text = "";
+                    if (follower1)
+                        text = followers[0].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
+                    else if (follower2)
+                        text = followers[1].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
+                    else
+                        text = followers[2].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
+
+                    if (GUI.Button(new Rect(xPosRight - width - 10, yPosRight, width, height), text, customButton))
                     {
                         if (follower1)
                         {
@@ -149,6 +199,8 @@ public class DebugUI : MonoBehaviour
                         {
                             followers[2].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
                         }
+
+                        //Refresh(customLabel, customButton);
                     }
 
                     yPosRight += height + 10;
@@ -325,4 +377,5 @@ public class DebugUI : MonoBehaviour
 		smtpServer.Send(mail);
 		Debug.Log("Mail send!");
 	}
+
 }
