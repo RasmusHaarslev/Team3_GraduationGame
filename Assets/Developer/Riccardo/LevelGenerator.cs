@@ -7,6 +7,10 @@ using System.Security.Cryptography.X509Certificates;
 
 public class LevelGenerator : MonoBehaviour
 {
+    public int enemyStatsMultiplier = 3;
+    public int enemyStatsAdditive = 10;
+    public int difficultyLevel = 5;
+
 	private DataService dataService;
 
 	// Use this for initialization
@@ -16,13 +20,7 @@ public class LevelGenerator : MonoBehaviour
         dataService = new DataService(StringResources.databaseName);
 
         dataService.CreateDB();
-        /*
-		GameObject daniel = dataService.GenerateCharacterByName("Daniel", new Vector3(-30, 45, -45));
-		//print( dataService.GetCharacterEquippableItemsValues(daniel.GetComponent<Character>().characterBaseValues.id).ToList().Count);
-		GameObject john = dataService.GenerateCharacterByName("John",new Vector3(-33, 45, -45));
-		GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(-32, 45, -45));
-		GameObject peter = dataService.GenerateCharacterByName("Peter", new Vector3(-31, 45, -45));
-        */
+       
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
 
@@ -94,8 +92,10 @@ public class LevelGenerator : MonoBehaviour
                             .ToArray();
 
                     break;
+   
             }
-
+            //scaling values of enemies
+            ScaleCharactersValuesByLevel(currentTierValues);
 
             foreach (PointOfInterestManager POI in currentPOIs)
                 //gets all the characters spawners and spawn the characters based on the tier
@@ -122,4 +122,29 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+
+    public void ScaleCharactersValuesByLevel(IEnumerable<CharacterValues> charactersValues)
+    {
+        foreach (CharacterValues charValues in charactersValues)
+        {
+            //increase values TODO all of them??
+            charValues.damage = ScaleParameter(charValues.damage);
+            charValues.health = ScaleParameter(charValues.health);
+            
+
+            charValues.tier = difficultyLevel + charValues.tier;
+        }
+    }
+
+    /// <summary>
+    /// The actual Scaling function that contains the formula
+    /// </summary>
+    /// <param name="values"></param>
+    private int ScaleParameter(int value)
+    {
+        return value + (difficultyLevel*enemyStatsMultiplier) + enemyStatsAdditive;
+    }
+
 }
+
+
