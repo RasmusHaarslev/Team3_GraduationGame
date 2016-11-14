@@ -103,6 +103,7 @@ public class LevelGenerator : MonoBehaviour
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
                 foreach (CharacterSpawner charSpawn in currentCharSpawners)
                 {
+                    
                     //create character with values based on the index of the tier [assuming that for each type, the tier will be unique, so for example we have only one wolf for wolf tier 2]
                     currentCharacter = Instantiate(
                         Resources.Load(StringResources.characterPrefabsPath +
@@ -111,10 +112,10 @@ public class LevelGenerator : MonoBehaviour
                         charSpawn.transform.position, charSpawn.transform.rotation) as GameObject;
                     //assign the values ONCE it is istanced
                     currentCharacter.GetComponent<Character>().init(currentTierValues[charSpawn.tier - 1]);
-
+                    EventManager.Instance.TriggerEvent(new EnemySpawned(currentTierValues[charSpawn.tier - 1]));
                     //parent the character to the character spawn point
                     currentCharacter.transform.parent = charSpawn.transform;
-
+                    
                 }
             }
 

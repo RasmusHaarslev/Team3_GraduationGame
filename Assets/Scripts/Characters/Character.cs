@@ -6,67 +6,82 @@ using System.Reflection;
 
 public class Character : MonoBehaviour
 {
-	//values gained from the database
-	public CharacterValues characterBaseValues;
-	//combat values
-	public int health = 0;
-	public int damage = 0;
-	public int range = 0;
-	public int damageSpeed = 0;
+    //values gained from the database
+    public CharacterValues characterBaseValues;
+    //combat values
+    public int health = 0;
+    public int damage = 0;
+    public int range = 0;
+    public int damageSpeed = 0;
 
-	public float currentHealth;
+    public float currentHealth;
 
-	NavMeshAgent agent;
-	public GameObject target;
-	GameObject targetParent;
-	GameObject parent;
-	public List<GameObject> currentOpponents = new List<GameObject>();
+    NavMeshAgent agent;
+    public GameObject target;
+    GameObject targetParent;
+    GameObject parent;
+    public List<GameObject> currentOpponents = new List<GameObject>();
 
-	public float rotationSpeed = 2;
+    public float rotationSpeed = 2;
 
-	//Combat state values
-	public bool isInCombat = false;
-	public bool isDead = false;
-	//model values
-	//private Dictionary<string, Transform> slots;
-	private Transform[] slots;
-	// Use this for initialization
-	void Start()
-	{
-		slots = new Transform[5];
-		/*slots = new Dictionary<string, Transform>(){ //TODO: chage gameObject of this list
-        {"head", transform },
-		{"torso", transform },
-		{"leftHand", transform },
-		{"rightHand", transform },
+    //Combat state values
+    public bool isInCombat = false;
+    public bool isDead = false;
+    //model values
+    //private Dictionary<string, Transform> slots;
+    public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;/**/
 
-	};*/
-	}
+    public Transform rightHandSlot;
+    public Transform leftHandSlot;
+    public Transform headSlot;
+    public Transform torsoSlot;
+    public Transform legsSlot;
 
-	void Update()
-	{
-		if (currentHealth <= 0)
-		{
-			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
-			{
+    // Use this for initialization
+    void Start()
+    {
+
+
+
+        //Setting additional values for combat
+
+        currentHealth = health;
+
+
+    }
+
+    void Update()
+    {
+        if (currentHealth <= 0)
+        {
+            if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+            {
 				
-				EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+                EventManager.Instance.TriggerEvent(new AllyDeathEvent());
 			} else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
 			{
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
-			}
-			isDead = true;
-			GetComponent<MeshRenderer>().enabled = false;
-		}
-	}
+            }
+            isDead = true;
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
 
-	void OnEnable()
-	{
-		agent = GetComponent<NavMeshAgent>();
-		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
-		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
+    void OnEnable()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
+        EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
-	}
+
+        equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
+        {EquippableitemValues.slot.head, headSlot },
+        {EquippableitemValues.slot.torso, torsoSlot },
+        {EquippableitemValues.slot.leftHand, leftHandSlot },
+        {EquippableitemValues.slot.rightHand, rightHandSlot },
+        {EquippableitemValues.slot.legs, legsSlot }
+    };
+    }
 
 
 
@@ -92,47 +107,58 @@ public class Character : MonoBehaviour
 		currentHealth = health;
 	}
 
-	/// <summary>
-	/// Changes the stats and spawn the item on the right character slot
-	/// </summary>
-	/// <param name="item"></param>
-	void equipItem(GameObject item)
-	{
-		if (item.GetComponent<EquippableItem>() != null)
-		{
-			EquippableitemValues values = item.GetComponent<EquippableItem>().itemValues;
-			//checking if another item is equipped in the item slot
+    /// <summary>
+    /// Changes the stats and spawn the item on the right character slot
+    /// </summary>
+    /// <param name="item"></param>
+    void equipItems(IEnumerable<GameObject> equips)
+    {
+        EquippableitemValues currentEquipValues;
 
-			//if thats the case, remove the values and remove the old object
+        foreach (GameObject equip in equips)
+        {
+            currentEquipValues = equip.GetComponent<EquippableItem>().itemValues;
+            if (currentEquipValues != null)
+            {
+                //checking if another item is equipped in the item slot
+                if (equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null)
+                {
+                    //if thats the case, remove the values and remove the old object
+                    detatchItem(currentEquipValues.Slot);
+                }
+                //parent and position the item on the appropriate slot
+                equip.transform.parent = equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
+                //add the new item values
+                health += currentEquipValues.health;
 
-			//add the new item values
-
-			//parent and position the item on the right slot
-
-
-		}
-		else
-		{
-			print("Trying to equip " + item.name + " that is not an equippable item!");
+                damage += currentEquipValues.damage;
+                damageSpeed = currentEquipValues.damageSpeed;
+                range = currentEquipValues.range;
+            }
+            else
+            {
+                print("Trying to equip " + equip.name + " that is not an equippable item!");
 
 		}
 	}
 
-	void detatchItem(EquippableitemValues.slot slot)
-	{
-		//remove item values from total on the player
+    }
 
-		//detatch and remove the item from the game
+    void detatchItem(EquippableitemValues.slot slotToDetatch)
+    {
+        //remove item values from total on the player
+        EquippableitemValues itemValuesToDetatch = equippableSpots[slotToDetatch].GetComponentInChildren<EquippableitemValues>();
+        //detatch and remove the item from the game
+        //TODO complete here and find a way to communicate with the database
+    }
 
-	}
-
-	// Finds the appropriate target based on traits
-	public void TargetOpponent()
-	{
-		if (currentOpponents.Count == 0)
-		{
-			FindCurrentOpponents();
-		}
+    // Finds the appropriate target based on traits
+    public void TargetOpponent()
+    {
+        if (currentOpponents.Count == 0)
+        {
+            FindCurrentOpponents();
+        }
 
 		if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
 		{
