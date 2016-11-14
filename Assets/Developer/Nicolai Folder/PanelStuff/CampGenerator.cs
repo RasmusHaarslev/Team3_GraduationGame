@@ -11,10 +11,11 @@ public class CampGenerator : MonoBehaviour
     {
 
         dataService = new DataService(StringResources.databaseName);
-dataService.CreateDB();
-        dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
-
-        
+        dataService.CreateDB();
+        GameObject charactersFellowship =  dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
+        Character daniel = charactersFellowship.transform.GetChild(0).gameObject.GetComponent<Character>();
+        //daniel.damage;//total damage made by daniel
+        //daniel.characterBaseValues.
         //GameObject daniel = dataService.GenerateCharacterByName("Daniel", new Vector3(-0.8f, 0, 0.7f), Quaternion.Euler(0, -205, 0));
         //GameObject john = dataService.GenerateCharacterByName("John", new Vector3(-1.8f, 0, -0.6f), Quaternion.Euler(0, -225, 0));
         //GameObject nicolai = dataService.GenerateCharacterByName("Nicolai", new Vector3(0.9f, 0, 0.6f), Quaternion.Euler(0, 208, 0));
