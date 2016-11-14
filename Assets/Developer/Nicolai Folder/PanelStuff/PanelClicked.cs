@@ -6,11 +6,12 @@ public class PanelClicked : MonoBehaviour, IPointerClickHandler
 {
 
     public bool isClicked;
-    void OnEnable()
-    {
+
+    void OnEnable() {
         isClicked = true;
     }
-    public void OnPointerClick(PointerEventData eventData)
+
+    public void OnPointerClick(PointerEventData eventData) 
     {
       
     }

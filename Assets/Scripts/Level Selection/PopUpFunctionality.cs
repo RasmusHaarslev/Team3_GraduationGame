@@ -7,6 +7,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public GameObject PopUpPanel;
     public GameObject btnScout;
     public GameObject btnPlay;
+    public GameObject invisPanel;
 
     // Left side shown when you have scouted
     public GameObject LeftPanel;
@@ -38,11 +39,16 @@ public class PopUpFunctionality : MonoBehaviour {
         EventManager.Instance.StopListening<SetupPopUp>(InitialisePopUP);
     }
 
+    void Start()
+    {
+        scoutCost = Random.Range(minimumScoutCost, maximumScoutCost);
+    }
+
     public void InitialisePopUP(SetupPopUp e)
     {
+        invisPanel.SetActive(true);
         GameObject node = e.node;
         Node nodeScript = node.GetComponent<Node>();
-        scoutCost = Random.Range(minimumScoutCost, maximumScoutCost);
 
         PopUpPanel.SetActive(true);
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
@@ -96,6 +102,9 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void Play(GameObject node)
     {
+        Debug.Log(node.GetComponent<Node>().TravelCost);
+        EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
+
         /*           
         public int Level;
         public int wolveCamps;
@@ -106,11 +115,26 @@ public class PopUpFunctionality : MonoBehaviour {
         public int itemDropAmount;
         */
 
+        PlayerPrefs.SetInt("NodeId", node.GetComponent<Node>().NodeId);
+        PlayerPrefs.SetInt("LevelDifficulty", node.GetComponent<Node>().Level);
+        PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
+        PlayerPrefs.SetInt("TribeCamps", node.GetComponent<Node>().tribeCamps);
+        PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
+        PlayerPrefs.SetInt("FoodAmount", node.GetComponent<Node>().foodAmount);
+        PlayerPrefs.SetInt("CoinAmount", node.GetComponent<Node>().coinAmount);
+        PlayerPrefs.SetInt("ItemDropAmount", node.GetComponent<Node>().itemDropAmount);
+
+        // IF NOT DEBUG USE THIS
+        //GameController.Instance.LoadScene(node.GetComponent<Node>().sceneSelection);
+        GameController.Instance.LoadScene(2);
+
         Debug.Log(node.name);
     }
 
     public void Scout(GameObject node)
     {
+        EventManager.Instance.TriggerEvent(new ChangeResources(scoutCost));
+
         btnScout.SetActive(false);
         NotScouted.SetActive(false);
 
@@ -124,7 +148,7 @@ public class PopUpFunctionality : MonoBehaviour {
         foodText.text = "Food : " + node.GetComponent<Node>().foodAmount;
         coinsText.text = "Coins : " + node.GetComponent<Node>().coinAmount;
 
-        GameController.Instance._FOOD -= scoutCost;
+        node.GetComponent<Node>().isScouted = true;
 
         Debug.Log(node.name);
     }

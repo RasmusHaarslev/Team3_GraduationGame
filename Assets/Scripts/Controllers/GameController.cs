@@ -26,6 +26,24 @@ public class GameController : MonoBehaviour {
     }
     #endregion
 
+    void OnEnable()
+    {
+        EventManager.Instance.StartListening<ChangeResources>(UpdateResources);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Instance.StopListening<ChangeResources>(UpdateResources);
+    }
+
+    public void UpdateResources(ChangeResources e)
+    {
+        _FOOD -= e.food;
+        _VILLAGERS -= e.villager;
+        _COINS -= e.coins;
+        EventManager.Instance.TriggerEvent(new ResourcesUpdated());
+    }
+
     void Awake()
     {
         if (_instance != null)

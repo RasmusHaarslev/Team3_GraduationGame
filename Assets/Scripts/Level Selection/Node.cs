@@ -150,25 +150,6 @@ public class Node : MonoBehaviour {
                 Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
             }
         }
-
-        /*    
-        PlayerPrefs.SetInt("LevelDifficulty", Level);
-        PlayerPrefs.SetInt("WolveCamps", wolveCamps);
-        PlayerPrefs.SetInt("TribeCamps", tribeCamps);
-        PlayerPrefs.SetInt("ChoiceCamps", choiceCamps);
-        PlayerPrefs.SetInt("FoodAmount", foodAmount);
-        PlayerPrefs.SetInt("CoinAmount", coinAmount);
-        PlayerPrefs.SetInt("ItemDropAmount", itemDropAmount);
-
-        if (SceneTransistion.instance != null)
-        {
-            SceneTransistion.instance.LoadScene(2);
-        }
-        else
-        {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
-        }
-        */
     }
 
     #region Get Functions for this node
