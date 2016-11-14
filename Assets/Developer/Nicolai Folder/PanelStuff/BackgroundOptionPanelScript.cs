@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
+public class BackgroundOptionPanelScript : MonoBehaviour, IPointerClickHandler
 {
     PanelClicked panelClickedScript;
 
@@ -13,7 +13,7 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        
+
         if (panelClickedScript.isClicked)
         {
             foreach (Transform child in gameObject.transform)
@@ -24,11 +24,9 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
 
                 }
             }
-            
             gameObject.SetActive(false);
         }
-       
+
     }
 
 }
- 
