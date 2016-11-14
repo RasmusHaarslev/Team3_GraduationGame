@@ -320,15 +320,15 @@ public class DataService : MonoBehaviour
         GameObject fellowship = new GameObject("PlayerFellowship");
         if (spawners.Length == 4)
         {
-            //instantiate player
-            GameObject daniel = GenerateCharacterByName("Daniel", spawners[0].transform.position);
+            //istantiate player
+            GameObject daniel = GenerateCharacterByName("Daniel", spawners[0].transform.position, spawners[0].transform.rotation);
             daniel.transform.parent = fellowship.transform;
-            //instantiate fellows and parent them to player
-            GameObject john = GenerateCharacterByName("John", spawners[1].transform.position);
+            //istantiate fellows and parent them to player
+            GameObject john = GenerateCharacterByName("John", spawners[1].transform.position, spawners[1].transform.rotation);
             john.transform.parent = fellowship.transform;
-            GameObject nicolai = GenerateCharacterByName("Nicolai", spawners[2].transform.position);
+            GameObject nicolai = GenerateCharacterByName("Nicolai", spawners[2].transform.position, spawners[2].transform.rotation);
             nicolai.transform.parent = fellowship.transform;
-            GameObject peter = GenerateCharacterByName("Peter", spawners[3].transform.position);
+            GameObject peter = GenerateCharacterByName("Peter", spawners[3].transform.position, spawners[3].transform.rotation);
             peter.transform.parent = fellowship.transform;
         }
         else
