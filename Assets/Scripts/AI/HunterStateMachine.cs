@@ -17,8 +17,7 @@ public class HunterStateMachine : CoroutineMachine
 		Helpful,
 		GlorySeeker,
 		LowAttentionSpan,
-		Loyal,
-
+		Loyal
 	}
 	public enum CombatTrait
 	{
