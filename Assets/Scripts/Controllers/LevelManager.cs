@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour {
 
     void PlayerDeath(EnemyDeathEvent e)
     {
-        LoseLevel();
+        //LoseLevel();
     }
 
     void LootReceived(EnemyDeathEvent e)
