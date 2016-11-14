@@ -26,7 +26,10 @@ public class CampGenerator : MonoBehaviour
         peter.gameObject.GetComponent<HunterStateMachine>().enabled = false;
         peter.gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
-
+        daniel.AddComponent<PanelController>();
+        john.AddComponent<PanelController>();
+        nicolai.AddComponent<PanelController>();
+        peter.AddComponent<PanelController>();
         print(john.GetComponent<Character>().characterBaseValues.name);
 
     }
