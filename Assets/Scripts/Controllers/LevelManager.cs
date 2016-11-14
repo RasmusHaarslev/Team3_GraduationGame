@@ -83,12 +83,12 @@ public class LevelManager : MonoBehaviour {
 
     void LoseLevel()
     {
-        EventManager.Instance.TriggerEvent()
+        //EventManager.Instance.TriggerEvent();
     }
 
     void WinLevel()
     {
-
+        //EventManager.Instance.TriggerEvent();
     }
 
 }
