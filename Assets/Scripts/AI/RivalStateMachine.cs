@@ -9,14 +9,20 @@ public class RivalStateMachine : CoroutineMachine
 	NavMeshAgent agent;
 	Character character;
 
+
 	public float distanceToTarget = float.MaxValue;
 
 	void OnEnable()
 	{
 		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
+
 	}
 
+	void OnDisable()
+	{
+
+	}
 
 	protected override StateRoutine InitialState
 	{
@@ -28,7 +34,10 @@ public class RivalStateMachine : CoroutineMachine
 
 	void Update()
 	{
-
+		if (character.target != null)
+		{
+			character.RotateTowards(character.target.transform);
+		}
 	}
 
 	IEnumerator StartState()
@@ -37,16 +46,32 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
+
 		if (character.isInCombat)
 		{
-			distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
-			if (distanceToTarget < agent.stoppingDistance)
+			if (character.currentOpponents.Count != 0)
 			{
-				yield return new TransitionTo(CombatState, DefaultTransition);
+				if (!character.target.GetComponent<Character>().isDead)
+				{
+					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+					if (distanceToTarget < agent.stoppingDistance)
+					{
+						yield return new TransitionTo(CombatState, DefaultTransition);
+					}
+					else
+					{
+						yield return new TransitionTo(EngageState, DefaultTransition);
+					}
+				}
+				else
+				{
+					character.currentOpponents.Remove(character.target);
+					character.target = character.FindNearestEnemy();
+				}
 			}
 			else
 			{
-				yield return new TransitionTo(EngageState, DefaultTransition);
+				character.isInCombat = false;
 			}
 
 		}
@@ -64,6 +89,13 @@ public class RivalStateMachine : CoroutineMachine
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
+	IEnumerator DeadState()
+	{
+
+		yield return new TransitionTo(StartState, DefaultTransition);
+	}
+
+
 	IEnumerator FleeState()
 	{
 
@@ -73,26 +105,24 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		agent.Resume();
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
-
-		Debug.Log(gameObject.name + "is engaging " + character.target.name);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
+		character.RotateTowards(character.target.transform);
 		agent.Stop();
+		yield return new WaitForSeconds(character.damageSpeed);
+		character.DealDamage();
+		character.RotateTowards(character.target.transform);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
 		yield return new WaitForSeconds(transitionTime);
-	}
-
-	IEnumerator DeadState()
-	{
-		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 }
