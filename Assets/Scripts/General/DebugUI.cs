@@ -292,17 +292,18 @@ public class DebugUI : MonoBehaviour
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Win level", customButton))
-                {
                     GameObject.Find("LevelGenerator").GetComponent<LevelManager>().WinLevel();
-                }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Lose level", customButton))
-                {
                     GameObject.Find("LevelGenerator").GetComponent<LevelManager>().LoseLevel();
+
+                yPosRight += height + 10;
+                if (SceneManager.GetActiveScene().name == "LevelSelection") { 
+                    if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Export levels", customButton))
+                        SaveLoadLevels.SaveLevels(GameObject.Find("LevelGenerator").GetComponent<LevelSelectionGenerator>().nodesInRows);
                 }
 
-                yPosRight += height + 50;
                 if (GUI.Button(new Rect(Screen.width/2 - width/2, 10, width, height), "Trait \nmanagement", customButton))
                     traitManagement = true;
                 #endregion
