@@ -293,7 +293,7 @@ public class DataService : MonoBehaviour
          },
              new EquippableitemValues
          {
-             id = 2,
+             id = 3,
              name = "Laser Rifle 2000",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,

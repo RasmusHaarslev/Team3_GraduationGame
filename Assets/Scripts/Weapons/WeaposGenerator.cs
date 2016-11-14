@@ -11,18 +11,23 @@ public class WeaposGenerator : MonoBehaviour
     [Range(0, 1)]
     public float shieldHealthPercentageIncrease = .6f;
 
+    public int shieldRange = 1;
     [Range(0, 1)]
     public float polearmStrenghtPercentageIncrease = .3f;
     [Range(0, 1)]
     public float polearmHealthPercentageIncrease = .6f;
+    public int polearmRange = 3;
 
     [Range(0, 1)]
     public float rifleStrenghtPercentageIncrease = .3f;
     [Range(0, 1)]
     public float rifleHealthPercentageIncrease = .6f;
+    public int rifleRange = 9;
 
     private int points = 0;
-
+    private float strenghtIncreaseProbabLimit;
+    private float healthtIncreaseProbabLimit;
+    
     private DataService dataService;
 
     // Use this for initialization
@@ -48,18 +53,14 @@ public class WeaposGenerator : MonoBehaviour
         {
             case EquippableitemValues.type.shield:
                 itemValues.name = "Shield level " + level;
-                itemValues.damage = (int)shieldStrenghtPercentageIncrease * points;
-                itemValues.health = (int)shieldHealthPercentageIncrease * points;
-                itemValues.damageSpeed = (int) (1- shieldStrenghtPercentageIncrease- shieldHealthPercentageIncrease)
-                *points;
+                
+                itemValues.range = shieldRange;
                 itemValues.prefabName = "Shield";
                 break;
             case EquippableitemValues.type.polearm:
                 itemValues.name = "Polearm level " + level;
-                itemValues.damage = (int)polearmStrenghtPercentageIncrease * points;
-                itemValues.health = (int)polearmHealthPercentageIncrease * points;
-                itemValues.damageSpeed = (int)(1 - polearmStrenghtPercentageIncrease - polearmHealthPercentageIncrease)
-                * points;
+                
+                itemValues.range = polearmRange;
                 itemValues.prefabName = "Stick";
                 break;
             case EquippableitemValues.type.rifle:
@@ -68,8 +69,27 @@ public class WeaposGenerator : MonoBehaviour
                 itemValues.health = (int)rifleHealthPercentageIncrease * points;
                 itemValues.damageSpeed = (int)(1 - rifleStrenghtPercentageIncrease - rifleHealthPercentageIncrease)
                 * points;
+                itemValues.range = rifleRange;
                 itemValues.prefabName = "Rifle";
                 break;
+
+        }
+        float currentPick = 0f;
+        for (int i = 0; i < points; i++)
+        {
+            currentPick = Random.Range(0, 1);
+            if (currentPick < strenghtIncreaseProbabLimit) //increase damage
+            {
+                itemValues.damage += 1;
+            }else if (currentPick < healthtIncreaseProbabLimit) //increase health
+            {
+                itemValues.health += 1;
+            }
+            else //increse damage speed
+            {
+                itemValues.damageSpeed += 1;
+            }
+
 
         }
 
