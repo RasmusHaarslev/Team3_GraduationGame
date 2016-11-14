@@ -49,6 +49,18 @@ public class Node : MonoBehaviour {
     public bool canPlay = false;
     #endregion
 
+    #region UI VARIABLES
+
+    public GameObject infoPanel;
+    public GameObject unknownPanel;
+    public Text txtFood;
+    public Text txtCoins;
+    public Text txtTribes;
+    public Text txtWolves;
+    public Text txtIntPoints;
+
+    #endregion
+
     public List<Sprite> activationImages = new List<Sprite>();
 
     /* ROADS FROM THIS NODE */
@@ -59,15 +71,29 @@ public class Node : MonoBehaviour {
     public void OnCreate(int id)
     {
         // If root set playable to true
-        if (id == 1)
-        {
+        //if (id == 1)
+        //{
             canPlay = true;
-        }
+        //}
         NodeId = id;
         GetComponent<Button>().onClick.AddListener(OpenPopUp);
         SetupCampsForThisNode();
         SetupResourceForThisNode();
         SetupImage();
+        SetupUIText();
+    }
+
+    public void SetupUIText()
+    {
+        Debug.Log(isScouted);
+        if (isScouted)
+        {
+            infoPanel.SetActive(true);
+        } else
+        {
+            unknownPanel.SetActive(true);
+            txtIntPoints.text = CampsInNode.ToString();
+        }
     }
 
     /// <summary>
@@ -125,7 +151,7 @@ public class Node : MonoBehaviour {
             Hierarchy = isParent
         });
 
-       if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
+        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
             child.GetComponent<Node>().AddLink(gameObject, true);
         }
 
