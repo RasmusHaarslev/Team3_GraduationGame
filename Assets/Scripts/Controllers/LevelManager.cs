@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour {
     {
         EventManager.Instance.TriggerEvent(new LevelLost());
         PlayerPrefs.SetInt("LevelResult", 0);
+        replaceCharactersWeapons();
         SceneManager.LoadScene("CampManagement");
     }
 
@@ -132,5 +133,27 @@ public class LevelManager : MonoBehaviour {
         PlayerPrefs.SetInt("LevelResult", 1);
         SceneManager.LoadScene("CampManagement");
     }
+
+
+    void replaceCharactersWeapons()
+    {
+        WeaposGenerator weaponGenerator = new WeaposGenerator();
+        DataService dataService = new DataService(StringResources.databaseName);
+        GameObject playerFellowship = GameObject.Find("PlayerFellowship");
+        int level = PlayerPrefs.GetInt(StringResources.hardnessLevel);
+        
+        foreach (Character character in playerFellowship.transform.GetComponentsInChildren<Character>())
+        {
+            EquippableitemValues newItemValues = weaponGenerator.GenerateEquippableItem(
+                character.GetComponentInChildren<EquippableItem>().itemValues.Type, level);
+            GameObject newItem =
+                dataService.GenerateNewEquippableItemFromValues(newItemValues);
+            dataService.equipItemsToCharacter(new List<GameObject>() { newItem },character);
+        }
+
+
+    }
+
+
 
 }

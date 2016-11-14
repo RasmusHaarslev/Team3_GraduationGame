@@ -471,7 +471,7 @@ public class DataService : MonoBehaviour
     /// Changes the stats and spawn the item on the right character slot
     /// </summary>
     /// <param name="item"></param>
-    void equipItemsToCharacter(IEnumerable<GameObject> equips, Character character)
+    public void equipItemsToCharacter(IEnumerable<GameObject> equips, Character character)
     {
         EquippableitemValues currentEquipValues;
         foreach (GameObject equip in equips)

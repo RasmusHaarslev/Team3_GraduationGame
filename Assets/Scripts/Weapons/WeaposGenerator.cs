@@ -42,7 +42,7 @@ public class WeaposGenerator : MonoBehaviour
 
 
     
-    public void GenerateEquippableItem(EquippableitemValues.type type, int level)
+    public EquippableitemValues GenerateEquippableItem(EquippableitemValues.type type, int level)
     {
         EquippableitemValues itemValues = new EquippableitemValues();
         itemValues.Type = type;
@@ -56,6 +56,7 @@ public class WeaposGenerator : MonoBehaviour
                 
                 itemValues.range = shieldRange;
                 itemValues.prefabName = "Shield";
+                
                 break;
             case EquippableitemValues.type.polearm:
                 itemValues.name = "Polearm level " + level;
@@ -65,10 +66,7 @@ public class WeaposGenerator : MonoBehaviour
                 break;
             case EquippableitemValues.type.rifle:
                 itemValues.name = "Rifle level " + level;
-                itemValues.damage = (int)rifleStrenghtPercentageIncrease * points;
-                itemValues.health = (int)rifleHealthPercentageIncrease * points;
-                itemValues.damageSpeed = (int)(1 - rifleStrenghtPercentageIncrease - rifleHealthPercentageIncrease)
-                * points;
+                
                 itemValues.range = rifleRange;
                 itemValues.prefabName = "Rifle";
                 break;
@@ -90,10 +88,11 @@ public class WeaposGenerator : MonoBehaviour
                 itemValues.damageSpeed += 1;
             }
 
-
         }
 
-        
+        itemValues.Slot = EquippableitemValues.slot.rightHand;
+
+        return itemValues;
 
     }
 
