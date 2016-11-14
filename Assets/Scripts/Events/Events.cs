@@ -48,6 +48,22 @@ public class InstantiateGame : GameEvent {
 
 }
 
+public class LevelWon : GameEvent
+{
+    public LevelWon()
+    {
+
+    }
+}
+
+public class LevelLost : GameEvent
+{
+    public LevelLost()
+    {
+
+    }
+}
+
 public class EnemySpottedEvent : GameEvent {
 
 	public GameObject parent;
@@ -84,11 +100,11 @@ public class DefendStateEvent : GameEvent
 
 public class EnemyDeathEvent : GameEvent
 {
-	public EnemyDeathEvent()
+	public GameObject enemy;
+	public EnemyDeathEvent(GameObject enemy)
 	{
-
+		this.enemy = enemy;
 	}
-
 }
 
 public class StayStateEvent : GameEvent
@@ -121,4 +137,15 @@ public class AllyDeathEvent : GameEvent
 	{
 
 	}
+}
+
+public class EnemySpawned : GameEvent
+{
+    private CharacterValues enemyValues;
+    public EnemySpawned(CharacterValues values)
+    {
+        enemyValues = values;
+    }
+
+
 }

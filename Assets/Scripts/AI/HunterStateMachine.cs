@@ -16,7 +16,6 @@ public class HunterStateMachine : CoroutineMachine
 		Codependant,
 		Helpful,
 		GlorySeeker,
-		VeryUnlikable,
 		LowAttentionSpan,
 		Loyal,
 
@@ -29,7 +28,8 @@ public class HunterStateMachine : CoroutineMachine
 		Excitable,
 		Clingy,
 		Desperate,
-		Vengeful
+		Vengeful,
+		VeryUnlikable
 	}
 
 	#region On Enable and Disable
@@ -183,6 +183,22 @@ public class HunterStateMachine : CoroutineMachine
 				else if (targetTrait == TargetTrait.GlorySeeker)
 				{
 					character.target = GlorySeekerTarget();
+				}
+				else if (targetTrait == TargetTrait.Codependant)
+				{
+					character.target = CodependantTarget();
+					if (!leader.GetComponent<MoveScript>().attacking)
+					{
+						yield return new TransitionTo(FollowState, DefaultTransition);
+					}
+				}
+				else if (targetTrait == TargetTrait.Loyal)
+				{
+					GameObject loyalTarget = LoyalTarget();
+					if (loyalTarget != null)
+					{
+						character.target = loyalTarget;
+					}
 				}
 				if (combatCommandState == CombatCommandState.Flee && combatTrait != CombatTrait.BraveFool || (combatTrait == CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
 				{
@@ -390,6 +406,27 @@ public class HunterStateMachine : CoroutineMachine
 			{
 				target = opponent;
 				max = opponent.GetComponent<Character>().characterBaseValues.tier;
+			}
+		}
+		return target;
+	}
+
+	private GameObject CodependantTarget()
+	{
+		GameObject target;
+		target = leader.GetComponent<Character>().target;
+		return target;
+	}
+
+	private GameObject LoyalTarget()
+	{
+		GameObject target = null;
+		foreach (GameObject enemy in character.currentOpponents)
+		{
+			if (enemy.GetComponent<Character>().target == leader)
+			{
+				target = enemy;
+				break;
 			}
 		}
 		return target;
