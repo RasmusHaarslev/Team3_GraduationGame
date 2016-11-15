@@ -608,7 +608,7 @@ public class DataService : MonoBehaviour
 
         string query =
             "SELECT itemValues.* FROM EquippableitemValues AS itemValues JOIN InventoryItem AS inventory ON itemValues.id = inventory.deferredId WHERE inventory.Type = " + (int)InventoryItem.type.equippable;
-        print(query);
+        
         itemsValues =_connection.Query<EquippableitemValues>(query);
 
 
