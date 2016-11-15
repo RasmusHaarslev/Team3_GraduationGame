@@ -6,20 +6,12 @@ public class OptionsPanel : MonoBehaviour {
 
     private bool panelOpen = false;
     public GameObject OptionPanel = null;
+    public GameObject BackgroundPanel;
 
     public void TogglePanelOpen()
     {
-        panelOpen = !panelOpen;
-        SetPanelVisible();
+        BackgroundPanel.SetActive(true);
+        OptionPanel.SetActive(true);
     }
-
-    public void SetPanelVisible()
-    {
-        if(OptionPanel != null)
-        {
-            OptionPanel.SetActive(panelOpen);
-        }   
-    }
-
 
 }

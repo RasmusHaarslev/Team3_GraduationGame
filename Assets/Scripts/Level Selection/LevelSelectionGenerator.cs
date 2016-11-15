@@ -47,17 +47,17 @@ public class LevelSelectionGenerator : MonoBehaviour {
     int numOfParents = 0;    
     #endregion
 
-    Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
+    public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
     List<GameObject> nodes = new List<GameObject>();
 
     void Awake()
     {
-        if (PlayerPrefs.GetInt("LevelResult") != 0)
+      /*  if (PlayerPrefs.GetInt("LevelResult") != 0)
         {
             GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
             nodeCleared.GetComponent<Node>().isCleared = true;
         }
-
+		 */
         if (nodesInRows.Count == 0) { 
             InstantiateRows(amountOfRows);
             SetScrollPosition(0);

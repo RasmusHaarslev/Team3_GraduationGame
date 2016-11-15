@@ -1,15 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SQLite;
+public class InventoryItem
+{
 
-public class InventoryItem : MonoBehaviour {
+    [PrimaryKey, AutoIncrement]
+    public int id { get; set; }
+    public type Type { get; set; }
+    public int characterId { get; set; }
+    public int quantity { get; set; }
+    
+    public enum type
+    {
+        equippable,
+        collectable,
+        consumable
+    }
+    public override string ToString()
+    {
+        return string.Format("[EquippableitemValues: Id={0}, Type={1},  quantity={2}]", id, Type, quantity);
+    }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
 }
