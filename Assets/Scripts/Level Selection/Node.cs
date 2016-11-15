@@ -89,7 +89,12 @@ public class Node : MonoBehaviour {
 
     public void SetupUIText()
     {
-        if (isScouted)
+        if(isCleared)
+        {
+            unknownPanel.SetActive(false);
+            infoPanel.SetActive(false);
+        }
+        else if (isScouted)
         {
             unknownPanel.SetActive(false);
             infoPanel.SetActive(true);
@@ -186,18 +191,18 @@ public class Node : MonoBehaviour {
         {
             if(link.Hierarchy)
             {
-                Debug.Log("Node Id : " + link.From.name + " Has Parent : " + link.To.name);
-                Debug.Log("Parent IsClear : " + link.To.GetComponent<Node>().isCleared + " Parent CanPlay : " + link.To.GetComponent<Node>().canPlay);
+                //Debug.Log("Node Id : " + link.From.name + " Has Parent : " + link.To.name);
+                //Debug.Log("Parent IsClear : " + link.To.GetComponent<Node>().isCleared + " Parent CanPlay : " + link.To.GetComponent<Node>().canPlay);
             } else
             {
-                Debug.Log("Node Id : " + link.From.name + " Has Child : " + link.To.name);
-                Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
+                //Debug.Log("Node Id : " + link.From.name + " Has Child : " + link.To.name);
+                //Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
             }
         }
     }
 
     #region Get Functions for this node
-    void SetupImage()
+    public void SetupImage()
     {
         if (isCleared)
         {

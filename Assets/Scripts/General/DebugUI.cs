@@ -282,28 +282,28 @@ public class DebugUI : MonoBehaviour
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Gameplay", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("LevelPrototype");
+                    GameController.Instance.LoadScene("LevelPrototype");
                 }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "To camp", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("CampManagement");
+                    GameController.Instance.LoadScene("CampManagement");
                 }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Level \nselection", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("LevelSelection");
+                    GameController.Instance.LoadScene("LevelSelection");
                 }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Demo Level", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("DemoLevel");
+                    GameController.Instance.LoadScene("DemoLevel");
                 }
 
                 yPosRight += height + 10;

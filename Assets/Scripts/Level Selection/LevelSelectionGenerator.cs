@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class LevelSelectionGenerator : MonoBehaviour {
 
@@ -62,28 +63,43 @@ public class LevelSelectionGenerator : MonoBehaviour {
     }
 
     void Awake()
-    {        
-        if (PlayerPrefs.GetInt("LevelResult") != 0) {
-            GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
-            nodeCleared.GetComponent<Node>().isCleared = true;
-            PlayerPrefs.SetInt("LevelResult", 0);
-        }
-		 
+    {        	 
         if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
             SetScrollPosition(0);
         } else {
             // Need to read from an external file for this to work.
+            nodesInRows = SaveLoadLevels.LoadLevels();
+
+            if (PlayerPrefs.GetInt("LevelResult") != 0)
+            {
+                GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
+                var nodeScript = nodeCleared.GetComponent<Node>();
+
+                nodeScript.isCleared = true;
+                nodeScript.canPlay = false;
+                nodeScript.SetupImage();
+                nodeScript.SetupUIText();
+
+                foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
+                {
+                    nodes.GetComponent<Node>().canPlay = true;
+                    nodes.GetComponent<Node>().SetupImage();
+                }
+
+                PlayerPrefs.SetInt("LevelResult", 0);
+            }
+
             totalAmountRows = 1;
             LoadRows();
             SetScrollPosition(0);
+
+            SaveDict(new SaveLevelsToXML());
         }
     }
 
     public void LoadRows() {
-        nodesInRows = SaveLoadLevels.LoadLevels();
-
         foreach (KeyValuePair<int, List<GameObject>> entry in nodesInRows)
         {
             GameObject row = Instantiate(rowPrefab);
@@ -112,6 +128,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                     increaseX = 482f;
                     break;
             }
+
 
             for (int j = 0; j < entry.Value.Count; j++)
             {

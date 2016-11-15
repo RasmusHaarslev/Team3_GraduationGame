@@ -46,9 +46,13 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void InitialisePopUP(SetupPopUp e)
     {
-        invisPanel.SetActive(true);
         GameObject node = e.node;
         Node nodeScript = node.GetComponent<Node>();
+
+        if (nodeScript.isCleared)
+            return;
+
+        invisPanel.SetActive(true);
 
         PopUpPanel.SetActive(true);
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
@@ -102,7 +106,6 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void Play(GameObject node)
     {
-        Debug.Log(node.GetComponent<Node>().TravelCost);
         EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
@@ -127,9 +130,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
         // IF NOT DEBUG USE THIS
         //GameController.Instance.LoadScene(node.GetComponent<Node>().sceneSelection);
-        GameController.Instance.LoadScene("LevelPrototype01WithSound");
-
-        Debug.Log(node.name);
+        GameController.Instance.LoadScene("LevelPrototype01WithSound");        
     }
 
     public void Scout(GameObject node)
@@ -168,8 +169,6 @@ public class PopUpFunctionality : MonoBehaviour {
             }
         }
 
-        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
-
-        Debug.Log(node.name);
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());        
     }
 }
