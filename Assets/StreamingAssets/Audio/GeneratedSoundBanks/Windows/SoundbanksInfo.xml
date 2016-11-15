@@ -16,29 +16,41 @@
 			<ShortName>ExploreTestSB</ShortName>
 			<Path>ExploreTestSB.bnk</Path>
 			<IncludedEvents>
-				<Event Id="3426751519" Name="Play_BaseWind" ObjectPath="\Events\Default Work Unit\Play_BaseWind"/>
-				<Event Id="2283762979" Name="Play_BaseWind_01" ObjectPath="\Events\Default Work Unit\Play_BaseWind_01" MaxAttenuation="20.000000"/>
-				<Event Id="1126010832" Name="Play_ExploreMusic" ObjectPath="\Events\Default Work Unit\Play_ExploreMusic"/>
-				<Event Id="2991955701" Name="Play_Fox" ObjectPath="\Events\Default Work Unit\Play_Fox" MaxAttenuation="20.000000"/>
-				<Event Id="3994697449" Name="Play_MenuMusic0_4" ObjectPath="\Events\Default Work Unit\Play_MenuMusic0_4"/>
-				<Event Id="1900502842" Name="Play_NoiseWind" ObjectPath="\Events\Default Work Unit\Play_NoiseWind" MaxAttenuation="20.000000"/>
+				<Event Id="3050945240" Name="New_Event" ObjectPath="\Events\Default Work Unit\WindsTest\New_Event" MaxAttenuation="0.000000"/>
+				<Event Id="3426751519" Name="Play_BaseWind" ObjectPath="\Events\Default Work Unit\Ambience\Play_BaseWind"/>
+				<Event Id="2283762979" Name="Play_BaseWind_01" ObjectPath="\Events\Default Work Unit\Ambience\Play_BaseWind_01" MaxAttenuation="20.000000"/>
+				<Event Id="1126010832" Name="Play_ExploreMusic" ObjectPath="\Events\Default Work Unit\Ambience\Play_ExploreMusic"/>
+				<Event Id="2781617342" Name="Play_FootStepLoop" ObjectPath="\Events\Default Work Unit\Play_FootStepLoop"/>
+				<Event Id="2991955701" Name="Play_Fox" ObjectPath="\Events\Default Work Unit\Ambience\Play_Fox" MaxAttenuation="20.000000"/>
+				<Event Id="441061787" Name="Play_LeaderFootStep" ObjectPath="\Events\Default Work Unit\Play_LeaderFootStep"/>
+				<Event Id="3994697449" Name="Play_MenuMusic0_4" ObjectPath="\Events\Default Work Unit\Ambience\Play_MenuMusic0_4"/>
+				<Event Id="1900502842" Name="Play_NoiseWind" ObjectPath="\Events\Default Work Unit\Ambience\Play_NoiseWind" MaxAttenuation="20.000000"/>
 				<Event Id="2121412285" Name="Play_Wind1" ObjectPath="\Events\Default Work Unit\WindsTest\Play_Wind1" MaxAttenuation="20.000000"/>
 				<Event Id="2121412286" Name="Play_Wind2" ObjectPath="\Events\Default Work Unit\WindsTest\Play_Wind2" MaxAttenuation="20.000000"/>
 				<Event Id="2121412287" Name="Play_Wind3" ObjectPath="\Events\Default Work Unit\WindsTest\Play_Wind3" MaxAttenuation="20.000000"/>
 				<Event Id="2121412280" Name="Play_Wind4" ObjectPath="\Events\Default Work Unit\WindsTest\Play_Wind4" MaxAttenuation="20.000000"/>
 				<Event Id="2121412281" Name="Play_Wind5" ObjectPath="\Events\Default Work Unit\WindsTest\Play_Wind5" MaxAttenuation="20.000000"/>
-				<Event Id="3882512547" Name="Play_WindBase" ObjectPath="\Events\Default Work Unit\Play_WindBase"/>
-				<Event Id="1465786195" Name="Play_WindDeep1" ObjectPath="\Events\Default Work Unit\Play_WindDeep1" MaxAttenuation="20.000000"/>
-				<Event Id="1465786192" Name="Play_WindDeep2" ObjectPath="\Events\Default Work Unit\Play_WindDeep2" MaxAttenuation="20.000000"/>
-				<Event Id="1661144613" Name="Play_windFlags" ObjectPath="\Events\Default Work Unit\Play_windFlags" MaxAttenuation="20.000000"/>
-				<Event Id="3104904358" Name="Play_windhowl" ObjectPath="\Events\Default Work Unit\Play_windhowl" MaxAttenuation="20.000000"/>
-				<Event Id="1663494684" Name="Play_WindHowlDrone" ObjectPath="\Events\Default Work Unit\Play_WindHowlDrone" MaxAttenuation="20.000000"/>
-				<Event Id="1938796326" Name="Play_windNoiseQuiet" ObjectPath="\Events\Default Work Unit\Play_windNoiseQuiet" MaxAttenuation="20.000000"/>
+				<Event Id="3882512547" Name="Play_WindBase" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindBase"/>
+				<Event Id="1465786195" Name="Play_WindDeep1" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindDeep1" MaxAttenuation="20.000000"/>
+				<Event Id="1465786192" Name="Play_WindDeep2" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindDeep2" MaxAttenuation="20.000000"/>
+				<Event Id="1661144613" Name="Play_windFlags" ObjectPath="\Events\Default Work Unit\Ambience\Play_windFlags" MaxAttenuation="20.000000"/>
+				<Event Id="3104904358" Name="Play_windhowl" ObjectPath="\Events\Default Work Unit\Ambience\Play_windhowl" MaxAttenuation="20.000000"/>
+				<Event Id="1663494684" Name="Play_WindHowlDrone" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindHowlDrone" MaxAttenuation="20.000000"/>
+				<Event Id="1938796326" Name="Play_windNoiseQuiet" ObjectPath="\Events\Default Work Unit\Ambience\Play_windNoiseQuiet" MaxAttenuation="20.000000"/>
+				<Event Id="1320564396" Name="Stop_FootStepLoop" ObjectPath="\Events\Default Work Unit\Stop_FootStepLoop" MaxAttenuation="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="94928507" Language="SFX">
 					<ShortName>WindBase.wav</ShortName>
 					<Path>SFX/WindBase_277E827B.wem</Path>
+				</File>
+				<File Id="96874168" Language="SFX">
+					<ShortName>Loop1.wav</ShortName>
+					<Path>SFX/Loop1_9AF8CBD0.wem</Path>
+				</File>
+				<File Id="115282647" Language="SFX">
+					<ShortName>LederFoot1.wav</ShortName>
+					<Path>SFX/LederFoot1_D210C7F6.wem</Path>
 				</File>
 				<File Id="160583729" Language="SFX">
 					<ShortName>WindQuiter.wav</ShortName>
@@ -47,6 +59,18 @@
 				<File Id="168508569" Language="SFX">
 					<ShortName>Fox1.wav</ShortName>
 					<Path>SFX/Fox1_277E827B.wem</Path>
+				</File>
+				<File Id="239675472" Language="SFX">
+					<ShortName>loop4.wav</ShortName>
+					<Path>SFX/loop4_9AF8CBD0.wem</Path>
+				</File>
+				<File Id="273771020" Language="SFX">
+					<ShortName>LederFoot4.wav</ShortName>
+					<Path>SFX/LederFoot4_D210C7F6.wem</Path>
+				</File>
+				<File Id="286495110" Language="SFX">
+					<ShortName>LederFoot2.wav</ShortName>
+					<Path>SFX/LederFoot2_D210C7F6.wem</Path>
 				</File>
 				<File Id="325070793" Language="SFX">
 					<ShortName>WindHowlDrone.wav</ShortName>
@@ -88,9 +112,17 @@
 					<ShortName>NoiseAmbienceWind5.wav</ShortName>
 					<Path>SFX/NoiseAmbienceWind5_277E827B.wem</Path>
 				</File>
+				<File Id="633043532" Language="SFX">
+					<ShortName>LederFoot5.wav</ShortName>
+					<Path>SFX/LederFoot5_D210C7F6.wem</Path>
+				</File>
 				<File Id="649023967" Language="SFX">
 					<ShortName>WindFlags.wav</ShortName>
 					<Path>SFX/WindFlags_277E827B.wem</Path>
+				</File>
+				<File Id="726626611" Language="SFX">
+					<ShortName>LederFoot3.wav</ShortName>
+					<Path>SFX/LederFoot3_D210C7F6.wem</Path>
 				</File>
 				<File Id="745371056" Language="SFX">
 					<ShortName>ExploreMusic4.wav</ShortName>
@@ -116,9 +148,17 @@
 					<ShortName>MenuMusic0.4.wav</ShortName>
 					<Path>SFX/MenuMusic0.4_277E827B.wem</Path>
 				</File>
+				<File Id="1006811940" Language="SFX">
+					<ShortName>loop3.wav</ShortName>
+					<Path>SFX/loop3_9AF8CBD0.wem</Path>
+				</File>
 				<File Id="1012816635" Language="SFX">
 					<ShortName>NoiseAmbienceWind3.wav</ShortName>
 					<Path>SFX/NoiseAmbienceWind3_277E827B.wem</Path>
+				</File>
+				<File Id="1022292725" Language="SFX">
+					<ShortName>loop2.wav</ShortName>
+					<Path>SFX/loop2_9AF8CBD0.wem</Path>
 				</File>
 				<File Id="1046654003" Language="SFX">
 					<ShortName>WindHowl.wav</ShortName>
