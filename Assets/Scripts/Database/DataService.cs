@@ -82,11 +82,11 @@ public class DataService : MonoBehaviour
 
         _connection.DropTable<CharacterValues>();
         _connection.DropTable<EquippableitemValues>();
+        _connection.DropTable<InventoryItem>();
 
-        _connection.CreateTable<CharacterValues>()
-        ;
-
+        _connection.CreateTable<CharacterValues>();
         _connection.CreateTable<EquippableitemValues>();
+        _connection.CreateTable<InventoryItem>();
 
         _connection.InsertAll(new[]
         {
@@ -319,7 +319,64 @@ public class DataService : MonoBehaviour
              range = 20,
              characterId = 3,
              prefabName = "Rifle"
+         },
+             new EquippableitemValues
+         {
+             id = 4,
+             name = "Rifle of the Git Master Rasmus",
+             Type = EquippableitemValues.type.rifle,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 25,
+             damage = 15,
+             damageSpeed = 15,
+             range = 15,
+             prefabName = "Rifle"
+         },
+             new EquippableitemValues
+         {
+             id = 5,
+             name = "Mighty power Stick",
+             Type = EquippableitemValues.type.polearm,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 20,
+             damage = 20,
+             damageSpeed = 9,
+             range = 5,
+             prefabName = "Stick"
+         },
+             new EquippableitemValues
+         {
+             id = 6,
+             name = "Romanian Steel Bar",
+             Type = EquippableitemValues.type.polearm,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 20,
+             damage = 25,
+             damageSpeed = 9,
+             range = 2,
+             prefabName = "Stick"
          }
+        });
+        _connection.InsertAll(new[]
+        {
+            new InventoryItem
+            {
+                Type = InventoryItem.type.equippable,
+                deferredId = 4,
+                quantity = 1
+            },
+            new InventoryItem
+            {
+                Type = InventoryItem.type.equippable,
+                deferredId = 5,
+                quantity = 1
+            },
+            new InventoryItem
+            {
+                Type = InventoryItem.type.equippable,
+                deferredId = 6,
+                quantity = 1
+            }
         });
 
     }
@@ -543,6 +600,19 @@ public class DataService : MonoBehaviour
         return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();
 
 
+    }
+
+    public IEnumerable<EquippableitemValues> GetEquippableItemsValuesFromInventory()
+    {
+        List<EquippableitemValues> itemsValues = new List<EquippableitemValues>();
+
+        string query =
+            "SELECT itemValues.* FROM EquippableitemValues AS itemValues JOIN InventoryItem AS inventory ON itemValues.id = inventory.deferredId WHERE inventory.Type = " + (int)InventoryItem.type.equippable;
+        print(query);
+        itemsValues =_connection.Query<EquippableitemValues>(query);
+
+
+        return itemsValues;
     }
 
     #endregion
