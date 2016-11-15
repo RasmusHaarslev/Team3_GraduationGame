@@ -23,10 +23,11 @@ public class SaveLoadLevels
 
                 var xmlNode = new NodeXML();
 
+                row.Level = currentNode.Level;
+
                 xmlNode.CampsInNode = currentNode.CampsInNode;
 
                 xmlNode.NodeId = currentNode.NodeId;
-                xmlNode.Level = currentNode.Level;
                 xmlNode.TravelCost = currentNode.TravelCost;
                 xmlNode.sceneSelection = currentNode.sceneSelection;
                 xmlNode.CampsInNode = currentNode.CampsInNode;
@@ -42,6 +43,17 @@ public class SaveLoadLevels
                 xmlNode.isCleared = currentNode.isCleared;
                 xmlNode.isScouted = currentNode.isScouted;
                 xmlNode.canPlay = currentNode.canPlay;
+
+                foreach(var link in currentNode.Links)
+                {
+                    var li = new LinkXML();
+
+                    li.FromID = link.From.GetComponent<Node>().NodeId;
+                    li.ToID = link.To.GetComponent<Node>().NodeId;
+                    li.Hierarchy = link.Hierarchy ? 1 : 0;
+
+                    xmlNode.Links.Add(li);
+                }
 
                 row.Nodes.Add(xmlNode);
             }
@@ -67,11 +79,10 @@ public class SaveLoadLevels
 
         var loadedLevels = new Dictionary<int, List<GameObject>>();
 
+        var levelsDict = new Dictionary<int, GameObject>();
+
         foreach (RowsXML row in container.Rows)
         {
-            int currentRow = 0;
-            List<GameObject> list = new List<GameObject>();
-
             foreach (var node in row.Nodes)
             {
                 var nodeObject = new GameObject();
@@ -81,10 +92,8 @@ public class SaveLoadLevels
 
                 xmlNode.CampsInNode = currentNode.CampsInNode;
 
-                currentRow = currentNode.Level;
-
                 currentNode.NodeId = xmlNode.NodeId;
-                currentNode.Level = xmlNode.Level;
+                currentNode.Level = row.Level;
                 currentNode.TravelCost = xmlNode.TravelCost;
                 currentNode.sceneSelection = xmlNode.sceneSelection;
                 currentNode.CampsInNode = xmlNode.CampsInNode;
@@ -100,6 +109,31 @@ public class SaveLoadLevels
                 currentNode.isCleared = xmlNode.isCleared;
                 currentNode.isScouted = xmlNode.isScouted;
                 currentNode.canPlay = xmlNode.canPlay;
+
+                levelsDict.Add(xmlNode.NodeId, nodeObject);
+            }
+        }
+
+        foreach (RowsXML row in container.Rows)
+        {
+            int currentRow = row.Level;
+            List<GameObject> list = new List<GameObject>();
+
+            foreach (var node in row.Nodes)
+            {
+                var nodeObject = levelsDict[node.NodeId];
+                var currentNode = nodeObject.GetComponent<Node>();
+
+                foreach (var link in node.Links)
+                {
+                    var li = new Link();
+
+                    li.From = levelsDict[link.FromID];
+                    li.To = levelsDict[link.ToID];
+                    li.Hierarchy = link.Hierarchy == 1 ? true : false;
+
+                    currentNode.Links.Add(li);
+                }
 
                 list.Add(nodeObject);
             }
@@ -123,14 +157,15 @@ public class RowsXML
     [XmlArray("NodeXMLs")]
     [XmlArrayItem("NodeXML")]
     public List<NodeXML> Nodes = new List<NodeXML>();
+
+    [XmlAttribute("level")]
+    public int Level;
 }
 
 public class NodeXML
 {
     [XmlAttribute("nodeID")]
     public int NodeId;
-    [XmlAttribute("level")]
-    public int Level;
     [XmlAttribute("travelCost")]
     public int TravelCost;
     [XmlAttribute("sceneSelection")]
@@ -161,4 +196,18 @@ public class NodeXML
     public bool isScouted;
     [XmlAttribute("canPlay")]
     public bool canPlay;
+
+    [XmlArray("Links")]
+    [XmlArrayItem("Link")]
+    public List<LinkXML> Links = new List<LinkXML>();
+}
+
+public class LinkXML
+{
+    [XmlAttribute("FromID")]
+    public int FromID;
+    [XmlAttribute("ToID")]
+    public int ToID;
+    [XmlAttribute("Hierarchy")]
+    public int Hierarchy;
 }
