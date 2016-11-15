@@ -11,10 +11,8 @@ public class HunterStateMachine : CoroutineMachine
 		NoTrait,
 		Foolhardy,
 		StubbornDefender,
-		PacifistSoul,
 		Bully,
 		Codependant,
-		Helpful,
 		GlorySeeker,
 		LowAttentionSpan,
 		Loyal
@@ -24,7 +22,6 @@ public class HunterStateMachine : CoroutineMachine
 		NoTrait,
 		BraveFool,
 		Fearful,
-		Excitable,
 		Clingy,
 		Desperate,
 		Vengeful,
