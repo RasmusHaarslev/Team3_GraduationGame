@@ -68,7 +68,7 @@ public class SaveLoadLevels
         stream.Close();
     }
 
-    public static Dictionary<int, List<GameObject>> LoadLevels(Dictionary<int, List<GameObject>> levelDictionary)
+    public static Dictionary<int, List<GameObject>> LoadLevels()
     {
         var path = Path.Combine(Application.persistentDataPath, "levels.xml");
 
@@ -85,32 +85,34 @@ public class SaveLoadLevels
         {
             foreach (var node in row.Nodes)
             {
-                var nodeObject = new GameObject();
-                var currentNode = nodeObject.AddComponent<Node>();
+                var nodeObject = GameObject.Instantiate(Resources.Load("Prefabs/LevelSelection/CityNode", typeof(GameObject))) as GameObject;
+                
+                var currentNode = nodeObject.GetComponent<Node>();
 
-                var xmlNode = new NodeXML();
+                currentNode.CampsInNode = node.CampsInNode;
 
-                xmlNode.CampsInNode = currentNode.CampsInNode;
-
-                currentNode.NodeId = xmlNode.NodeId;
+                currentNode.NodeId = node.NodeId;
                 currentNode.Level = row.Level;
-                currentNode.TravelCost = xmlNode.TravelCost;
-                currentNode.sceneSelection = xmlNode.sceneSelection;
-                currentNode.CampsInNode = xmlNode.CampsInNode;
-                currentNode.probabilityWolves = xmlNode.probabilityWolves;
-                currentNode.probabilityTribes = xmlNode.probabilityTribes;
-                currentNode.probabilityChoice = xmlNode.probabilityChoice;
-                currentNode.wolveCamps = xmlNode.wolveCamps;
-                currentNode.tribeCamps = xmlNode.tribeCamps;
-                currentNode.choiceCamps = xmlNode.choiceCamps;
-                currentNode.foodAmount = xmlNode.foodAmount;
-                currentNode.coinAmount = xmlNode.coinAmount;
-                currentNode.itemDropAmount = xmlNode.itemDropAmount;
-                currentNode.isCleared = xmlNode.isCleared;
-                currentNode.isScouted = xmlNode.isScouted;
-                currentNode.canPlay = xmlNode.canPlay;
+                currentNode.TravelCost = node.TravelCost;
+                currentNode.sceneSelection = node.sceneSelection;
+                currentNode.CampsInNode = node.CampsInNode;
+                currentNode.probabilityWolves = node.probabilityWolves;
+                currentNode.probabilityTribes = node.probabilityTribes;
+                currentNode.probabilityChoice = node.probabilityChoice;
+                currentNode.wolveCamps = node.wolveCamps;
+                currentNode.tribeCamps = node.tribeCamps;
+                currentNode.choiceCamps = node.choiceCamps;
+                currentNode.foodAmount = node.foodAmount;
+                currentNode.coinAmount = node.coinAmount;
+                currentNode.itemDropAmount = node.itemDropAmount;
+                currentNode.isCleared = node.isCleared;
+                currentNode.isScouted = node.isScouted;
+                currentNode.canPlay = node.canPlay;
 
-                levelsDict.Add(xmlNode.NodeId, nodeObject);
+                currentNode.OnCreate(currentNode.NodeId);
+
+                levelsDict.Add(node.NodeId, nodeObject);
+
             }
         }
 

@@ -398,7 +398,7 @@ public class DataService : MonoBehaviour
         //load prefab
         GameObject characterGameObject = Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
         //assign values to prefab
-        characterGameObject.GetComponent<Character>().init(charValues);
+        characterGameObject.GetComponent<Character>().Init(charValues);
         //spawn weapons 
         List<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id)) as List<GameObject>; //TODO continue here
 
@@ -434,7 +434,7 @@ public class DataService : MonoBehaviour
                                                                                                                           /*#if UNITY_EDITOR
                                                                                                                                   PrefabUtility.DisconnectPrefabInstance(gameObject);
                                                                                                                           #endif*/
-        character.GetComponent<Character>().init(charValues);
+        character.GetComponent<Character>().Init(charValues);
         //todo handle weapons attached to them!
 
         return character;

@@ -52,7 +52,7 @@ public class LevelGenerator : MonoBehaviour
             //load prefab
             GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName),position,Quaternion.identity) as GameObject;
             //assign values to prefab
-            characterGameObject.GetComponent<Character>().init(charValues);
+            characterGameObject.GetComponent<Character>().Init(charValues);
             //load prefab weapons TODO handle the weapons stats
         return characterGameObject;
         
@@ -112,7 +112,7 @@ public class LevelGenerator : MonoBehaviour
                         //Resources.Load(StringResources.characterPrefabsPath + currentTiers[charSpawn.tier - 1].name)
                         charSpawn.transform.position, charSpawn.transform.rotation) as GameObject;
                     //assign the values ONCE it is istanced
-                    currentCharacter.GetComponent<Character>().init(currentTierValues[charSpawn.tier - 1]);
+                    currentCharacter.GetComponent<Character>().Init(currentTierValues[charSpawn.tier - 1]);
                     EventManager.Instance.TriggerEvent(new EnemySpawned(currentTierValues[charSpawn.tier - 1]));
                     //parent the character to the character spawn point
                     currentCharacter.transform.parent = charSpawn.transform;
