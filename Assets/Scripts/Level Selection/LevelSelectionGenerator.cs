@@ -62,11 +62,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
     }
 
     void Awake()
-    {
-        
-       
-        if (PlayerPrefs.GetInt("LevelResult") != 0)
-        {
+    {        
+        if (PlayerPrefs.GetInt("LevelResult") != 0) {
             GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
             nodeCleared.GetComponent<Node>().isCleared = true;
             PlayerPrefs.SetInt("LevelResult", 0);
@@ -125,10 +122,6 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
                 startX += increaseX;
-
-                //rowNodes.Add(newNode);
-                //nodes.Add(newNode);
-
             }
 
             if (entry.Key > 0)
@@ -353,20 +346,9 @@ public class LevelSelectionGenerator : MonoBehaviour {
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
         node.GetComponent<Node>().probabilityTribes = probabilityTribes;
         node.GetComponent<Node>().probabilityChoice = probabilityChoices;
-    }
-
-    public void DefeatedLevel(int nodeId)
-    {
-
-    }
-    /*
-    public GameObject GetNode(int nodeId)
-    {
-        nodes[nodeId]
-    }*/
+    }    
 
     #region Helper function
-
     void printDict(Dictionary<int, List<GameObject>> dict)
     {
         foreach (KeyValuePair<int, List<GameObject>> kvp in dict)
@@ -443,9 +425,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
     private void SaveDict(SaveLevelsToXML e)
     {
-        Debug.Log("HEY");
-        SaveLoadLevels.SaveLevels(nodesInRows);
-        
+        SaveLoadLevels.SaveLevels(nodesInRows);        
     }
 
     public void ResetDatabase()

@@ -71,16 +71,18 @@ public class Node : MonoBehaviour {
     public void OnCreate(int id)
     {
         // If root set playable to true
-        if (id == 1)
+        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
         {
-            canPlay = true;
-        }
-        NodeId = id;
-        GetComponent<Button>().onClick.AddListener(OpenPopUp);
-        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
+            if (id == 1)
+            {
+                canPlay = true;
+            }
             SetupCampsForThisNode();
             SetupResourceForThisNode();
         }
+        NodeId = id;
+        GetComponent<Button>().onClick.AddListener(OpenPopUp);
+
         SetupImage();
         SetupUIText();
     }
