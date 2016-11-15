@@ -18,11 +18,14 @@ public class CharacterValues
     public int range { get; set; }
 	public int tier { get; set; }
 
+    public TargetTrait targetTrait { get; set; }
+    public CombatTrait combatTrait { get; set; }
+    /*
     public combatFocusType CombatFocusType { get; set; }
     public combatFleeType CombatFleeType { get; set; }
     public outOfCombatMovementType OutOfCombatMovementType { get; set; }
-
-	public enum type
+    */
+    public enum type
 	{
 		Tribesman,
 		Wolf,
@@ -30,7 +33,33 @@ public class CharacterValues
 		Player
 	}
 
+    public enum TargetTrait
+    {
+        NoTrait,
+        Foolhardy,
+        StubbornDefender,
+        PacifistSoul,
+        Bully,
+        Codependant,
+        Helpful,
+        GlorySeeker,
+        LowAttentionSpan,
+        Loyal,
 
+    }
+    public enum CombatTrait
+    {
+        NoTrait,
+        BraveFool,
+        Fearful,
+        Excitable,
+        Clingy,
+        Desperate,
+        Vengeful,
+        VeryUnlikable
+    }
+
+    /*
 	public enum combatFocusType 
     {
         PlayerAttackers,
@@ -56,6 +85,7 @@ public enum combatFleeType
         FollowLeader,
         Patrolling
     }
+    */
     public string prefabName { get; set; }
     public override string ToString()
     {

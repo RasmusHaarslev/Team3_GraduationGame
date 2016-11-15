@@ -63,182 +63,223 @@ public class Character : MonoBehaviour {
 
         equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
-        {EquippableitemValues.slot.torso, torsoSlot },
-        {EquippableitemValues.slot.leftHand, leftHandSlot },
-        {EquippableitemValues.slot.rightHand, rightHandSlot },
-        {EquippableitemValues.slot.legs, legsSlot }
-    };
-    }
+		{EquippableitemValues.slot.torso, torsoSlot },
+		{EquippableitemValues.slot.leftHand, leftHandSlot },
+		{EquippableitemValues.slot.rightHand, rightHandSlot },
+		{EquippableitemValues.slot.legs, legsSlot }
+	};
+	}
 
-    void OnDisable() {
-        EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
-        EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
-        EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
-    }
 
-    /// <summary>
-    /// Set the character values passed in the parameter
-    /// </summary>
-    /// <param name="initValues"></param>
-    public void Init(CharacterValues initValues) {
-        characterBaseValues = initValues;
-        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-        health = initValues.health;
-        range = initValues.range;
-        damage = initValues.damage;
-        damageSpeed = initValues.damageSpeed;
-        currentHealth = health;
-    }
 
-    /// <summary>
-    /// Changes the stats and spawn the item on the right character slot
-    /// </summary>
-    /// <param name="item"></param>
-    void EquipItems(IEnumerable<GameObject> equips) {
-        EquippableitemValues currentEquipValues;
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
+		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+	}
 
-        foreach (GameObject equip in equips) {
-            currentEquipValues = equip.GetComponent<EquippableItem>().itemValues;
-            if (currentEquipValues != null) {
-                //checking if another item is equipped in the item slot
-                if (equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null) {
-                    //if thats the case, remove the values and remove the old object
-                    DetachItem(currentEquipValues.Slot);
-                }
-                //parent and position the item on the appropriate slot
-                equip.transform.parent = equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
-                //add the new item values
-                health += currentEquipValues.health;
+	/// <summary>
+	/// Set the character values passed in the parameter
+	/// </summary>
+	/// <param name="initValues"></param>
+	public void init(CharacterValues initValues)
+	{
+		characterBaseValues = initValues;
+		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+		health = initValues.health;
+		range = initValues.range;
+		damage = initValues.damage;
+		damageSpeed = initValues.damageSpeed;
+		currentHealth = health;
+	}
 
-                damage += currentEquipValues.damage;
-                damageSpeed = currentEquipValues.damageSpeed;
-                range = currentEquipValues.range;
-            }
-            else {
-                print("Trying to equip " + equip.name + " that is not an equippable item!");
+	/// <summary>
+	/// Changes the stats and spawn the item on the right character slot
+	/// </summary>
+	/// <param name="item"></param>
+	void equipItems(IEnumerable<GameObject> equips)
+	{
+		EquippableitemValues currentEquipValues;
 
-            }
-        }
+		foreach (GameObject equip in equips)
+		{
+			currentEquipValues = equip.GetComponent<EquippableItem>().itemValues;
+			if (currentEquipValues != null)
+			{
+				//checking if another item is equipped in the item slot
+				if (equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null)
+				{
+					//if thats the case, remove the values and remove the old object
+					detatchItem(currentEquipValues.Slot);
+				}
+				//parent and position the item on the appropriate slot
+				equip.transform.parent = equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
+				//add the new item values
+				health += currentEquipValues.health;
 
-    }
+				damage += currentEquipValues.damage;
+				damageSpeed = currentEquipValues.damageSpeed;
+				range = currentEquipValues.range;
+			}
+			else
+			{
+				print("Trying to equip " + equip.name + " that is not an equippable item!");
 
-    void DetachItem(EquippableitemValues.slot slotToDetatch) {
-        //remove item values from total on the player
-        EquippableitemValues itemValuesToDetatch = equippableSpots[slotToDetatch].GetComponentInChildren<EquippableitemValues>();
-        //detatch and remove the item from the game
-        //TODO complete here and find a way to communicate with the database
-    }
+			}
+		}
 
-    // Finds the appropriate target based on traits
-    public void TargetOpponent() {
-        if (currentOpponents.Count == 0) {
-            FindCurrentOpponents();
-        }
+	}
 
-        if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) {
-            foreach (GameObject opp in currentOpponents) {
-                var hunter = opp.GetComponent<HunterStateMachine>();
-                if (hunter != null && hunter.combatTrait == HunterStateMachine.CombatTrait.VeryUnlikable) {
-                    target = opp;
-                    break;
-                }
-                else {
-                    target = FindRandomEnemy();
-                }
-            }
+	void detatchItem(EquippableitemValues.slot slotToDetatch)
+	{
+		//remove item values from total on the player
+		EquippableitemValues itemValuesToDetatch = equippableSpots[slotToDetatch].GetComponentInChildren<EquippableitemValues>();
+		//detatch and remove the item from the game
+		//TODO complete here and find a way to communicate with the database
+	}
 
-        }
-        else {
-            target = FindNearestEnemy();
-        }
-    }
+	// Finds the appropriate target based on traits
+	public void TargetOpponent()
+	{
+		if (currentOpponents.Count == 0)
+		{
+			FindCurrentOpponents();
+		}
 
-    private void FindCurrentOpponents() {
-        if (gameObject.tag == "Unfriendly") {
+		if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+		{
+			foreach (GameObject opp in currentOpponents)
+			{
+				var hunter = opp.GetComponent<HunterStateMachine>();
+				if (hunter != null && hunter.combatTrait == CharacterValues.CombatTrait.VeryUnlikable)
+				{
+					target = opp;
+					break;
+				}
+				else
+				{
+					target = FindRandomEnemy();
+				}
+			}
 
-            if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) {
-                List<GameObject> friendlies = new List<GameObject>();
-                friendlies.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
-                friendlies.Add(GameObject.FindGameObjectWithTag("Player"));
+		}
+		else
+		{
+			target = FindNearestEnemy();
+		}
+	}
 
-                foreach (GameObject child in friendlies) {
-                    currentOpponents.Add(child);
-                }
+	private void FindCurrentOpponents()
+	{
+		if (gameObject.tag == "Unfriendly")
+		{
 
-            }
-        }
-        else {
-            foreach (Transform child in targetParent.transform) {
-                foreach (Transform child2 in child) {
-                    if (child2.gameObject.tag == "Unfriendly") {
-                        currentOpponents.Add(child2.gameObject);
-                    }
-                }
-            }
-        }
-    }
+			if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+			{
+				List<GameObject> friendlies = new List<GameObject>();
+				friendlies.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+				friendlies.Add(GameObject.FindGameObjectWithTag("Player"));
 
-    public GameObject FindNearestEnemy() {
-        GameObject finalTarget;
-        finalTarget = null;
-        float min = float.MaxValue;
+				foreach (GameObject child in friendlies)
+				{
+					currentOpponents.Add(child);
+				}
 
-        foreach (var possibleTarget in currentOpponents) {
-            float distances;
-            distances = Vector3.Distance(transform.position, possibleTarget.transform.position);
-            if (distances < min) {
-                min = distances;
-                finalTarget = possibleTarget;
-            }
-        }
-        return finalTarget;
-    }
+			}
+		}
+		else
+		{
+			foreach (Transform child in targetParent.transform)
+			{
+				foreach (Transform child2 in child)
+				{
+					if (child2.gameObject.tag == "Unfriendly")
+					{
+						currentOpponents.Add(child2.gameObject);
+					}
+				}
+			}
+		}
+	}
 
-    public GameObject FindRandomEnemy() {
-        GameObject finalTarget;
-        finalTarget = currentOpponents[UnityEngine.Random.Range(0, currentOpponents.Count)];
-        return finalTarget;
-    }
+	public GameObject FindNearestEnemy()
+	{
+		GameObject finalTarget;
+		finalTarget = null;
+		float min = float.MaxValue;
 
-    private void StartCombatState(EnemySpottedEvent e) {
-        if (!isInCombat) {
-            if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject)) {
-                targetParent = e.parent;
-                TargetOpponent();
-                isInCombat = true;
-            }
-        }
-    }
+		foreach (var possibleTarget in currentOpponents)
+		{
+			float distances;
+			distances = Vector3.Distance(transform.position, possibleTarget.transform.position);
+			if (distances < min)
+			{
+				min = distances;
+				finalTarget = possibleTarget;
+			}
+		}
+		return finalTarget;
+	}
 
-    public void DealDamage() {
-        EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
-        if (target != null) {
-            var hunterStateMachine = target.GetComponent<HunterStateMachine>();
-            if (hunterStateMachine != null && hunterStateMachine.combatCommandState == HunterStateMachine.CombatCommandState.Defense) {
-                {
-                    target.GetComponent<Character>().target = gameObject;
-                    hunterStateMachine.attacked = true;
-                }
-            }
-        }
-    }
+	public GameObject FindRandomEnemy()
+	{
+		GameObject finalTarget;
+		finalTarget = currentOpponents[UnityEngine.Random.Range(0, currentOpponents.Count)];
+		return finalTarget;
+	}
 
-    private void TakeDamage(TakeDamageEvent e) {
-        if (e.target == gameObject) {
-            currentHealth -= e.damage;
-        }
-    }
+	private void StartCombatState(EnemySpottedEvent e)
+	{
+		if (!isInCombat)
+		{
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
+			{
+				targetParent = e.parent;
+				TargetOpponent();
+				isInCombat = true;
+			}
+		}
+	}
 
-    public void RotateTowards(Transform target) {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-    }
+	public void DealDamage()
+	{
+		EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
+		if (target != null)
+		{
+			if (target.GetComponent<HunterStateMachine>() != null)
+			{
+				if (target.GetComponent<HunterStateMachine>().combatCommandState == HunterStateMachine.CombatCommandState.Defense)
+				{
+					target.GetComponent<Character>().target = gameObject;
+					target.GetComponent<HunterStateMachine>().attacked = true;
+				}
+			}
+		}
+	}
 
-    private void EnemyDeath(EnemyDeathEvent e) {
-        if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player) {
-            target = null;
-        }
-    }
+	private void TakeDamage(TakeDamageEvent e)
+	{
+		if (e.target == gameObject)
+		{
+			currentHealth -= e.damage;
+		}
+	}
+
+	public void RotateTowards(Transform target)
+	{
+		Vector3 direction = (target.position - transform.position).normalized;
+		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
+		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+	}
+
+	private void EnemyDeath(EnemyDeathEvent e)
+	{
+		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
+		{
+			target = null;
+		}
+	}
+
 }
 

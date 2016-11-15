@@ -138,7 +138,7 @@ public class DebugUI : MonoBehaviour
             if (follower1 || follower2 || follower3)
             {
                 // targeting
-                var targeting = Enum.GetValues(typeof(HunterStateMachine.TargetTrait));
+                var targeting = Enum.GetValues(typeof(CharacterValues.TargetTrait));
 
                 width = 300;
                 xPosRight = Screen.width - width - 10;
@@ -148,25 +148,25 @@ public class DebugUI : MonoBehaviour
                 {
                     var text = "";
                     if (follower1)
-                        text = followers[0].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
+                        text = followers[0].GetComponent<HunterStateMachine>().targetTrait == (CharacterValues.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
                     else if (follower2)
-                        text = followers[1].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
+                        text = followers[1].GetComponent<HunterStateMachine>().targetTrait == (CharacterValues.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
                     else
-                        text = followers[2].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
+                        text = followers[2].GetComponent<HunterStateMachine>().targetTrait == (CharacterValues.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
 
                     if (GUI.Button(new Rect(xPosRight, yPosLeft, width, height), text, customButton))
                     {
                         if (follower1)
                         {
-                            followers[0].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
+                            followers[0].GetComponent<HunterStateMachine>().targetTrait = (CharacterValues.TargetTrait)tar;
                         }
                         else if (follower2)
                         {
-                            followers[1].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
+                            followers[1].GetComponent<HunterStateMachine>().targetTrait = (CharacterValues.TargetTrait)tar;
                         }
                         else
                         {
-                            followers[2].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
+                            followers[2].GetComponent<HunterStateMachine>().targetTrait = (CharacterValues.TargetTrait)tar;
                         }
 
                         //Refresh(customLabel, customButton);
@@ -178,30 +178,30 @@ public class DebugUI : MonoBehaviour
                 // Combat
                 GUI.Label(new Rect(xPosRight - width + 20, yPosRight, width, height), "Combat trait", customLabel);
                 yPosRight += height + 10;
-                var combat = Enum.GetValues(typeof(HunterStateMachine.CombatTrait));
+                var combat = Enum.GetValues(typeof(CharacterValues.CombatTrait));
                 foreach (var com in combat)
                 {
                     var text = "";
                     if (follower1)
-                        text = followers[0].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
+                        text = followers[0].GetComponent<HunterStateMachine>().combatTrait == (CharacterValues.CombatTrait)com ? com.ToString() + " *" : com.ToString();
                     else if (follower2)
-                        text = followers[1].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
+                        text = followers[1].GetComponent<HunterStateMachine>().combatTrait == (CharacterValues.CombatTrait)com ? com.ToString() + " *" : com.ToString();
                     else
-                        text = followers[2].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
+                        text = followers[2].GetComponent<HunterStateMachine>().combatTrait == (CharacterValues.CombatTrait)com ? com.ToString() + " *" : com.ToString();
 
                     if (GUI.Button(new Rect(xPosRight - width - 10, yPosRight, width, height), text, customButton))
                     {
                         if (follower1)
                         {
-                            followers[0].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
+                            followers[0].GetComponent<HunterStateMachine>().combatTrait = (CharacterValues.CombatTrait)com;
                         }
                         else if (follower2)
                         {
-                            followers[1].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
+                            followers[1].GetComponent<HunterStateMachine>().combatTrait = (CharacterValues.CombatTrait)com;
                         }
                         else
                         {
-                            followers[2].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
+                            followers[2].GetComponent<HunterStateMachine>().combatTrait = (CharacterValues.CombatTrait)com;
                         }
 
                         //Refresh(customLabel, customButton);
@@ -318,9 +318,15 @@ public class DebugUI : MonoBehaviour
                     GameObject.Find("LevelGenerator").GetComponent<LevelManager>().LoseLevel();
                 }
 
-                yPosRight += height + 50;
                 if (GUI.Button(new Rect(Screen.width / 2 - width / 2, 10, width, height), "Trait \nmanagement", customButton))
                     traitManagement = true;
+
+                yPosRight += height + 10;
+                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Reset Game", customButton))
+                {
+                    PlayerPrefs.DeleteAll();
+                }
+
                 #endregion
 
                 #region Freeze

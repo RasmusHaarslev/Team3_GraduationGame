@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class LevelSelectionGenerator : MonoBehaviour {
 
@@ -50,52 +51,95 @@ public class LevelSelectionGenerator : MonoBehaviour {
     public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
     List<GameObject> nodes = new List<GameObject>();
 
+    void OnEnable()
+    {
+        EventManager.Instance.StartListening<SaveLevelsToXML>(SaveDict);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Instance.StopListening<SaveLevelsToXML>(SaveDict);
+    }
+
     void Awake()
     {
-      /*  if (PlayerPrefs.GetInt("LevelResult") != 0)
+        
+       
+        if (PlayerPrefs.GetInt("LevelResult") != 0)
         {
             GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
             nodeCleared.GetComponent<Node>().isCleared = true;
+            PlayerPrefs.SetInt("LevelResult", 0);
         }
-		 */
-        if (nodesInRows.Count == 0) { 
+		 
+        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
             InstantiateRows(amountOfRows);
+            PlayerPrefs.SetInt("LevelsInstantiated", 1);
             SetScrollPosition(0);
         } else {
             // Need to read from an external file for this to work.
+            totalAmountRows = 1;
             LoadRows();
+            SetScrollPosition(0);
         }
     }
 
     public void LoadRows() {
+        nodesInRows = SaveLoadLevels.LoadLevels();
+
         foreach (KeyValuePair<int, List<GameObject>> entry in nodesInRows)
         {
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
-            row.name = (entry.Key-1).ToString();
+            row.name = (entry.Key).ToString();
+
+            float startX = 0f;
+            float increaseX = 0f;
+
+            switch (entry.Value.Count)
+            {
+                case 1:
+                    startX = 0;
+                    increaseX = 0;
+                    break;
+                case 2:
+                    startX = -241.5f;
+                    increaseX = 483f;
+                    break;
+                case 3:
+                    startX = -483f;
+                    increaseX = 483f;
+                    break;
+                case 4:
+                    startX = -724f;
+                    increaseX = 482f;
+                    break;
+            }
 
             for (int j = 0; j < entry.Value.Count; j++)
             {
-                GameObject newNode = Instantiate(entry.Value[j]);
+                GameObject newNode = entry.Value[j];
                 ResetTransform(newNode, row);
 
-                //newNode.name = (totalAmountRows) + "." + j;
-                //newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
+                newNode.name = (totalAmountRows) + "." + j;
+                newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
-                newNode.GetComponent<Node>().OnCreate(nodeCounter);
+                startX += increaseX;
 
                 //rowNodes.Add(newNode);
                 //nodes.Add(newNode);
-                
+
             }
 
-            if (entry.Key > 1)
+            if (entry.Key > 0)
             {
                 GameObject imageRow = Instantiate(rowImagePrefab);
                 ResetTransform(imageRow, row);
                 imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
                 imageRow.GetComponent<AddImageRow>().InsertImage(entry.Value.Count, nodesInRows[entry.Key - 1].Count);
             }
+
+            totalAmountRows++;
         }
     }
 
@@ -187,6 +231,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
         // Need to be changed to the node we are currently on
         SetScrollPosition(0);
         //printDict();
+        SaveLoadLevels.SaveLevels(nodesInRows);
     }
 
     /// <summary>
@@ -302,9 +347,9 @@ public class LevelSelectionGenerator : MonoBehaviour {
     void SetupValuesInNode(GameObject node)
     {
         node.GetComponent<Node>().Level = totalAmountRows;
-        node.GetComponent<Node>().TravelCost = Random.Range(LowestTravelCost, HighestTravelCost); ;
-        node.GetComponent<Node>().sceneSelection = Random.Range(2, numberOfScenes + 2);
-        node.GetComponent<Node>().itemDropAmount = Random.Range(1, itemDropAmount);
+        node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost); ;
+        node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
+        node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, itemDropAmount);
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
         node.GetComponent<Node>().probabilityTribes = probabilityTribes;
         node.GetComponent<Node>().probabilityChoice = probabilityChoices;
@@ -322,13 +367,9 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
     #region Helper function
 
-    void printDict(int startFromRow)
+    void printDict(Dictionary<int, List<GameObject>> dict)
     {
-        for (int key = startFromRow; key < nodesInRows.Count; key++)
-        {
-
-        }
-        foreach (KeyValuePair<int, List<GameObject>> kvp in nodesInRows)
+        foreach (KeyValuePair<int, List<GameObject>> kvp in dict)
         {
             Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count));
         }
@@ -339,7 +380,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
     /// </summary>
     int randomController(int oldNumber)
     {
-        int a = Random.Range(1, 5);
+        int a = UnityEngine.Random.Range(1, 5);
 
         if (a == oldNumber)
         {
@@ -400,10 +441,17 @@ public class LevelSelectionGenerator : MonoBehaviour {
     }
     #endregion
 
+    private void SaveDict(SaveLevelsToXML e)
+    {
+        Debug.Log("HEY");
+        SaveLoadLevels.SaveLevels(nodesInRows);
+        
+    }
+
     public void ResetDatabase()
     {
         DataService dataService = new DataService(StringResources.databaseName);
 
-        dataService.CreateDB();
+        dataService.CreateDB(1);
     }
 }
