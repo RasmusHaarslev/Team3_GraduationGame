@@ -15,12 +15,12 @@ public class CommandsManager : MonoBehaviour
 
     void Start()
     {
-        commandsList.Add(new List<int> { 4, 1, 2 }); // DefendStateEvent
-        commandsList.Add(new List<int> { 4, 3, 6 }); // OffensiveStateEvent
-        commandsList.Add(new List<int> { 4, 3, 0 }); // FleeStateEvent
+        commandsList.Add(new List<int> { 4, 1 }); // DefendStateEvent
+        commandsList.Add(new List<int> { 4, 2 }); // OffensiveStateEvent
+        commandsList.Add(new List<int> { 4, 5 }); // FleeStateEvent
 
-		commandsList.Add(new List<int> { 4, 7, 6 }); // FollowStateEvent
-		commandsList.Add(new List<int> { 4, 5, 2 }); // StayStateEvent
+		commandsList.Add(new List<int> { 4, 3 }); // FollowStateEvent
+		commandsList.Add(new List<int> { 4, 7 }); // StayStateEvent
 
 	}
 

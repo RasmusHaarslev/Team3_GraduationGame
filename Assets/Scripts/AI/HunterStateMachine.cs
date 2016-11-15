@@ -17,8 +17,7 @@ public class HunterStateMachine : CoroutineMachine
 		Helpful,
 		GlorySeeker,
 		LowAttentionSpan,
-		Loyal,
-
+		Loyal
 	}
 	public enum CombatTrait
 	{
@@ -189,6 +188,7 @@ public class HunterStateMachine : CoroutineMachine
 					character.target = CodependantTarget();
 					if (!leader.GetComponent<MoveScript>().attacking)
 					{
+						character.isInCombat = false;
 						yield return new TransitionTo(FollowState, DefaultTransition);
 					}
 				}
@@ -331,6 +331,7 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FleeState()
 	{
 		character.target = null;
+		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 0;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);

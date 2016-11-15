@@ -17,4 +17,9 @@ public class AggroRange : MonoBehaviour {
 	{
 		EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject));
 	}
+
+	void OnTriggerExit(Collider col)
+	{
+		
+	}
 }

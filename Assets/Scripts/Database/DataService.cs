@@ -293,7 +293,7 @@ public class DataService : MonoBehaviour
          },
              new EquippableitemValues
          {
-             id = 2,
+             id = 3,
              name = "Laser Rifle 2000",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -321,14 +321,14 @@ public class DataService : MonoBehaviour
         if (spawners.Length == 4)
         {
             //istantiate player
-            GameObject daniel = GenerateCharacterByName("Daniel", spawners[0].transform.position);
+            GameObject daniel = GenerateCharacterByName("Daniel", spawners[0].transform.position, spawners[0].transform.rotation);
             daniel.transform.parent = fellowship.transform;
             //istantiate fellows and parent them to player
-            GameObject john = GenerateCharacterByName("John", spawners[1].transform.position);
+            GameObject john = GenerateCharacterByName("John", spawners[1].transform.position, spawners[1].transform.rotation);
             john.transform.parent = fellowship.transform;
-            GameObject nicolai = GenerateCharacterByName("Nicolai", spawners[2].transform.position);
+            GameObject nicolai = GenerateCharacterByName("Nicolai", spawners[2].transform.position, spawners[2].transform.rotation);
             nicolai.transform.parent = fellowship.transform;
-            GameObject peter = GenerateCharacterByName("Peter", spawners[3].transform.position);
+            GameObject peter = GenerateCharacterByName("Peter", spawners[3].transform.position, spawners[3].transform.rotation);
             peter.transform.parent = fellowship.transform;
         }
         else
@@ -471,7 +471,7 @@ public class DataService : MonoBehaviour
     /// Changes the stats and spawn the item on the right character slot
     /// </summary>
     /// <param name="item"></param>
-    void equipItemsToCharacter(IEnumerable<GameObject> equips, Character character)
+    public void equipItemsToCharacter(IEnumerable<GameObject> equips, Character character)
     {
         EquippableitemValues currentEquipValues;
         foreach (GameObject equip in equips)

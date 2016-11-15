@@ -5,31 +5,27 @@ using UnityEngine.EventSystems;
 
 public class PanelController : MonoBehaviour, IPointerClickHandler
 {
+    PanelScript panelScript;
 
-    public GameObject upgradePanel;
-    public GameObject soldierPanel;
-    //public List<GameObject> panelList= new List<GameObject>();
-    public GameObject backgroundPanel;
-    public bool panelIsActive = false;
-
+    void Start()
+    {
+        panelScript = GameObject.FindGameObjectWithTag("CampPanel").GetComponent<PanelScript>();
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
-
-        Debug.Log("hi");
-        if (gameObject.CompareTag("Tent") && upgradePanel.activeSelf == false)
+       
+        if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
         {
-            backgroundPanel.SetActive(true);
-            upgradePanel.SetActive(true);
-            panelIsActive = true;
-            print("activating panel1");
+            
+            panelScript.panelList[4].SetActive(true);
+            panelScript.panelList[0].SetActive(true);
         }
 
-        if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && soldierPanel.activeSelf == false)
+        if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
         {
-            backgroundPanel.SetActive(true);
-            soldierPanel.SetActive(true);
-            print("activating panel2");
-            panelIsActive = true;
+            panelScript.UpdateSoldierStats(gameObject);
+            panelScript.panelList[4].SetActive(true);
+            panelScript.panelList[1].SetActive(true);
         }
 
     }

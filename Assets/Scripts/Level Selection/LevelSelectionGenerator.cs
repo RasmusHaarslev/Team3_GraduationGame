@@ -52,12 +52,12 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
     void Awake()
     {
-        if (PlayerPrefs.GetInt("LevelResult") != 0)
+      /*  if (PlayerPrefs.GetInt("LevelResult") != 0)
         {
             GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
             nodeCleared.GetComponent<Node>().isCleared = true;
         }
-
+		 */
         if (nodesInRows.Count == 0) { 
             InstantiateRows(amountOfRows);
             SetScrollPosition(0);
@@ -399,4 +399,11 @@ public class LevelSelectionGenerator : MonoBehaviour {
         scrollingGrid.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gridYPosition);
     }
     #endregion
+
+    public void ResetDatabase()
+    {
+        DataService dataService = new DataService(StringResources.databaseName);
+
+        dataService.CreateDB();
+    }
 }

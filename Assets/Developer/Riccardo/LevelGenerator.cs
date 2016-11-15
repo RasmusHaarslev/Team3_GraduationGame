@@ -7,8 +7,8 @@ using System.Security.Cryptography.X509Certificates;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public int enemyStatsMultiplier = 3;
-    public int enemyStatsAdditive = 10;
+    public int enemyStatsMultiplier = 1;
+    public int enemyStatsAdditive = 1;
     public int difficultyLevel = 5;
 
 	private DataService dataService;
@@ -16,6 +16,7 @@ public class LevelGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+	    difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel, difficultyLevel);
         
         dataService = new DataService(StringResources.databaseName);
 

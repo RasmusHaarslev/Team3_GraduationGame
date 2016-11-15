@@ -10,8 +10,6 @@ using System.Net.Security;
 
 public class DebugUI : MonoBehaviour
 {
-    private bool showDebug = false;
-    private bool traitManagement = false;
 	private bool expandLog = false;
 	private bool frozen = false;
 
@@ -40,48 +38,20 @@ public class DebugUI : MonoBehaviour
 
 	void Start()
 	{
-        DontDestroyOnLoad(this.gameObject);
 	}
 
 	void OnEnable()
 	{
-        EventManager.Instance.StartListening<LevelWon>(Won);
-        EventManager.Instance.StartListening<LevelLost>(Lost);
 
-        Application.logMessageReceived += HandleLog;
+		Application.logMessageReceived += HandleLog;
 	}
 
-    void OnDisable()
-    {
-        EventManager.Instance.StopListening<LevelWon>(Won);
-        EventManager.Instance.StopListening<LevelLost>(Lost);
 
-        Application.logMessageReceived -= HandleLog;
-    }
 
-    private void Lost(LevelLost e)
-    {
-        showDebug = false;
-        traitManagement = false;
-        expandLog = false;
-        frozen = false;
 
-        follower1 = false;
-        follower2 = false;
-        follower3 = false;
-    }
+	}
 
-    private void Won(LevelWon e)
-    {
-        showDebug = false;
-        traitManagement = false;
-        expandLog = false;
-        frozen = false;
 
-        follower1 = false;
-        follower2 = false;
-        follower3 = false;
-    }
 
 
 
@@ -96,9 +66,13 @@ public class DebugUI : MonoBehaviour
 
 	void Update()
 	{
-		if (followers.Count < 3)
+		if (SceneManager.GetActiveScene().name == "LevelPrototype01")
 		{
-			followers.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+			if (followers.Count < 3 || followers[0] == null || followers[1] == null || followers[2] == null)
+			{
+				followers.Clear();
+				followers.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+			}
 		}
 	}
 
@@ -117,137 +91,30 @@ public class DebugUI : MonoBehaviour
 		customDebug.fontSize = 30;
 		customDebug.normal.textColor = Color.white;
 
-        GUIStyle followerButton = new GUIStyle("button");
-        followerButton.fontSize = 30;
-        followerButton.normal.textColor = Color.white;
-        
 
-        float width = 250;
+
 		float height = 100;
 		float xPosLeft = 10;
 		float xPosRight = Screen.width - width - 10;
 		float yPosLeft = 10;
 		float yPosRight = 10;
 
-        if(traitManagement)
-        {
-            if (follower1 || follower2 || follower3)
-            {
-                // targeting
-                var targeting = Enum.GetValues(typeof(HunterStateMachine.TargetTrait));
 
-                width = 300;
-                xPosRight = Screen.width - width - 10;
-                GUI.Label(new Rect(xPosRight + 20, yPosLeft, width, height), "Targeting trait", customLabel);
-                yPosLeft += height + 10;
-                foreach (var tar in targeting)
-                {
-                    var text = "";
-                    if (follower1)
-                        text = followers[0].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
-                    else if (follower2)
-                        text = followers[1].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
-                    else
-                        text = followers[2].GetComponent<HunterStateMachine>().targetTrait == (HunterStateMachine.TargetTrait)tar ? tar.ToString() + " *" : tar.ToString();
 
-                    if (GUI.Button(new Rect(xPosRight, yPosLeft, width, height), text, customButton))
-                    {
-                        if (follower1)
-                        {
-                            followers[0].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
-                        }
-                        else if (follower2)
-                        {
-                            followers[1].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
-                        }
-                        else
-                        {
-                            followers[2].GetComponent<HunterStateMachine>().targetTrait = (HunterStateMachine.TargetTrait)tar;
-                        }
 
-                        //Refresh(customLabel, customButton);
-                    }
+					}
 
-                    yPosLeft += height + 10;
-                }
 
-                // Combat
-                GUI.Label(new Rect(xPosRight - width + 20, yPosRight, width, height), "Combat trait", customLabel);
-                yPosRight += height + 10;
-                var combat = Enum.GetValues(typeof(HunterStateMachine.CombatTrait));
-                foreach (var com in combat)
-                {
-                    var text = "";
-                    if (follower1)
-                        text = followers[0].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
-                    else if (follower2)
-                        text = followers[1].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
-                    else
-                        text = followers[2].GetComponent<HunterStateMachine>().combatTrait == (HunterStateMachine.CombatTrait)com ? com.ToString() + " *" : com.ToString();
 
-                    if (GUI.Button(new Rect(xPosRight - width - 10, yPosRight, width, height), text, customButton))
-                    {
-                        if (follower1)
-                        {
-                            followers[0].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
-                        }
-                        else if (follower2)
-                        {
-                            followers[1].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
-                        }
-                        else
-                        {
-                            followers[2].GetComponent<HunterStateMachine>().combatTrait = (HunterStateMachine.CombatTrait)com;
-                        }
 
-                        //Refresh(customLabel, customButton);
-                    }
+					}
 
-                    yPosRight += height + 10;
-                }
 
-                width = 250;
-            }
 
-            followerButton.normal.textColor = Color.white;
-            yPosLeft = 10;
-            if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Close", followerButton))
-            {
-                traitManagement = false;
-                follower1 = false;
-                follower2 = false;
-                follower3 = false;
-            }
 
-            followerButton.normal.textColor = Color.blue;
-            yPosLeft += height + 10;
-            if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), follower1 ? "Follower1 *" : "Follower1", followerButton))
-            {
-                follower1 = true;
-                follower2 = false;
-                follower3 = false;
-            }
 
-            followerButton.normal.textColor = Color.yellow;
-            yPosLeft += height + 10;
-            if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), follower2 ? "Follower2 *" : "Follower2", followerButton))
-            {
-                follower1 = false;
-                follower2 = true;
-                follower3 = false;
-            }
 
-            followerButton.normal.textColor = Color.red;
-            yPosLeft += height + 10;
-            if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), follower3 ? "Follower3 *" : "Follower3", followerButton))
-            {
-                follower1 = false;
-                follower2 = false;
-                follower3 = true;
-            }
 
-        }
-        else if (showDebug)
 		{
 			if (expandLog)
 			{
@@ -255,12 +122,9 @@ public class DebugUI : MonoBehaviour
 				if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Close log", customButton))
 					expandLog = false;
 
-                xPosLeft += width + 10;
 				if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Clear log", customButton))
 					output = "";
 
-                xPosLeft += width + 10;
-                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Send log", customButton))
 					SendMail();
 
 				GUI.Label(new Rect(10, 120, 2028, 1406), "Debug:", customLabel);
@@ -273,30 +137,40 @@ public class DebugUI : MonoBehaviour
 				if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Close", customButton))
 					showDebug = false;
 
-                #region Right side
-                yPosRight = 10;
 				if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Gameplay", customButton))
+				{
+					followers.Clear();
 					SceneManager.LoadScene("LevelPrototype");
+				}
 
 				yPosRight += height + 10;
 				if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "To camp", customButton))
+				{
+					followers.Clear();
 					SceneManager.LoadScene("CampManagement");
+				}
 
 				yPosRight += height + 10;
 				if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Level \nselection", customButton))
+				{
+					followers.Clear();
 					SceneManager.LoadScene("LevelSelection");
+				}
 
-                yPosRight += height + 10;
-                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Demo Level", customButton))
-                    SceneManager.LoadScene("DemoLevel");
 
-                yPosRight += height + 10;
-                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Win level", customButton))
-                    GameObject.Find("LevelGenerator").GetComponent<LevelManager>().WinLevel();
+				yPosRight += height + 10;
+				if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Demo Level", customButton))
+				{
+					followers.Clear();
+					SceneManager.LoadScene("DemoLevel");
+				}
 
-                yPosRight += height + 10;
-                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Lose level", customButton))
-                    GameObject.Find("LevelGenerator").GetComponent<LevelManager>().LoseLevel();
+				yPosRight += height + 10;
+				if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Win level", customButton))
+				{
+					GameObject.Find("LevelGenerator").GetComponent<LevelManager>().WinLevel();
+				}
+
 
                 yPosRight += height + 10;
                 if (SceneManager.GetActiveScene().name == "LevelSelection") { 
@@ -304,12 +178,12 @@ public class DebugUI : MonoBehaviour
                         SaveLoadLevels.SaveLevels(GameObject.Find("LevelGenerator").GetComponent<LevelSelectionGenerator>().nodesInRows);
                 }
 
-                if (GUI.Button(new Rect(Screen.width/2 - width/2, 10, width, height), "Trait \nmanagement", customButton))
-                    traitManagement = true;
-                #endregion
 
-                #region Freeze
-                yPosLeft += height + 10;
+				yPosRight += height + 50;
+				if (GUI.Button(new Rect(Screen.width / 2 - width / 2, 10, width, height), "Trait \nmanagement", customButton))
+					traitManagement = true;
+				#endregion
+
 				if (frozen)
 				{
 					if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Unfreeze", customButton))
