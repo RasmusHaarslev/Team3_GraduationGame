@@ -123,8 +123,8 @@ public class LevelManager : MonoBehaviour {
     {
         EventManager.Instance.TriggerEvent(new LevelLost());
         PlayerPrefs.SetInt("LevelResult", 0);
-        
-        SceneManager.LoadScene("CampManagement");
+
+        GameController.Instance.LoadScene("CampManagement");
     }
 
     public void WinLevel()
@@ -132,7 +132,7 @@ public class LevelManager : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new LevelWon());
         PlayerPrefs.SetInt("LevelResult", 1);
         //replaceCharactersWeapons();
-        SceneManager.LoadScene("CampManagement");
+        GameController.Instance.LoadScene("CampManagement");
     }
 
 
