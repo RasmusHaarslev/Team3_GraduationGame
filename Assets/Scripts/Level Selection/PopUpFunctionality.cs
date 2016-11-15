@@ -104,6 +104,7 @@ public class PopUpFunctionality : MonoBehaviour {
     {
         Debug.Log(node.GetComponent<Node>().TravelCost);
         EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
         /*           
         public int Level;
@@ -143,6 +144,7 @@ public class PopUpFunctionality : MonoBehaviour {
         wolveText.text = "Wolve dens : " + node.GetComponent<Node>().wolveCamps;
         tribeText.text = "Tribe camps : " + node.GetComponent<Node>().tribeCamps;
         choiceText.text = "Choice camps : " + node.GetComponent<Node>().choiceCamps;
+
         // Right Panel
         RightPanel.SetActive(true);
         foodText.text = "Food : " + node.GetComponent<Node>().foodAmount;
@@ -165,6 +167,8 @@ public class PopUpFunctionality : MonoBehaviour {
                 child.gameObject.SetActive(false);
             }
         }
+
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
         Debug.Log(node.name);
     }
