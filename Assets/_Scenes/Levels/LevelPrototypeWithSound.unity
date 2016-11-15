@@ -1208,6 +1208,7 @@ GameObject:
   - 124: {fileID: 362531837}
   - 114: {fileID: 362531836}
   - 114: {fileID: 362531841}
+  - 114: {fileID: 362531835}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1215,6 +1216,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &362531835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 362531834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenerId: 0
 --- !u!114 &362531836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4858,9 +4871,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 131072
-  lowerPoolSize: 65536
-  streamingPoolSize: 32768
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -6005,15 +6018,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010657424236, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -48.7
+      value: -48.92
       objectReference: {fileID: 0}
     - target: {fileID: 4000010657424236, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 31.106594
+      value: 28.47
       objectReference: {fileID: 0}
     - target: {fileID: 4000010657424236, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -74.99
+      value: -75.49
       objectReference: {fileID: 0}
     - target: {fileID: 4000010657424236, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
       propertyPath: m_LocalRotation.x
