@@ -5487,6 +5487,7 @@ GameObject:
   - 4: {fileID: 1865423172}
   - 114: {fileID: 1865423171}
   - 114: {fileID: 1865423170}
+  - 114: {fileID: 1865423173}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -5507,9 +5508,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 4096
-  lowerPoolSize: 2048
-  streamingPoolSize: 1024
+  defaultPoolSize: 131072
+  lowerPoolSize: 65536
+  streamingPoolSize: 32768
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -5537,6 +5538,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1865423173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865423169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ed4571e42cbfe4c9e18af82820d36d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  valueGuid: c982fbd8e52a1a43b6e51c9cec125ac8
+  bankName: ExploreTestSB
+  loadAsynchronous: 0
+  decodeBank: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
 --- !u!1 &1895990022
 GameObject:
   m_ObjectHideFlags: 0
