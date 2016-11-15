@@ -153,31 +153,31 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (character.isInCombat)
 			{
-			    switch (targetTrait)
-			    {
-			        case CharacterValues.TargetTrait.Bully:
-			            character.target = BullyTarget();
-			            break;
-			        case CharacterValues.TargetTrait.GlorySeeker:
-			            character.target = GlorySeekerTarget();
-			            break;
-			        case CharacterValues.TargetTrait.Codependant:
-			            character.target = CodependantTarget();
-			            if (!leader.GetComponent<MoveScript>().attacking)
-			            {
-			                character.isInCombat = false;
-			                yield return new TransitionTo(FollowState, DefaultTransition);
-			            }
-			            break;
-			        case CharacterValues.TargetTrait.Loyal:
-			            GameObject loyalTarget = LoyalTarget();
-			            if (loyalTarget != null)
-			            {
-			                character.target = loyalTarget;
-			            }
-			            break;
-			    }
-			    if (combatCommandState == CombatCommandState.Flee && combatTrait != CharacterValues.CombatTrait.BraveFool || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
+				switch (targetTrait)
+				{
+					case CharacterValues.TargetTrait.Bully:
+						character.target = BullyTarget();
+						break;
+					case CharacterValues.TargetTrait.GlorySeeker:
+						character.target = GlorySeekerTarget();
+						break;
+					case CharacterValues.TargetTrait.Codependant:
+						character.target = CodependantTarget();
+						if (!leader.GetComponent<MoveScript>().attacking)
+						{
+							character.isInCombat = false;
+							yield return new TransitionTo(FollowState, DefaultTransition);
+						}
+						break;
+					case CharacterValues.TargetTrait.Loyal:
+						GameObject loyalTarget = LoyalTarget();
+						if (loyalTarget != null)
+						{
+							character.target = loyalTarget;
+						}
+						break;
+				}
+				if (combatCommandState == CombatCommandState.Flee && combatTrait != CharacterValues.CombatTrait.BraveFool || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
 				{
 					yield return new TransitionTo(FleeState, DefaultTransition);
 				}

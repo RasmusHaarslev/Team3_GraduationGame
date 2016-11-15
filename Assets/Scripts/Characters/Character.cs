@@ -20,7 +20,7 @@ public class Character : MonoBehaviour {
 	GameObject targetParent;
 	GameObject parent;
 	public List<GameObject> currentOpponents = new List<GameObject>();
-
+	public bool isCurrentTargetAlive;
 	public float rotationSpeed = 2;
 
 	//Combat state values
@@ -50,7 +50,7 @@ public class Character : MonoBehaviour {
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 			}
 			isDead = true;
-			GetComponent<MeshRenderer>().enabled = false;
+			//GetComponent<MeshRenderer>().enabled = false;
 		}
 	}
 
@@ -234,6 +234,7 @@ public class Character : MonoBehaviour {
 	private void EnemyDeath(EnemyDeathEvent e) {
 		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player) {
 			target = null;
+			currentOpponents.Remove(target);
 		}
 	}
 }
