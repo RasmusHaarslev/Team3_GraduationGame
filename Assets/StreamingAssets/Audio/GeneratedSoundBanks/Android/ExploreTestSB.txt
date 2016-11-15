@@ -19,8 +19,23 @@ Event	ID	Name			Wwise Object Path	Notes
 	3050945240	New_Event			\Default Work Unit\WindsTest\New_Event	
 	3104904358	Play_windhowl			\Default Work Unit\Ambience\Play_windhowl	
 	3426751519	Play_BaseWind			\Default Work Unit\Ambience\Play_BaseWind	
+	3611237377	BridgeState			\Default Work Unit\BridgeState	
 	3882512547	Play_WindBase			\Default Work Unit\Ambience\Play_WindBase	
 	3994697449	Play_MenuMusic0_4			\Default Work Unit\Ambience\Play_MenuMusic0_4	
+	4102693405	ExploreState			\Default Work Unit\ExploreState	
+
+State Group	ID	Name			Wwise Object Path	Notes
+	579523862	Explore			\Default Work Unit\Explore	
+
+State	ID	Name	State Group			Notes
+	304873613	EnemyNear	Explore			
+	748895195	None	Explore			
+	1823678183	Exploring	Explore			
+	2068062714	Bridge	Explore			
+	3373579172	InCombat	Explore			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	621278359	Bridge	Explore	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind_01		
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	94928507	WindBase	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindBase_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind\WindBase		574886
