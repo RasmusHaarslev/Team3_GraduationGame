@@ -472,7 +472,6 @@ public class DataService : MonoBehaviour
         GameObject currentEquip = new GameObject();
         foreach (EquippableitemValues values in equipValues)
         {
-            print("Going to istantiate from Resources" + StringResources.equippableItemsPrefabsPath + values.prefabName);
             currentEquip = Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + values.prefabName)) as GameObject;
 
             currentEquip.GetComponent<EquippableItem>().init(values);

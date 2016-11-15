@@ -318,9 +318,15 @@ public class DebugUI : MonoBehaviour
                     GameObject.Find("LevelGenerator").GetComponent<LevelManager>().LoseLevel();
                 }
 
-                yPosRight += height + 50;
                 if (GUI.Button(new Rect(Screen.width / 2 - width / 2, 10, width, height), "Trait \nmanagement", customButton))
                     traitManagement = true;
+
+                yPosRight += height + 10;
+                if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Reset Game", customButton))
+                {
+                    PlayerPrefs.DeleteAll();
+                }
+
                 #endregion
 
                 #region Freeze
