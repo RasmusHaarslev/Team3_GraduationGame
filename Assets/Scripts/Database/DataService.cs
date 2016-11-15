@@ -66,18 +66,26 @@ public class DataService : MonoBehaviour
         var dbPath = filepath;
 #endif
         _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
-        Debug.Log("Final PATH: " + dbPath);
+        //Debug.Log("Final PATH: " + dbPath);
 
     }
 
-    public void CreateDB()
-    {
+    public void CreateDB(int command = 0)
+    {/**/
+        if (command == 0)
+            if (_connection.GetTableInfo("CharacterValues").Any())
+            {
+                //Databese already present, continuing with the old one. print("Databese already present, continuing with the old one.");
+                return;
+            }
+        //Otherwise create database... print("Creating database...");
 
         _connection.DropTable<CharacterValues>();
         _connection.DropTable<EquippableitemValues>();
 
-        if(_connection.CreateTable<CharacterValues>() == 0)
-            print("table already existing!!");
+        _connection.CreateTable<CharacterValues>()
+        ;
+
         _connection.CreateTable<EquippableitemValues>();
 
         _connection.InsertAll(new[]
@@ -102,6 +110,8 @@ public class DataService : MonoBehaviour
                 health = 50,
                 damageSpeed = 4,
                 range = 2,
+                combatTrait = CharacterValues.CombatTrait.BraveFool,
+                targetTrait = CharacterValues.TargetTrait.Bully,
                 prefabName = "Follower1"
             },
          new CharacterValues
@@ -113,6 +123,8 @@ public class DataService : MonoBehaviour
                 health = 50,
                 damageSpeed = 4,
                 range = 7,
+                combatTrait = CharacterValues.CombatTrait.Desperate,
+                targetTrait = CharacterValues.TargetTrait.GlorySeeker,
                 prefabName = "Follower2"
             },
          new CharacterValues
@@ -124,6 +136,8 @@ public class DataService : MonoBehaviour
                 health = 50,
                 damageSpeed = 4,
                 range = 2,
+                combatTrait = CharacterValues.CombatTrait.VeryUnlikable,
+                targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
                 prefabName = "Follower3"
             },
          new CharacterValues
@@ -135,6 +149,8 @@ public class DataService : MonoBehaviour
                 health = 50,
                 damageSpeed = 9,
                 range = 3,
+                combatTrait = CharacterValues.CombatTrait.Vengeful,
+                targetTrait = CharacterValues.TargetTrait.Codependant,
                 prefabName = "Follower4"
             },
           new CharacterValues
@@ -237,7 +253,7 @@ public class DataService : MonoBehaviour
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival"
-		  },
+          },
           new CharacterValues
           {
               name = "Mature tribesman",
@@ -248,7 +264,7 @@ public class DataService : MonoBehaviour
               damageSpeed = 3,
               range = 2,
               prefabName = "Rival"
-		  },
+          },
           new CharacterValues
           {
               name = "Leader tribesman",
@@ -259,7 +275,7 @@ public class DataService : MonoBehaviour
               damageSpeed = 3,
               range = 2,
               prefabName = "Rival"
-		  }
+          }
 
         });
 
@@ -525,7 +541,7 @@ public class DataService : MonoBehaviour
     {
         values.id = _connection.Insert(values);
 
-        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() {values}).FirstOrDefault();
+        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();
 
 
     }

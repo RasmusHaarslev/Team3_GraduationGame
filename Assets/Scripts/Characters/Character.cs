@@ -166,7 +166,7 @@ public class Character : MonoBehaviour
 			foreach (GameObject opp in currentOpponents)
 			{
 				var hunter = opp.GetComponent<HunterStateMachine>();
-				if (hunter != null && hunter.combatTrait == HunterStateMachine.CombatTrait.VeryUnlikable)
+				if (hunter != null && hunter.combatTrait == CharacterValues.CombatTrait.VeryUnlikable)
 				{
 					target = opp;
 					break;

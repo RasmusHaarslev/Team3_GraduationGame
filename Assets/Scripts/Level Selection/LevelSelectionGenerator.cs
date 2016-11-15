@@ -404,6 +404,6 @@ public class LevelSelectionGenerator : MonoBehaviour {
     {
         DataService dataService = new DataService(StringResources.databaseName);
 
-        dataService.CreateDB();
+        dataService.CreateDB(1);
     }
 }
