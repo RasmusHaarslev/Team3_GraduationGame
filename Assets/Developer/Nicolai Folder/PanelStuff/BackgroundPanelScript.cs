@@ -24,6 +24,7 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
 
                 }
             }
+            
             gameObject.SetActive(false);
         }
        

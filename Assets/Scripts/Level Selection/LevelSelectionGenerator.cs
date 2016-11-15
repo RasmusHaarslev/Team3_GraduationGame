@@ -47,7 +47,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
     int numOfParents = 0;    
     #endregion
 
-    Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
+    public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
     List<GameObject> nodes = new List<GameObject>();
 
     void Awake()
