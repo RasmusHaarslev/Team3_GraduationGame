@@ -71,26 +71,42 @@ public class Node : MonoBehaviour {
     public void OnCreate(int id)
     {
         // If root set playable to true
-        //if (id == 1)
-        //{
+        if (id == 1)
+        {
             canPlay = true;
-        //}
+        }
         NodeId = id;
         GetComponent<Button>().onClick.AddListener(OpenPopUp);
-        SetupCampsForThisNode();
-        SetupResourceForThisNode();
+        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
+            SetupCampsForThisNode();
+            SetupResourceForThisNode();
+        }
         SetupImage();
         SetupUIText();
     }
 
     public void SetupUIText()
     {
-        Debug.Log(isScouted);
         if (isScouted)
         {
+            unknownPanel.SetActive(false);
             infoPanel.SetActive(true);
+
+            foreach (RectTransform child in transform)
+            {
+                if (child.name == "InfoPanel")
+                {
+                    child.gameObject.SetActive(true);
+                    GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
+                    GetComponent<Node>().txtCoins.text = GetComponent<Node>().coinAmount.ToString();
+                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
+                    GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
+                }
+            }
+
         } else
         {
+            infoPanel.SetActive(false);
             unknownPanel.SetActive(true);
             txtIntPoints.text = CampsInNode.ToString();
         }

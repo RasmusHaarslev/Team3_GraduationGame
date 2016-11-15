@@ -1,6 +1,11 @@
 ﻿
 using UnityEngine;
 
+public class SaveLevelsToXML : GameEvent
+{
+    public SaveLevelsToXML () { }
+}
+
 public class ChangeResources : GameEvent
 {
     public int food;
