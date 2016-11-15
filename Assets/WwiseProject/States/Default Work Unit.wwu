@@ -19,7 +19,22 @@
 						<State Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
 						<State Name="EnemyNear" ID="{8A8D9332-02BE-4FBD-99BF-E118BF6BEBDB}"/>
 						<State Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
+						<State Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
 					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+							<EndState Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
+							<Time>1</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+						<Transition>
+							<StartState Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
+							<EndState Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+							<Time>2</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+					</TransitionList>
 				</StateGroup>
 			</ChildrenList>
 		</WorkUnit>

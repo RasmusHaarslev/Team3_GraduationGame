@@ -486,7 +486,7 @@
 								<Property Name="Spatialization" Type="bool" Value="False"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>2</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -711,6 +711,16 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="windFlags" ID="{CB31FDE0-CA66-483C-96BF-FA462BE92E70}" ShortID="145176499">
 							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>20</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>22</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
@@ -767,11 +777,6 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="windhowl" ID="{436AA435-E321-4EFD-9DDF-74B3FABB707B}" ShortID="521212223">
 							<PropertyList>
-								<Property Name="OutputBusVolume" Type="Real64">
-									<ValueList>
-										<Value>4</Value>
-									</ValueList>
-								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
@@ -780,7 +785,7 @@
 								<Property Name="Spatialization" Type="bool" Value="False"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>6</Value>
+										<Value>5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1109,11 +1114,6 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="BaseWind_01" ID="{BB6737AD-FD49-4FB8-8CC6-DDAC2C6BB95F}" ShortID="1044708694">
 							<PropertyList>
-								<Property Name="OutputBusVolume" Type="Real64">
-									<ValueList>
-										<Value>5</Value>
-									</ValueList>
-								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
@@ -1121,7 +1121,7 @@
 								<Property Name="Spatialization" Type="bool" Value="False"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-1</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1226,6 +1226,24 @@
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
+										<State Name="Custom State" ID="{EE911A05-D162-494C-9232-745C7F84ADBC}" ShortID="621278359">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32" Value="-380"/>
+												<Property Name="Volume" Type="Real64" Value="-4"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
 							<Playlist>
 								<ItemRef Name="windStrings" ID="{C653996E-6165-4FF8-B927-FEC4E76F19CE}"/>
 							</Playlist>
@@ -1259,7 +1277,7 @@
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-1</Value>
+										<Value>-6</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>

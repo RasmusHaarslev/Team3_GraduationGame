@@ -102,6 +102,12 @@
 						</Event>
 						<Event Name="Play_BaseWind_01" ID="{6F5D0234-A1B2-453E-8214-49DE3F7EA9C9}">
 							<ChildrenList>
+								<Action Name="Set State" ID="{705060AB-A4E0-4498-9328-11BA7020DB8C}" ShortID="481240669" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+										<GroupItem Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+									</SetItemParam>
+								</Action>
 								<Action Name="Play" ID="{F6F57EC1-3699-4EB0-8727-ED23C505BBE8}" ShortID="54632359" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{D8C35B40-43CE-481D-A865-34E949A8969C}" Global="false">
@@ -309,6 +315,26 @@
 									<ObjectRef Name="loop4" ID="{204F6AC3-2688-4DF2-9021-0E77E94EEB52}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 								</Element>
 							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="BridgeState" ID="{288732BD-63F4-445D-A8A1-A85FA708B6B6}">
+					<ChildrenList>
+						<Action Name="Set State" ID="{94D5484B-6918-4133-96C0-28F3BE309861}" ShortID="144701343" Type="SetState" Scope="All" Global="true">
+							<SetItemParam>
+								<Group Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+								<GroupItem Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
+							</SetItemParam>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ExploreState" ID="{06466D5A-778B-45B2-AF3C-A7F517690006}">
+					<ChildrenList>
+						<Action Name="Set State" ID="{90440268-5EDD-43D6-88AF-28903C36D3C4}" ShortID="819780375" Type="SetState" Scope="All" Global="true">
+							<SetItemParam>
+								<Group Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+								<GroupItem Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+							</SetItemParam>
 						</Action>
 					</ChildrenList>
 				</Event>
