@@ -11,21 +11,17 @@ public class HunterStateMachine : CoroutineMachine
 		NoTrait,
 		Foolhardy,
 		StubbornDefender,
-		PacifistSoul,
 		Bully,
 		Codependant,
-		Helpful,
 		GlorySeeker,
 		LowAttentionSpan,
-		Loyal,
-
+		Loyal
 	}
 	public enum CombatTrait
 	{
 		NoTrait,
 		BraveFool,
 		Fearful,
-		Excitable,
 		Clingy,
 		Desperate,
 		Vengeful,
@@ -176,31 +172,31 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (character.isInCombat)
 			{
-				if (targetTrait == TargetTrait.Bully)
-				{
-					character.target = BullyTarget();
-				}
-				else if (targetTrait == TargetTrait.GlorySeeker)
-				{
-					character.target = GlorySeekerTarget();
-				}
-				else if (targetTrait == TargetTrait.Codependant)
-				{
-					character.target = CodependantTarget();
-					if (!leader.GetComponent<MoveScript>().attacking)
-					{
-						yield return new TransitionTo(FollowState, DefaultTransition);
-					}
-				}
-				else if (targetTrait == TargetTrait.Loyal)
-				{
-					GameObject loyalTarget = LoyalTarget();
-					if (loyalTarget != null)
-					{
-						character.target = loyalTarget;
-					}
-				}
-				if (combatCommandState == CombatCommandState.Flee && combatTrait != CombatTrait.BraveFool || (combatTrait == CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
+			    switch (targetTrait)
+			    {
+			        case TargetTrait.Bully:
+			            character.target = BullyTarget();
+			            break;
+			        case TargetTrait.GlorySeeker:
+			            character.target = GlorySeekerTarget();
+			            break;
+			        case TargetTrait.Codependant:
+			            character.target = CodependantTarget();
+			            if (!leader.GetComponent<MoveScript>().attacking)
+			            {
+			                character.isInCombat = false;
+			                yield return new TransitionTo(FollowState, DefaultTransition);
+			            }
+			            break;
+			        case TargetTrait.Loyal:
+			            GameObject loyalTarget = LoyalTarget();
+			            if (loyalTarget != null)
+			            {
+			                character.target = loyalTarget;
+			            }
+			            break;
+			    }
+			    if (combatCommandState == CombatCommandState.Flee && combatTrait != CombatTrait.BraveFool || (combatTrait == CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
 				{
 					yield return new TransitionTo(FleeState, DefaultTransition);
 				}
@@ -331,6 +327,7 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FleeState()
 	{
 		character.target = null;
+		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 0;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);

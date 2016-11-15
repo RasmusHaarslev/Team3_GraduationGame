@@ -49,6 +49,18 @@ public class Node : MonoBehaviour {
     public bool canPlay = false;
     #endregion
 
+    #region UI VARIABLES
+
+    public GameObject infoPanel;
+    public GameObject unknownPanel;
+    public Text txtFood;
+    public Text txtCoins;
+    public Text txtTribes;
+    public Text txtWolves;
+    public Text txtIntPoints;
+
+    #endregion
+
     public List<Sprite> activationImages = new List<Sprite>();
 
     /* ROADS FROM THIS NODE */
@@ -59,15 +71,29 @@ public class Node : MonoBehaviour {
     public void OnCreate(int id)
     {
         // If root set playable to true
-        if (id == 1)
-        {
+        //if (id == 1)
+        //{
             canPlay = true;
-        }
+        //}
         NodeId = id;
-        GetComponent<Button>().onClick.AddListener(BeginLevel);
+        GetComponent<Button>().onClick.AddListener(OpenPopUp);
         SetupCampsForThisNode();
         SetupResourceForThisNode();
         SetupImage();
+        SetupUIText();
+    }
+
+    public void SetupUIText()
+    {
+        Debug.Log(isScouted);
+        if (isScouted)
+        {
+            infoPanel.SetActive(true);
+        } else
+        {
+            unknownPanel.SetActive(true);
+            txtIntPoints.text = CampsInNode.ToString();
+        }
     }
 
     /// <summary>
@@ -125,51 +151,18 @@ public class Node : MonoBehaviour {
             Hierarchy = isParent
         });
 
-       if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
+        if (!child.GetComponent<Node>().Links.Exists(a => a.From == child && a.To == gameObject)) {
             child.GetComponent<Node>().AddLink(gameObject, true);
         }
 
         return gameObject;
     }
 
-    void BeginLevel()
+    void OpenPopUp()
     {
-        /*           
-               public int Level;
-               public int wolveCamps;
-               public int tribeCamps;
-               public int choiceCamps;
-               public int foodAmount;
-               public int coinAmount;
-               public int itemDropAmount;
-         */
-
         SetupImage();
-
-        Debug.Log(canPlay);
-        Debug.Log(isCleared);
-
-        if (canPlay && !isCleared)
-        {
-            if (isScouted) { 
-                Debug.Log("Show Panel - Can Play - Is Scouted");
-            } else {
-                Debug.Log("Show Panel - Can Play - Not Scouted");
-            }
-        } else if (!canPlay)
-        {
-            if (isScouted)
-            {
-                Debug.Log("Show Panel - Cannot Play - Is Scouted");
-            }
-            else
-            {
-                Debug.Log("Show Panel - Cannot Play - Not Scouted");
-            }
-        } else
-        {
-            Debug.Log("Show Panel - You have cleared this level");
-        }
+        
+        EventManager.Instance.TriggerEvent(new SetupPopUp(gameObject));
 
         foreach (var link in Links)
         {
@@ -183,23 +176,6 @@ public class Node : MonoBehaviour {
                 Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
             }
         }
-            
-        /*PlayerPrefs.SetInt("LevelDifficulty", Level);
-        PlayerPrefs.SetInt("WolveCamps", wolveCamps);
-        PlayerPrefs.SetInt("TribeCamps", tribeCamps);
-        PlayerPrefs.SetInt("ChoiceCamps", choiceCamps);
-        PlayerPrefs.SetInt("FoodAmount", foodAmount);
-        PlayerPrefs.SetInt("CoinAmount", coinAmount);
-        PlayerPrefs.SetInt("ItemDropAmount", itemDropAmount);
-
-        if (SceneTransistion.instance != null)
-        {
-            SceneTransistion.instance.LoadScene(2);
-        }
-        else {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
-        }
-        */
     }
 
     #region Get Functions for this node

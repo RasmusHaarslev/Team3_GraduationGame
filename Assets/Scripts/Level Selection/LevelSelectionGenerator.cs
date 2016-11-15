@@ -44,18 +44,60 @@ public class LevelSelectionGenerator : MonoBehaviour {
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
-    int numOfParents = 0;
+    int numOfParents = 0;    
     #endregion
 
-    Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
+    public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
+    List<GameObject> nodes = new List<GameObject>();
 
     void Awake()
     {
-        InstantiateRows(amountOfRows);
-        SetScrollPosition(0);
+      /*  if (PlayerPrefs.GetInt("LevelResult") != 0)
+        {
+            GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
+            nodeCleared.GetComponent<Node>().isCleared = true;
+        }
+		 */
+        if (nodesInRows.Count == 0) { 
+            InstantiateRows(amountOfRows);
+            SetScrollPosition(0);
+        } else {
+            // Need to read from an external file for this to work.
+            LoadRows();
+        }
     }
 
-    public void InstantiateTutorials() { }
+    public void LoadRows() {
+        foreach (KeyValuePair<int, List<GameObject>> entry in nodesInRows)
+        {
+            GameObject row = Instantiate(rowPrefab);
+            ResetTransform(row, scrollingGrid);
+            row.name = (entry.Key-1).ToString();
+
+            for (int j = 0; j < entry.Value.Count; j++)
+            {
+                GameObject newNode = Instantiate(entry.Value[j]);
+                ResetTransform(newNode, row);
+
+                //newNode.name = (totalAmountRows) + "." + j;
+                //newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
+
+                newNode.GetComponent<Node>().OnCreate(nodeCounter);
+
+                //rowNodes.Add(newNode);
+                //nodes.Add(newNode);
+                
+            }
+
+            if (entry.Key > 1)
+            {
+                GameObject imageRow = Instantiate(rowImagePrefab);
+                ResetTransform(imageRow, row);
+                imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
+                imageRow.GetComponent<AddImageRow>().InsertImage(entry.Value.Count, nodesInRows[entry.Key - 1].Count);
+            }
+        }
+    }
 
     /// <summary>
     /// Building the Rows and randomly selection how many nodes pr. row
@@ -116,6 +158,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.GetComponent<Node>().OnCreate(nodeCounter);
 
                 rowNodes.Add(newNode);
+                nodes.Add(newNode);
 
                 if (nodeCounter > 1) {
                     int counter = 0;
@@ -267,6 +310,16 @@ public class LevelSelectionGenerator : MonoBehaviour {
         node.GetComponent<Node>().probabilityChoice = probabilityChoices;
     }
 
+    public void DefeatedLevel(int nodeId)
+    {
+
+    }
+    /*
+    public GameObject GetNode(int nodeId)
+    {
+        nodes[nodeId]
+    }*/
+
     #region Helper function
 
     void printDict(int startFromRow)
@@ -346,4 +399,11 @@ public class LevelSelectionGenerator : MonoBehaviour {
         scrollingGrid.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gridYPosition);
     }
     #endregion
+
+    public void ResetDatabase()
+    {
+        DataService dataService = new DataService(StringResources.databaseName);
+
+        dataService.CreateDB();
+    }
 }
