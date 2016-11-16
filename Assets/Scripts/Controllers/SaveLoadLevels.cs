@@ -74,6 +74,12 @@ public class SaveLoadLevels
     {
         var path = Path.Combine(Application.persistentDataPath, "levels.xml");
 
+        if (!File.Exists(path))
+        {
+            Debug.LogError("No levels generated, reset game");
+            return new Dictionary<int, List<GameObject>>();
+        }
+
         var serializer = new XmlSerializer(typeof(LevelXML));
         var stream = new FileStream(path, FileMode.Open);
         var container = serializer.Deserialize(stream) as LevelXML;
@@ -109,8 +115,6 @@ public class SaveLoadLevels
                 currentNode.isCleared = node.isCleared;
                 currentNode.isScouted = node.isScouted;
                 currentNode.canPlay = node.canPlay;
-
-                Debug.Log("NODE : " + currentNode.NodeId + " WolveCamps : " + node.wolveCamps);
 
                 currentNode.OnCreate(currentNode.NodeId);
 

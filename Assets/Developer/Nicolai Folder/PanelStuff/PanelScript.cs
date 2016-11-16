@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class PanelScript : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class PanelScript : MonoBehaviour {
     private DataService dataService;
     public Transform solidersSpawnPosition;
     GameObject charactersFellowship;
+    public List<Camera> soldierCameraList = new List<Camera>();
 
     void Start()
     {
@@ -37,6 +39,45 @@ public class PanelScript : MonoBehaviour {
         soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[0].GetComponent<MoveScript>().enabled = false;
+        soldiersList[0].layer = LayerMask.NameToLayer("Player");
+        soldiersList[1].layer = LayerMask.NameToLayer("Hunter1");
+        soldiersList[2].layer = LayerMask.NameToLayer("Hunter2");
+        soldiersList[3].layer = LayerMask.NameToLayer("Hunter3");
+    }
+    
+    public void ActivateCamera(GameObject soldier)
+    {
+        if(soldier.layer == 9)
+        {
+            soldierCameraList[0].enabled = true;
+            DeactivateCamera(0);
+        }
+        if (soldier.layer == 10)
+        {
+            soldierCameraList[1].enabled = true;
+            DeactivateCamera(1);
+        }
+        if (soldier.layer == 11)
+        {
+            soldierCameraList[2].enabled = true;
+            DeactivateCamera(2);
+        }
+        if (soldier.layer == 12)
+        {
+            soldierCameraList[3].enabled = true;
+            DeactivateCamera(3);
+        }
+    }
+
+    public void DeactivateCamera(int cameraIndex)
+    {
+        for (int i = 0; i < charactersFellowship.transform.childCount ; i++)
+        {
+            if(i != cameraIndex)
+            {
+                soldierCameraList[i].enabled = false;
+            }   
+        }     
     }
 
     public void UpdateSoldierStats(GameObject soldier)
@@ -72,7 +113,15 @@ public class PanelScript : MonoBehaviour {
             {
                 stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
             }
-           
+            if (stat.name == "Combat Trait")
+            {
+                stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+            }
+            if (stat.name == "Target Trait")
+            {
+                stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+            }
+
         }
             
     }
