@@ -72,6 +72,13 @@ public class LevelSelectionGenerator : MonoBehaviour {
             // Need to read from an external file for this to work.
             nodesInRows = SaveLoadLevels.LoadLevels();
 
+            totalAmountRows = 0;
+            numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
+            LoadRows();
+
+            var maxRowCleared = SaveLoadLevels.AllLevelsLoaded.Where(val => val.Value.GetComponent<Node>().isCleared == true);
+            
+
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
                 GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
@@ -87,13 +94,12 @@ public class LevelSelectionGenerator : MonoBehaviour {
                     nodes.GetComponent<Node>().SetupImage();
                 }
 
+                InstantiateRows(1);
+
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
-            totalAmountRows = 0;
-
-            numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
-            LoadRows();
-            SetScrollPosition(0);
+            
+            //SetScrollPosition(maxRowCleared);
 
             SaveDict(new SaveLevelsToXML());
         }
