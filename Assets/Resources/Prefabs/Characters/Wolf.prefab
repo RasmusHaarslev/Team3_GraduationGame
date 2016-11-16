@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000012838779412}
   m_IsPrefabParent: 1
+--- !u!1 &1000011112365786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010304448950}
+  - 114: {fileID: 114000011963315256}
+  m_Layer: 0
+  m_Name: HealthBar (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012838779412
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +49,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4000010304448950
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011112365786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012950053870}
+  m_RootOrder: 0
 --- !u!4 &4000012950053870
 Transform:
   m_ObjectHideFlags: 1
@@ -43,7 +72,8 @@ Transform:
   m_LocalPosition: {x: -11.116924, y: 43.132446, z: -54.36387}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000010304448950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &23000010315601846
@@ -82,6 +112,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012838779412}
   m_Mesh: {fileID: 4300000, guid: 1d1938a21fac8c043b3f4e871d165f77, type: 3}
+--- !u!114 &114000011963315256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011112365786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74794283224c884cb69e9ecec53a79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barDisplay: 0
+  size: {x: 120, y: 15}
 --- !u!114 &114000012682501296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +143,7 @@ MonoBehaviour:
   currentHealth: 0
   target: {fileID: 0}
   currentOpponents: []
+  isCurrentTargetAlive: 0
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
@@ -121,6 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   distanceToTarget: 3.4028235e+38
+  fleeHealthLimit: 3
+  averageHealth: 0
 --- !u!114 &114000012987986346
 MonoBehaviour:
   m_ObjectHideFlags: 1
