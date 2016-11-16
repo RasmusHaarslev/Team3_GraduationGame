@@ -25,6 +25,7 @@ GameObject:
   - 114: {fileID: 114000012694973368}
   - 195: {fileID: 195000012472257536}
   - 136: {fileID: 136000011830774818}
+  - 114: {fileID: 114000012987986346}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Unfriendly
@@ -58,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8cea83c328a9b4f48a605cdcf072f316, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -120,6 +121,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   distanceToTarget: 3.4028235e+38
+--- !u!114 &114000012987986346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012838779412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373bcaaab0cec644390781acfc69058c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standard: {fileID: 2100000, guid: 8cea83c328a9b4f48a605cdcf072f316, type: 2}
+  targeted: {fileID: 2100000, guid: 3b39c601a5385ed4b9b93fafeea19e04, type: 2}
+  meshRenderer: {fileID: 23000010315601846}
 --- !u!136 &136000011830774818
 CapsuleCollider:
   m_ObjectHideFlags: 1
