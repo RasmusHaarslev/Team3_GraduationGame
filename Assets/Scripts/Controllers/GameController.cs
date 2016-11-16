@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadScene(int scene)
+    public void LoadScene(string scene)
     {
         if (SceneTransistion.instance != null)
         {

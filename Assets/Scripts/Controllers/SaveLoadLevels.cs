@@ -9,6 +9,8 @@ using UnityEngine;
 
 public class SaveLoadLevels
 {
+    public static Dictionary<int, GameObject> AllLevelsLoaded = new Dictionary<int, GameObject>();
+
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
         var levels = new LevelXML();
@@ -77,9 +79,9 @@ public class SaveLoadLevels
         var container = serializer.Deserialize(stream) as LevelXML;
         stream.Close();
 
-        var loadedLevels = new Dictionary<int, List<GameObject>>();
+        AllLevelsLoaded = new Dictionary<int, GameObject>();
 
-        var levelsDict = new Dictionary<int, GameObject>();
+        var loadedLevels = new Dictionary<int, List<GameObject>>();
 
         foreach (RowsXML row in container.Rows)
         {
@@ -111,8 +113,7 @@ public class SaveLoadLevels
 
                 currentNode.OnCreate(currentNode.NodeId);
 
-                levelsDict.Add(node.NodeId, nodeObject);
-
+                AllLevelsLoaded.Add(node.NodeId, nodeObject);
             }
         }
 
@@ -123,15 +124,15 @@ public class SaveLoadLevels
 
             foreach (var node in row.Nodes)
             {
-                var nodeObject = levelsDict[node.NodeId];
+                var nodeObject = AllLevelsLoaded[node.NodeId];
                 var currentNode = nodeObject.GetComponent<Node>();
 
                 foreach (var link in node.Links)
                 {
                     var li = new Link();
 
-                    li.From = levelsDict[link.FromID];
-                    li.To = levelsDict[link.ToID];
+                    li.From = AllLevelsLoaded[link.FromID];
+                    li.To = AllLevelsLoaded[link.ToID];
                     li.Hierarchy = link.Hierarchy == 1 ? true : false;
 
                     currentNode.Links.Add(li);

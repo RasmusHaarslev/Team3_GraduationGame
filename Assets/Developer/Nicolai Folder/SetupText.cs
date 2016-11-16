@@ -25,6 +25,6 @@ public class SetupText : MonoBehaviour {
 
     public void GoToCamp()
     {
-        GameController.Instance.LoadScene(0);
+        GameController.Instance.LoadScene("CampManagement");
     }
 }
