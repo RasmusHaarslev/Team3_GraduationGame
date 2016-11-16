@@ -35,6 +35,7 @@ public class MoveScript : MonoBehaviour
 			if (Input.GetKey(KeyCode.Mouse0))
 			{
 				agent.Resume();
+				character.isInCombat = false;
 				attacking = false;
 				MoveToClickPosition();
 			}
@@ -42,6 +43,7 @@ public class MoveScript : MonoBehaviour
 			{
 				if (character.target != null && !character.target.GetComponent<Character>().isDead)
 				{
+					character.isInCombat = true;
 					agent.SetDestination(character.target.transform.position);
 					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
 					if (distanceToTarget < agent.stoppingDistance)
@@ -61,6 +63,7 @@ public class MoveScript : MonoBehaviour
 				else
 				{
 					agent.Resume();
+					character.isInCombat = false;
 					attacking = false;
 				}
 			}
