@@ -55,6 +55,9 @@ public class PopUpFunctionality : MonoBehaviour {
         invisPanel.SetActive(true);
 
         PopUpPanel.SetActive(true);
+        btnPlay.GetComponent<Button>().onClick.RemoveAllListeners();
+        btnScout.GetComponent<Button>().onClick.RemoveAllListeners();
+
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
         btnScout.GetComponent<Button>().onClick.AddListener(delegate { Scout(node); });
         btnScout.GetComponent<Text>().text = "Scout for : " + scoutCost;
@@ -65,6 +68,8 @@ public class PopUpFunctionality : MonoBehaviour {
         foodText.text = "Food : " + nodeScript.foodAmount;
         coinsText.text = "Coins : " + nodeScript.coinAmount;
         interestPointsText.text = "Interest points : " + nodeScript.CampsInNode;
+
+        
 
         if (nodeScript.canPlay && !nodeScript.isCleared)
         {
