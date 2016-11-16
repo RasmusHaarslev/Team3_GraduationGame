@@ -104,7 +104,7 @@ public class Character : MonoBehaviour
 		damage = initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;
-		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
+		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
 		{
 			animator = GetComponent<Animator>();
 		}
@@ -173,7 +173,14 @@ public class Character : MonoBehaviour
 				}
 				else
 				{
-					target = FindRandomEnemy();
+					if (UnityEngine.Random.Range(0, 1) == 1)
+					{
+						target = FindRandomEnemy();
+					}
+					else
+					{
+						target = FindNearestEnemy();
+					}
 				}
 			}
 
