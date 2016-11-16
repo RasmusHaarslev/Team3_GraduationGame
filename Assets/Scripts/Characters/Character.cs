@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
 {
 	//values gained from the database
 	public CharacterValues characterBaseValues;
+
 	//combat values
 	public int health = 0;
 	public int damage = 0;
@@ -17,6 +18,7 @@ public class Character : MonoBehaviour
 	public float currentHealth;
 
 	NavMeshAgent agent;
+	Animator animator;
 	public GameObject target;
 	GameObject targetParent;
 	GameObject parent;
@@ -30,7 +32,7 @@ public class Character : MonoBehaviour
 	bool deadEvent = false;
 	//model values
 	//private Dictionary<string, Transform> slots;
-	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;/**/
+	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;
 
 	public Transform rightHandSlot;
 	public Transform leftHandSlot;
@@ -46,9 +48,10 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
+		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude);
 		if (currentHealth <= 0)
 		{
-			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
 				if (deadEvent == false)
 				{
@@ -56,7 +59,7 @@ public class Character : MonoBehaviour
 					deadEvent = true;
 				}
 			}
-			else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 			}
@@ -101,6 +104,10 @@ public class Character : MonoBehaviour
 		damage = initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;
+		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
+		{
+			animator = GetComponent<Animator>();
+		}
 	}
 
 	/// <summary>
@@ -134,7 +141,6 @@ public class Character : MonoBehaviour
 			else
 			{
 				print("Trying to equip " + equip.name + " that is not an equippable item!");
-
 			}
 		}
 	}
@@ -167,7 +173,14 @@ public class Character : MonoBehaviour
 				}
 				else
 				{
-					target = FindRandomEnemy();
+					if (UnityEngine.Random.Range(0, 1) == 1)
+					{
+						target = FindRandomEnemy();
+					}
+					else
+					{
+						target = FindNearestEnemy();
+					}
 				}
 			}
 
@@ -270,7 +283,6 @@ public class Character : MonoBehaviour
 		if (e.target == gameObject)
 		{
 			currentHealth -= e.damage;
-			//barDisplay = currentHealth;
 		}
 	}
 

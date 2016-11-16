@@ -10,6 +10,7 @@ using UnityEngine;
 public class SaveLoadLevels
 {
     public static Dictionary<int, GameObject> AllLevelsLoaded = new Dictionary<int, GameObject>();
+    public static int maxRowsCleared = 0;
 
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
@@ -74,6 +75,12 @@ public class SaveLoadLevels
     {
         var path = Path.Combine(Application.persistentDataPath, "levels.xml");
 
+        if (!File.Exists(path))
+        {
+            Debug.LogError("No levels generated, reset game");
+            return new Dictionary<int, List<GameObject>>();
+        }
+
         var serializer = new XmlSerializer(typeof(LevelXML));
         var stream = new FileStream(path, FileMode.Open);
         var container = serializer.Deserialize(stream) as LevelXML;
@@ -111,6 +118,10 @@ public class SaveLoadLevels
                 currentNode.canPlay = node.canPlay;
 
                 currentNode.OnCreate(currentNode.NodeId);
+
+                // Finds the max rows
+                if (node.isCleared && row.Level > maxRowsCleared)
+                    maxRowsCleared = row.Level;
 
                 AllLevelsLoaded.Add(node.NodeId, nodeObject);
             }
