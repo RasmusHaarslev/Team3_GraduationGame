@@ -51,11 +51,23 @@ public class TranslationManager : MonoBehaviour
     {
         var splitted = line.Split('\t');
 
+        if (splitted.Length != 3)
+        {
+            Debug.LogError("Skipping translation, error in the following line (missing a tab?): " + line);
+            return;
+        }
+
         LoadedTranlations.Add(splitted[0], English ? splitted[1] : splitted[2]);
     }
 
-    public string GetTranslation(string tranlationKey)
+    public string GetTranslation(string translationKey)
     {
-        return LoadedTranlations[tranlationKey];
+        if (!LoadedTranlations.ContainsKey(translationKey))
+        {
+            Debug.LogError("MISSING " + translationKey);
+            return "**" + translationKey + "**";
+        }
+
+        return LoadedTranlations[translationKey];
     }
 }
