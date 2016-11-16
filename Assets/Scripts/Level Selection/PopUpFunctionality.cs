@@ -60,14 +60,15 @@ public class PopUpFunctionality : MonoBehaviour {
 
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
         btnScout.GetComponent<Button>().onClick.AddListener(delegate { Scout(node); });
-        btnScout.GetComponent<Text>().text = "Scout for : " + scoutCost;
-        btnPlay.GetComponent<Text>().text = "Enter for : " + nodeScript.TravelCost;
-        wolveText.text = "Wolve dens : " + nodeScript.wolveCamps;
-        tribeText.text = "Tribe camps : " + nodeScript.tribeCamps;
-        choiceText.text = "Choice camps : " + nodeScript.choiceCamps;
-        foodText.text = "Food : " + nodeScript.foodAmount;
-        coinsText.text = "Coins : " + nodeScript.coinAmount;
-        interestPointsText.text = "Interest points : " + nodeScript.CampsInNode;
+
+        btnScout.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Scout For") + " : " + scoutCost;
+        btnPlay.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Enter For") + " : " + nodeScript.TravelCost;
+        wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;
+        tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.tribeCamps;
+        choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
+        foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
+        coinsText.text = TranslationManager.Instance.GetTranslation("Coins") + " : " + nodeScript.coinAmount;
+        interestPointsText.text = TranslationManager.Instance.GetTranslation("Interest Points") + " : " + nodeScript.CampsInNode;
 
         
 
