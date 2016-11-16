@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-public class LevelSelectionGenerator : MonoBehaviour {
+public class LevelSelectionGenerator : MonoBehaviour
+{
 
     #region VARIABLES
     public GameObject scrollRect;
@@ -46,7 +47,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
-    int numOfParents = 0;    
+    int numOfParents = 0;
     #endregion
 
     public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
@@ -63,12 +64,15 @@ public class LevelSelectionGenerator : MonoBehaviour {
     }
 
     void Awake()
-    {        	 
-        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
+    {
+        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
+        {
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
             SetScrollPosition(0);
-        } else {
+        }
+        else
+        {
             // Need to read from an external file for this to work.
             nodesInRows = SaveLoadLevels.LoadLevels();
 
@@ -77,7 +81,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
             LoadRows();
 
             var maxRowCleared = SaveLoadLevels.AllLevelsLoaded.Where(val => val.Value.GetComponent<Node>().isCleared == true);
-            
+
 
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
@@ -98,14 +102,15 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
-            
-            //SetScrollPosition(maxRowCleared);
+
+            SetScrollPosition(SaveLoadLevels.maxRowsCleared);
 
             SaveDict(new SaveLevelsToXML());
         }
     }
 
-    public void LoadRows() {
+    public void LoadRows()
+    {
         foreach (KeyValuePair<int, List<GameObject>> entry in nodesInRows)
         {
             GameObject row = Instantiate(rowPrefab);
@@ -164,19 +169,23 @@ public class LevelSelectionGenerator : MonoBehaviour {
     /// Building the Rows and randomly selection how many nodes pr. row
     /// </summary>
     /// <param name="rowAmount"></param>
-    public void InstantiateRows(int rowAmount) {
+    public void InstantiateRows(int rowAmount)
+    {
 
-        for (int i = 0; i < rowAmount; i++) {
+        for (int i = 0; i < rowAmount; i++)
+        {
 
             GameObject row = Instantiate(rowPrefab);
             ResetTransform(row, scrollingGrid);
             row.name = (totalAmountRows).ToString();
 
             numOfParents = numOfLastLevels;
-            
-            if (nodeCounter > 0) {
+
+            if (nodeCounter > 0)
+            {
                 numOfLastLevels = randomController(numOfLastLevels);
-            } else
+            }
+            else
             {
                 numOfLastLevels = 1;
             }
@@ -184,7 +193,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
             float startX = 0f;
             float increaseX = 0f;
 
-            switch (numOfLastLevels) {
+            switch (numOfLastLevels)
+            {
                 case 1:
                     startX = 0;
                     increaseX = 0;
@@ -205,9 +215,10 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
             List<GameObject> rowNodes = new List<GameObject>();
 
-            for (int j = 0; j < numOfLastLevels; j++) {
+            for (int j = 0; j < numOfLastLevels; j++)
+            {
                 nodeCounter++;
-                
+
                 GameObject newNode = Instantiate(nodePrefab);
                 ResetTransform(newNode, row);
 
@@ -216,30 +227,33 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
-                newNode.GetComponent<Node>().OnCreate(nodeCounter);                
+                newNode.GetComponent<Node>().OnCreate(nodeCounter);
 
                 rowNodes.Add(newNode);
                 nodes.Add(newNode);
 
-                if (nodeCounter > 1) {
+                if (nodeCounter > 1)
+                {
                     int counter = 0;
-                    foreach (var node in nodesInRows[totalAmountRows - 1]) {
-                        SetupChildrenNodes(node, newNode, counter, j);                  
+                    foreach (var node in nodesInRows[totalAmountRows - 1])
+                    {
+                        SetupChildrenNodes(node, newNode, counter, j);
                         counter++;
                     }
                 }
 
                 startX += increaseX;
             }
-            
+
             nodesInRows.Add(totalAmountRows, rowNodes);
 
-            if (nodeCounter > 1) { 
+            if (nodeCounter > 1)
+            {
                 GameObject imageRow = Instantiate(rowImagePrefab);
                 ResetTransform(imageRow, row);
                 imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
                 imageRow.GetComponent<AddImageRow>().InsertImage(numOfLastLevels, numOfParents);
-            } 
+            }
 
             totalAmountRows += 1;
         }
@@ -370,7 +384,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
         node.GetComponent<Node>().probabilityTribes = probabilityTribes;
         node.GetComponent<Node>().probabilityChoice = probabilityChoices;
-    }    
+    }
 
     #region Helper function
     void printDict(Dictionary<int, List<GameObject>> dict)
@@ -425,7 +439,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
         if (totalAmountRows + 1 == amountOfRows)
         {
-            dropdown.onValueChanged.AddListener(delegate {
+            dropdown.onValueChanged.AddListener(delegate
+            {
                 myDropdownValueChangedHandler(dropdown);
             });
         }
@@ -443,13 +458,29 @@ public class LevelSelectionGenerator : MonoBehaviour {
         float rowToGoTo = rowHeight * rowNumber;
         float gridYPosition = -(((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight) + rowToGoTo;
 
-        scrollingGrid.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gridYPosition);
+        Vector2 initPos = scrollingGrid.GetComponent<RectTransform>().anchoredPosition;
+        Vector2 desPos = new Vector2(0, gridYPosition);
+
+        StartCoroutine(MoveFromTo(initPos, desPos, 0.5f));
+
     }
+
+    IEnumerator MoveFromTo(Vector2 pointA, Vector2 pointB, float time)
+    {
+        float t = 0f;
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
+            scrollingGrid.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(pointA, pointB, t); // Set position proportional to t
+            yield return null;         // Leave the routine and return here in the next frame
+        }
+    }
+
     #endregion
 
     private void SaveDict(SaveLevelsToXML e)
     {
-        SaveLoadLevels.SaveLevels(nodesInRows);        
+        SaveLoadLevels.SaveLevels(nodesInRows);
     }
 
     public void ResetDatabase()
