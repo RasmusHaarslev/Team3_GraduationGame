@@ -41,6 +41,9 @@ public class DebugUI : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        followers.Add(GameObject.Find("Follower1(Clone)"));
+        followers.Add(GameObject.Find("Follower2(Clone)"));
+        followers.Add(GameObject.Find("Follower3(Clone)"));
     }
 
     void OnEnable()
@@ -82,8 +85,6 @@ public class DebugUI : MonoBehaviour
         follower2 = false;
         follower3 = false;
     }
-
-
 
     void HandleLog(string logString, string stackTrace, LogType type)
     {
@@ -282,28 +283,28 @@ public class DebugUI : MonoBehaviour
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Gameplay", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("LevelPrototype");
+                    GameController.Instance.LoadScene("LevelPrototype");
                 }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "To camp", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("CampManagement");
+                    GameController.Instance.LoadScene("CampManagement");
                 }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Level \nselection", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("LevelSelection");
+                    GameController.Instance.LoadScene("LevelSelection");
                 }
 
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Demo Level", customButton))
                 {
                     followers.Clear();
-                    SceneManager.LoadScene("DemoLevel");
+                    GameController.Instance.LoadScene("DemoLevel");
                 }
 
                 yPosRight += height + 10;
