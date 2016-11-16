@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude);
 		if (currentHealth <= 0)
 		{
-			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
 				if (deadEvent == false)
 				{
@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
 					deadEvent = true;
 				}
 			}
-			else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 			}
@@ -141,7 +141,6 @@ public class Character : MonoBehaviour
 			else
 			{
 				print("Trying to equip " + equip.name + " that is not an equippable item!");
-
 			}
 		}
 	}
