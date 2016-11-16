@@ -35,6 +35,7 @@ public class MoveScript : MonoBehaviour
 			if (Input.GetKey(KeyCode.Mouse0))
 			{
 				agent.Resume();
+				character.isInCombat = false;
 				attacking = false;
 				MoveToClickPosition();
 			}
@@ -42,6 +43,7 @@ public class MoveScript : MonoBehaviour
 			{
 				if (character.target != null && !character.target.GetComponent<Character>().isDead)
 				{
+					character.isInCombat = true;
 					agent.SetDestination(character.target.transform.position);
 					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
 					if (distanceToTarget < agent.stoppingDistance)
@@ -61,6 +63,7 @@ public class MoveScript : MonoBehaviour
 				else
 				{
 					agent.Resume();
+					character.isInCombat = false;
 					attacking = false;
 				}
 			}
@@ -77,11 +80,16 @@ public class MoveScript : MonoBehaviour
 		{
 			if (hit.transform.gameObject.tag == "Unfriendly")
 			{
-				character.target = hit.transform.gameObject;
+                if(character.target)
+                    character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
+
+                character.target = hit.transform.gameObject;
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-			}
+
+                hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
+            }
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
@@ -89,7 +97,8 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
-				agent.stoppingDistance = 0;
+                EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+                agent.stoppingDistance = 0;
 				agent.destination = hit.point;
 				attacking = false;
 			}
