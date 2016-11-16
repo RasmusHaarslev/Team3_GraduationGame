@@ -154,6 +154,16 @@ public class AllyDeathEvent : GameEvent
 	}
 }
 
+public class ItemSpawned : GameEvent
+{
+    public ItemSpawned()
+    {
+        
+    }
+
+
+}
+
 public class EnemySpawned : GameEvent
 {
     private CharacterValues enemyValues;
