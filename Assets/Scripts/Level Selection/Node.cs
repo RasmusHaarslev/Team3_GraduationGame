@@ -70,24 +70,29 @@ public class Node : MonoBehaviour {
 
     public void OnCreate(int id)
     {
-        // If root set playable to true
         if (id == 1)
         {
             canPlay = true;
         }
+
+        SetupCampsForThisNode();
+        SetupResourceForThisNode();
+
         NodeId = id;
         GetComponent<Button>().onClick.AddListener(OpenPopUp);
-        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
-            SetupCampsForThisNode();
-            SetupResourceForThisNode();
-        }
+
         SetupImage();
         SetupUIText();
     }
 
     public void SetupUIText()
     {
-        if (isScouted)
+        if(isCleared)
+        {
+            unknownPanel.SetActive(false);
+            infoPanel.SetActive(false);
+        }
+        else if (isScouted)
         {
             unknownPanel.SetActive(false);
             infoPanel.SetActive(true);
@@ -125,7 +130,7 @@ public class Node : MonoBehaviour {
         IEnumerable<int> rangeChoices = Enumerable.Range(probabilityWolves + probabilityTribes, probabilityChoice);
 
         int totalRange = rangeWolves.Count() + rangeTribes.Count() + rangeChoices.Count();
-
+     
         for (int i = 0; i < noCamps; i++)
         {
             int selectionNumber = Random.Range(0, totalRange);
@@ -175,27 +180,12 @@ public class Node : MonoBehaviour {
     }
 
     void OpenPopUp()
-    {
-        SetupImage();
-        
+    {               
         EventManager.Instance.TriggerEvent(new SetupPopUp(gameObject));
-
-        foreach (var link in Links)
-        {
-            if(link.Hierarchy)
-            {
-                Debug.Log("Node Id : " + link.From.name + " Has Parent : " + link.To.name);
-                Debug.Log("Parent IsClear : " + link.To.GetComponent<Node>().isCleared + " Parent CanPlay : " + link.To.GetComponent<Node>().canPlay);
-            } else
-            {
-                Debug.Log("Node Id : " + link.From.name + " Has Child : " + link.To.name);
-                Debug.Log("Child IsClear : " + link.To.GetComponent<Node>().isCleared + " Child CanPlay : " + link.To.GetComponent<Node>().canPlay);
-            }
-        }
     }
 
     #region Get Functions for this node
-    void SetupImage()
+    public void SetupImage()
     {
         if (isCleared)
         {

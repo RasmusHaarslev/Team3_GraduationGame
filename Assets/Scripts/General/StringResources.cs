@@ -7,6 +7,8 @@ public class StringResources
 {
     public static string databaseName = "gameDatabase.db";
 
+    public static string uiPrefabsPath = "Prefabs/UI/";
+
     public static string characterPrefabsPath = "Prefabs/Characters/";
 
     public static string equippableItemsPrefabsPath = "Prefabs/Items/EquippableItems/";

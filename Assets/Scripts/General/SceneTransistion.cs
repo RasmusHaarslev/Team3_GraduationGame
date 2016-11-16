@@ -36,16 +36,20 @@ public class SceneTransistion : MonoBehaviour
 
     void OnEnable()
     {
-        if (fadeIn)
-        {
-            StartCoroutine(StartScene());
-        }
+        StartCoroutine(StartScene());
     }
 
     //This gets called from anywhere you need to load a new scene
-    public void LoadScene(int level)
+    public void LoadScene(string level)
     {
-        StartCoroutine(EndScene(level));
+        if (fadeImg.color.a != 0f)
+        {
+            StartCoroutine(EndScene(level));
+        } else
+        {
+            StartCoroutine(StartScene());
+
+        }
     }
 
     IEnumerator StartScene()
@@ -61,7 +65,7 @@ public class SceneTransistion : MonoBehaviour
         fadeImg.gameObject.SetActive(false);
     }
     
-    IEnumerator EndScene(int nextScene)
+    IEnumerator EndScene(string nextScene)
     {
         fadeImg.gameObject.SetActive(true);
         time = 0.0f;

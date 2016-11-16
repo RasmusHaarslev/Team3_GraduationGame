@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour {
     {
         //Enemy spawn for counting
         EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
-        EventManager.Instance.StartListening<EnemySpawned>(ItemSpawn);
+        EventManager.Instance.StartListening<ItemSpawned>(ItemSpawn);
 
         // -Collecting-
         //Loot received
@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour {
     {
         //Enemy spawn for counting
         EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
-        EventManager.Instance.StopListening<EnemySpawned>(ItemSpawn);
+        EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
 
         // -Collecting-
         //Loot received
@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour {
         EnemiesAlive++;
     }
 
-    private void ItemSpawn(EnemySpawned e)
+    private void ItemSpawn(ItemSpawned e)
     {
         ItemsLeft++;
     }
@@ -123,8 +123,8 @@ public class LevelManager : MonoBehaviour {
     {
         EventManager.Instance.TriggerEvent(new LevelLost());
         PlayerPrefs.SetInt("LevelResult", 0);
-        
-        SceneManager.LoadScene("CampManagement");
+
+        GameController.Instance.LoadScene("CampManagement");
     }
 
     public void WinLevel()
@@ -132,7 +132,7 @@ public class LevelManager : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new LevelWon());
         PlayerPrefs.SetInt("LevelResult", 1);
         //replaceCharactersWeapons();
-        SceneManager.LoadScene("CampManagement");
+        GameController.Instance.LoadScene("CampManagement");
     }
 
 
@@ -153,10 +153,6 @@ public class LevelManager : MonoBehaviour {
                 dataService.GenerateNewEquippableItemFromValues(newItemValues);
             dataService.equipItemsToCharacter(new List<GameObject>() { newItem },character);
         }
-
-
     }
-
-
 
 }

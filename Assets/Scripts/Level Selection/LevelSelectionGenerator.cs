@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class LevelSelectionGenerator : MonoBehaviour {
 
@@ -62,31 +63,44 @@ public class LevelSelectionGenerator : MonoBehaviour {
     }
 
     void Awake()
-    {
-        
-       
-        if (PlayerPrefs.GetInt("LevelResult") != 0)
-        {
-            GameObject nodeCleared = nodesInRows[PlayerPrefs.GetInt("LevelDifficulty")].Find(item => item.GetComponent<Node>().NodeId == PlayerPrefs.GetInt("NodeId"));
-            nodeCleared.GetComponent<Node>().isCleared = true;
-            PlayerPrefs.SetInt("LevelResult", 0);
-        }
-		 
+    {        	 
         if (PlayerPrefs.GetInt("LevelsInstantiated") != 1) { 
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
             SetScrollPosition(0);
         } else {
             // Need to read from an external file for this to work.
-            totalAmountRows = 1;
+            nodesInRows = SaveLoadLevels.LoadLevels();
+
+            if (PlayerPrefs.GetInt("LevelResult") != 0)
+            {
+                GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
+                var nodeScript = nodeCleared.GetComponent<Node>();
+
+                nodeScript.isCleared = true;
+                nodeScript.canPlay = false;
+                nodeScript.SetupImage();
+                nodeScript.SetupUIText();
+
+                foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
+                {
+                    nodes.GetComponent<Node>().canPlay = true;
+                    nodes.GetComponent<Node>().SetupImage();
+                }
+
+                PlayerPrefs.SetInt("LevelResult", 0);
+            }
+            totalAmountRows = 0;
+
+            numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
             LoadRows();
             SetScrollPosition(0);
+
+            SaveDict(new SaveLevelsToXML());
         }
     }
 
     public void LoadRows() {
-        nodesInRows = SaveLoadLevels.LoadLevels();
-
         foreach (KeyValuePair<int, List<GameObject>> entry in nodesInRows)
         {
             GameObject row = Instantiate(rowPrefab);
@@ -116,6 +130,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                     break;
             }
 
+
             for (int j = 0; j < entry.Value.Count; j++)
             {
                 GameObject newNode = entry.Value[j];
@@ -124,11 +139,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
+                nodeCounter++;
                 startX += increaseX;
-
-                //rowNodes.Add(newNode);
-                //nodes.Add(newNode);
-
             }
 
             if (entry.Key > 0)
@@ -156,8 +168,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
             row.name = (totalAmountRows).ToString();
 
             numOfParents = numOfLastLevels;
-
-            if (nodeCounter > 0) { 
+            
+            if (nodeCounter > 0) {
                 numOfLastLevels = randomController(numOfLastLevels);
             } else
             {
@@ -199,7 +211,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
-                newNode.GetComponent<Node>().OnCreate(nodeCounter);
+                newNode.GetComponent<Node>().OnCreate(nodeCounter);                
 
                 rowNodes.Add(newNode);
                 nodes.Add(newNode);
@@ -353,20 +365,9 @@ public class LevelSelectionGenerator : MonoBehaviour {
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
         node.GetComponent<Node>().probabilityTribes = probabilityTribes;
         node.GetComponent<Node>().probabilityChoice = probabilityChoices;
-    }
-
-    public void DefeatedLevel(int nodeId)
-    {
-
-    }
-    /*
-    public GameObject GetNode(int nodeId)
-    {
-        nodes[nodeId]
-    }*/
+    }    
 
     #region Helper function
-
     void printDict(Dictionary<int, List<GameObject>> dict)
     {
         foreach (KeyValuePair<int, List<GameObject>> kvp in dict)
@@ -443,9 +444,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
     private void SaveDict(SaveLevelsToXML e)
     {
-        Debug.Log("HEY");
-        SaveLoadLevels.SaveLevels(nodesInRows);
-        
+        SaveLoadLevels.SaveLevels(nodesInRows);        
     }
 
     public void ResetDatabase()

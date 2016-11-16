@@ -24,6 +24,7 @@ public class LevelGenerator : MonoBehaviour
        
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
+        
 
 		//TODO acquire data from playerprefs
         

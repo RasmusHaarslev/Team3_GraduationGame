@@ -10,6 +10,9 @@ public class Manager_Audio : MonoBehaviour {
 
 	public static string menuMusic = "Play_MenuMusic0_4";
 	public static string wind1 = "Play_WindDeep1";
+	public static string leaderFootStep = "Play_LeaderFootStep";
+	public static string footStepLoopStart = "Play_FootStepLoop";
+	public static string footStepLoopStop = "Stop_FootStepLoop";
 
 	public static void PlaySound(string name,GameObject objectPos)
 	{

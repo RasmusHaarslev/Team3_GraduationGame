@@ -46,11 +46,18 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void InitialisePopUP(SetupPopUp e)
     {
-        invisPanel.SetActive(true);
         GameObject node = e.node;
         Node nodeScript = node.GetComponent<Node>();
 
+        if (nodeScript.isCleared)
+            return;
+
+        invisPanel.SetActive(true);
+
         PopUpPanel.SetActive(true);
+        btnPlay.GetComponent<Button>().onClick.RemoveAllListeners();
+        btnScout.GetComponent<Button>().onClick.RemoveAllListeners();
+
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
         btnScout.GetComponent<Button>().onClick.AddListener(delegate { Scout(node); });
         btnScout.GetComponent<Text>().text = "Scout for : " + scoutCost;
@@ -61,6 +68,8 @@ public class PopUpFunctionality : MonoBehaviour {
         foodText.text = "Food : " + nodeScript.foodAmount;
         coinsText.text = "Coins : " + nodeScript.coinAmount;
         interestPointsText.text = "Interest points : " + nodeScript.CampsInNode;
+
+        
 
         if (nodeScript.canPlay && !nodeScript.isCleared)
         {
@@ -102,7 +111,6 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void Play(GameObject node)
     {
-        Debug.Log(node.GetComponent<Node>().TravelCost);
         EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
@@ -127,9 +135,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
         // IF NOT DEBUG USE THIS
         //GameController.Instance.LoadScene(node.GetComponent<Node>().sceneSelection);
-        GameController.Instance.LoadScene(2);
-
-        Debug.Log(node.name);
+        GameController.Instance.LoadScene("LevelPrototype01WithSound");        
     }
 
     public void Scout(GameObject node)
@@ -168,8 +174,6 @@ public class PopUpFunctionality : MonoBehaviour {
             }
         }
 
-        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
-
-        Debug.Log(node.name);
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());        
     }
 }
