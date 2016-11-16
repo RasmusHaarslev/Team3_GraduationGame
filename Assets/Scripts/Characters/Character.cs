@@ -4,64 +4,75 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-public class Character : MonoBehaviour {
-    //values gained from the database
-    public CharacterValues characterBaseValues;
-    //combat values
-    public int health = 0;
-    public int damage = 0;
-    public int range = 0;
-    public int damageSpeed = 0;
+public class Character : MonoBehaviour
+{
+	//values gained from the database
+	public CharacterValues characterBaseValues;
+	//combat values
+	public int health = 0;
+	public int damage = 0;
+	public int range = 0;
+	public int damageSpeed = 0;
 
-    public float currentHealth;
+	public float currentHealth;
 
-    NavMeshAgent agent;
-    public GameObject target;
-    GameObject targetParent;
-    GameObject parent;
-    public List<GameObject> currentOpponents = new List<GameObject>();
+	NavMeshAgent agent;
+	public GameObject target;
+	GameObject targetParent;
+	GameObject parent;
+	public List<GameObject> currentOpponents = new List<GameObject>();
+	public bool isCurrentTargetAlive;
+	public float rotationSpeed = 2;
 
-    public float rotationSpeed = 2;
+	//Combat state values
+	public bool isInCombat = false;
+	public bool isDead = false;
+	bool deadEvent = false;
+	//model values
+	//private Dictionary<string, Transform> slots;
+	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;/**/
 
-    //Combat state values
-    public bool isInCombat = false;
-    public bool isDead = false;
-    //model values
-    //private Dictionary<string, Transform> slots;
-    public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;/**/
+	public Transform rightHandSlot;
+	public Transform leftHandSlot;
+	public Transform headSlot;
+	public Transform torsoSlot;
+	public Transform legsSlot;
 
-    public Transform rightHandSlot;
-    public Transform leftHandSlot;
-    public Transform headSlot;
-    public Transform torsoSlot;
-    public Transform legsSlot;
+	// Use this for initialization
+	void Start()
+	{
+		currentHealth = health;
+	}
 
-    // Use this for initialization
-    void Start() {
-        currentHealth = health;
-    }
+	void Update()
+	{
+		if (currentHealth <= 0)
+		{
+			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
+			{
+				if (deadEvent == false)
+				{
+					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+					deadEvent = true;
+				}
+			}
+			else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+			{
+				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+			}
+			isDead = true;
+			//GetComponent<MeshRenderer>().enabled = false;
+		}
+	}
 
-    void Update() {
-        if (currentHealth <= 0) {
-            if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter) {
+	void OnEnable()
+	{
+		agent = GetComponent<NavMeshAgent>();
+		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
+		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 
-                EventManager.Instance.TriggerEvent(new AllyDeathEvent());
-            }
-            else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) {
-                EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
-            }
-            isDead = true;
-            GetComponent<MeshRenderer>().enabled = false;
-        }
-    }
-
-    void OnEnable() {
-        agent = GetComponent<NavMeshAgent>();
-        EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
-        EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
-        EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
-
-        equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
+		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
@@ -69,8 +80,6 @@ public class Character : MonoBehaviour {
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
 	}
-
-
 
 	void OnDisable()
 	{
@@ -98,7 +107,7 @@ public class Character : MonoBehaviour {
 	/// Changes the stats and spawn the item on the right character slot
 	/// </summary>
 	/// <param name="item"></param>
-	void equipItems(IEnumerable<GameObject> equips)
+	void EquipItems(IEnumerable<GameObject> equips)
 	{
 		EquippableitemValues currentEquipValues;
 
@@ -111,7 +120,7 @@ public class Character : MonoBehaviour {
 				if (equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null)
 				{
 					//if thats the case, remove the values and remove the old object
-					detatchItem(currentEquipValues.Slot);
+					DetachItem(currentEquipValues.Slot);
 				}
 				//parent and position the item on the appropriate slot
 				equip.transform.parent = equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
@@ -128,10 +137,9 @@ public class Character : MonoBehaviour {
 
 			}
 		}
-
 	}
 
-	void detatchItem(EquippableitemValues.slot slotToDetatch)
+	void DetachItem(EquippableitemValues.slot slotToDetatch)
 	{
 		//remove item values from total on the player
 		EquippableitemValues itemValuesToDetatch = equippableSpots[slotToDetatch].GetComponentInChildren<EquippableitemValues>();
@@ -174,7 +182,6 @@ public class Character : MonoBehaviour {
 	{
 		if (gameObject.tag == "Unfriendly")
 		{
-
 			if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
 			{
 				List<GameObject> friendlies = new List<GameObject>();
@@ -263,6 +270,7 @@ public class Character : MonoBehaviour {
 		if (e.target == gameObject)
 		{
 			currentHealth -= e.damage;
+			//barDisplay = currentHealth;
 		}
 	}
 
@@ -278,8 +286,8 @@ public class Character : MonoBehaviour {
 		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
 		{
 			target = null;
+			currentOpponents.Remove(target);
 		}
 	}
-
 }
 

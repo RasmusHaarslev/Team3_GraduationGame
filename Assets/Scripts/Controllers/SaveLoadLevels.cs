@@ -90,7 +90,6 @@ public class SaveLoadLevels
                 var nodeObject = GameObject.Instantiate(Resources.Load("Prefabs/LevelSelection/CityNode", typeof(GameObject))) as GameObject;
                 
                 var currentNode = nodeObject.GetComponent<Node>();
-
                 currentNode.CampsInNode = node.CampsInNode;
 
                 currentNode.NodeId = node.NodeId;

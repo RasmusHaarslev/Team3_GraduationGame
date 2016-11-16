@@ -319,15 +319,11 @@ public class DebugUI : MonoBehaviour
                     GameObject.Find("LevelGenerator").GetComponent<LevelManager>().LoseLevel();
                 }
 
-                if (GUI.Button(new Rect(Screen.width / 2 - width / 2, 10, width, height), "Trait \nmanagement", customButton))
-                    traitManagement = true;
-
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Reset Game", customButton))
                 {
                     PlayerPrefs.DeleteAll();
                 }
-
                 #endregion
 
                 #region Freeze
@@ -366,6 +362,14 @@ public class DebugUI : MonoBehaviour
                 yPosLeft += height + 10;
                 if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Send log", customButton))
                     SendMail();
+
+                yPosLeft += height + 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Previous scene", customButton))
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+                yPosLeft += height + 10;
+                if (GUI.Button(new Rect(xPosLeft, yPosLeft, width, height), "Next scene", customButton))
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
                 GUI.Label(new Rect(width + 25, 20, 400, height), "Current scene: " + SceneManager.GetActiveScene().name, customLabel);
 

@@ -78,7 +78,6 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 var nodeScript = nodeCleared.GetComponent<Node>();
 
                 nodeScript.isCleared = true;
-                nodeScript.canPlay = false;
                 nodeScript.SetupImage();
                 nodeScript.SetupUIText();
 
@@ -90,8 +89,9 @@ public class LevelSelectionGenerator : MonoBehaviour {
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
+            totalAmountRows = 0;
 
-            totalAmountRows = 1;
+            numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
             LoadRows();
             SetScrollPosition(0);
 
@@ -138,6 +138,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
+                nodeCounter++;
                 startX += increaseX;
             }
 
@@ -166,8 +167,8 @@ public class LevelSelectionGenerator : MonoBehaviour {
             row.name = (totalAmountRows).ToString();
 
             numOfParents = numOfLastLevels;
-
-            if (nodeCounter > 0) { 
+            
+            if (nodeCounter > 0) {
                 numOfLastLevels = randomController(numOfLastLevels);
             } else
             {
@@ -209,7 +210,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
-                newNode.GetComponent<Node>().OnCreate(nodeCounter);
+                newNode.GetComponent<Node>().OnCreate(nodeCounter);                
 
                 rowNodes.Add(newNode);
                 nodes.Add(newNode);

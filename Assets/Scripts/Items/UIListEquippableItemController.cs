@@ -6,6 +6,6 @@ public class UIListEquippableItemController : MonoBehaviour
 {
 
     public Image Icon;
-    public Text Name, Description;
+    public Text name, damage, damageSpeed, range, health;
 
 }
