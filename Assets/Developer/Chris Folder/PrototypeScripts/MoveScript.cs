@@ -71,7 +71,6 @@ public class MoveScript : MonoBehaviour
 		}
 	}
 
-
 	public void MoveToClickPosition()
 	{
 
@@ -80,26 +79,26 @@ public class MoveScript : MonoBehaviour
 		{
 			if (hit.transform.gameObject.tag == "Unfriendly")
 			{
-                if(character.target)
-                    character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
+				if (character.target)
+					character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
 
-                character.target = hit.transform.gameObject;
+				character.target = hit.transform.gameObject;
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
 
-                hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
-            }
+				hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
+			}
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
-				agent.stoppingDistance = 0;
+				agent.stoppingDistance = 1.5f;
 			}
 			else
 			{
-                EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
-                agent.stoppingDistance = 0;
-				agent.destination = hit.point;
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				agent.stoppingDistance = 1.5f;
+				agent.SetDestination(hit.point);
 				attacking = false;
 			}
 		}
