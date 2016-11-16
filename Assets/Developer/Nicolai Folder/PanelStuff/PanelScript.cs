@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class PanelScript : MonoBehaviour {
 
@@ -112,7 +113,15 @@ public class PanelScript : MonoBehaviour {
             {
                 stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
             }
-           
+            if (stat.name == "Combat Trait")
+            {
+                stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+            }
+            if (stat.name == "Target Trait")
+            {
+                stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+            }
+
         }
             
     }
