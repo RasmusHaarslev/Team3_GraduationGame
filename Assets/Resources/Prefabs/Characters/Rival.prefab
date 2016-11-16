@@ -32,6 +32,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000011167365538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012223737632}
+  - 114: {fileID: 114000010470228048}
+  m_Layer: 0
+  m_Name: HealthBar (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000012223737632
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011167365538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000014137239628}
+  m_RootOrder: 0
 --- !u!4 &4000014137239628
 Transform:
   m_ObjectHideFlags: 1
@@ -42,7 +71,8 @@ Transform:
   m_LocalPosition: {x: -17.695854, y: 43.132446, z: -52.650127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000012223737632}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &23000010093788958
@@ -81,6 +111,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010830001794}
   m_Mesh: {fileID: 4300000, guid: 0e5518decb06d2246bd0bc2e769d0b5c, type: 3}
+--- !u!114 &114000010470228048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011167365538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74794283224c884cb69e9ecec53a79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barDisplay: 0
+  size: {x: 120, y: 15}
 --- !u!114 &114000013335739844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,9 +142,15 @@ MonoBehaviour:
   currentHealth: 0
   target: {fileID: 0}
   currentOpponents: []
+  isCurrentTargetAlive: 0
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  rightHandSlot: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  headSlot: {fileID: 0}
+  torsoSlot: {fileID: 0}
+  legsSlot: {fileID: 0}
 --- !u!114 &114000013755156898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,6 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   distanceToTarget: 3.4028235e+38
+  fleeHealthLimit: 3
+  averageHealth: 0
 --- !u!136 &136000014115639894
 CapsuleCollider:
   m_ObjectHideFlags: 1
