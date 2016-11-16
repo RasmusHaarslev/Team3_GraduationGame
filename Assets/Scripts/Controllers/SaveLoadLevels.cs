@@ -110,8 +110,6 @@ public class SaveLoadLevels
                 currentNode.isScouted = node.isScouted;
                 currentNode.canPlay = node.canPlay;
 
-                Debug.Log("NODE : " + currentNode.NodeId + " WolveCamps : " + node.wolveCamps);
-
                 currentNode.OnCreate(currentNode.NodeId);
 
                 AllLevelsLoaded.Add(node.NodeId, nodeObject);
