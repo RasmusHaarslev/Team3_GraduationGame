@@ -61,6 +61,16 @@ public class LevelWon : GameEvent
     }
 }
 
+public class PositionClicked : GameEvent
+{
+    public Vector3 position;
+    public PositionClicked(Vector3 clickPosition) {
+        position = clickPosition;
+    }
+
+}
+
+
 public class LevelLost : GameEvent
 {
     public LevelLost()

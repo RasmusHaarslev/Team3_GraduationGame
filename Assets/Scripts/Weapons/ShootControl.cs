@@ -38,7 +38,7 @@ public class ShootControl : MonoBehaviour {
 	{
 		if(nextFireTime<Time.time)
 		{
-			print ("shoot");
+			//print ("shoot");
 
 			nextFireTime = Time.time + shootRate;
 			GetBullet ().AddForce (shootPoint.transform.forward*projectileSpeed);
