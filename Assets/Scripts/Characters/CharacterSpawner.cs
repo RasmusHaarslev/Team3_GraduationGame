@@ -8,14 +8,17 @@ public class CharacterSpawner : MonoBehaviour
 {
 
     //public string characterName;
+    [Range(1,3)]
     public int tier = 1;
-    public Color GizmoColor = Color.red;
-    [Range(1.0f, 5.0f)]
-    public float gizmoSize = 1.0f;
+    private Color GizmoColor = Color.red;
+    private float gizmoSize = 1.0f;
     
     /**/
     void OnDrawGizmos()
     {
+        GizmoColor = new Color(1f, (3 - tier) * 0.5f, 0f, 1f);
+        gizmoSize = 0.5f + tier * 0.5f;
+
         Gizmos.color = GizmoColor;
         Gizmos.DrawSphere(transform.position, gizmoSize * 0.3f);
         #if UNITY_EDITOR
