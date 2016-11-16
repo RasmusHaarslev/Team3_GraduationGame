@@ -90,7 +90,6 @@ public class SaveLoadLevels
                 var nodeObject = GameObject.Instantiate(Resources.Load("Prefabs/LevelSelection/CityNode", typeof(GameObject))) as GameObject;
                 
                 var currentNode = nodeObject.GetComponent<Node>();
-
                 currentNode.CampsInNode = node.CampsInNode;
 
                 currentNode.NodeId = node.NodeId;
@@ -110,6 +109,8 @@ public class SaveLoadLevels
                 currentNode.isCleared = node.isCleared;
                 currentNode.isScouted = node.isScouted;
                 currentNode.canPlay = node.canPlay;
+
+                Debug.Log("NODE : " + currentNode.NodeId + " WolveCamps : " + node.wolveCamps);
 
                 currentNode.OnCreate(currentNode.NodeId);
 

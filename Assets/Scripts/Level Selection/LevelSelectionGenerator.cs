@@ -93,7 +93,6 @@ public class LevelSelectionGenerator : MonoBehaviour {
             totalAmountRows = 0;
 
             numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
-            Debug.Log("NUM LAST : " + numOfLastLevels);
             LoadRows();
             SetScrollPosition(0);
 
@@ -212,7 +211,7 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 newNode.name = (totalAmountRows) + "." + j;
                 newNode.transform.localPosition = new Vector3(startX, newNode.transform.localPosition.y - 84f, 0);
 
-                newNode.GetComponent<Node>().OnCreate(nodeCounter);
+                newNode.GetComponent<Node>().OnCreate(nodeCounter);                
 
                 rowNodes.Add(newNode);
                 nodes.Add(newNode);
