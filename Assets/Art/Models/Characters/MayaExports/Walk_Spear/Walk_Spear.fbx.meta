@@ -422,7 +422,26 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nDefault bone length found in this file is different
+      form the one found in the source avatar:\n\t'bind_spine_a_01' : position error
+      = 34.570919 mm\n\t'bind_l_fingerLeft_a_01' : position error = 14.833793 mm\n\t'bind_l_fingerLeft_c_01'
+      : position error = 19.173004 mm\n\nInbetween bone default rotation found in
+      this file is different from the one found in the source avatar:\n\t'bind_l_ankle_01'
+      : rotation error = 16.982815 deg\n\t'bind_r_ankle_01' : rotation error = 5.533082
+      deg\n\t'bind_spine_a_01' : rotation error = 7.927951 deg\n\t'bind_spine_c_01'
+      : rotation error = 6.650501 deg\n\t'bind_l_wrist_01' : rotation error = 87.588867
+      deg\n\t'bind_r_wrist_01' : rotation error = 31.478102 deg\n\nClip 'Walk_Spear'
+      has import animation warnings that might lower retargeting quality:\nNote: Activate
+      translation DOF on avatar to improve retargeting quality.\n\t'bind_pelvis_01'
+      has translation animation that will be discarded.\n\t'bind_pelvis_01' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'bind_l_ankle_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_r_ankle_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_spine_a_01'
+      has translation animation that will be discarded.\n\t'bind_spine_a_01' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'bind_spine_c_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_l_wrist_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_r_wrist_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
@@ -455,7 +474,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.040000003
+        functionName: PlayFootStep
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.536
+        functionName: PlayFootStep
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
