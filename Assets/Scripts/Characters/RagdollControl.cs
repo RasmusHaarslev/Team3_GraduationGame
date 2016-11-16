@@ -8,6 +8,9 @@ public class RagdollControl : MonoBehaviour {
 	[Tooltip("Colliders used for the ragdoll. Script collects them from children...")]
 	private List<Collider> collidersRagdoll;
 
+	private List<Rigidbody> rigidBodiesRagdoll;
+
+
 	[Tooltip("Collect player collider on main object")]
 	private Collider playerCollider;
 
@@ -16,6 +19,7 @@ public class RagdollControl : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		playerCollider = GetComponent<Collider> ();
 		CollectColliders ();
+		CollectRigidBodies ();
 	}
 
 	void Update()
@@ -37,9 +41,8 @@ public class RagdollControl : MonoBehaviour {
 			playerCollider.isTrigger = true;
 		}
 
-		// enable colliders
 		ToggleColliders (true);
-
+		ToggleRigids (false);
 		anim.enabled = false;
 	}
 
@@ -73,11 +76,29 @@ public class RagdollControl : MonoBehaviour {
 		ToggleColliders (false);
 	}
 
+	void CollectRigidBodies()
+	{
+		rigidBodiesRagdoll = new List<Rigidbody> ();
+
+		rigidBodiesRagdoll.AddRange (GetComponentsInChildren<Rigidbody> ());
+
+		ToggleRigids (true);
+
+	}
+
 	void ToggleColliders(bool isEnabled)
 	{
 		for(int i = 0;i<collidersRagdoll.Count;i++)
 		{
 			collidersRagdoll [i].enabled = isEnabled;
+		}
+	}
+
+	void ToggleRigids(bool isEnabled)
+	{
+		for(int i = 0;i<rigidBodiesRagdoll.Count;i++)
+		{
+			rigidBodiesRagdoll [i].isKinematic = isEnabled;
 		}
 	}
 
