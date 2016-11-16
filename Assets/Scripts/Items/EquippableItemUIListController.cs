@@ -108,6 +108,8 @@ public class EquippableItemUIListController : MonoBehaviour
             controller.range.text = "Range: " + values.range;
             newItem.transform.SetParent(ContentPanel.transform);
             newItem.transform.localScale = Vector3.one;
+            newItem.transform.localPosition = Vector3.zero;
+            newItem.transform.localRotation = Quaternion.Euler(0,0,0);
         }
 
     }
