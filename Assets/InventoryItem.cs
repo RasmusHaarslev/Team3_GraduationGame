@@ -7,7 +7,7 @@ public class InventoryItem
     [PrimaryKey, AutoIncrement]
     public int id { get; set; }
     public type Type { get; set; }
-    public int characterId { get; set; }
+    public int deferredId { get; set; }
     public int quantity { get; set; }
     
     public enum type
