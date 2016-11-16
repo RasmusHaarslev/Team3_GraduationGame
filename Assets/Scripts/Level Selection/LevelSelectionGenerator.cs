@@ -78,7 +78,6 @@ public class LevelSelectionGenerator : MonoBehaviour {
                 var nodeScript = nodeCleared.GetComponent<Node>();
 
                 nodeScript.isCleared = true;
-                nodeScript.canPlay = false;
                 nodeScript.SetupImage();
                 nodeScript.SetupUIText();
 

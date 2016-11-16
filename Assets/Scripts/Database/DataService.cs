@@ -535,7 +535,7 @@ public class DataService : MonoBehaviour
 
             equips.Add(currentEquip);
         }
-
+        
         return equips;
     }
 
@@ -568,7 +568,9 @@ public class DataService : MonoBehaviour
                 //into the database
                 currentEquipValues.characterId = character.characterBaseValues.id;
                 _connection.Update(currentEquipValues);
-
+                //remove from inventory
+                _connection.Query<InventoryItem>("DELETE FROM InventoryItem WHERE Type = "+ (int)InventoryItem.type.equippable + " and deferredId = "+ currentEquipValues.id);
+                
             }
             else
             {
@@ -585,8 +587,14 @@ public class DataService : MonoBehaviour
         EquippableItem itemToDetatch = character.equippableSpots[slotToDetatch].GetComponentInChildren<EquippableItem>();
         //detatch and remove the item from the game
         if (itemToDetatch != null)
-        {   //removing from database
-            _connection.Delete(itemToDetatch.itemValues);
+        {   //putting that into the inventory from database
+            itemToDetatch.itemValues.characterId = 0;
+            _connection.Update(itemToDetatch.itemValues);
+            //add in inventory
+            InventoryItem inventoryItem = new InventoryItem();
+            inventoryItem.Type = InventoryItem.type.equippable;
+            inventoryItem.deferredId = itemToDetatch.itemValues.id;
+            _connection.Insert(inventoryItem);
             //removing from scene
             Destroy(itemToDetatch.transform.gameObject);
         }
