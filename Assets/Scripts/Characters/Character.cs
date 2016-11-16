@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
 	//Combat state values
 	public bool isInCombat = false;
 	public bool isDead = false;
+	bool deadEvent = false;
 	//model values
 	//private Dictionary<string, Transform> slots;
 	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;/**/
@@ -49,7 +50,11 @@ public class Character : MonoBehaviour
 		{
 			if (isDead != true && characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
-				EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+				if (deadEvent == false)
+				{
+					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+					deadEvent = true;
+				}
 			}
 			else if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
 			{
