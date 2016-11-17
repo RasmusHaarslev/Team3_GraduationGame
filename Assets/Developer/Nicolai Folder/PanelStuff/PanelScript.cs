@@ -34,35 +34,35 @@ public class PanelScript : MonoBehaviour {
             soldier.AddComponent<PanelController>();
             soldier.GetComponent<NavMeshAgent>().enabled = false;     
         }
-
+        
         soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[0].GetComponent<MoveScript>().enabled = false;
-        soldiersList[0].layer = LayerMask.NameToLayer("Player");
-        soldiersList[1].layer = LayerMask.NameToLayer("Hunter1");
-        soldiersList[2].layer = LayerMask.NameToLayer("Hunter2");
-        soldiersList[3].layer = LayerMask.NameToLayer("Hunter3");
+        soldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Player");
+        soldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        soldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+        soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
     }
     
     public void ActivateCamera(GameObject soldier)
     {
-        if(soldier.layer == 9)
+        if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
             soldierCameraList[0].enabled = true;
             DeactivateCamera(0);
         }
-        if (soldier.layer == 10)
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 10)
         {
             soldierCameraList[1].enabled = true;
             DeactivateCamera(1);
         }
-        if (soldier.layer == 11)
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 11)
         {
             soldierCameraList[2].enabled = true;
             DeactivateCamera(2);
         }
-        if (soldier.layer == 12)
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 12)
         {
             soldierCameraList[3].enabled = true;
             DeactivateCamera(3);
