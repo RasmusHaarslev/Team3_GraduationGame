@@ -55,8 +55,8 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 4
     m_Resolution: 2
-    m_BakeResolution: 40
-    m_TextureWidth: 1024
+    m_BakeResolution: 10
+    m_TextureWidth: 512
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
@@ -1188,6 +1188,7 @@ GameObject:
   - 114: {fileID: 362531836}
   - 114: {fileID: 362531835}
   - 114: {fileID: 362531841}
+  - 114: {fileID: 362531842}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1315,6 +1316,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followers: []
   output: 
+--- !u!114 &362531842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 362531834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f19108706fdce9469603d07980eb8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendMode: 3
+  intensity: 1
+  texture: {fileID: 2800000, guid: b2c8ca9ae8d5a6a4b80939b7bbca1b03, type: 3}
+  overlayShader: {fileID: 4800000, guid: 8c81db0e527d24acc9bcec04e87781bd, type: 3}
 --- !u!1001 &375649740
 Prefab:
   m_ObjectHideFlags: 0
@@ -2295,22 +2311,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 118312587}
   m_RootOrder: 73
---- !u!1 &840803690 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011824219998, guid: ac6d4d13d0281b446882045bf32fada5,
-    type: 2}
-  m_PrefabInternal: {fileID: 392171909}
---- !u!114 &840803691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 840803690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0279683ab453c2e43b23a4dc21f4e8a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &849495392 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000014093300836, guid: e07459f840aec7945a421468faab73a5,
