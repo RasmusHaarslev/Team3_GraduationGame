@@ -80,9 +80,7 @@ public class Character : MonoBehaviour
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
-		//{EquippableitemValues.slot.rightHand_Spear, rightHandSlot_Spear},
 		{EquippableitemValues.slot.rightHand, rightHandSlot},
-
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
 	}
