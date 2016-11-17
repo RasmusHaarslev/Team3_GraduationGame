@@ -30,7 +30,6 @@ public class MoveScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log(agent.remainingDistance);
 		if (character.currentHealth <= 0 && isDead == false)
 		{
 			EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
