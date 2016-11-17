@@ -217,9 +217,6 @@ public class CampManager : MonoBehaviour
         TextLevels[2].text = Upgrades.MaxVillages + "";
         TextLevels[3].text = Upgrades.LeaderHealthLevel + "";
         TextLevels[4].text = Upgrades.LeaderStrengthLevel + "";
-
-        foreach (var but in Buttons)
-            but.interactable = true;
     }
 
     private int GetTimeForUpgrade(int level) {
