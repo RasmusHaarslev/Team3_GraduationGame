@@ -13,6 +13,6 @@ public class PanelClicked : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData) 
     {   
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+
     }
 }
