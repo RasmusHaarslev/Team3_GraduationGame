@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 			}
 			isDead = true;
-			//GetComponent<MeshRenderer>().enabled = false;
+			GetComponent<RagdollControl>().EnableRagDoll();
 		}
 	}
 

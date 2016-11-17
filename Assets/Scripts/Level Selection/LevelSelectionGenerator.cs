@@ -416,7 +416,7 @@ public class LevelSelectionGenerator : MonoBehaviour
     {
         from.transform.SetParent(to.transform);
         from.transform.localPosition = new Vector3(to.transform.localPosition.x, 0f, 0f);
-        from.transform.localScale = new Vector3(1, 1, 1);
+        from.transform.localScale = new Vector3(1, 1, 1);        
     }
 
     /// <summary>

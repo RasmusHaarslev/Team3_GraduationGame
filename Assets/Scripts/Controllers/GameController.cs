@@ -12,8 +12,6 @@ public class GameController : MonoBehaviour {
     public int _VILLAGERS = 10;
     public int _COINS = 10;
 
-    public GameObject OverAllSound;
-
     #region Setup Instance
     private static GameController _instance;
 
