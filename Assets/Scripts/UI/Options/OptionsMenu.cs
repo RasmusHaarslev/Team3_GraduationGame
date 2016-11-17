@@ -4,14 +4,21 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour {
 
+    private float currentMusicVolume = 0.5f;
+    private float currentFXVolume = 0.5f;
+
     public Text MenuHeader;
-    public GameObject OverAllSound;
     public GameObject Music;
     public GameObject FX;
     public GameObject LanguageHeader;
 
     public GameObject ToggleDanish;
     
+    void Start()
+    {
+        AdjustMusicVolume();
+    }
+
 	void OnEnable () {
         UpdateText();
     }
@@ -19,33 +26,61 @@ public class OptionsMenu : MonoBehaviour {
     public void UpdateText()
     {
         MenuHeader.text = TranslationManager.Instance.GetTranslation("Menu");
-        OverAllSound.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("GeneralSound");
-        Music.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Music");
-        FX.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("FX");
-        LanguageHeader.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("LanguageHeader");
+        Music.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Music");
+        FX.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("FX");
+        LanguageHeader.transform.GetChild(0).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("LanguageHeader");
+        LanguageHeader.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("English");
+        LanguageHeader.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Danish");
     }
-
-    public void ToggleSound()
+    #region MUSIC OPTIONS
+    public void ToggleMusic()
     {
-        Manager_Audio.overAllSoundToggle = !Manager_Audio.overAllSoundToggle;
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.musicToggle = !Manager_Audio.musicToggle;
 
-        if (Manager_Audio.overAllSoundToggle)
+        if (Manager_Audio.musicToggle)
         {
-            Manager_Audio.SendParameterValue(Manager_Audio.adjustOverallVolume, Manager_Audio.currentOverAllSoundVolume);
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
         }
         else
         {
-            Manager_Audio.SendParameterValue(Manager_Audio.adjustOverallVolume, 0);
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, 0);
         }
     }
 
-    public void AdjustSound()
+    public void AdjustMusicVolume()
     {
-        Manager_Audio.currentOverAllSoundVolume = OverAllSound.transform.GetChild(1).GetComponent<Slider>().value;
+        currentMusicVolume = Music.transform.GetChild(1).GetComponent<Slider>().value;
+        Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
     }
+    #endregion
+
+    #region FX OPTIONS
+    public void ToggleFX()
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.fxToggle = !Manager_Audio.fxToggle;
+
+        if (Manager_Audio.fxToggle)
+        {
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
+        }
+        else
+        {
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, 0);
+        }
+    }
+
+    public void AdjustFXVolume()
+    {
+        currentFXVolume = FX.transform.GetChild(1).GetComponent<Slider>().value;
+        Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
+    }
+    #endregion
 
     public void ChangeLanguage()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (ToggleDanish.GetComponent<Toggle>().isOn)
         {
             TranslationManager.Instance.LoadLanguage(false);
