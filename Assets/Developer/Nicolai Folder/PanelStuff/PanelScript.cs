@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 public class PanelScript : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class PanelScript : MonoBehaviour {
     public Transform solidersSpawnPosition;
     GameObject charactersFellowship;
     public List<Camera> soldierCameraList = new List<Camera>();
+    Character currentSoldier;
 
     void Start()
     {
@@ -82,7 +84,7 @@ public class PanelScript : MonoBehaviour {
 
     public void UpdateSoldierStats(GameObject soldier)
     {
-        Character currentSoldier = soldier.GetComponent<Character>();
+        currentSoldier = soldier.GetComponent<Character>();
         foreach(var stat in soldierStatsList)
         {        
             if (stat.name == "Type")
@@ -124,5 +126,17 @@ public class PanelScript : MonoBehaviour {
 
         }
             
+    }
+
+    public void ActivateInventoryPanel()
+    {
+        panelList[5].GetComponent< EquippableItemUIListController >().itemsValues = dataService.GetEquippableItemsValuesFromInventory().ToArray();
+        panelList[5].SetActive(true);
+    }
+
+    public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
+    {
+        IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
+        dataService.equipItemsToCharacter(weapon, currentSoldier);
     }
 }
