@@ -14,7 +14,7 @@ public class EquippableitemValues
     public string description { get; set; }
     public int damage { get; set; }
     public int health { get; set; }
-    public int damageSpeed { get; set; }
+    public float damageSpeed { get; set; }
     public int range { get; set; }
     public string prefabName { get; set; }
 

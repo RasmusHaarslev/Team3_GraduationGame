@@ -50,7 +50,7 @@ public class MoveScript : MonoBehaviour
 				{
 					character.isInCombat = true;
 					agent.SetDestination(character.target.transform.position);
-					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+					distanceToTarget = agent.remainingDistance;
 					if (distanceToTarget < agent.stoppingDistance)
 					{
 						character.RotateTowards(character.target.transform);
@@ -91,19 +91,20 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
+				
 
 				hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
 			}
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
-				agent.stoppingDistance = 1.5f;
+				agent.stoppingDistance = 1.2f;
 			}
 			else
 			{
 				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
-				agent.stoppingDistance = 1.5f;
-				agent.SetDestination(hit.point);
+				agent.stoppingDistance = 1.2f;
+				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
 				attacking = false;
 			}
 		}

@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{AF8BB386-55BF-49A9-970A-610545106FDF}" SchemaVersion="72">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{AF8BB386-55BF-49A9-970A-610545106FDF}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{AF8BB386-55BF-49A9-970A-610545106FDF}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="SFXVol" ID="{8226DE71-C143-47F5-8117-8303CB00D423}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="1"/>
+						<Property Name="Max" Type="Real64" Value="1"/>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="MusicVol" ID="{DF5A4AB7-D6DB-4E82-9D7D-FB8B83B42EC6}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="1"/>
+						<Property Name="Max" Type="Real64" Value="1"/>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>

@@ -2,12 +2,17 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
+using System.IO;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
     public int _COINS = 10;
+
+    public GameObject OverAllSound;
 
     #region Setup Instance
     private static GameController _instance;
@@ -65,5 +70,34 @@ public class GameController : MonoBehaviour {
         {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
+    }
+
+    public void ToggleSound()
+    {
+        GameController.Instance.GetComponent<AudioSource>().volume = GameController.Instance.GetComponent<AudioSource>().volume == 1 ? 0 : 1;
+    }
+
+    public void AdjustSound(float value)
+    {
+        GameController.Instance.GetComponent<AudioSource>().volume = value;
+    }
+
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene("LevelPrototype01");
+
+        var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
+        List<string> scenes = new List<string>();
+
+        foreach (var scene in sceneDirectory.GetFiles())
+        {
+            if (scene.Name.EndsWith(".unity"))
+            {
+                scenes.Add("Assets/_Scenes/Levels/" + scene.Name);
+            }
+        }
+
+        var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
+        SceneManager.LoadScene(randomScene);
     }
 }

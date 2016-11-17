@@ -136,7 +136,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
         // IF NOT DEBUG USE THIS
         //GameController.Instance.LoadScene(node.GetComponent<Node>().sceneSelection);
-        GameController.Instance.LoadScene("LevelPrototype01WithSound");        
+        GameController.Instance.LoadLevel();
     }
 
     public void Scout(GameObject node)

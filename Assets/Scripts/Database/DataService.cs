@@ -97,7 +97,7 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Player,
 				damage = 5,
 				health = 100,
-				damageSpeed = 5,
+				damageSpeed = 1.5f,
 				range = 5,
 				prefabName = "Player"
 			},
@@ -108,7 +108,7 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Hunter,
 				damage = 8,
 				health = 50,
-				damageSpeed = 4,
+				damageSpeed = 2.5f,
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.BraveFool,
 				targetTrait = CharacterValues.TargetTrait.NoTrait,
@@ -121,7 +121,7 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Hunter,
 				damage = 5,
 				health = 50,
-				damageSpeed = 4,
+				damageSpeed = 1f,
 				range = 7,
 				combatTrait = CharacterValues.CombatTrait.Clingy,
 				targetTrait = CharacterValues.TargetTrait.Loyal,
@@ -134,7 +134,7 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Hunter,
 				damage = 9,
 				health = 50,
-				damageSpeed = 4,
+				damageSpeed = 0.5f,
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.Fearful,
 				targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
@@ -275,7 +275,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 10,
-			 damageSpeed = 9,
+			 damageSpeed = 2f,
 			 range = 5,
 			 characterId = 1,
 			 prefabName = "Stick"
@@ -288,7 +288,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.leftHand,
 			 health = 20,
 			 damage = 10,
-			 damageSpeed = 9,
+			 damageSpeed = 2f,
 			 range = 5,
 			 characterId = 2,
 			 prefabName = "Shield"
@@ -301,7 +301,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 10,
-			 damageSpeed = 9,
+			 damageSpeed = 2.5f,
 			 range = 20,
 			 characterId = 3,
 			 prefabName = "Rifle"
@@ -314,7 +314,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 25,
 			 damage = 15,
-			 damageSpeed = 15,
+			 damageSpeed = 1.5f,
 			 range = 15,
 			 prefabName = "Rifle"
 		 },
@@ -326,7 +326,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 20,
-			 damageSpeed = 9,
+			 damageSpeed = 1.5f,
 			 range = 5,
 			 prefabName = "Stick"
 		 },
@@ -338,7 +338,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 25,
-			 damageSpeed = 9,
+			 damageSpeed = 1.5f,
 			 range = 2,
 			 prefabName = "Stick"
 		 }

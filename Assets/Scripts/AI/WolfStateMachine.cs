@@ -76,7 +76,7 @@ public class WolfStateMachine : CoroutineMachine {
 
 	IEnumerator RoamState() {
 		agent.Resume();
-		agent.stoppingDistance = 0;
+		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(originalPosition);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
@@ -87,7 +87,7 @@ public class WolfStateMachine : CoroutineMachine {
 
 	IEnumerator FleeState() {
 		agent.Resume();
-		agent.stoppingDistance = 0;
+		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
