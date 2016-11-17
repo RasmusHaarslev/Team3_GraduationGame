@@ -62,6 +62,11 @@ public class LevelManager : MonoBehaviour {
         //Follower dies
         EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
     }
+
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
     #endregion
 
     #region functions
