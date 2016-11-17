@@ -13,7 +13,7 @@ public class BackgroundOptionPanelScript : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (panelClickedScript.isClicked)
         {
             foreach (Transform child in gameObject.transform)

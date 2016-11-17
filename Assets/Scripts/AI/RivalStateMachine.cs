@@ -95,7 +95,7 @@ public class RivalStateMachine : CoroutineMachine
 	{
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(originalPosition);
+		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

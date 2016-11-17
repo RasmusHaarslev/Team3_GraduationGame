@@ -23,6 +23,7 @@ public class CampManager : MonoBehaviour
     public int MaxVillagesCostIncrease;
 
     public Text[] TextLevels;
+    public Button[] Buttons;
 
     #region Setup Instance
     private static CampManager _instance;
@@ -50,7 +51,10 @@ public class CampManager : MonoBehaviour
 
     private void SaveUpgrades()
     {
-        var path = Path.Combine(Application.persistentDataPath, "upgrades.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
+
+        foreach (var but in Buttons)
+            but.interactable = !Upgrades.UpgradeInProgress;
 
         var serializer = new XmlSerializer(typeof(CampUpgrades));
         var stream = new FileStream(path, FileMode.Create);
@@ -60,7 +64,7 @@ public class CampManager : MonoBehaviour
 
     private void LoadUpgrades()
     {
-        var path = Path.Combine(Application.persistentDataPath, "upgrades.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
 
         if (File.Exists(path))
         {
@@ -68,6 +72,7 @@ public class CampManager : MonoBehaviour
             var stream = new FileStream(path, FileMode.Open);
             Upgrades = serializer.Deserialize(stream) as CampUpgrades;
             Upgrades.GetCurrency();
+            SetLevels();
             stream.Close();
         }
         else {
@@ -106,6 +111,7 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = "";
         SaveUpgrades();
+        SetLevels();
     }
 
     public double TimeLeftInSeconds()
@@ -120,7 +126,7 @@ public class CampManager : MonoBehaviour
                 return 0.0;
             }
             else
-                return timeLeft;
+                return (int) timeLeft;
         }
         else
         {
@@ -131,6 +137,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeGather()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.GatherLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
         
@@ -143,6 +152,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeVillages()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -155,6 +167,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeBlacksmith()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -167,6 +182,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeLeaderHealth()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -179,6 +197,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeLeaderStrength()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -196,6 +217,9 @@ public class CampManager : MonoBehaviour
         TextLevels[2].text = Upgrades.MaxVillages + "";
         TextLevels[3].text = Upgrades.LeaderHealthLevel + "";
         TextLevels[4].text = Upgrades.LeaderStrengthLevel + "";
+
+        foreach (var but in Buttons)
+            but.interactable = true;
     }
 
     private int GetTimeForUpgrade(int level) {
