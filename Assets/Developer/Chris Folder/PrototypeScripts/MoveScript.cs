@@ -12,7 +12,7 @@ public class MoveScript : MonoBehaviour
 	float attackSpeed;
 	float counter = 0;
 	bool attack = false;
-
+	bool isDead = false;
 
 	// Use this for initialization
 	void Start()
@@ -30,6 +30,11 @@ public class MoveScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (character.currentHealth <= 0 && isDead == false)
+		{
+			EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
+			isDead = true;
+		}
 		if (movement)
 		{
 			if (Input.GetKey(KeyCode.Mouse0))

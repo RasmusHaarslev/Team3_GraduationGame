@@ -40,6 +40,7 @@ public class Character : MonoBehaviour
 	public Transform torsoSlot;
 	public Transform legsSlot;
 
+
 	// Use this for initialization
 	void Start()
 	{
@@ -79,7 +80,7 @@ public class Character : MonoBehaviour
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
-		{EquippableitemValues.slot.rightHand, rightHandSlot },
+		{EquippableitemValues.slot.rightHand, rightHandSlot},
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
 	}
@@ -166,24 +167,16 @@ public class Character : MonoBehaviour
 			foreach (GameObject opp in currentOpponents)
 			{
 				var hunter = opp.GetComponent<HunterStateMachine>();
-				if (hunter != null && hunter.combatTrait == CharacterValues.CombatTrait.VeryUnlikable)
+
+				if (UnityEngine.Random.Range(0, 1) == 1)
 				{
-					target = opp;
-					break;
+					target = FindRandomEnemy();
 				}
 				else
 				{
-					if (UnityEngine.Random.Range(0, 1) == 1)
-					{
-						target = FindRandomEnemy();
-					}
-					else
-					{
-						target = FindNearestEnemy();
-					}
+					target = FindNearestEnemy();
 				}
 			}
-
 		}
 		else
 		{
