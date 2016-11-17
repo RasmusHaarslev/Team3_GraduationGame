@@ -169,24 +169,16 @@ public class Character : MonoBehaviour
 			foreach (GameObject opp in currentOpponents)
 			{
 				var hunter = opp.GetComponent<HunterStateMachine>();
-				if (hunter != null && hunter.combatTrait == CharacterValues.CombatTrait.VeryUnlikable)
+
+				if (UnityEngine.Random.Range(0, 1) == 1)
 				{
-					target = opp;
-					break;
+					target = FindRandomEnemy();
 				}
 				else
 				{
-					if (UnityEngine.Random.Range(0, 1) == 1)
-					{
-						target = FindRandomEnemy();
-					}
-					else
-					{
-						target = FindNearestEnemy();
-					}
+					target = FindNearestEnemy();
 				}
 			}
-
 		}
 		else
 		{

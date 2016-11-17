@@ -111,7 +111,7 @@ public class DataService : MonoBehaviour
 				damageSpeed = 4,
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.BraveFool,
-				targetTrait = CharacterValues.TargetTrait.Bully,
+				targetTrait = CharacterValues.TargetTrait.NoTrait,
 				prefabName = "Follower"
 			},
 		 new CharacterValues
@@ -123,8 +123,8 @@ public class DataService : MonoBehaviour
 				health = 50,
 				damageSpeed = 4,
 				range = 7,
-				combatTrait = CharacterValues.CombatTrait.Desperate,
-				targetTrait = CharacterValues.TargetTrait.GlorySeeker,
+				combatTrait = CharacterValues.CombatTrait.Clingy,
+				targetTrait = CharacterValues.TargetTrait.Loyal,
 				prefabName = "Follower"
 			},
 		 new CharacterValues
@@ -136,21 +136,8 @@ public class DataService : MonoBehaviour
 				health = 50,
 				damageSpeed = 4,
 				range = 2,
-				combatTrait = CharacterValues.CombatTrait.VeryUnlikable,
+				combatTrait = CharacterValues.CombatTrait.Fearful,
 				targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-				prefabName = "Follower"
-			},
-		 new CharacterValues
-			{
-				id = 4,
-				name = "Christian",
-				Type = CharacterValues.type.Hunter,
-				damage = 3,
-				health = 50,
-				damageSpeed = 9,
-				range = 3,
-				combatTrait = CharacterValues.CombatTrait.Vengeful,
-				targetTrait = CharacterValues.TargetTrait.Codependant,
 				prefabName = "Follower"
 			},
 		  new CharacterValues
@@ -162,7 +149,6 @@ public class DataService : MonoBehaviour
 				health = 50,
 				damageSpeed = 1,
 				range = 2,
-
 				prefabName = "EnemyLeader"
 			},
 
