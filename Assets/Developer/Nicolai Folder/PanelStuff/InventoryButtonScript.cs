@@ -14,7 +14,8 @@ public class InventoryButtonScript : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         panelScript.ActivateInventoryPanel();
-        panelScript.panelList[4].SetActive(true);
+        panelScript.panelList[5].SetActive(true);
+        panelScript.panelList[1].SetActive(false);
     }
 
 }
