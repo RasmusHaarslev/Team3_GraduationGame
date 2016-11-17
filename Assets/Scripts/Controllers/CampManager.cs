@@ -47,14 +47,6 @@ public class CampManager : MonoBehaviour
     void Start()
     {
         LoadUpgrades();
-        Manager_Audio.PlaySound(Manager_Audio.play_menuMusic, gameObject);
-        Manager_Audio.PlaySound(Manager_Audio.play_menuAmbience, gameObject);
-    }
-
-    void OnDisable()
-    {
-        Manager_Audio.PlaySound(Manager_Audio.stop_menuMusic, gameObject);
-        Manager_Audio.PlaySound(Manager_Audio.stop_menuAmbience, gameObject);
     }
 
     private void SaveUpgrades()
