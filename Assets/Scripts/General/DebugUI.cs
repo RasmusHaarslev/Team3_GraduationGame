@@ -91,7 +91,11 @@ public class DebugUI : MonoBehaviour
         if (type.ToString() == "Exception")
         {
             output += logString + "\n" + stackTrace + "\n";
-            SendMail();
+            
+            #if !UNITY_EDITOR
+                SendMail();
+            #endif
+
         }
     }
 

@@ -148,14 +148,9 @@ public class PopUpFunctionality : MonoBehaviour {
 
         // Left Panel
         LeftPanel.SetActive(true);
-        wolveText.text = "Wolve dens : " + node.GetComponent<Node>().wolveCamps;
-        tribeText.text = "Tribe camps : " + node.GetComponent<Node>().tribeCamps;
-        choiceText.text = "Choice camps : " + node.GetComponent<Node>().choiceCamps;
 
         // Right Panel
         RightPanel.SetActive(true);
-        foodText.text = "Food : " + node.GetComponent<Node>().foodAmount;
-        coinsText.text = "Coins : " + node.GetComponent<Node>().coinAmount;
 
         node.GetComponent<Node>().isScouted = true;
 
