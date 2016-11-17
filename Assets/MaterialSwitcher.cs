@@ -5,12 +5,12 @@ public class MaterialSwitcher : MonoBehaviour {
 
     public Material standard;
     public Material targeted;
-    public MeshRenderer meshRenderer;
+    public SkinnedMeshRenderer meshRenderer;
     private bool target = false;
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        //meshRenderer = GetComponent<SkinnedMeshRenderer>();
     }
     
     public void SwitchMaterial()
