@@ -100,28 +100,6 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Play_MenuMusic0_4" ID="{20445E6F-137B-44C0-B65A-8EC57135B92E}">
-							<ChildrenList>
-								<Action Name="Play" ID="{EFF4D964-44E0-4680-B819-079A8162AADE}" ShortID="655250087" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{5DB21A68-8AF2-4D9D-B44E-2CF9A7D413CF}" Global="false">
-											<ObjectRef Name="MenuMusic0_4" ID="{F15EAD05-CDF2-486C-8C4C-8323FD779D2E}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_ExploreMusic" ID="{AB75F84A-D1BF-4EB8-B3D1-90503DF93F85}">
-							<ChildrenList>
-								<Action Name="Play" ID="{A41202BF-38CA-4ACA-94B0-9BF7027AACCA}" ShortID="580855325" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{3BC6A2AA-F8B8-430E-B4F3-2B077FB4B303}" Global="false">
-											<ObjectRef Name="ExploreMusic" ID="{78BFD393-CAA3-4A93-B179-02E3F828CA60}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
 						<Event Name="Stop_GroundAmbience" ID="{63617761-5C01-4EC1-A0BA-655ED12C3DF5}">
 							<ChildrenList>
 								<Action Name="Stop" ID="{A5495522-8523-4835-BEFD-BEE5CAB892CA}" ShortID="844698797" Type="Stop" Scope="One" Global="false">
@@ -718,6 +696,17 @@
 							<ElementList>
 								<Element ID="{5C71EB47-20B2-4C0B-8E42-C75F33B25AE5}" Global="false">
 									<ObjectRef Name="MenuAmbience" ID="{1E78B28A-8A8E-4C3D-9B8C-2E93A36B8BC8}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Music" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}">
+					<ChildrenList>
+						<Action Name="Play" ID="{AE794CCD-C97C-4BCB-86A8-45DF4C84B92B}" ShortID="1003170738" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{783DC8FE-1485-410A-BC5B-996D06C969C9}" Global="false">
+									<ObjectRef Name="Music" ID="{C2CAEDBD-8423-472B-8CDE-1E03ACBD1F60}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
 								</Element>
 							</ElementList>
 						</Action>
