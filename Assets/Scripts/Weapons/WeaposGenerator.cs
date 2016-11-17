@@ -90,7 +90,7 @@ public class WeaposGenerator : MonoBehaviour
 
         }
 
-        itemValues.Slot = EquippableitemValues.slot.rightHand_Spear;
+        itemValues.Slot = EquippableitemValues.slot.rightHand;
 
         return itemValues;
 
