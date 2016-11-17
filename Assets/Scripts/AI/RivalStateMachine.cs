@@ -94,8 +94,8 @@ public class RivalStateMachine : CoroutineMachine
 	IEnumerator RoamState()
 	{
 		agent.Resume();
-		agent.stoppingDistance = 0;
-		agent.SetDestination(originalPosition);
+		agent.stoppingDistance = 1.2f;
+		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -107,7 +107,7 @@ public class RivalStateMachine : CoroutineMachine
 	IEnumerator FleeState()
 	{
 		agent.Resume();
-		agent.stoppingDistance = 0;
+		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}

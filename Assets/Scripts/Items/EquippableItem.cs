@@ -7,7 +7,7 @@ public class EquippableItem : MonoBehaviour
 {
     public int healthIncrease;
     public int damageIncrease;
-    public int damageSpeed;
+    public float damageSpeed;
     public int range;
 	public Vector3 weaponRotation;
 	public Vector3 weaponPosition;

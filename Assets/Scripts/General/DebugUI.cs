@@ -51,7 +51,7 @@ public class DebugUI : MonoBehaviour
         EventManager.Instance.StartListening<LevelWon>(Won);
         EventManager.Instance.StartListening<LevelLost>(Lost);
 
-        Application.logMessageReceived += HandleLog;
+        //Application.logMessageReceived += HandleLog;
     }
 
     void OnDisable()
@@ -59,7 +59,7 @@ public class DebugUI : MonoBehaviour
         EventManager.Instance.StopListening<LevelWon>(Won);
         EventManager.Instance.StopListening<LevelLost>(Lost);
 
-        Application.logMessageReceived -= HandleLog;
+        //Application.logMessageReceived -= HandleLog;
     }
 
     private void Lost(LevelLost e)

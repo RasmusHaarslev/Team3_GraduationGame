@@ -13,14 +13,13 @@ public class HunterStateMachine : CoroutineMachine
 		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
 		leader = GameObject.FindGameObjectWithTag("Player");
+		formation = leader.GetComponent<Formation>();
 		EventManager.Instance.StartListening<OffensiveStateEvent>(Offense);
 		EventManager.Instance.StartListening<DefendStateEvent>(Defense);
 		EventManager.Instance.StartListening<FollowStateEvent>(Follow);
 		EventManager.Instance.StartListening<StayStateEvent>(Stay);
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
-
 	}
-
 
 	void OnDisable()
 	{
@@ -29,9 +28,7 @@ public class HunterStateMachine : CoroutineMachine
 		EventManager.Instance.StopListening<FollowStateEvent>(Follow);
 		EventManager.Instance.StopListening<StayStateEvent>(Stay);
 		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
-
 	}
-
 
 	#endregion
 
@@ -70,6 +67,7 @@ public class HunterStateMachine : CoroutineMachine
 	Character character;
 	NavMeshAgent agent;
 	GameObject leader;
+	Formation formation;
 
 	public enum CombatCommandState
 	{
@@ -225,24 +223,8 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FollowState()
 	{
 		agent.Resume();
-		agent.stoppingDistance = 0;
-		// TODO make these dynamic:
-		if (partyID == 1)
-		{
-			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 - leader.transform.right * 2);
-		}
-		else if (partyID == 2)
-		{
-			agent.SetDestination(leader.transform.position - leader.transform.forward * 4);
-		}
-		else if (partyID == 3)
-		{
-			agent.SetDestination(leader.transform.position - leader.transform.forward * 2 + leader.transform.right * 2);
-		}
-		else if (partyID == 4)
-		{
-			agent.SetDestination(leader.transform.position - leader.transform.forward * 4 + leader.transform.right * 2);
-		}
+		agent.stoppingDistance = 1.2f;
+		agent.SetDestination(formation.formationPositions[gameObject]);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -257,7 +239,7 @@ public class HunterStateMachine : CoroutineMachine
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
-		agent.stoppingDistance = 0;
+		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
