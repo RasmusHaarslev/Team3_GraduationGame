@@ -285,7 +285,7 @@ public class DataService : MonoBehaviour
 			 id = 2,
 			 name = "Plastic Shield",
 			 Type = EquippableitemValues.type.shield,
-			 Slot = EquippableitemValues.slot.rightHand,
+			 Slot = EquippableitemValues.slot.leftHand,
 			 health = 20,
 			 damage = 10,
 			 damageSpeed = 9,
