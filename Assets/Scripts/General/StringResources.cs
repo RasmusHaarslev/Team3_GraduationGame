@@ -15,6 +15,9 @@ public class StringResources
 
     public static string hardnessLevel = "LevelDifficulty";
 
+    public static string follower1PrefabName = "Follower1";
+
+    public static string follower2PrefabName = "Follower2";
 
     // Use this for initialization
     void Start () {

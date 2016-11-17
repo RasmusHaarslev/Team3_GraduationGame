@@ -112,7 +112,7 @@ public class DataService : MonoBehaviour
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.BraveFool,
 				targetTrait = CharacterValues.TargetTrait.NoTrait,
-				prefabName = "Follower"
+				prefabName = StringResources.follower1PrefabName
 			},
 		 new CharacterValues
 			{
@@ -125,8 +125,8 @@ public class DataService : MonoBehaviour
 				range = 7,
 				combatTrait = CharacterValues.CombatTrait.Clingy,
 				targetTrait = CharacterValues.TargetTrait.Loyal,
-				prefabName = "Follower"
-			},
+				prefabName = StringResources.follower1PrefabName
+            },
 		 new CharacterValues
 			{
 				id = 3,
@@ -138,8 +138,8 @@ public class DataService : MonoBehaviour
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.Fearful,
 				targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-				prefabName = "Follower"
-			},
+				prefabName = StringResources.follower1PrefabName
+            },
 		  new CharacterValues
 			{
 				name = "Yasmin",
@@ -576,10 +576,18 @@ public class DataService : MonoBehaviour
 		EquippableItem itemToDetatch = character.equippableSpots[slotToDetatch].GetComponentInChildren<EquippableItem>();
 		//detatch and remove the item from the game
 		if (itemToDetatch != null)
-        {   //putting that into the inventory from database
+        {
+            //remove the item values
+            //to the character prefab
+            character.health -= itemToDetatch.healthIncrease;
+            character.damage -= itemToDetatch.damageIncrease;
+            character.damageSpeed = character.characterBaseValues.damageSpeed;
+            character.range = character.characterBaseValues.range;
+            //from database
+            //putting that from character into inventory
             itemToDetatch.itemValues.characterId = 0;
             _connection.Update(itemToDetatch.itemValues);
-            //add in inventory
+            //add it in inventory
             InventoryItem inventoryItem = new InventoryItem();
             inventoryItem.Type = InventoryItem.type.equippable;
             inventoryItem.deferredId = itemToDetatch.itemValues.id;
