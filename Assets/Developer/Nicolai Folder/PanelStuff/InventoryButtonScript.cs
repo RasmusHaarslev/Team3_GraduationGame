@@ -13,6 +13,7 @@ public class InventoryButtonScript : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         panelScript.ActivateInventoryPanel();
         panelScript.panelList[4].SetActive(true);
     }
