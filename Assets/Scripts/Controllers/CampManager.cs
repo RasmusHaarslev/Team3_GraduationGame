@@ -24,8 +24,8 @@ public class CampManager : MonoBehaviour
 
     public Text[] TextLevels;
 
-    #region Setup Instance
-    private static CampManager _instance;
+#region Setup Instance
+private static CampManager _instance;
 
     public static CampManager Instance
     {
@@ -50,7 +50,7 @@ public class CampManager : MonoBehaviour
 
     private void SaveUpgrades()
     {
-        var path = Path.Combine(Application.persistentDataPath, "upgrades.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
 
         var serializer = new XmlSerializer(typeof(CampUpgrades));
         var stream = new FileStream(path, FileMode.Create);
@@ -60,7 +60,7 @@ public class CampManager : MonoBehaviour
 
     private void LoadUpgrades()
     {
-        var path = Path.Combine(Application.persistentDataPath, "upgrades.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
 
         if (File.Exists(path))
         {
