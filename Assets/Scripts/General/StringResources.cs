@@ -15,9 +15,9 @@ public class StringResources
 
     public static string hardnessLevel = "LevelDifficulty";
 
-    public static string follower1PrefabName = "Follower1";
+    public static string follower1PrefabName = "Follower";
 
-    public static string follower2PrefabName = "Follower2";
+    public static string follower2PrefabName = "Follower";
 
     public static string animControllerShieldName = "Humanoid_Shield";
 
