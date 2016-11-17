@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 public class PanelScript : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class PanelScript : MonoBehaviour {
     public Transform solidersSpawnPosition;
     GameObject charactersFellowship;
     public List<Camera> soldierCameraList = new List<Camera>();
+    Character currentSoldier;
 
     void Start()
     {
@@ -34,35 +36,35 @@ public class PanelScript : MonoBehaviour {
             soldier.AddComponent<PanelController>();
             soldier.GetComponent<NavMeshAgent>().enabled = false;     
         }
-
+        
         soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[0].GetComponent<MoveScript>().enabled = false;
-        soldiersList[0].layer = LayerMask.NameToLayer("Player");
-        soldiersList[1].layer = LayerMask.NameToLayer("Hunter1");
-        soldiersList[2].layer = LayerMask.NameToLayer("Hunter2");
-        soldiersList[3].layer = LayerMask.NameToLayer("Hunter3");
+        soldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Player");
+        soldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        soldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+        soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
     }
     
     public void ActivateCamera(GameObject soldier)
     {
-        if(soldier.layer == 9)
+        if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
             soldierCameraList[0].enabled = true;
             DeactivateCamera(0);
         }
-        if (soldier.layer == 10)
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 10)
         {
             soldierCameraList[1].enabled = true;
             DeactivateCamera(1);
         }
-        if (soldier.layer == 11)
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 11)
         {
             soldierCameraList[2].enabled = true;
             DeactivateCamera(2);
         }
-        if (soldier.layer == 12)
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 12)
         {
             soldierCameraList[3].enabled = true;
             DeactivateCamera(3);
@@ -82,7 +84,7 @@ public class PanelScript : MonoBehaviour {
 
     public void UpdateSoldierStats(GameObject soldier)
     {
-        Character currentSoldier = soldier.GetComponent<Character>();
+        currentSoldier = soldier.GetComponent<Character>();
         foreach(var stat in soldierStatsList)
         {        
             if (stat.name == "Type")
@@ -124,5 +126,17 @@ public class PanelScript : MonoBehaviour {
 
         }
             
+    }
+
+    public void ActivateInventoryPanel()
+    {
+        panelList[5].GetComponent< EquippableItemUIListController >().itemsValues = dataService.GetEquippableItemsValuesFromInventory().ToArray();
+        panelList[5].SetActive(true);
+    }
+
+    public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
+    {
+        IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
+        dataService.equipItemsToCharacter(weapon, currentSoldier);
     }
 }

@@ -160,8 +160,6 @@ public class ItemSpawned : GameEvent
     {
         
     }
-
-
 }
 
 public class EnemySpawned : GameEvent
@@ -171,6 +169,11 @@ public class EnemySpawned : GameEvent
     {
         enemyValues = values;
     }
+}
 
-
+public class PlayerDeathEvent : GameEvent
+{
+	public PlayerDeathEvent()
+	{
+	}
 }

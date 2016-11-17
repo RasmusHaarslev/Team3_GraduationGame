@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
     public int _VILLAGERS = 10;
     public int _COINS = 10;
 
+    public GameObject OverAllSound;
+
     #region Setup Instance
     private static GameController _instance;
 
@@ -65,5 +67,15 @@ public class GameController : MonoBehaviour {
         {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
+    }
+
+    public void ToggleSound()
+    {
+        GameController.Instance.GetComponent<AudioSource>().volume = GameController.Instance.GetComponent<AudioSource>().volume == 1 ? 0 : 1;
+    }
+
+    public void AdjustSound(float value)
+    {
+        GameController.Instance.GetComponent<AudioSource>().volume = value;
     }
 }

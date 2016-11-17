@@ -35,9 +35,9 @@ public class LevelManager : MonoBehaviour {
         //Enemy dies for progress
         EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 
-        // -Lose-
-        //Player dies
-        EventManager.Instance.StartListening<EnemyDeathEvent>(PlayerDeath);
+		// -Lose-
+		//Player dies
+        EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
         //Follower dies
         EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
     }
@@ -58,9 +58,14 @@ public class LevelManager : MonoBehaviour {
 
         // -Lose-
         //Player dies
-        EventManager.Instance.StopListening<EnemyDeathEvent>(PlayerDeath);
+        EventManager.Instance.StopListening<PlayerDeathEvent>(PlayerDeath);
         //Follower dies
         EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
+    }
+
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
     }
     #endregion
 
@@ -89,9 +94,9 @@ public class LevelManager : MonoBehaviour {
         CheckConditions();
     }
 
-    void PlayerDeath(EnemyDeathEvent e)
+    void PlayerDeath(PlayerDeathEvent e)
     {
-        //LoseLevel();
+        LoseLevel();
     }
 
     void LootReceived(EnemyDeathEvent e)
