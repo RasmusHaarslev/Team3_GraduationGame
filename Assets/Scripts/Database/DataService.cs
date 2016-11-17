@@ -97,7 +97,7 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Player,
 				damage = 5,
 				health = 100,
-				damageSpeed = 5,
+				damageSpeed = 1.5f,
 				range = 5,
 				prefabName = "Player"
 			},
@@ -108,10 +108,10 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Hunter,
 				damage = 8,
 				health = 50,
-				damageSpeed = 4,
+				damageSpeed = 2.5f,
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.BraveFool,
-				targetTrait = CharacterValues.TargetTrait.Bully,
+				targetTrait = CharacterValues.TargetTrait.NoTrait,
 				prefabName = "Follower"
 			},
 		 new CharacterValues
@@ -121,10 +121,10 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Hunter,
 				damage = 5,
 				health = 50,
-				damageSpeed = 4,
+				damageSpeed = 1f,
 				range = 7,
-				combatTrait = CharacterValues.CombatTrait.Desperate,
-				targetTrait = CharacterValues.TargetTrait.GlorySeeker,
+				combatTrait = CharacterValues.CombatTrait.Clingy,
+				targetTrait = CharacterValues.TargetTrait.Loyal,
 				prefabName = "Follower"
 			},
 		 new CharacterValues
@@ -134,23 +134,10 @@ public class DataService : MonoBehaviour
 				Type = CharacterValues.type.Hunter,
 				damage = 9,
 				health = 50,
-				damageSpeed = 4,
+				damageSpeed = 0.5f,
 				range = 2,
-				combatTrait = CharacterValues.CombatTrait.VeryUnlikable,
+				combatTrait = CharacterValues.CombatTrait.Fearful,
 				targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-				prefabName = "Follower"
-			},
-		 new CharacterValues
-			{
-				id = 4,
-				name = "Christian",
-				Type = CharacterValues.type.Hunter,
-				damage = 3,
-				health = 50,
-				damageSpeed = 9,
-				range = 3,
-				combatTrait = CharacterValues.CombatTrait.Vengeful,
-				targetTrait = CharacterValues.TargetTrait.Codependant,
 				prefabName = "Follower"
 			},
 		  new CharacterValues
@@ -162,7 +149,6 @@ public class DataService : MonoBehaviour
 				health = 50,
 				damageSpeed = 1,
 				range = 2,
-
 				prefabName = "EnemyLeader"
 			},
 
@@ -289,7 +275,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 10,
-			 damageSpeed = 9,
+			 damageSpeed = 2f,
 			 range = 5,
 			 characterId = 1,
 			 prefabName = "Stick"
@@ -299,10 +285,10 @@ public class DataService : MonoBehaviour
 			 id = 2,
 			 name = "Plastic Shield",
 			 Type = EquippableitemValues.type.shield,
-			 Slot = EquippableitemValues.slot.rightHand,
+			 Slot = EquippableitemValues.slot.leftHand,
 			 health = 20,
 			 damage = 10,
-			 damageSpeed = 9,
+			 damageSpeed = 2f,
 			 range = 5,
 			 characterId = 2,
 			 prefabName = "Shield"
@@ -315,7 +301,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 10,
-			 damageSpeed = 9,
+			 damageSpeed = 2.5f,
 			 range = 20,
 			 characterId = 3,
 			 prefabName = "Rifle"
@@ -328,7 +314,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 25,
 			 damage = 15,
-			 damageSpeed = 15,
+			 damageSpeed = 1.5f,
 			 range = 15,
 			 prefabName = "Rifle"
 		 },
@@ -340,7 +326,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 20,
-			 damageSpeed = 9,
+			 damageSpeed = 1.5f,
 			 range = 5,
 			 prefabName = "Stick"
 		 },
@@ -352,7 +338,7 @@ public class DataService : MonoBehaviour
 			 Slot = EquippableitemValues.slot.rightHand,
 			 health = 20,
 			 damage = 25,
-			 damageSpeed = 9,
+			 damageSpeed = 1.5f,
 			 range = 2,
 			 prefabName = "Stick"
 		 }
@@ -558,10 +544,13 @@ public class DataService : MonoBehaviour
 					detatchItemFromCharacter(currentEquipValues.Slot, character);
 				}
 				//parent and position the item on the appropriate slot
-				equip.transform.parent = character.equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
-				//add the new item values
-				//to the character prefab
-				character.health += currentEquipValues.health;
+				equip.transform.parent = character.equippableSpots[currentEquipValues.Slot];
+                equip.transform.localPosition = equip.GetComponent<EquippableItem>().weaponPosition;
+                equip.transform.localRotation = Quaternion.Euler(equip.GetComponent<EquippableItem>().weaponRotation);
+
+                //add the new item values
+                //to the character prefab
+                character.health += currentEquipValues.health;
 				character.damage += currentEquipValues.damage;
 				character.damageSpeed = currentEquipValues.damageSpeed;
 				character.range = currentEquipValues.range;

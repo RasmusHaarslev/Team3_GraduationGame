@@ -14,7 +14,7 @@ public class CharacterValues
 	public string description { get; set; }
 	public int damage { get; set; }
 	public int health { get; set; }
-	public int damageSpeed { get; set; }
+	public float damageSpeed { get; set; }
 	public int range { get; set; }
 	public int tier { get; set; }
 
@@ -32,11 +32,7 @@ public class CharacterValues
 	public enum TargetTrait
 	{
 		NoTrait,
-		Foolhardy,
-		StubbornDefender,
-		Bully,
 		Codependant,
-		GlorySeeker,
 		LowAttentionSpan,
 		Loyal
 	}
@@ -45,10 +41,7 @@ public class CharacterValues
 		NoTrait,
 		BraveFool,
 		Fearful,
-		Clingy,
-		Desperate,
-		Vengeful,
-		VeryUnlikable
+		Clingy
 	}
 
 	public string prefabName { get; set; }

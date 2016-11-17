@@ -29,10 +29,14 @@ public class TranslationManager : MonoBehaviour
     }
     #endregion
 
-    private void LoadLanguage(bool isEnglish = false)
+    public void LoadLanguage(bool isEnglish = false)
     {
+        if (LoadedTranlations.Count > 0)
+        {
+            LoadedTranlations.Clear();
+        }
         English = isEnglish;
-
+        
         string line;
 
         // Read the file and display it line by line.

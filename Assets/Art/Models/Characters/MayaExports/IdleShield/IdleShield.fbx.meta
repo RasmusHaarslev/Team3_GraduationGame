@@ -422,7 +422,24 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nDefault bone length found in this file is different
+      form the one found in the source avatar:\n\t'bind_spine_a_01' : position error
+      = 14.434406 mm\n\t'bind_l_fingerLeft_a_01' : position error = 12.846491 mm\n\t'bind_l_fingerLeft_c_01'
+      : position error = 16.047047 mm\n\nInbetween bone default rotation found in
+      this file is different from the one found in the source avatar:\n\t'bind_l_ankle_01'
+      : rotation error = 6.647837 deg\n\t'bind_r_ankle_01' : rotation error = 7.183064
+      deg\n\t'bind_spine_b_01' : rotation error = 3.503122 deg\n\t'bind_spine_c_01'
+      : rotation error = 3.500581 deg\n\t'bind_l_wrist_01' : rotation error = 9.916506
+      deg\n\t'bind_r_wrist_01' : rotation error = 9.916506 deg\n\nClip 'IdleShield'
+      has import animation warnings that might lower retargeting quality:\nNote: Activate
+      translation DOF on avatar to improve retargeting quality.\n\t'bind_pelvis_01'
+      has translation animation that will be discarded.\n\t'bind_pelvis_01' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'bind_l_ankle_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_r_ankle_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_spine_a_01'
+      has translation animation that will be discarded.\n\t'bind_spine_b_01' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'bind_spine_c_01'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
@@ -889,7 +906,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     human:
     - boneName: jDrv_root_01
@@ -948,7 +965,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: bind_spine_b_01
+    - boneName: bind_spine_a_01
       humanName: Spine
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -2035,7 +2052,7 @@ ModelImporter:
       transformModified: 1
     - name: bind_l_fingerLeft_a_01
       position: {x: 0.00018146844, y: 0.053075146, z: -0.038546782}
-      rotation: {x: 0.10231985, y: -0.00003594221, z: -0.0009831402, w: 0.99475104}
+      rotation: {x: 0.10231986, y: -0.000035942212, z: -0.0009831403, w: 0.9947511}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: bind_l_fingerLeft_b_01
@@ -2050,7 +2067,7 @@ ModelImporter:
       transformModified: 1
     - name: bind_l_fingerRight_a_01
       position: {x: 0.00018146844, y: 0.057545755, z: 0.021509616}
-      rotation: {x: 0.10231985, y: -0.000036038713, z: -0.0009829572, w: 0.99475104}
+      rotation: {x: 0.10231986, y: -0.000036038717, z: -0.0009829573, w: 0.9947511}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: bind_l_fingerRight_b_01
@@ -2155,7 +2172,7 @@ ModelImporter:
       transformModified: 1
     - name: bind_r_thumb_a_01
       position: {x: -0.0014599999, y: 0.0032905492, z: -0.049579572}
-      rotation: {x: 0.47564536, y: 0.087159775, z: 0.10097724, w: 0.86946434}
+      rotation: {x: 0.4756454, y: 0.08715978, z: 0.10097725, w: 0.8694644}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: bind_r_thumb_b_01
@@ -2237,9 +2254,8 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b245b8617bfa5b34fbea04ecf19c7c01,
-    type: 3}
-  animationType: 3
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
