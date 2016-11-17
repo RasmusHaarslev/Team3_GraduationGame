@@ -24,15 +24,24 @@ public class OptionsMenu : MonoBehaviour {
         FX.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("FX");
         LanguageHeader.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("LanguageHeader");
     }
-	
+
     public void ToggleSound()
     {
-        GameController.Instance.ToggleSound();
+        Manager_Audio.overAllSoundToggle = !Manager_Audio.overAllSoundToggle;
+
+        if (Manager_Audio.overAllSoundToggle)
+        {
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustOverallVolume, Manager_Audio.currentOverAllSoundVolume);
+        }
+        else
+        {
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustOverallVolume, 0);
+        }
     }
 
     public void AdjustSound()
     {
-        GameController.Instance.AdjustSound(OverAllSound.transform.GetChild(1).GetComponent<Slider>().value);
+        Manager_Audio.currentOverAllSoundVolume = OverAllSound.transform.GetChild(1).GetComponent<Slider>().value;
     }
 
     public void ChangeLanguage()
