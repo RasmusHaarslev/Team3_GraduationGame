@@ -224,7 +224,7 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(formation.formationPositions[gameObject]);
+		agent.SetDestination(formation.formationPositions[gameObject].position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

@@ -177,3 +177,15 @@ public class PlayerDeathEvent : GameEvent
 	{
 	}
 }
+
+public class ChangeFormationEvent : GameEvent
+{
+	public GameObject hunter;
+	public bool rear;
+
+	public ChangeFormationEvent(GameObject hunter, bool rear)
+	{
+		this.hunter = hunter;
+		this.rear = rear;
+	}
+}
