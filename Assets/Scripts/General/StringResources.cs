@@ -19,6 +19,12 @@ public class StringResources
 
     public static string follower2PrefabName = "Follower2";
 
+    public static string animControllerShieldName = "Humanoid_Shield";
+
+    public static string animControllerRifleName = "Humanoid_Riffle";
+
+    public static string animControllerSpearName = "Humanoid_Spear";
+
     // Use this for initialization
     void Start () {
 	

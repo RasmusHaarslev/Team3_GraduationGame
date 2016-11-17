@@ -548,6 +548,19 @@ public class DataService : MonoBehaviour
                 equip.transform.localPosition = equip.GetComponent<EquippableItem>().weaponPosition;
                 equip.transform.localRotation = Quaternion.Euler(equip.GetComponent<EquippableItem>().weaponRotation);
 
+			    switch (currentEquipValues.Type)
+			    {
+                    case EquippableitemValues.type.polearm:
+                        character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerSpearName) as RuntimeAnimatorController;
+                        break;
+                    case EquippableitemValues.type.shield:
+                        character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerShieldName) as RuntimeAnimatorController;
+                        break;
+                    case EquippableitemValues.type.rifle:
+                        character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerRifleName) as RuntimeAnimatorController;
+                        break;
+                }
+                
                 //add the new item values
                 //to the character prefab
                 character.health += currentEquipValues.health;
