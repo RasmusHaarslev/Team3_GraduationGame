@@ -11,9 +11,10 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
     {
         panelScript = GameObject.FindGameObjectWithTag("CampPanel").GetComponent<PanelScript>();
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-       
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
         {
             
