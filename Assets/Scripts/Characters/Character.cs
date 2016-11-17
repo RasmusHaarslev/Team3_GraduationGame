@@ -40,6 +40,7 @@ public class Character : MonoBehaviour
 	public Transform torsoSlot;
 	public Transform legsSlot;
 
+
 	// Use this for initialization
 	void Start()
 	{
@@ -79,7 +80,9 @@ public class Character : MonoBehaviour
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
-		{EquippableitemValues.slot.rightHand, rightHandSlot },
+		//{EquippableitemValues.slot.rightHand_Spear, rightHandSlot_Spear},
+		{EquippableitemValues.slot.rightHand, rightHandSlot},
+
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
 	}
