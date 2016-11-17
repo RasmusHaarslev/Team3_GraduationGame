@@ -4,6 +4,13 @@
 		<WorkUnit Name="Default Work Unit" ID="{AA8D190D-B159-4D3A-8348-121D2CA50747}" PersistMode="Standalone">
 			<ChildrenList>
 				<Bus Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
+					<PropertyList>
+						<Property Name="BusVolume" Type="Real64">
+							<ValueList>
+								<Value>2</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ChildrenList>
 						<Bus Name="SFX" ID="{6933BDF4-F0F4-4AEB-BDE4-B33E6797D3B3}">
 							<PropertyList>
@@ -27,7 +34,7 @@
 														<XPos>0</XPos>
 														<YPos>-200</YPos>
 														<Flags>5</Flags>
-														<SegmentShape>Log2</SegmentShape>
+														<SegmentShape>Exp1</SegmentShape>
 													</Point>
 													<Point>
 														<XPos>1</XPos>
@@ -69,7 +76,7 @@
 														<XPos>0</XPos>
 														<YPos>-200</YPos>
 														<Flags>5</Flags>
-														<SegmentShape>Log2</SegmentShape>
+														<SegmentShape>Exp1</SegmentShape>
 													</Point>
 													<Point>
 														<XPos>1</XPos>

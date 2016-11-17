@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{80D91FC2-DFBB-4D26-9C1A-89EB703676F7}" SchemaVersion="72">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{80D91FC2-DFBB-4D26-9C1A-89EB703676F7}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{80D91FC2-DFBB-4D26-9C1A-89EB703676F7}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="Mixtest" ID="{07F6C777-C0D8-4AD6-AF54-F54E5CDDC469}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_GroundAmbience" ID="{3157952A-3EF3-43FA-A435-FC876AEC3823}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_Music" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="LeaderFootStep" ID="{C141F8C6-89C8-4F24-B5C2-31AEA7574A55}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="MenuMusic" ID="{6D0AC137-B9A1-41A3-BA00-1FCF0E5CEBB1}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="MenuAmbience" ID="{1E78B28A-8A8E-4C3D-9B8C-2E93A36B8BC8}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="MenuUI" ID="{9C4B2527-E6FC-411A-A3CB-B4B9301A09C2}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="SFXVol" ID="{8226DE71-C143-47F5-8117-8303CB00D423}"/>
+							<Value>1</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="MusicVol" ID="{DF5A4AB7-D6DB-4E82-9D7D-FB8B83B42EC6}"/>
+							<Value>1</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Explore" ID="{59BAE200-2BFA-4E87-A9FA-980B973B5116}"/>
+						<CurrentStateRef Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>
