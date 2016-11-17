@@ -23,9 +23,10 @@ public class CampManager : MonoBehaviour
     public int MaxVillagesCostIncrease;
 
     public Text[] TextLevels;
+    public Button[] Buttons;
 
-#region Setup Instance
-private static CampManager _instance;
+    #region Setup Instance
+    private static CampManager _instance;
 
     public static CampManager Instance
     {
@@ -51,6 +52,9 @@ private static CampManager _instance;
     private void SaveUpgrades()
     {
         var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
+
+        foreach (var but in Buttons)
+            but.interactable = !Upgrades.UpgradeInProgress;
 
         var serializer = new XmlSerializer(typeof(CampUpgrades));
         var stream = new FileStream(path, FileMode.Create);
@@ -213,6 +217,9 @@ private static CampManager _instance;
         TextLevels[2].text = Upgrades.MaxVillages + "";
         TextLevels[3].text = Upgrades.LeaderHealthLevel + "";
         TextLevels[4].text = Upgrades.LeaderStrengthLevel + "";
+
+        foreach (var but in Buttons)
+            but.interactable = true;
     }
 
     private int GetTimeForUpgrade(int level) {
