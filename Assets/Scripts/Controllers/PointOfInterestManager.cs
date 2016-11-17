@@ -52,8 +52,8 @@ public class PointOfInterestManager : MonoBehaviour {
 				character.currentHealth = 0;
 			}
 			s += character.currentHealth;
-			averageHealth = s / characterList.Count;
 		}
+		averageHealth = s / characterList.Count;
 		return averageHealth;
 	}
 }
