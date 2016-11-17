@@ -7,6 +7,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
     public void GoToCamp()
     {
-        levelSelectionPanel.SetActive(true);
+        GameController.Instance.LoadScene("LevelSelection");
+        //levelSelectionPanel.SetActive(true);
     }
 }
