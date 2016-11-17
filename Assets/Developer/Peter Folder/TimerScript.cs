@@ -14,6 +14,6 @@ public class TimerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        text.text = CampManager.TimeLeftInSeconds()+"";
+        text.text = CampManager.TimeLeftInSeconds()+""; 
 	}
 }

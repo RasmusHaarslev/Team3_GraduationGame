@@ -68,6 +68,7 @@ public class CampManager : MonoBehaviour
             var stream = new FileStream(path, FileMode.Open);
             Upgrades = serializer.Deserialize(stream) as CampUpgrades;
             Upgrades.GetCurrency();
+            SetLevels();
             stream.Close();
         }
         else {
@@ -106,6 +107,7 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = "";
         SaveUpgrades();
+        SetLevels();
     }
 
     public double TimeLeftInSeconds()
@@ -120,7 +122,7 @@ public class CampManager : MonoBehaviour
                 return 0.0;
             }
             else
-                return timeLeft;
+                return (int) timeLeft;
         }
         else
         {
@@ -131,6 +133,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeGather()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.GatherLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
         
@@ -143,6 +148,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeVillages()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -155,6 +163,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeBlacksmith()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -167,6 +178,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeLeaderHealth()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
@@ -179,6 +193,9 @@ public class CampManager : MonoBehaviour
 
     public void UpgradeLeaderStrength()
     {
+        if (Upgrades.UpgradeInProgress)
+            return;
+
         var amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
         DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
 
