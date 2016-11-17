@@ -24,6 +24,7 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
         if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
         {
+            Debug.Log(panelScript);
             panelScript.UpdateSoldierStats(gameObject);
             panelScript.ActivateCamera(gameObject);
             panelScript.panelList[3].SetActive(true);
