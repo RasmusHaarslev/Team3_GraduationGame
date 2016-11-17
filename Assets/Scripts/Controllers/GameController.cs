@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour {
         {
             if (scene.Name.EndsWith(".unity"))
             {
-                scenes.Add("Assets/_Scenes/Levels/" + scene.Name);
+                scenes.Add(scene.Name.Split('.')[0]);
             }
         }
 

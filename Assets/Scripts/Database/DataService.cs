@@ -455,6 +455,7 @@ public class DataService : MonoBehaviour
 		//load character prefab, weapons prefab and attach them
 		//print(StringResources.characterPrefabsPath + charValues.prefabName);
 		//load prefab
+        print("inside Prefabs: "+ StringResources.characterPrefabsPath + charValues.prefabName);
 		GameObject characterGameObject = Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
 		//assign values to prefab
 		characterGameObject.GetComponent<Character>().init(charValues);
@@ -489,10 +490,8 @@ public class DataService : MonoBehaviour
 
 	public GameObject GetCharacterFromValues(CharacterValues charValues)
 	{
-		GameObject character = Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName) as GameObject;//Instantiate()  as GameObject;
-																														  /*#if UNITY_EDITOR
-                                                                                                                                  PrefabUtility.DisconnectPrefabInstance(gameObject);
-                                                                                                                          #endif*/
+		GameObject character = Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName) as GameObject;
+																														  
 		character.GetComponent<Character>().init(charValues);
 		//todo handle weapons attached to them!
 
@@ -547,7 +546,19 @@ public class DataService : MonoBehaviour
 				equip.transform.parent = character.equippableSpots[currentEquipValues.Slot];
                 equip.transform.localPosition = equip.GetComponent<EquippableItem>().weaponPosition;
                 equip.transform.localRotation = Quaternion.Euler(equip.GetComponent<EquippableItem>().weaponRotation);
-
+                //handling animations
+			    switch (currentEquipValues.Type)
+			    {
+                    case EquippableitemValues.type.polearm:
+                        character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerSpearName) as RuntimeAnimatorController;
+                        break;
+                    case EquippableitemValues.type.shield:
+                        character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerShieldName) as RuntimeAnimatorController;
+                        break;
+                    case EquippableitemValues.type.rifle:
+                        character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerRifleName) as RuntimeAnimatorController;
+                        break;
+                }
                 //add the new item values
                 //to the character prefab
                 character.health += currentEquipValues.health;

@@ -63,7 +63,7 @@ public class SaveLoadLevels
             levels.Rows.Add(row);
         }
 
-        var path = Path.Combine(Application.persistentDataPath, "levels.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
 
         var serializer = new XmlSerializer(typeof(LevelXML));
         var stream = new FileStream(path, FileMode.Create);
@@ -73,7 +73,7 @@ public class SaveLoadLevels
 
     public static Dictionary<int, List<GameObject>> LoadLevels()
     {
-        var path = Path.Combine(Application.persistentDataPath, "levels.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
 
         if (!File.Exists(path))
         {

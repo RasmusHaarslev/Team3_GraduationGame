@@ -23,7 +23,7 @@ GameObject:
   - 114: {fileID: 114000013054922578}
   - 114: {fileID: 114000010542428764}
   m_Layer: 5
-  m_Name: LeaderUpgrade (1)
+  m_Name: LeaderStrengthUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,7 +178,7 @@ GameObject:
   - 114: {fileID: 114000013416063394}
   - 114: {fileID: 114000012504601758}
   m_Layer: 5
-  m_Name: LeaderUpgrade
+  m_Name: LeaderHealthUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000011334151258}
-        m_MethodName: UpgradeGather
+        m_MethodName: UpgradeVillages
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -510,7 +510,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000011334151258}
-        m_MethodName: UpgradeGather
+        m_MethodName: UpgradeLeaderStrength
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -707,7 +707,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000011334151258}
-        m_MethodName: UpgradeGather
+        m_MethodName: UpgradeBlacksmith
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -746,6 +746,12 @@ MonoBehaviour:
   - {fileID: 114000010272005888}
   - {fileID: 114000011386237638}
   - {fileID: 114000010285669864}
+  Buttons:
+  - {fileID: 114000010781861430}
+  - {fileID: 114000011305056566}
+  - {fileID: 114000010258470808}
+  - {fileID: 114000012504601758}
+  - {fileID: 114000010542428764}
 --- !u!114 &114000011386237638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -912,7 +918,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000011334151258}
-        m_MethodName: UpgradeGather
+        m_MethodName: UpgradeLeaderHealth
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
