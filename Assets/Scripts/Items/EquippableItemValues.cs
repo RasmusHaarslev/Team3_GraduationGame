@@ -23,8 +23,7 @@ public class EquippableitemValues
         head,
         torso,
         leftHand,
-        rightHand_Spear,
-		rightHand,
+        rightHand,
         legs
     }
     public enum type
