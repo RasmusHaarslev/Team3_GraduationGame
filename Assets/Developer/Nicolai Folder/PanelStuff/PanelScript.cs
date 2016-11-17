@@ -130,7 +130,7 @@ public class PanelScript : MonoBehaviour {
 
     public void ActivateInventoryPanel()
     {
-        panelList[4].GetComponent< EquippableItemUIListController >().itemsValues = dataService.GetEquippableItemsValuesFromInventory().ToArray();
+        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToArray());
         panelList[4].SetActive(true);
 
     }
