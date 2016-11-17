@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
 	public int health = 0;
 	public int damage = 0;
 	public int range = 0;
-	public int damageSpeed = 0;
+	public float damageSpeed = 0;
 
 	public float currentHealth;
 
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude);
+		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude,0.15f,Time.deltaTime);
 		if (currentHealth <= 0)
 		{
 			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
