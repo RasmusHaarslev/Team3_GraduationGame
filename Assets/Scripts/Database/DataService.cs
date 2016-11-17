@@ -544,10 +544,13 @@ public class DataService : MonoBehaviour
 					detatchItemFromCharacter(currentEquipValues.Slot, character);
 				}
 				//parent and position the item on the appropriate slot
-				equip.transform.parent = character.equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
-				//add the new item values
-				//to the character prefab
-				character.health += currentEquipValues.health;
+				equip.transform.parent = character.equippableSpots[currentEquipValues.Slot];
+                equip.transform.localPosition = equip.GetComponent<EquippableItem>().weaponPosition;
+                equip.transform.localRotation = Quaternion.Euler(equip.GetComponent<EquippableItem>().weaponRotation);
+
+                //add the new item values
+                //to the character prefab
+                character.health += currentEquipValues.health;
 				character.damage += currentEquipValues.damage;
 				character.damageSpeed = currentEquipValues.damageSpeed;
 				character.range = currentEquipValues.range;
