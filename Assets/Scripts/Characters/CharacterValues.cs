@@ -32,11 +32,7 @@ public class CharacterValues
 	public enum TargetTrait
 	{
 		NoTrait,
-		Foolhardy,
-		StubbornDefender,
-		Bully,
 		Codependant,
-		GlorySeeker,
 		LowAttentionSpan,
 		Loyal
 	}
@@ -45,10 +41,7 @@ public class CharacterValues
 		NoTrait,
 		BraveFool,
 		Fearful,
-		Clingy,
-		Desperate,
-		Vengeful,
-		VeryUnlikable
+		Clingy
 	}
 
 	public string prefabName { get; set; }
