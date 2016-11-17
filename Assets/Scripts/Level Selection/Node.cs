@@ -180,7 +180,8 @@ public class Node : MonoBehaviour {
     }
 
     void OpenPopUp()
-    {               
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         EventManager.Instance.TriggerEvent(new SetupPopUp(gameObject));
     }
 
