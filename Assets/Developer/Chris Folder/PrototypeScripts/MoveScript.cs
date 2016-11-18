@@ -38,8 +38,9 @@ public class MoveScript : MonoBehaviour
 		if (movement)
 		{
 			if (Input.GetKeyDown(KeyCode.Mouse0))
-			{
 				Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
+			if (Input.GetKey(KeyCode.Mouse0))
+			{
 				agent.Resume();
 				character.isInCombat = false;
 				attacking = false;
