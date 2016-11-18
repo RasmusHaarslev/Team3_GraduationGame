@@ -123,6 +123,10 @@ public class LevelManager : MonoBehaviour {
         {
             LoseGame("AllyDeathCutscene");
         }
+        else if (AlliesAlive <= 0)
+        {
+            LoseLevel();
+        }
     }
 
     public void LoseGame(string scene = "PlayerDeathCutscene")
