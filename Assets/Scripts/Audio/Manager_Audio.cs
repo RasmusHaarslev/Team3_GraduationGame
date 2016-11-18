@@ -20,6 +20,10 @@ public class Manager_Audio : MonoBehaviour {
 	public static string exploreSnapshot = "Exploring";
 	public static string fightSnapshot = "inCombat";
 
+	public static string commandWheelContainer = "CommandWheel";
+	public static string openWheel = "On";
+	public static string closeWheel = "Off";
+
 	public static string attackMale1 = "Play_WarriorMale1Attack";
 	public static string attackMale2 = "Play_WarriorMale2Attack";
 	public static string attackFemale1 = "Play_WarriorFemale1Attack";
