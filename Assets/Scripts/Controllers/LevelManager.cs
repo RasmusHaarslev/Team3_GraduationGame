@@ -147,7 +147,7 @@ public class LevelManager : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new LevelWon());
         PlayerPrefs.SetInt("LevelResult", 1);
         //replaceCharactersWeapons();
-        GameController.Instance.LoadScene("CampManagement");
+        GameController.Instance.LoadScene("LevelWinCutscene");
     }
 
 
