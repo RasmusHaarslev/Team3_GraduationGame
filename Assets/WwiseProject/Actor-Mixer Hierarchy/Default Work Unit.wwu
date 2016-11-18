@@ -663,6 +663,33 @@
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
+										<State Name="Custom State" ID="{6BA60B0E-6500-4B7E-8C46-3632AB4C7BC8}" ShortID="286537910">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="30"/>
+												<Property Name="Volume" Type="Real64" Value="-4"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
+										<State Name="Custom State" ID="{D0D5C161-0041-42DF-BA0C-C6FB1284FC8C}" ShortID="544375241">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="60"/>
+												<Property Name="Volume" Type="Real64" Value="-10"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
 							<Playlist>
 								<ItemRef Name="WindHowlDrone" ID="{4B442694-B9EF-4C84-AC35-CD656A9A7205}"/>
 							</Playlist>
@@ -897,7 +924,7 @@
 							<StateInfo>
 								<StateGroupList>
 									<StateGroupInfo>
-										<StateGroupRef Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
 									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
@@ -4390,6 +4417,9 @@
 									</ValueList>
 								</Property>
 								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-230</Value>
+									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{E273FEF4-C37A-4D0C-A3EA-DA325B661544}">
@@ -4404,7 +4434,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-4</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4689,7 +4719,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4937,7 +4967,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="4"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5181,7 +5211,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-12</Value>
+										<Value>-13</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>

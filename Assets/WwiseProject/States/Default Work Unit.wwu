@@ -13,13 +13,14 @@
 						<State Name="Off" ID="{3B5B2475-5352-4B42-B52E-56891BE510DB}"/>
 					</ChildrenList>
 				</StateGroup>
-				<StateGroup Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}">
+				<StateGroup Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}">
 					<ChildrenList>
 						<State Name="None" ID="{49963F9B-C828-4BED-9139-6F605448A617}"/>
 						<State Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
 						<State Name="EnemyNear" ID="{8A8D9332-02BE-4FBD-99BF-E118BF6BEBDB}"/>
 						<State Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
 						<State Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
+						<State Name="Flee" ID="{41A74B5C-2969-4338-9A9E-2E909F653E56}"/>
 					</ChildrenList>
 					<TransitionList>
 						<Transition>
@@ -35,15 +36,6 @@
 							<IsShared>false</IsShared>
 						</Transition>
 					</TransitionList>
-				</StateGroup>
-				<StateGroup Name="MusicState" ID="{6119953F-0AA6-4301-A424-AB73580CCAF0}">
-					<ChildrenList>
-						<State Name="None" ID="{2E554B5B-09C2-4975-A6B6-78A575427F86}"/>
-						<State Name="Explore" ID="{59BAE200-2BFA-4E87-A9FA-980B973B5116}"/>
-						<State Name="Combat" ID="{C70D574B-D080-41AA-A1DB-DE929622803E}"/>
-						<State Name="Danger" ID="{B3F50AF1-4378-497C-A58E-AE4AE0E6C4A9}"/>
-						<State Name="Flee" ID="{BCF76B6D-8B53-4AA3-8D3E-38A157ED0519}"/>
-					</ChildrenList>
 				</StateGroup>
 			</ChildrenList>
 		</WorkUnit>
