@@ -17,6 +17,7 @@ public class EquippableitemValues
     public float damageSpeed { get; set; }
     public int range { get; set; }
     public string prefabName { get; set; }
+    public string materialName { get; set; }
 
     public enum slot
     {
