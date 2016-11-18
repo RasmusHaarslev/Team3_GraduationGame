@@ -100,13 +100,17 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-			else
-			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
-				agent.stoppingDistance = 1.2f;
-				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
-				attacking = false;
-			}
+            else if (hit.transform.gameObject.tag == "Item")
+		    {
+                EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
+            }
+		    else
+		    {
+		        EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+		        agent.stoppingDistance = 1.2f;
+		        agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
+		        attacking = false;
+		    }
 		}
 	}
 }

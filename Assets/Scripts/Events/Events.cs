@@ -67,9 +67,16 @@ public class PositionClicked : GameEvent
     public PositionClicked(Vector3 clickPosition) {
         position = clickPosition;
     }
-
 }
 
+public class ItemClicked : GameEvent
+{
+    public ClickableItem item;
+    public ItemClicked(ClickableItem clickedItem)
+    {
+        item = clickedItem;
+    }
+}
 
 public class LevelLost : GameEvent
 {
