@@ -70,6 +70,24 @@ public class SimpleInputScript : MonoBehaviour
                     Debug.Log("stay");
                     break;
                 }
+                if (command == simpleCommandsManager.commandsList[5])
+                {
+                    EventManager.Instance.TriggerEvent(new ChangeFormationEvent());
+                    Debug.Log("front/back");
+                    break;
+                }
+                if (command == simpleCommandsManager.commandsList[6])
+                {
+                    EventManager.Instance.TriggerEvent(new ChangeFormationEvent());
+                    Debug.Log("front/back");
+                    break;
+                }
+                if (command == simpleCommandsManager.commandsList[7])
+                {
+                    EventManager.Instance.TriggerEvent(new ChangeFormationEvent());
+                    Debug.Log("front/back");
+                    break;
+                }
             }
         }
     }
