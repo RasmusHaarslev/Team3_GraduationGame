@@ -114,8 +114,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000014085619996}
   - 114: {fileID: 114000012123040834}
-  - 135: {fileID: 135000011269568400}
-  - 114: {fileID: 114000010772735306}
   m_Layer: 2
   m_Name: Point of Interest
   m_TagString: Untagged
@@ -291,17 +289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 1
---- !u!114 &114000010772735306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013776393692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000011297424152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fe020b5f98dd64799b363038a83339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 1
   radius: 6
 --- !u!114 &114000012611424220
 MonoBehaviour:
@@ -363,15 +350,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 2
---- !u!135 &135000011269568400
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013776393692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 6
-  m_Center: {x: 0, y: 0, z: 0}

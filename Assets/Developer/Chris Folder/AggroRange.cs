@@ -9,7 +9,6 @@ public class AggroRange : MonoBehaviour
 		Debug.Log(col.gameObject.tag);
 		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly")
 		{
-			Debug.Log("saw player");
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
 				EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
