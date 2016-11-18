@@ -24,14 +24,20 @@ public class LevelGenerator : MonoBehaviour
        
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
-		Manager_Audio.PlaySound (Manager_Audio.baseAmbience,this.gameObject);
+		Manager_Audio.PlaySound (Manager_Audio.baseAmbiencePlay,this.gameObject);
 
 		//TODO acquire data from playerprefs
         
         //spawn the other character from the Points of Interests
         spawnEnemies();
 	}
-	
+
+	void OnDisable()
+	{
+		Manager_Audio.PlaySound (Manager_Audio.baseAmbienceStop,this.gameObject);
+
+	}
+
 	/// <summary>
 	/// 
 	/// </summary>
