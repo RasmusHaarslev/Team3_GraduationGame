@@ -67,10 +67,15 @@ public class LevelManager : MonoBehaviour
 
 		// -Lose-
 		//Player dies
-		EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
-		//Follower dies
-		EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
-	}
+
+        EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
+        //Follower dies
+        EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
+
+        //Reacting on Items clicks
+        EventManager.Instance.StartListening<ItemClicked>(ReactOnItemClick);
+    }
+
 
 	void OnDisable()
 	{
@@ -91,6 +96,9 @@ public class LevelManager : MonoBehaviour
         EventManager.Instance.StopListening<PlayerDeathEvent>(PlayerDeath);
         //Follower dies
         EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
+
+        //Reacting on Items clicks
+        EventManager.Instance.StopListening<ItemClicked>(ReactOnItemClick);
     }
 
     void OnApplicationQuit()
@@ -198,5 +206,16 @@ public class LevelManager : MonoBehaviour
 			dataService.equipItemsToCharacter(new List<GameObject>() { newItem }, character);
 		}
 	}
+
+    void ReactOnItemClick(ItemClicked itemClickedEvent)
+    {
+        ClickableItem clickedItem = itemClickedEvent.item;
+        switch (clickedItem.type)
+        {
+                case ClickableItem.Type.newspaper:
+                print("A Newspaper was clicked!");
+                break;
+        }
+    }
 
 }

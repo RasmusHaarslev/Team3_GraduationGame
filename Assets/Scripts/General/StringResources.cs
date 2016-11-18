@@ -20,6 +20,8 @@ public class StringResources
 
     public static string hardnessLevel = "LevelDifficulty";
 
+    public static string playerPrefabName = "Player";
+
     public static string follower1PrefabName = "Follower";
 
     public static string follower2PrefabName = "Follower";
@@ -40,6 +42,8 @@ public class StringResources
     public static string charactersMaterialsPath = "Materials/Characters/";
 
     public static string itemsMaterialsPath = "Materials/Items/";
+
+    public static string playerMaterialName = "LeaderMaterial";
 
     public static string follower1MaterialName = "Follower1Material";
 
