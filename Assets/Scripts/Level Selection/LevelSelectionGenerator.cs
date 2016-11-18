@@ -462,7 +462,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         Vector2 desPos = new Vector2(0, gridYPosition);
 
         StartCoroutine(MoveFromTo(initPos, desPos, 0.5f));
-
     }
 
     IEnumerator MoveFromTo(Vector2 pointA, Vector2 pointB, float time)
