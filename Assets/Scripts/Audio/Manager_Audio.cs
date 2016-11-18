@@ -31,6 +31,11 @@ public class Manager_Audio : MonoBehaviour {
 
 	public static string genericHit = "Play_GenericHit";
 
+	public static string attackSpear = "Play_UseSpear";
+	public static string attackShield = "Play_UseShield";
+	public static string attackRiffle = "Play_UseRiffle";
+
+
 	public static string wind1 = "Play_WindDeep1";
 	public static string leaderFootStep = "Play_LeaderFootStep";
 	public static string footStepLoopStart = "Play_FootStepLoop";
