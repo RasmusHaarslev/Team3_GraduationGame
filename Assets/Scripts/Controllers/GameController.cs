@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene("LevelPrototype01");
+        print("LoadLevel:");
 
         var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
         List<string> scenes = new List<string>();
@@ -92,10 +92,11 @@ public class GameController : MonoBehaviour {
             if (scene.Name.EndsWith(".unity"))
             {
                 scenes.Add(scene.Name.Split('.')[0]);
+                print(scene.Name);
             }
         }
 
         var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
-        SceneManager.LoadScene(randomScene);
+        //SceneManager.LoadScene(randomScene);
     }
 }
