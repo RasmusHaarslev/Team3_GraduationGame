@@ -94,6 +94,7 @@ public class DataService : MonoBehaviour
 			{
 				id = 1,
 				name = "Daniel",
+                isMale = true,
 				Type = CharacterValues.type.Player,
 				damage = 5,
 				health = 100,
@@ -105,45 +106,52 @@ public class DataService : MonoBehaviour
 			{
 				id = 2,
 				name = "John",
-				Type = CharacterValues.type.Hunter,
+                isMale = true,
+                Type = CharacterValues.type.Hunter,
 				damage = 8,
 				health = 50,
 				damageSpeed = 2.5f,
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.BraveFool,
 				targetTrait = CharacterValues.TargetTrait.NoTrait,
-				prefabName = StringResources.follower1PrefabName
+				prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.follower1MaterialName
 			},
 		 new CharacterValues
 			{
 				id = 3,
 				name = "Nicolai",
-				Type = CharacterValues.type.Hunter,
+                isMale = true,
+                Type = CharacterValues.type.Hunter,
 				damage = 5,
 				health = 50,
 				damageSpeed = 1f,
 				range = 7,
 				combatTrait = CharacterValues.CombatTrait.Clingy,
 				targetTrait = CharacterValues.TargetTrait.Loyal,
-				prefabName = StringResources.follower1PrefabName
+				prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.follower1MaterialName
             },
 		 new CharacterValues
 			{
 				id = 3,
 				name = "Peter",
-				Type = CharacterValues.type.Hunter,
+                isMale = true,
+                Type = CharacterValues.type.Hunter,
 				damage = 9,
 				health = 50,
 				damageSpeed = 0.5f,
 				range = 2,
 				combatTrait = CharacterValues.CombatTrait.Fearful,
 				targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-				prefabName = StringResources.follower1PrefabName
+				prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.follower1MaterialName
             },
 		  new CharacterValues
 			{
 				name = "Yasmin",
-				Type = CharacterValues.type.Wolf,
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
 				tier = 6,
 				damage = 6,
 				health = 50,
@@ -221,7 +229,8 @@ public class DataService : MonoBehaviour
 		  new CharacterValues
 		  {
 			  name = "Teen tribesman",
-			  Type = CharacterValues.type.Tribesman,
+              isMale = true,
+              Type = CharacterValues.type.Tribesman,
 			  tier = 2,
 			  damage = 3,
 			  health = 4,
@@ -232,7 +241,8 @@ public class DataService : MonoBehaviour
 		  new CharacterValues
 		  {
 			  name = "Tribesman initiate",
-			  Type = CharacterValues.type.Tribesman,
+              isMale = true,
+              Type = CharacterValues.type.Tribesman,
 			  tier = 3,
 			  damage = 4,
 			  health = 5,
@@ -243,7 +253,8 @@ public class DataService : MonoBehaviour
 		  new CharacterValues
 		  {
 			  name = "Mature tribesman",
-			  Type = CharacterValues.type.Tribesman,
+              isMale = true,
+              Type = CharacterValues.type.Tribesman,
 			  tier = 4,
 			  damage = 5,
 			  health = 6,
@@ -254,7 +265,8 @@ public class DataService : MonoBehaviour
 		  new CharacterValues
 		  {
 			  name = "Leader tribesman",
-			  Type = CharacterValues.type.Tribesman,
+              isMale = true,
+              Type = CharacterValues.type.Tribesman,
 			  tier = 5,
 			  damage = 6,
 			  health = 7,
@@ -278,7 +290,8 @@ public class DataService : MonoBehaviour
 			 damageSpeed = 2f,
 			 range = 5,
 			 characterId = 1,
-			 prefabName = "Stick"
+			 prefabName = StringResources.polearm1PrefabName,
+             materialName = StringResources.polearm1MaterialName
 		 },
 			 new EquippableitemValues
 		 {
@@ -291,8 +304,9 @@ public class DataService : MonoBehaviour
 			 damageSpeed = 2f,
 			 range = 5,
 			 characterId = 2,
-			 prefabName = "Shield"
-		 },
+			 prefabName = StringResources.shield1PrefabName,
+             materialName = StringResources.shield1MaterialName
+         },
 			 new EquippableitemValues
 		 {
 			 id = 3,
@@ -304,8 +318,9 @@ public class DataService : MonoBehaviour
 			 damageSpeed = 2.5f,
 			 range = 20,
 			 characterId = 3,
-			 prefabName = "Rifle"
-		 },
+			 prefabName = StringResources.rifle1PrefabName,
+             materialName = StringResources.rifle1MaterialName
+         },
 			 new EquippableitemValues
 		 {
 			 id = 4,
@@ -316,8 +331,8 @@ public class DataService : MonoBehaviour
 			 damage = 15,
 			 damageSpeed = 1.5f,
 			 range = 15,
-			 prefabName = "Rifle"
-		 },
+			 prefabName = StringResources.rifle1PrefabName
+         },
 			 new EquippableitemValues
 		 {
 			 id = 5,
@@ -328,8 +343,8 @@ public class DataService : MonoBehaviour
 			 damage = 20,
 			 damageSpeed = 1.5f,
 			 range = 5,
-			 prefabName = "Stick"
-		 },
+			 prefabName = StringResources.polearm1PrefabName
+         },
 			 new EquippableitemValues
 		 {
 			 id = 6,
@@ -340,8 +355,8 @@ public class DataService : MonoBehaviour
 			 damage = 25,
 			 damageSpeed = 1.5f,
 			 range = 2,
-			 prefabName = "Stick"
-		 }
+			 prefabName = StringResources.polearm1PrefabName
+         }
 		});
 		_connection.InsertAll(new[]
 		{
@@ -452,18 +467,21 @@ public class DataService : MonoBehaviour
 	{
 		//get informations from database
 		CharacterValues charValues = GetCharacterValuesByName(characterName);
-		//load character prefab, weapons prefab and attach them
-		//print(StringResources.characterPrefabsPath + charValues.prefabName);
-		//load prefab
-        print("inside Prefabs: "+ StringResources.characterPrefabsPath + charValues.prefabName);
-		GameObject characterGameObject = Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
+        //load character prefab, weapons prefab and attach them
+        //print(StringResources.charactersPrefabsPath + charValues.prefabName);
+        //load prefab
+	    GameObject characterGameObject = GenerateCharacterFromValues(charValues,position,rotation);
+        /*
+        print("inside Prefabs: "+ StringResources.charactersPrefabsPath + charValues.prefabName);
+		GameObject characterGameObject = Instantiate(Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
 		//assign values to prefab
 		characterGameObject.GetComponent<Character>().init(charValues);
+       
 		//spawn weapons 
-		List<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id)) as List<GameObject>; //TODO continue here
+		List<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id)) as List<GameObject>; 
 
 		equipItemsToCharacter(equips, characterGameObject.GetComponent<Character>());
-
+ */
 		return characterGameObject;
 	}
 
@@ -480,7 +498,7 @@ public class DataService : MonoBehaviour
 		List<CharacterValues> charValuesList = GetCharactersValuesByType(charactersType).ToList();
 		foreach (CharacterValues charValues in charValuesList)
 		{
-			charact = GetCharacterFromValues(charValues);
+			charact = GenerateCharacterFromValues(charValues,Vector3.zero);
 
 			characters.Add(charact);
 		}
@@ -488,14 +506,23 @@ public class DataService : MonoBehaviour
 		return characters;
 	}
 
-	public GameObject GetCharacterFromValues(CharacterValues charValues)
+	public GameObject GenerateCharacterFromValues(CharacterValues charValues, Vector3 position, Quaternion rotation = new Quaternion())
 	{
-		GameObject character = Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName) as GameObject;
-																														  
-		character.GetComponent<Character>().init(charValues);
-		//todo handle weapons attached to them!
+		GameObject character = Instantiate( Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName),position,rotation) as GameObject;
+        
+        if (charValues.materialName != null) { 
+		character.GetComponentInChildren<SkinnedMeshRenderer>().material = Instantiate(Resources.Load(StringResources.charactersMaterialsPath + charValues.materialName) as Material);
+        }
+        /**/
+        character.GetComponent<Character>().init(charValues);
+        
+        //spawn weapons 
+        IEnumerable<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id));
+        //equip weapons
+        equipItemsToCharacter(equips, character.GetComponent<Character>());
+        /**/
 
-		return character;
+        return character;
 	}
 	#endregion
 	/**/
@@ -514,9 +541,14 @@ public class DataService : MonoBehaviour
 		GameObject currentEquip = new GameObject();
 		foreach (EquippableitemValues values in equipValues)
 		{
+            
 			currentEquip = Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + values.prefabName)) as GameObject;
-
-			currentEquip.GetComponent<EquippableItem>().init(values);
+            if (values.materialName != null)
+            {
+                print(StringResources.itemsMaterialsPath + values.materialName);
+                currentEquip.GetComponent<Renderer>().material = Instantiate(Resources.Load(StringResources.itemsMaterialsPath + values.materialName) as Material);
+            }
+            currentEquip.GetComponent<EquippableItem>().init(values);
 
 			equips.Add(currentEquip);
 		}
@@ -551,12 +583,15 @@ public class DataService : MonoBehaviour
 			    {
                     case EquippableitemValues.type.polearm:
                         character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerSpearName) as RuntimeAnimatorController;
+			            character.equippedWeaponType = EquippableitemValues.type.polearm;
                         break;
                     case EquippableitemValues.type.shield:
                         character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerShieldName) as RuntimeAnimatorController;
+                        character.equippedWeaponType = EquippableitemValues.type.shield;
                         break;
                     case EquippableitemValues.type.rifle:
                         character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerRifleName) as RuntimeAnimatorController;
+                        character.equippedWeaponType = EquippableitemValues.type.rifle;
                         break;
                 }
                 //add the new item values

@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
        
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
-        
+		Manager_Audio.PlaySound (Manager_Audio.baseAmbience,this.gameObject);
 
 		//TODO acquire data from playerprefs
         
@@ -51,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
         CharacterValues charValues = dataService.GetCharacterValuesByName(characterName);
         //load character prefab, weapons prefab and attach them
             //load prefab
-            GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.characterPrefabsPath + charValues.prefabName),position,Quaternion.identity) as GameObject;
+            GameObject characterGameObject = (GameObject)Instantiate(Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName),position,Quaternion.identity) as GameObject;
             //assign values to prefab
             characterGameObject.GetComponent<Character>().init(charValues);
             //load prefab weapons TODO handle the weapons stats
@@ -108,9 +108,9 @@ public class LevelGenerator : MonoBehaviour
                     
                     //create character with values based on the index of the tier [assuming that for each type, the tier will be unique, so for example we have only one wolf for wolf tier 2]
                     currentCharacter = Instantiate(
-                        Resources.Load(StringResources.characterPrefabsPath +
+                        Resources.Load(StringResources.charactersPrefabsPath +
                                        currentTierValues[charSpawn.tier - 1].prefabName),
-                        //Resources.Load(StringResources.characterPrefabsPath + currentTiers[charSpawn.tier - 1].name)
+                        //Resources.Load(StringResources.charactersPrefabsPath + currentTiers[charSpawn.tier - 1].name)
                         charSpawn.transform.position, charSpawn.transform.rotation) as GameObject;
                     //assign the values ONCE it is istanced
                     currentCharacter.GetComponent<Character>().init(currentTierValues[charSpawn.tier - 1]);
