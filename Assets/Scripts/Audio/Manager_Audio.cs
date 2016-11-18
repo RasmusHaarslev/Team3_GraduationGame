@@ -11,6 +11,31 @@ public class Manager_Audio : MonoBehaviour {
     public static bool musicToggle = true;
     public static bool fxToggle = true;
 
+	public static string baseAmbience = "Play_GroundAmbience";
+	public static string musicExploreStart = "Play_ExploreMusic";
+	public static string musicExploreStop = "Stop_ExploreMusic";
+	public static string walkTapUISound = "Play_WalkTapUI";
+	public static string playStateGroupContainer = "ExploreState";
+	public static string exploreSnapshot = "Exploring";
+	public static string fightSnapshot = "inCombat";
+
+	public static string attackMale1 = "Play_WarriorMale1Attack";
+	public static string attackMale2 = "Play_WarriorMale2Attack";
+	public static string attackFemale1 = "Play_WarriorFemale1Attack";
+	public static string attackFemale2 = "Play_WarriorFemale2Attack";
+
+	public static string deathMale1 = "Play_WarriorMale1Death";
+	public static string deathMale2 = "Play_WarriorMale2Death";
+	public static string deathFemale1 = "Play_WarriorFemale1Death";
+	public static string deathFemale2 = "Play_WarriorFemale2Death";
+
+	public static string genericHit = "Play_GenericHit";
+
+	public static string attackSpear = "Play_UseSpear";
+	public static string attackShield = "Play_UseShield";
+	public static string attackRiffle = "Play_UseRiffle";
+
+
 	public static string wind1 = "Play_WindDeep1";
 	public static string leaderFootStep = "Play_LeaderFootStep";
 	public static string footStepLoopStart = "Play_FootStepLoop";
