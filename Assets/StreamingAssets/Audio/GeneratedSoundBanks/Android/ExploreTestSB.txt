@@ -44,7 +44,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	3484799022	Stop_ExploreMusic			\Default Work Unit\Stop_ExploreMusic	
 	3552896197	Play_FemaleWarrior1Attack			\Default Work Unit\Warriors\Play_FemaleWarrior1Attack	
 	3582425144	Play_WolfHowl			\Default Work Unit\Play_WolfHowl	
-	3611237377	BridgeState			\Default Work Unit\test\BridgeState	
 	3643034395	Play_EvilFemaleWarrior1Attack			\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack	
 	3689491696	Play_MaleWarrior1Death			\Default Work Unit\Warriors\Play_MaleWarrior1Death	
 	3719726781	Play_MenuUI			\Default Work Unit\UI\Play_MenuUI	
@@ -52,21 +51,24 @@ Event	ID	Name			Wwise Object Path	Notes
 	3974976660	Play_PickSpear			\Default Work Unit\UI\Play_PickSpear	
 	3984082794	Play_EvilFemaleWarrior1Hit			\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Hit	
 	4074757615	Play_CommandUI			\Default Work Unit\UI\Play_CommandUI	
-	4102693405	ExploreState			\Default Work Unit\test\ExploreState	
 
 State Group	ID	Name			Wwise Object Path	Notes
+	2073749505	CommandWheel			\Default Work Unit\CommandWheel	
 	4102693405	ExploreState			\Default Work Unit\ExploreState	
 
 State	ID	Name	State Group			Notes
+	748895195	None	CommandWheel			
+	930712164	Off	CommandWheel			
+	1651971902	On	CommandWheel			
 	304873613	EnemyNear	ExploreState			
 	748895195	None	ExploreState			
 	1823678183	Exploring	ExploreState			
-	2068062714	Bridge	ExploreState			
 	2864273045	Flee	ExploreState			
 	3373579172	InCombat	ExploreState			
 
 Custom State	ID	Name	State Group	Owner		Notes
-	286537910	Bridge	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindHowlDrone		
+	68664264	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindHowlDrone		
+	380717595	On	CommandWheel	\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1		
 	544375241	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindHowlDrone		
 
 Trigger	ID	Name			Wwise Object Path	Notes
@@ -122,7 +124,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	306391641	MenuMusicPlace	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MenuMusicPlace_21ADA429.wem		\Interactive Music Hierarchy\Default Work Unit\MenuMusic\MenuMusicPlace\MenuMusicPlace		1381900
 	324456182	MaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack2_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleWarrior2Attack\MaleWarrior2Attack2		30862
 	325070793	WindHowlDrone	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindHowlDrone_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindHowlDrone\WindHowlDrone		400945
-	325237437	CombatTest	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CombatTest_21ADA429.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Combat\CombatTest\CombatTest		593872
+	325237437	CombatTest	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CombatTest_21ADA429.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Combat\CombatTest\CombatTest		331689
 	326011935	Wind_deepTone2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Wind_deepTone2_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindDeep2\Wind_deepTone2		803409
 	328503743	EvilFemaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Attack2_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack2		29814
 	329068355	WolfAttack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WolfAttack1_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Wolf\WolfAttack\WolfAttack1		18227

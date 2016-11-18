@@ -6,6 +6,16 @@
 				<MusicSwitchContainer Name="ExploreMusic1" ID="{C2CAEDBD-8423-472B-8CDE-1E03ACBD1F60}" ShortID="672658018">
 					<PropertyList>
 						<Property Name="GridFrequencyPreset" Type="int16" Value="52"/>
+						<Property Name="Highpass" Type="int16">
+							<ValueList>
+								<Value>14</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Lowpass" Type="int16">
+							<ValueList>
+								<Value>25</Value>
+							</ValueList>
+						</Property>
 						<Property Name="Tempo" Type="Real64" Value="75"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
@@ -367,7 +377,7 @@
 								<Property Name="Tempo" Type="Real64" Value="75"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>1</Value>
+										<Value>-1</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -420,7 +430,7 @@
 													<ClipList>
 														<MusicClip Name="CombatTest" ID="{821EF371-E714-46D0-A93C-E7247E20D0D6}">
 															<PropertyList>
-																<Property Name="EndTrimOffset" Type="Real64" Value="44799.9999999998"/>
+																<Property Name="EndTrimOffset" Type="Real64" Value="25600"/>
 																<Property Name="FadeInMode" Type="int16" Value="0"/>
 																<Property Name="FadeOutMode" Type="int16" Value="0"/>
 															</PropertyList>
@@ -438,7 +448,7 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>44.8</XPos>
+																				<XPos>25.6</XPos>
 																				<YPos>0</YPos>
 																				<Flags>37</Flags>
 																			</Point>
@@ -457,7 +467,7 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>44.8</XPos>
+																				<XPos>25.6</XPos>
 																				<YPos>0</YPos>
 																				<Flags>37</Flags>
 																			</Point>
@@ -476,7 +486,7 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>44.8</XPos>
+																				<XPos>25.6</XPos>
 																				<YPos>0</YPos>
 																				<Flags>37</Flags>
 																			</Point>
@@ -495,7 +505,7 @@
 										<MusicCue Name="Exit Cue" ID="{9D5E2493-69E9-4EF9-B3B8-D4626F171F9C}">
 											<PropertyList>
 												<Property Name="CueType" Type="int16" Value="1"/>
-												<Property Name="TimeMs" Type="Real64" Value="44800"/>
+												<Property Name="TimeMs" Type="Real64" Value="25600"/>
 											</PropertyList>
 										</MusicCue>
 									</CueList>
@@ -537,7 +547,7 @@
 								<Property Name="Tempo" Type="Real64" Value="75"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-1</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -785,6 +795,24 @@
 							</CueList>
 						</MusicSegment>
 					</ChildrenList>
+					<StateInfo>
+						<StateGroupList>
+							<StateGroupInfo>
+								<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+							</StateGroupInfo>
+						</StateGroupList>
+						<CustomStateList>
+							<CustomState>
+								<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+								<State Name="Custom State" ID="{79036817-AF17-444F-B2B8-D53DB9A52DD7}" ShortID="380717595">
+									<PropertyList>
+										<Property Name="Lowpass" Type="int16" Value="35"/>
+										<Property Name="Volume" Type="Real64" Value="-2"/>
+									</PropertyList>
+								</State>
+							</CustomState>
+						</CustomStateList>
+					</StateInfo>
 					<TransitionList>
 						<MusicTransition Name="Root" ID="{5E806A1C-BE6E-4FD8-8937-BC9EC3C02D13}">
 							<PropertyList>
@@ -818,6 +846,9 @@
 											</MusicFade>
 										</DestinationFadeIn>
 									</TransitionInfo>
+								</MusicTransition>
+								<MusicTransition Name="Transition" ID="{19A9D3AF-9E51-407A-B7E8-A503C7C5BF3A}">
+									<TransitionInfo/>
 								</MusicTransition>
 								<MusicTransition Name="Transition" ID="{E1288830-E104-45C3-82E5-95F5FB84E566}">
 									<PropertyList>
