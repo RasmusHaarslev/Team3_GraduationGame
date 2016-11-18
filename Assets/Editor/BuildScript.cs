@@ -16,6 +16,7 @@ class BuildScript
         // Todo
         string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
         string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + "_build.apk";
+        PlayerSettings.productName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
 
         // Create build folder if not yet exists
         var dir = Directory.CreateDirectory(buildPath);
@@ -25,6 +26,13 @@ class BuildScript
 
     static void addScenes(List<string> scenes)
     {
+        scenes.Add("Assets/_Scenes/Cutscenes/IntroCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/LevelEnterCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/LevelFleeCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/LevelWinCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/AllyDeathCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/PlayerDeathCutscene.unity");
+
         var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/");
         foreach (var scene in sceneDirectory.GetFiles())
         {

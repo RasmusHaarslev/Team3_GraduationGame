@@ -663,6 +663,38 @@
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+									</StateGroupInfo>
+									<StateGroupInfo>
+										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
+										<State Name="Custom State" ID="{D0D5C161-0041-42DF-BA0C-C6FB1284FC8C}" ShortID="544375241">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="60"/>
+												<Property Name="Volume" Type="Real64" Value="-10"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+										<State Name="Custom State" ID="{68DF1619-89E6-49D1-8E02-02BC3B7FF0A1}" ShortID="68664264">
+											<PropertyList>
+												<Property Name="Highpass" Type="int16" Value="40"/>
+												<Property Name="Lowpass" Type="int16" Value="39"/>
+												<Property Name="Pitch" Type="int32" Value="-200"/>
+												<Property Name="Volume" Type="Real64" Value="-6"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
 							<Playlist>
 								<ItemRef Name="WindHowlDrone" ID="{4B442694-B9EF-4C84-AC35-CD656A9A7205}"/>
 							</Playlist>
@@ -897,20 +929,9 @@
 							<StateInfo>
 								<StateGroupList>
 									<StateGroupInfo>
-										<StateGroupRef Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
 									</StateGroupInfo>
 								</StateGroupList>
-								<CustomStateList>
-									<CustomState>
-										<StateRef Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
-										<State Name="Custom State" ID="{EE911A05-D162-494C-9232-745C7F84ADBC}" ShortID="621278359">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32" Value="-380"/>
-												<Property Name="Volume" Type="Real64" Value="-4"/>
-											</PropertyList>
-										</State>
-									</CustomState>
-								</CustomStateList>
 							</StateInfo>
 							<Playlist>
 								<ItemRef Name="windStrings" ID="{C653996E-6165-4FF8-B927-FEC4E76F19CE}"/>
@@ -4390,6 +4411,9 @@
 									</ValueList>
 								</Property>
 								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-230</Value>
+									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{E273FEF4-C37A-4D0C-A3EA-DA325B661544}">
@@ -4404,7 +4428,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-4</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4502,6 +4526,205 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="PickSpear" ID="{70BEEF28-6F15-4F3A-B4F5-B33BE87D3DDB}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="OpenMapUI" ID="{E9AABCE1-34E7-48C1-8191-8BF92971165F}" ShortID="413211127" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>7</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="OpenMapUI" ID="{D1B112DB-D29A-4929-A476-BFC2ED3486BE}" ShortID="496179797">
+									<Language>SFX</Language>
+									<AudioFile>OpenMapUI.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="OpenMapUI" ID="{D1B112DB-D29A-4929-A476-BFC2ED3486BE}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<RandomSequenceContainer Name="ScrollMap" ID="{8157D08B-FB1B-47CF-BF5C-EE7408A20C16}" ShortID="108251557">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>12</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{2771C306-F40B-4EAB-BB4A-1ABEC199C930}" ShortID="956020456">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ScrollPitch" ID="{41578AE1-05BE-45DB-898D-9B4D7C319930}" WorkUnitID="{AF8BB386-55BF-49A9-970A-610545106FDF}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{3A6221BE-CD0C-4F8A-9B2C-F6CB167A12BE}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>-14</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>1</XPos>
+														<YPos>24</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>56</Value>
+									</ValueList>
+									<RTPCList>
+										<RTPC Name="" ID="{DA2EB506-D90E-4927-B4F2-66F360870A4A}" ShortID="961778068">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="ScrollPitch" ID="{41578AE1-05BE-45DB-898D-9B4D7C319930}" WorkUnitID="{AF8BB386-55BF-49A9-970A-610545106FDF}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{EFCCD8AC-7CF9-45A0-A789-EAB8BC15473B}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>5</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>1</XPos>
+														<YPos>-20</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-200</Value>
+									</ValueList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.5"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="ScrollUI" ID="{6E59F4A5-4A36-4FCB-AE97-5344DDC772E0}" ShortID="763646780" Type="SoundFX">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<RTPCList>
+												<RTPC Name="" ID="{09284760-05A1-4BB4-A386-FE6F0B71F11D}" ShortID="737053302">
+													<ReferenceList>
+														<Reference Name="ControlInput">
+															<ObjectRef Name="ScrollPitch" ID="{41578AE1-05BE-45DB-898D-9B4D7C319930}" WorkUnitID="{AF8BB386-55BF-49A9-970A-610545106FDF}"/>
+														</Reference>
+													</ReferenceList>
+													<Curve Name="" ID="{86FA4D32-D74F-4605-83C3-84F5810FCFDD}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-695</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>1</XPos>
+																<YPos>471</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</RTPC>
+											</RTPCList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ScrollUI" ID="{FA43F789-9215-47E2-A647-0E8031C19866}" ShortID="969021496">
+											<PropertyList>
+												<Property Name="TrimBegin" Type="Real64" Value="0.439972436823015"/>
+												<Property Name="TrimEnd" Type="Real64" Value="2.33523831852216"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>ScrollUI.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ScrollUI" ID="{FA43F789-9215-47E2-A647-0E8031C19866}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<Playlist>
+								<ItemRef Name="ScrollUI" ID="{6E59F4A5-4A36-4FCB-AE97-5344DDC772E0}"/>
+							</Playlist>
+						</RandomSequenceContainer>
+						<Sound Name="CloudPuff" ID="{3DFE8780-D247-4E79-93CB-45B20D99FE7B}" ShortID="561357970" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CloudPuff" ID="{51633EF6-614B-4DF1-A53B-3DB93BFA9426}" ShortID="38438293">
+									<Language>SFX</Language>
+									<AudioFile>CloudPuff.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CloudPuff" ID="{51633EF6-614B-4DF1-A53B-3DB93BFA9426}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
@@ -4689,7 +4912,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4937,7 +5160,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="4"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5181,7 +5404,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-12</Value>
+										<Value>-13</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>

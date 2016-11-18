@@ -10,7 +10,7 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_Music" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<ObjectRef Name="Play_ExploreMusic" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
@@ -32,6 +32,10 @@
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
+							<GameParameterRef Name="ScrollPitch" ID="{41578AE1-05BE-45DB-898D-9B4D7C319930}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
 							<GameParameterRef Name="SFXVol" ID="{8226DE71-C143-47F5-8117-8303CB00D423}"/>
 							<Value>1</Value>
 						</RTPCValue>
@@ -41,8 +45,8 @@
 						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Explore" ID="{59BAE200-2BFA-4E87-A9FA-980B973B5116}"/>
-						<CurrentStateRef Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+						<CurrentStateRef Name="Flee" ID="{41A74B5C-2969-4338-9A9E-2E909F653E56}"/>
+						<CurrentStateRef Name="Off" ID="{3B5B2475-5352-4B42-B52E-56891BE510DB}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>

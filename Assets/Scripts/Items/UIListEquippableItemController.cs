@@ -12,8 +12,17 @@ public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Object.FindObjectOfType<PanelScript>().AssignWeaponToSoldier(itemValues);
+        if (itemValues.Type == EquippableitemValues.type.rifle) {
+            Manager_Audio.PlaySound(Manager_Audio.play_pickRiffle, gameObject);
+        } else if (itemValues.Type == EquippableitemValues.type.polearm)
+        {
+            Manager_Audio.PlaySound(Manager_Audio.play_pickSpear, gameObject);
+        } else if (itemValues.Type == EquippableitemValues.type.shield)
+        {
+            Manager_Audio.PlaySound(Manager_Audio.play_pickShield, gameObject);
+        }
 
+        Object.FindObjectOfType<PanelScript>().AssignWeaponToSoldier(itemValues);
     }
 
 }
