@@ -115,26 +115,6 @@
 				</Folder>
 				<Folder Name="test" ID="{2D8BB1E7-F912-4398-BE1B-14271DC78BC3}" ShortID="141014388">
 					<ChildrenList>
-						<Event Name="BridgeState" ID="{288732BD-63F4-445D-A8A1-A85FA708B6B6}">
-							<ChildrenList>
-								<Action Name="Set State" ID="{94D5484B-6918-4133-96C0-28F3BE309861}" ShortID="144701343" Type="SetState" Scope="All" Global="true">
-									<SetItemParam>
-										<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
-										<GroupItem Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
-									</SetItemParam>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="ExploreState" ID="{06466D5A-778B-45B2-AF3C-A7F517690006}">
-							<ChildrenList>
-								<Action Name="Set State" ID="{90440268-5EDD-43D6-88AF-28903C36D3C4}" ShortID="819780375" Type="SetState" Scope="All" Global="true">
-									<SetItemParam>
-										<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
-										<GroupItem Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
-									</SetItemParam>
-								</Action>
-							</ChildrenList>
-						</Event>
 						<Event Name="Play_LeaderFootStep" ID="{ADB5E9DD-D508-48CE-80B9-E6D3ABF6BD52}">
 							<ChildrenList>
 								<Action Name="Play" ID="{157969FC-BE9B-4A53-82DA-CF246470415D}" ShortID="329573844" Type="Play" Scope="One" Global="false">
@@ -674,6 +654,12 @@
 				</Event>
 				<Event Name="Play_ExploreMusic" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}">
 					<ChildrenList>
+						<Action Name="Set State" ID="{4FAD9667-8061-4CB8-B64F-7F353532903F}" ShortID="49037251" Type="SetState" Scope="All" Global="true">
+							<SetItemParam>
+								<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+								<GroupItem Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+							</SetItemParam>
+						</Action>
 						<Action Name="Play" ID="{AE794CCD-C97C-4BCB-86A8-45DF4C84B92B}" ShortID="1003170738" Type="Play" Scope="One" Global="false">
 							<PropertyList>
 								<Property Name="Delay" Type="Real64" Value="5"/>
