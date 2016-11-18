@@ -40,7 +40,7 @@ public class Character : MonoBehaviour
 	public Transform torsoSlot;
 	public Transform legsSlot;
 
-    private EquippableItem currentWeapon;
+	private EquippableItem currentWeapon;
 	// Use this for initialization
 	void Start()
 	{
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude,0.15f,Time.deltaTime);
+		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{
 			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
@@ -73,6 +73,7 @@ public class Character : MonoBehaviour
 	{
 		agent = GetComponent<NavMeshAgent>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(ForceCombat);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 
@@ -83,16 +84,13 @@ public class Character : MonoBehaviour
 		{EquippableitemValues.slot.rightHand, rightHandSlot},
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
-
-	    currentWeapon = GetComponentInChildren<EquippableItem>();
-
-	    
-
+		currentWeapon = GetComponentInChildren<EquippableItem>();
 	}
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(ForceCombat);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 	}
@@ -297,6 +295,21 @@ public class Character : MonoBehaviour
 		{
 			target = null;
 			currentOpponents.Remove(target);
+		}
+	}
+
+	private void ForceCombat(EnemyAttackedByLeaderEvent e)
+	{
+		if (characterBaseValues.Type == CharacterValues.type.Tribesman && gameObject.transform.parent.parent.gameObject == e.enemy.transform.parent.parent.gameObject)
+		{
+			targetParent = e.enemy.transform.parent.parent.gameObject;
+			TargetOpponent();
+			isInCombat = true;
+		} else if (characterBaseValues.Type == CharacterValues.type.Hunter)
+		{
+			targetParent = e.enemy.transform.parent.parent.gameObject;
+			TargetOpponent();
+			isInCombat = true;
 		}
 	}
 }
