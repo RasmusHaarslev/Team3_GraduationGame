@@ -42,6 +42,7 @@ public class Character : MonoBehaviour
 
     
     private EquippableitemValues.type equippedWeaponType;
+	public bool isMale = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -115,6 +116,8 @@ public class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator>();
 		}
+
+		isMale = initValues.isMale;
 	}
 
 	/// <summary>
