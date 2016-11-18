@@ -87,7 +87,15 @@ public class EnemySpottedEvent : GameEvent {
 	{
 		this.parent = parent;
 	}
+}
 
+public class EnemyAttackedByLeaderEvent : GameEvent
+{
+	public GameObject enemy;
+	public EnemyAttackedByLeaderEvent(GameObject enemy)
+	{
+		this.enemy = enemy;
+	}
 }
 
 public class CeaseFightingEvent : GameEvent {
