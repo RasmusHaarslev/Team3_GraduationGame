@@ -31,6 +31,8 @@ public class SimpleInputScript : MonoBehaviour
             checkForCommand();
             simpleCommandsManager.currentCommand.Clear();
             commandPanel.SetActive(false);
+			Manager_Audio.ChangeState (Manager_Audio.commandWheelContainer,Manager_Audio.closeWheel);
+
         } 
     }
 
@@ -96,7 +98,9 @@ public class SimpleInputScript : MonoBehaviour
 
             if (countdown < 0)
             {
-                commandPanel.SetActive(true);        
+                commandPanel.SetActive(true);
+
+				Manager_Audio.ChangeState (Manager_Audio.commandWheelContainer,Manager_Audio.openWheel);
             }
         }
     }

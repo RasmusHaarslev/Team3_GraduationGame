@@ -127,16 +127,16 @@ public class LevelSelectionGenerator : MonoBehaviour
                     increaseX = 0;
                     break;
                 case 2:
-                    startX = -241.5f;
-                    increaseX = 483f;
+                    startX = -178.3f;
+                    increaseX = 356.6f;
                     break;
                 case 3:
-                    startX = -483f;
-                    increaseX = 483f;
+                    startX = -356.6f;
+                    increaseX = 356.6f;
                     break;
                 case 4:
-                    startX = -724f;
-                    increaseX = 482f;
+                    startX = -535f;
+                    increaseX = 356.6f;
                     break;
             }
 
@@ -157,7 +157,7 @@ public class LevelSelectionGenerator : MonoBehaviour
             {
                 GameObject imageRow = Instantiate(rowImagePrefab);
                 ResetTransform(imageRow, row);
-                imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
+                imageRow.transform.localPosition = new Vector3(0, 100f, 0);
                 imageRow.GetComponent<AddImageRow>().InsertImage(entry.Value.Count, nodesInRows[entry.Key - 1].Count);
             }
 
@@ -200,16 +200,16 @@ public class LevelSelectionGenerator : MonoBehaviour
                     increaseX = 0;
                     break;
                 case 2:
-                    startX = -241.5f;
-                    increaseX = 483f;
+                    startX = -178.3f;
+                    increaseX = 356.6f;
                     break;
                 case 3:
-                    startX = -483f;
-                    increaseX = 483f;
+                    startX = -356.6f;
+                    increaseX = 356.6f;
                     break;
                 case 4:
-                    startX = -724f;
-                    increaseX = 482f;
+                    startX = -535f;
+                    increaseX = 356.6f;
                     break;
             }
 
@@ -251,7 +251,7 @@ public class LevelSelectionGenerator : MonoBehaviour
             {
                 GameObject imageRow = Instantiate(rowImagePrefab);
                 ResetTransform(imageRow, row);
-                imageRow.transform.localPosition = new Vector3(imageRow.transform.position.x, 100f, 0);
+                imageRow.transform.localPosition = new Vector3(0, 100f, 0);
                 imageRow.GetComponent<AddImageRow>().InsertImage(numOfLastLevels, numOfParents);
             }
 
@@ -462,7 +462,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         Vector2 desPos = new Vector2(0, gridYPosition);
 
         StartCoroutine(MoveFromTo(initPos, desPos, 0.5f));
-
     }
 
     IEnumerator MoveFromTo(Vector2 pointA, Vector2 pointB, float time)

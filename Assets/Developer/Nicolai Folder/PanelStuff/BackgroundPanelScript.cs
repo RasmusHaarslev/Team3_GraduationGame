@@ -20,7 +20,8 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
             {
                 if (child.gameObject.activeSelf == true)
                 {
-                    child.gameObject.SetActive(false);
+                    if(gameObject.name != "LevelSelection")
+                        child.gameObject.SetActive(false);
 
                 }
             }

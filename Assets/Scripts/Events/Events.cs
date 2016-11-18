@@ -87,7 +87,15 @@ public class EnemySpottedEvent : GameEvent {
 	{
 		this.parent = parent;
 	}
+}
 
+public class EnemyAttackedByLeaderEvent : GameEvent
+{
+	public GameObject enemy;
+	public EnemyAttackedByLeaderEvent(GameObject enemy)
+	{
+		this.enemy = enemy;
+	}
 }
 
 public class CeaseFightingEvent : GameEvent {
@@ -181,11 +189,9 @@ public class PlayerDeathEvent : GameEvent
 public class ChangeFormationEvent : GameEvent
 {
 	public GameObject hunter;
-	public bool rear;
 
-	public ChangeFormationEvent(GameObject hunter, bool rear)
+	public ChangeFormationEvent(GameObject hunter)
 	{
 		this.hunter = hunter;
-		this.rear = rear;
 	}
 }
