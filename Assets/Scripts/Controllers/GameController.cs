@@ -82,8 +82,6 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene("LevelPrototype01");
-
         var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
         List<string> scenes = new List<string>();
 
