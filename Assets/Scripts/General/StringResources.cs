@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 /// <summary>
 /// This class gather all the main resources paths, to be used in other scripts.
 /// </summary>

@@ -7,6 +7,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
     public void GoToCamp()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_openMap, gameObject);
         //GameController.Instance.LoadScene("LevelSelection");
         levelSelectionPanel.SetActive(true);
     }
