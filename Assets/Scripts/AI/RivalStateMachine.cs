@@ -40,7 +40,10 @@ public class RivalStateMachine : CoroutineMachine
 	{
 		if (character.target != null)
 		{
-			character.RotateTowards(character.target.transform);
+			if (!character.isDead)
+			{
+				character.RotateTowards(character.target.transform);
+			}
 		}
 	}
 
@@ -101,22 +104,28 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator DeadState()
 	{
-		yield return new TransitionTo(StartState, DefaultTransition);
+		yield return new TransitionTo(DeadState, DefaultTransition);
 	}
 
 	IEnumerator FleeState()
 	{
-		agent.Resume();
-		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+		if (!character.isDead)
+		{
+			agent.Resume();
+			agent.stoppingDistance = 1.2f;
+			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
 	{
-		agent.Resume();
-		agent.stoppingDistance = character.range;
-		agent.SetDestination(character.target.transform.position);
+		if (!character.isDead)
+		{
+			agent.Resume();
+			agent.stoppingDistance = character.range;
+			agent.SetDestination(character.target.transform.position);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

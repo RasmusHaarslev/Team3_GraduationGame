@@ -96,7 +96,10 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		if (character.target != null)
 		{
-			character.RotateTowards(character.target.transform);
+			if (!character.isDead)
+			{
+				character.RotateTowards(character.target.transform);
+			}
 		}
 	}
 
@@ -266,7 +269,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator DeadState()
 	{
-		yield return new TransitionTo(StartState, DefaultTransition);
+		yield return new TransitionTo(DeadState, DefaultTransition);
 	}
 
 	IEnumerator DefenseState()
