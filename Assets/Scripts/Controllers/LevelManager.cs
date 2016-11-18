@@ -96,7 +96,7 @@ public class LevelManager : MonoBehaviour {
 
     void PlayerDeath(PlayerDeathEvent e)
     {
-        LoseLevel();
+        LoseGame("PlayerDeathCutscene");
     }
 
     void LootReceived(EnemyDeathEvent e)
@@ -117,11 +117,17 @@ public class LevelManager : MonoBehaviour {
     {
         if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
         {
-            if (ItemsLeft <= 0) //Extra condition for the choice encounters
-            {
-                WinLevel();
-            }
+            WinLevel();
         }
+        else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
+        {
+            LoseGame("AllyDeathCutscene");
+        }
+    }
+
+    public void LoseGame(string scene = "PlayerDeathCutscene")
+    {
+        GameController.Instance.LoadScene(scene);
     }
 
     public void LoseLevel()
