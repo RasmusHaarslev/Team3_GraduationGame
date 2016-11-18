@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
        
 	    dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
         
-        
+		Manager_Audio.PlaySound (Manager_Audio.baseAmbience,this.gameObject);
 
 		//TODO acquire data from playerprefs
         
