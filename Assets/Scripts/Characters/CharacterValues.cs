@@ -10,7 +10,8 @@ public class CharacterValues
 	[PrimaryKey, AutoIncrement]
 	public int id { get; set; }
 	public string name { get; set; }
-	public type Type { get; set; }
+    public bool isMale { get; set; }
+    public type Type { get; set; }
 	public string description { get; set; }
 	public int damage { get; set; }
 	public int health { get; set; }
@@ -45,7 +46,9 @@ public class CharacterValues
 	}
 
 	public string prefabName { get; set; }
-	public override string ToString()
+    public string materialName { get; set; }
+
+    public override string ToString()
 	{
 		return string.Format("[CharacterInfo: Id={0}, Name={1},  prefabName={2}]", id, name, prefabName);
 	}
