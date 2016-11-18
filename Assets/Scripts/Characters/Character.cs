@@ -40,7 +40,10 @@ public class Character : MonoBehaviour
 	public Transform torsoSlot;
 	public Transform legsSlot;
 
-    private EquippableItem currentWeapon;
+
+    public EquippableitemValues.type equippedWeaponType;
+    
+	public bool isMale = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -84,7 +87,7 @@ public class Character : MonoBehaviour
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
 
-	    currentWeapon = GetComponentInChildren<EquippableItem>();
+	    equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 
 	    
 
@@ -114,6 +117,8 @@ public class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator>();
 		}
+
+		isMale = initValues.isMale;
 	}
 
 	/// <summary>
