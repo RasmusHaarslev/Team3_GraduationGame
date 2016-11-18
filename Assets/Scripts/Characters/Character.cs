@@ -86,6 +86,7 @@ public class Character : MonoBehaviour
 					Manager_Audio.PlaySound(Manager_Audio.deathFemale1, this.gameObject);
 				}
 			}
+			isInCombat = false;
 			isDead = true;
 		}
 	}
