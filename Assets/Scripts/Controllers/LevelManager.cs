@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
 	public bool inCombat = false;
 
 	private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
-	private List<GameObject> huntersAndPlayer = new List<GameObject>();
+	public List<GameObject> huntersAndPlayer = new List<GameObject>();
 
 	void Start()
 	{
