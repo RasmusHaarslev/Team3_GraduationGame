@@ -140,6 +140,10 @@ public class PanelScript : MonoBehaviour {
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
         UpdateSoldierStats(currentSoldier.gameObject);
+        if(weaponValues.Type == EquippableitemValues.type.rifle)
+        {
+            //carry on camstuff here
+        }
         panelList[4].SetActive(false);
         panelList[5].SetActive(false);
         panelList[1].SetActive(true);

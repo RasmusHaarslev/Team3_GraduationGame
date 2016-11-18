@@ -74,9 +74,10 @@ public class Node : MonoBehaviour {
         {
             canPlay = true;
         }
-
-        SetupCampsForThisNode();
-        SetupResourceForThisNode();
+        if (wolveCamps == 0 && tribeCamps == 0 && choiceCamps == 0) { 
+            SetupCampsForThisNode();
+            SetupResourceForThisNode();
+        }
 
         NodeId = id;
         GetComponent<Button>().onClick.AddListener(OpenPopUp);
