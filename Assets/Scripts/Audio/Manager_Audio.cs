@@ -20,6 +20,10 @@ public class Manager_Audio : MonoBehaviour {
 	public static string exploreSnapshot = "Exploring";
 	public static string fightSnapshot = "inCombat";
 
+	public static string commandWheelContainer = "CommandWheel";
+	public static string openWheel = "On";
+	public static string closeWheel = "Off";
+
 	public static string attackMale1 = "Play_WarriorMale1Attack";
 	public static string attackMale2 = "Play_WarriorMale2Attack";
 	public static string attackFemale1 = "Play_WarriorFemale1Attack";
@@ -35,7 +39,7 @@ public class Manager_Audio : MonoBehaviour {
 	public static string attackSpear = "Play_UseSpear";
 	public static string attackShield = "Play_UseShield";
 	public static string attackRiffle = "Play_UseRiffle";
-
+	public static string shieldHit = "Play_ShieldHit";
 
 	public static string wind1 = "Play_WindDeep1";
 	public static string leaderFootStep = "Play_LeaderFootStep";
