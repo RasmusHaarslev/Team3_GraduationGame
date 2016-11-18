@@ -663,6 +663,38 @@
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+									</StateGroupInfo>
+									<StateGroupInfo>
+										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
+										<State Name="Custom State" ID="{D0D5C161-0041-42DF-BA0C-C6FB1284FC8C}" ShortID="544375241">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="60"/>
+												<Property Name="Volume" Type="Real64" Value="-10"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+										<State Name="Custom State" ID="{68DF1619-89E6-49D1-8E02-02BC3B7FF0A1}" ShortID="68664264">
+											<PropertyList>
+												<Property Name="Highpass" Type="int16" Value="40"/>
+												<Property Name="Lowpass" Type="int16" Value="39"/>
+												<Property Name="Pitch" Type="int32" Value="-200"/>
+												<Property Name="Volume" Type="Real64" Value="-6"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
 							<Playlist>
 								<ItemRef Name="WindHowlDrone" ID="{4B442694-B9EF-4C84-AC35-CD656A9A7205}"/>
 							</Playlist>
@@ -897,20 +929,9 @@
 							<StateInfo>
 								<StateGroupList>
 									<StateGroupInfo>
-										<StateGroupRef Name="Explore" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
 									</StateGroupInfo>
 								</StateGroupList>
-								<CustomStateList>
-									<CustomState>
-										<StateRef Name="Bridge" ID="{144A0702-2431-456E-AC66-FEE4DDA60074}"/>
-										<State Name="Custom State" ID="{EE911A05-D162-494C-9232-745C7F84ADBC}" ShortID="621278359">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32" Value="-380"/>
-												<Property Name="Volume" Type="Real64" Value="-4"/>
-											</PropertyList>
-										</State>
-									</CustomState>
-								</CustomStateList>
 							</StateInfo>
 							<Playlist>
 								<ItemRef Name="windStrings" ID="{C653996E-6165-4FF8-B927-FEC4E76F19CE}"/>
@@ -4390,6 +4411,9 @@
 									</ValueList>
 								</Property>
 								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-230</Value>
+									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{E273FEF4-C37A-4D0C-A3EA-DA325B661544}">
@@ -4404,7 +4428,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-4</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4689,7 +4713,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4937,7 +4961,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="4"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5181,7 +5205,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-12</Value>
+										<Value>-13</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
