@@ -29,12 +29,13 @@ public class SimpleCommandsManager : MonoBehaviour
     public void FillCurrentCommandList(int index)
     {
         currentCommand.Add(index);
+        
     }
 
     public void RemoveCurrentCommandList(int index)
     {
-            currentCommand.RemoveAt(index);
-
+        currentCommand.RemoveAt(index);
+        
     }
 }
 
