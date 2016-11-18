@@ -27,15 +27,15 @@ public class Formation : MonoBehaviour
 	private void ChangeFormation(ChangeFormationEvent e)
 	{
 		var index = followers.IndexOf(e.hunter);
-		if (e.rear == true)
+		if (rears[index] == true)
 		{
 			Move(index, rearPositions[index]);
-			rears[index] = true;
+			rears[index] = false;
 		}
 		else
 		{
 			Move(index, frontPositions[index]);
-			rears[index] = false;
+			rears[index] = true;
 		}
 	}
 
