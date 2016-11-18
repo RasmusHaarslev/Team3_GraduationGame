@@ -467,12 +467,14 @@ public class LevelSelectionGenerator : MonoBehaviour
     IEnumerator MoveFromTo(Vector2 pointA, Vector2 pointB, float time)
     {
         float t = 0f;
+        Manager_Audio.PlaySound(Manager_Audio.play_scrollMap, gameObject);
         while (t < 1.0f)
         {
             t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
             scrollingGrid.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(pointA, pointB, t); // Set position proportional to t
             yield return null;         // Leave the routine and return here in the next frame
         }
+        Manager_Audio.PlaySound(Manager_Audio.stop_scrollMap, gameObject);
     }
 
     #endregion
