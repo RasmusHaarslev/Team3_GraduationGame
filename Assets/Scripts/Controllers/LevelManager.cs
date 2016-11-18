@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
 
 		// -Lose-
 		//Player dies
-<<<<<<< HEAD
+
         EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
         //Follower dies
         EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
@@ -75,12 +75,7 @@ public class LevelManager : MonoBehaviour
         //Reacting on Items clicks
         EventManager.Instance.StartListening<ItemClicked>(ReactOnItemClick);
     }
-=======
-		EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
-		//Follower dies
-		EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
-	}
->>>>>>> 989122fb569a94f86092129e4a39fcb319efdd70
+
 
 	void OnDisable()
 	{
