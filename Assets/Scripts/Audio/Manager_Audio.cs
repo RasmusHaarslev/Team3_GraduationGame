@@ -11,13 +11,18 @@ public class Manager_Audio : MonoBehaviour {
     public static bool musicToggle = true;
     public static bool fxToggle = true;
 
-	public static string baseAmbience = "Play_GroundAmbience";
+	public static string baseAmbiencePlay = "Play_GroundAmbience";
+	public static string baseAmbienceStop = "Stop_GroundAmbience";
 	public static string musicExploreStart = "Play_ExploreMusic";
 	public static string musicExploreStop = "Stop_ExploreMusic";
 	public static string walkTapUISound = "Play_WalkTapUI";
 	public static string playStateGroupContainer = "ExploreState";
 	public static string exploreSnapshot = "Exploring";
 	public static string fightSnapshot = "inCombat";
+
+	public static string commandWheelContainer = "CommandWheel";
+	public static string openWheel = "On";
+	public static string closeWheel = "Off";
 
 	public static string attackMale1 = "Play_WarriorMale1Attack";
 	public static string attackMale2 = "Play_WarriorMale2Attack";
@@ -34,7 +39,7 @@ public class Manager_Audio : MonoBehaviour {
 	public static string attackSpear = "Play_UseSpear";
 	public static string attackShield = "Play_UseShield";
 	public static string attackRiffle = "Play_UseRiffle";
-
+	public static string shieldHit = "Play_ShieldHit";
 
 	public static string wind1 = "Play_WindDeep1";
 	public static string leaderFootStep = "Play_LeaderFootStep";
