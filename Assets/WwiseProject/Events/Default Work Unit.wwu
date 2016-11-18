@@ -573,6 +573,50 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_OpenMapUI" ID="{F23FF39B-D07A-4371-8F8B-75FEAC39F68A}">
+							<ChildrenList>
+								<Action Name="Play" ID="{7B1BA8BF-F2E7-49D4-9937-3911FC0E87A4}" ShortID="962956568" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{2A3EF856-3DEA-4741-9860-6B3445138B2A}" Global="false">
+											<ObjectRef Name="OpenMapUI" ID="{E9AABCE1-34E7-48C1-8191-8BF92971165F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ScrollMap" ID="{FA94B15A-D748-449E-94F6-CF6BDC94FC4A}">
+							<ChildrenList>
+								<Action Name="Play" ID="{58640AA2-55FE-4691-9410-29CA48E18C4E}" ShortID="1002577734" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{33B005BB-3C5A-46D0-9BD0-C6DA418C2C58}" Global="false">
+											<ObjectRef Name="ScrollMap" ID="{8157D08B-FB1B-47CF-BF5C-EE7408A20C16}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_ScrollMap" ID="{D5B807D0-5B0A-493E-B0E8-DB6B6474497A}">
+							<ChildrenList>
+								<Action Name="Stop" ID="{97C965F2-6C4D-461C-BA17-AA6FA8AB4A92}" ShortID="532785487" Type="Stop" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{6F44ABDC-4BA9-4979-8867-B31FFA8AA3B3}" Global="false">
+											<ObjectRef Name="ScrollMap" ID="{8157D08B-FB1B-47CF-BF5C-EE7408A20C16}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_NewMaps" ID="{5EF170C4-F393-4A38-9809-C9EF0795A37A}">
+							<ChildrenList>
+								<Action Name="Play" ID="{3DC3CC0D-FB2E-48C1-B103-356B7396A54F}" ShortID="875022136" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{214C5473-670C-45C8-A1B3-9EDAC79D1D1C}" Global="false">
+											<ObjectRef Name="CloudPuff" ID="{3DFE8780-D247-4E79-93CB-45B20D99FE7B}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Event Name="Play_WolfHowl" ID="{A5AB476C-B9E7-4B74-BF84-6E3284E891C4}">
