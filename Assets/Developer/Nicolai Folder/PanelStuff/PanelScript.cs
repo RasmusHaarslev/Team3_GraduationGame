@@ -49,8 +49,10 @@ public class PanelScript : MonoBehaviour {
     
     public void ActivateCamera(GameObject soldier)
     {
+        
         if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
+            Debug.Log("hi");
             soldierCameraList[0].enabled = true;
             DeactivateCamera(0);
         }
@@ -137,13 +139,30 @@ public class PanelScript : MonoBehaviour {
 
     public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
     {
+
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
         UpdateSoldierStats(currentSoldier.gameObject);
-        if(weaponValues.Type == EquippableitemValues.type.rifle)
-        {
-            //carry on camstuff here
-        }
+
+        //foreach (var camera in soldierCameraList)
+        //{
+        //    if (camera.enabled == true)
+        //    {
+        //        if (weaponValues.Type == EquippableitemValues.type.rifle)
+        //        {
+        //            camera.cullingMask = camera.cullingMask ^= (1 << LayerMask.NameToLayer("Rifle") | 1 << LayerMask.NameToLayer("Player"));
+        //        }
+        //        if (weaponValues.Type == EquippableitemValues.type.shield)
+        //        {
+        //            camera.cullingMask ^= (1 << LayerMask.NameToLayer("Shield") | 1 << LayerMask.NameToLayer("Player"));
+        //        }
+        //        if (weaponValues.Type == EquippableitemValues.type.polearm)
+        //        {
+        //            camera.cullingMask ^= (1 << LayerMask.NameToLayer("Stick") | 1 << LayerMask.NameToLayer("Player"));
+        //        }
+        //    }
+        //}
+
         panelList[4].SetActive(false);
         panelList[5].SetActive(false);
         panelList[1].SetActive(true);

@@ -20,18 +20,22 @@ public class SimpleCommandsManager : MonoBehaviour
         commandsList.Add(new List<int> { 0, 3 }); // FleeStateEvent
         commandsList.Add(new List<int> { 0, 4 }); // FollowStateEvent
         commandsList.Add(new List<int> { 0, 5 }); // StayStateEvent
+        commandsList.Add(new List<int> { 0, 6 }); // Hunter1ToggleEvent
+        commandsList.Add(new List<int> { 0, 7 }); // Hunter2ToggleEvent
+        commandsList.Add(new List<int> { 0, 8 }); // Hunter3ToggleEvent
 
     }
 
     public void FillCurrentCommandList(int index)
     {
         currentCommand.Add(index);
+        
     }
 
     public void RemoveCurrentCommandList(int index)
     {
-            currentCommand.RemoveAt(index);
-
+        currentCommand.RemoveAt(index);
+        
     }
 }
 
