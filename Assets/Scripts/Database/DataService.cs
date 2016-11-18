@@ -583,12 +583,15 @@ public class DataService : MonoBehaviour
 			    {
                     case EquippableitemValues.type.polearm:
                         character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerSpearName) as RuntimeAnimatorController;
+			            character.equippedWeaponType = EquippableitemValues.type.polearm;
                         break;
                     case EquippableitemValues.type.shield:
                         character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerShieldName) as RuntimeAnimatorController;
+                        character.equippedWeaponType = EquippableitemValues.type.shield;
                         break;
                     case EquippableitemValues.type.rifle:
                         character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerRifleName) as RuntimeAnimatorController;
+                        character.equippedWeaponType = EquippableitemValues.type.rifle;
                         break;
                 }
                 //add the new item values

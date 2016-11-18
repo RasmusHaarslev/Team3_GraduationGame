@@ -41,7 +41,7 @@ public class Character : MonoBehaviour
 	public Transform legsSlot;
 
     
-    private EquippableitemValues.type equippedWeaponType;
+    public EquippableitemValues.type equippedWeaponType;
 	// Use this for initialization
 	void Start()
 	{
