@@ -37,7 +37,7 @@ public class MoveScript : MonoBehaviour
 		}
 		if (movement)
 		{
-			if (Input.GetKey(KeyCode.Mouse0))
+			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
 				Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
 				agent.Resume();
