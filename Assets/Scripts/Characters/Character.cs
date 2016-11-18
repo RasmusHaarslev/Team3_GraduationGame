@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
 
     public EquippableitemValues.type equippedWeaponType;
     
-	public bool isMale = false;
+	public bool isMale = true;
 	// Use this for initialization
 	void Start()
 	{
@@ -60,12 +60,22 @@ public class Character : MonoBehaviour
 				if (deadEvent == false)
 				{
 					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+					if (isMale)
+					{
+						Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
+					}
+					else
+					{
+						Manager_Audio.PlaySound(Manager_Audio.deathFemale1, this.gameObject);
+					}
 					deadEvent = true;
 				}
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				GetComponent<Collider>().enabled = false;
+				agent.enabled = false;
 				GetComponent<RagdollControl>().EnableRagDoll();
 				if (isMale)
 				{
