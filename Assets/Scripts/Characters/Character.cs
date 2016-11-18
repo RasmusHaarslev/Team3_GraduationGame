@@ -40,7 +40,8 @@ public class Character : MonoBehaviour
 	public Transform torsoSlot;
 	public Transform legsSlot;
 
-    private EquippableItem currentWeapon;
+    
+    private EquippableitemValues.type equippedWeaponType;
 	// Use this for initialization
 	void Start()
 	{
@@ -84,7 +85,7 @@ public class Character : MonoBehaviour
 		{EquippableitemValues.slot.legs, legsSlot }
 	};
 
-	    currentWeapon = GetComponentInChildren<EquippableItem>();
+	    equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 
 	    
 
