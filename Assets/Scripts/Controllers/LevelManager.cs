@@ -4,39 +4,70 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
-    private int AlliesAlive;
-    private bool PlayerAlive;
+	private int AlliesAlive;
+	private bool PlayerAlive;
 
-    private int EnemiesAlive = 0;
-    private int ItemsLeft = 0;
+	private int EnemiesAlive = 0;
+	private int ItemsLeft = 0;
+	public bool inCombat = false;
 
-    private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
+	private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
+	public List<GameObject> huntersAndPlayer = new List<GameObject>();
 
-    void Start () {
-        PlayerAlive = true;
-        AlliesAlive = 3;
+	void Start()
+	{
+		PlayerAlive = true;
+		AlliesAlive = 3;
+	}
 
-    }
+	void Update()
+	{
+		if (huntersAndPlayer.Count == 0)
+		{
+			huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+			huntersAndPlayer.Add(GameObject.FindGameObjectWithTag("Player"));
+		}
+		SetGameState();
+	}
 
-    #region Listeners
-    void OnEnable()
-    {
-        //Enemy spawn for counting
-        EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
-        EventManager.Instance.StartListening<ItemSpawned>(ItemSpawn);
+	void SetGameState()
+	{
+		foreach (var friendly in huntersAndPlayer)
+		{
+			if (friendly.GetComponent<Character>().isInCombat)
+			{
+				inCombat = true;
+				Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.fightSnapshot);
+				return;
+			}
+		}
+		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.exploreSnapshot);
+		inCombat = false;
+	}
 
-        // -Collecting-
-        //Loot received
-        EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
+	#region Listeners
+	void OnEnable()
+	{
+		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.exploreSnapshot);
 
-        // -Win-
-        //Enemy dies for progress
-        EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
+		//Enemy spawn for counting
+		EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
+		EventManager.Instance.StartListening<ItemSpawned>(ItemSpawn);
+
+		// -Collecting-
+		//Loot received
+		EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
+
+		// -Win-
+		//Enemy dies for progress
+		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 
 		// -Lose-
 		//Player dies
+<<<<<<< HEAD
         EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
         //Follower dies
         EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
@@ -44,20 +75,26 @@ public class LevelManager : MonoBehaviour {
         //Reacting on Items clicks
         EventManager.Instance.StartListening<ItemClicked>(ReactOnItemClick);
     }
+=======
+		EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
+		//Follower dies
+		EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
+	}
+>>>>>>> 989122fb569a94f86092129e4a39fcb319efdd70
 
-    void OnDisable()
-    {
-        //Enemy spawn for counting
-        EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
-        EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
+	void OnDisable()
+	{
+		//Enemy spawn for counting
+		EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
+		EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
 
-        // -Collecting-
-        //Loot received
-        EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
+		// -Collecting-
+		//Loot received
+		EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
 
-        // -Win-
-        //Enemy dies for progress
-        EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+		// -Win-
+		//Enemy dies for progress
+		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 
         // -Lose-
         //Player dies
@@ -102,7 +139,7 @@ public class LevelManager : MonoBehaviour {
 
     void PlayerDeath(PlayerDeathEvent e)
     {
-        LoseLevel();
+        LoseGame("PlayerDeathCutscene");
     }
 
     void LootReceived(EnemyDeathEvent e)
@@ -123,11 +160,21 @@ public class LevelManager : MonoBehaviour {
     {
         if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
         {
-            if (ItemsLeft <= 0) //Extra condition for the choice encounters
-            {
-                WinLevel();
-            }
+            WinLevel();
         }
+        else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
+        {
+            LoseGame("AllyDeathCutscene");
+        }
+        else if (AlliesAlive <= 0)
+        {
+            LoseLevel();
+        }
+    }
+
+    public void LoseGame(string scene = "PlayerDeathCutscene")
+    {
+        GameController.Instance.LoadScene(scene);
     }
 
     public void LoseLevel()
@@ -135,7 +182,7 @@ public class LevelManager : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new LevelLost());
         PlayerPrefs.SetInt("LevelResult", 0);
 
-        GameController.Instance.LoadScene("CampManagement");
+        GameController.Instance.LoadScene("LevelFleeCutscene");
     }
 
     public void WinLevel()
@@ -143,28 +190,27 @@ public class LevelManager : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new LevelWon());
         PlayerPrefs.SetInt("LevelResult", 1);
         //replaceCharactersWeapons();
-        GameController.Instance.LoadScene("CampManagement");
+        GameController.Instance.LoadScene("LevelWinCutscene");
     }
 
+	void replaceCharactersWeapons()
+	{
+		WeaposGenerator weaponGenerator = new WeaposGenerator();
+		DataService dataService = new DataService(StringResources.databaseName);
+		GameObject playerFellowship = GameObject.Find("PlayerFellowship");
+		int level = PlayerPrefs.GetInt(StringResources.hardnessLevel, 4);
 
-    void replaceCharactersWeapons()
-    {
-        WeaposGenerator weaponGenerator = new WeaposGenerator();
-        DataService dataService = new DataService(StringResources.databaseName);
-        GameObject playerFellowship = GameObject.Find("PlayerFellowship");
-        int level = PlayerPrefs.GetInt(StringResources.hardnessLevel,4);
-        
-        foreach (Character character in playerFellowship.transform.GetComponentsInChildren<Character>())
-        {
-            EquippableitemValues oldEquippableitemValues = character.GetComponentInChildren<EquippableItem>().itemValues;
-            EquippableitemValues newItemValues = weaponGenerator.GenerateEquippableItem(
-                character.GetComponentInChildren<EquippableItem>().itemValues.Type, level);
+		foreach (Character character in playerFellowship.transform.GetComponentsInChildren<Character>())
+		{
+			EquippableitemValues oldEquippableitemValues = character.GetComponentInChildren<EquippableItem>().itemValues;
+			EquippableitemValues newItemValues = weaponGenerator.GenerateEquippableItem(
+				character.GetComponentInChildren<EquippableItem>().itemValues.Type, level);
 
-            GameObject newItem =
-                dataService.GenerateNewEquippableItemFromValues(newItemValues);
-            dataService.equipItemsToCharacter(new List<GameObject>() { newItem },character);
-        }
-    }
+			GameObject newItem =
+				dataService.GenerateNewEquippableItemFromValues(newItemValues);
+			dataService.equipItemsToCharacter(new List<GameObject>() { newItem }, character);
+		}
+	}
 
     void ReactOnItemClick(ItemClicked itemClickedEvent)
     {

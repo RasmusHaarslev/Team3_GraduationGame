@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
 
     public EquippableitemValues.type equippedWeaponType;
     
-	public bool isMale = false;
+	public bool isMale = true;
 	// Use this for initialization
 	void Start()
 	{
@@ -60,15 +60,33 @@ public class Character : MonoBehaviour
 				if (deadEvent == false)
 				{
 					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+					if (isMale)
+					{
+						Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
+					}
+					else
+					{
+						Manager_Audio.PlaySound(Manager_Audio.deathFemale1, this.gameObject);
+					}
 					deadEvent = true;
 				}
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				GetComponent<Collider>().enabled = false;
+				agent.enabled = false;
+				GetComponent<RagdollControl>().EnableRagDoll();
+				if (isMale)
+				{
+					Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
+				}
+				else
+				{
+					Manager_Audio.PlaySound(Manager_Audio.deathFemale1, this.gameObject);
+				}
 			}
 			isDead = true;
-			GetComponent<RagdollControl>().EnableRagDoll();
 		}
 	}
 
@@ -88,9 +106,6 @@ public class Character : MonoBehaviour
 	};
 
 	    equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
-
-	    
-
 	}
 
 	void OnDisable()
@@ -276,6 +291,30 @@ public class Character : MonoBehaviour
 				{
 					target.GetComponent<Character>().target = gameObject;
 					target.GetComponent<HunterStateMachine>().attacked = true;
+
+
+					switch (equippedWeaponType)
+					{
+						case EquippableitemValues.type.polearm:
+							Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
+							break;
+						case EquippableitemValues.type.rifle:
+							Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
+							break;
+						case EquippableitemValues.type.shield:
+							Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
+							break;
+
+					}
+
+
+					if (isMale)
+					{
+						Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
+					} else
+					{
+						Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
+					}
 				}
 			}
 		}
@@ -284,7 +323,14 @@ public class Character : MonoBehaviour
 	private void TakeDamage(TakeDamageEvent e)
 	{
 		if (e.target == gameObject)
-		{
+		{ 
+			Manager_Audio.PlaySound(Manager_Audio.genericHit, this.gameObject);
+
+			if(equippedWeaponType == EquippableitemValues.type.shield)
+			{
+				Manager_Audio.PlaySound(Manager_Audio.shieldHit, this.gameObject);
+			}
+
 			currentHealth -= e.damage;
 		}
 	}

@@ -12,7 +12,6 @@ public class SceneInitializor : MonoBehaviour {
     // Use this for initialization
     void Start() {
         
-
         foreach (GameObject ui in UIPrefabs) { 
             GameObject _ui = (GameObject)Instantiate(ui);
         }

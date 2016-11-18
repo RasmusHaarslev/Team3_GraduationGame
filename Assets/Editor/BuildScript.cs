@@ -25,6 +25,13 @@ class BuildScript
 
     static void addScenes(List<string> scenes)
     {
+        scenes.Add("Assets/_Scenes/Cutscenes/IntroCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/LevelEnterCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/LevelFleeCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/LevelWinCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/AllyDeathCutscene.unity");
+        scenes.Add("Assets/_Scenes/Cutscenes/PlayerDeathCutscene.unity");
+
         var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/");
         foreach (var scene in sceneDirectory.GetFiles())
         {

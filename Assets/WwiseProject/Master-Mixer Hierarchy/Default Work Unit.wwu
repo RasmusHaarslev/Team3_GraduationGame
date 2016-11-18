@@ -49,7 +49,15 @@
 							</PropertyList>
 							<ChildrenList>
 								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}"/>
-								<Bus Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}"/>
+								<Bus Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}"/>
 								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}"/>
 							</ChildrenList>

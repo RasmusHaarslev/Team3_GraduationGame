@@ -37,6 +37,8 @@ public class MoveScript : MonoBehaviour
 		}
 		if (movement)
 		{
+			if (Input.GetKeyDown(KeyCode.Mouse0))
+				Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
 			if (Input.GetKey(KeyCode.Mouse0))
 			{
 				agent.Resume();
@@ -91,8 +93,11 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
+				if (!character.isInCombat)
+				{
+					EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+				}
 				
-
 				hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
 			}
 			else if (hit.transform.gameObject.tag == "Player")

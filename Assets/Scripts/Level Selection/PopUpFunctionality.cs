@@ -136,8 +136,9 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt("ItemDropAmount", node.GetComponent<Node>().itemDropAmount);
 
         // IF NOT DEBUG USE THIS
+        GameController.Instance.LoadScene("LevelEnterCutscene");
         //GameController.Instance.LoadScene(node.GetComponent<Node>().sceneSelection);
-        GameController.Instance.LoadLevel();
+        //GameController.Instance.LoadLevel();
     }
 
     public void Scout(GameObject node)

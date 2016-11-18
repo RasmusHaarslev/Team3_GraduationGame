@@ -190,6 +190,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000010998403480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011203245314}
+  m_Layer: 0
+  m_Name: FleePoint
+  m_TagString: FleePoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011289080328
 GameObject:
   m_ObjectHideFlags: 1
@@ -534,6 +549,7 @@ GameObject:
   - 114: {fileID: 114000014175853686}
   - 114: {fileID: 114000013365420994}
   - 114: {fileID: 114000011275476364}
+  - 114: {fileID: 114000010650190790}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -942,6 +958,19 @@ Transform:
   - {fileID: 4000010104935754}
   m_Father: {fileID: 4000011733362664}
   m_RootOrder: 0
+--- !u!4 &4000011203245314
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010998403480}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.8974247, y: 0.32184982, z: 12.91423}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000011733362664}
+  m_RootOrder: 6
 --- !u!4 &4000011427172190
 Transform:
   m_ObjectHideFlags: 1
@@ -1001,7 +1030,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013150418164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 0}
+  m_LocalPosition: {x: -32.117424, y: 42.86815, z: -59.32423}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1011,6 +1040,7 @@ Transform:
   - {fileID: 4000013293542060}
   - {fileID: 4000012243049830}
   - {fileID: 4000013392945120}
+  - {fileID: 4000011203245314}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000011756430708
@@ -1442,6 +1472,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 1
+--- !u!114 &114000010650190790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013150418164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad4f007735b78f4daae6faae136fd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 0}
+  UIPrefabs:
+  - {fileID: 1000011096772094, guid: 00e5233f7ab2a8a48a75097ab1a8fe54, type: 2}
 --- !u!114 &114000011220901740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1515,6 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000011402088812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1635,6 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000012221109094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1756,6 +1802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000013365420994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1767,6 +1814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f25e6e38383e454d991e81723676b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inCombat: 0
+  huntersAndPlayer: []
 --- !u!114 &114000013416379112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1887,6 +1936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000014175853686
 MonoBehaviour:
   m_ObjectHideFlags: 1
