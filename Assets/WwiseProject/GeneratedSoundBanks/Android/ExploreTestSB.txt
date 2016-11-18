@@ -1,12 +1,14 @@
 Event	ID	Name			Wwise Object Path	Notes
 	12654283	Play_EvilMaleWarrior2Death			\Default Work Unit\Warriors\Play_EvilMaleWarrior2Death	
 	161668694	Play_EvilMaleWarrior1Death			\Default Work Unit\Warriors\Play_EvilMaleWarrior1Death	
+	225821351	Stop_ScrollMap			\Default Work Unit\UI\Stop_ScrollMap	
 	275137096	Play_WolfDeath			\Default Work Unit\Play_WolfDeath	
 	324117657	Play_FemaleWarrior1Death			\Default Work Unit\Warriors\Play_FemaleWarrior1Death	
 	374946458	Play_MaleWarrior1Attack			\Default Work Unit\Warriors\Play_MaleWarrior1Attack	
 	432969025	Play_MaleWarrior2Death			\Default Work Unit\Warriors\Play_MaleWarrior2Death	
 	441061787	Play_LeaderFootStep			\Default Work Unit\test\Play_LeaderFootStep	
 	484731529	Stop_MenuAmbience			\Default Work Unit\Stop_MenuAmbience	
+	623878550	Play_OpenMapUI			\Default Work Unit\UI\Play_OpenMapUI	
 	663193808	Play_MaleWarrior2Hit			\Default Work Unit\Warriors\Play_MaleWarrior2Hit	
 	677386556	Play_UseShield			\Default Work Unit\Combat\Play_UseShield	
 	955974805	Play_UseRiffle			\Default Work Unit\Combat\Play_UseRiffle	
@@ -36,6 +38,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3086379201	Play_MaleWarrior1Hit			\Default Work Unit\Warriors\Play_MaleWarrior1Hit	
 	3104904358	Play_windhowl			\Default Work Unit\Ambience\Play_windhowl	
 	3125842213	Stop_GroundAmbience			\Default Work Unit\Ambience\Stop_GroundAmbience	
+	3142926109	Play_ScrollMap			\Default Work Unit\UI\Play_ScrollMap	
 	3254793675	Play_GroundAmbience			\Default Work Unit\Ambience\Play_GroundAmbience	
 	3280597815	Play_EvilFemaleWarrior2Hit			\Default Work Unit\Warriors\Play_EvilFemaleWarrior2Hit	
 	3296022196	Play_EvilMaleWarrior1Attack			\Default Work Unit\Warriors\Play_EvilMaleWarrior1Attack	
@@ -45,6 +48,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3552896197	Play_FemaleWarrior1Attack			\Default Work Unit\Warriors\Play_FemaleWarrior1Attack	
 	3582425144	Play_WolfHowl			\Default Work Unit\Play_WolfHowl	
 	3643034395	Play_EvilFemaleWarrior1Attack			\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack	
+	3674699749	Play_NewMaps			\Default Work Unit\UI\Play_NewMaps	
 	3689491696	Play_MaleWarrior1Death			\Default Work Unit\Warriors\Play_MaleWarrior1Death	
 	3719726781	Play_MenuUI			\Default Work Unit\UI\Play_MenuUI	
 	3862357400	Play_FemaleWarrior1Hit			\Default Work Unit\Warriors\Play_FemaleWarrior1Hit	
@@ -71,6 +75,9 @@ Custom State	ID	Name	State Group	Owner		Notes
 	380717595	On	CommandWheel	\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1		
 	544375241	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindHowlDrone		
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1633960628	ScrollPitch			\Default Work Unit\ScrollPitch	
+
 Trigger	ID	Name			Wwise Object Path	Notes
 	3646224280	DiscoverTest			\Default Work Unit\DiscoverTest	
 
@@ -79,6 +86,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	16900475	EvilFemaleWarrior2Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Attack1_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack1		30040
 	19545444	MaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack4_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleWarrior2Attack\MaleWarrior2Attack4		30511
 	26566640	FemaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack3_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleWarrior1Attack\FemaleWarrior1Attack3		30815
+	38438293	CloudPuff	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CloudPuff_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CloudPuff		6846
 	41430989	FemaleWarrior1Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack2_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleWarrior1Attack\FemaleWarrior1Attack2		20832
 	52315870	FootstepsConc5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc5_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc5		2836
 	55096845	FootStepsBoot10	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot10_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot10		3210
@@ -155,6 +163,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	467728431	EvilFemaleWarrior1Hit1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Hit1_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleWarrior1Hit\EvilFemaleWarrior1Hit1		29522
 	478117380	ExploreToCombat	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ExploreToCombat_21ADA429.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\ExploreToCombat\ExploreToCombat		134742
 	489717547	GenericHit2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit2_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit2		8352
+	496179797	OpenMapUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\OpenMapUI_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\OpenMapUI		7836
 	501059768	STINGER1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Stinger3_21ADA429.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Explore\STINGER1\STINGER1		176484
 	506703436	FemaleWarrior1Hit3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Hit3_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleWarrior1Hit\FemaleWarrior1Hit3		30430
 	507969026	MaleWarrior2Hit1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Hit1_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleWarrior2Hit\MaleWarrior2Hit1		30918
@@ -229,6 +238,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	933282720	EvilMaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior1Attack4_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleWarrior1Attack\EvilMaleWarrior1Attack4		30697
 	934244384	MaleWarrior1Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Attack6_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleWarrior1Attack\MaleWarrior1Attack6		29932
 	944792657	MaleWarrior2Hit3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Hit3_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleWarrior2Hit\MaleWarrior2Hit3		31093
+	969021496	ScrollUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ScrollUI_42C743BD.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ScrollMap\ScrollUI		27065
 	970652787	FemaleWarrior2Hit4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Hit4_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleWarrior2Hit\FemaleWarrior2Hit4		29873
 	974952532	FootStepsSneak4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak4_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak4		2810
 	983054606	WolfAttack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WolfAttack2_277E827B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Wolf\WolfAttack\WolfAttack2		16981
