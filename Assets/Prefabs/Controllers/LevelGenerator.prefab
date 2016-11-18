@@ -534,6 +534,7 @@ GameObject:
   - 114: {fileID: 114000014175853686}
   - 114: {fileID: 114000013365420994}
   - 114: {fileID: 114000011275476364}
+  - 114: {fileID: 114000010650190790}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -1442,6 +1443,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 1
+--- !u!114 &114000010650190790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013150418164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad4f007735b78f4daae6faae136fd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 0}
+  UIPrefabs:
+  - {fileID: 1000011096772094, guid: 00e5233f7ab2a8a48a75097ab1a8fe54, type: 2}
 --- !u!114 &114000011220901740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1515,6 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000011402088812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1635,6 +1651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000012221109094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1756,6 +1773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000013365420994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1767,6 +1785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f25e6e38383e454d991e81723676b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inCombat: 0
+  huntersAndPlayer: []
 --- !u!114 &114000013416379112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1887,6 +1907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000014175853686
 MonoBehaviour:
   m_ObjectHideFlags: 1
