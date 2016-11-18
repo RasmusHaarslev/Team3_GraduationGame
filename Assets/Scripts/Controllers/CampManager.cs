@@ -23,6 +23,17 @@ public class CampManager : MonoBehaviour
     public int MaxVillagesCostIncrease;
 
     public Text[] TextLevels;
+    public Button[] Buttons;
+    public Button FinishNow;
+
+    #region
+    private double amountOfSeconds = 0.0;
+    private string tempUpgradeName = "";
+    private int tempCost = 0;
+
+    private int tempGold = 0;
+    #endregion
+
 
     #region Setup Instance
     private static CampManager _instance;
@@ -50,7 +61,12 @@ public class CampManager : MonoBehaviour
 
     private void SaveUpgrades()
     {
-        var path = Path.Combine(Application.persistentDataPath, "upgrades.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
+
+        foreach (var but in Buttons)
+            but.interactable = !Upgrades.UpgradeInProgress;
+
+        FinishNow.interactable = Upgrades.UpgradeInProgress;
 
         var serializer = new XmlSerializer(typeof(CampUpgrades));
         var stream = new FileStream(path, FileMode.Create);
@@ -60,7 +76,7 @@ public class CampManager : MonoBehaviour
 
     private void LoadUpgrades()
     {
-        var path = Path.Combine(Application.persistentDataPath, "upgrades.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
 
         if (File.Exists(path))
         {
@@ -77,9 +93,61 @@ public class CampManager : MonoBehaviour
         }
     }
 
+    public void PerformUpgrade()
+    {
+        DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
+
+        PlayerPrefs.SetString("UpgradeEnd", End.ToString());
+        Upgrades.UpgradeInProgress = true;
+        Upgrades.UpgradeBought = tempUpgradeName;
+        Upgrades.Scrap -= tempCost;
+        SaveUpgrades();
+    }
+
+    public double TimeLeftInSeconds()
+    {
+        if (Upgrades.UpgradeInProgress)
+        {
+            DateTime end = DateTime.Parse(PlayerPrefs.GetString("UpgradeEnd"));
+            double timeLeft = (end - DateTime.Now).TotalSeconds;
+            if (timeLeft < 0.0)
+            {
+                FinishUpgrade();
+                return 0.0;
+            }
+            else
+                return (int) timeLeft;
+        }
+        else
+        {
+            return 0.0;
+        }
+    }
+
+    public void CancelUpgrade()
+    {
+        Upgrades.UpgradeBought = "";
+        Upgrades.UpgradeInProgress = false;
+        tempCost = 0;
+    }
+
+    public void FinishUpgradeClicked()
+    {
+        tempGold = (int) Mathf.Max( ((float)TimeLeftInSeconds())/10.0f, 1.0f);
+    }
+
+    public void FinishUpgradeNow()
+    {
+        Upgrades.UpgradeInProgress = true;
+        Upgrades.UpgradeBought = tempUpgradeName;
+        Upgrades.Gold -= tempGold;
+        FinishUpgrade();
+    }
+
     private void FinishUpgrade()
     {
-        switch (Upgrades.UpgradeBought) {
+        switch (Upgrades.UpgradeBought)
+        {
             case "Gather":
                 Upgrades.GatherLevel++;
                 break;
@@ -110,100 +178,41 @@ public class CampManager : MonoBehaviour
         SetLevels();
     }
 
-    public double TimeLeftInSeconds()
-    {
-        if (Upgrades.UpgradeInProgress)
-        {
-            DateTime end = DateTime.Parse(PlayerPrefs.GetString("UpgradeEnd"));
-            double timeLeft = (end - DateTime.Now).TotalSeconds;
-            if (timeLeft < 0.0)
-            {
-                FinishUpgrade();
-                return 0.0;
-            }
-            else
-                return (int) timeLeft;
-        }
-        else
-        {
-            return 0.0;
-        }
-        
-    }
+    #region Upgrade Buttons
 
     public void UpgradeGather()
     {
-        if (Upgrades.UpgradeInProgress)
-            return;
-
-        var amountOfSeconds = GetTimeForUpgrade(Upgrades.GatherLevel);
-        DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
-        
-        PlayerPrefs.SetString("UpgradeEnd",End.ToString());
-        Upgrades.UpgradeInProgress = true;
-        Upgrades.UpgradeBought = "Gather";
-        Upgrades.Scrap -= GatherCost + (GatherCostIncrease * Upgrades.GatherLevel);
-        SaveUpgrades();
+        tempUpgradeName     = "Gather";
+        tempCost            = GatherCost + (GatherCostIncrease * Upgrades.GatherLevel);
+        amountOfSeconds     = GetTimeForUpgrade(Upgrades.GatherLevel);
     }
 
     public void UpgradeVillages()
     {
-        if (Upgrades.UpgradeInProgress)
-            return;
-
-        var amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
-        DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
-
-        PlayerPrefs.SetString("UpgradeEnd", End.ToString());
-        Upgrades.UpgradeInProgress = true;
-        Upgrades.UpgradeBought = "Villages";
-        Upgrades.Scrap -= MaxVillagesCost + (MaxVillagesCostIncrease * Upgrades.GatherLevel);
-        SaveUpgrades();
+        tempUpgradeName = "Villages";
+        tempCost = MaxVillagesCost + (MaxVillagesCostIncrease * Upgrades.MaxVillages);
+        amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
     }
 
     public void UpgradeBlacksmith()
     {
-        if (Upgrades.UpgradeInProgress)
-            return;
-
-        var amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
-        DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
-
-        PlayerPrefs.SetString("UpgradeEnd", End.ToString());
-        Upgrades.UpgradeInProgress = true;
-        Upgrades.UpgradeBought = "Blacksmith";
-        Upgrades.Scrap -= BlacksmithCost + (BlacksmithCostIncrease * Upgrades.GatherLevel);
-        SaveUpgrades();
+        tempUpgradeName = "Blacksmith";
+        tempCost = BlacksmithCost + (BlacksmithCostIncrease * Upgrades.BlacksmithLevel);
+        amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
     }
 
     public void UpgradeLeaderHealth()
     {
-        if (Upgrades.UpgradeInProgress)
-            return;
-
-        var amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
-        DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
-
-        PlayerPrefs.SetString("UpgradeEnd", End.ToString());
-        Upgrades.UpgradeInProgress = true;
-        Upgrades.UpgradeBought = "LeaderHealth";
-        Upgrades.Scrap -= LeaderHealthCost + (LeaderHealthCostIncrease * Upgrades.GatherLevel);
-        SaveUpgrades();
+        tempUpgradeName = "LeaderHealth";
+        tempCost = LeaderHealthCost + (LeaderHealthCostIncrease * Upgrades.LeaderHealthLevel);
+        amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
     }
 
     public void UpgradeLeaderStrength()
     {
-        if (Upgrades.UpgradeInProgress)
-            return;
-
-        var amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
-        DateTime End = DateTime.Now.AddSeconds(amountOfSeconds);
-
-        PlayerPrefs.SetString("UpgradeEnd", End.ToString());
-        Upgrades.UpgradeInProgress = true;
-        Upgrades.UpgradeBought = "LeaderStrength";
-        Upgrades.Scrap -= LeaderStrengthCost + (LeaderStrengthCostIncrease * Upgrades.GatherLevel);
-        SaveUpgrades();
+        tempUpgradeName = "LeaderStrength";
+        tempCost = LeaderStrengthCost + (LeaderStrengthCostIncrease * Upgrades.LeaderStrengthLevel);
+        amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
     }
 
     private void SetLevels()
@@ -214,6 +223,8 @@ public class CampManager : MonoBehaviour
         TextLevels[3].text = Upgrades.LeaderHealthLevel + "";
         TextLevels[4].text = Upgrades.LeaderStrengthLevel + "";
     }
+
+    #endregion
 
     private int GetTimeForUpgrade(int level) {
         switch (level)

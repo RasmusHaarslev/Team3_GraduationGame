@@ -130,13 +130,18 @@ public class PanelScript : MonoBehaviour {
 
     public void ActivateInventoryPanel()
     {
-        panelList[5].GetComponent< EquippableItemUIListController >().itemsValues = dataService.GetEquippableItemsValuesFromInventory().ToArray();
-        panelList[5].SetActive(true);
+        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToArray());
+        panelList[4].SetActive(true);
+
     }
 
     public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
     {
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
+        UpdateSoldierStats(currentSoldier.gameObject);
+        panelList[4].SetActive(false);
+        panelList[5].SetActive(false);
+        panelList[1].SetActive(true);
     }
 }

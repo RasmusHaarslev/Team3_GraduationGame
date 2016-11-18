@@ -12,7 +12,7 @@ public class PanelClicked : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData) 
-    {
-      
+    {   
+
     }
 }

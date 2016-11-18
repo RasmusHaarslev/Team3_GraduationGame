@@ -11,21 +11,23 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
     {
         panelScript = GameObject.FindGameObjectWithTag("CampPanel").GetComponent<PanelScript>();
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-       
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
         {
             
-            panelScript.panelList[4].SetActive(true);
+            panelScript.panelList[3].SetActive(true);
             panelScript.panelList[0].SetActive(true);
         }
 
         if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
         {
+            Debug.Log(panelScript);
             panelScript.UpdateSoldierStats(gameObject);
             panelScript.ActivateCamera(gameObject);
-            panelScript.panelList[4].SetActive(true);
+            panelScript.panelList[3].SetActive(true);
             panelScript.panelList[1].SetActive(true);
         }
 

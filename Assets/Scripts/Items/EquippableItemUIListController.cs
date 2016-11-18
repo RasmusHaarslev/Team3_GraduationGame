@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class EquippableItemUIListController : MonoBehaviour
 {
-
-    public Sprite[] AnimalImages;
+    
     public GameObject ContentPanel;
     private GameObject ListItemPrefab;
 
-    public EquippableitemValues[] itemsValues;
+    //public EquippableitemValues[] itemsValues;
+    void OnEnable()
+    {
+        
+    }
 
     void Start()
     {
-        ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
+        //ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
         // 1. Get the data to be displayed
         //itemsValues = new[] {
         //      new EquippableitemValues
@@ -96,9 +101,24 @@ public class EquippableItemUIListController : MonoBehaviour
         //	  instantiate prefab, 
         //	  set the data, 
         //	  add it to panel
+
+
+
+
+    }
+
+   public void GenerateItemsList(IEnumerable<EquippableitemValues> itemsValues)
+    {
+        ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
+        //removing previous list if present
+        foreach (Transform child in ContentPanel.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        //adding the new list
         foreach (EquippableitemValues values in itemsValues)
         {
-            GameObject newItem = Instantiate( ListItemPrefab) as GameObject;
+            GameObject newItem = Instantiate(ListItemPrefab) as GameObject;
             UIListEquippableItemController controller = newItem.GetComponent<UIListEquippableItemController>();
             //controller.Icon.sprite = animal.Icon;
             controller.name.text = values.name;
@@ -110,11 +130,10 @@ public class EquippableItemUIListController : MonoBehaviour
             newItem.transform.SetParent(ContentPanel.transform);
             newItem.transform.localScale = Vector3.one;
             newItem.transform.localPosition = Vector3.zero;
-            newItem.transform.localRotation = Quaternion.Euler(0,0,0);
+            newItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
     }
-
 
 
 }

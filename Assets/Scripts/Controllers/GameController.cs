@@ -12,8 +12,6 @@ public class GameController : MonoBehaviour {
     public int _VILLAGERS = 10;
     public int _COINS = 10;
 
-    public GameObject OverAllSound;
-
     #region Setup Instance
     private static GameController _instance;
 
@@ -93,7 +91,7 @@ public class GameController : MonoBehaviour {
         {
             if (scene.Name.EndsWith(".unity"))
             {
-                scenes.Add("Assets/_Scenes/Levels/" + scene.Name);
+                scenes.Add(scene.Name.Split('.')[0]);
             }
         }
 
