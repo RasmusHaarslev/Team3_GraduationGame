@@ -67,10 +67,15 @@ public class LevelManager : MonoBehaviour
 
 		// -Lose-
 		//Player dies
-		EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
-		//Follower dies
-		EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
-	}
+
+        EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
+        //Follower dies
+        EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
+
+        //Reacting on Items clicks
+        EventManager.Instance.StartListening<ItemClicked>(ReactOnItemClick);
+    }
+
 
 	void OnDisable()
 	{
@@ -86,90 +91,102 @@ public class LevelManager : MonoBehaviour
 		//Enemy dies for progress
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 
-		// -Lose-
-		//Player dies
-		EventManager.Instance.StopListening<PlayerDeathEvent>(PlayerDeath);
-		//Follower dies
-		EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
-	}
+        // -Lose-
+        //Player dies
+        EventManager.Instance.StopListening<PlayerDeathEvent>(PlayerDeath);
+        //Follower dies
+        EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
 
-	void OnApplicationQuit()
-	{
-		this.enabled = false;
-	}
-	#endregion
+        //Reacting on Items clicks
+        EventManager.Instance.StopListening<ItemClicked>(ReactOnItemClick);
+    }
 
-	#region functions
-	private void EnemySpawn(EnemySpawned e)
-	{
-		EnemiesAlive++;
-	}
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+    #endregion
 
-	private void ItemSpawn(ItemSpawned e)
-	{
-		ItemsLeft++;
-	}
+    #region functions
+    private void EnemySpawn(EnemySpawned e)
+    {
+        EnemiesAlive++;
+    }
 
-	private void AllyDeath(AllyDeathEvent e)
-	{
-		AlliesAlive--;
+    private void ItemSpawn(ItemSpawned e)
+    {
+        ItemsLeft++;
+    }
 
-		CheckConditions();
-	}
+    private void AllyDeath(AllyDeathEvent e)
+    {
+        AlliesAlive--;
 
-	private void EnemyDeath(EnemyDeathEvent e)
-	{
-		EnemiesAlive--;
+        CheckConditions();
+    }
 
-		CheckConditions();
-	}
+    private void EnemyDeath(EnemyDeathEvent e)
+    {
+        EnemiesAlive--;
 
-	void PlayerDeath(PlayerDeathEvent e)
-	{
-		LoseLevel();
-	}
+        CheckConditions();
+    }
 
-	void LootReceived(EnemyDeathEvent e)
-	{
+    void PlayerDeath(PlayerDeathEvent e)
+    {
+        LoseGame("PlayerDeathCutscene");
+    }
 
-	}
+    void LootReceived(EnemyDeathEvent e)
+    {
 
-	void CollectLoot()
-	{
-		gainedWeapons.Add(new EquippableItem());
+    }
 
-		CheckConditions();
-	}
+    void CollectLoot()
+    {
+        gainedWeapons.Add(new EquippableItem());
 
-	#endregion
+        CheckConditions();
+    }
 
-	void CheckConditions()
-	{
-		if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
-		{
-			if (ItemsLeft <= 0) //Extra condition for the choice encounters
-			{
-				WinLevel();
-			}
-		}
-	}
+    #endregion
 
-	public void LoseLevel()
-	{
-		EventManager.Instance.TriggerEvent(new LevelLost());
-		PlayerPrefs.SetInt("LevelResult", 0);
+    void CheckConditions()
+    {
+        if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
+        {
+            WinLevel();
+        }
+        else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
+        {
+            LoseGame("AllyDeathCutscene");
+        }
+        else if (AlliesAlive <= 0)
+        {
+            LoseLevel();
+        }
+    }
 
-		GameController.Instance.LoadScene("CampManagement");
-	}
+    public void LoseGame(string scene = "PlayerDeathCutscene")
+    {
+        GameController.Instance.LoadScene(scene);
+    }
 
-	public void WinLevel()
-	{
-		EventManager.Instance.TriggerEvent(new LevelWon());
-		PlayerPrefs.SetInt("LevelResult", 1);
-		//replaceCharactersWeapons();
-		GameController.Instance.LoadScene("CampManagement");
-	}
+    public void LoseLevel()
+    {
+        EventManager.Instance.TriggerEvent(new LevelLost());
+        PlayerPrefs.SetInt("LevelResult", 0);
 
+        GameController.Instance.LoadScene("LevelFleeCutscene");
+    }
+
+    public void WinLevel()
+    {
+        EventManager.Instance.TriggerEvent(new LevelWon());
+        PlayerPrefs.SetInt("LevelResult", 1);
+        //replaceCharactersWeapons();
+        GameController.Instance.LoadScene("LevelWinCutscene");
+    }
 
 	void replaceCharactersWeapons()
 	{
@@ -189,5 +206,16 @@ public class LevelManager : MonoBehaviour
 			dataService.equipItemsToCharacter(new List<GameObject>() { newItem }, character);
 		}
 	}
+
+    void ReactOnItemClick(ItemClicked itemClickedEvent)
+    {
+        ClickableItem clickedItem = itemClickedEvent.item;
+        switch (clickedItem.type)
+        {
+                case ClickableItem.Type.newspaper:
+                print("A Newspaper was clicked!");
+                break;
+        }
+    }
 
 }

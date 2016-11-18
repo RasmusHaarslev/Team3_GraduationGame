@@ -409,4 +409,9 @@ public class DebugUI : MonoBehaviour
         Debug.Log("Mail send!");
     }
 
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
 }

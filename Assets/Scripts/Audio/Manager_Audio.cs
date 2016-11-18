@@ -52,6 +52,14 @@ public class Manager_Audio : MonoBehaviour {
     public static string stop_menuMusic = "Stop_MenuMusic";
     public static string stop_menuAmbience = "Stop_MenuAmbience";
 
+    public static string play_pickShield = "Play_PickShield";
+    public static string play_pickSpear = "Play_PickSpear";
+    public static string play_pickRiffle = "Play_PickRiffle";
+
+    public static string play_openMap = "Play_OpenMap";
+    public static string play_scrollMap = "Play_ScrollMap";
+    public static string stop_scrollMap = "Stop_ScrollMap";
+
     public static string adjustMusicVolume = "MusicVol";
     public static string adjustFXVolume = "SFXVol";
 
