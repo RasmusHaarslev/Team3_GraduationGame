@@ -3,14 +3,17 @@ using System.Collections;
 
 public class AggroRange : MonoBehaviour
 {
-
+	public float verticalTriggerOffset = 1.5f;
 	void OnTriggerEnter(Collider col)
 	{
-		Debug.Log(transform.position.y + " col.y: " + col.transform.position.y);
-		Debug.Log("Entered");
-		if (transform.position.y < col.transform.position.y)
+		Debug.Log(col.gameObject.tag);
+		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly")
 		{
-			EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.gameObject));
+			Debug.Log("saw player");
+			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
+			{
+				EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
+			}
 		}
 	}
 }
