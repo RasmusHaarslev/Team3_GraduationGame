@@ -110,7 +110,6 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
         var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
 
         System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
@@ -120,14 +119,6 @@ public class GameController : MonoBehaviour {
         while ((line = reader.ReadLine()) != null)
         {
             scenes.Add(line);
-        }
-
-        foreach (var scene in sceneDirectory.GetFiles())
-        {
-            if (scene.Name.EndsWith(".unity"))
-            {
-                scenes.Add(scene.Name.Split('.')[0]);
-            }
         }
 
         var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
