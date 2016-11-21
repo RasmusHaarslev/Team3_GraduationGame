@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour {
 
-    private float currentMusicVolume = 0.5f;
-    private float currentFXVolume = 0.5f;
+    private float currentMusicVolume = 0.8f;
+    private float currentFXVolume = 0.8f;
 
     public Text MenuHeader;
     public GameObject Music;
@@ -17,6 +17,8 @@ public class OptionsMenu : MonoBehaviour {
     void Start()
     {
         AdjustMusicVolume();
+        Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
+        Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
     }
 
 	void OnEnable () {

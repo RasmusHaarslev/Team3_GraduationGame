@@ -11,6 +11,7 @@ public class EquippableitemValues
     public slot Slot { get; set; }
     public int characterId { get; set; }
     public string rarity { get; set; }
+    public int level { get; set; }
     public string description { get; set; }
     public int damage { get; set; }
     public int health { get; set; }
