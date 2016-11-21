@@ -42,8 +42,17 @@ public class GameController : MonoBehaviour {
 
     public void UpdateResources(ChangeResources e)
     {
-        _FOOD += e.food;
-        _VILLAGERS += e.villager;
+        if (_FOOD + e.food >= 0)
+        {
+            _FOOD += e.food;
+            _VILLAGERS += e.villager;
+        }
+        else
+        {
+            _VILLAGERS += e.villager - (Mathf.Abs(e.food) - _FOOD);
+            _FOOD = 0;
+        }
+
         _SCRAPS += e.scraps;
         _PREMIUM += e.premium;
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
