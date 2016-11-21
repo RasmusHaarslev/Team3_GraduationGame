@@ -10,17 +10,14 @@ public class EffectManager : MonoBehaviour {
     // Use this for initialization
     void OnEnable () {
         EventManager.Instance.StartListening<PositionClicked>(positionEffect);
-	}
+        _currentClick = (GameObject)Instantiate(clicking, new Vector3(), Quaternion.Euler(90f, 0f, 0f));
+    }
 
     private void positionEffect(PositionClicked e)
     {
-        if (_currentClick) {
-            var ps = _currentClick.GetComponent<ParticleSystem>();
-            ps.playbackSpeed = 4f;
-            ps.Stop();
-        }
-
-        _currentClick = (GameObject)Instantiate(clicking, e.position, Quaternion.Euler(90f, 0f, 0f));
+        //_currentClick.GetComponent<ParticleSystem>().Stop();
+        _currentClick.transform.position = e.position + new Vector3(0,0.5f,0);
+        //_currentClick.GetComponent<ParticleSystem>().Play();
     }
 
     // Update is called once per frame

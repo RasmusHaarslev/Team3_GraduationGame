@@ -17,19 +17,19 @@ public class MoveScript : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		agent = GetComponent<NavMeshAgent>();
-		character = GetComponent<Character>();
-		attackSpeed = character.damageSpeed;
+
 	}
 
 	void OnEnable()
 	{
-
+		agent = GetComponent<NavMeshAgent>();
+		character = GetComponent<Character>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		attackSpeed = character.damageSpeed;
 		if (character.currentHealth <= 0 && isDead == false)
 		{
 			EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
@@ -59,6 +59,7 @@ public class MoveScript : MonoBehaviour
 						if (counter <= 0)
 						{
 							character.DealDamage();
+							character.animator.SetTrigger("Attack");
 							counter = attackSpeed;
 						}
 						else
@@ -87,7 +88,7 @@ public class MoveScript : MonoBehaviour
 			if (hit.transform.gameObject.tag == "Unfriendly")
 			{
 				if (character.target)
-					character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
+					//character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
 
 				character.target = hit.transform.gameObject;
 				attacking = true;
@@ -98,7 +99,7 @@ public class MoveScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 				}
 				
-				hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
+				//hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
 			}
 			else if (hit.transform.gameObject.tag == "Player")
 			{
