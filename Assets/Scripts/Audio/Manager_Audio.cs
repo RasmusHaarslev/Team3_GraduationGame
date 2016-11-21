@@ -24,15 +24,25 @@ public class Manager_Audio : MonoBehaviour {
 	public static string openWheel = "On";
 	public static string closeWheel = "Off";
 
-	public static string attackMale1 = "Play_WarriorMale1Attack";
-	public static string attackMale2 = "Play_WarriorMale2Attack";
-	public static string attackFemale1 = "Play_WarriorFemale1Attack";
-	public static string attackFemale2 = "Play_WarriorFemale2Attack";
+	public static string attackMale1 = "Play_MaleWarrior1Attack";
+	public static string attackMale2 = "Play_MaleWarrior2Attack";
+	public static string attackFemale1 = "Play_FemaleWarrior1Attack";
+	public static string attackFemale2 = "Play_FemaleWarrior2Attack";
 
-	public static string deathMale1 = "Play_WarriorMale1Death";
-	public static string deathMale2 = "Play_WarriorMale2Death";
-	public static string deathFemale1 = "Play_WarriorFemale1Death";
-	public static string deathFemale2 = "Play_WarriorFemale2Death";
+	public static string deathMale1 = "Play_MaleWarrior1Death";
+	public static string deathMale2 = "Play_MaleWarrior2Death";
+	public static string deathFemale1 = "Play_FemaleWarrior1Death";
+	public static string deathFemale2 = "Play_FemaleWarrior2Death";
+
+	public static string evilAttackMale1 = "Play_EvilMaleWarrior1Attack";
+	public static string evilAttackMale2 = "Play_EvilMaleWarrior2Attack";
+	public static string evilAttackFemale1 = "Play_EvilFemaleWarrior1Attack";
+	public static string evilAttackFemale2 = "Play_EvilFemaleWarrior2Attack";
+
+	public static string evilDeathMale1 = "Play_EvilMaleWarrior1Death";
+	public static string evilDeathMale2 = "Play_EvilMaleWarrior2Death";
+	public static string evilDeathFemale1 = "Play_EvilFemaleWarrior1Death";
+	public static string evilDeathFemale2 = "Play_EvilFemaleWarrior2Death";
 
 	public static string genericHit = "Play_GenericHit";
 
@@ -63,7 +73,12 @@ public class Manager_Audio : MonoBehaviour {
     public static string adjustMusicVolume = "MusicVol";
     public static string adjustFXVolume = "SFXVol";
 
-    public static void PlaySound(string name,GameObject objectPos)
+	public static string discoverFriendly = "DiscoverFriendly";
+	public static string discoverEnemy = "DiscoverEnemy";
+	public static string friendlyDeath = "CombatFriendlyDie";
+
+
+	public static void PlaySound(string name,GameObject objectPos)
 	{
 		AkSoundEngine.PostEvent (name, objectPos);
 	}
