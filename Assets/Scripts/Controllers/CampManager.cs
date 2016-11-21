@@ -105,7 +105,7 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Scrap -= tempCost;
 
-        EventManager.Instance.TriggerEvent(new ChangeResources(coins: -5));
+        EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -5));
 
         SaveUpgrades();
     }
