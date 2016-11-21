@@ -71,14 +71,13 @@ public class DataService : MonoBehaviour
 	}
 
 	public void CreateDB(int command = 0)
-	{/*
+	{/**/
 		if (command == 0)
 			if (_connection.GetTableInfo("CharacterValues").Any())
 			{
 				//Databese already present, continuing with the old one. print("Databese already present, continuing with the old one.");
 				return;
 			}
-            */
 		//Otherwise create database... print("Creating database...");
 
 		_connection.DropTable<CharacterValues>();
@@ -101,8 +100,7 @@ public class DataService : MonoBehaviour
 				health = 100,
 				damageSpeed = 1.5f,
 				range = 5,
-				prefabName = StringResources.playerPrefabName,
-                materialName = StringResources.playerMaterialName
+				prefabName = "Player"
 			},
 		 new CharacterValues
 			{
