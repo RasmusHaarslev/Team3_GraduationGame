@@ -6,17 +6,26 @@ public class SaveLevelsToXML : GameEvent
     public SaveLevelsToXML () { }
 }
 
+public class LevelCleared : GameEvent
+{
+    public LevelCleared()
+    {
+    }
+}
+
 public class ChangeResources : GameEvent
 {
     public int food;
     public int coins;
     public int villager;
+    public int premium;
 
-    public ChangeResources(int food = 0, int coins = 0, int villager = 0)
+    public ChangeResources(int food = 0, int coins = 0, int villager = 0, int premium = 0)
     {
         this.food = food;
         this.coins = coins;
         this.villager = villager;
+        this.premium = premium;
     }
 }
 

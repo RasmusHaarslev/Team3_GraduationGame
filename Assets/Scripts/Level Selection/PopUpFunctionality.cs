@@ -113,7 +113,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void Play(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
         /*           
@@ -144,7 +144,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void Scout(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(scoutCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-scoutCost));
 
         btnScout.SetActive(false);
         NotScouted.SetActive(false);
