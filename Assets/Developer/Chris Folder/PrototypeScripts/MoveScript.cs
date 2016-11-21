@@ -87,7 +87,7 @@ public class MoveScript : MonoBehaviour
 			if (hit.transform.gameObject.tag == "Unfriendly")
 			{
 				if (character.target)
-					character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
+					//character.target.GetComponent<MaterialSwitcher>().SwitchMaterial();
 
 				character.target = hit.transform.gameObject;
 				attacking = true;
@@ -98,7 +98,7 @@ public class MoveScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 				}
 				
-				hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
+				//hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
 			}
 			else if (hit.transform.gameObject.tag == "Player")
 			{
