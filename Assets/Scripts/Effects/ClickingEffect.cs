@@ -11,16 +11,7 @@ public class ClickingEffect : MonoBehaviour
     void Start()
     {
         _particleSystem = GetComponent<ParticleSystem>();
-        _particleSystem.Play();
-    }
-
-    void Update()
-    {
-        transform.Rotate(Vector3.up, 0.1f);
-        if (!_particleSystem.isPlaying)
-        {
-            Destroy(this.gameObject);
-        }
+        //_particleSystem.Play();
     }
 }
 

@@ -4,8 +4,8 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-
-	private GameObject player;
+    [HideInInspector]
+	public GameObject player;
 
 	#region Inspector fields
 	[Tooltip("Sets the distance away from the player")]
