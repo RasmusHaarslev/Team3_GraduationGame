@@ -274,6 +274,7 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		agent.Stop();
 		character.RotateTowards(character.target.transform);
+		character.animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
 		lowAttentionSpanCounter--;
