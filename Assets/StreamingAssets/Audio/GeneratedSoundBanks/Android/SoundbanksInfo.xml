@@ -20,6 +20,9 @@
 				<Event Id="604685473" Name="DiscoverFriendly" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendly" MaxAttenuation="0.000000"/>
 				<Event Id="1392836774" Name="FriendlyDie" ObjectPath="\Events\Default Work Unit\TriggerEvents\FriendlyDie" MaxAttenuation="0.000000"/>
 				<Event Id="2283762979" Name="Play_BaseWind_01" ObjectPath="\Events\Default Work Unit\Ambience\Play_BaseWind_01"/>
+				<Event Id="1292318918" Name="Play_CharSel" ObjectPath="\Events\Default Work Unit\UI\Play_CharSel"/>
+				<Event Id="1757332637" Name="Play_ClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap"/>
+				<Event Id="1164893191" Name="Play_CommandSel" ObjectPath="\Events\Default Work Unit\UI\Play_CommandSel"/>
 				<Event Id="4074757615" Name="Play_CommandUI" ObjectPath="\Events\Default Work Unit\UI\Play_CommandUI"/>
 				<Event Id="3643034395" Name="Play_EvilFemaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack"/>
 				<Event Id="2491028491" Name="Play_EvilFemaleWarrior1Death" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Death"/>
@@ -54,7 +57,6 @@
 				<Event Id="1918433323" Name="Play_MenuAmbience" ObjectPath="\Events\Default Work Unit\Play_MenuAmbience"/>
 				<Event Id="2570041344" Name="Play_MenuMusic" ObjectPath="\Events\Default Work Unit\Play_MenuMusic"/>
 				<Event Id="3719726781" Name="Play_MenuUI" ObjectPath="\Events\Default Work Unit\UI\Play_MenuUI"/>
-				<Event Id="3674699749" Name="Play_NewMaps" ObjectPath="\Events\Default Work Unit\UI\Play_NewMaps"/>
 				<Event Id="1900502842" Name="Play_NoiseWind" ObjectPath="\Events\Default Work Unit\Ambience\Play_NoiseWind" MaxAttenuation="20.000000"/>
 				<Event Id="623878550" Name="Play_OpenMapUI" ObjectPath="\Events\Default Work Unit\UI\Play_OpenMapUI"/>
 				<Event Id="2149966355" Name="Play_PickRiffle" ObjectPath="\Events\Default Work Unit\UI\Play_PickRiffle"/>
@@ -62,6 +64,7 @@
 				<Event Id="3974976660" Name="Play_PickSpear" ObjectPath="\Events\Default Work Unit\UI\Play_PickSpear"/>
 				<Event Id="3142926109" Name="Play_ScrollMap" ObjectPath="\Events\Default Work Unit\UI\Play_ScrollMap"/>
 				<Event Id="1496010068" Name="Play_ShieldHit" ObjectPath="\Events\Default Work Unit\Combat\Play_ShieldHit"/>
+				<Event Id="4008979185" Name="Play_UnlockNewMaps" ObjectPath="\Events\Default Work Unit\UI\Play_UnlockNewMaps"/>
 				<Event Id="955974805" Name="Play_UseRiffle" ObjectPath="\Events\Default Work Unit\Combat\Play_UseRiffle"/>
 				<Event Id="677386556" Name="Play_UseShield" ObjectPath="\Events\Default Work Unit\Combat\Play_UseShield"/>
 				<Event Id="2143972174" Name="Play_UseSpear" ObjectPath="\Events\Default Work Unit\Combat\Play_UseSpear"/>
@@ -81,6 +84,10 @@
 				<Event Id="225821351" Name="Stop_ScrollMap" ObjectPath="\Events\Default Work Unit\UI\Stop_ScrollMap" MaxAttenuation="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="7581663" Language="SFX">
+					<ShortName>PickUpGeneral3.wav</ShortName>
+					<Path>SFX/PickUpGeneral3_277E827B.wem</Path>
+				</File>
 				<File Id="7654141" Language="SFX">
 					<ShortName>WolfHowl1.wav</ShortName>
 					<Path>SFX/WolfHowl1_277E827B.wem</Path>
@@ -232,6 +239,10 @@
 				<File Id="274655049" Language="SFX">
 					<ShortName>WeaponWhoosh2.wav</ShortName>
 					<Path>SFX/WeaponWhoosh2_277E827B.wem</Path>
+				</File>
+				<File Id="274771103" Language="SFX">
+					<ShortName>UnlockNewMaps.wav</ShortName>
+					<Path>SFX/UnlockNewMaps_277E827B.wem</Path>
 				</File>
 				<File Id="283084582" Language="SFX">
 					<ShortName>MaleWarrior2Attack6.wav</ShortName>
@@ -540,6 +551,10 @@
 				<File Id="681295941" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack2.wav</ShortName>
 					<Path>SFX/EvilMaleWarrior1Attack2_277E827B.wem</Path>
+				</File>
+				<File Id="683580329" Language="SFX">
+					<ShortName>CommandSel.wav</ShortName>
+					<Path>SFX/CommandSel_277E827B.wem</Path>
 				</File>
 				<File Id="696283885" Language="SFX">
 					<ShortName>FemaleWarrior1Attack5.wav</ShortName>

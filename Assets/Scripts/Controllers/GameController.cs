@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
     public int _COINS = 10;
+    public int _PREMIUM = 10;
 
     #region Setup Instance
     private static GameController _instance;
@@ -41,9 +42,10 @@ public class GameController : MonoBehaviour {
 
     public void UpdateResources(ChangeResources e)
     {
-        _FOOD -= e.food;
-        _VILLAGERS -= e.villager;
-        _COINS -= e.coins;
+        _FOOD += e.food;
+        _VILLAGERS += e.villager;
+        _COINS += e.coins;
+        _PREMIUM += e.premium;
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
     }
 
