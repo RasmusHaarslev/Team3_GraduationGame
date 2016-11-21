@@ -57,13 +57,9 @@ public class Formation : MonoBehaviour
 			for(int i = 0; i < 3; i++)
 			{
 				if(rears[i] == false)
-				{
-					Move(i, frontPositions[i]);
-				}
+					Move(i, frontPositions[frontPositions.IndexOf(formationPositions[followers[i]])]);
 				else
-				{
-					Move(i, rearPositions[i]);
-				}
+					Move(i, rearPositions[rearPositions.IndexOf(formationPositions[followers[i]])]);
 			}
 		}
 	}
