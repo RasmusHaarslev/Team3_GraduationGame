@@ -113,7 +113,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void Play(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
         /*           
@@ -144,7 +144,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void Scout(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(scoutCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-scoutCost));
 
         btnScout.SetActive(false);
         NotScouted.SetActive(false);
@@ -165,7 +165,7 @@ public class PopUpFunctionality : MonoBehaviour {
                 node.GetComponent<Node>().txtFood.text = node.GetComponent<Node>().foodAmount.ToString();
                 node.GetComponent<Node>().txtCoins.text = node.GetComponent<Node>().coinAmount.ToString();
                 node.GetComponent<Node>().txtTribes.text = node.GetComponent<Node>().tribeCamps.ToString();
-                node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
+             //   node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
             }
             else
             {

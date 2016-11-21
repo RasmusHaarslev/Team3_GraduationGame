@@ -728,6 +728,43 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Folder Name="TriggerEvents" ID="{905C2268-90EA-46DC-8A85-31E537DC9C8E}" ShortID="495669439">
+					<ChildrenList>
+						<Event Name="DiscoverEnemy" ID="{26F6EE87-4555-4777-B9FA-DF3B76F409B8}">
+							<ChildrenList>
+								<Action Name="Trigger" ID="{BD7D0FB3-3E12-4108-BB77-C84080644A14}" ShortID="622131012" Type="Trigger" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{E3BFEC31-F9EB-4542-BF42-CE1824B42567}" Global="false">
+											<ObjectRef Name="DiscoverEnemy" ID="{F75AE403-1652-461E-91D1-381F4BF2E959}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="DiscoverFriendly" ID="{8F12BFAD-EBD3-47BF-AD75-B5ACF4324B46}">
+							<ChildrenList>
+								<Action Name="Trigger" ID="{D856EEAA-5539-4763-B663-9AAB3D188AC5}" ShortID="665576251" Type="Trigger" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{F797F9E3-9731-4561-8408-254B70A6B3A2}" Global="false">
+											<ObjectRef Name="DiscoverFriendly" ID="{BB4CDBF5-5633-441F-963B-EF4830AD2CF4}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="FriendlyDie" ID="{434E53FA-0E14-48A1-995E-1F7F066FD00B}">
+							<ChildrenList>
+								<Action Name="Trigger" ID="{754C0CD3-9544-46CF-8DFB-22DD9132F851}" ShortID="127172616" Type="Trigger" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{517E66DD-54A2-4BB0-AB48-358C6D26407A}" Global="false">
+											<ObjectRef Name="FriendlyDie" ID="{68A81C50-9576-4B37-B808-4C4669F0738E}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -80,23 +80,9 @@ public class LevelSelectionGenerator : MonoBehaviour
             numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
             LoadRows();
 
-            var maxRowCleared = SaveLoadLevels.AllLevelsLoaded.Where(val => val.Value.GetComponent<Node>().isCleared == true);
-
-
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
-                GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
-                var nodeScript = nodeCleared.GetComponent<Node>();
-
-                nodeScript.isCleared = true;
-                nodeScript.SetupImage();
-                nodeScript.SetupUIText();
-
-                foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
-                {
-                    nodes.GetComponent<Node>().canPlay = true;
-                    nodes.GetComponent<Node>().SetupImage();
-                }
+                EventManager.Instance.TriggerEvent(new LevelCleared());
 
                 InstantiateRows(1);
 

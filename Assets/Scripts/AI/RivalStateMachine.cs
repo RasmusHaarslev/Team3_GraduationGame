@@ -133,6 +133,7 @@ public class RivalStateMachine : CoroutineMachine
 	{
 		character.RotateTowards(character.target.transform);
 		agent.Stop();
+		character.animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
 		character.RotateTowards(character.target.transform);

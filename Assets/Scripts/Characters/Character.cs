@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
     public float currentHealth;
 
     NavMeshAgent agent;
-    Animator animator;
+    public Animator animator;
     public GameObject target;
     GameObject targetParent;
     GameObject parent;
@@ -48,11 +48,13 @@ public class Character : MonoBehaviour
     void Start()
     {
         currentHealth = health;
+
     }
 
     void Update()
     {
-        animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
+		animator.SetBool("isAware", isInCombat);
+		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
         if (currentHealth <= 0)
         {
             if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
@@ -76,7 +78,10 @@ public class Character : MonoBehaviour
                 EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
                 GetComponent<Collider>().enabled = false;
                 agent.enabled = false;
+				animator.SetTrigger("Die");
+				// VESO REMOVE THIS:
                 GetComponent<RagdollControl>().EnableRagDoll();
+
                 if (isMale)
                 {
                     Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
@@ -105,7 +110,7 @@ public class Character : MonoBehaviour
         {EquippableitemValues.slot.rightHand, rightHandSlot},
         {EquippableitemValues.slot.legs, legsSlot }
     };
-
+		damageSpeed = Mathf.Clamp(damageSpeed, 1.1f, damageSpeed);
         //DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
     }
 
@@ -292,9 +297,7 @@ public class Character : MonoBehaviour
                 {
                     target.GetComponent<Character>().target = gameObject;
                     target.GetComponent<HunterStateMachine>().attacked = true;
-
-
-                    switch (equippedWeaponType)
+					switch (equippedWeaponType)
                     {
                         case EquippableitemValues.type.polearm:
                             Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);

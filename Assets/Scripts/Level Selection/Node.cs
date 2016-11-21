@@ -86,6 +86,23 @@ public class Node : MonoBehaviour {
         SetupUIText();
     }
 
+    public void SetupImage()
+    {
+        if (isCleared)
+        {
+            GetComponent<Image>().sprite = activationImages[2];
+            GetComponent<Image>().color = Color.green;
+        }
+        else if (!isCleared && canPlay)
+        {
+            GetComponent<Image>().sprite = activationImages[1];
+        }
+        else
+        {
+            GetComponent<Image>().sprite = activationImages[0];
+        }
+    }
+
     public void SetupUIText()
     {
         if(isCleared)
@@ -106,7 +123,7 @@ public class Node : MonoBehaviour {
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
                     GetComponent<Node>().txtCoins.text = GetComponent<Node>().coinAmount.ToString();
                     GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
-                    GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
+                    //GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
                 }
             }
 
@@ -187,21 +204,6 @@ public class Node : MonoBehaviour {
     }
 
     #region Get Functions for this node
-    public void SetupImage()
-    {
-        if (isCleared)
-        {
-            GetComponent<Image>().sprite = activationImages[0];
-            GetComponent<Image>().color = Color.green;
-        } else if (!isCleared && canPlay)
-        {
-            GetComponent<Image>().sprite = activationImages[0];
-        } else
-        {
-            GetComponent<Image>().sprite = activationImages[1];
-        }
-    }
-
     public List<Link> GetParents()
     {
         List<Link> parents = new List<Link>();

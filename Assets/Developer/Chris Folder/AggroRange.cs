@@ -11,7 +11,8 @@ public class AggroRange : MonoBehaviour
 		{
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
-				EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
+				//if (!transform.parent.GetComponent<Character>().isDead)
+					EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
 			}
 		}
 	}
