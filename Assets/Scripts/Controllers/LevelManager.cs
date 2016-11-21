@@ -219,11 +219,7 @@ public class LevelManager : MonoBehaviour
         //fill a list with the new items values
         EquippableitemValues[] newItemsValues = weaponsGenerator.GetNewItemsValues(difficultyLevel);
 
-        //display them on the panel
-        EquippableItemUIListController listController = GetComponentInChildren<EquippableItemUIListController>(true);
-        listController.GenerateItemsList(newItemsValues);
-        //activate new items panel
-        listController.transform.parent.gameObject.SetActive(true);
+        //TODO call canvas to display!
 
 
     }

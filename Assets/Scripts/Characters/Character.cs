@@ -56,7 +56,7 @@ public class Character : MonoBehaviour
 		animator.SetBool("isAware", isInCombat);
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
         if (currentHealth <= 0)
-        {
+        { 
             if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
             {
                 if (deadEvent == false)
