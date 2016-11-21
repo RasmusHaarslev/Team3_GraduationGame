@@ -169,6 +169,10 @@ public class HunterStateMachine : CoroutineMachine
 						{
 							if (!character.target.GetComponent<Character>().isDead)
 							{
+								if (combatTrait == CharacterValues.CombatTrait.BraveFool)
+								{
+									ProjectTrait();
+								}
 								if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
 								{
 									GameObject formerTarget = character.target;
