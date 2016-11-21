@@ -678,6 +678,21 @@ public class DataService : MonoBehaviour
         return itemsValues;
     }
 
+    public void InsertItemsValuesInInventory(IEnumerable<EquippableitemValues> itemsValues )
+    {
+        foreach (EquippableitemValues itemValues in itemsValues)
+        {
+            //from database
+            _connection.Insert(itemValues);
+            //add it in inventory
+            InventoryItem inventoryItem = new InventoryItem();
+            inventoryItem.Type = InventoryItem.type.equippable;
+            inventoryItem.deferredId = itemValues.id;
+            _connection.Insert(inventoryItem);
+        }
+       
+    }
+
     #endregion
 
 }

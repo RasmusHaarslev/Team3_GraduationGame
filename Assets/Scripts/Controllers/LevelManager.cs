@@ -25,10 +25,10 @@ public class LevelManager : MonoBehaviour
     }
 
     void Update()
-    {
+    { /*
         if (Input.GetKeyDown(KeyCode.A))
             GenerateNewItems();
-
+        */
         if (huntersAndPlayer.Count == 0)
         {
             huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
@@ -188,9 +188,18 @@ public class LevelManager : MonoBehaviour
     {
         EventManager.Instance.TriggerEvent(new LevelWon());
         PlayerPrefs.SetInt("LevelResult", 1);
-        //replaceCharactersWeapons();
+        //generate and display the new items
+        GenerateNewItems();
+        
+        
+    }
+    //called on the canvas button of the new generated items
+    public void levelWonEnding()
+    {
+        
         GameController.Instance.LoadScene("LevelWinCutscene");
     }
+
 
     void replaceCharactersWeapons()
     {
@@ -219,9 +228,13 @@ public class LevelManager : MonoBehaviour
         //fill a list with the new items values
         EquippableitemValues[] newItemsValues = weaponsGenerator.GetNewItemsValues(difficultyLevel);
 
-        //TODO call canvas to display!
-
-
+        //Generate new weapons values
+        
+        //save them into database inventory
+        DataService dataService = new DataService(StringResources.databaseName);
+        dataService.InsertItemsValuesInInventory(newItemsValues);
+        LevelCanvasManager canvasManager = GetComponentInChildren<LevelCanvasManager>();
+        canvasManager.DisplayEndLootItems(newItemsValues);
     }
 
     void ReactOnItemClick(ItemClicked itemClickedEvent)
