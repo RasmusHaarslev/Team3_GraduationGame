@@ -304,7 +304,7 @@ public class CampUpgrades
 
     public void GetCurrency()
     {
-        Gold = PlayerPrefs.GetInt("Gold");
+        Gold = PlayerPrefs.GetInt("Premium");
         Food = PlayerPrefs.GetInt("Food");
         Scrap = PlayerPrefs.GetInt("Scrap");
     }

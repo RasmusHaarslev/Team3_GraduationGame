@@ -47,6 +47,15 @@ public class GameController : MonoBehaviour {
         _SCRAPS += e.scraps;
         _PREMIUM += e.premium;
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
+        SaveResources();
+    }
+
+    private void SaveResources()
+    {
+        PlayerPrefs.SetInt("Food", _FOOD);
+        PlayerPrefs.SetInt("Villagers", _VILLAGERS);
+        PlayerPrefs.SetInt("Scraps", _SCRAPS);
+        PlayerPrefs.SetInt("Premium", _PREMIUM);
     }
 
     void Awake()
@@ -58,6 +67,14 @@ public class GameController : MonoBehaviour {
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if (PlayerPrefs.HasKey("Food"))
+        {
+            _FOOD = PlayerPrefs.GetInt("Food");
+            _VILLAGERS = PlayerPrefs.GetInt("Villagers");
+            _SCRAPS = PlayerPrefs.GetInt("Scraps");
+            _PREMIUM = PlayerPrefs.GetInt("Premium");
+        }
     }
 
     public void LoadScene(string scene)
