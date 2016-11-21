@@ -68,7 +68,59 @@ public class StringResources
 
     #endregion
 
+    #region CharacterNames
+    public static string[] maleNames = new[] { "THOMAS",
+"NILS",
+"KRISTIAN",
+"CHRISTIAN",
+"SEBASTIAN",
+"VESELIN",
+"DANIEL",
+"JOHN",
+"NICOLAI",
+"PETER",
+"RASMUS",
+"RICCARDO",
+"TOBIAS",
+"LUDVIG",
+"BENJAMIN",
+"MADS",
+"HASSAN",
+"MARK",
+"MATHIAS",
+"ANDRZEJ",
+"BESNIK",
+"LUCA",
+"YOSKA",
+"TOBAR"};
 
+    public static string[] femaleNames = new[] { "TEA",
+"AGNES",
+"ANDREA",
+"YASMIN",
+"SHAHIDA",
+"MIRA",
+"SELMA",
+"AISHA",
+"BESS",
+"EMMA",
+"IDA",
+"LOUISE",
+"CAMILLA",
+"SUSI",
+"DIKA",
+"DONKA",
+"ESMERALDA",
+"LULUDJA",
+"NADYA",
+"AIDA",
+"HABIBAH",
+"ELIZA",
+"ESHAL",
+"INAAYA"};
+
+
+    #endregion
 
     // Use this for initialization
     void Start () {

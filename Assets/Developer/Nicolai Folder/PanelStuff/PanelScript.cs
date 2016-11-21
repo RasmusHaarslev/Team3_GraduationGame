@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System;
 
 public class PanelScript : MonoBehaviour {
 
@@ -15,6 +16,26 @@ public class PanelScript : MonoBehaviour {
     GameObject charactersFellowship;
     public List<Camera> soldierCameraList = new List<Camera>();
     Character currentSoldier;
+    public List<NewSoldierList> newSoldierStatsList;
+    List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
+
+    [Serializable]
+    public class NewSoldierList : IEnumerable<GameObject>
+    {
+        public List<GameObject> newIndividualSoldierStatsList;
+
+        #region Implementation of IEnumerable
+        public IEnumerator<GameObject> GetEnumerator()
+        {
+            return newIndividualSoldierStatsList.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        #endregion
+    }
 
     void Start()
     {
@@ -22,8 +43,20 @@ public class PanelScript : MonoBehaviour {
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
+        
+        GetNewSoldiers();// this should be called when player clicks on silhouette
     }
 
+    void GetNewSoldiers()
+    {
+        GameObject Soldier1 = SpawnNewSoldiers();
+        GameObject Soldier2 = SpawnNewSoldiers();
+        GameObject Soldier3 = SpawnNewSoldiers();
+        Soldier1.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        Soldier2.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        Soldier3.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        FillInNewSoldierStats();
+    }
     void InitializeSoldiers()
     {
         for(int i = 0; i < charactersFellowship.transform.childCount; i++)
@@ -46,7 +79,8 @@ public class PanelScript : MonoBehaviour {
         soldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
         soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
     }
-    
+
+    #region Cameras
     public void ActivateCamera(GameObject soldier)
     {
         
@@ -82,6 +116,59 @@ public class PanelScript : MonoBehaviour {
                 soldierCameraList[i].enabled = false;
             }   
         }     
+    }
+    #endregion
+
+    void FillInNewSoldierStats()
+    {
+        int i = 0;
+        foreach (var newSoldierStats in newSoldierStatsList)
+        {
+            
+            foreach (var stat in newSoldierStats)
+            {
+
+                if (stat.name == "Type")
+                {
+                    stat.GetComponent<Text>().text = "Type: " + newCharacterSoldierList[i].Type.ToString();
+                }
+                if (stat.name == "Damage")
+                {
+                    stat.GetComponent<Text>().text = "Damage: " + newCharacterSoldierList[i].damage.ToString();
+                }
+                if (stat.name == "Soldier Name")
+                {
+                    stat.GetComponent<Text>().text = "Name: " + newCharacterSoldierList[i].name;
+                }
+                if (stat.name == "Description")
+                {
+                    stat.GetComponent<Text>().text = "Description: " + newCharacterSoldierList[i].description;
+                }
+                if (stat.name == "Health")
+                {
+                    stat.GetComponent<Text>().text = "Health: " + newCharacterSoldierList[i].health.ToString();
+                }
+                if (stat.name == "Damage Speed")
+                {
+                    stat.GetComponent<Text>().text = "Damage speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
+                }
+                if (stat.name == "Range")
+                {
+                    stat.GetComponent<Text>().text = "Range: " + newCharacterSoldierList[i].range.ToString();
+                }
+                if (stat.name == "Combat Trait")
+                {
+                    stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                }
+                if (stat.name == "Target Trait")
+                {
+                    stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                }
+
+            }
+            i++;
+        }
+        newCharacterSoldierList.Clear();
     }
 
     public void UpdateSoldierStats(GameObject soldier)
@@ -130,6 +217,8 @@ public class PanelScript : MonoBehaviour {
             
     }
 
+    #region InventoryMethods
+
     public void ActivateInventoryPanel()
     {
         panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToArray());
@@ -167,4 +256,44 @@ public class PanelScript : MonoBehaviour {
         panelList[5].SetActive(false);
         panelList[1].SetActive(true);
     }
+
+    #endregion
+
+    public CharacterValues GenerateNewCharacterValues()
+    {
+        CharacterValues newCharValues = new CharacterValues();
+        
+        //generate random name
+        String characterName = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)];
+        newCharValues.name = characterName;
+        //generate stats
+        newCharValues = GenerateNewCharacterStats(newCharValues);
+        //generate material
+        newCharValues.prefabName = StringResources.follower1PrefabName;
+
+        newCharacterSoldierList.Add(newCharValues);
+        Debug.Log(newCharacterSoldierList.Count);
+        
+        return newCharValues;
+    }
+
+    CharacterValues GenerateNewCharacterStats(CharacterValues charValues)
+    {
+        charValues.damage = 5;
+        charValues.damageSpeed = 5;
+        charValues.health = 5;
+        charValues.range = 5;
+        charValues.combatTrait = CharacterValues.CombatTrait.BraveFool;
+        charValues.targetTrait = CharacterValues.TargetTrait.Loyal;
+
+        return charValues;
+
+    }
+
+    GameObject SpawnNewSoldiers()
+    {
+        CharacterValues char1Values = GenerateNewCharacterValues();
+        return dataService.GenerateCharacterFromValues(char1Values, new Vector3(0, 0, -12));
+    }
+
 }
