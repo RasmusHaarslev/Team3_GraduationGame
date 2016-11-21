@@ -56,7 +56,7 @@ public class Manager_Audio : MonoBehaviour {
     public static string play_pickSpear = "Play_PickSpear";
     public static string play_pickRiffle = "Play_PickRiffle";
 
-    public static string play_openMap = "Play_OpenMap";
+    public static string play_openMap = "Play_OpenMapUI";
     public static string play_scrollMap = "Play_ScrollMap";
     public static string stop_scrollMap = "Stop_ScrollMap";
 
