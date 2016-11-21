@@ -55,5 +55,11 @@ namespace Assets.Editor
             }
 
         }
+
+        [MenuItem("Build/Generate Scenelist")]
+        static void ScenesToTxt()
+        {
+            BuildScript.ScenesToTxt();
+        }
     }
 }

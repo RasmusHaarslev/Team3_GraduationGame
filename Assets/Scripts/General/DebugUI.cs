@@ -287,7 +287,7 @@ public class DebugUI : MonoBehaviour
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Gameplay", customButton))
                 {
                     followers.Clear();
-                    GameController.Instance.LoadScene("LevelPrototype");
+                    GameController.Instance.LoadScene("LevelPrototype03");
                 }
 
                 yPosRight += height + 10;

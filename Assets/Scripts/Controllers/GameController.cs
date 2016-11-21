@@ -85,7 +85,16 @@ public class GameController : MonoBehaviour {
     public void LoadLevel()
     {
         var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
+        var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
+
+        System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
         List<string> scenes = new List<string>();
+
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            scenes.Add(line);
+        }
 
         foreach (var scene in sceneDirectory.GetFiles())
         {

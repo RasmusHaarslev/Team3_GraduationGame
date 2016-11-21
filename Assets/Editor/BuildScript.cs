@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEngine;
+using System.Linq;
 
 class BuildScript
 {
@@ -59,7 +61,15 @@ class BuildScript
                 scenes.Add("Assets/_Scenes/Levels/" + scene.Name);
             }
         }
+
+        ScenesToTxt();
     }
 
-    
+    public static void ScenesToTxt()
+    {
+        var fileInfo = Directory.CreateDirectory("Assets/_Scenes/Levels").GetFiles();
+        var fileNames = fileInfo.Where(f => f.Name.EndsWith(".unity")).Select(f => f.Name.Replace(".unity", "")).ToArray();
+
+        File.WriteAllLines("Assets/Resources/ScenesList.txt", fileNames);
+    }
 }
