@@ -8,6 +8,6 @@ public class GetFreeGold : MonoBehaviour
 {
     public void Get100FreeGold()
     {
-        PlayerPrefs.SetInt("Gold", PlayerPrefs.GetInt("Gold") + 100);
+        EventManager.Instance.TriggerEvent(new ChangeResources(premium: 100));
     }
 }
