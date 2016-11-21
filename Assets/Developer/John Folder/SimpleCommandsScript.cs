@@ -18,14 +18,22 @@ public class SimpleCommandsScript : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
-        isOver = true;  
+        isOver = true;
+        if (gameObject.name != "0") { 
+            GetComponent<RectTransform>().localScale = new Vector2(1.5f, 1.5f);
+            GetComponent<Image>().color = new Color(0, 160, 0);
+        }
         simpleCommandsManager.FillCurrentCommandList(int.Parse(gameObject.name));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isOver = false;
+        if (gameObject.name != "0")
+        {
+            GetComponent<RectTransform>().localScale = new Vector2(1f, 1f);
+            GetComponent<Image>().color = new Color(0, 0, 0);
+        }
         if (simpleCommandsManager.currentCommand.Count > 1) { 
         simpleCommandsManager.RemoveCurrentCommandList(1);
         }
