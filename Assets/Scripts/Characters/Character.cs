@@ -79,6 +79,7 @@ public class Character : MonoBehaviour
                 GetComponent<Collider>().enabled = false;
                 agent.enabled = false;
 				animator.SetTrigger("Die");
+				// VESO REMOVE THIS:
                 GetComponent<RagdollControl>().EnableRagDoll();
 
                 if (isMale)

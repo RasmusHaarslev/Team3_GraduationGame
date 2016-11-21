@@ -94,8 +94,9 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-				if (!character.isInCombat)
+				if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
 				{
+					Debug.Log("Clicked dead dude");
 					EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 				}
 				
