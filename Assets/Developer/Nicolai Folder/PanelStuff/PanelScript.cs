@@ -44,7 +44,7 @@ public class PanelScript : MonoBehaviour {
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
         
-        GetNewSoldiers();// this should be called when player clicks on silhouette
+        //GetNewSoldiers();// this should be called when player clicks on silhouette
     }
 
     void GetNewSoldiers()
@@ -86,7 +86,6 @@ public class PanelScript : MonoBehaviour {
         
         if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
-            Debug.Log("hi");
             soldierCameraList[0].enabled = true;
             DeactivateCamera(0);
         }
@@ -178,39 +177,39 @@ public class PanelScript : MonoBehaviour {
         {        
             if (stat.name == "Type")
             {     
-                stat.GetComponent<Text>().text = "Type: " + currentSoldier.characterBaseValues.Type.ToString();
+                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
             }
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.damage.ToString();
+                stat.GetComponent<Text>().text = currentSoldier.damage.ToString();
             }
             if (stat.name == "Soldier Name")
             {
-                stat.GetComponent<Text>().text = "Name: " +  currentSoldier.characterBaseValues.name;
+                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
             }
             if (stat.name == "Description")
             {
-                stat.GetComponent<Text>().text = "Description: " + currentSoldier.characterBaseValues.description;
+                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.description;
             }
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = "Health: " + currentSoldier.health.ToString();
+                stat.GetComponent<Text>().text = currentSoldier.health.ToString();
             }
             if (stat.name == "Damage Speed")
             {
-                stat.GetComponent<Text>().text = "Damage speed: " +  currentSoldier.damageSpeed.ToString();
+                stat.GetComponent<Text>().text =  currentSoldier.damageSpeed.ToString();
             }
             if (stat.name == "Range")
             {
-                stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
+                stat.GetComponent<Text>().text = currentSoldier.range.ToString();
             }
             if (stat.name == "Combat Trait")
             {
-                stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
             }
             if (stat.name == "Target Trait")
             {
-                stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
             }
 
         }
