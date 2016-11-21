@@ -16,6 +16,13 @@
 			<ShortName>ExploreTestSB</ShortName>
 			<Path>ExploreTestSB.bnk</Path>
 			<IncludedEvents>
+				<Event Id="1629463520" Name="DiscoverEnemy" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverEnemy" MaxAttenuation="0.000000"/>
+				<Event Id="604685473" Name="DiscoverFriendly" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendly" MaxAttenuation="0.000000"/>
+				<Event Id="1392836774" Name="FriendlyDie" ObjectPath="\Events\Default Work Unit\TriggerEvents\FriendlyDie" MaxAttenuation="0.000000"/>
+				<Event Id="2283762979" Name="Play_BaseWind_01" ObjectPath="\Events\Default Work Unit\Ambience\Play_BaseWind_01"/>
+				<Event Id="1292318918" Name="Play_CharSel" ObjectPath="\Events\Default Work Unit\UI\Play_CharSel"/>
+				<Event Id="1757332637" Name="Play_ClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap"/>
+				<Event Id="1164893191" Name="Play_CommandSel" ObjectPath="\Events\Default Work Unit\UI\Play_CommandSel"/>
 				<Event Id="4074757615" Name="Play_CommandUI" ObjectPath="\Events\Default Work Unit\UI\Play_CommandUI"/>
 				<Event Id="3643034395" Name="Play_EvilFemaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack"/>
 				<Event Id="2491028491" Name="Play_EvilFemaleWarrior1Death" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Death"/>
@@ -50,20 +57,23 @@
 				<Event Id="1918433323" Name="Play_MenuAmbience" ObjectPath="\Events\Default Work Unit\Play_MenuAmbience"/>
 				<Event Id="2570041344" Name="Play_MenuMusic" ObjectPath="\Events\Default Work Unit\Play_MenuMusic"/>
 				<Event Id="3719726781" Name="Play_MenuUI" ObjectPath="\Events\Default Work Unit\UI\Play_MenuUI"/>
-				<Event Id="3674699749" Name="Play_NewMaps" ObjectPath="\Events\Default Work Unit\UI\Play_NewMaps"/>
+				<Event Id="1900502842" Name="Play_NoiseWind" ObjectPath="\Events\Default Work Unit\Ambience\Play_NoiseWind" MaxAttenuation="20.000000"/>
 				<Event Id="623878550" Name="Play_OpenMapUI" ObjectPath="\Events\Default Work Unit\UI\Play_OpenMapUI"/>
 				<Event Id="2149966355" Name="Play_PickRiffle" ObjectPath="\Events\Default Work Unit\UI\Play_PickRiffle"/>
 				<Event Id="3454913730" Name="Play_PickShield" ObjectPath="\Events\Default Work Unit\UI\Play_PickShield"/>
 				<Event Id="3974976660" Name="Play_PickSpear" ObjectPath="\Events\Default Work Unit\UI\Play_PickSpear"/>
 				<Event Id="3142926109" Name="Play_ScrollMap" ObjectPath="\Events\Default Work Unit\UI\Play_ScrollMap"/>
 				<Event Id="1496010068" Name="Play_ShieldHit" ObjectPath="\Events\Default Work Unit\Combat\Play_ShieldHit"/>
+				<Event Id="4008979185" Name="Play_UnlockNewMaps" ObjectPath="\Events\Default Work Unit\UI\Play_UnlockNewMaps"/>
 				<Event Id="955974805" Name="Play_UseRiffle" ObjectPath="\Events\Default Work Unit\Combat\Play_UseRiffle"/>
 				<Event Id="677386556" Name="Play_UseShield" ObjectPath="\Events\Default Work Unit\Combat\Play_UseShield"/>
 				<Event Id="2143972174" Name="Play_UseSpear" ObjectPath="\Events\Default Work Unit\Combat\Play_UseSpear"/>
 				<Event Id="1488691910" Name="Play_WalkTapUI" ObjectPath="\Events\Default Work Unit\UI\Play_WalkTapUI"/>
+				<Event Id="1465786195" Name="Play_WindDeep1" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindDeep1" MaxAttenuation="20.000000"/>
 				<Event Id="1465786192" Name="Play_WindDeep2" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindDeep2" MaxAttenuation="20.000000"/>
 				<Event Id="1661144613" Name="Play_windFlags" ObjectPath="\Events\Default Work Unit\Ambience\Play_windFlags" MaxAttenuation="20.000000"/>
 				<Event Id="3104904358" Name="Play_windhowl" ObjectPath="\Events\Default Work Unit\Ambience\Play_windhowl" MaxAttenuation="20.000000"/>
+				<Event Id="1938796326" Name="Play_windNoiseQuiet" ObjectPath="\Events\Default Work Unit\Ambience\Play_windNoiseQuiet" MaxAttenuation="20.000000"/>
 				<Event Id="1762052194" Name="Play_WolfAttack" ObjectPath="\Events\Default Work Unit\Play_WolfAttack"/>
 				<Event Id="275137096" Name="Play_WolfDeath" ObjectPath="\Events\Default Work Unit\Play_WolfDeath"/>
 				<Event Id="3582425144" Name="Play_WolfHowl" ObjectPath="\Events\Default Work Unit\Play_WolfHowl"/>
@@ -74,6 +84,10 @@
 				<Event Id="225821351" Name="Stop_ScrollMap" ObjectPath="\Events\Default Work Unit\UI\Stop_ScrollMap" MaxAttenuation="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="7581663" Language="SFX">
+					<ShortName>PickUpGeneral3.wav</ShortName>
+					<Path>SFX/PickUpGeneral3_277E827B.wem</Path>
+				</File>
 				<File Id="7654141" Language="SFX">
 					<ShortName>WolfHowl1.wav</ShortName>
 					<Path>SFX/WolfHowl1_277E827B.wem</Path>
@@ -150,6 +164,10 @@
 					<ShortName>EvilFemaleWarrior1Hit3.wav</ShortName>
 					<Path>SFX/EvilFemaleWarrior1Hit3_277E827B.wem</Path>
 				</File>
+				<File Id="160583729" Language="SFX">
+					<ShortName>WindQuiter.wav</ShortName>
+					<Path>SFX/WindQuiter_277E827B.wem</Path>
+				</File>
 				<File Id="166559896" Language="SFX">
 					<ShortName>MaleWarrior1Attack4.wav</ShortName>
 					<Path>SFX/MaleWarrior1Attack4_277E827B.wem</Path>
@@ -198,10 +216,6 @@
 					<ShortName>EvilMaleWarrior2Death1.wav</ShortName>
 					<Path>SFX/EvilMaleWarrior2Death1_277E827B.wem</Path>
 				</File>
-				<File Id="250994983" Language="SFX">
-					<ShortName>STINGER1.wav</ShortName>
-					<Path>SFX/STINGER1_21ADA429.wem</Path>
-				</File>
 				<File Id="252880203" Language="SFX">
 					<ShortName>EvilMaleWarrior2Attack3.wav</ShortName>
 					<Path>SFX/EvilMaleWarrior2Attack3_277E827B.wem</Path>
@@ -225,6 +239,10 @@
 				<File Id="274655049" Language="SFX">
 					<ShortName>WeaponWhoosh2.wav</ShortName>
 					<Path>SFX/WeaponWhoosh2_277E827B.wem</Path>
+				</File>
+				<File Id="274771103" Language="SFX">
+					<ShortName>UnlockNewMaps.wav</ShortName>
+					<Path>SFX/UnlockNewMaps_277E827B.wem</Path>
 				</File>
 				<File Id="283084582" Language="SFX">
 					<ShortName>MaleWarrior2Attack6.wav</ShortName>
@@ -390,6 +408,10 @@
 					<ShortName>EvilFemaleWarrior1Hit1.wav</ShortName>
 					<Path>SFX/EvilFemaleWarrior1Hit1_277E827B.wem</Path>
 				</File>
+				<File Id="471266327" Language="SFX">
+					<ShortName>windStrings.wav</ShortName>
+					<Path>SFX/windStrings_277E827B.wem</Path>
+				</File>
 				<File Id="478117380" Language="SFX">
 					<ShortName>ExploreToCombat.wav</ShortName>
 					<Path>SFX/ExploreToCombat_21ADA429.wem</Path>
@@ -401,10 +423,6 @@
 				<File Id="496179797" Language="SFX">
 					<ShortName>OpenMapUI.wav</ShortName>
 					<Path>SFX/OpenMapUI_277E827B.wem</Path>
-				</File>
-				<File Id="501059768" Language="SFX">
-					<ShortName>Stinger3.wav</ShortName>
-					<Path>SFX/Stinger3_21ADA429.wem</Path>
 				</File>
 				<File Id="506703436" Language="SFX">
 					<ShortName>FemaleWarrior1Hit3.wav</ShortName>
@@ -454,6 +472,10 @@
 					<ShortName>MaleWarrior1Death2.wav</ShortName>
 					<Path>SFX/MaleWarrior1Death2_277E827B.wem</Path>
 				</File>
+				<File Id="573729679" Language="SFX">
+					<ShortName>NoiseWind.wav</ShortName>
+					<Path>SFX/NoiseWind_277E827B.wem</Path>
+				</File>
 				<File Id="574431990" Language="SFX">
 					<ShortName>FootStepsBoot7.wav</ShortName>
 					<Path>SFX/FootStepsBoot7_277E827B.wem</Path>
@@ -473,6 +495,10 @@
 				<File Id="617761867" Language="SFX">
 					<ShortName>FootStepsBoot3.wav</ShortName>
 					<Path>SFX/FootStepsBoot3_277E827B.wem</Path>
+				</File>
+				<File Id="620914224" Language="SFX">
+					<ShortName>Stinger3.wav</ShortName>
+					<Path>SFX/Stinger3_21ADA429.wem</Path>
 				</File>
 				<File Id="621111750" Language="SFX">
 					<ShortName>FemaleWarrior2Attack4.wav</ShortName>
@@ -525,6 +551,10 @@
 				<File Id="681295941" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack2.wav</ShortName>
 					<Path>SFX/EvilMaleWarrior1Attack2_277E827B.wem</Path>
+				</File>
+				<File Id="683580329" Language="SFX">
+					<ShortName>CommandSel.wav</ShortName>
+					<Path>SFX/CommandSel_277E827B.wem</Path>
 				</File>
 				<File Id="696283885" Language="SFX">
 					<ShortName>FemaleWarrior1Attack5.wav</ShortName>
@@ -706,9 +736,17 @@
 					<ShortName>FemaleWarrior2Hit4.wav</ShortName>
 					<Path>SFX/FemaleWarrior2Hit4_277E827B.wem</Path>
 				</File>
+				<File Id="974275100" Language="SFX">
+					<ShortName>STINGER1.wav</ShortName>
+					<Path>SFX/STINGER1_21ADA429.wem</Path>
+				</File>
 				<File Id="974952532" Language="SFX">
 					<ShortName>FootStepsSneak4.wav</ShortName>
 					<Path>SFX/FootStepsSneak4_277E827B.wem</Path>
+				</File>
+				<File Id="976000376" Language="SFX">
+					<ShortName>Wind_deepTone.wav</ShortName>
+					<Path>SFX/Wind_deepTone_277E827B.wem</Path>
 				</File>
 				<File Id="983054606" Language="SFX">
 					<ShortName>WolfAttack2.wav</ShortName>

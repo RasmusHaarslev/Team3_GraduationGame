@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandler
 {
-
     public RawImage Icon;
     public Text name, damage, damageSpeed, range, health;
     public EquippableitemValues itemValues;

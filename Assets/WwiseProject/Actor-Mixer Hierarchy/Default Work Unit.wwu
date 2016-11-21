@@ -4530,9 +4530,14 @@
 						</Sound>
 						<Sound Name="OpenMapUI" ID="{E9AABCE1-34E7-48C1-8191-8BF92971165F}" ShortID="413211127" Type="SoundFX">
 							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>530</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>7</Value>
+										<Value>11</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -4701,7 +4706,7 @@
 								<ItemRef Name="ScrollUI" ID="{6E59F4A5-4A36-4FCB-AE97-5344DDC772E0}"/>
 							</Playlist>
 						</RandomSequenceContainer>
-						<Sound Name="CloudPuff" ID="{3DFE8780-D247-4E79-93CB-45B20D99FE7B}" ShortID="561357970" Type="SoundFX">
+						<Sound Name="ClearMap" ID="{3DFE8780-D247-4E79-93CB-45B20D99FE7B}" ShortID="561357970" Type="SoundFX">
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
@@ -4725,6 +4730,82 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="CloudPuff" ID="{51633EF6-614B-4DF1-A53B-3DB93BFA9426}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="UnlockNewMaps" ID="{F72ED727-84D9-4170-B23D-0F44BFDF1C69}" ShortID="1051779728" Type="SoundFX">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="UnlockNewMaps" ID="{B4CE76FD-1C9E-4A61-89C6-7AA4E486EABB}" ShortID="274771103">
+									<Language>SFX</Language>
+									<AudioFile>UnlockNewMaps.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="UnlockNewMaps" ID="{B4CE76FD-1C9E-4A61-89C6-7AA4E486EABB}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CharSel" ID="{D47405BC-89F2-44E5-A32C-7655565A56E4}" ShortID="170291968" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PickUpGeneral3" ID="{238BB0A7-4363-4017-95EC-1124A39586D3}" ShortID="7581663">
+									<Language>SFX</Language>
+									<AudioFile>PickUpGeneral3.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PickUpGeneral3" ID="{238BB0A7-4363-4017-95EC-1124A39586D3}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CommandSel" ID="{25E79B1F-DA52-41E0-A6FA-550511622332}" ShortID="999168819" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>510</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CommandSel" ID="{5552AE71-FEC6-4A1D-A58B-D6AD524CA05B}" ShortID="683580329">
+									<Language>SFX</Language>
+									<AudioFile>CommandSel.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CommandSel" ID="{5552AE71-FEC6-4A1D-A58B-D6AD524CA05B}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
