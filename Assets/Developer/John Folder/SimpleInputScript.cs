@@ -35,7 +35,7 @@ public class SimpleInputScript : MonoBehaviour
 
     public void ButtonUp()
     {
-
+        Time.timeScale = 1f;
         buttonClicked = false;
         if (commandPanel.activeSelf == true)
         {
@@ -160,6 +160,8 @@ public class SimpleInputScript : MonoBehaviour
 
             if (countdown < 0)
             {
+                Time.timeScale = 0.15f;
+
                 commandPanel.SetActive(true);
 
 				Manager_Audio.ChangeState (Manager_Audio.commandWheelContainer,Manager_Audio.openWheel);

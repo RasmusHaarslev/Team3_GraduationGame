@@ -18,7 +18,7 @@ public class PopUpFunctionality : MonoBehaviour {
     // Right side shown when you have scouted
     public GameObject RightPanel;
     public Text foodText;
-    public Text coinsText;
+    public Text scrapsText;
 
     // Not scouted panel
     public GameObject NotScouted;
@@ -67,7 +67,7 @@ public class PopUpFunctionality : MonoBehaviour {
         tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.tribeCamps;
         choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
         foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
-        coinsText.text = TranslationManager.Instance.GetTranslation("Coins") + " : " + nodeScript.coinAmount;
+        scrapsText.text = TranslationManager.Instance.GetTranslation("Scraps") + " : " + nodeScript.scrapAmount;
         interestPointsText.text = TranslationManager.Instance.GetTranslation("Interest Points") + " : " + nodeScript.CampsInNode;
 
         
@@ -113,7 +113,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void Play(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
         /*           
@@ -122,7 +122,7 @@ public class PopUpFunctionality : MonoBehaviour {
         public int tribeCamps;
         public int choiceCamps;
         public int foodAmount;
-        public int coinAmount;
+        public int scrapAmount;
         public int itemDropAmount;
         */
 
@@ -132,7 +132,7 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt("TribeCamps", node.GetComponent<Node>().tribeCamps);
         PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
         PlayerPrefs.SetInt("FoodAmount", node.GetComponent<Node>().foodAmount);
-        PlayerPrefs.SetInt("CoinAmount", node.GetComponent<Node>().coinAmount);
+        PlayerPrefs.SetInt("ScrapAmount", node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt("ItemDropAmount", node.GetComponent<Node>().itemDropAmount);
 
         // IF NOT DEBUG USE THIS
@@ -144,7 +144,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void Scout(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(scoutCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-scoutCost));
 
         btnScout.SetActive(false);
         NotScouted.SetActive(false);
@@ -163,7 +163,7 @@ public class PopUpFunctionality : MonoBehaviour {
             {
                 child.gameObject.SetActive(true);
                 node.GetComponent<Node>().txtFood.text = node.GetComponent<Node>().foodAmount.ToString();
-                node.GetComponent<Node>().txtCoins.text = node.GetComponent<Node>().coinAmount.ToString();
+                node.GetComponent<Node>().txtScraps.text = node.GetComponent<Node>().scrapAmount.ToString();
                 node.GetComponent<Node>().txtTribes.text = node.GetComponent<Node>().tribeCamps.ToString();
                 node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
             }

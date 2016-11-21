@@ -38,7 +38,7 @@ public class Node : MonoBehaviour {
 
     /* AMOUNT OF RESOURCE DROPS */
     public int foodAmount;
-    public int coinAmount;
+    public int scrapAmount;
 
     /* AMOUNT OF ITEM DROPS */
     public int itemDropAmount;
@@ -54,7 +54,7 @@ public class Node : MonoBehaviour {
     public GameObject infoPanel;
     public GameObject unknownPanel;
     public Text txtFood;
-    public Text txtCoins;
+    public Text txtScraps;
     public Text txtTribes;
     public Text txtWolves;
     public Text txtIntPoints;
@@ -86,6 +86,23 @@ public class Node : MonoBehaviour {
         SetupUIText();
     }
 
+    public void SetupImage()
+    {
+        if (isCleared)
+        {
+            GetComponent<Image>().sprite = activationImages[0];
+            GetComponent<Image>().color = Color.green;
+        }
+        else if (!isCleared && canPlay)
+        {
+            GetComponent<Image>().sprite = activationImages[0];
+        }
+        else
+        {
+            GetComponent<Image>().sprite = activationImages[1];
+        }
+    }
+
     public void SetupUIText()
     {
         if(isCleared)
@@ -104,7 +121,7 @@ public class Node : MonoBehaviour {
                 {
                     child.gameObject.SetActive(true);
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
-                    GetComponent<Node>().txtCoins.text = GetComponent<Node>().coinAmount.ToString();
+                    GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
                     GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
                     GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
                 }
@@ -156,8 +173,8 @@ public class Node : MonoBehaviour {
         // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
         foodAmount = 10;
 
-        // COIN COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 COINS 
-        coinAmount = 10;
+        // SCRAP COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 SCRAPS 
+        scrapAmount = 10;
     }
     #endregion
 
@@ -187,21 +204,6 @@ public class Node : MonoBehaviour {
     }
 
     #region Get Functions for this node
-    public void SetupImage()
-    {
-        if (isCleared)
-        {
-            GetComponent<Image>().sprite = activationImages[0];
-            GetComponent<Image>().color = Color.green;
-        } else if (!isCleared && canPlay)
-        {
-            GetComponent<Image>().sprite = activationImages[0];
-        } else
-        {
-            GetComponent<Image>().sprite = activationImages[1];
-        }
-    }
-
     public List<Link> GetParents()
     {
         List<Link> parents = new List<Link>();
