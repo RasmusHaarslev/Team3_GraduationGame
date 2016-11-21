@@ -63,6 +63,10 @@ public class HunterStateMachine : CoroutineMachine
 	public int maxLowAttentionSpanCounter = 3;
 	int lowAttentionSpanCounter = 3;
 
+	// Trait visualisation
+	public GameObject traitProjection;
+	bool traitVisualised = false;
+
 	public bool attacked = false;
 	Character character;
 	NavMeshAgent agent;
@@ -133,6 +137,7 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
+						ProjectTrait();
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
 							character.isInCombat = false;
@@ -141,6 +146,7 @@ public class HunterStateMachine : CoroutineMachine
 						break;
 					case CharacterValues.TargetTrait.Loyal:
 						GameObject loyalTarget = LoyalTarget();
+						ProjectTrait();
 						if (loyalTarget != null)
 						{
 							character.target = loyalTarget;
@@ -149,6 +155,10 @@ public class HunterStateMachine : CoroutineMachine
 				}
 				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
 				{
+					if (combatTrait == CharacterValues.CombatTrait.Fearful)
+					{
+						ProjectTrait();
+					}
 					yield return new TransitionTo(FleeState, DefaultTransition);
 				}
 				else
@@ -159,6 +169,10 @@ public class HunterStateMachine : CoroutineMachine
 						{
 							if (!character.target.GetComponent<Character>().isDead)
 							{
+								if (combatTrait == CharacterValues.CombatTrait.BraveFool)
+								{
+									ProjectTrait();
+								}
 								if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
 								{
 									GameObject formerTarget = character.target;
@@ -171,6 +185,7 @@ public class HunterStateMachine : CoroutineMachine
 										}
 										else
 										{
+											ProjectTrait();
 											character.target = character.FindRandomEnemy();
 										}
 									}
@@ -216,6 +231,10 @@ public class HunterStateMachine : CoroutineMachine
 				else
 				{
 					agent.Resume();
+					if (combatTrait == CharacterValues.CombatTrait.Clingy && outOfCombatCommandState == OutOfCombatCommandState.Stay)
+					{
+						ProjectTrait();
+					}
 					yield return new TransitionTo(FollowState, DefaultTransition);
 				}
 			}
@@ -252,7 +271,6 @@ public class HunterStateMachine : CoroutineMachine
 		agent.Resume();
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
-
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -260,6 +278,7 @@ public class HunterStateMachine : CoroutineMachine
 	{
 		agent.Stop();
 		character.RotateTowards(character.target.transform);
+		character.animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
 		lowAttentionSpanCounter--;
@@ -310,6 +329,26 @@ public class HunterStateMachine : CoroutineMachine
 			}
 		}
 		return target;
+	}
+
+	private void ProjectTrait()
+	{
+		if (!traitVisualised)
+		{
+			StartCoroutine(TraitProjector());
+			traitVisualised = true;
+		}
+	}
+
+	IEnumerator TraitProjector()
+	{
+		GameObject proj = Instantiate(traitProjection);
+		proj.transform.SetParent(gameObject.transform, false);
+		proj.transform.eulerAngles = new Vector3(90, 0, 0);
+		yield return new WaitForSeconds(0.5f);
+		Destroy(proj);
+		traitVisualised = false;
+		yield return null;
 	}
 }
 

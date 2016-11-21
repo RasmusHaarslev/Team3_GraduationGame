@@ -1,39 +1,77 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class WeaposGenerator : MonoBehaviour
 {
+    public int newWeaponsNumber = 5;
     public int increasePointsMultiplier = 2;
     public int increasePointsAdder = 10;
-
-    [Range(0, 1)] public float shieldStrenghtPercentageIncrease = .3f;
+    [Header("Shield Settings")]
     [Range(0, 1)]
-    public float shieldHealthPercentageIncrease = .6f;
-
+    public float damagePercentageShield = .3f;
+    [Range(0, 1)]
+    public float healthPercentageShield = .6f;
+    [Range(0, 1)]
+    public float damageSpeedPercentageShield = .1f;
     public int shieldRange = 1;
+
+    [Header("Polearm Settings")]
     [Range(0, 1)]
-    public float polearmStrenghtPercentageIncrease = .3f;
+    public float damagePercentagePolearm = .3f;
     [Range(0, 1)]
-    public float polearmHealthPercentageIncrease = .6f;
+    public float healthPercentagePolearm = .1f;
+    [Range(0, 1)]
+    public float damageSpeedPercentagePolearm = .6f;
     public int polearmRange = 3;
 
+    [Header("Rifle Settings")]
     [Range(0, 1)]
-    public float rifleStrenghtPercentageIncrease = .3f;
+    public float damagePercentageRifle = .3f;
     [Range(0, 1)]
-    public float rifleHealthPercentageIncrease = .6f;
+    public float healthPercentageRifle = .4f;
+    [Range(0, 1)]
+    public float damageSpeedPercentageRifle = .1f;
     public int rifleRange = 9;
 
     private int points = 0;
     private float strenghtIncreaseProbabLimit;
     private float healthtIncreaseProbabLimit;
-    
-    private DataService dataService;
+
+    //private DataService dataService;
+    [ExecuteInEditMode]
+    void OnValidate()
+    {//adjusting probability values among the item types if some value has been changed in the editor
+        if (damagePercentageShield + healthPercentageShield + damageSpeedPercentageShield > 1)
+        {
+            damagePercentageShield = Mathf.Clamp01(damagePercentageShield - 0.02f);
+            healthPercentageShield = Mathf.Clamp01(healthPercentageShield - 0.02f);
+            damageSpeedPercentageShield = Mathf.Clamp01(damageSpeedPercentageShield - 0.02f);
+        }
+        if (damagePercentagePolearm + healthPercentagePolearm + damageSpeedPercentagePolearm > 1)
+        {
+            damagePercentagePolearm = Mathf.Clamp01(damagePercentagePolearm - 0.02f);
+            healthPercentagePolearm = Mathf.Clamp01(healthPercentagePolearm - 0.02f);
+            damageSpeedPercentagePolearm = Mathf.Clamp01(damageSpeedPercentagePolearm - 0.02f);
+        }
+        if (damagePercentageRifle + healthPercentageRifle + damageSpeedPercentageRifle > 1)
+        {
+            damagePercentageRifle = Mathf.Clamp01(damagePercentageRifle - 0.02f);
+            healthPercentageRifle = Mathf.Clamp01(healthPercentageRifle - 0.02f);
+            damageSpeedPercentageRifle = Mathf.Clamp01(damageSpeedPercentageRifle - 0.02f);
+        }
+
+    }
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
-        dataService = new DataService(StringResources.databaseName);
+        //dataService = new DataService(StringResources.databaseName);
         //calculate weapons parameters
 
         //....
@@ -41,60 +79,88 @@ public class WeaposGenerator : MonoBehaviour
     }
 
 
-    
     public EquippableitemValues GenerateEquippableItem(EquippableitemValues.type type, int level)
     {
         EquippableitemValues itemValues = new EquippableitemValues();
         itemValues.Type = type;
 
-        points = level/5*increasePointsMultiplier + increasePointsAdder;
-
+        points = (level / 5 + 1) * increasePointsMultiplier + increasePointsAdder;
+        float healthProbability = 0f; float damageProbability = 0f; float damageSpeedProbability = 0f;
         switch (type)
         {
             case EquippableitemValues.type.shield:
                 itemValues.name = "Shield level " + level;
-                
                 itemValues.range = shieldRange;
-                itemValues.prefabName = "Shield";
-                
+                itemValues.prefabName = StringResources.shield1PrefabName;
+                itemValues.Slot = EquippableitemValues.slot.leftHand;
+                healthProbability = healthPercentageShield;
+                damageProbability = damagePercentageShield;
+                damageSpeedProbability = damageSpeedPercentageShield;
                 break;
             case EquippableitemValues.type.polearm:
                 itemValues.name = "Polearm level " + level;
-                
                 itemValues.range = polearmRange;
-                itemValues.prefabName = "Stick";
+                itemValues.prefabName = StringResources.polearm1PrefabName;
+                itemValues.Slot = EquippableitemValues.slot.rightHand;
+                healthProbability = healthPercentagePolearm;
+                damageProbability = damagePercentagePolearm;
+                damageSpeedProbability = damageSpeedPercentagePolearm;
                 break;
             case EquippableitemValues.type.rifle:
                 itemValues.name = "Rifle level " + level;
-                
                 itemValues.range = rifleRange;
-                itemValues.prefabName = "Rifle";
+                itemValues.prefabName = StringResources.rifle1PrefabName;
+                itemValues.Slot = EquippableitemValues.slot.rightHand;
+                healthProbability = healthPercentageRifle;
+                damageProbability = damagePercentageRifle;
+                damageSpeedProbability = damageSpeedPercentageRifle;
                 break;
-
         }
+
         float currentPick = 0f;
+        //print(healthProbability + " " + damageProbability + " " + damageSpeedProbability);
+        //print(points);
         for (int i = 0; i < points; i++)
         {
-            currentPick = Random.Range(0, 1);
-            if (currentPick < strenghtIncreaseProbabLimit) //increase damage
+            //Random.seed = (int)System.DateTime.Now.Ticks;
+            currentPick = Random.Range(0.0f, 1.0f);
+            print(currentPick);
+            if (currentPick < damageProbability) //increase damage
             {
                 itemValues.damage += 1;
-            }else if (currentPick < healthtIncreaseProbabLimit) //increase health
+            }
+            else if (currentPick < healthProbability + damageProbability) //increase health
             {
                 itemValues.health += 1;
             }
-            else //increse damage speed
+            else if (currentPick < healthProbability + damageProbability + damageSpeedProbability)//increse damage speed
             {
                 itemValues.damageSpeed += 1;
             }
 
         }
 
-        itemValues.Slot = EquippableitemValues.slot.rightHand;
+        itemValues.level = level;
 
         return itemValues;
 
     }
 
+    public EquippableitemValues[] GetNewItemsValues(int difficultyLevel)
+    {
+        EquippableitemValues[] newItemsValues = new EquippableitemValues[newWeaponsNumber];
+        for (int i = 0; i < newWeaponsNumber; i++)
+        {
+            newItemsValues[i] = GenerateEquippableItem(RandomItemType(), difficultyLevel);
+        }
 
+        return newItemsValues;
+    }
+
+    private EquippableitemValues.type RandomItemType()
+    {
+
+        return (EquippableitemValues.type)(Random.Range(0, Enum.GetNames(typeof(EquippableitemValues.type)).Length));
+
+    }
 }
