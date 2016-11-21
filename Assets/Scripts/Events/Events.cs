@@ -6,6 +6,13 @@ public class SaveLevelsToXML : GameEvent
     public SaveLevelsToXML () { }
 }
 
+public class LevelCleared : GameEvent
+{
+    public LevelCleared()
+    {
+    }
+}
+
 public class ChangeResources : GameEvent
 {
     public int food;
