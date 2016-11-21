@@ -63,7 +63,12 @@ public class Manager_Audio : MonoBehaviour {
     public static string adjustMusicVolume = "MusicVol";
     public static string adjustFXVolume = "SFXVol";
 
-    public static void PlaySound(string name,GameObject objectPos)
+	public static string discoverFriendly = "DiscoverFriendly";
+	public static string discoverEnemy = "DiscoverEnemy";
+	public static string friendlyDeath = "CombatFriendlyDie";
+
+
+	public static void PlaySound(string name,GameObject objectPos)
 	{
 		AkSoundEngine.PostEvent (name, objectPos);
 	}

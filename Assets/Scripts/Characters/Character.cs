@@ -289,7 +289,22 @@ public class Character : MonoBehaviour
     public void DealDamage()
     {
         EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
-        if (target != null)
+		switch (equippedWeaponType)
+		{
+			case EquippableitemValues.type.polearm:
+				Debug.Log("polearm");
+				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
+				break;
+			case EquippableitemValues.type.rifle:
+				Debug.Log("rifle");
+				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
+				break;
+			case EquippableitemValues.type.shield:
+				Debug.Log("shield");
+				Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
+				break;
+		}
+		if (target != null)
         {
             if (target.GetComponent<HunterStateMachine>() != null)
             {
@@ -297,21 +312,6 @@ public class Character : MonoBehaviour
                 {
                     target.GetComponent<Character>().target = gameObject;
                     target.GetComponent<HunterStateMachine>().attacked = true;
-					switch (equippedWeaponType)
-                    {
-                        case EquippableitemValues.type.polearm:
-                            Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
-                            break;
-                        case EquippableitemValues.type.rifle:
-                            Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
-                            break;
-                        case EquippableitemValues.type.shield:
-                            Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
-                            break;
-
-                    }
-
-
                     if (isMale)
                     {
                         Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
