@@ -165,7 +165,7 @@ public class PopUpFunctionality : MonoBehaviour {
                 node.GetComponent<Node>().txtFood.text = node.GetComponent<Node>().foodAmount.ToString();
                 node.GetComponent<Node>().txtCoins.text = node.GetComponent<Node>().coinAmount.ToString();
                 node.GetComponent<Node>().txtTribes.text = node.GetComponent<Node>().tribeCamps.ToString();
-                node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
+             //   node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
             }
             else
             {

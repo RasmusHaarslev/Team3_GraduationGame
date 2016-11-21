@@ -10,7 +10,8 @@ using UnityEngine;
 public class SaveLoadLevels
 {
     public static Dictionary<int, GameObject> AllLevelsLoaded = new Dictionary<int, GameObject>();
-    public static int maxRowsCleared = 0;
+    public static int maxRowsCleared = -1;
+    public static GameObject lastNodeCleared;
 
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
@@ -120,8 +121,10 @@ public class SaveLoadLevels
                 currentNode.OnCreate(currentNode.NodeId);
 
                 // Finds the max rows
-                if (node.isCleared && row.Level > maxRowsCleared)
+                if (node.isCleared && row.Level > maxRowsCleared) { 
                     maxRowsCleared = row.Level;
+                    lastNodeCleared = nodeObject;
+                }
 
                 AllLevelsLoaded.Add(node.NodeId, nodeObject);
             }

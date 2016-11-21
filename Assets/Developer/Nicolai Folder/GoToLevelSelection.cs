@@ -21,6 +21,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
     public void ClearedLevel(GameEvent e)
     {
+        Debug.Log(winAnimation);
         winAnimation = true;
     }
 
@@ -29,13 +30,15 @@ public class GoToLevelSelection : MonoBehaviour {
     {
         Manager_Audio.PlaySound(Manager_Audio.play_openMap, gameObject);
         levelSelectionPanel.SetActive(true);
-
+        
         if (winAnimation) { 
             WinAnimateMap();
             winAnimation = !winAnimation;
         } else
         {
-            LoseAnimateMap();
+            if (SaveLoadLevels.lastNodeCleared != null) { 
+                SaveLoadLevels.lastNodeCleared.transform.GetChild(2).gameObject.SetActive(true);
+            }
         }
     }
 
@@ -43,6 +46,8 @@ public class GoToLevelSelection : MonoBehaviour {
     {
         GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
         Node nodeScript = nodeCleared.GetComponent<Node>();
+
+        nodeCleared.transform.GetChild(2).gameObject.SetActive(true);
 
         // MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR
 

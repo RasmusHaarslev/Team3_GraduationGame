@@ -79,7 +79,7 @@ public class LevelSelectionGenerator : MonoBehaviour
             totalAmountRows = 0;
             numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
             LoadRows();
-            Debug.Log(PlayerPrefs.GetInt("LevelResult"));
+
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
                 EventManager.Instance.TriggerEvent(new LevelCleared());
