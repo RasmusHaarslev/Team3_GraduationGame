@@ -18,6 +18,6 @@ public class LightEffect : MonoBehaviour
     void Update()
     {
         var dist = Vector3.Distance(this.transform.position, Camera.main.GetComponent<CameraController>().player.transform.position);
-        _light.intensity = 2f - (2f / dist);
+        _light.intensity = 4f - (5f / dist);
     }
 }
