@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class WeaposGenerator : MonoBehaviour
 {
-    public int newWeaponsNumber = 5;
+    public int newWeaponsNumber = 1;
     public int increasePointsMultiplier = 2;
     public int increasePointsAdder = 10;
     [Header("Shield Settings")]
@@ -124,7 +124,7 @@ public class WeaposGenerator : MonoBehaviour
         {
             //Random.seed = (int)System.DateTime.Now.Ticks;
             currentPick = Random.Range(0.0f, 1.0f);
-            print(currentPick);
+           
             if (currentPick < damageProbability) //increase damage
             {
                 itemValues.damage += 1;
