@@ -22,6 +22,9 @@ public class CampManager : MonoBehaviour
     public int MaxVillagesCost;
     public int MaxVillagesCostIncrease;
 
+    [Tooltip("The amount of gold it costs to finish an upgrade.")]
+    public int FinishUpgradeCost = 10;
+
     public Text[] TextLevels;
     public Button[] Buttons;
     public Button FinishNow;
@@ -101,6 +104,9 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeInProgress = true;
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Scrap -= tempCost;
+
+        EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -5));
+
         SaveUpgrades();
     }
 
@@ -140,7 +146,11 @@ public class CampManager : MonoBehaviour
     {
         Upgrades.UpgradeInProgress = true;
         Upgrades.UpgradeBought = tempUpgradeName;
-        Upgrades.Gold -= tempGold;
+        Upgrades.Gold -= FinishUpgradeCost;
+
+        // Update premium resource in GameController.
+        EventManager.Instance.TriggerEvent(new ChangeResources(premium: -FinishUpgradeCost));
+
         FinishUpgrade();
     }
 
@@ -294,7 +304,7 @@ public class CampUpgrades
 
     public void GetCurrency()
     {
-        Gold = PlayerPrefs.GetInt("Gold");
+        Gold = PlayerPrefs.GetInt("Premium");
         Food = PlayerPrefs.GetInt("Food");
         Scrap = PlayerPrefs.GetInt("Scrap");
     }
