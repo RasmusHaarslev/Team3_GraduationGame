@@ -10,7 +10,7 @@ public class RagdollControl : MonoBehaviour
 	private List<Collider> collidersRagdoll;
 
 	private List<Rigidbody> rigidBodiesRagdoll;
-
+	public Rigidbody rigidbody;
 
 	[Tooltip("Collect player collider on main object")]
 	private Collider playerCollider;
@@ -46,7 +46,12 @@ public class RagdollControl : MonoBehaviour
 		{
 			playerCollider.isTrigger = true;
 		}
-
+		foreach (var rigid in rigidBodiesRagdoll)
+		{
+			
+				rigid.WakeUp();
+			
+		}
 		ToggleColliders(true);
 		ToggleRigids(false);
 		anim.enabled = false;
@@ -90,9 +95,15 @@ public class RagdollControl : MonoBehaviour
 	void CollectRigidBodies()
 	{
 		rigidBodiesRagdoll = new List<Rigidbody>();
-
-		rigidBodiesRagdoll.AddRange(GetComponentsInChildren<Rigidbody>());
-
+		foreach (var rigid in GetComponentsInChildren<Rigidbody>())
+		{
+			if (rigid != rigidbody)
+			{
+				rigidBodiesRagdoll.Add(rigid);
+				rigid.Sleep();
+			}
+		}
+		
 		ToggleRigids(true);
 	}
 
