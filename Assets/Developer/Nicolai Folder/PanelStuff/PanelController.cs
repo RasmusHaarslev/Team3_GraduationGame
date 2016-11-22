@@ -30,7 +30,6 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
             panelScript.panelList[3].SetActive(true);
             panelScript.panelList[1].SetActive(true);
         }
-
     }
 
 }
