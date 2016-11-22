@@ -70,10 +70,15 @@ public class Manager_Audio : MonoBehaviour {
     public static string play_scrollMap = "Play_ScrollMap";
     public static string stop_scrollMap = "Stop_ScrollMap";
 
+    public static string play_clearMap = "Play_ClearMap";
+    public static string play_unlockNewMaps = "Play_UnlockNewMaps";
+    public static string play_charSel = "Play_CharSel";
+
     public static string adjustMusicVolume = "MusicVol";
     public static string adjustFXVolume = "SFXVol";
+    public static string adjustScrollPitch = "ScrollPitch";
 
-	public static string discoverFriendly = "DiscoverFriendly";
+    public static string discoverFriendly = "DiscoverFriendly";
 	public static string discoverEnemy = "DiscoverEnemy";
 	public static string friendlyDeath = "CombatFriendlyDie";
 

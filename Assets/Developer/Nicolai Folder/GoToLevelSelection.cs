@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,13 +52,14 @@ public class GoToLevelSelection : MonoBehaviour {
 
         nodeCleared.transform.GetChild(2).gameObject.SetActive(true);
 
-        // MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR
+        // MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR        
 
         nodeScript.isCleared = true;
 
         if (nodeScript.isCleared)
         {
-            nodeScript.SetupImage();
+            StartCoroutine(initWin(nodeCleared));
+            //nodeScript.SetupImage();
             nodeScript.SetupUIText();
 
             foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
@@ -66,6 +68,13 @@ public class GoToLevelSelection : MonoBehaviour {
                 nodes.GetComponent<Node>().SetupImage();
             }
         }
+    }
+
+    IEnumerator initWin(GameObject node)
+    {
+        node.GetComponent<Animator>().SetBool("IsCleared", true);
+
+        yield return new WaitForSeconds(1);
     }
 
     void LoseAnimateMap()
