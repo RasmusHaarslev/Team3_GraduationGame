@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class WeaposGenerator : MonoBehaviour
+public class WeaponGenerator : MonoBehaviour
 {
     public int newWeaponsNumber = 1;
     public int increasePointsMultiplier = 2;

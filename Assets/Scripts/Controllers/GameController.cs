@@ -8,6 +8,11 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
+    public int InitialFood = 10;
+    public int InitialVillages = 10;
+    public int InitialScrap = 10;
+    public int InitialPremium = 10;
+
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
     public int _SCRAPS = 10;
@@ -84,6 +89,13 @@ public class GameController : MonoBehaviour {
             _SCRAPS = PlayerPrefs.GetInt("Scraps");
             _PREMIUM = PlayerPrefs.GetInt("Premium");
         }
+        else
+        {
+            PlayerPrefs.SetInt("Food", InitialFood);
+            PlayerPrefs.SetInt("Villagers", InitialVillages);
+            PlayerPrefs.SetInt("Scraps", InitialScrap);
+            PlayerPrefs.SetInt("Premium", InitialPremium);
+        }
     }
 
     public void LoadScene(string scene)
@@ -110,22 +122,22 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        //var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
+        var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
 
-        //System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
+        System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
         List<string> scenes = new List<string>();
 
-        //string line;
-        //while ((line = reader.ReadLine()) != null)
-        //{
-        //    scenes.Add(line);
-        //}
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            scenes.Add(line);
+        }
 
-        scenes.Add("LevelPrototype02");
-        scenes.Add("LevelPrototype03");
-        scenes.Add("LevelPrototype04");
-        scenes.Add("LevelPrototype05");
-        scenes.Add("LevelPrototype06");
+        //scenes.Add("LevelPrototype02");
+        //scenes.Add("LevelPrototype03");
+        //scenes.Add("LevelPrototype04");
+        //scenes.Add("LevelPrototype05");
+        //scenes.Add("LevelPrototype06");
 
         //foreach (var scene in sceneDirectory.GetFiles())
         //{
