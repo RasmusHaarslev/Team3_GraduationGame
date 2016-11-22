@@ -8,12 +8,18 @@ public class CampTutorialController : MonoBehaviour
     public List<GameObject> panelList = new List<GameObject>();
     private int currentPanel;
     PanelScript panelScript;
+    GameObject levelSelectionGenerator;
 
     // Use this for initialization
     void Start()
     {
         currentPanel = 0;
         panelScript = GameObject.FindGameObjectWithTag("CampPanel").GetComponent<PanelScript>();
+        levelSelectionGenerator = GameObject.Find("LevelSelectionGenerator");
+
+        if (PlayerPrefs.HasKey("TutorialCompleted"))
+            if (PlayerPrefs.GetInt("TutorialCompleted") == 0)
+                gameObject.SetActive(true);
     }
 
     public void NextPanel()
@@ -24,7 +30,7 @@ public class CampTutorialController : MonoBehaviour
 
     public void OpenLevelSelect()
     {
-        panelScript.panelList[2].SetActive(true);
+        levelSelectionGenerator.GetComponent<GoToLevelSelection>().GoToCamp();
     }
 
     public void ClickHunter()
@@ -69,5 +75,23 @@ public class CampTutorialController : MonoBehaviour
             soldierPanel.SetActive(false);
             centralPanel.SetActive(false);
         }
+    }
+
+    public void ChooseLevel()
+    {
+        GameObject level0 = GameObject.Find("0.0");
+        Node node0 = level0.GetComponent<Node>();
+
+        Manager_Audio.PlaySound(Manager_Audio.play_openMap, level0);
+        EventManager.Instance.TriggerEvent(new SetupPopUp(level0));
+    }
+
+    public void EnterLevel()
+    {
+        PlayerPrefs.SetInt("TutorialCompleted", 1);
+        // TODO: Load the level!
+        // GameController.Instance.LoadScene("Tutttt");
+
+        gameObject.SetActive(false);
     }
 }
