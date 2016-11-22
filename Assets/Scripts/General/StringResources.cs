@@ -55,7 +55,13 @@ public class StringResources
 
     public static string shield1MaterialName = "Shield1Material";
 
+    public static string[] maleHuntersMaterials = new[] { "MaleHunterMaterial1", "MaleHunterMaterial2", "MaleHunterMaterial3", "MaleHunterMaterial4", "MaleHunterMaterial5" };
+
+    public static string[] femaleHuntersMaterials = new[] { "FemaleHunterMaterial1", "FemaleHunterMaterial2", "FemaleHunterMaterial3", "FemaleHunterMaterial4", "FemaleHunterMaterial5" };
+    
+
     #endregion
+
 
 
     #region ANIMATIONS

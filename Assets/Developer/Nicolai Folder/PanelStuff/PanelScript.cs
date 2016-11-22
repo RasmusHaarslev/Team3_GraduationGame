@@ -18,6 +18,9 @@ public class PanelScript : MonoBehaviour {
     Character currentSoldier;
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
+    public int newCharPoints = 15;
+    [Range (0f, 1f)]
+    public float damagePointsChance = 0.5f;
 
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
@@ -44,7 +47,7 @@ public class PanelScript : MonoBehaviour {
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
         
-        //GetNewSoldiers();// this should be called when player clicks on silhouette
+        GetNewSoldiers();// this should be called when player clicks on silhouette
     }
 
     void GetNewSoldiers()
@@ -52,9 +55,15 @@ public class PanelScript : MonoBehaviour {
         GameObject Soldier1 = SpawnNewSoldiers();
         GameObject Soldier2 = SpawnNewSoldiers();
         GameObject Soldier3 = SpawnNewSoldiers();
+        Soldier1.GetComponent<NavMeshAgent>().enabled = false;
+        Soldier2.GetComponent<NavMeshAgent>().enabled = false;
+        Soldier3.GetComponent<NavMeshAgent>().enabled = false;
+        Soldier1.GetComponent<HunterStateMachine>().enabled = false;
+        Soldier2.GetComponent<HunterStateMachine>().enabled = false;
+        Soldier3.GetComponent<HunterStateMachine>().enabled = false;
         Soldier1.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        Soldier2.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        Soldier3.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        Soldier2.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+        Soldier3.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
         FillInNewSoldierStats();
     }
     void InitializeSoldiers()
@@ -261,29 +270,58 @@ public class PanelScript : MonoBehaviour {
     public CharacterValues GenerateNewCharacterValues()
     {
         CharacterValues newCharValues = new CharacterValues();
-        
+        //generate prefab 
+        newCharValues.prefabName = StringResources.follower1PrefabName;
+        float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         //generate random name
-        String characterName = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)];
+        String characterName;
+        if(randomValue > 0.5f)//we create a Male
+        {
+            characterName = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)];
+            newCharValues.isMale = true;
+            newCharValues.materialName = StringResources.maleHuntersMaterials[UnityEngine.Random.Range(0, StringResources.maleHuntersMaterials.Length)];
+        }
+        else //we create a female
+        {
+            characterName =  StringResources.femaleNames[UnityEngine.Random.Range(0, StringResources.femaleNames.Length)];
+            newCharValues.isMale = false;
+            newCharValues.materialName = StringResources.femaleHuntersMaterials[UnityEngine.Random.Range(0, StringResources.femaleHuntersMaterials.Length)];
+        }
+        
         newCharValues.name = characterName;
+        newCharValues.Type = CharacterValues.type.Hunter;
         //generate stats
         newCharValues = GenerateNewCharacterStats(newCharValues);
-        //generate material
-        newCharValues.prefabName = StringResources.follower1PrefabName;
+       
 
         newCharacterSoldierList.Add(newCharValues);
-        Debug.Log(newCharacterSoldierList.Count);
-        
+   
         return newCharValues;
     }
 
     CharacterValues GenerateNewCharacterStats(CharacterValues charValues)
     {
-        charValues.damage = 5;
-        charValues.damageSpeed = 5;
-        charValues.health = 5;
+        float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
+        for (int i = 0; i < newCharPoints; i ++)
+        {
+            if(randomValue < damagePointsChance)
+            {
+                charValues.damage += 1;
+            }
+            else
+            {
+                charValues.health += 1;
+            }
+            randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
+        }
+        
+        charValues.damageSpeed = 5; 
         charValues.range = 5;
-        charValues.combatTrait = CharacterValues.CombatTrait.BraveFool;
-        charValues.targetTrait = CharacterValues.TargetTrait.Loyal;
+
+        Array values = Enum.GetValues(typeof(CharacterValues.CombatTrait));
+        charValues.combatTrait = (CharacterValues.CombatTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        values = Enum.GetValues(typeof(CharacterValues.TargetTrait));
+        charValues.targetTrait = (CharacterValues.TargetTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
 
         return charValues;
 
