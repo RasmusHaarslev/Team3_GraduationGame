@@ -90,16 +90,16 @@ public class Node : MonoBehaviour {
     {
         if (isCleared)
         {
-            GetComponent<Image>().sprite = activationImages[0];
+            GetComponent<Image>().sprite = activationImages[2];
             GetComponent<Image>().color = Color.green;
         }
         else if (!isCleared && canPlay)
         {
-            GetComponent<Image>().sprite = activationImages[0];
+            GetComponent<Image>().sprite = activationImages[1];
         }
         else
         {
-            GetComponent<Image>().sprite = activationImages[1];
+            GetComponent<Image>().sprite = activationImages[0];
         }
     }
 
@@ -123,7 +123,7 @@ public class Node : MonoBehaviour {
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
                     GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
                     GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
-                    GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
+                    //GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
                 }
             }
 

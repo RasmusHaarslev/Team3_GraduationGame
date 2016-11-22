@@ -95,7 +95,8 @@ public class SimpleInputScript : MonoBehaviour
                 if (command == simpleCommandsManager.commandsList[5])
                 {
                     EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[0]));
-                    Debug.Log("hunter1 front/back");                
+					levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
+					Debug.Log("hunter1 front/back");                
                     ChangeButtonText(5);
                     ChangeColor(5);
 
@@ -104,7 +105,8 @@ public class SimpleInputScript : MonoBehaviour
                 if (command == simpleCommandsManager.commandsList[6])
                 {
                     EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[1]));
-                    Debug.Log("hunter2 front/back");
+					levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
+					Debug.Log("hunter2 front/back");
                     ChangeButtonText(6);
                     ChangeColor(6);
                     break;
@@ -112,7 +114,8 @@ public class SimpleInputScript : MonoBehaviour
                 if (command == simpleCommandsManager.commandsList[7])
                 {
                     EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[2]));
-                    Debug.Log("hunter3 front/back");
+					levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
+					Debug.Log("hunter3 front/back");
                     ChangeButtonText(7);
                     ChangeColor(7);
                     
@@ -133,7 +136,7 @@ public class SimpleInputScript : MonoBehaviour
         Text btnText = buttons[index].transform.GetChild(0).GetComponent<Text>();
 
         if (btnText.text == "Rear")
-            buttons[index].transform.GetChild(0).GetComponent<Text>().text = "Back";
+            buttons[index].transform.GetChild(0).GetComponent<Text>().text = "Front";
         else
             buttons[index].transform.GetChild(0).GetComponent<Text>().text = "Rear";
     }
@@ -163,7 +166,7 @@ public class SimpleInputScript : MonoBehaviour
                 Time.timeScale = 0.15f;
 
                 commandPanel.SetActive(true);
-
+				Manager_Audio.PlaySound(Manager_Audio.CommandUI, gameObject);
 				Manager_Audio.ChangeState (Manager_Audio.commandWheelContainer,Manager_Audio.openWheel);
             }
         }

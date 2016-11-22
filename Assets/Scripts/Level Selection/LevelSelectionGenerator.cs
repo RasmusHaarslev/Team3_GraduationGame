@@ -69,7 +69,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         {
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
-            SetScrollPosition(0);
         }
         else
         {
@@ -79,7 +78,7 @@ public class LevelSelectionGenerator : MonoBehaviour
             totalAmountRows = 0;
             numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
             LoadRows();
-            Debug.Log(PlayerPrefs.GetInt("LevelResult"));
+
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
                // EventManager.Instance.TriggerEvent(new LevelCleared());
@@ -107,8 +106,6 @@ public class LevelSelectionGenerator : MonoBehaviour
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
-
-            SetScrollPosition(SaveLoadLevels.maxRowsCleared);
 
             SaveDict(new SaveLevelsToXML());
         }
@@ -264,9 +261,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         }
 
         initialiseDropDown();
-        // Need to be changed to the node we are currently on
-        SetScrollPosition(0);
-        //printDict();
+
         SaveLoadLevels.SaveLevels(nodesInRows);
     }
 
@@ -456,7 +451,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         SetScrollPosition(target.value);
     }
 
-    void SetScrollPosition(int rowNumber)
+    public void SetScrollPosition(int rowNumber)
     {
         /* SETUP SCROLL POSITION */
         float rowHeight = rowPrefab.GetComponent<RectTransform>().rect.height;
