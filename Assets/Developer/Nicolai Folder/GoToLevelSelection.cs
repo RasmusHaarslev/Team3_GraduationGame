@@ -72,7 +72,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
     IEnumerator initWin(GameObject node)
     {
-        node.GetComponent<Animator>().SetBool("IsCleared", true);
+        //node.GetComponent<Animator>().SetBool("IsCleared", true);
 
         yield return new WaitForSeconds(1);
     }
