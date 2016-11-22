@@ -10,31 +10,31 @@ public class ItemController
 {
     public static List<ItemXML> ItemsLoaded = new List<ItemXML>();
 
-    public static void SaveCharacters(List<ItemXML> characters)
+    public static void SaveItem(List<ItemXML> items)
     {
         var itemsXML = new ItemsXML();
 
-        foreach (ItemXML entry in characters)
+        foreach (ItemXML item in items)
         {
-            ItemsLoaded.Add(entry);
-            itemsXML.Items.Add(entry);
+            ItemsLoaded.Add(item);
+            itemsXML.Items.Add(item);
         }
 
-        var path = Path.Combine(PersistentData.GetPath(), "characters.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "items.xml");
 
-        var serializer = new XmlSerializer(typeof(CharactersXML));
+        var serializer = new XmlSerializer(typeof(ItemsXML));
         var stream = new FileStream(path, FileMode.Create);
         serializer.Serialize(stream, itemsXML);
         stream.Close();
     }
 
-    public static List<ItemXML> LoadCharacters()
+    public static List<ItemXML> LoadItems()
     {
-        var path = Path.Combine(PersistentData.GetPath(), "characters.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "items.xml");
 
         if (!File.Exists(path))
         {
-            Debug.LogError("No levels generated, reset game");
+            Debug.LogError("No items generated, reset game");
             return new List<ItemXML>();
         }
 
@@ -45,9 +45,9 @@ public class ItemController
 
         ItemsLoaded = new List<ItemXML>();
 
-        foreach (ItemXML character in container.Items)
+        foreach (ItemXML item in container.Items)
         {
-            ItemsLoaded.Add(character);
+            ItemsLoaded.Add(item);
         }
 
         return ItemsLoaded;
