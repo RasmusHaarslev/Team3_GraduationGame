@@ -110,30 +110,16 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        //var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
+        var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
 
-        //System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
+        System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
         List<string> scenes = new List<string>();
 
-        //string line;
-        //while ((line = reader.ReadLine()) != null)
-        //{
-        //    scenes.Add(line);
-        //}
-
-        scenes.Add("LevelPrototype02");
-        scenes.Add("LevelPrototype03");
-        scenes.Add("LevelPrototype04");
-        scenes.Add("LevelPrototype05");
-        scenes.Add("LevelPrototype06");
-
-        //foreach (var scene in sceneDirectory.GetFiles())
-        //{
-        //    if (scene.Name.EndsWith(".unity"))
-        //    {
-        //        scenes.Add(scene.Name.Split('.')[0]);
-        //    }
-        //}
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            scenes.Add(line);
+        }
 
         var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
         SceneManager.LoadScene(randomScene);
