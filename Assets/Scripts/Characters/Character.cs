@@ -51,6 +51,11 @@ public class Character : MonoBehaviour
 
 	}
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
 	void Update()
 	{
 		animator.SetBool("isAware", isInCombat);
@@ -61,11 +66,6 @@ public class Character : MonoBehaviour
 			{
 				if (deadEvent == false)
 				{
-					GetComponent<Collider>().enabled = false;
-					agent.enabled = false;
-					animator.SetTrigger("Die");
-					// VESO REMOVE THIS:
-					GetComponent<RagdollControl>().EnableRagDoll();
 					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
 					if (isMale)
 					{
@@ -103,8 +103,9 @@ public class Character : MonoBehaviour
 
 	void OnEnable()
 	{
-		animator = GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
+
+		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
@@ -299,18 +300,21 @@ public class Character : MonoBehaviour
 		{
 			case EquippableitemValues.type.polearm:
 				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
+				Debug.Log("polearm");
 				break;
 			case EquippableitemValues.type.rifle:
 				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
+				Debug.Log("rifle");
 				break;
 			case EquippableitemValues.type.shield:
+				Debug.Log("shield");
 				Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
 				break;
 		}
 
 		if (isMale)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
 			}
@@ -321,7 +325,7 @@ public class Character : MonoBehaviour
 		}
 		else
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
 			}
@@ -330,7 +334,7 @@ public class Character : MonoBehaviour
 				Manager_Audio.PlaySound(Manager_Audio.evilAttackFemale1, this.gameObject);
 			}
 		}
-		// this makes hunters in defend state attack back if attacked
+
 		if (target != null)
 		{
 			if (target.GetComponent<HunterStateMachine>() != null)
@@ -339,7 +343,6 @@ public class Character : MonoBehaviour
 				{
 					target.GetComponent<Character>().target = gameObject;
 					target.GetComponent<HunterStateMachine>().attacked = true;
-
 				}
 			}
 		}

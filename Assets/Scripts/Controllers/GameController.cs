@@ -138,6 +138,11 @@ public class GameController : MonoBehaviour {
         //scenes.Add("LevelPrototype04");
         //scenes.Add("LevelPrototype05");
         //scenes.Add("LevelPrototype06");
+        //scenes.Add("LevelPrototype02");
+        //scenes.Add("LevelPrototype03");
+        //scenes.Add("LevelPrototype04");
+        //scenes.Add("LevelPrototype05");
+        //scenes.Add("LevelPrototype06");
 
         //foreach (var scene in sceneDirectory.GetFiles())
         //{
