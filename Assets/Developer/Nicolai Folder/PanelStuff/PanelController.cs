@@ -31,6 +31,11 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
             panelScript.panelList[1].SetActive(true);
         }
 
+        if (gameObject.CompareTag("MapTable") && panelScript.panelList[2].activeSelf == false)
+        {
+            panelScript.panelList[2].SetActive(true);
+        }
+
     }
 
 }
