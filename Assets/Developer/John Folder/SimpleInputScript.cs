@@ -136,7 +136,7 @@ public class SimpleInputScript : MonoBehaviour
         Text btnText = buttons[index].transform.GetChild(0).GetComponent<Text>();
 
         if (btnText.text == "Rear")
-            buttons[index].transform.GetChild(0).GetComponent<Text>().text = "Back";
+            buttons[index].transform.GetChild(0).GetComponent<Text>().text = "Front";
         else
             buttons[index].transform.GetChild(0).GetComponent<Text>().text = "Rear";
     }
@@ -166,7 +166,7 @@ public class SimpleInputScript : MonoBehaviour
                 Time.timeScale = 0.15f;
 
                 commandPanel.SetActive(true);
-
+				Manager_Audio.PlaySound(Manager_Audio.CommandUI, gameObject);
 				Manager_Audio.ChangeState (Manager_Audio.commandWheelContainer,Manager_Audio.openWheel);
             }
         }
