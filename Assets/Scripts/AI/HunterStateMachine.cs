@@ -30,29 +30,39 @@ public class HunterStateMachine : CoroutineMachine
 		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
 	}
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
 	#endregion
 
 	#region Functions for events
 
 	private void Defense(DefendStateEvent e)
 	{
+		ProjectCommand();
 		combatCommandState = CombatCommandState.Defense;
 	}
 
 	private void Offense(OffensiveStateEvent e)
 	{
+		ProjectCommand();
 		combatCommandState = CombatCommandState.Offense;
 	}
 	private void Follow(FollowStateEvent e)
 	{
+		ProjectCommand();
 		outOfCombatCommandState = OutOfCombatCommandState.Follow;
 	}
 	private void Stay(StayStateEvent e)
 	{
+		ProjectCommand();
 		outOfCombatCommandState = OutOfCombatCommandState.Stay;
 	}
 	private void Flee(FleeStateEvent e)
 	{
+		ProjectCommand();
 		combatCommandState = CombatCommandState.Flee;
 	}
 
@@ -66,6 +76,7 @@ public class HunterStateMachine : CoroutineMachine
 	// Trait visualisation
 	public GameObject traitProjection;
 	bool traitVisualised = false;
+	public GameObject commandVisualisation;
 
 	public bool attacked = false;
 	Character character;
@@ -98,6 +109,10 @@ public class HunterStateMachine : CoroutineMachine
 
 	void Update()
 	{
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			agent.Stop();
+		}
 		if (character.target != null)
 		{
 			if (!character.isDead)
@@ -349,6 +364,11 @@ public class HunterStateMachine : CoroutineMachine
 		Destroy(proj);
 		traitVisualised = false;
 		yield return null;
+	}
+
+	public void ProjectCommand()
+	{
+		Instantiate(commandVisualisation, transform.position + new Vector3(0,2.2f,0.2f), transform.rotation, gameObject.transform);
 	}
 }
 

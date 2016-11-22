@@ -18,6 +18,7 @@ public class SimpleCommandsScript : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+		Manager_Audio.PlaySound(Manager_Audio.HoverCommandUI, gameObject);
         isOver = true;
         if (gameObject.name != "0") { 
             GetComponent<RectTransform>().localScale = new Vector2(1.5f, 1.5f);

@@ -27,6 +27,11 @@ public class RivalStateMachine : CoroutineMachine
 		EventManager.Instance.StopListening<FleeStateEvent>(OpponentsFleeing);
 	}
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
 	protected override StateRoutine InitialState
 	{
 		get
@@ -38,6 +43,10 @@ public class RivalStateMachine : CoroutineMachine
 
 	void Update()
 	{
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			agent.Stop();
+		}
 		if (character.target != null)
 		{
 			if (!character.isDead)
