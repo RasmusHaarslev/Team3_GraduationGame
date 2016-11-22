@@ -23,11 +23,15 @@ namespace Assets.Editor
 
         void OnGUI()
         {
-            string[] guids = AssetDatabase.FindAssets("CampUpgradesPanel");
+            string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesPanel");
 
             if (guids.Length == 0)
             {
                 GUILayout.Label("The prefab is missing, go to Peter!", EditorStyles.boldLabel);
+            }
+            else if (guids.Length > 1)
+            {
+                GUILayout.Label("More than one prefabs with same name, go to Peter!", EditorStyles.boldLabel);
             }
             else
             {

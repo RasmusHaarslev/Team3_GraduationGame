@@ -24,12 +24,16 @@ namespace Assets.Editor
 
         void OnGUI()
         {
-            string[] guids = AssetDatabase.FindAssets("GameController");
-            string[] guids2 = AssetDatabase.FindAssets("LevelGenerator");
+            string[] guids = AssetDatabase.FindAssets("t:Prefab GameController");
+            string[] guids2 = AssetDatabase.FindAssets("t:Prefab LevelGenerator");
 
             if (guids.Length == 0 || guids2.Length == 0)
             {
                 GUILayout.Label("The prefab is missing, go to Peter!", EditorStyles.boldLabel);
+            }
+            else if (guids.Length > 1)
+            {
+                GUILayout.Label("More than one prefabs with same name, go to Peter!", EditorStyles.boldLabel);
             }
             else
             {

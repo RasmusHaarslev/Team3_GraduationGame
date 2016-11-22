@@ -23,11 +23,15 @@ namespace Assets.Editor
 
         void OnGUI()
         {
-            string[] guids = AssetDatabase.FindAssets("LevelGenerator");
+            string[] guids = AssetDatabase.FindAssets("t:Prefab LevelSelectionGenerator");
 
             if (guids.Length == 0)
             {
                 GUILayout.Label("The prefab is missing, go to Peter!", EditorStyles.boldLabel);
+            }
+            else if (guids.Length > 1)
+            {
+                GUILayout.Label("More than one prefabs with same name, go to Peter!", EditorStyles.boldLabel);
             }
             else
             {
@@ -37,10 +41,10 @@ namespace Assets.Editor
                     prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<LevelSelectionGenerator>();
 
                     GUILayout.Label("General", EditorStyles.boldLabel);
-                    prefabScript.amountOfRows = EditorGUILayout.IntField(prefabScript.amountOfRows, "Initial amount of rows");
+                    prefabScript.amountOfRows = EditorGUILayout.IntField("Amount of rows generated",prefabScript.amountOfRows);
 
                     GUILayout.Label("Probabilities", EditorStyles.boldLabel);
-                    prefabScript.probabilityTribes = EditorGUILayout.IntSlider(prefabScript.probabilityTribes, 0, 5);
+                    prefabScript.probabilityTribes = EditorGUILayout.IntSlider("Probability of tribe",prefabScript.probabilityTribes, 0, 5);
 
                 }
                 catch (Exception e) {
