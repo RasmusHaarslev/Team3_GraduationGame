@@ -43,8 +43,6 @@ public class PointOfInterestManager : MonoBehaviour
 				transform.Find("WolfDecor").gameObject.SetActive(true);
 				break;
 		}
-
-
 	}
 
 	public float GetAverageCharactersHealth()
