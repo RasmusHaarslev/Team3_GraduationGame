@@ -19,6 +19,7 @@ public class PanelScript : MonoBehaviour {
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
     public int newCharPoints = 15;
+    public GameObject newSoldierSpawnPosition;
     [Range (0f, 1f)]
     public float damagePointsChance = 0.5f;
 
@@ -45,6 +46,7 @@ public class PanelScript : MonoBehaviour {
         dataService = new DataService(StringResources.databaseName);
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
+        print("Fellowship retrieved");
         InitializeSoldiers();
         
         GetNewSoldiers();// this should be called when player clicks on silhouette
@@ -52,9 +54,9 @@ public class PanelScript : MonoBehaviour {
 
     void GetNewSoldiers()
     {
-        GameObject Soldier1 = SpawnNewSoldiers();
-        GameObject Soldier2 = SpawnNewSoldiers();
-        GameObject Soldier3 = SpawnNewSoldiers();
+        GameObject Soldier1 = GenerateNewHunter();
+        GameObject Soldier2 = GenerateNewHunter();
+        GameObject Soldier3 = GenerateNewHunter();
         Soldier1.GetComponent<NavMeshAgent>().enabled = false;
         Soldier2.GetComponent<NavMeshAgent>().enabled = false;
         Soldier3.GetComponent<NavMeshAgent>().enabled = false;
@@ -66,19 +68,39 @@ public class PanelScript : MonoBehaviour {
         Soldier3.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
         FillInNewSoldierStats();
     }
+
     void InitializeSoldiers()
     {
+        int[] layersIndices = new[] { 9, 10, 11, 12 };
+
+
         for(int i = 0; i < charactersFellowship.transform.childCount; i++)
         {
             soldiersList.Add(charactersFellowship.transform.GetChild(i).gameObject);
         }
 
-        foreach (var soldier in soldiersList)
+        for (int i = 0; i < soldiersList.Count; i++)
+        //foreach (GameObject soldier in soldiersList)
         {
-            soldier.AddComponent<PanelController>();
-            soldier.GetComponent<NavMeshAgent>().enabled = false;     
+            soldiersList[i].AddComponent<PanelController>();
+            soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;     
+
+            
+            if(soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
+            {
+                soldiersList[i].GetComponent<MoveScript>().enabled = false;
+            }else
+            {
+                soldiersList[i].GetComponent<HunterStateMachine>().enabled = false;
+            }
+
+            soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
+
         }
+
+
         
+        /*
         soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
@@ -87,6 +109,10 @@ public class PanelScript : MonoBehaviour {
         soldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
         soldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
         soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+        */
+
+       
+
     }
 
     #region Cameras
@@ -267,6 +293,23 @@ public class PanelScript : MonoBehaviour {
 
     #endregion
 
+    public GameObject GenerateNewHunter()
+    {
+        CharacterValues newCharValues = GenerateNewCharacterValues();
+        GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, new Vector3(0, 0, -12));
+       
+        //create new weapon for new soldier
+        Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
+        EquippableitemValues newWeaponValues = GetComponent<WeaposGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+        IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
+        Character hunterChar = hunter.GetComponent<Character>();
+        //generate  and attach the weapon
+        dataService.equipItemsToCharacter(newWeapon, hunterChar);
+
+        return hunter;
+
+    }
+
     public CharacterValues GenerateNewCharacterValues()
     {
         CharacterValues newCharValues = new CharacterValues();
@@ -288,8 +331,15 @@ public class PanelScript : MonoBehaviour {
             newCharValues.materialName = StringResources.femaleHuntersMaterials[UnityEngine.Random.Range(0, StringResources.femaleHuntersMaterials.Length)];
         }
         
+        //give name to soldier and assign type
         newCharValues.name = characterName;
         newCharValues.Type = CharacterValues.type.Hunter;
+
+        Array values = Enum.GetValues(typeof(CharacterValues.CombatTrait));
+        newCharValues.combatTrait = (CharacterValues.CombatTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        values = Enum.GetValues(typeof(CharacterValues.TargetTrait));
+        newCharValues.targetTrait = (CharacterValues.TargetTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+
         //generate stats
         newCharValues = GenerateNewCharacterStats(newCharValues);
        
@@ -315,22 +365,11 @@ public class PanelScript : MonoBehaviour {
             randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         }
         
-        charValues.damageSpeed = 5; 
-        charValues.range = 5;
-
-        Array values = Enum.GetValues(typeof(CharacterValues.CombatTrait));
-        charValues.combatTrait = (CharacterValues.CombatTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        values = Enum.GetValues(typeof(CharacterValues.TargetTrait));
-        charValues.targetTrait = (CharacterValues.TargetTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        //charValues.damageSpeed = 5; 
+        //charValues.range = 5;    
 
         return charValues;
 
-    }
-
-    GameObject SpawnNewSoldiers()
-    {
-        CharacterValues char1Values = GenerateNewCharacterValues();
-        return dataService.GenerateCharacterFromValues(char1Values, new Vector3(0, 0, -12));
     }
 
 }

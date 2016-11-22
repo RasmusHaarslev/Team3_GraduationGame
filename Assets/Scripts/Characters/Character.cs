@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
 			{
 				if (deadEvent == false)
 				{
-					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+					EventManager.Instance.TriggerEvent(new AllyDeathEvent(this));
 					if (isMale)
 					{
 						Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
