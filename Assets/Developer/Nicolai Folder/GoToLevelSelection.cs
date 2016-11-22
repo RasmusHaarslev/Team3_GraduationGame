@@ -30,7 +30,9 @@ public class GoToLevelSelection : MonoBehaviour {
     {
         Manager_Audio.PlaySound(Manager_Audio.play_openMap, gameObject);
         levelSelectionPanel.SetActive(true);
-        
+
+        gameObject.GetComponent<LevelSelectionGenerator>().SetScrollPosition(SaveLoadLevels.maxRowsCleared);
+
         if (winAnimation) { 
             WinAnimateMap();
             winAnimation = !winAnimation;
