@@ -203,7 +203,7 @@ public class LevelManager : MonoBehaviour
 
     void replaceCharactersWeapons()
     {
-        WeaposGenerator weaponGenerator = new WeaposGenerator();
+        WeaponGenerator weaponGenerator = new WeaponGenerator();
         DataService dataService = new DataService(StringResources.databaseName);
         GameObject playerFellowship = GameObject.Find("PlayerFellowship");
         int level = PlayerPrefs.GetInt(StringResources.hardnessLevel, 4);
@@ -223,7 +223,7 @@ public class LevelManager : MonoBehaviour
     void GenerateNewItems()
     {
         int difficultyLevel = GetComponent<LevelGenerator>().difficultyLevel;
-        WeaposGenerator weaponsGenerator = GetComponent<WeaposGenerator>();
+        WeaponGenerator weaponsGenerator = GetComponent<WeaponGenerator>();
 
         //fill a list with the new items values
         EquippableitemValues[] newItemsValues = weaponsGenerator.GetNewItemsValues(difficultyLevel);
