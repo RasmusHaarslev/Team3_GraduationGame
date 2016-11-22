@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AggroRange : MonoBehaviour
+public class TutorialAggroRange : MonoBehaviour
 {
 	public float verticalTriggerOffset = 1.5f;
 	void OnTriggerEnter(Collider col)
@@ -11,7 +11,7 @@ public class AggroRange : MonoBehaviour
 			Debug.Log("parent: " + gameObject.transform.parent.parent.parent.gameObject);
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
-				if (!transform.parent.GetComponent<Character>().isDead)
+				if (!transform.parent.GetComponent<TutorialCharacter>().isDead)
 				{
 					EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
 				}
