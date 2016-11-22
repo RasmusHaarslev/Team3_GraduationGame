@@ -51,7 +51,12 @@ public class Character : MonoBehaviour
 
     }
 
-    void Update()
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
+	void Update()
     {
 		animator.SetBool("isAware", isInCombat);
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
