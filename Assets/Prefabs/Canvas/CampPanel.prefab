@@ -2199,23 +2199,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1000014093020616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 224000012958615914}
-  - 222: {fileID: 222000011591355388}
-  - 114: {fileID: 114000012053351748}
-  m_Layer: 5
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1000014097324748
 GameObject:
   m_ObjectHideFlags: 1
@@ -2433,7 +2416,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114000012053351748}
+      - m_Target: {fileID: 0}
         m_MethodName: GoToCamp
         m_Mode: 1
         m_Arguments:
@@ -3656,7 +3639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VillageCount: {fileID: 114000013123190618}
   FoodCount: {fileID: 114000013677072054}
-  CoinsCount: {fileID: 114000010621404948}
+  ScrapCount: {fileID: 114000010621404948}
+  PremiumCount: {fileID: 114000013357683344}
 --- !u!114 &114000010966362814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5176,18 +5160,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Health
---- !u!114 &114000012053351748
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014093020616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 334433c15dfff9d4881df86657bab5cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelSelectionPanel: {fileID: 0}
 --- !u!114 &114000012116439672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6377,6 +6349,7 @@ MonoBehaviour:
   LeaderStrengthCostIncrease: 0
   MaxVillagesCost: 0
   MaxVillagesCostIncrease: 0
+  FinishUpgradeCost: 10
   TextLevels:
   - {fileID: 114000010251841518}
   - {fileID: 114000010549037064}
@@ -7899,12 +7872,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011181407880}
---- !u!222 &222000011591355388
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014093020616}
 --- !u!222 &222000011594210622
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -9037,7 +9004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 224000012442538818}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 766, y: -531}
@@ -9670,7 +9637,7 @@ RectTransform:
   m_Children:
   - {fileID: 224000011084418732}
   m_Father: {fileID: 224000012442538818}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -9779,7 +9746,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 224000012958615914}
   - {fileID: 224000013384419860}
   - {fileID: 224000012198525600}
   - {fileID: 224000011111008124}
@@ -9996,7 +9962,7 @@ RectTransform:
   - {fileID: 224000012538441534}
   - {fileID: 224000010544845104}
   m_Father: {fileID: 224000012442538818}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -10088,24 +10054,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 224000010028071612}
-  m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224000012958615914
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014093020616}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 224000012442538818}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10458,7 +10406,7 @@ RectTransform:
   - {fileID: 224000012985930722}
   - {fileID: 224000010252503516}
   m_Father: {fileID: 224000012442538818}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -150}
