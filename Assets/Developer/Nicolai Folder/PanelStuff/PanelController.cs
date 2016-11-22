@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PanelController : MonoBehaviour, IPointerClickHandler
 {
     PanelScript panelScript;
+    public GameObject levelSelectionGenerator;
 
     void Start()
     {
@@ -14,7 +15,8 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_unlockNewMaps, gameObject);
+        //Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
         {
             
@@ -33,7 +35,7 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
         if (gameObject.CompareTag("MapTable") && panelScript.panelList[2].activeSelf == false)
         {
-            panelScript.panelList[2].SetActive(true);
+            levelSelectionGenerator.GetComponent<GoToLevelSelection>().GoToCamp();
         }
 
     }

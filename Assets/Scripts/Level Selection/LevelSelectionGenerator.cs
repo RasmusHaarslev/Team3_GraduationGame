@@ -81,26 +81,7 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
-               // EventManager.Instance.TriggerEvent(new LevelCleared());
-
-				GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
-				Node nodeScript = nodeCleared.GetComponent<Node>();
-
-				// MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR
-
-				nodeScript.isCleared = true;
-
-				if (nodeScript.isCleared)
-				{
-					nodeScript.SetupImage();
-					nodeScript.SetupUIText();
-
-					foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
-					{
-						nodes.GetComponent<Node>().canPlay = true;
-						nodes.GetComponent<Node>().SetupImage();
-					}
-				}
+                EventManager.Instance.TriggerEvent(new LevelCleared());
 
 				InstantiateRows(1);
 
@@ -472,6 +453,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         {
             t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
             scrollingGrid.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(pointA, pointB, t); // Set position proportional to t
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustScrollPitch, t);
             yield return null;         // Leave the routine and return here in the next frame
         }
         Manager_Audio.PlaySound(Manager_Audio.stop_scrollMap, gameObject);
