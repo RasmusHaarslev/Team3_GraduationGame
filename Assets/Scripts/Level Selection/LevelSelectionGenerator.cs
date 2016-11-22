@@ -82,9 +82,28 @@ public class LevelSelectionGenerator : MonoBehaviour
             Debug.Log(PlayerPrefs.GetInt("LevelResult"));
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
-                EventManager.Instance.TriggerEvent(new LevelCleared());
+               // EventManager.Instance.TriggerEvent(new LevelCleared());
 
-                InstantiateRows(1);
+				GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
+				Node nodeScript = nodeCleared.GetComponent<Node>();
+
+				// MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR
+
+				nodeScript.isCleared = true;
+
+				if (nodeScript.isCleared)
+				{
+					nodeScript.SetupImage();
+					nodeScript.SetupUIText();
+
+					foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
+					{
+						nodes.GetComponent<Node>().canPlay = true;
+						nodes.GetComponent<Node>().SetupImage();
+					}
+				}
+
+				InstantiateRows(1);
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
