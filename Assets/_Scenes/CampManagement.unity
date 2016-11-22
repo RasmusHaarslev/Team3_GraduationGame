@@ -587,6 +587,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1001 &810873752
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &934077293
 Prefab:
   m_ObjectHideFlags: 0
@@ -653,7 +695,112 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1007fecbc4da3d34e88b152b89be16a9, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &974973613
+--- !u!224 &974973614 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224000012442538818, guid: 525d20ba46eb3144e927c250581204a5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1894857138}
+--- !u!20 &1071830327 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20000014250554884, guid: cc0e44a9d98cb5244a054b6072d879bb,
+    type: 2}
+  m_PrefabInternal: {fileID: 352678541}
+--- !u!20 &1217307233 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20000011702967012, guid: cc0e44a9d98cb5244a054b6072d879bb,
+    type: 2}
+  m_PrefabInternal: {fileID: 352678541}
+--- !u!20 &1790236700 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20000013878394960, guid: cc0e44a9d98cb5244a054b6072d879bb,
+    type: 2}
+  m_PrefabInternal: {fileID: 352678541}
+--- !u!1 &1865423169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1865423172}
+  - 114: {fileID: 1865423171}
+  - 114: {fileID: 1865423170}
+  - 114: {fileID: 1865423173}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1865423170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865423169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a095e20345db3434e8e1f6aecf5eab11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePath: Audio\GeneratedSoundBanks
+  language: English(US)
+  defaultPoolSize: 65536
+  lowerPoolSize: 32768
+  streamingPoolSize: 16384
+  preparePoolSize: 0
+  memoryCutoffThreshold: 0.95
+  engineLogging: 1
+--- !u!114 &1865423171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865423169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b010004263a445140906afc05863f25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1865423172
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865423169}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+--- !u!114 &1865423173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865423169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ed4571e42cbfe4c9e18af82820d36d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  valueGuid: c982fbd8e52a1a43b6e51c9cec125ac8
+  bankName: ExploreTestSB
+  loadAsynchronous: 0
+  decodeBank: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+--- !u!1 &1868016148 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013902931166, guid: 608ecdeb6fd6f5f4c8a9e29bd356fadd,
+    type: 2}
+  m_PrefabInternal: {fileID: 645294342}
+--- !u!1001 &1894857138
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -778,111 +925,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 525d20ba46eb3144e927c250581204a5, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &974973614 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224000012442538818, guid: 525d20ba46eb3144e927c250581204a5,
-    type: 2}
-  m_PrefabInternal: {fileID: 974973613}
---- !u!20 &1071830327 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 20000014250554884, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 352678541}
---- !u!20 &1217307233 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 20000011702967012, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 352678541}
---- !u!20 &1790236700 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 20000013878394960, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 352678541}
---- !u!1 &1865423169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1865423172}
-  - 114: {fileID: 1865423171}
-  - 114: {fileID: 1865423170}
-  - 114: {fileID: 1865423173}
-  m_Layer: 0
-  m_Name: WwiseGlobal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1865423170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1865423169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a095e20345db3434e8e1f6aecf5eab11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basePath: Audio\GeneratedSoundBanks
-  language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
-  preparePoolSize: 0
-  memoryCutoffThreshold: 0.95
-  engineLogging: 1
---- !u!114 &1865423171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1865423169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b010004263a445140906afc05863f25a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1865423172
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1865423169}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
---- !u!114 &1865423173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1865423169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55ed4571e42cbfe4c9e18af82820d36d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  valueGuid: c982fbd8e52a1a43b6e51c9cec125ac8
-  bankName: ExploreTestSB
-  loadAsynchronous: 0
-  decodeBank: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
---- !u!1 &1868016148 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013902931166, guid: 608ecdeb6fd6f5f4c8a9e29bd356fadd,
-    type: 2}
-  m_PrefabInternal: {fileID: 645294342}
 --- !u!1001 &2084220053
 Prefab:
   m_ObjectHideFlags: 0
