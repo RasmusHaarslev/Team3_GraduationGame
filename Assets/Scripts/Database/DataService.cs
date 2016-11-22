@@ -521,9 +521,11 @@ public class DataService : MonoBehaviour
         character.GetComponent<Character>().init(charValues);
 
         //spawn weapons 
+        if(charValues.id != null) { 
         IEnumerable<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id));
         //equip weapons
         equipItemsToCharacter(equips, character.GetComponent<Character>());
+        }
         /**/
 
         return character;
