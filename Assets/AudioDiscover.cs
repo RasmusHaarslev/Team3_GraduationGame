@@ -13,6 +13,11 @@ public class AudioDiscover : MonoBehaviour {
 		EventManager.Instance.StopListening<AllyDeathEvent>(PlayAllyDeath);
 	}
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
 	private void PlayAllyDeath(AllyDeathEvent e)
 	{
 		Manager_Audio.PlaySound(Manager_Audio.friendlyDeath, gameObject);
