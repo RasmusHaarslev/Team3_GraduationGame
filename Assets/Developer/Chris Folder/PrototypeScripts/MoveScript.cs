@@ -48,34 +48,37 @@ public class MoveScript : MonoBehaviour
 			}
 			if (attacking)
 			{
-				if (character.target != null && !character.target.GetComponent<Character>().isDead)
+
+				if (character.target != null)
 				{
-					character.isInCombat = true;
-					agent.SetDestination(character.target.transform.position);
-					distanceToTarget = agent.remainingDistance;
-					if (distanceToTarget < agent.stoppingDistance)
+					if (character.target.GetComponent<TutorialCharacter>() != null)
 					{
-						character.RotateTowards(character.target.transform);
-						if (counter <= 0)
+						if ((!character.target.GetComponent<TutorialCharacter>().isDead))
 						{
-							character.DealDamage();
-							character.animator.SetTrigger("Attack");
-							counter = attackSpeed;
+							Attacking();
 						}
 						else
 						{
-							counter -= Time.deltaTime;
+							agent.Resume();
+							character.isInCombat = false;
+							attacking = false;
+						}
+					}
+					else if (character.target.GetComponent<Character>() != null)
+					{
+						if (character.target != null && (!character.target.GetComponent<Character>().isDead))
+						{
+							Attacking();
+						}
+						else
+						{
+							agent.Resume();
+							character.isInCombat = false;
+							attacking = false;
 						}
 					}
 				}
-				else
-				{
-					agent.Resume();
-					character.isInCombat = false;
-					attacking = false;
-				}
 			}
-
 		}
 	}
 
@@ -91,12 +94,21 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-				if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
+				if (hit.transform.gameObject.GetComponent<Character>() != null)
 				{
-					Debug.Log("Clicked dead dude");
-					EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
+					{
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+					}
+				} else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
+				{
+					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
+					{
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+					}
 				}
-				
+
+
 				//hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
 			}
 			else if (hit.transform.gameObject.tag == "Player")
@@ -104,17 +116,40 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-            else if (hit.transform.gameObject.tag == "Item")
-		    {
-                EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
-            }
-		    else
-		    {
-		        EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
-		        agent.stoppingDistance = 1.2f;
-		        agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
-		        attacking = false;
-		    }
+			else if (hit.transform.gameObject.tag == "Item")
+			{
+				EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
+			}
+			else
+			{
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				agent.stoppingDistance = 1.2f;
+				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
+				attacking = false;
+			}
 		}
 	}
+	private void Attacking()
+	{
+		character.isInCombat = true;
+		agent.SetDestination(character.target.transform.position);
+		distanceToTarget = agent.remainingDistance;
+		if (distanceToTarget < agent.stoppingDistance)
+		{
+			character.RotateTowards(character.target.transform);
+			if (counter <= 0)
+			{
+				character.DealDamage();
+				character.animator.SetTrigger("Attack");
+				counter = attackSpeed;
+			}
+			else
+			{
+				counter -= Time.deltaTime;
+			}
+		}
+	}
+
+
 }
+

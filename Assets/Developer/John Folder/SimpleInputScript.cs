@@ -105,7 +105,7 @@ public class SimpleInputScript : MonoBehaviour
                 if (command == simpleCommandsManager.commandsList[6])
                 {
                     EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[1]));
-					levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
+					levelManager.huntersAndPlayer[1].GetComponent<HunterStateMachine>().ProjectCommand();
 					Debug.Log("hunter2 front/back");
                     ChangeButtonText(6);
                     ChangeColor(6);
@@ -114,7 +114,7 @@ public class SimpleInputScript : MonoBehaviour
                 if (command == simpleCommandsManager.commandsList[7])
                 {
                     EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[2]));
-					levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
+					levelManager.huntersAndPlayer[2].GetComponent<HunterStateMachine>().ProjectCommand();
 					Debug.Log("hunter3 front/back");
                     ChangeButtonText(7);
                     ChangeColor(7);
