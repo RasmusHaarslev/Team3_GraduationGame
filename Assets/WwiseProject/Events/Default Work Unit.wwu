@@ -606,12 +606,45 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Play_NewMaps" ID="{5EF170C4-F393-4A38-9809-C9EF0795A37A}">
+						<Event Name="Play_ClearMap" ID="{5EF170C4-F393-4A38-9809-C9EF0795A37A}">
 							<ChildrenList>
 								<Action Name="Play" ID="{3DC3CC0D-FB2E-48C1-B103-356B7396A54F}" ShortID="875022136" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{214C5473-670C-45C8-A1B3-9EDAC79D1D1C}" Global="false">
-											<ObjectRef Name="CloudPuff" ID="{3DFE8780-D247-4E79-93CB-45B20D99FE7B}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="ClearMap" ID="{3DFE8780-D247-4E79-93CB-45B20D99FE7B}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_UnlockNewMaps" ID="{A9F492B0-085C-4350-BB9F-B0912918AD42}">
+							<ChildrenList>
+								<Action Name="Play" ID="{6221284D-631C-40FA-823E-17FBFE94470F}" ShortID="460449225" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{80478E80-228C-40E1-AA72-8BA8656418D2}" Global="false">
+											<ObjectRef Name="UnlockNewMaps" ID="{F72ED727-84D9-4170-B23D-0F44BFDF1C69}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_CharSel" ID="{FEE0DE10-526B-4D12-8E84-47C89A9F9142}">
+							<ChildrenList>
+								<Action Name="Play" ID="{46A30415-D1BC-429D-B81C-12AB18C9A29A}" ShortID="731976581" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{2782840F-F0AC-4676-A9C5-9E05A4060D9A}" Global="false">
+											<ObjectRef Name="CharSel" ID="{D47405BC-89F2-44E5-A32C-7655565A56E4}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_CommandSel" ID="{BA240307-008B-4E15-842A-2EC6492F815B}">
+							<ChildrenList>
+								<Action Name="Play" ID="{11D4E083-CD7B-4845-839D-A2A49ED594A1}" ShortID="422344215" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{63352D40-D673-4A4A-ABE2-5ECB67BABA84}" Global="false">
+											<ObjectRef Name="CommandSel" ID="{25E79B1F-DA52-41E0-A6FA-550511622332}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>

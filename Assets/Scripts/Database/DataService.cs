@@ -101,7 +101,7 @@ public class DataService : MonoBehaviour
                 damage = 5,
                 health = 100,
                 damageSpeed = 1.5f,
-                range = 5,
+                range = 2,
                 prefabName = StringResources.playerPrefabName,
                 materialName = StringResources.playerMaterialName
             },
@@ -129,7 +129,7 @@ public class DataService : MonoBehaviour
                 damage = 5,
                 health = 50,
                 damageSpeed = 1f,
-                range = 7,
+                range = 2,
                 combatTrait = CharacterValues.CombatTrait.Clingy,
                 targetTrait = CharacterValues.TargetTrait.Loyal,
                 prefabName = StringResources.follower1PrefabName,
@@ -291,7 +291,7 @@ public class DataService : MonoBehaviour
              health = 20,
              damage = 10,
              damageSpeed = 2f,
-             range = 5,
+             range = 2,
              characterId = 1,
              prefabName = StringResources.polearm1PrefabName,
              materialName = StringResources.polearm1MaterialName
@@ -305,7 +305,7 @@ public class DataService : MonoBehaviour
              health = 20,
              damage = 10,
              damageSpeed = 2f,
-             range = 5,
+             range = 2,
              characterId = 2,
              prefabName = StringResources.shield1PrefabName,
              materialName = StringResources.shield1MaterialName
@@ -345,7 +345,7 @@ public class DataService : MonoBehaviour
              health = 20,
              damage = 20,
              damageSpeed = 1.5f,
-             range = 5,
+             range = 2,
              prefabName = StringResources.polearm1PrefabName
          },
              new EquippableitemValues
@@ -678,6 +678,21 @@ public class DataService : MonoBehaviour
 
 
         return itemsValues;
+    }
+
+    public void InsertItemsValuesInInventory(IEnumerable<EquippableitemValues> itemsValues )
+    {
+        foreach (EquippableitemValues itemValues in itemsValues)
+        {
+            //from database
+            _connection.Insert(itemValues);
+            //add it in inventory
+            InventoryItem inventoryItem = new InventoryItem();
+            inventoryItem.Type = InventoryItem.type.equippable;
+            inventoryItem.deferredId = itemValues.id;
+            _connection.Insert(inventoryItem);
+        }
+       
     }
 
     #endregion
