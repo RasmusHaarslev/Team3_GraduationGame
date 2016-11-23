@@ -45,9 +45,6 @@ namespace Assets.Editor
                     prefabScript.GatherCost = EditorGUILayout.IntField("Gather cost", prefabScript.GatherCost);
                     prefabScript.GatherCostIncrease = EditorGUILayout.IntField("Gather cost increase", prefabScript.GatherCostIncrease);
 
-                    prefabScript.BlacksmithCost = EditorGUILayout.IntField("Blacksmith cost", prefabScript.BlacksmithCost);
-                    prefabScript.BlacksmithCostIncrease = EditorGUILayout.IntField("Blacksmith cost increase", prefabScript.BlacksmithCostIncrease);
-
                     prefabScript.MaxVillagesCost = EditorGUILayout.IntField("Max villages cost", prefabScript.MaxVillagesCost);
                     prefabScript.MaxVillagesCostIncrease = EditorGUILayout.IntField("Max villages cost increase", prefabScript.MaxVillagesCostIncrease);
 

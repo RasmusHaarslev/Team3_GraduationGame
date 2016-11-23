@@ -10,9 +10,6 @@ public class CampManager : MonoBehaviour
     public int GatherCost;
     public int GatherCostIncrease;
 
-    public int BlacksmithCost;
-    public int BlacksmithCostIncrease;
-
     public int LeaderHealthCost;
     public int LeaderHealthCostIncrease;
 
@@ -38,6 +35,7 @@ public class CampManager : MonoBehaviour
     #endregion
 
     public Text[] TextLevels;
+	public Text[] TextCosts;
     public Button[] Buttons;
     public Button FinishNow;
 	public GameObject UpgradeConfirmationPanel;
@@ -101,6 +99,7 @@ public class CampManager : MonoBehaviour
             Upgrades = serializer.Deserialize(stream) as CampUpgrades;
             Upgrades.GetCurrency();
             SetLevels();
+			SetCosts ();
             stream.Close();
         }
         else {
@@ -183,10 +182,6 @@ public class CampManager : MonoBehaviour
                 Upgrades.LeaderHealthLevel++;
                 break;
 
-            case "Blacksmith":
-                Upgrades.BlacksmithLevel++;
-                break;
-
             case "Villages":
                 Upgrades.MaxVillages++;
                 break;
@@ -199,6 +194,7 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeBought = "";
         SaveUpgrades();
         SetLevels();
+		SetCosts ();
     }
 
     #region Upgrade Buttons
@@ -230,15 +226,6 @@ public class CampManager : MonoBehaviour
 		OpenPopUp (tempCost);
     }
 
-    public void UpgradeBlacksmith()
-    {
-        tempUpgradeName = "Blacksmith";
-        tempCost = BlacksmithCost + (BlacksmithCostIncrease * Upgrades.BlacksmithLevel);
-        amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
-
-		OpenPopUp (tempCost);
-    }
-
     public void UpgradeLeaderHealth()
     {
         tempUpgradeName = "LeaderHealth";
@@ -260,11 +247,18 @@ public class CampManager : MonoBehaviour
     private void SetLevels()
     {
         TextLevels[0].text = Upgrades.GatherLevel+"";
-        TextLevels[1].text = Upgrades.BlacksmithLevel + "";
-        TextLevels[2].text = Upgrades.MaxVillages + "";
-        TextLevels[3].text = Upgrades.LeaderHealthLevel + "";
-        TextLevels[4].text = Upgrades.LeaderStrengthLevel + "";
+        TextLevels[1].text = Upgrades.MaxVillages + "";
+        TextLevels[2].text = Upgrades.LeaderHealthLevel + "";
+        TextLevels[3].text = Upgrades.LeaderStrengthLevel + "";
     }
+
+	private void SetCosts()
+	{
+		TextCosts[0].text = GatherCost + Upgrades.GatherLevel * GatherCostIncrease + "";
+		TextCosts[1].text = MaxVillagesCost + Upgrades.MaxVillages * MaxVillagesCostIncrease + "";
+		TextCosts[2].text = LeaderHealthCost + Upgrades.LeaderHealthLevel * LeaderHealthCostIncrease + "";
+		TextCosts[3].text = LeaderStrengthCost + Upgrades.LeaderStrengthLevel * LeaderStrengthCostIncrease + "";
+	}
 
     #endregion
 
