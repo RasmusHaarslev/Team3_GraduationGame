@@ -384,6 +384,16 @@ public class DataService : MonoBehaviour
         });
 
     }
+
+    public void ResetDatabase()
+    {
+        _connection.DropTable<CharacterValues>();
+        _connection.DropTable<EquippableitemValues>();
+        _connection.DropTable<InventoryItem>();
+
+        CreateDB();
+    }
+
     #region character methods
     public IEnumerable<CharacterValues> GetFellowshipValues()
     {
