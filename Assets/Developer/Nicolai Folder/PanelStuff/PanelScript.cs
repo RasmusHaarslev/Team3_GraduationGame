@@ -24,6 +24,8 @@ public class PanelScript : MonoBehaviour {
     public GameObject camsAndNewSoldiersPosition;
     public GameObject silhouette;
     public bool alreadyGeneratedNewSoldiers = false;
+    List<GameObject> newSoldiersList = new List<GameObject>();
+    public GameObject silhouetteGO;
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -48,25 +50,66 @@ public class PanelScript : MonoBehaviour {
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
+    }
 
+    public void SpawnNewSoldier(int index)
+    {
+        for(int i = 0; i < newSoldiersList.Count; i++)
+        {
+            if(index == i)
+            {
+                foreach (Transform soldiertrans in solidersSpawnPosition)
+                {
+                    Debug.Log(silhouetteGO.transform.localPosition);
+                    Debug.Log(soldiertrans.localPosition);
+                    if (silhouetteGO.transform.localPosition == soldiertrans.localPosition)
+                    {
+                        print("adding as new Character");
+                        newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
+                        print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
+
+                        GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
+                        print("id of the weapon "+newWeapon.GetComponent<EquippableItem>().itemValues.id );
+                        //destroy current puppet weapon
+                        Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
+                        //equip weapon
+                        print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
+                        
+                        dataService.equipItemsToCharacter(new[] { newWeapon },newSoldiersList[i].GetComponent<Character>());
+                        
+                        newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
+                        newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
+                        newSoldiersList[i].AddComponent<PanelController>();
+                    }
+                }  
+               
+            }
+            else
+            {
+                Destroy(newSoldiersList[i]);
+            }
+        }
+        newSoldiersList.Clear();
+        Destroy(silhouetteGO);
     }
 
     public void GetNewSoldiers()
     {
-       
-        GameObject Soldier1 = GenerateNewHunter();
-        GameObject Soldier2 = GenerateNewHunter();
-        GameObject Soldier3 = GenerateNewHunter();
-        Soldier1.GetComponent<NavMeshAgent>().enabled = false;
-        Soldier2.GetComponent<NavMeshAgent>().enabled = false;
-        Soldier3.GetComponent<NavMeshAgent>().enabled = false;
-        Soldier1.GetComponent<HunterStateMachine>().enabled = false;
-        Soldier2.GetComponent<HunterStateMachine>().enabled = false;
-        Soldier3.GetComponent<HunterStateMachine>().enabled = false;
-        Soldier1.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        Soldier2.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-        Soldier3.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+        newSoldiersList.Add(GenerateNewHunter());
+        newSoldiersList.Add(GenerateNewHunter());
+        newSoldiersList.Add(GenerateNewHunter());      
+        newSoldiersList[0].GetComponent<NavMeshAgent>().enabled = false;
+        newSoldiersList[1].GetComponent<NavMeshAgent>().enabled = false;
+        newSoldiersList[2].GetComponent<NavMeshAgent>().enabled = false;
+        newSoldiersList[0].GetComponent<HunterStateMachine>().enabled = false;
+        newSoldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
+        newSoldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
+        newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+        newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+
         FillInNewSoldierStats();
+    
     }
 
     void InitializeSoldiers()
@@ -79,8 +122,7 @@ public class PanelScript : MonoBehaviour {
             soldiersList.Add(charactersFellowship.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < soldiersList.Count; i++)
-        //foreach (GameObject soldier in soldiersList)
+        for (int i = 0; i < soldiersList.Count; i++)      
         {
             
             soldiersList[i].AddComponent<PanelController>();
@@ -90,9 +132,11 @@ public class PanelScript : MonoBehaviour {
             if(soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
             {
                 soldiersList[i].GetComponent<MoveScript>().enabled = false;
-            }else
+                soldiersList[i].GetComponent<Formation>().enabled = false;
+            }
+            else
             {
-                soldiersList[i].GetComponent<HunterStateMachine>().enabled = false;
+                soldiersList[i].GetComponent<HunterStateMachine>().enabled = false;              
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
@@ -103,7 +147,7 @@ public class PanelScript : MonoBehaviour {
         {
             for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
             {
-                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
+                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position, Quaternion.identity);
             }
         }
         

@@ -386,6 +386,17 @@ public class DataService : MonoBehaviour
     }
     #region character methods
     
+    /// <summary>
+    /// Add values to db and returns the id
+    /// </summary>
+    /// <param name="hunterValues"></param>
+    /// <returns></returns>
+    public int AddcharacterToDbByValues(CharacterValues hunterValues)
+    {
+        _connection.Insert(hunterValues);
+        return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()"); 
+    }
+
     public IEnumerable<CharacterValues> GetFellowshipValues()
     {
         return _connection.Table<CharacterValues>().Where(x => x.Type == CharacterValues.type.Hunter || x.Type == CharacterValues.type.Player);
@@ -676,11 +687,19 @@ public class DataService : MonoBehaviour
 
     public GameObject GenerateNewEquippableItemFromValues(EquippableitemValues values)
     {
-        values.id = _connection.Insert(values);
+        _connection.Insert(values);
+        values.id = _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
 
         return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();
 
 
+    }
+
+    public int AddWeaponInDbByValues(EquippableitemValues itemValues)
+    {
+        _connection.Insert(  itemValues);
+
+        return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
     }
 
     public IEnumerable<EquippableitemValues> GetEquippableItemsValuesFromInventory()
