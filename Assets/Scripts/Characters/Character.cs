@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
 	public float currentHealth;
 
 	NavMeshAgent agent;
+	[HideInInspector]
 	public Animator animator;
 	public GameObject target;
 	GameObject targetParent;
@@ -42,13 +43,14 @@ public class Character : MonoBehaviour
 
 
 	public EquippableitemValues.type equippedWeaponType;
+	public CharacterValues.type characterType;
 
 	public bool isMale = true;
+
 	// Use this for initialization
 	void Start()
 	{
 		currentHealth = health;
-
 	}
 
 	void OnApplicationQuit()
@@ -64,6 +66,11 @@ public class Character : MonoBehaviour
 		{
 			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
+				GetComponent<Collider>().enabled = false;
+				agent.enabled = false;
+				// VESO REMOVE THIS:
+				GetComponent<RagdollControl>().EnableRagDoll();
+				animator.SetTrigger("Die");
 				if (deadEvent == false)
 				{
 					EventManager.Instance.TriggerEvent(new AllyDeathEvent(this));
@@ -145,7 +152,6 @@ public class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator>();
 		}
-
 		isMale = initValues.isMale;
 	}
 
@@ -284,6 +290,7 @@ public class Character : MonoBehaviour
 	{
 		if (!isInCombat)
 		{
+			//Debug.Log(characterBaseValues.Type);
 			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
 			{
 				targetParent = e.parent;

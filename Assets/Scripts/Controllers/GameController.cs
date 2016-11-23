@@ -8,6 +8,11 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
+    public int InitialFood = 10;
+    public int InitialVillages = 10;
+    public int InitialScrap = 10;
+    public int InitialPremium = 10;
+
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
     public int _SCRAPS = 10;
@@ -84,6 +89,13 @@ public class GameController : MonoBehaviour {
             _SCRAPS = PlayerPrefs.GetInt("Scraps");
             _PREMIUM = PlayerPrefs.GetInt("Premium");
         }
+        else
+        {
+            PlayerPrefs.SetInt("Food", InitialFood);
+            PlayerPrefs.SetInt("Villagers", InitialVillages);
+            PlayerPrefs.SetInt("Scraps", InitialScrap);
+            PlayerPrefs.SetInt("Premium", InitialPremium);
+        }
     }
 
     public void LoadScene(string scene)
@@ -120,6 +132,25 @@ public class GameController : MonoBehaviour {
         {
             scenes.Add(line);
         }
+
+        //scenes.Add("LevelPrototype02");
+        //scenes.Add("LevelPrototype03");
+        //scenes.Add("LevelPrototype04");
+        //scenes.Add("LevelPrototype05");
+        //scenes.Add("LevelPrototype06");
+        //scenes.Add("LevelPrototype02");
+        //scenes.Add("LevelPrototype03");
+        //scenes.Add("LevelPrototype04");
+        //scenes.Add("LevelPrototype05");
+        //scenes.Add("LevelPrototype06");
+
+        //foreach (var scene in sceneDirectory.GetFiles())
+        //{
+        //    if (scene.Name.EndsWith(".unity"))
+        //    {
+        //        scenes.Add(scene.Name.Split('.')[0]);
+        //    }
+        //}
 
         var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
         SceneManager.LoadScene(randomScene);

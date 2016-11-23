@@ -109,7 +109,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	void Update()
 	{
-		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !character.isDead)
 		{
 			agent.Stop();
 		}
@@ -182,53 +182,109 @@ public class HunterStateMachine : CoroutineMachine
 					{
 						if ((combatCommandState == CombatCommandState.Offense || (combatCommandState == CombatCommandState.Flee && combatTrait == CharacterValues.CombatTrait.BraveFool)))
 						{
-							if (!character.target.GetComponent<Character>().isDead)
+							if (character.target.GetComponent<TutorialCharacter>() != null)
 							{
-								if (combatTrait == CharacterValues.CombatTrait.BraveFool)
+								if (!character.target.GetComponent<TutorialCharacter>().isDead)
 								{
-									ProjectTrait();
-								}
-								if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
-								{
-									GameObject formerTarget = character.target;
-									lowAttentionSpanCounter = maxLowAttentionSpanCounter;
-									while (formerTarget == character.target)
+									if (combatTrait == CharacterValues.CombatTrait.BraveFool)
 									{
-										if (character.currentOpponents.Count <= 1)
+										ProjectTrait();
+									}
+									if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
+									{
+										GameObject formerTarget = character.target;
+										lowAttentionSpanCounter = maxLowAttentionSpanCounter;
+										while (formerTarget == character.target)
 										{
-											break;
-										}
-										else
-										{
-											ProjectTrait();
-											character.target = character.FindRandomEnemy();
+											if (character.currentOpponents.Count <= 1)
+											{
+												break;
+											}
+											else
+											{
+												ProjectTrait();
+												character.target = character.FindRandomEnemy();
+											}
 										}
 									}
-								}
-								distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
-								if (distanceToTarget < agent.stoppingDistance)
-								{
-									yield return new TransitionTo(CombatState, DefaultTransition);
+									distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+									if (distanceToTarget < agent.stoppingDistance)
+									{
+										yield return new TransitionTo(CombatState, DefaultTransition);
+									}
+									else
+									{
+										yield return new TransitionTo(EngageState, DefaultTransition);
+									}
 								}
 								else
 								{
-									yield return new TransitionTo(EngageState, DefaultTransition);
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
 								}
 							}
-							else
+							else if (character.target.GetComponent<Character>() != null)
 							{
-								character.currentOpponents.Remove(character.target);
-								character.target = character.FindNearestEnemy();
+								if (!character.target.GetComponent<Character>().isDead)
+								{
+									if (combatTrait == CharacterValues.CombatTrait.BraveFool)
+									{
+										ProjectTrait();
+									}
+									if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
+									{
+										GameObject formerTarget = character.target;
+										lowAttentionSpanCounter = maxLowAttentionSpanCounter;
+										while (formerTarget == character.target)
+										{
+											if (character.currentOpponents.Count <= 1)
+											{
+												break;
+											}
+											else
+											{
+												ProjectTrait();
+												character.target = character.FindRandomEnemy();
+											}
+										}
+									}
+									distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+									if (distanceToTarget < agent.stoppingDistance)
+									{
+										yield return new TransitionTo(CombatState, DefaultTransition);
+									}
+									else
+									{
+										yield return new TransitionTo(EngageState, DefaultTransition);
+									}
+								}
+								else
+								{
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
+								}
 							}
 						}
 						else if (combatCommandState == CombatCommandState.Defense)
 						{
-							if (character.target.GetComponent<Character>().isDead)
+							if (character.target.GetComponent<TutorialCharacter>() != null)
 							{
-								character.currentOpponents.Remove(character.target);
-								character.target = character.FindNearestEnemy();
+								if (character.target.GetComponent<TutorialCharacter>().isDead)
+								{
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
+								}
+								yield return new TransitionTo(DefenseState, DefaultTransition);
 							}
-							yield return new TransitionTo(DefenseState, DefaultTransition);
+							else if (character.target.GetComponent<Character>() != null)
+							{
+								if (character.target.GetComponent<Character>().isDead)
+								{
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
+								}
+								yield return new TransitionTo(DefenseState, DefaultTransition);
+							}
 						}
 					}
 					else
@@ -337,10 +393,21 @@ public class HunterStateMachine : CoroutineMachine
 		GameObject target = null;
 		foreach (GameObject enemy in character.currentOpponents)
 		{
-			if (enemy.GetComponent<Character>().target == leader)
+			if (enemy.GetComponent<TutorialCharacter>() != null)
 			{
-				target = enemy;
-				break;
+				if (enemy.GetComponent<TutorialCharacter>().target == leader)
+				{
+					target = enemy;
+					break;
+				}
+			}
+			if (enemy.GetComponent<Character>() != null)
+			{
+				if (enemy.GetComponent<Character>().target == leader)
+				{
+					target = enemy;
+					break;
+				}
 			}
 		}
 		return target;
@@ -368,7 +435,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	public void ProjectCommand()
 	{
-		Instantiate(commandVisualisation, transform.position + new Vector3(0,2.2f,0.2f), transform.rotation, gameObject.transform);
+		Instantiate(commandVisualisation, transform.position + new Vector3(0, 2.2f, 0.2f), transform.rotation, gameObject.transform);
 	}
 }
 
