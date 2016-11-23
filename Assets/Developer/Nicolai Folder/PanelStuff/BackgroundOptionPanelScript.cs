@@ -24,7 +24,9 @@ public class BackgroundOptionPanelScript : MonoBehaviour, IPointerClickHandler
 
                 }
             }
+            Debug.Log("Clicking : " + gameObject);
             gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
 
     }
