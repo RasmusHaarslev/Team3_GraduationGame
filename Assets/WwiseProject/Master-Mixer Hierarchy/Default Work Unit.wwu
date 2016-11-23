@@ -50,8 +50,44 @@
 											</ValueList>
 										</Property>
 									</PropertyList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+												<State Name="Custom State" ID="{3D9212F6-C3DA-45E1-9BCF-184EFC962172}" ShortID="1029686334">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="60"/>
+														<Property Name="Pitch" Type="int32" Value="-100"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
 								</Bus>
-								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}"/>
+								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}">
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+												<State Name="Custom State" ID="{8EB029F0-123F-4DF6-9A7E-642E9B24472B}" ShortID="317658611">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
+								</Bus>
 								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}"/>
 								<Bus Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}"/>
 							</ChildrenList>
