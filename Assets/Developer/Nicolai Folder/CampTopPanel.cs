@@ -19,6 +19,11 @@ public class CampTopPanel : MonoBehaviour {
         EventManager.Instance.StopListening<ResourcesUpdated>(UpdateResources);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     // Use this for initialization
     void Start () {
         VillageCount.text = GameController.Instance._VILLAGERS.ToString();
