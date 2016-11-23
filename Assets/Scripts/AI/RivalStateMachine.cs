@@ -10,7 +10,7 @@ public class RivalStateMachine : CoroutineMachine
 	Character character;
 	Vector3 originalPosition;
 	public float distanceToTarget = float.MaxValue;
-	public int fleeHealthLimit = 3;
+	public float fleeHealthLimit = 0.5f;
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
 
@@ -122,6 +122,7 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
+			character.isInCombat = false;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);

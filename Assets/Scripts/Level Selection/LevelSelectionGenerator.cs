@@ -63,6 +63,11 @@ public class LevelSelectionGenerator : MonoBehaviour
         EventManager.Instance.StopListening<SaveLevelsToXML>(SaveDict);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     void Awake()
     {
         if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)

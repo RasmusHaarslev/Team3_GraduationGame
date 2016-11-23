@@ -14,7 +14,6 @@ public class Character : MonoBehaviour
 	public int damage = 0;
 	public int range = 0;
 	public float damageSpeed = 0;
-
 	public float currentHealth;
 
 	NavMeshAgent agent;
