@@ -98,8 +98,8 @@ public class DataService : MonoBehaviour
                 name = "Daniel",
                 isMale = true,
                 Type = CharacterValues.type.Player,
-                damage = 5,
-                health = 100,
+                damage = 16,
+                health = 115,
                 damageSpeed = 1.5f,
                 range = 2,
                 prefabName = StringResources.playerPrefabName,
@@ -112,8 +112,8 @@ public class DataService : MonoBehaviour
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
                 damage = 8,
-                health = 50,
-                damageSpeed = 2.5f,
+                health = 75,
+                damageSpeed = 1f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.BraveFool,
                 targetTrait = CharacterValues.TargetTrait.NoTrait,
@@ -126,8 +126,8 @@ public class DataService : MonoBehaviour
                 name = "Nicolai",
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
-                damage = 5,
-                health = 50,
+                damage = 8,
+                health = 75,
                 damageSpeed = 1f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.Clingy,
@@ -141,9 +141,9 @@ public class DataService : MonoBehaviour
                 name = "Peter",
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
-                damage = 9,
-                health = 50,
-                damageSpeed = 0.5f,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.Fearful,
                 targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
@@ -156,8 +156,8 @@ public class DataService : MonoBehaviour
                 isMale = false,
                 Type = CharacterValues.type.Wolf,
                 tier = 6,
-                damage = 6,
-                health = 50,
+                damage = 8,
+                health = 75,
                 damageSpeed = 1,
                 range = 2,
                 prefabName = "EnemyLeader"
@@ -220,64 +220,74 @@ public class DataService : MonoBehaviour
           },
           new CharacterValues
           {
-              name = "Young tribesman",
+              name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 1,
-              damage = 2,
-              health = 3,
+              damage = 3,
+              health = 20,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival"
           },
           new CharacterValues
           {
-              name = "Teen tribesman",
-              isMale = true,
+              name = "Easy rifle tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 2,
               damage = 3,
-              health = 4,
+              health = 20,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival"
           },
           new CharacterValues
           {
-              name = "Tribesman initiate",
+              name = "Medium mellee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 3,
-              damage = 4,
-              health = 5,
+              damage = 6,
+              health = 25,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival"
           },
           new CharacterValues
           {
-              name = "Mature tribesman",
+              name = "Medium rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 4,
-              damage = 5,
-              health = 6,
-              damageSpeed = 3,
+              damage = 6,
+              health = 25,
+              damageSpeed = 2,
               range = 2,
               prefabName = "Rival"
           },
-          new CharacterValues
+            new CharacterValues
           {
-              name = "Leader tribesman",
+              name = "Hard mellee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
               damage = 6,
-              health = 7,
-              damageSpeed = 3,
+              health = 25,
+              damageSpeed = 2,
               range = 2,
               prefabName = "Rival"
-          }
-
+          },
+            new CharacterValues
+          {
+              name = "Hard rifle tribesman",
+              isMale = true,
+              Type = CharacterValues.type.Tribesman,
+              tier = 6,
+              damage = 6,
+              health = 25,
+              damageSpeed = 2,
+              range = 2,
+              prefabName = "Rival"
+          },
         });
 
         _connection.InsertAll(new[]
