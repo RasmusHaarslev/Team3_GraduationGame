@@ -16,7 +16,7 @@ public class NewSoldierConfirmationScript : MonoBehaviour
     {
         panelScript = GameObject.FindGameObjectWithTag("CampPanel").GetComponent<PanelScript>();
         GetComponent<Button>().onClick.RemoveAllListeners();
-        GetComponent<Button>().onClick.AddListener(delegate { ActivateConfirmationPanel(); });
+        GetComponent<Button>().onClick.AddListener(ActivateConfirmationPanel);
     }
 
     public void ActivateConfirmationPanel()
