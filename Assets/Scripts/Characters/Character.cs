@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	bool deadEvent = false;
-	[Range(0,99)]
+	[Range(0, 99)]
 	public int randomTargetProbability = 25;
 
 	//model values
@@ -62,7 +62,10 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		animator.SetBool("isAware", isInCombat);
+		if (agent.velocity.normalized.magnitude < 0.2f)
+		{
+			animator.SetBool("isAware", isInCombat);
+		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{
