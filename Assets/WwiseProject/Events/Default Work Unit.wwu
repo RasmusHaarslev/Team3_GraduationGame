@@ -700,6 +700,27 @@
 				</Event>
 				<Event Name="Play_ExploreMusic" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}">
 					<ChildrenList>
+						<Action Name="Stop" ID="{CDEFF496-E3D5-4D4B-91DF-BB84435C05EF}" ShortID="1064879938" Type="Stop" Scope="One" Global="true">
+							<ElementList>
+								<Element ID="{8B82830D-4C78-467F-90E6-D0E0F923DE7F}" Global="true">
+									<ObjectRef Name="MenuMusic" ID="{6D0AC137-B9A1-41A3-BA00-1FCF0E5CEBB1}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+								</Element>
+							</ElementList>
+						</Action>
+						<Action Name="Stop" ID="{F0FEBAE2-834E-4344-8701-2712928BB296}" ShortID="333841723" Type="Stop" Scope="One" Global="true">
+							<ElementList>
+								<Element ID="{0798ED6C-7A5F-4038-9AAF-212B040516B2}" Global="true">
+									<ObjectRef Name="MenuAmbience" ID="{86E5649D-411D-4B32-A6EB-E9DABE030987}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+								</Element>
+							</ElementList>
+						</Action>
+						<Action Name="Stop" ID="{E059E784-53CD-4D87-9B5E-DC9F282F6957}" ShortID="227563083" Type="Stop" Scope="One" Global="true">
+							<ElementList>
+								<Element ID="{852370A6-3CDF-4079-A185-E09E0FF7262F}" Global="true">
+									<ObjectRef Name="MenuDog" ID="{A65C8F6B-8D7F-4FA8-9ECB-B5A383AAB783}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+								</Element>
+							</ElementList>
+						</Action>
 						<Action Name="Set State" ID="{4FAD9667-8061-4CB8-B64F-7F353532903F}" ShortID="49037251" Type="SetState" Scope="All" Global="true">
 							<SetItemParam>
 								<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
