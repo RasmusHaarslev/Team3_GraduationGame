@@ -15,7 +15,7 @@ public class LevelCanvasManager : MonoBehaviour {
         EquippableItemUIListController listController = GetComponentInChildren<EquippableItemUIListController>(true);
         listController.GenerateItemsList(newItemsValues);
         //activate new items panel
-        listController.transform.parent.gameObject.SetActive(true);
+        listController.transform.parent.parent.gameObject.SetActive(true);
     }
 
 }

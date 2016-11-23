@@ -10,7 +10,7 @@ public class RivalStateMachine : CoroutineMachine
 	Character character;
 	Vector3 originalPosition;
 	public float distanceToTarget = float.MaxValue;
-	public int fleeHealthLimit = 3;
+	public float fleeHealthLimit = 0.5f;
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
 
@@ -63,7 +63,7 @@ public class RivalStateMachine : CoroutineMachine
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
 		averageHealth = poimanager.GetAverageCharactersHealth();
-		if (averageHealth < fleeHealthLimit)
+		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
@@ -122,6 +122,7 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
+			character.isInCombat = false;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
@@ -142,10 +143,10 @@ public class RivalStateMachine : CoroutineMachine
 	{
 		character.RotateTowards(character.target.transform);
 		agent.Stop();
+		character.RotateTowards(character.target.transform);
 		character.animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
-		character.RotateTowards(character.target.transform);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

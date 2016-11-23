@@ -14,7 +14,6 @@ public class Character : MonoBehaviour
 	public int damage = 0;
 	public int range = 0;
 	public float damageSpeed = 0;
-
 	public float currentHealth;
 
 	NavMeshAgent agent;
@@ -31,6 +30,9 @@ public class Character : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	bool deadEvent = false;
+	[Range(0, 99)]
+	public int randomTargetProbability = 25;
+
 	//model values
 	//private Dictionary<string, Transform> slots;
 	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;
@@ -60,7 +62,10 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		animator.SetBool("isAware", isInCombat);
+		if (agent.velocity.normalized.magnitude < 0.2f)
+		{
+			animator.SetBool("isAware", isInCombat);
+		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{
@@ -211,8 +216,7 @@ public class Character : MonoBehaviour
 			foreach (GameObject opp in currentOpponents)
 			{
 				var hunter = opp.GetComponent<HunterStateMachine>();
-
-				if (UnityEngine.Random.Range(0, 1) == 1)
+				if (UnityEngine.Random.Range(0, 100) < randomTargetProbability)
 				{
 					target = FindRandomEnemy();
 				}
@@ -290,7 +294,6 @@ public class Character : MonoBehaviour
 	{
 		if (!isInCombat)
 		{
-			//Debug.Log(characterBaseValues.Type);
 			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
 			{
 				targetParent = e.parent;
@@ -307,14 +310,11 @@ public class Character : MonoBehaviour
 		{
 			case EquippableitemValues.type.polearm:
 				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
-				Debug.Log("polearm");
 				break;
 			case EquippableitemValues.type.rifle:
 				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
-				Debug.Log("rifle");
 				break;
 			case EquippableitemValues.type.shield:
-				Debug.Log("shield");
 				Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
 				break;
 		}
@@ -381,8 +381,8 @@ public class Character : MonoBehaviour
 	{
 		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
 		{
-			target = null;
 			currentOpponents.Remove(target);
+			target = null;
 		}
 	}
 }
