@@ -251,14 +251,11 @@ public class TutorialCharacter : MonoBehaviour
 		{
 			case EquippableitemValues.type.polearm:
 				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
-				Debug.Log("polearm");
 				break;
 			case EquippableitemValues.type.rifle:
 				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
-				Debug.Log("rifle");
 				break;
 			case EquippableitemValues.type.shield:
-				Debug.Log("shield");
 				Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
 				break;
 		}
