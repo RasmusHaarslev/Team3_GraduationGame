@@ -19,10 +19,11 @@ public class PanelScript : MonoBehaviour {
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
     public int newCharPoints = 15;
-    public GameObject newSoldierSpawnPosition;
     [Range (0f, 1f)]
     public float damagePointsChance = 0.5f;
-
+    public GameObject camsAndNewSoldiersPosition;
+    public GameObject silhouette;
+    public bool alreadyGeneratedNewSoldiers = false;
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -46,14 +47,13 @@ public class PanelScript : MonoBehaviour {
         dataService = new DataService(StringResources.databaseName);
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
-        print("Fellowship retrieved");
         InitializeSoldiers();
-        
-        GetNewSoldiers();// this should be called when player clicks on silhouette
+
     }
 
-    void GetNewSoldiers()
+    public void GetNewSoldiers()
     {
+       
         GameObject Soldier1 = GenerateNewHunter();
         GameObject Soldier2 = GenerateNewHunter();
         GameObject Soldier3 = GenerateNewHunter();
@@ -82,6 +82,7 @@ public class PanelScript : MonoBehaviour {
         for (int i = 0; i < soldiersList.Count; i++)
         //foreach (GameObject soldier in soldiersList)
         {
+            
             soldiersList[i].AddComponent<PanelController>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;     
 
@@ -97,9 +98,16 @@ public class PanelScript : MonoBehaviour {
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
 
         }
-
-
+      
+        if(solidersSpawnPosition.childCount != soldiersList.Count)
+        {
+            for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
+            {
+                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
+            }
+        }
         
+
         /*
         soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
         soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
@@ -111,7 +119,7 @@ public class PanelScript : MonoBehaviour {
         soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
         */
 
-       
+
 
     }
 
@@ -211,8 +219,15 @@ public class PanelScript : MonoBehaviour {
         foreach(var stat in soldierStatsList)
         {        
             if (stat.name == "Type")
-            {     
-                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
+            {
+                if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
+                {
+                    stat.GetComponent<Text>().text = "Leader";
+                }
+                else
+                {
+                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
+                }
             }
             if (stat.name == "Damage")
             {
@@ -300,7 +315,7 @@ public class PanelScript : MonoBehaviour {
        
         //create new weapon for new soldier
         Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
-        EquippableitemValues newWeaponValues = GetComponent<WeaposGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+        EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
         IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
         Character hunterChar = hunter.GetComponent<Character>();
         //generate  and attach the weapon

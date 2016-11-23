@@ -38,6 +38,19 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
             levelSelectionGenerator.GetComponent<GoToLevelSelection>().GoToCamp();
         }
 
+        if (gameObject.CompareTag("Silhouette") && panelScript.panelList[6].activeSelf == false)
+        {
+            Debug.Log("silhouette click");
+            if (!panelScript.alreadyGeneratedNewSoldiers)
+            {
+                panelScript.GetNewSoldiers();
+                panelScript.alreadyGeneratedNewSoldiers = true;
+            }
+            
+            panelScript.panelList[3].SetActive(true);
+            panelScript.panelList[6].SetActive(true);
+        }
+
     }
 
 }
