@@ -166,11 +166,11 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                    stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
                 }
                 if (stat.name == "Target Trait")
                 {
-                    stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+					stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
                 }
 
             }
@@ -214,11 +214,11 @@ public class PanelScript : MonoBehaviour {
             }
             if (stat.name == "Combat Trait")
             {
-                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(currentSoldier.characterBaseValues);
             }
             if (stat.name == "Target Trait")
             {
-                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2");
+                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(currentSoldier.characterBaseValues);
             }
 
         }

@@ -11,7 +11,7 @@ namespace Assets.ModuleDesigner.Scripts
 
         void Start()
         {
-            mainCamera = Camera.current;
+            mainCamera = Camera.main;
             switchedCamera = GetComponentInChildren<Camera> ();
         }
 
