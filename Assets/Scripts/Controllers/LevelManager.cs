@@ -188,7 +188,12 @@ public class LevelManager : MonoBehaviour
     public void WinLevel()
     {
         EventManager.Instance.TriggerEvent(new LevelWon());
-        //TODO: Update resources
+		EventManager.Instance.TriggerEvent (
+			new ChangeResources (
+				food: PlayerPrefs.GetInt("FoodAmount"),
+				scraps: PlayerPrefs.GetInt("ScrapAmount")
+			)
+		);
         PlayerPrefs.SetInt("LevelResult", 1);
         //generate and display the new items
         GenerateNewItems();
