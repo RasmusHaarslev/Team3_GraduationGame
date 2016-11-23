@@ -189,12 +189,12 @@ public class PopUpFunctionality : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
-        PlayerPrefs.SetInt("NodeId", node.GetComponent<Node>().NodeId);
-        PlayerPrefs.SetInt("LevelDifficulty", node.GetComponent<Node>().Level);
-        PlayerPrefs.SetInt("TribeCamps", node.GetComponent<Node>().tribeCamps);
-        PlayerPrefs.SetInt("FoodAmount", node.GetComponent<Node>().foodAmount);
-        PlayerPrefs.SetInt("ScrapAmount", node.GetComponent<Node>().scrapAmount);
-        PlayerPrefs.SetInt("ItemDropAmount", node.GetComponent<Node>().itemDropAmount);
+        PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);
+        PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, node.GetComponent<Node>().Level);
+        PlayerPrefs.SetInt(StringResources.TribeCampsPrefsName, node.GetComponent<Node>().tribeCamps);
+        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
+        PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
+        PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
         // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
 
