@@ -293,8 +293,7 @@ public class DataService : MonoBehaviour
              damageSpeed = 2f,
              range = 2,
              characterId = 1,
-             prefabName = StringResources.polearm1PrefabName,
-             materialName = StringResources.polearm1MaterialName
+             prefabName = StringResources.polearm1PrefabName
          },
              new EquippableitemValues
          {
@@ -307,8 +306,7 @@ public class DataService : MonoBehaviour
              damageSpeed = 2f,
              range = 2,
              characterId = 2,
-             prefabName = StringResources.shield1PrefabName,
-             materialName = StringResources.shield1MaterialName
+             prefabName = StringResources.shield1PrefabName
          },
              new EquippableitemValues
          {
@@ -321,8 +319,7 @@ public class DataService : MonoBehaviour
              damageSpeed = 2.5f,
              range = 20,
              characterId = 3,
-             prefabName = StringResources.rifle1PrefabName,
-             materialName = StringResources.rifle1MaterialName
+             prefabName = StringResources.rifle1PrefabName
          },
              new EquippableitemValues
          {
