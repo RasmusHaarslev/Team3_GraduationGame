@@ -10,6 +10,17 @@ public class StringResources
 {
     public static string databaseName = "gameDatabase.db";
 
+    #region RESOURCES
+    
+        public static string NodeIdPrefsName = "NodeId";
+        public static string LevelDifficultyPrefsName = "LevelDifficulty";
+        public static string TribeCampsPrefsName = "TribeCamps";
+        public static string FoodAmountPrefsName = "FoodAmount";
+        public static string ScrapAmountPrefsName = "ScrapAmount";
+        public static string ItemDropAmountPrefsName = "ItemDropAmount";
+
+#endregion
+
     #region PREFABS
 
     public static string uiPrefabsPath = "Prefabs/UI/";

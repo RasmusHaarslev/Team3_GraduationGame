@@ -6,7 +6,7 @@ using System.Linq;
 
 public class PointOfInterestManager : MonoBehaviour
 {
-
+	public float originalAverageHealth = 0;
 	public EncounterType type;
 	[Range(3, 20)]
 	public int radius = 8;
@@ -60,6 +60,10 @@ public class PointOfInterestManager : MonoBehaviour
 			s += character.currentHealth;
 		}
 		averageHealth = s / characterList.Count;
+		if (originalAverageHealth == 0)
+		{
+			originalAverageHealth = averageHealth;
+		}
 		return averageHealth;
 	}
 }
