@@ -63,7 +63,7 @@ public class RivalStateMachine : CoroutineMachine
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
 		averageHealth = poimanager.GetAverageCharactersHealth();
-		if (averageHealth < fleeHealthLimit)
+		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
@@ -143,10 +143,10 @@ public class RivalStateMachine : CoroutineMachine
 	{
 		character.RotateTowards(character.target.transform);
 		agent.Stop();
+		character.RotateTowards(character.target.transform);
 		character.animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(character.damageSpeed);
 		character.DealDamage();
-		character.RotateTowards(character.target.transform);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
