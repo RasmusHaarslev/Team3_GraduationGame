@@ -601,48 +601,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1001 &810873752
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &934077293
 Prefab:
   m_ObjectHideFlags: 0
@@ -770,9 +728,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 32768
+  lowerPoolSize: 16384
+  streamingPoolSize: 8192
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -1024,6 +982,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 525d20ba46eb3144e927c250581204a5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1894857139 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012522091216, guid: 525d20ba46eb3144e927c250581204a5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1894857138}
+--- !u!114 &1894857140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1894857139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4747dc861b6f284589ad18906b498dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2084220053
 Prefab:
   m_ObjectHideFlags: 0
