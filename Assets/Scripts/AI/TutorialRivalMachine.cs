@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RivalStateMachine : CoroutineMachine
+public class TutorialRivalMachine : CoroutineMachine
 {
 	public float transitionTime = 0.05f;
 
 	NavMeshAgent agent;
-	Character character;
+	TutorialCharacter character;
 	Vector3 originalPosition;
 	public float distanceToTarget = float.MaxValue;
 	public int fleeHealthLimit = 3;
@@ -16,7 +16,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	void OnEnable()
 	{
-		character = GetComponent<Character>();
+		character = GetComponent<TutorialCharacter>();
 		agent = GetComponent<NavMeshAgent>();
 		originalPosition = transform.position;
 		EventManager.Instance.StartListening<FleeStateEvent>(OpponentsFleeing);
