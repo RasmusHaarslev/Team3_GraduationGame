@@ -40,6 +40,9 @@ public class CampManager : MonoBehaviour
     public Text[] TextLevels;
     public Button[] Buttons;
     public Button FinishNow;
+	public GameObject UpgradeConfirmationPanel;
+	public GameObject InsufficientScrapsPanel;
+	public GameObject ConfirmationShade;
 
     #region
     private double amountOfSeconds = 0.0;
@@ -115,7 +118,7 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Scrap -= tempCost;
 
-        EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -5));
+		EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -tempCost));
 
         SaveUpgrades();
     }
@@ -200,11 +203,22 @@ public class CampManager : MonoBehaviour
 
     #region Upgrade Buttons
 
+	private void OpenPopUp(int cost) {
+		if (cost > GameController.Instance._SCRAPS)
+			InsufficientScrapsPanel.SetActive (true);
+		else
+			UpgradeConfirmationPanel.SetActive (true);
+
+		ConfirmationShade.SetActive (true);
+	}
+
     public void UpgradeGather()
     {
         tempUpgradeName     = "Gather";
         tempCost            = GatherCost + (GatherCostIncrease * Upgrades.GatherLevel);
         amountOfSeconds     = GetTimeForUpgrade(Upgrades.GatherLevel);
+
+		OpenPopUp (tempCost);
     }
 
     public void UpgradeVillages()
@@ -212,6 +226,8 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "Villages";
         tempCost = MaxVillagesCost + (MaxVillagesCostIncrease * Upgrades.MaxVillages);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
+
+		OpenPopUp (tempCost);
     }
 
     public void UpgradeBlacksmith()
@@ -219,6 +235,8 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "Blacksmith";
         tempCost = BlacksmithCost + (BlacksmithCostIncrease * Upgrades.BlacksmithLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
+
+		OpenPopUp (tempCost);
     }
 
     public void UpgradeLeaderHealth()
@@ -226,6 +244,8 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "LeaderHealth";
         tempCost = LeaderHealthCost + (LeaderHealthCostIncrease * Upgrades.LeaderHealthLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
+
+		OpenPopUp (tempCost);
     }
 
     public void UpgradeLeaderStrength()
@@ -233,6 +253,8 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "LeaderStrength";
         tempCost = LeaderStrengthCost + (LeaderStrengthCostIncrease * Upgrades.LeaderStrengthLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
+
+		OpenPopUp (tempCost);
     }
 
     private void SetLevels()
