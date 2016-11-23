@@ -8,7 +8,6 @@ public class AggroRange : MonoBehaviour
 	{
 		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly")
 		{
-			Debug.Log("parent: " + gameObject.transform.parent.parent.parent.gameObject);
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
 				if (!transform.parent.GetComponent<Character>().isDead)
