@@ -41,7 +41,7 @@ namespace Assets.Editor
                     prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<RivalStateMachine>();
 
                     GUILayout.Label("General", EditorStyles.boldLabel);
-                    prefabScript.fleeHealthLimit = EditorGUILayout.IntField("Flee health limit", prefabScript.fleeHealthLimit);
+                    prefabScript.fleeHealthLimit = EditorGUILayout.FloatField("Flee health limit", prefabScript.fleeHealthLimit);
 
                     GUILayout.Label("Maybe more?...", EditorStyles.boldLabel);
                 }
