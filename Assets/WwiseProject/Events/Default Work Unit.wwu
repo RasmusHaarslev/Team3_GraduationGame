@@ -184,7 +184,7 @@
 									</PropertyList>
 									<ElementList>
 										<Element ID="{3F3C12B3-E31F-458B-B3EE-EE7D4370BFE9}" Global="false">
-											<ObjectRef Name="EvilFemaleWarrior1Attack" ID="{CC99A605-2701-4428-B90D-BFB6876B4708}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="EvilFemaleAttack" ID="{A64DAC4F-E6F0-49D6-B131-FFB2E26CA30D}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -195,54 +195,7 @@
 								<Action Name="Play" ID="{1C6DF2C8-7BF7-4102-8F96-8B284432B17A}" ShortID="631085744" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{83061B2E-8221-425E-B107-966051FBAB75}" Global="false">
-											<ObjectRef Name="EvilFemaleWarrior1Death" ID="{D505D1F4-EF90-43B8-A038-2575CCD4A47E}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilFemaleWarrior1Hit" ID="{3137E2F8-01E0-4B48-8CEC-85C87704F456}">
-							<ChildrenList>
-								<Action Name="Play" ID="{783B8275-40F6-4EC9-8278-931DFC3CA8F7}" ShortID="353800331" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{85B42B01-5E60-411E-8E2D-815F10B25575}" Global="false">
-											<ObjectRef Name="EvilFemaleWarrior1Hit" ID="{6473B8BD-25EE-4A68-B0AB-B051E3F1F952}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilFemaleWarrior2Attack" ID="{0E16FD44-581A-4624-B8FF-DF3430C0B16C}">
-							<ChildrenList>
-								<Action Name="Play" ID="{5BDA6BB0-029C-4284-A6C7-BD18023ADF99}" ShortID="207722829" Type="Play" Scope="One" Global="false">
-									<PropertyList>
-										<Property Name="Probability" Type="Real64" Value="25"/>
-									</PropertyList>
-									<ElementList>
-										<Element ID="{E1EA2ECC-DB5F-40D3-8EF1-A5947C6C5E36}" Global="false">
-											<ObjectRef Name="EvilFemaleWarrior2Attack" ID="{D418CC08-3BE9-4E0C-A600-C8AD41AC1722}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilFemaleWarrior2Death" ID="{D39E7662-EC80-4F1F-8604-626D25017FFB}">
-							<ChildrenList>
-								<Action Name="Play" ID="{37719DE9-F571-4036-B249-D23B7CCCE35C}" ShortID="487535289" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{C081EDE6-0BE4-439F-9DC0-791F25F58676}" Global="false">
-											<ObjectRef Name="EvilFemaleWarrior2Death" ID="{2A3C0171-B9C9-4F5C-9B1F-0106EF486A0D}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilFemaleWarrior2Hit" ID="{FFA7AE79-CC20-4710-830E-7705C1C4D769}">
-							<ChildrenList>
-								<Action Name="Play" ID="{735110BE-4EFE-4F03-8105-5DAF9722BFDD}" ShortID="940783003" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{9FE1B81E-4248-404D-8568-2BFE3CBA1214}" Global="false">
-											<ObjectRef Name="EvilFemaleWarrior2Hit" ID="{A27C085A-32B1-4AC0-8740-3428D48380AE}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="EVilFemaleDeath" ID="{43823C8D-E8BC-497B-BC5C-05EA476B1165}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -256,7 +209,7 @@
 									</PropertyList>
 									<ElementList>
 										<Element ID="{E8140514-B4BC-4DE1-AACF-60387E30C8C5}" Global="false">
-											<ObjectRef Name="EvilMaleWarrior1Attack" ID="{A25F5247-3C7E-4896-9733-40BD4C81308C}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="EvilMaleAttack" ID="{A40D78CC-0D1A-4681-A1B9-BD01E00E73D2}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -267,54 +220,7 @@
 								<Action Name="Play" ID="{D630412C-3A8C-4CB7-944B-8129F15E3477}" ShortID="322505845" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{FB160010-1A02-4FED-802D-D500CBC6B18E}" Global="false">
-											<ObjectRef Name="EvilMaleWarrior1Death" ID="{5281F720-0A41-43BE-AD7C-227FAEF642AE}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilMaleWarrior1Hit" ID="{F70E625D-FF36-4141-B6FE-7572C7985BA9}">
-							<ChildrenList>
-								<Action Name="Play" ID="{3B989515-8185-4873-967F-F24A564B50B1}" ShortID="244487583" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{68C2421F-6A6F-499D-AA46-AFD6E6B4C3DA}" Global="false">
-											<ObjectRef Name="EvilMaleWarrior1Hit" ID="{E01D7390-D718-4646-B3A4-D3746207CFC9}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilMaleWarrior2Attack" ID="{40C2618A-D04C-47DD-AFF2-604CDCCC45F1}">
-							<ChildrenList>
-								<Action Name="Play" ID="{806DD475-EB0E-4A08-BDAB-610811D6B3AC}" ShortID="1053506454" Type="Play" Scope="One" Global="false">
-									<PropertyList>
-										<Property Name="Probability" Type="Real64" Value="25"/>
-									</PropertyList>
-									<ElementList>
-										<Element ID="{7F2EBECD-23ED-4721-A9EC-9D054A1476BA}" Global="false">
-											<ObjectRef Name="EvilMaleWarrior2Attack" ID="{BE4E486D-BAC0-4A00-B7B5-7DD2029DED6D}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilMaleWarrior2Death" ID="{726F1C57-BB6F-454A-9641-6CA68B019AAC}">
-							<ChildrenList>
-								<Action Name="Play" ID="{94AD69FE-FD74-4485-B028-EB1A0743A5C1}" ShortID="920363613" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{0D49640C-8BB8-419C-B929-ED293FB36F7B}" Global="false">
-											<ObjectRef Name="EvilMaleWarrior2Death" ID="{E55025EE-74E2-42F4-B8D8-5EDA16476FA6}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_EvilMaleWarrior2Hit" ID="{E8BD8BC3-5610-4232-B0B4-5048358258DD}">
-							<ChildrenList>
-								<Action Name="Play" ID="{DF49ABAC-980C-4868-BF77-70BBBA46A338}" ShortID="240654777" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{2C575596-0874-4C92-892E-E2327E8AF2C4}" Global="false">
-											<ObjectRef Name="EvilMaleWarrior2Hit" ID="{32E15207-18FA-48BD-96BE-9E20C67140B1}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="EvilMaleDeath" ID="{AD59A51B-37AD-45CF-B417-810386E28A6B}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -328,7 +234,7 @@
 									</PropertyList>
 									<ElementList>
 										<Element ID="{81974649-B5D4-470E-91AE-D8167D5E681B}" Global="false">
-											<ObjectRef Name="FemaleWarrior1Attack" ID="{3D252000-3F23-4623-A37A-535142C3959F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="FemaleAttack" ID="{17D70ECB-1059-430E-A5D7-949D1DCDDEF9}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -339,54 +245,7 @@
 								<Action Name="Play" ID="{B7FFD361-393D-4319-948E-4F30160F65FC}" ShortID="1034763332" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{6C490229-CD08-4C7A-A621-863CEF3C64B8}" Global="false">
-											<ObjectRef Name="FemaleWarrior1Death" ID="{D8AA33D0-EE3F-435E-A1AF-C4ABD76A89E0}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_FemaleWarrior1Hit" ID="{E8753C9D-68CE-4620-A21C-AA59611EBC36}">
-							<ChildrenList>
-								<Action Name="Play" ID="{6AE1E381-7DA8-405D-9DD7-228A8B6E7FB6}" ShortID="873260536" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{57EC98F9-571B-4949-A68C-2EE632A704D3}" Global="false">
-											<ObjectRef Name="FemaleWarrior1Hit" ID="{2B84D49E-558D-4BE1-B059-E5FF9B311BF2}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_FemaleWarrior2Attack" ID="{D8167894-10BA-4BE1-B717-35156884C782}">
-							<ChildrenList>
-								<Action Name="Play" ID="{BC9B99E4-3359-40E4-8293-6EC0662BC164}" ShortID="832544107" Type="Play" Scope="One" Global="false">
-									<PropertyList>
-										<Property Name="Probability" Type="Real64" Value="25"/>
-									</PropertyList>
-									<ElementList>
-										<Element ID="{150911B8-A7E3-47F6-961A-33DE14DF202E}" Global="false">
-											<ObjectRef Name="FemaleWarrior2Attack" ID="{619B09A2-9277-4D9C-8E1A-2CC3A868778D}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_FemaleWarrior2Death" ID="{69996416-94B9-42CF-B713-C911A5D1F794}">
-							<ChildrenList>
-								<Action Name="Play" ID="{D25126EB-CB34-4D75-A123-6C47F6199CAE}" ShortID="415559977" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{FC5516C9-AE57-4D90-9BDA-CC0819F2C9A1}" Global="false">
-											<ObjectRef Name="FemaleWarrior2Death" ID="{4541854A-757B-4E65-B812-1BFA01F81315}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_FemaleWarrior2Hit" ID="{545E7911-6BCA-4474-8B35-32E603E5D699}">
-							<ChildrenList>
-								<Action Name="Play" ID="{B06924A9-D4DF-4D5E-94BD-B8E8D9D6BE13}" ShortID="397536937" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{4E8A7617-9F61-4000-85BD-7EE8682292E2}" Global="false">
-											<ObjectRef Name="FemaleWarrior2Hit" ID="{7AB88B0F-2E21-4BD9-9AB2-967ED0181AD1}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="FemaleDeath" ID="{5D35BCEF-B6C7-4EB4-BE22-E43ED1EE5F3C}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -400,7 +259,7 @@
 									</PropertyList>
 									<ElementList>
 										<Element ID="{37DBDCB4-6AEF-4386-ACED-10F4F77B0F8C}" Global="false">
-											<ObjectRef Name="MaleWarrior1Attack" ID="{3CB3F282-BC6F-4407-B69F-413061F29A40}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="MaleAttack" ID="{8E6F7DDB-74C5-44BD-8F40-B822A2E81426}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -411,54 +270,7 @@
 								<Action Name="Play" ID="{02E3BF8B-C88F-4907-8AF2-6728AA3A47DD}" ShortID="1020825935" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{3966D5C4-3CF8-4FBF-A883-FB82FF4EAC54}" Global="false">
-											<ObjectRef Name="MaleWarrior1Death" ID="{A8800EBD-0291-43E1-B210-5C61E0EA3AE5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_MaleWarrior1Hit" ID="{8E5E1713-036F-46B5-BBB3-C4C2B7DCEC30}">
-							<ChildrenList>
-								<Action Name="Play" ID="{9066F4F5-8481-423E-9E82-7E6FF17971E4}" ShortID="723874645" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{7857DA41-C9F1-4759-8AB3-F98F30F852E3}" Global="false">
-											<ObjectRef Name="MaleWarrior1Hit" ID="{ED92657B-44D1-4E6A-88FF-CB1635AB4E20}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_MaleWarrior2Attack" ID="{2846972A-2675-47AF-B96B-C7F02262EB18}">
-							<ChildrenList>
-								<Action Name="Play" ID="{FC7E8B7E-D65A-4B1D-9D31-D6050F566C5D}" ShortID="127570718" Type="Play" Scope="One" Global="false">
-									<PropertyList>
-										<Property Name="Probability" Type="Real64" Value="25"/>
-									</PropertyList>
-									<ElementList>
-										<Element ID="{548D4049-CC6A-488D-BB3B-AADAD2ACE0BF}" Global="false">
-											<ObjectRef Name="MaleWarrior2Attack" ID="{3FD8F182-5C9A-479F-9776-282035F5B5F2}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_MaleWarrior2Death" ID="{8DD691F0-2707-4A4F-8EC2-89FBF0BCDC19}">
-							<ChildrenList>
-								<Action Name="Play" ID="{A632A98E-8D54-4A07-82B0-0282C7F1CA11}" ShortID="350577277" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{D756C2A7-1A05-499F-A4DA-E3FA6537BCCD}" Global="false">
-											<ObjectRef Name="MaleWarrior2Death" ID="{C5AD6BB7-AA9F-4DF8-AA02-07B513A1F892}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-										</Element>
-									</ElementList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_MaleWarrior2Hit" ID="{F2ED8D86-016F-4850-9D23-3A4925E9DB09}">
-							<ChildrenList>
-								<Action Name="Play" ID="{C8D4A5BD-DDEC-4FC7-9659-291E563D9D28}" ShortID="771684779" Type="Play" Scope="One" Global="false">
-									<ElementList>
-										<Element ID="{FB53CDCD-58CE-47DB-BF4F-C2FB9341A669}" Global="false">
-											<ObjectRef Name="MaleWarrior2Hit" ID="{8C50010B-BC77-40F7-BB3F-19563761B678}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="MaleDeath" ID="{A9277524-9A64-4D3C-BA86-4E0EA39AFAE1}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>

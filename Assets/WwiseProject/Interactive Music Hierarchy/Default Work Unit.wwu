@@ -239,10 +239,15 @@
 						<MusicPlaylistContainer Name="Combat" ID="{197E3D62-07CB-46DE-A405-19183295EC0E}" ShortID="592923918">
 							<PropertyList>
 								<Property Name="GridFrequencyPreset" Type="int16" Value="53"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>39</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Tempo" Type="Real64" Value="75"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-6</Value>
+										<Value>-9</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -412,7 +417,7 @@
 								<Property Name="Tempo" Type="Real64" Value="75"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -538,7 +543,7 @@
 								<Property Name="Tempo" Type="Real64" Value="106"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-7</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -552,6 +557,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<MusicTrack Name="ExploreToCombat" ID="{4F71AE1C-13B0-42CA-A0A3-1DF1B2E8478E}" ShortID="547649973">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="OutputBus">
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
@@ -633,8 +645,18 @@
 																		<Flags>5</Flags>
 																	</Point>
 																	<Point>
+																		<XPos>0.8201</XPos>
+																		<YPos>-4.40589</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>2.39598</XPos>
+																		<YPos>-5.9277</YPos>
+																		<Flags>0</Flags>
+																	</Point>
+																	<Point>
 																		<XPos>7.8</XPos>
-																		<YPos>0</YPos>
+																		<YPos>-4.88415</YPos>
 																		<Flags>37</Flags>
 																	</Point>
 																</PointList>
@@ -652,7 +674,7 @@
 								<MusicCue Name="Exit Cue" ID="{6C4D5094-6AF7-4EBA-A4A4-D0D9BF069836}">
 									<PropertyList>
 										<Property Name="CueType" Type="int16" Value="1"/>
-										<Property Name="TimeMs" Type="Real64" Value="1132.07547169811"/>
+										<Property Name="TimeMs" Type="Real64" Value="566.037735849057"/>
 									</PropertyList>
 								</MusicCue>
 							</CueList>
@@ -1577,8 +1599,8 @@
 											<MusicFade Name="Source Fade-out" ID="{B91D5A31-8A8A-4F14-8FC4-EBE97B92234B}">
 												<PropertyList>
 													<Property Name="FadeCurve" Type="int16" Value="6"/>
-													<Property Name="FadeOffset" Type="Real64" Value="2"/>
-													<Property Name="FadeTime" Type="Real64" Value="2"/>
+													<Property Name="FadeOffset" Type="Real64" Value="1"/>
+													<Property Name="FadeTime" Type="Real64" Value="1"/>
 													<Property Name="FadeType" Type="int16" Value="1"/>
 												</PropertyList>
 											</MusicFade>
@@ -1628,8 +1650,8 @@
 										<SourceFadeOut>
 											<MusicFade Name="Source Fade-out" ID="{1291B737-2511-4660-9921-4BC6A7BD29D0}">
 												<PropertyList>
-													<Property Name="FadeOffset" Type="Real64" Value="2"/>
-													<Property Name="FadeTime" Type="Real64" Value="2"/>
+													<Property Name="FadeOffset" Type="Real64" Value="1"/>
+													<Property Name="FadeTime" Type="Real64" Value="1"/>
 													<Property Name="FadeType" Type="int16" Value="1"/>
 												</PropertyList>
 											</MusicFade>
