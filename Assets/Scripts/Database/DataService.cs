@@ -116,7 +116,7 @@ public class DataService : MonoBehaviour
                 damageSpeed = 2.5f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.BraveFool,
-                targetTrait = CharacterValues.TargetTrait.Codependant,
+                targetTrait = CharacterValues.TargetTrait.NoTrait,
                 prefabName = StringResources.follower1PrefabName,
                 materialName = StringResources.follower1MaterialName
             },
