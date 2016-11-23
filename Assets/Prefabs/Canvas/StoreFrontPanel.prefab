@@ -235,7 +235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get free gold
+  m_Text: Get free premium
 --- !u!114 &114000013270890350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,8 +328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GatherCost: 0
   GatherCostIncrease: 0
-  BlacksmithCost: 0
-  BlacksmithCostIncrease: 0
   LeaderHealthCost: 0
   LeaderHealthCostIncrease: 0
   LeaderStrengthCost: 0
@@ -337,12 +335,22 @@ MonoBehaviour:
   MaxVillagesCost: 0
   MaxVillagesCostIncrease: 0
   FinishUpgradeCost: 10
+  Level1_Time: 0
+  Level2_Time: 0
+  Level3_Time: 0
+  Level4_Time: 0
+  Level5_Time: 0
+  Level6_Time: 0
+  Level7_Time: 0
+  Level8_Time: 0
+  Level9_Above_Time: 0
   TextLevels:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  TextCosts: []
   Buttons:
   - {fileID: 0}
   - {fileID: 0}
@@ -350,6 +358,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   FinishNow: {fileID: 0}
+  UpgradeConfirmationPanel: {fileID: 0}
+  InsufficientScrapsPanel: {fileID: 0}
+  ConfirmationShade: {fileID: 0}
 --- !u!222 &222000010339054324
 CanvasRenderer:
   m_ObjectHideFlags: 1

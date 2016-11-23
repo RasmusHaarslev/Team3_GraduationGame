@@ -38,6 +38,8 @@ public class CampManager : MonoBehaviour
 	public Text[] TextCosts;
     public Button[] Buttons;
     public Button FinishNow;
+	public GameObject FinishConfirmationPanel;
+	public GameObject InsufficientPremiumPanel;
 	public GameObject UpgradeConfirmationPanel;
 	public GameObject InsufficientScrapsPanel;
 	public GameObject ConfirmationShade;
@@ -98,6 +100,8 @@ public class CampManager : MonoBehaviour
             var stream = new FileStream(path, FileMode.Open);
             Upgrades = serializer.Deserialize(stream) as CampUpgrades;
             Upgrades.GetCurrency();
+			FinishNow.interactable = Upgrades.UpgradeInProgress;
+
             SetLevels();
 			SetCosts ();
             stream.Close();
@@ -151,7 +155,12 @@ public class CampManager : MonoBehaviour
 
     public void FinishUpgradeClicked()
     {
-        tempGold = (int) Mathf.Max( ((float)TimeLeftInSeconds())/10.0f, 1.0f);
+		if (GameController.Instance._PREMIUM < FinishUpgradeCost)
+			InsufficientPremiumPanel.SetActive (true);
+		else
+			FinishConfirmationPanel.SetActive (true);
+
+		ConfirmationShade.SetActive (true);
     }
 
     public void FinishUpgradeNow()
@@ -199,7 +208,7 @@ public class CampManager : MonoBehaviour
 
     #region Upgrade Buttons
 
-	private void OpenPopUp(int cost) {
+	private void OpenUpgradePopUp(int cost) {
 		if (cost > GameController.Instance._SCRAPS)
 			InsufficientScrapsPanel.SetActive (true);
 		else
@@ -214,7 +223,7 @@ public class CampManager : MonoBehaviour
         tempCost            = GatherCost + (GatherCostIncrease * Upgrades.GatherLevel);
         amountOfSeconds     = GetTimeForUpgrade(Upgrades.GatherLevel);
 
-		OpenPopUp (tempCost);
+		OpenUpgradePopUp (tempCost);
     }
 
     public void UpgradeVillages()
@@ -223,7 +232,7 @@ public class CampManager : MonoBehaviour
         tempCost = MaxVillagesCost + (MaxVillagesCostIncrease * Upgrades.MaxVillages);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
 
-		OpenPopUp (tempCost);
+		OpenUpgradePopUp (tempCost);
     }
 
     public void UpgradeLeaderHealth()
@@ -232,7 +241,7 @@ public class CampManager : MonoBehaviour
         tempCost = LeaderHealthCost + (LeaderHealthCostIncrease * Upgrades.LeaderHealthLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
 
-		OpenPopUp (tempCost);
+		OpenUpgradePopUp (tempCost);
     }
 
     public void UpgradeLeaderStrength()
@@ -241,7 +250,7 @@ public class CampManager : MonoBehaviour
         tempCost = LeaderStrengthCost + (LeaderStrengthCostIncrease * Upgrades.LeaderStrengthLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
 
-		OpenPopUp (tempCost);
+		OpenUpgradePopUp (tempCost);
     }
 
     private void SetLevels()
