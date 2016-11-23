@@ -23,7 +23,19 @@ public class CampManager : MonoBehaviour
     public int MaxVillagesCostIncrease;
 
     [Tooltip("The amount of gold it costs to finish an upgrade.")]
-    public int FinishUpgradeCost = 10;
+    public int FinishUpgradeCost;
+
+    #region
+    public int Level1_Time;
+    public int Level2_Time;
+    public int Level3_Time;
+    public int Level4_Time;
+    public int Level5_Time;
+    public int Level6_Time;
+    public int Level7_Time;
+    public int Level8_Time;
+    public int Level9_Above_Time;
+    #endregion
 
     public Text[] TextLevels;
     public Button[] Buttons;
@@ -33,10 +45,8 @@ public class CampManager : MonoBehaviour
     private double amountOfSeconds = 0.0;
     private string tempUpgradeName = "";
     private int tempCost = 0;
-
     private int tempGold = 0;
     #endregion
-
 
     #region Setup Instance
     private static CampManager _instance;
@@ -240,34 +250,34 @@ public class CampManager : MonoBehaviour
         switch (level)
         {
             case 0:
-                return 60;
+                return Level1_Time;
 
             case 1:
-                return 120;
+                return Level2_Time;
 
             case 2:
-                return 300;
+                return Level3_Time;
 
             case 3:
-                return 600;
+                return Level4_Time;
 
             case 4:
-                return 900;
+                return Level5_Time;
 
             case 5:
-                return 1200;
+                return Level6_Time;
 
             case 6:
-                return 1800;
+                return Level7_Time;
 
             case 7:
-                return 2700;
+                return Level8_Time;
 
             case 8:
-                return 3600;
+                return Level9_Above_Time;
 
             default:
-                return 7200;
+                return Level9_Above_Time;
         }
     }
 }

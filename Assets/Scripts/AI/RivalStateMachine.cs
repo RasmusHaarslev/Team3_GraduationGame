@@ -43,7 +43,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	void Update()
 	{
-		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !character.isDead)
 		{
 			agent.Stop();
 		}
