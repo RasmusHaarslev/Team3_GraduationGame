@@ -4,6 +4,13 @@
 		<WorkUnit Name="Default Work Unit" ID="{AA8D190D-B159-4D3A-8348-121D2CA50747}" PersistMode="Standalone">
 			<ChildrenList>
 				<Bus Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
+					<PropertyList>
+						<Property Name="BusVolume" Type="Real64">
+							<ValueList>
+								<Value>-2</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ChildrenList>
 						<Bus Name="SFX" ID="{6933BDF4-F0F4-4AEB-BDE4-B33E6797D3B3}">
 							<PropertyList>
@@ -41,12 +48,25 @@
 								</Property>
 							</PropertyList>
 							<ChildrenList>
-								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}"/>
+								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 								<Bus Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}">
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>-4</Value>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>18</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -70,6 +90,13 @@
 									</StateInfo>
 								</Bus>
 								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<StateInfo>
 										<StateGroupList>
 											<StateGroupInfo>
@@ -88,7 +115,15 @@
 										</CustomStateList>
 									</StateInfo>
 								</Bus>
-								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}"/>
+								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 								<Bus Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}"/>
 							</ChildrenList>
 						</Bus>
@@ -128,7 +163,15 @@
 								</Property>
 							</PropertyList>
 							<ChildrenList>
-								<Bus Name="Explore" ID="{FE6AD22F-85E0-4925-AA6F-A0F4FA885A3F}"/>
+								<Bus Name="Explore" ID="{FE6AD22F-85E0-4925-AA6F-A0F4FA885A3F}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 								<Bus Name="Combat" ID="{D51F3137-377C-4C2F-86B9-2B859B03B417}"/>
 							</ChildrenList>
 						</Bus>
