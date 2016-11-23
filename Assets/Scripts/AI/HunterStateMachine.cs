@@ -295,6 +295,15 @@ public class HunterStateMachine : CoroutineMachine
 			}
 			else
 			{
+				if (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit)
+				{
+					ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
+					yield return new TransitionTo(FleeState, DefaultTransition);
+				}
+				if (combatCommandState == CombatCommandState.Flee)
+				{
+					yield return new TransitionTo(FleeState, DefaultTransition);
+				}
 				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && combatTrait != CharacterValues.CombatTrait.Clingy)
 				{
 					yield return new TransitionTo(StayState, DefaultTransition);
@@ -452,17 +461,17 @@ public class HunterStateMachine : CoroutineMachine
 
 	private void ProjectTrait(CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait, CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait)
 	{
-
-			StartCoroutine(TraitProjector(combatTrait, targetTrait));
-
+		StartCoroutine(TraitProjector(combatTrait, targetTrait));
 	}
 
 	IEnumerator TraitProjector(CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait, CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait)
 	{
 		GameObject proj = Instantiate(traitProjection);
-		if (combatTrait != CharacterValues.CombatTrait.NoTrait) {
+		if (combatTrait != CharacterValues.CombatTrait.NoTrait)
+		{
 			proj.GetComponent<traitText>().trait = combatTrait.ToString();
-		} else
+		}
+		else
 		{
 			proj.GetComponent<traitText>().trait = targetTrait.ToString();
 		}
