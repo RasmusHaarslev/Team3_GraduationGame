@@ -116,7 +116,7 @@ public class DataService : MonoBehaviour
                 damageSpeed = 2.5f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.BraveFool,
-                targetTrait = CharacterValues.TargetTrait.NoTrait,
+                targetTrait = CharacterValues.TargetTrait.Codependant,
                 prefabName = StringResources.follower1PrefabName,
                 materialName = StringResources.follower1MaterialName
             },
@@ -384,6 +384,16 @@ public class DataService : MonoBehaviour
         });
 
     }
+
+    public void ResetDatabase()
+    {
+        _connection.DropTable<CharacterValues>();
+        _connection.DropTable<EquippableitemValues>();
+        _connection.DropTable<InventoryItem>();
+
+        CreateDB();
+    }
+
     #region character methods
     public IEnumerable<CharacterValues> GetFellowshipValues()
     {

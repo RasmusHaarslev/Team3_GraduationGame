@@ -70,7 +70,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	public float transitionTime = 0.05f;
 	public float fearfulHealthLimit = 25;
-	public int maxLowAttentionSpanCounter = 3;
+	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
 
 	// Trait visualisation
@@ -339,6 +339,22 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		if (character.target.GetComponent<TutorialCharacter>() != null)
+		{
+			if (!character.target.GetComponent<TutorialCharacter>().isInCombat)
+			{
+				character.isInCombat = false;
+				yield return new TransitionTo(StartState, DefaultTransition);
+			}
+		}
+		else if (character.target.GetComponent<Character>() != null)
+		{
+			if (!character.target.GetComponent<Character>().isInCombat)
+			{
+				character.isInCombat = false;
+				yield return new TransitionTo(StartState, DefaultTransition);
+			}
+		}
 		agent.Resume();
 		agent.stoppingDistance = character.range;
 		agent.SetDestination(character.target.transform.position);
@@ -348,13 +364,21 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator CombatState()
 	{
 		agent.Stop();
-		character.RotateTowards(character.target.transform);
-		character.animator.SetTrigger("Attack");
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
-		lowAttentionSpanCounter--;
-		character.RotateTowards(character.target.transform);
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (character.target != null)
+		{
+			if (!character.target.GetComponent<Character>().isInCombat)
+			{
+				character.isInCombat = false;
+				yield return new TransitionTo(StartState, DefaultTransition);
+			}
+			character.RotateTowards(character.target.transform);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(character.damageSpeed);
+			character.DealDamage();
+			lowAttentionSpanCounter--;
+			character.RotateTowards(character.target.transform);
+			yield return new TransitionTo(StartState, DefaultTransition);
+		}
 	}
 
 	IEnumerator DeadState()

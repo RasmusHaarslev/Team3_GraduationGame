@@ -21,6 +21,8 @@ public class OptionsPanel : MonoBehaviour {
 
     public void TogglePanelOpen()
     {
+        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        
         BackgroundPanel.SetActive(true);
         OptionPanel.SetActive(true);
     }
