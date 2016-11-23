@@ -120,6 +120,7 @@ public class TutorialRivalMachine : CoroutineMachine
 	{
 		if (!character.isDead)
 		{
+			character.isInCombat = false;
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
@@ -140,13 +141,16 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
-		character.RotateTowards(character.target.transform);
 		agent.Stop();
-		character.animator.SetTrigger("Attack");
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
-		character.RotateTowards(character.target.transform);
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (character.target != null)
+		{
+
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(character.damageSpeed);
+			character.DealDamage();
+			character.RotateTowards(character.target.transform);
+			yield return new TransitionTo(StartState, DefaultTransition);
+		}
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)

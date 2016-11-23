@@ -20,7 +20,12 @@ public class GoToLevelSelection : MonoBehaviour {
         EventManager.Instance.StopListening<LevelCleared>(ClearedLevel);
     }
 
-    public void ClearedLevel(GameEvent e)
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
+	public void ClearedLevel(GameEvent e)
     {
         Debug.Log(winAnimation);
         winAnimation = true;
