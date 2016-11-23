@@ -49,8 +49,7 @@ public class CampTutorialController : MonoBehaviour
 
     public void ClickItem()
     {
-        DataService dataService = new DataService(StringResources.databaseName);
-        List<EquippableitemValues> inventoryItems = new List<EquippableitemValues>(dataService.GetEquippableItemsValuesFromInventory());
+        List<EquippableitemValues> inventoryItems = new List<EquippableitemValues>(GameController.Instance.dataService.GetEquippableItemsValuesFromInventory());
 
         if (inventoryItems[0].Type == EquippableitemValues.type.rifle)
             Manager_Audio.PlaySound(Manager_Audio.play_pickRiffle, gameObject);

@@ -173,6 +173,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoseGame(string scene = "PlayerDeathCutscene")
     {
+        GameController.Instance.LoseGame();
         GameController.Instance.LoadScene(scene);
     }
 

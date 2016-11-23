@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour {
     public int _SCRAPS = 10;
     public int _PREMIUM = 10;
 
+    public DataService dataService;
+
     #region Setup Instance
     private static GameController _instance;
 
@@ -81,6 +83,8 @@ public class GameController : MonoBehaviour {
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+
+        dataService = new DataService(StringResources.databaseName);
 
         if (PlayerPrefs.HasKey("Food"))
         {
@@ -154,5 +158,12 @@ public class GameController : MonoBehaviour {
 
         var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
         SceneManager.LoadScene(randomScene);
+    }
+
+    public void LoseGame()
+    {
+        PlayerPrefs.DeleteAll();
+
+        dataService.ResetDatabase();
     }
 }
