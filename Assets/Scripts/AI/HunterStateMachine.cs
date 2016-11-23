@@ -70,7 +70,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	public float transitionTime = 0.05f;
 	public float fearfulHealthLimit = 25;
-	public int maxLowAttentionSpanCounter = 3;
+	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
 
 	// Trait visualisation
