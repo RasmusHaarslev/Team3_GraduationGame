@@ -21,7 +21,7 @@ public class PanelScript : MonoBehaviour {
     public int newCharPoints = 15;
     [Range (0f, 1f)]
     public float damagePointsChance = 0.5f;
-    public GameObject camsAndNewSoldiersPosition;
+    public Transform camsAndNewSoldiersPosition;
     public GameObject silhouette;
     //public bool alreadyGeneratedNewSoldiers = false;
     List<GameObject> newSoldiersList = new List<GameObject>();
@@ -61,8 +61,6 @@ public class PanelScript : MonoBehaviour {
             {
                 foreach (Transform soldiertrans in solidersSpawnPosition)
                 {
-                    Debug.Log(silhouetteGO.transform.localPosition);
-                    Debug.Log(soldiertrans.localPosition);
                     if (silhouetteGO.transform.localPosition == soldiertrans.localPosition)
                     {
                         print("adding as new Character");
@@ -81,6 +79,18 @@ public class PanelScript : MonoBehaviour {
                         newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                         newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
                         newSoldiersList[i].AddComponent<PanelController>();
+                        if(soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                        }
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(2).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                        }
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(3).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                        }
                     }
                 }  
                
@@ -96,18 +106,22 @@ public class PanelScript : MonoBehaviour {
 
     public void GetNewSoldiers()
     {
-        newSoldiersList.Add(GenerateNewHunter());
-        newSoldiersList.Add(GenerateNewHunter());
-        newSoldiersList.Add(GenerateNewHunter());      
+        foreach (Transform trans in camsAndNewSoldiersPosition)
+        {
+            newSoldiersList.Add(GenerateNewHunter(trans));
+        }
+        //newSoldiersList.Add(GenerateNewHunter());
+        //newSoldiersList.Add(GenerateNewHunter());
+        //newSoldiersList.Add(GenerateNewHunter());      
         newSoldiersList[0].GetComponent<NavMeshAgent>().enabled = false;
         newSoldiersList[1].GetComponent<NavMeshAgent>().enabled = false;
         newSoldiersList[2].GetComponent<NavMeshAgent>().enabled = false;
         newSoldiersList[0].GetComponent<HunterStateMachine>().enabled = false;
         newSoldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
         newSoldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
-        newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-        newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+        //newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        //newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+        //newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
 
         FillInNewSoldierStats();
     
@@ -340,10 +354,10 @@ public class PanelScript : MonoBehaviour {
 
     #endregion
 
-    public GameObject GenerateNewHunter()
+    public GameObject GenerateNewHunter(Transform newSoldierTrans)
     {
         CharacterValues newCharValues = GenerateNewCharacterValues();
-        GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, new Vector3(0, 0, -12));
+        GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
        
         //create new weapon for new soldier
         Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
