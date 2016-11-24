@@ -65,6 +65,8 @@ public class RivalStateMachine : CoroutineMachine
 		averageHealth = poimanager.GetAverageCharactersHealth();
 		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
+			EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+			character.isFleeing = true;
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
 		if (character.isInCombat)
@@ -93,13 +95,11 @@ public class RivalStateMachine : CoroutineMachine
 			{
 				character.isInCombat = false;
 			}
-
 		}
 		else
 		{
 			yield return new TransitionTo(RoamState, DefaultTransition);
 		}
-
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -125,7 +125,7 @@ public class RivalStateMachine : CoroutineMachine
 			character.isInCombat = false;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		}
-		yield return new TransitionTo(StartState, DefaultTransition);
+		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
@@ -141,12 +141,14 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
-		character.RotateTowards(character.target.transform);
-		agent.Stop();
-		character.RotateTowards(character.target.transform);
-		character.animator.SetTrigger("Attack");
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
+		if (!character.isDead)
+		{
+			agent.Stop();
+			character.RotateTowards(character.target.transform);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(character.damageSpeed);
+			character.DealDamage();
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

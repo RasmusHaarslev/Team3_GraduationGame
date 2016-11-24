@@ -57,7 +57,7 @@ public abstract class CoroutineMachine : MonoBehaviour
 		{
 			if (!coroutine.MoveNext())
 			{
-				Debug.LogError("Broke out of the current state. Will resume.");
+				Debug.LogError("Broke out of the current state. Will resume." + m_CurrentState());
 				yield break;
 			}
 
