@@ -183,10 +183,16 @@ public class FollowStateEvent : GameEvent
 
 public class AllyDeathEvent : GameEvent
 {
-	public AllyDeathEvent()
+    public Character deadAlly;
+
+    public AllyDeathEvent()
 	{
 
 	}
+    public AllyDeathEvent(Character deadAlly)
+    {
+        this.deadAlly = deadAlly;
+    }
 }
 
 public class ItemSpawned : GameEvent
