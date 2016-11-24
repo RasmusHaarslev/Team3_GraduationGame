@@ -18,7 +18,9 @@ public class RagdollControl : MonoBehaviour
 	private CapsuleCollider playerCapsuleCollider;
 	[SerializeField]
 	private SphereCollider playerSphereCollider;
-
+	[SerializeField]
+	private float pushForceOnDeath=10;
+	public ForceMode forceModePush = ForceMode.Impulse;
 	#region System
 	void Awake()
 	{
@@ -42,19 +44,21 @@ public class RagdollControl : MonoBehaviour
 
 	public void EnableRagDoll()
 	{
+		
 		if (playerCollider != null)
 		{
 			playerCollider.isTrigger = true;
 		}
+
 		foreach (var rigid in rigidBodiesRagdoll)
 		{
-			
 				rigid.WakeUp();
-			
 		}
+
 		ToggleColliders(true);
 		ToggleRigids(false);
 		anim.enabled = false;
+		rigidbody.AddForce(-transform.forward*pushForceOnDeath,forceModePush);
 	}
 
 	public void DisableRagDoll()
