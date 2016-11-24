@@ -21,7 +21,12 @@ public class PanelScript : MonoBehaviour {
     public int newCharPoints = 15;
     [Range (0f, 1f)]
     public float damagePointsChance = 0.5f;
-
+    public Transform camsAndNewSoldiersPosition;
+    public GameObject silhouette;
+    //public bool alreadyGeneratedNewSoldiers = false;
+    List<GameObject> newSoldiersList = new List<GameObject>();
+    public GameObject silhouetteGO;
+    //public List<GameObject> silhouetteList = new List<GameObject>();
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -46,47 +51,122 @@ public class PanelScript : MonoBehaviour {
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
-        
-        GetNewSoldiers();// this should be called when player clicks on silhouette
     }
 
-    void GetNewSoldiers()
+    public void SpawnNewSoldier(int index)
     {
-        GameObject Soldier1 = SpawnNewSoldiers();
-        GameObject Soldier2 = SpawnNewSoldiers();
-        GameObject Soldier3 = SpawnNewSoldiers();
-        Soldier1.GetComponent<NavMeshAgent>().enabled = false;
-        Soldier2.GetComponent<NavMeshAgent>().enabled = false;
-        Soldier3.GetComponent<NavMeshAgent>().enabled = false;
-        Soldier1.GetComponent<HunterStateMachine>().enabled = false;
-        Soldier2.GetComponent<HunterStateMachine>().enabled = false;
-        Soldier3.GetComponent<HunterStateMachine>().enabled = false;
-        Soldier1.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        Soldier2.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-        Soldier3.transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
-        FillInNewSoldierStats();
+        for(int i = 0; i < newSoldiersList.Count; i++)
+        {
+            if(index == i)
+            {
+                foreach (Transform soldiertrans in solidersSpawnPosition)
+                {
+                    if (silhouetteGO.transform.localPosition == soldiertrans.localPosition)
+                    {
+                        print("adding as new Character");
+                        newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
+                        print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
+
+                        GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
+                        print("id of the weapon "+newWeapon.GetComponent<EquippableItem>().itemValues.id );
+                        //destroy current puppet weapon
+                        Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
+                        //equip weapon
+                        print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
+                        
+                        dataService.equipItemsToCharacter(new[] { newWeapon },newSoldiersList[i].GetComponent<Character>());
+                        
+                        newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
+                        newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
+                        newSoldiersList[i].AddComponent<PanelController>();
+                        if(soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                        }
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(2).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                        }
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(3).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                        }
+                    }
+                }  
+               
+            }
+            else
+            {
+                Destroy(newSoldiersList[i]);
+            }
+        }
+        newSoldiersList.Clear();
+        Destroy(silhouetteGO);
     }
+
+    public void GetNewSoldiers()
+    {
+        foreach (Transform trans in camsAndNewSoldiersPosition)
+        {
+            newSoldiersList.Add(GenerateNewHunter(trans));
+        }
+        //newSoldiersList.Add(GenerateNewHunter());
+        //newSoldiersList.Add(GenerateNewHunter());
+        //newSoldiersList.Add(GenerateNewHunter());      
+        newSoldiersList[0].GetComponent<NavMeshAgent>().enabled = false;
+        newSoldiersList[1].GetComponent<NavMeshAgent>().enabled = false;
+        newSoldiersList[2].GetComponent<NavMeshAgent>().enabled = false;
+        newSoldiersList[0].GetComponent<HunterStateMachine>().enabled = false;
+        newSoldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
+        newSoldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
+        //newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+        //newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+        //newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+
+        FillInNewSoldierStats();
+    
+    }
+
     void InitializeSoldiers()
     {
+        int[] layersIndices = new[] { 9, 10, 11, 12 };
+
+
         for(int i = 0; i < charactersFellowship.transform.childCount; i++)
         {
             soldiersList.Add(charactersFellowship.transform.GetChild(i).gameObject);
         }
 
-        foreach (var soldier in soldiersList)
+        for (int i = 0; i < soldiersList.Count; i++)      
         {
-            soldier.AddComponent<PanelController>();
-            soldier.GetComponent<NavMeshAgent>().enabled = false;     
+            
+            soldiersList[i].AddComponent<PanelController>();
+            soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;     
+
+            
+            if(soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
+            {
+                soldiersList[i].GetComponent<MoveScript>().enabled = false;
+                soldiersList[i].GetComponent<Formation>().enabled = false;
+            }
+            else
+            {
+                soldiersList[i].GetComponent<HunterStateMachine>().enabled = false;              
+            }
+
+            soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
+
         }
-        
-        soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
-        soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
-        soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
-        soldiersList[0].GetComponent<MoveScript>().enabled = false;
-        soldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Player");
-        soldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        soldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-        soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+      
+        if(solidersSpawnPosition.childCount != soldiersList.Count)
+        {
+            for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
+            {
+                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position, Quaternion.identity);
+                //silhouetteList.Add(silhouette);
+            }
+        }
+
     }
 
     #region Cameras
@@ -185,8 +265,15 @@ public class PanelScript : MonoBehaviour {
         foreach(var stat in soldierStatsList)
         {        
             if (stat.name == "Type")
-            {     
-                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
+            {
+                if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
+                {
+                    stat.GetComponent<Text>().text = "Leader";
+                }
+                else
+                {
+                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
+                }
             }
             if (stat.name == "Damage")
             {
@@ -267,6 +354,23 @@ public class PanelScript : MonoBehaviour {
 
     #endregion
 
+    public GameObject GenerateNewHunter(Transform newSoldierTrans)
+    {
+        CharacterValues newCharValues = GenerateNewCharacterValues();
+        GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
+       
+        //create new weapon for new soldier
+        Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
+        EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+        IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
+        Character hunterChar = hunter.GetComponent<Character>();
+        //generate  and attach the weapon
+        dataService.equipItemsToCharacter(newWeapon, hunterChar);
+
+        return hunter;
+
+    }
+
     public CharacterValues GenerateNewCharacterValues()
     {
         CharacterValues newCharValues = new CharacterValues();
@@ -288,8 +392,15 @@ public class PanelScript : MonoBehaviour {
             newCharValues.materialName = StringResources.femaleHuntersMaterials[UnityEngine.Random.Range(0, StringResources.femaleHuntersMaterials.Length)];
         }
         
+        //give name to soldier and assign type
         newCharValues.name = characterName;
         newCharValues.Type = CharacterValues.type.Hunter;
+
+        Array values = Enum.GetValues(typeof(CharacterValues.CombatTrait));
+        newCharValues.combatTrait = (CharacterValues.CombatTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        values = Enum.GetValues(typeof(CharacterValues.TargetTrait));
+        newCharValues.targetTrait = (CharacterValues.TargetTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+
         //generate stats
         newCharValues = GenerateNewCharacterStats(newCharValues);
        
@@ -315,22 +426,11 @@ public class PanelScript : MonoBehaviour {
             randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         }
         
-        charValues.damageSpeed = 5; 
-        charValues.range = 5;
-
-        Array values = Enum.GetValues(typeof(CharacterValues.CombatTrait));
-        charValues.combatTrait = (CharacterValues.CombatTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        values = Enum.GetValues(typeof(CharacterValues.TargetTrait));
-        charValues.targetTrait = (CharacterValues.TargetTrait)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        //charValues.damageSpeed = 5; 
+        //charValues.range = 5;    
 
         return charValues;
 
-    }
-
-    GameObject SpawnNewSoldiers()
-    {
-        CharacterValues char1Values = GenerateNewCharacterValues();
-        return dataService.GenerateCharacterFromValues(char1Values, new Vector3(0, 0, -12));
     }
 
 }
