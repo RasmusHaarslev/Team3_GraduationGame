@@ -75,6 +75,7 @@ public class Node : MonoBehaviour {
         {
             canPlay = true;
         }
+
         if (wolveCamps == 0 && tribeCamps == 0 && choiceCamps == 0) { 
             SetupCampsForThisNode();
             SetupResourceForThisNode();
