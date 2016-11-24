@@ -96,6 +96,7 @@ public class Character : MonoBehaviour
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
+				GetComponentInChildren<AggroRange>().gameObject.SetActive(false);
 				// VESO REMOVE THIS:
 				GetComponent<RagdollControl>().EnableRagDoll();
 

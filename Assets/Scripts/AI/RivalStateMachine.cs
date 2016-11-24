@@ -141,13 +141,15 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
-		character.RotateTowards(character.target.transform);
-		agent.Stop();
-		character.RotateTowards(character.target.transform);
-		character.animator.SetTrigger("Attack");
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (!character.isDead)
+		{
+			agent.Stop();
+			character.RotateTowards(character.target.transform);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(character.damageSpeed);
+			character.DealDamage();
+			yield return new TransitionTo(StartState, DefaultTransition);
+		}
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
