@@ -228,7 +228,8 @@ public class DataService : MonoBehaviour
               health = 20,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier1-2Material"
           },
           new CharacterValues
           {
@@ -240,7 +241,8 @@ public class DataService : MonoBehaviour
               health = 20,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier1-2Material"
           },
           new CharacterValues
           {
@@ -253,7 +255,8 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier3-4Material"
           },
           new CharacterValues
           {
@@ -266,7 +269,8 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier3-4Material"
           },
             new CharacterValues
           {
@@ -279,7 +283,8 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier5-6Material"
           },
             new CharacterValues
           {
@@ -292,7 +297,8 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier5-6Material"
           },
         });
 
