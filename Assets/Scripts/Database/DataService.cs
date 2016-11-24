@@ -402,9 +402,22 @@ public class DataService : MonoBehaviour
     }
 
     #region character methods
+    
+    /// <summary>
+    /// Add values to db and returns the id
+    /// </summary>
+    /// <param name="hunterValues"></param>
+    /// <returns></returns>
+    public int AddcharacterToDbByValues(CharacterValues hunterValues)
+    {
+        _connection.Insert(hunterValues);
+        return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()"); 
+    }
+
     public IEnumerable<CharacterValues> GetFellowshipValues()
     {
-        return _connection.Table<CharacterValues>();
+        return _connection.Table<CharacterValues>().Where(x => x.Type == CharacterValues.type.Hunter || x.Type == CharacterValues.type.Player);
+
     }
 
     //TODO generalize this function with any number of fellowship and with rotation
@@ -412,18 +425,18 @@ public class DataService : MonoBehaviour
     {
         CharacterSpawner[] spawners = fellowshipLocation.gameObject.GetComponentsInChildren<CharacterSpawner>().ToArray();
         GameObject fellowship = new GameObject("PlayerFellowship");
+        CharacterValues[] fellowshipValues = GetFellowshipValues().ToArray();
+
         if (spawners.Length == 4)
         {
-            //istantiate player
-            GameObject daniel = GenerateCharacterByName("Daniel", spawners[0].transform.position, spawners[0].transform.rotation);
-            daniel.transform.parent = fellowship.transform;
-            //istantiate fellows and parent them to player
-            GameObject john = GenerateCharacterByName("John", spawners[1].transform.position, spawners[1].transform.rotation);
-            john.transform.parent = fellowship.transform;
-            GameObject nicolai = GenerateCharacterByName("Nicolai", spawners[2].transform.position, spawners[2].transform.rotation);
-            nicolai.transform.parent = fellowship.transform;
-            GameObject peter = GenerateCharacterByName("Peter", spawners[3].transform.position, spawners[3].transform.rotation);
-            peter.transform.parent = fellowship.transform;
+            for(int i=0; i < fellowshipValues.Length;i++)
+            {
+                //istantiate player
+                GameObject charGameObject = GenerateCharacterFromValues(fellowshipValues[i], spawners[i].transform.position, spawners[i].transform.rotation);
+                charGameObject.transform.parent = fellowship.transform;
+            }
+            
+            
         }
         else
         {
@@ -435,7 +448,18 @@ public class DataService : MonoBehaviour
 
     }
 
+    public bool RemoveCharacter(CharacterValues charToRemove)
+    {
+        if(charToRemove.id != 0)
+        {
+            _connection.Delete(charToRemove);
 
+            return true;
+
+        }
+
+        return false;
+    }
 
     public CharacterValues GetCharacterValuesByName(string characterName)
     {
@@ -538,7 +562,7 @@ public class DataService : MonoBehaviour
         character.GetComponent<Character>().init(charValues);
 
         //spawn weapons 
-        if(charValues.id != null) { 
+        if(charValues.id != 0) { 
         IEnumerable<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id));
         //equip weapons
         equipItemsToCharacter(equips, character.GetComponent<Character>());
@@ -627,16 +651,19 @@ public class DataService : MonoBehaviour
                 }
                 //add the new item values
                 //to the character prefab
+                Debug.Log(character.characterBaseValues.name + " " + currentEquipValues.name);
                 character.health += currentEquipValues.health;
                 character.damage += currentEquipValues.damage;
                 character.damageSpeed = currentEquipValues.damageSpeed;
                 character.range = currentEquipValues.range;
+                
                 //into the database
+                if (currentEquipValues.id != 0) {
                 currentEquipValues.characterId = character.characterBaseValues.id;
                 _connection.Update(currentEquipValues);
                 //remove from inventory
                 _connection.Query<InventoryItem>("DELETE FROM InventoryItem WHERE Type = " + (int)InventoryItem.type.equippable + " and deferredId = " + currentEquipValues.id);
-
+                }
             }
             else
             {
@@ -677,11 +704,19 @@ public class DataService : MonoBehaviour
 
     public GameObject GenerateNewEquippableItemFromValues(EquippableitemValues values)
     {
-        values.id = _connection.Insert(values);
+        _connection.Insert(values);
+        values.id = _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
 
         return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();
 
 
+    }
+
+    public int AddWeaponInDbByValues(EquippableitemValues itemValues)
+    {
+        _connection.Insert(  itemValues);
+
+        return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
     }
 
     public IEnumerable<EquippableitemValues> GetEquippableItemsValuesFromInventory()

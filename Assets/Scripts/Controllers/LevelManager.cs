@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-
+    private DataService dataService = new DataService(StringResources.databaseName);
     private int AlliesAlive;
     private bool PlayerAlive;
 
@@ -124,6 +124,10 @@ public class LevelManager : MonoBehaviour
 
     private void AllyDeath(AllyDeathEvent e)
     {
+        
+        //removing hunter from database
+        dataService.RemoveCharacter(e.deadAlly.characterBaseValues);
+
         AlliesAlive--;
 
         CheckConditions();
