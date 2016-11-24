@@ -115,6 +115,10 @@ public class Character : MonoBehaviour
 			isInCombat = false;
 			isDead = true;
 		}
+		if (!isInCombat)
+		{
+			currentOpponents.Clear();
+		}
 	}
 
 	void OnEnable()
