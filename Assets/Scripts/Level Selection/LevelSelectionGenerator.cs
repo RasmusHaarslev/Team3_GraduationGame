@@ -63,13 +63,17 @@ public class LevelSelectionGenerator : MonoBehaviour
         EventManager.Instance.StopListening<SaveLevelsToXML>(SaveDict);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     void Awake()
     {
         if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
         {
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
-            SetScrollPosition(0);
         }
         else
         {
@@ -79,17 +83,15 @@ public class LevelSelectionGenerator : MonoBehaviour
             totalAmountRows = 0;
             numOfLastLevels = nodesInRows.OrderBy(key => key.Key).Last().Value.Count;
             LoadRows();
-            Debug.Log(PlayerPrefs.GetInt("LevelResult"));
+
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
                 EventManager.Instance.TriggerEvent(new LevelCleared());
 
-                InstantiateRows(1);
+				InstantiateRows(1);
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
-
-            SetScrollPosition(SaveLoadLevels.maxRowsCleared);
 
             SaveDict(new SaveLevelsToXML());
         }
@@ -245,9 +247,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         }
 
         initialiseDropDown();
-        // Need to be changed to the node we are currently on
-        SetScrollPosition(0);
-        //printDict();
+
         SaveLoadLevels.SaveLevels(nodesInRows);
     }
 
@@ -437,7 +437,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         SetScrollPosition(target.value);
     }
 
-    void SetScrollPosition(int rowNumber)
+    public void SetScrollPosition(int rowNumber)
     {
         /* SETUP SCROLL POSITION */
         float rowHeight = rowPrefab.GetComponent<RectTransform>().rect.height;
@@ -458,6 +458,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         {
             t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
             scrollingGrid.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(pointA, pointB, t); // Set position proportional to t
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustScrollPitch, t);
             yield return null;         // Leave the routine and return here in the next frame
         }
         Manager_Audio.PlaySound(Manager_Audio.stop_scrollMap, gameObject);

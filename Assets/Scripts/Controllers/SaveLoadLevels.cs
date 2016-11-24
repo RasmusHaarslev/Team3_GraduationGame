@@ -10,7 +10,8 @@ using UnityEngine;
 public class SaveLoadLevels
 {
     public static Dictionary<int, GameObject> AllLevelsLoaded = new Dictionary<int, GameObject>();
-    public static int maxRowsCleared = 0;
+    public static int maxRowsCleared = -1;
+    public static GameObject lastNodeCleared;
 
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
@@ -41,7 +42,7 @@ public class SaveLoadLevels
                 xmlNode.tribeCamps = currentNode.tribeCamps;
                 xmlNode.choiceCamps = currentNode.choiceCamps;
                 xmlNode.foodAmount = currentNode.foodAmount;
-                xmlNode.coinAmount = currentNode.coinAmount;
+                xmlNode.scrapAmount = currentNode.scrapAmount;
                 xmlNode.itemDropAmount = currentNode.itemDropAmount;
                 xmlNode.isCleared = currentNode.isCleared;
                 xmlNode.isScouted = currentNode.isScouted;
@@ -111,7 +112,7 @@ public class SaveLoadLevels
                 currentNode.tribeCamps = node.tribeCamps;
                 currentNode.choiceCamps = node.choiceCamps;
                 currentNode.foodAmount = node.foodAmount;
-                currentNode.coinAmount = node.coinAmount;
+                currentNode.scrapAmount = node.scrapAmount;
                 currentNode.itemDropAmount = node.itemDropAmount;
                 currentNode.isCleared = node.isCleared;
                 currentNode.isScouted = node.isScouted;
@@ -120,8 +121,10 @@ public class SaveLoadLevels
                 currentNode.OnCreate(currentNode.NodeId);
 
                 // Finds the max rows
-                if (node.isCleared && row.Level > maxRowsCleared)
+                if (node.isCleared && row.Level > maxRowsCleared) { 
                     maxRowsCleared = row.Level;
+                    lastNodeCleared = nodeObject;
+                }
 
                 AllLevelsLoaded.Add(node.NodeId, nodeObject);
             }
@@ -199,8 +202,8 @@ public class NodeXML
     public int choiceCamps;
     [XmlAttribute("foodAmount")]
     public int foodAmount;
-    [XmlAttribute("coinAmount")]
-    public int coinAmount;
+    [XmlAttribute("scrapAmount")]
+    public int scrapAmount;
     [XmlAttribute("itemDropAmount")]
     public int itemDropAmount;
     [XmlAttribute("isCleared")]

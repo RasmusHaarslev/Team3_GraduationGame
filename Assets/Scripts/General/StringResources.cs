@@ -10,6 +10,17 @@ public class StringResources
 {
     public static string databaseName = "gameDatabase.db";
 
+    #region RESOURCES
+    
+        public static string NodeIdPrefsName = "NodeId";
+        public static string LevelDifficultyPrefsName = "LevelDifficulty";
+        public static string TribeCampsPrefsName = "TribeCamps";
+        public static string FoodAmountPrefsName = "FoodAmount";
+        public static string ScrapAmountPrefsName = "ScrapAmount";
+        public static string ItemDropAmountPrefsName = "ItemDropAmount";
+
+#endregion
+
     #region PREFABS
 
     public static string uiPrefabsPath = "Prefabs/UI/";
@@ -55,7 +66,13 @@ public class StringResources
 
     public static string shield1MaterialName = "Shield1Material";
 
+    public static string[] maleHuntersMaterials = new[] { "MaleHunterMaterial1", "MaleHunterMaterial2", "MaleHunterMaterial3", "MaleHunterMaterial4", "MaleHunterMaterial5" };
+
+    public static string[] femaleHuntersMaterials = new[] { "FemaleHunterMaterial1", "FemaleHunterMaterial2", "FemaleHunterMaterial3", "FemaleHunterMaterial4", "FemaleHunterMaterial5" };
+    
+
     #endregion
+
 
 
     #region ANIMATIONS
@@ -68,7 +85,59 @@ public class StringResources
 
     #endregion
 
+    #region CharacterNames
+    public static string[] maleNames = new[] { "THOMAS",
+"NILS",
+"KRISTIAN",
+"CHRISTIAN",
+"SEBASTIAN",
+"VESELIN",
+"DANIEL",
+"JOHN",
+"NICOLAI",
+"PETER",
+"RASMUS",
+"RICCARDO",
+"TOBIAS",
+"LUDVIG",
+"BENJAMIN",
+"MADS",
+"HASSAN",
+"MARK",
+"MATHIAS",
+"ANDRZEJ",
+"BESNIK",
+"LUCA",
+"YOSKA",
+"TOBAR"};
 
+    public static string[] femaleNames = new[] { "TEA",
+"AGNES",
+"ANDREA",
+"YASMIN",
+"SHAHIDA",
+"MIRA",
+"SELMA",
+"AISHA",
+"BESS",
+"EMMA",
+"IDA",
+"LOUISE",
+"CAMILLA",
+"SUSI",
+"DIKA",
+"DONKA",
+"ESMERALDA",
+"LULUDJA",
+"NADYA",
+"AIDA",
+"HABIBAH",
+"ELIZA",
+"ESHAL",
+"INAAYA"};
+
+
+    #endregion
 
     // Use this for initialization
     void Start () {

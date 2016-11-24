@@ -24,6 +24,11 @@ public class Formation : MonoBehaviour
 		EventManager.Instance.StopListening<ChangeFormationEvent>(ChangeFormation);
 	}
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
 	private void ChangeFormation(ChangeFormationEvent e)
 	{
 		var index = followers.IndexOf(e.hunter);

@@ -6,7 +6,8 @@ public class CampTopPanel : MonoBehaviour {
 
     public Text VillageCount;
     public Text FoodCount;
-    public Text CoinsCount;
+    public Text ScrapCount;
+	public Text PremiumCount;
 
     void OnEnable()
     {
@@ -18,20 +19,24 @@ public class CampTopPanel : MonoBehaviour {
         EventManager.Instance.StopListening<ResourcesUpdated>(UpdateResources);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     // Use this for initialization
     void Start () {
-        Debug.Log(GameController.Instance);
         VillageCount.text = GameController.Instance._VILLAGERS.ToString();
         FoodCount.text = GameController.Instance._FOOD.ToString();
-        CoinsCount.text = GameController.Instance._COINS.ToString();
+        ScrapCount.text = GameController.Instance._SCRAPS.ToString();
+        PremiumCount.text = GameController.Instance._PREMIUM.ToString();
     }
 	
 	// Update is called once per frame
 	public void UpdateResources(ResourcesUpdated e) {
-
-        Debug.Log("Change Resources! " + GameController.Instance._FOOD.ToString());
         VillageCount.text = GameController.Instance._VILLAGERS.ToString();
         FoodCount.text = GameController.Instance._FOOD.ToString();
-        CoinsCount.text = GameController.Instance._COINS.ToString();
+        ScrapCount.text = GameController.Instance._SCRAPS.ToString();
+        PremiumCount.text = GameController.Instance._PREMIUM.ToString();
     }
 }

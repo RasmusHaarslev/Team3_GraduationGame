@@ -25,10 +25,10 @@ public class LevelManager : MonoBehaviour
     }
 
     void Update()
-    {
+    { /*
         if (Input.GetKeyDown(KeyCode.A))
             GenerateNewItems();
-
+        */
         if (huntersAndPlayer.Count == 0)
         {
             huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
@@ -173,6 +173,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoseGame(string scene = "PlayerDeathCutscene")
     {
+        GameController.Instance.LoseGame();
         GameController.Instance.LoadScene(scene);
     }
 
@@ -187,14 +188,29 @@ public class LevelManager : MonoBehaviour
     public void WinLevel()
     {
         EventManager.Instance.TriggerEvent(new LevelWon());
+		EventManager.Instance.TriggerEvent (
+			new ChangeResources (
+				food: PlayerPrefs.GetInt("FoodAmount"),
+				scraps: PlayerPrefs.GetInt("ScrapAmount")
+			)
+		);
         PlayerPrefs.SetInt("LevelResult", 1);
-        //replaceCharactersWeapons();
+        //generate and display the new items
+        GenerateNewItems();
+        
+        
+    }
+    //called on the canvas button of the new generated items
+    public void levelWonEnding()
+    {
+        
         GameController.Instance.LoadScene("LevelWinCutscene");
     }
 
+
     void replaceCharactersWeapons()
     {
-        WeaposGenerator weaponGenerator = new WeaposGenerator();
+        WeaponGenerator weaponGenerator = new WeaponGenerator();
         DataService dataService = new DataService(StringResources.databaseName);
         GameObject playerFellowship = GameObject.Find("PlayerFellowship");
         int level = PlayerPrefs.GetInt(StringResources.hardnessLevel, 4);
@@ -214,14 +230,18 @@ public class LevelManager : MonoBehaviour
     void GenerateNewItems()
     {
         int difficultyLevel = GetComponent<LevelGenerator>().difficultyLevel;
-        WeaposGenerator weaponsGenerator = GetComponent<WeaposGenerator>();
+        WeaponGenerator weaponsGenerator = GetComponent<WeaponGenerator>();
 
         //fill a list with the new items values
         EquippableitemValues[] newItemsValues = weaponsGenerator.GetNewItemsValues(difficultyLevel);
 
-        //TODO call canvas to display!
-
-
+        //Generate new weapons values
+        
+        //save them into database inventory
+        DataService dataService = new DataService(StringResources.databaseName);
+        dataService.InsertItemsValuesInInventory(newItemsValues);
+        LevelCanvasManager canvasManager = GetComponentInChildren<LevelCanvasManager>();
+        canvasManager.DisplayEndLootItems(newItemsValues);
     }
 
     void ReactOnItemClick(ItemClicked itemClickedEvent)

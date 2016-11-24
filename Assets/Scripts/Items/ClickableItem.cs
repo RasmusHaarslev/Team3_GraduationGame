@@ -10,7 +10,7 @@ public class ClickableItem : MonoBehaviour
         newspaper,
         mushroom,
         food,
-        coins
+        scraps
     }
     
 

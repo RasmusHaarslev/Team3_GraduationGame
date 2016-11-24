@@ -8,10 +8,17 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
+    public int InitialFood = 10;
+    public int InitialVillages = 10;
+    public int InitialScrap = 10;
+    public int InitialPremium = 10;
+
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
-    public int _COINS = 10;
+    public int _SCRAPS = 10;
     public int _PREMIUM = 10;
+
+    public DataService dataService;
 
     #region Setup Instance
     private static GameController _instance;
@@ -42,11 +49,26 @@ public class GameController : MonoBehaviour {
 
     public void UpdateResources(ChangeResources e)
     {
-        _FOOD += e.food;
-        _VILLAGERS += e.villager;
-        _COINS += e.coins;
-        _PREMIUM += e.premium;
+        if (_FOOD + e.food < 0)
+		{
+			e.villager = e.villager - (Mathf.Abs(e.food) - _FOOD);
+			e.food = -_FOOD;
+        }
+
+		_FOOD 		= (_FOOD + e.food < 0) 			? 0 : _FOOD + e.food;
+		_VILLAGERS 	= (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
+		_SCRAPS 	= (_SCRAPS + e.scraps < 0) 		? 0 : _SCRAPS + e.scraps;
+		_PREMIUM 	= (_PREMIUM + e.premium < 0) 	? 0 : _PREMIUM + e.premium;
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
+        SaveResources();
+    }
+
+    private void SaveResources()
+    {
+        PlayerPrefs.SetInt("Food", _FOOD);
+        PlayerPrefs.SetInt("Villagers", _VILLAGERS);
+        PlayerPrefs.SetInt("Scraps", _SCRAPS);
+        PlayerPrefs.SetInt("Premium", _PREMIUM);
     }
 
     void Awake()
@@ -58,6 +80,23 @@ public class GameController : MonoBehaviour {
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+
+        dataService = new DataService(StringResources.databaseName);
+
+        if (PlayerPrefs.HasKey("Food"))
+        {
+            _FOOD = PlayerPrefs.GetInt("Food");
+            _VILLAGERS = PlayerPrefs.GetInt("Villagers");
+            _SCRAPS = PlayerPrefs.GetInt("Scraps");
+            _PREMIUM = PlayerPrefs.GetInt("Premium");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Food", InitialFood);
+            PlayerPrefs.SetInt("Villagers", InitialVillages);
+            PlayerPrefs.SetInt("Scraps", InitialScrap);
+            PlayerPrefs.SetInt("Premium", InitialPremium);
+        }
     }
 
     public void LoadScene(string scene)
@@ -84,18 +123,44 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
+        var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
+
+        System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
         List<string> scenes = new List<string>();
 
-        foreach (var scene in sceneDirectory.GetFiles())
+        string line;
+        while ((line = reader.ReadLine()) != null)
         {
-            if (scene.Name.EndsWith(".unity"))
-            {
-                scenes.Add(scene.Name.Split('.')[0]);
-            }
+            scenes.Add(line);
         }
+
+        //scenes.Add("LevelPrototype02");
+        //scenes.Add("LevelPrototype03");
+        //scenes.Add("LevelPrototype04");
+        //scenes.Add("LevelPrototype05");
+        //scenes.Add("LevelPrototype06");
+        //scenes.Add("LevelPrototype02");
+        //scenes.Add("LevelPrototype03");
+        //scenes.Add("LevelPrototype04");
+        //scenes.Add("LevelPrototype05");
+        //scenes.Add("LevelPrototype06");
+
+        //foreach (var scene in sceneDirectory.GetFiles())
+        //{
+        //    if (scene.Name.EndsWith(".unity"))
+        //    {
+        //        scenes.Add(scene.Name.Split('.')[0]);
+        //    }
+        //}
 
         var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
         SceneManager.LoadScene(randomScene);
+    }
+
+    public void LoseGame()
+    {
+        PlayerPrefs.DeleteAll();
+
+        dataService.ResetDatabase();
     }
 }
