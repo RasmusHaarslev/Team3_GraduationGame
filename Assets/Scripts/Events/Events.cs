@@ -211,3 +211,11 @@ public class ChangeFormationEvent : GameEvent
 		this.hunter = hunter;
 	}
 }
+
+public class CommandEvent : GameEvent
+{
+	public CommandEvent()
+	{
+
+	}
+}
