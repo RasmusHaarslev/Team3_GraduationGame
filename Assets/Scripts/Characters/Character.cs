@@ -64,8 +64,8 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		isFleeingValue = isFleeing ? 1 : 0;
-		animator.SetFloat("isWounded", isFleeingValue);
+		//isFleeingValue = isFleeing ? 1 : 0;
+		//animator.SetFloat("isWounded", isFleeingValue);
 		if (agent.velocity.normalized.magnitude < 0.2f)
 		{
 			animator.SetBool("isAware", isInCombat);
@@ -147,6 +147,7 @@ public class Character : MonoBehaviour
 
 	private void CommandAnimator(CommandEvent e)
 	{
+		Debug.Log("received ");
 		animator.SetTrigger("IssueCommand");
 	}
 
