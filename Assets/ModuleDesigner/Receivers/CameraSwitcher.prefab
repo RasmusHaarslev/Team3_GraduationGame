@@ -23,10 +23,9 @@ GameObject:
   - 124: {fileID: 124000010850431298}
   - 92: {fileID: 92000013931172536}
   - 81: {fileID: 81000013093951976}
-  - 114: {fileID: 114000011115328118}
   m_Layer: 0
   m_Name: Preview
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +54,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011393729076}
-  m_LocalRotation: {x: 0.41013312, y: 0.02736226, z: -0.012311327, w: 0.911532}
-  m_LocalPosition: {x: -9.58, y: 37.719803, z: -17.099998}
+  m_LocalRotation: {x: 0.046599645, y: -0.93630666, z: 0.13605052, w: 0.32038826}
+  m_LocalPosition: {x: 7.05944, y: -4.872448, z: 14.93294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 31.320002, y: 0, z: 0}
   m_Children: []
@@ -160,28 +159,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011393729076}
   m_Enabled: 1
---- !u!114 &114000011115328118
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011393729076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd933feb7413bb4ca65bddaf4119018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  Distance: 15
-  Height: 8
-  SlerpAmount: 1
-  CameraOffset: 1
-  OverridePosition: 0
-  OverriddenPosition: {x: 0, y: 14.96, z: -17.78}
-  OverrideDistance: 1
-  OverriddenDistance: 9
-  OverrideHeight: 1
-  OverriddenHeight: 10
 --- !u!114 &114000011613286216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KeepGizmo: 1
   gizmoMesh: {fileID: 4300000, guid: 4a9035eebec08a247b268ea94c995ad6, type: 3}
+  SlerpAmount: 2
 --- !u!124 &124000010850431298
 Behaviour:
   m_ObjectHideFlags: 1

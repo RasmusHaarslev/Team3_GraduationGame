@@ -6,6 +6,8 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class CameraSwitch : TriggerReceiver
     {
+        public float SlerpAmount;
+
         private Camera mainCamera;
         private Camera targetCamera;
         private bool Enabled = false;
@@ -20,8 +22,8 @@ namespace Assets.ModuleDesigner.Scripts
         {
             if (Enabled)
             {
-                mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, targetCamera.transform.position, 0.05f);
-                mainCamera.transform.rotation = Quaternion.Slerp(mainCamera.transform.rotation, targetCamera.transform.rotation, 0.05f);
+                mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, targetCamera.transform.position, Time.deltaTime * SlerpAmount);
+                mainCamera.transform.rotation = Quaternion.Slerp(mainCamera.transform.rotation, targetCamera.transform.rotation, Time.deltaTime * SlerpAmount);
             }
         }
 
