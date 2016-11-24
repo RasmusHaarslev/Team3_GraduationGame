@@ -12,7 +12,9 @@ namespace Assets.ModuleDesigner.Scripts
 
         public override void TriggerEnter()
         {
-            Camera.main.GetComponent<CameraController>().player.GetComponent<MoveScript>().enabled = false;
+            var player = Camera.main.GetComponent<CameraController>().player;
+            player.GetComponent<MoveScript>().enabled = false;
+            player.GetComponent<NavMeshAgent>().Stop();
         }
 
         public override void TriggerExit()
