@@ -21,6 +21,7 @@ public class Node : MonoBehaviour {
 
     /* FOOD COST TO GO TO THIS LEVEL */
     public int TravelCost;
+    public int scoutCost;
 
     /* THE SCENE TO LOAD WHEN PLAYING LEVEL */
     public int sceneSelection;
