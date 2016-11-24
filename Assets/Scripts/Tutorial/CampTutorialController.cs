@@ -88,9 +88,7 @@ public class CampTutorialController : MonoBehaviour
     public void EnterLevel()
     {
         PlayerPrefs.SetInt("TutorialCompleted", 1);
-        // TODO: Load the level!
-        // GameController.Instance.LoadScene("Tutttt");
-
         gameObject.SetActive(false);
+        GameController.Instance.LoadLevel();
     }
 }
