@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MoveScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MoveScript : MonoBehaviour
 	float counter = 0;
 	bool attack = false;
 	bool isDead = false;
+	bool isFleeing = false;
 
 	// Use this for initialization
 	void Start()
@@ -22,64 +24,95 @@ public class MoveScript : MonoBehaviour
 
 	void OnEnable()
 	{
+		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
 		agent = GetComponent<NavMeshAgent>();
 		character = GetComponent<Character>();
+	}
+
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
+	}
+
+	private void Flee(FleeStateEvent e)
+	{
+		isFleeing = true;
+	}
+
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		attackSpeed = character.damageSpeed;
-		if (character.currentHealth <= 0 && isDead == false)
+		if (!isFleeing)
 		{
-			EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
-			isDead = true;
-		}
-		if (movement)
-		{
-			if (Input.GetKeyDown(KeyCode.Mouse0))
-				Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
-			if (Input.GetKey(KeyCode.Mouse0))
+			attackSpeed = character.damageSpeed;
+			if (character.currentHealth <= 0 && isDead == false)
 			{
-				agent.Resume();
-				character.isInCombat = false;
-				//attacking = false;
-				MoveToClickPosition();
+				EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
+				isDead = true;
 			}
-			if (attacking)
+			if (movement)
 			{
-
-				if (character.target != null)
+				if (Input.GetKeyDown(KeyCode.Mouse0))
+					Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
+				if (Input.GetKey(KeyCode.Mouse0))
 				{
-					if (character.target.GetComponent<TutorialCharacter>() != null)
+					agent.Resume();
+					character.isInCombat = false;
+					//attacking = false;
+					MoveToClickPosition();
+				}
+				if (attacking)
+				{
+
+					if (character.target != null)
 					{
-						if ((!character.target.GetComponent<TutorialCharacter>().isDead))
+						if (character.target.GetComponent<TutorialCharacter>() != null)
 						{
-							Attacking();
+							if ((!character.target.GetComponent<TutorialCharacter>().isDead))
+							{
+								Attacking();
+							}
+							else
+							{
+								agent.Resume();
+								character.isInCombat = false;
+								attacking = false;
+							}
 						}
-						else
+						else if (character.target.GetComponent<Character>() != null)
 						{
-							agent.Resume();
-							character.isInCombat = false;
-							attacking = false;
-						}
-					}
-					else if (character.target.GetComponent<Character>() != null)
-					{
-						if (character.target != null && (!character.target.GetComponent<Character>().isDead))
-						{
-							Attacking();
-						}
-						else
-						{
-							agent.Resume();
-							character.isInCombat = false;
-							attacking = false;
+							if (character.target != null && (!character.target.GetComponent<Character>().isDead))
+							{
+								Attacking();
+							}
+							else
+							{
+								agent.Resume();
+								character.isInCombat = false;
+								attacking = false;
+							}
 						}
 					}
 				}
 			}
+		} else
+		{
+			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+			StartCoroutine(LoseScene());
 		}
+	}
+
+	IEnumerator LoseScene()
+	{
+		yield return new WaitForSeconds(5);
+
+		SceneManager.LoadScene("LevelFleeCutscene");
+		yield return null;
 	}
 
 	public void MoveToClickPosition()
@@ -101,7 +134,8 @@ public class MoveScript : MonoBehaviour
                         EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
                         EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
-				} else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
+				}
+				else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
 				{
 					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
 					{

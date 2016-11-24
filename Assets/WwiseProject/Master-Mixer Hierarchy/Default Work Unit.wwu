@@ -7,7 +7,7 @@
 					<PropertyList>
 						<Property Name="BusVolume" Type="Real64">
 							<ValueList>
-								<Value>2</Value>
+								<Value>-1</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -38,7 +38,7 @@
 													</Point>
 													<Point>
 														<XPos>1</XPos>
-														<YPos>0</YPos>
+														<YPos>1</YPos>
 														<Flags>37</Flags>
 													</Point>
 												</PointList>
@@ -47,9 +47,54 @@
 									</RTPCList>
 								</Property>
 							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Effect0" PluginName="Wwise Compressor" CompanyID="0" PluginID="108" PluginType="3">
+									<ObjectRef Name="SFXComp" ID="{BC9B0605-CE71-4A2E-BD33-7F9C47BE3AE9}" WorkUnitID="{75BCCEEF-CC0F-4E09-8F05-3CD4EEEAFC93}"/>
+								</Reference>
+							</ReferenceList>
 							<ChildrenList>
-								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}"/>
+								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 								<Bus Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>18</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+												<State Name="Custom State" ID="{3D9212F6-C3DA-45E1-9BCF-184EFC962172}" ShortID="1029686334">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="60"/>
+														<Property Name="Pitch" Type="int32" Value="-100"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
+								</Bus>
+								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}">
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
@@ -57,9 +102,34 @@
 											</ValueList>
 										</Property>
 									</PropertyList>
+									<StateInfo>
+										<StateGroupList>
+											<StateGroupInfo>
+												<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+											</StateGroupInfo>
+										</StateGroupList>
+										<CustomStateList>
+											<CustomState>
+												<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+												<State Name="Custom State" ID="{8EB029F0-123F-4DF6-9A7E-642E9B24472B}" ShortID="317658611">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+										</CustomStateList>
+									</StateInfo>
 								</Bus>
-								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}"/>
-								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}"/>
+								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
+								<Bus Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}"/>
 							</ChildrenList>
 						</Bus>
 						<Bus Name="Music" ID="{5724D256-1278-4FEA-828D-56431668FF78}">
@@ -88,7 +158,7 @@
 													</Point>
 													<Point>
 														<XPos>1</XPos>
-														<YPos>0</YPos>
+														<YPos>1</YPos>
 														<Flags>37</Flags>
 													</Point>
 												</PointList>

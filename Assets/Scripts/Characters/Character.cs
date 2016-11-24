@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
 	bool deadEvent = false;
 	[Range(0, 99)]
 	public int randomTargetProbability = 25;
+	float isFleeingValue;
 
 	//model values
 	//private Dictionary<string, Transform> slots;
@@ -63,6 +64,8 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
+		//isFleeingValue = isFleeing ? 1 : 0;
+		//animator.SetFloat("isWounded", isFleeingValue);
 		if (agent.velocity.normalized.magnitude < 0.2f)
 		{
 			animator.SetBool("isAware", isInCombat);
@@ -129,6 +132,7 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
+		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -141,11 +145,18 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
+	private void CommandAnimator(CommandEvent e)
+	{
+		Debug.Log("received ");
+		animator.SetTrigger("IssueCommand");
+	}
+
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 	}
 
 	/// <summary>
