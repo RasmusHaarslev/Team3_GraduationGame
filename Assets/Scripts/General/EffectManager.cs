@@ -4,32 +4,52 @@ using System;
 
 public class EffectManager : MonoBehaviour {
 
-    public GameObject clicking;
+    public GameObject Clicking;
     private GameObject _currentClick;
+    public GameObject Target;
+    private GameObject _currentTarget;
 
     // Use this for initialization
     void OnEnable () {
         EventManager.Instance.StartListening<PositionClicked>(positionEffect);
-        
+        EventManager.Instance.StartListening<EnemyClicked>(setTarget);
+        EventManager.Instance.StartListening<EnemyDeathEvent>(checkTarget);
+    }
+
+    private void checkTarget(EnemyDeathEvent e)
+    {
+        if (e.enemy.transform == _currentTarget.transform.parent)
+        {
+            _currentTarget.GetComponent<ParticleSystem>().Stop();
+        }
     }
 
     private void positionEffect(PositionClicked e)
     {
-        //_currentClick.GetComponent<ParticleSystem>().Stop();
+        if (_currentTarget != null)
+            _currentTarget.GetComponent<ParticleSystem>().Stop();
+        if (_currentClick != null)
+            _currentClick.GetComponent<ParticleSystem>().Stop();
+
         if (_currentClick == null)
-            InitLight();
+            _currentClick = (GameObject)Instantiate(Clicking);
 
         _currentClick.transform.position = e.position + new Vector3(0,0.5f,0);
-        //_currentClick.GetComponent<ParticleSystem>().Play();
+        _currentClick.GetComponent<ParticleSystem>().Play();
     }
 
-    void InitLight()
+    private void setTarget(EnemyClicked e)
     {
-        _currentClick = (GameObject)Instantiate(clicking, new Vector3(), Quaternion.Euler(90f, 0f, 0f));
-    }
+        if (_currentTarget != null)
+            _currentTarget.GetComponent<ParticleSystem>().Stop();
+        if (_currentClick != null)
+            _currentClick.GetComponent<ParticleSystem>().Stop();
 
-    // Update is called once per frame
-    void OnDisable() {
-	    
-	}
+        if (_currentTarget == null)
+            _currentTarget = (GameObject)Instantiate(Target);
+
+        _currentTarget.transform.SetParent(e.enemy.transform);
+        _currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 1f, 0);
+        _currentTarget.GetComponent<ParticleSystem>().Play();
+    }
 }

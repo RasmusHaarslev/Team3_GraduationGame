@@ -73,8 +73,19 @@ public class LevelWon : GameEvent
 public class PositionClicked : GameEvent
 {
     public Vector3 position;
+
     public PositionClicked(Vector3 clickPosition) {
         position = clickPosition;
+    }
+}
+
+public class EnemyClicked : GameEvent
+{
+    public GameObject enemy;
+
+    public EnemyClicked(GameObject enemy)
+    {
+        this.enemy = enemy;
     }
 }
 

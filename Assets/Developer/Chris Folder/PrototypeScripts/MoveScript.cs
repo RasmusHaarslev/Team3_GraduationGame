@@ -131,7 +131,8 @@ public class MoveScript : MonoBehaviour
 				{
 					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
 					{
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+                        EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
+                        EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
 				}
 				else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
@@ -141,10 +142,7 @@ public class MoveScript : MonoBehaviour
 						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
 				}
-
-
-				//hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
-			}
+            }
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
