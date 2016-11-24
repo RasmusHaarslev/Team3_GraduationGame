@@ -533,6 +533,9 @@
 				<Event Name="Play_MenuAmbience" ID="{6879E80F-BF50-4155-9A6A-A13360C6A201}">
 					<ChildrenList>
 						<Action Name="Play" ID="{37864FAF-11F2-44E7-A46C-56DC9A7E7F75}" ShortID="673804451" Type="Play" Scope="One" Global="false">
+							<ExcludedPlatformList>
+								<Platform>Windows</Platform>
+							</ExcludedPlatformList>
 							<ElementList>
 								<Element ID="{98BC36AA-D9AB-4F4D-9140-5CB234B0C31E}" Global="false">
 									<ObjectRef Name="MenuDog" ID="{A65C8F6B-8D7F-4FA8-9ECB-B5A383AAB783}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
