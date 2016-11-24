@@ -118,6 +118,9 @@ public class WeaponGenerator : MonoBehaviour
         }
 
         float currentPick = 0f;
+        //damage and damage speed have to be at least 1
+        itemValues.damageSpeed = 1;
+        itemValues.damage = 1;
         //print(healthProbability + " " + damageProbability + " " + damageSpeedProbability);
         //print(points);
         for (int i = 0; i < points; i++)
