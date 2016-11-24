@@ -23,9 +23,10 @@ public class PanelScript : MonoBehaviour {
     public float damagePointsChance = 0.5f;
     public GameObject camsAndNewSoldiersPosition;
     public GameObject silhouette;
-    public bool alreadyGeneratedNewSoldiers = false;
+    //public bool alreadyGeneratedNewSoldiers = false;
     List<GameObject> newSoldiersList = new List<GameObject>();
     public GameObject silhouetteGO;
+    //public List<GameObject> silhouetteList = new List<GameObject>();
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -148,22 +149,9 @@ public class PanelScript : MonoBehaviour {
             for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
             {
                 Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position, Quaternion.identity);
+                //silhouetteList.Add(silhouette);
             }
         }
-        
-
-        /*
-        soldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
-        soldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
-        soldiersList[3].GetComponent<HunterStateMachine>().enabled = false;
-        soldiersList[0].GetComponent<MoveScript>().enabled = false;
-        soldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Player");
-        soldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        soldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-        soldiersList[3].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
-        */
-
-
 
     }
 

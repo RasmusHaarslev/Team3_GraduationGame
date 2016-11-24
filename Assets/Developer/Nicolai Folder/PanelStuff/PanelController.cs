@@ -7,6 +7,7 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 {
     PanelScript panelScript;
     public GameObject levelSelectionGenerator;
+    bool isAlreadyOpen = false;
 
     void Start()
     {
@@ -40,10 +41,15 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
         if (gameObject.CompareTag("Silhouette") && panelScript.panelList[6].activeSelf == false)
         {
-            if (!panelScript.alreadyGeneratedNewSoldiers)
+            //if (!panelScript.alreadyGeneratedNewSoldiers)
+            //{
+            //    panelScript.GetNewSoldiers();
+            //    panelScript.alreadyGeneratedNewSoldiers = true;
+            //}
+            if (!isAlreadyOpen)
             {
                 panelScript.GetNewSoldiers();
-                panelScript.alreadyGeneratedNewSoldiers = true;
+                isAlreadyOpen = true;
             }
             panelScript.silhouetteGO = gameObject;
             panelScript.panelList[3].SetActive(true);

@@ -25,7 +25,7 @@ public class NewSoldierConfirmationScript : MonoBehaviour
         yesButton.GetComponent<Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<Button>().onClick.AddListener(delegate { backgroundConfirmationPanel.SetActive(false); });
-        yesButton.GetComponent<Button>().onClick.AddListener(delegate { gameObject.transform.parent.gameObject.SetActive(false); panelScript.SpawnNewSoldier(transform.GetSiblingIndex()); centralPanel.SetActive(false); });
+        yesButton.GetComponent<Button>().onClick.AddListener(delegate { backgroundConfirmationPanel.SetActive(false); gameObject.transform.parent.gameObject.SetActive(false); panelScript.SpawnNewSoldier(transform.GetSiblingIndex()); centralPanel.SetActive(false); });
     }
 }
 
