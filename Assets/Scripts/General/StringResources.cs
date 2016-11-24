@@ -79,7 +79,7 @@ public class StringResources
 
     public static string animControllerShieldName = "Humanoid_ShieldController";
 
-    public static string animControllerRifleName = "Humanoid_RiffleController";
+    public static string animControllerRifleName = "Humanoid_RifleController";
 
     public static string animControllerSpearName = "Humanoid_SpearController";
 
