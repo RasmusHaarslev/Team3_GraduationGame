@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
 	//Combat state values
 	public bool isInCombat = false;
 	public bool isDead = false;
+	public bool isFleeing = false;
 	bool deadEvent = false;
 	[Range(0, 99)]
 	public int randomTargetProbability = 25;
@@ -92,7 +93,9 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
+				if (!isFleeing) { 
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
@@ -380,10 +383,13 @@ public class Character : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
+		if (e.enemy == target && (characterBaseValues.Type == CharacterValues.type.Player))
 		{
 			currentOpponents.Remove(target);
 			target = null;
+		}
+		if (characterBaseValues.Type == CharacterValues.type.Hunter) {
+			currentOpponents.Remove(e.enemy);
 		}
 	}
 }
