@@ -478,7 +478,6 @@ public class HunterStateMachine : CoroutineMachine
 		proj.transform.SetParent(gameObject.transform, false);
 		proj.transform.eulerAngles = new Vector3(90, 0, 0);
 		yield return new WaitForSeconds(2f);
-
 		Destroy(proj);
 		yield return null;
 	}
