@@ -77,11 +77,11 @@ public class StringResources
 
     #region ANIMATIONS
 
-    public static string animControllerShieldName = "Humanoid_Shield";
+    public static string animControllerShieldName = "Humanoid_ShieldController";
 
-    public static string animControllerRifleName = "Humanoid_Riffle";
+    public static string animControllerRifleName = "Humanoid_RifleController";
 
-    public static string animControllerSpearName = "Humanoid_Spear";
+    public static string animControllerSpearName = "Humanoid_SpearController";
 
     #endregion
 
