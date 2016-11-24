@@ -7,24 +7,34 @@ namespace Assets.ModuleDesigner.Scripts
     public class CameraSwitch : TriggerReceiver
     {
         private Camera mainCamera;
-        private Camera switchedCamera;
+        private Camera targetCamera;
+        private bool Enabled = false;
 
         void Start()
         {
             mainCamera = Camera.main;
-            switchedCamera = GetComponentInChildren<Camera> ();
+            targetCamera = GetComponentInChildren<Camera>();
+        }
+
+        void Update()
+        {
+            if (Enabled)
+            {
+                mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, targetCamera.transform.position, 0.05f);
+                mainCamera.transform.rotation = Quaternion.Slerp(mainCamera.transform.rotation, targetCamera.transform.rotation, 0.05f);
+            }
         }
 
         public override void TriggerEnter()
         {
-            mainCamera.enabled = false;
-            switchedCamera.enabled = true;
+            mainCamera.GetComponent<CameraController>().enabled = false;
+            Enabled = true;
         }
 
         public override void TriggerExit()
         {
-            mainCamera.enabled = true;
-            switchedCamera.enabled = false;
+            mainCamera.GetComponent<CameraController>().enabled = true;
+            Enabled = false;
         }
 
         public override void Expose(GameObject go)
