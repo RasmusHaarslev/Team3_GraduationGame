@@ -5,34 +5,24 @@ using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class Delayer : TriggerReceiver
+    public class Inverter : TriggerReceiver
     {
-        [Header("Delay options")]
-        public float DelayInSeconds = 0;
-
         [Header("Output objects")]
         public TriggerReceiver[] Targets;
 
         public override void TriggerEnter()
         {
-            StartCoroutine(CallForward(true));
+            foreach (var target in Targets)
+            {
+                target.TriggerExit(); 
+            }
         }
 
         public override void TriggerExit()
         {
-            StartCoroutine(CallForward(false));
-        }
-
-        IEnumerator CallForward(Boolean input)
-        {
-            yield return new WaitForSeconds(DelayInSeconds);
-
             foreach (var target in Targets)
             {
-                if (input)
-                    target.TriggerEnter();
-                else
-                    target.TriggerExit();
+                target.TriggerEnter();
             }
         }
 
@@ -45,22 +35,13 @@ namespace Assets.ModuleDesigner.Scripts
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            //Gizmos.DrawCube(transform.position, transform.localScale);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
 
-            foreach (var obj in Targets)
+            foreach (var obj in Targets) 
             {
                 obj.ShowGizmos();
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(this.transform.position + new Vector3(0, 0.5f, 0), obj.transform.position - new Vector3(0, 0.5f, 0));
-            }
-        }
-
-        void OnValidate()
-        {
-            foreach (var target in Targets)
-            {
-                target.Expose(this.gameObject);
             }
         }
 
