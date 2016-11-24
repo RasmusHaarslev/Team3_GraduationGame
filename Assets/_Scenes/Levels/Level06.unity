@@ -333,7 +333,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &453998220
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ Transform:
   - {fileID: 625815757}
   - {fileID: 868882473}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &705354611
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,48 +717,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 625815757}
   m_RootOrder: 0
---- !u!1001 &1344764653
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1362049109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1349,23 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -0.42547855
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4000011203245314, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203245314, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.05
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 135000012732972790, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 135000010791243034, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 135000013846997672, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 135000010281324778, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000011345814538, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000013132672902, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000012210355602, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000014108435512, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1730745004
@@ -1431,7 +1405,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010171308806, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114000013351673726, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
         type: 2}
@@ -1551,9 +1525,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 4096
-  lowerPoolSize: 2048
-  streamingPoolSize: 1024
+  defaultPoolSize: 32768
+  lowerPoolSize: 16384
+  streamingPoolSize: 8192
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -1580,7 +1554,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!114 &1776809313
 MonoBehaviour:
   m_ObjectHideFlags: 0
