@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Object = UnityEngine.Object;
 
 public class CampTutorialController : MonoBehaviour
 {
@@ -49,7 +51,9 @@ public class CampTutorialController : MonoBehaviour
 
     public void ClickItem()
     {
-        List<EquippableitemValues> inventoryItems = new List<EquippableitemValues>(GameController.Instance._dataService.GetEquippableItemsValuesFromInventory());
+
+        DataService dataService = new DataService(StringResources.databaseName);
+        List<EquippableitemValues> inventoryItems = new List<EquippableitemValues>(dataService.GetEquippableItemsValuesFromInventory());
 
         if (inventoryItems[0].Type == EquippableitemValues.type.rifle)
             Manager_Audio.PlaySound(Manager_Audio.play_pickRiffle, gameObject);
