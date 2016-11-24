@@ -42,18 +42,21 @@ public class CommandsManager : MonoBehaviour
                     {
                         Debug.Log("defend");
                         EventManager.Instance.TriggerEvent(new DefendStateEvent());
-                        button.GetComponent<InputScript>().ButtonUp();
+						EventManager.Instance.TriggerEvent(new CommandEvent());
+						button.GetComponent<InputScript>().ButtonUp();
                         break;
                     }
                     if (command == commandsList[1])
                     {
                         EventManager.Instance.TriggerEvent(new OffensiveStateEvent());
-                        Debug.Log("offensive");
+						EventManager.Instance.TriggerEvent(new CommandEvent());
+						Debug.Log("offensive");
                         button.GetComponent<InputScript>().ButtonUp();
                         break;
                     }
 					if (command == commandsList[2])
 					{
+						EventManager.Instance.TriggerEvent(new CommandEvent());
 						EventManager.Instance.TriggerEvent(new FleeStateEvent());
 						Debug.Log("flee");
 						button.GetComponent<InputScript>().ButtonUp();
@@ -62,6 +65,7 @@ public class CommandsManager : MonoBehaviour
 					if (command == commandsList[3])
 					{
 						EventManager.Instance.TriggerEvent(new FollowStateEvent());
+						EventManager.Instance.TriggerEvent(new CommandEvent());
 						Debug.Log("follow");
 						button.GetComponent<InputScript>().ButtonUp();
 						break;
@@ -69,6 +73,7 @@ public class CommandsManager : MonoBehaviour
 					if (command == commandsList[4])
 					{
 						EventManager.Instance.TriggerEvent(new StayStateEvent());
+						EventManager.Instance.TriggerEvent(new CommandEvent());
 						Debug.Log("stay");
 						button.GetComponent<InputScript>().ButtonUp();
 						break;

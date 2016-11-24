@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private int AlliesAlive;
     private bool PlayerAlive;
 
+	[SerializeField]
     private int EnemiesAlive = 0;
     private int ItemsLeft = 0;
     public bool inCombat = false;
@@ -201,13 +202,11 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("LevelResult", 1);
         //generate and display the new items
         GenerateNewItems();
-        
-        
     }
-    //called on the canvas button of the new generated items
+	
+	//called on the canvas button of the new generated items
     public void levelWonEnding()
     {
-        
         GameController.Instance.LoadScene("LevelWinCutscene");
     }
 

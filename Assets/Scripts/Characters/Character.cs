@@ -29,9 +29,11 @@ public class Character : MonoBehaviour
 	//Combat state values
 	public bool isInCombat = false;
 	public bool isDead = false;
+	public bool isFleeing = false;
 	bool deadEvent = false;
 	[Range(0, 99)]
 	public int randomTargetProbability = 25;
+	float isFleeingValue;
 
 	//model values
 	//private Dictionary<string, Transform> slots;
@@ -62,6 +64,8 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
+		//isFleeingValue = isFleeing ? 1 : 0;
+		//animator.SetFloat("isWounded", isFleeingValue);
 		if (agent.velocity.normalized.magnitude < 0.2f)
 		{
 			animator.SetBool("isAware", isInCombat);
@@ -92,10 +96,13 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
+				if (!isFleeing) { 
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
+				GetComponentInChildren<AggroRange>().gameObject.SetActive(false);
 				// VESO REMOVE THIS:
 				GetComponent<RagdollControl>().EnableRagDoll();
 
@@ -111,6 +118,10 @@ public class Character : MonoBehaviour
 			isInCombat = false;
 			isDead = true;
 		}
+		if (!isInCombat)
+		{
+			currentOpponents.Clear();
+		}
 	}
 
 	void OnEnable()
@@ -121,6 +132,7 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
+		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -133,11 +145,18 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
+	private void CommandAnimator(CommandEvent e)
+	{
+		Debug.Log("received ");
+		animator.SetTrigger("IssueCommand");
+	}
+
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 	}
 
 	/// <summary>
@@ -379,10 +398,13 @@ public class Character : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
+		if (e.enemy == target && (characterBaseValues.Type == CharacterValues.type.Player))
 		{
 			currentOpponents.Remove(target);
 			target = null;
+		}
+		if (characterBaseValues.Type == CharacterValues.type.Hunter) {
+			currentOpponents.Remove(e.enemy);
 		}
 	}
 }

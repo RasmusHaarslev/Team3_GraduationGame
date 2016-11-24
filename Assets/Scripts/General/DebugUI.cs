@@ -326,7 +326,7 @@ public class DebugUI : MonoBehaviour
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Reset Game", customButton))
                 {
-                    PlayerPrefs.DeleteAll();
+                    GameController.Instance.LoseGame();
                 }
                 #endregion
 

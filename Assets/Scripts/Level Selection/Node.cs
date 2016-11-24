@@ -7,10 +7,11 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
-public class Node : MonoBehaviour {    
+public class Node : MonoBehaviour {
 
     #region VARIABLES
-    public const int _MAXCAMPS = 6;
+    public const int _MINCAMPS = 2;
+    public const int _MAXCAMPS = 4;
 
     /* UNIQUE IDENTIFIER */
     public int NodeId;
@@ -74,6 +75,7 @@ public class Node : MonoBehaviour {
         {
             canPlay = true;
         }
+
         if (wolveCamps == 0 && tribeCamps == 0 && choiceCamps == 0) { 
             SetupCampsForThisNode();
             SetupResourceForThisNode();
@@ -140,10 +142,12 @@ public class Node : MonoBehaviour {
     /// </summary>
     void SetupCampsForThisNode()
     {
-        int noCamps = Random.Range(1, _MAXCAMPS);
+        int noCamps = Random.Range(_MINCAMPS, _MAXCAMPS+1);
         CampsInNode = noCamps;
 
-        IEnumerable<int> rangeWolves = Enumerable.Range(0, probabilityWolves);
+        tribeCamps += CampsInNode;
+
+        /*IEnumerable<int> rangeWolves = Enumerable.Range(0, probabilityWolves);
         IEnumerable<int> rangeTribes = Enumerable.Range(probabilityWolves, probabilityTribes);
         IEnumerable<int> rangeChoices = Enumerable.Range(probabilityWolves + probabilityTribes, probabilityChoice);
 
@@ -165,7 +169,7 @@ public class Node : MonoBehaviour {
             {
                 choiceCamps += 1;
             }
-        }
+        } */
     }
 
     void SetupResourceForThisNode()

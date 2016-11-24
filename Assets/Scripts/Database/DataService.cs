@@ -75,7 +75,7 @@ public class DataService : MonoBehaviour
 		if (command == 0)*/
         if (_connection.GetTableInfo("EquippableitemValues").Any(colInfo => colInfo.Name == "level"))
         {
-            print("New Databese already present, continuing with the old one.");  //Databese already present, continuing with the old one. 
+            print("New Database already present, continuing with the old one.");  //Databese already present, continuing with the old one. 
             return;
         }
 
@@ -149,7 +149,7 @@ public class DataService : MonoBehaviour
                 targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
                 prefabName = StringResources.follower1PrefabName,
                 materialName = StringResources.follower1MaterialName
-            },
+            },/*
           new CharacterValues
             {
                 name = "Yasmin",
@@ -217,9 +217,10 @@ public class DataService : MonoBehaviour
               damageSpeed = 2,
               range = 2,
               prefabName = "Wolf"
-          },
+          },*/
           new CharacterValues
           {
+              id = 4,
               name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 1,
@@ -227,10 +228,12 @@ public class DataService : MonoBehaviour
               health = 20,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier1-2Material"
           },
           new CharacterValues
           {
+              id = 5,
               name = "Easy rifle tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 2,
@@ -238,10 +241,12 @@ public class DataService : MonoBehaviour
               health = 20,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier1-2Material"
           },
           new CharacterValues
           {
+              id = 6,
               name = "Medium mellee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -250,10 +255,12 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier3-4Material"
           },
           new CharacterValues
           {
+              id = 7,
               name = "Medium rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -262,10 +269,12 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier3-4Material"
           },
             new CharacterValues
           {
+                id = 8,
               name = "Hard mellee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -274,10 +283,12 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier5-6Material"
           },
             new CharacterValues
           {
+                id = 9,
               name = "Hard rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -286,7 +297,8 @@ public class DataService : MonoBehaviour
               health = 25,
               damageSpeed = 2,
               range = 2,
-              prefabName = "Rival"
+              prefabName = "Rival",
+              materialName = "RivalTribesmanTier5-6Material"
           },
         });
 
@@ -366,6 +378,81 @@ public class DataService : MonoBehaviour
              damageSpeed = 1.5f,
              range = 2,
              prefabName = StringResources.polearm1PrefabName
+         },
+             new EquippableitemValues
+         {
+             //id = 6,
+             name = "Easy Steel Bar",
+             Type = EquippableitemValues.type.polearm,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 0,
+             damage = 0,
+             damageSpeed = 2f,
+             range = 2,
+             characterId = 4,
+             prefabName = StringResources.polearm1PrefabName
+         },new EquippableitemValues
+         {
+             //id = 4,
+             name = "Easy Rifle",
+             Type = EquippableitemValues.type.rifle,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 0,
+             damage = 0,
+             damageSpeed = 2f,
+             range = 9,
+             characterId = 5,
+             prefabName = StringResources.rifle1PrefabName
+         },
+             new EquippableitemValues
+         {
+             //id = 6,
+             name = "Medium Steel Bar",
+             Type = EquippableitemValues.type.polearm,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 0,
+             damage = 0,
+             damageSpeed = 2f,
+             range = 2,
+             characterId = 6,
+             prefabName = StringResources.polearm1PrefabName
+         },new EquippableitemValues
+         {
+             //id = 4,
+             name = "Medium Rifle",
+             Type = EquippableitemValues.type.rifle,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 0,
+             damage = 0,
+             damageSpeed = 2f,
+             range = 9,
+             characterId = 7,
+             prefabName = StringResources.rifle1PrefabName
+         },
+             new EquippableitemValues
+         {
+             //id = 6,
+             name = "Hard Steel Bar",
+             Type = EquippableitemValues.type.polearm,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 0,
+             damage = 0,
+             damageSpeed = 2f,
+             range = 2,
+             characterId = 8,
+             prefabName = StringResources.polearm1PrefabName
+         },new EquippableitemValues
+         {
+             //id = 4,
+             name = "Hard Rifle",
+             Type = EquippableitemValues.type.rifle,
+             Slot = EquippableitemValues.slot.rightHand,
+             health = 0,
+             damage = 0,
+             damageSpeed = 2f,
+             range = 9,
+             characterId = 9,
+             prefabName = StringResources.rifle1PrefabName
          }
         });
         _connection.InsertAll(new[]
@@ -388,6 +475,8 @@ public class DataService : MonoBehaviour
                 deferredId = 6,
                 quantity = 1
             }
+            
+
         });
 
     }
