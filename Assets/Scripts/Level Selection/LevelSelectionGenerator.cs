@@ -87,14 +87,25 @@ public class LevelSelectionGenerator : MonoBehaviour
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
                 EventManager.Instance.TriggerEvent(new LevelCleared());
+                GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
+                Node nodeScript = nodeCleared.GetComponent<Node>();     
 
-				InstantiateRows(1);
+                nodeScript.isCleared = true;
+
+                foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
+                {
+                    nodes.GetComponent<Node>().canPlay = true;
+                }
+
+                    InstantiateRows(1);
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
 
             SaveDict(new SaveLevelsToXML());
         }
+
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
     }
 
     public void LoadRows()
