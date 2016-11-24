@@ -375,7 +375,8 @@ public class LevelSelectionGenerator : MonoBehaviour
     void SetupValuesInNode(GameObject node)
     {
         node.GetComponent<Node>().Level = totalAmountRows;
-        node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost); ;
+        node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost);
+        node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(1, 5);
         node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
         node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, itemDropAmount);
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
