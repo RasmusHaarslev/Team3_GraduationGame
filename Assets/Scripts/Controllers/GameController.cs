@@ -160,7 +160,6 @@ public class GameController : MonoBehaviour {
     public void LoseGame()
     {
         PlayerPrefs.DeleteAll();
-
-        dataService.ResetDatabase();
-    }
+		//dataService.ResetDatabase();
+	}
 }
