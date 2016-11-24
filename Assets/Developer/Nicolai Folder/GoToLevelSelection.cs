@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,13 @@ public class GoToLevelSelection : MonoBehaviour {
         EventManager.Instance.StopListening<LevelCleared>(ClearedLevel);
     }
 
-    public void ClearedLevel(GameEvent e)
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
+	public void ClearedLevel(GameEvent e)
     {
-        Debug.Log(winAnimation);
         winAnimation = true;
     }
 
@@ -36,12 +41,15 @@ public class GoToLevelSelection : MonoBehaviour {
         if (winAnimation) { 
             WinAnimateMap();
             winAnimation = !winAnimation;
-        } else
+        } else if (!winAnimation)
         {
-            if (SaveLoadLevels.lastNodeCleared != null) { 
-                SaveLoadLevels.lastNodeCleared.transform.GetChild(2).gameObject.SetActive(true);
-            }
+          //  LoseAnimateMap();
         }
+
+        if (SaveLoadLevels.lastNodeCleared != null) { 
+            SaveLoadLevels.lastNodeCleared.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
     }
 
     void WinAnimateMap()
@@ -49,30 +57,42 @@ public class GoToLevelSelection : MonoBehaviour {
         GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
         Node nodeScript = nodeCleared.GetComponent<Node>();
 
-        nodeCleared.transform.GetChild(2).gameObject.SetActive(true);
-
-        // MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR
-
-        nodeScript.isCleared = true;
-
         if (nodeScript.isCleared)
         {
-            nodeScript.SetupImage();
+            StartCoroutine(initWin(nodeCleared));
+
             nodeScript.SetupUIText();
+            nodeCleared.transform.GetChild(2).gameObject.SetActive(true);
 
             foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
             {
-                nodes.GetComponent<Node>().canPlay = true;
-                nodes.GetComponent<Node>().SetupImage();
+                StartCoroutine(initUnlock(nodes));
             }
         }
     }
 
+    IEnumerator initWin(GameObject node)
+    {
+        node.GetComponent<Animator>().SetTrigger("IsCleared");
+        yield return new WaitForSeconds(2);   
+    }
+
+    IEnumerator initUnlock(GameObject node)
+    {
+        node.GetComponent<Animator>().SetTrigger("IsUnlocked");
+        yield return new WaitForSeconds(1);
+    }
+
     void LoseAnimateMap()
     {
-        GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
-        Node nodeScript = nodeCleared.GetComponent<Node>();
+        GameObject nodeLost = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
 
-        // MAKE A NICE ANIMATION ON NODE THAT WE DID NOT CLEAR
+        StartCoroutine(initLose(nodeLost));
+    }
+
+    IEnumerator initLose(GameObject node)
+    {
+        node.GetComponent<Animator>().SetTrigger("IsLost");
+        yield return new WaitForSeconds(2);
     }
 }

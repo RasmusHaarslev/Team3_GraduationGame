@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-
+    private DataService dataService = new DataService(StringResources.databaseName);
     private int AlliesAlive;
     private bool PlayerAlive;
 
+	[SerializeField]
     private int EnemiesAlive = 0;
     private int ItemsLeft = 0;
     public bool inCombat = false;
@@ -124,6 +125,10 @@ public class LevelManager : MonoBehaviour
 
     private void AllyDeath(AllyDeathEvent e)
     {
+        
+        //removing hunter from database
+        dataService.RemoveCharacter(e.deadAlly.characterBaseValues);
+
         AlliesAlive--;
 
         CheckConditions();
@@ -173,6 +178,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoseGame(string scene = "PlayerDeathCutscene")
     {
+        GameController.Instance.LoseGame();
         GameController.Instance.LoadScene(scene);
     }
 
@@ -187,16 +193,20 @@ public class LevelManager : MonoBehaviour
     public void WinLevel()
     {
         EventManager.Instance.TriggerEvent(new LevelWon());
+		EventManager.Instance.TriggerEvent (
+			new ChangeResources (
+				food: PlayerPrefs.GetInt("FoodAmount"),
+				scraps: PlayerPrefs.GetInt("ScrapAmount")
+			)
+		);
         PlayerPrefs.SetInt("LevelResult", 1);
         //generate and display the new items
         GenerateNewItems();
-        
-        
     }
-    //called on the canvas button of the new generated items
+	
+	//called on the canvas button of the new generated items
     public void levelWonEnding()
     {
-        
         GameController.Instance.LoadScene("LevelWinCutscene");
     }
 

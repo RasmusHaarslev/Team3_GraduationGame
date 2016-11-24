@@ -63,6 +63,11 @@ public class LevelSelectionGenerator : MonoBehaviour
         EventManager.Instance.StopListening<SaveLevelsToXML>(SaveDict);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     void Awake()
     {
         if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
@@ -81,34 +86,26 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
-               // EventManager.Instance.TriggerEvent(new LevelCleared());
+                EventManager.Instance.TriggerEvent(new LevelCleared());
+                GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
+                Node nodeScript = nodeCleared.GetComponent<Node>();     
 
-				GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
-				Node nodeScript = nodeCleared.GetComponent<Node>();
+                nodeScript.isCleared = true;
 
-				// MAKE A NICE ANIMATION ON NODE THAT WE DID CLEAR
+                foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
+                {
+                    nodes.GetComponent<Node>().canPlay = true;
+                }
 
-				nodeScript.isCleared = true;
-
-				if (nodeScript.isCleared)
-				{
-					nodeScript.SetupImage();
-					nodeScript.SetupUIText();
-
-					foreach (var nodes in nodeScript.Links.Select(l => l.To).ToList())
-					{
-						nodes.GetComponent<Node>().canPlay = true;
-						nodes.GetComponent<Node>().SetupImage();
-					}
-				}
-
-				InstantiateRows(1);
+                    InstantiateRows(1);
 
                 PlayerPrefs.SetInt("LevelResult", 0);
             }
 
             SaveDict(new SaveLevelsToXML());
         }
+
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
     }
 
     public void LoadRows()
@@ -378,7 +375,8 @@ public class LevelSelectionGenerator : MonoBehaviour
     void SetupValuesInNode(GameObject node)
     {
         node.GetComponent<Node>().Level = totalAmountRows;
-        node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost); ;
+        node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost);
+        node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(1, 5);
         node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
         node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, itemDropAmount);
         node.GetComponent<Node>().probabilityWolves = probabilityWolves;
@@ -472,6 +470,7 @@ public class LevelSelectionGenerator : MonoBehaviour
         {
             t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
             scrollingGrid.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(pointA, pointB, t); // Set position proportional to t
+            Manager_Audio.SendParameterValue(Manager_Audio.adjustScrollPitch, t);
             yield return null;         // Leave the routine and return here in the next frame
         }
         Manager_Audio.PlaySound(Manager_Audio.stop_scrollMap, gameObject);

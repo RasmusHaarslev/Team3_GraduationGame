@@ -14,10 +14,10 @@ public class Character : MonoBehaviour
 	public int damage = 0;
 	public int range = 0;
 	public float damageSpeed = 0;
-
 	public float currentHealth;
 
 	NavMeshAgent agent;
+	[HideInInspector]
 	public Animator animator;
 	public GameObject target;
 	GameObject targetParent;
@@ -29,7 +29,12 @@ public class Character : MonoBehaviour
 	//Combat state values
 	public bool isInCombat = false;
 	public bool isDead = false;
+	public bool isFleeing = false;
 	bool deadEvent = false;
+	[Range(0, 99)]
+	public int randomTargetProbability = 25;
+	float isFleeingValue;
+
 	//model values
 	//private Dictionary<string, Transform> slots;
 	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;
@@ -42,13 +47,14 @@ public class Character : MonoBehaviour
 
 
 	public EquippableitemValues.type equippedWeaponType;
+	public CharacterValues.type characterType;
 
 	public bool isMale = true;
+
 	// Use this for initialization
 	void Start()
 	{
 		currentHealth = health;
-
 	}
 
 	void OnApplicationQuit()
@@ -58,15 +64,25 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		animator.SetBool("isAware", isInCombat);
+		//isFleeingValue = isFleeing ? 1 : 0;
+		//animator.SetFloat("isWounded", isFleeingValue);
+		if (agent.velocity.normalized.magnitude < 0.2f)
+		{
+			animator.SetBool("isAware", isInCombat);
+		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{
 			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
 			{
+				GetComponent<Collider>().enabled = false;
+				agent.enabled = false;
+				// VESO REMOVE THIS:
+				GetComponent<RagdollControl>().EnableRagDoll();
+				animator.SetTrigger("Die");
 				if (deadEvent == false)
 				{
-					EventManager.Instance.TriggerEvent(new AllyDeathEvent());
+					EventManager.Instance.TriggerEvent(new AllyDeathEvent(this));
 					if (isMale)
 					{
 						Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
@@ -80,10 +96,13 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
+				if (!isFleeing) { 
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
+				GetComponentInChildren<AggroRange>().gameObject.SetActive(false);
 				// VESO REMOVE THIS:
 				GetComponent<RagdollControl>().EnableRagDoll();
 
@@ -99,6 +118,10 @@ public class Character : MonoBehaviour
 			isInCombat = false;
 			isDead = true;
 		}
+		if (!isInCombat)
+		{
+			currentOpponents.Clear();
+		}
 	}
 
 	void OnEnable()
@@ -109,6 +132,7 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
+		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -121,11 +145,18 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
+	private void CommandAnimator(CommandEvent e)
+	{
+		Debug.Log("received ");
+		animator.SetTrigger("IssueCommand");
+	}
+
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 	}
 
 	/// <summary>
@@ -145,7 +176,6 @@ public class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator>();
 		}
-
 		isMale = initValues.isMale;
 	}
 
@@ -205,8 +235,7 @@ public class Character : MonoBehaviour
 			foreach (GameObject opp in currentOpponents)
 			{
 				var hunter = opp.GetComponent<HunterStateMachine>();
-
-				if (UnityEngine.Random.Range(0, 1) == 1)
+				if (UnityEngine.Random.Range(0, 100) < randomTargetProbability)
 				{
 					target = FindRandomEnemy();
 				}
@@ -300,14 +329,11 @@ public class Character : MonoBehaviour
 		{
 			case EquippableitemValues.type.polearm:
 				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
-				Debug.Log("polearm");
 				break;
 			case EquippableitemValues.type.rifle:
 				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
-				Debug.Log("rifle");
 				break;
 			case EquippableitemValues.type.shield:
-				Debug.Log("shield");
 				Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
 				break;
 		}
@@ -372,10 +398,13 @@ public class Character : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
+		if (e.enemy == target && (characterBaseValues.Type == CharacterValues.type.Player))
 		{
-			target = null;
 			currentOpponents.Remove(target);
+			target = null;
+		}
+		if (characterBaseValues.Type == CharacterValues.type.Hunter) {
+			currentOpponents.Remove(e.enemy);
 		}
 	}
 }

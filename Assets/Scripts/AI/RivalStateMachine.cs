@@ -10,7 +10,7 @@ public class RivalStateMachine : CoroutineMachine
 	Character character;
 	Vector3 originalPosition;
 	public float distanceToTarget = float.MaxValue;
-	public int fleeHealthLimit = 3;
+	public float fleeHealthLimit = 0.5f;
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
 
@@ -43,7 +43,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	void Update()
 	{
-		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !character.isDead)
 		{
 			agent.Stop();
 		}
@@ -63,8 +63,10 @@ public class RivalStateMachine : CoroutineMachine
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
 		averageHealth = poimanager.GetAverageCharactersHealth();
-		if (averageHealth < fleeHealthLimit)
+		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
+			EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+			character.isFleeing = true;
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
 		if (character.isInCombat)
@@ -93,13 +95,11 @@ public class RivalStateMachine : CoroutineMachine
 			{
 				character.isInCombat = false;
 			}
-
 		}
 		else
 		{
 			yield return new TransitionTo(RoamState, DefaultTransition);
 		}
-
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -122,9 +122,10 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
+			character.isInCombat = false;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		}
-		yield return new TransitionTo(StartState, DefaultTransition);
+		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
@@ -140,12 +141,14 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
-		character.RotateTowards(character.target.transform);
-		agent.Stop();
-		character.animator.SetTrigger("Attack");
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
-		character.RotateTowards(character.target.transform);
+		if (!character.isDead)
+		{
+			agent.Stop();
+			character.RotateTowards(character.target.transform);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(character.damageSpeed);
+			character.DealDamage();
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 

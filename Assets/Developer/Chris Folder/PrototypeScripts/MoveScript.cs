@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MoveScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MoveScript : MonoBehaviour
 	float counter = 0;
 	bool attack = false;
 	bool isDead = false;
+	bool isFleeing = false;
 
 	// Use this for initialization
 	void Start()
@@ -22,61 +24,95 @@ public class MoveScript : MonoBehaviour
 
 	void OnEnable()
 	{
+		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
 		agent = GetComponent<NavMeshAgent>();
 		character = GetComponent<Character>();
+	}
+
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
+	}
+
+	private void Flee(FleeStateEvent e)
+	{
+		isFleeing = true;
+	}
+
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		attackSpeed = character.damageSpeed;
-		if (character.currentHealth <= 0 && isDead == false)
+		if (!isFleeing)
 		{
-			EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
-			isDead = true;
-		}
-		if (movement)
-		{
-			if (Input.GetKeyDown(KeyCode.Mouse0))
-				Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
-			if (Input.GetKey(KeyCode.Mouse0))
+			attackSpeed = character.damageSpeed;
+			if (character.currentHealth <= 0 && isDead == false)
 			{
-				agent.Resume();
-				character.isInCombat = false;
-				//attacking = false;
-				MoveToClickPosition();
+				EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
+				isDead = true;
 			}
-			if (attacking)
+			if (movement)
 			{
-				if (character.target != null && !character.target.GetComponent<Character>().isDead)
-				{
-					character.isInCombat = true;
-					agent.SetDestination(character.target.transform.position);
-					distanceToTarget = agent.remainingDistance;
-					if (distanceToTarget < agent.stoppingDistance)
-					{
-						character.RotateTowards(character.target.transform);
-						if (counter <= 0)
-						{
-							character.DealDamage();
-							character.animator.SetTrigger("Attack");
-							counter = attackSpeed;
-						}
-						else
-						{
-							counter -= Time.deltaTime;
-						}
-					}
-				}
-				else
+				if (Input.GetKeyDown(KeyCode.Mouse0))
+					Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
+				if (Input.GetKey(KeyCode.Mouse0))
 				{
 					agent.Resume();
 					character.isInCombat = false;
-					attacking = false;
+					//attacking = false;
+					MoveToClickPosition();
+				}
+				if (attacking)
+				{
+
+					if (character.target != null)
+					{
+						if (character.target.GetComponent<TutorialCharacter>() != null)
+						{
+							if ((!character.target.GetComponent<TutorialCharacter>().isDead))
+							{
+								Attacking();
+							}
+							else
+							{
+								agent.Resume();
+								character.isInCombat = false;
+								attacking = false;
+							}
+						}
+						else if (character.target.GetComponent<Character>() != null)
+						{
+							if (character.target != null && (!character.target.GetComponent<Character>().isDead))
+							{
+								Attacking();
+							}
+							else
+							{
+								agent.Resume();
+								character.isInCombat = false;
+								attacking = false;
+							}
+						}
+					}
 				}
 			}
-
+		} else
+		{
+			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+			StartCoroutine(LoseScene());
 		}
+	}
+
+	IEnumerator LoseScene()
+	{
+		yield return new WaitForSeconds(5);
+
+		SceneManager.LoadScene("LevelFleeCutscene");
+		yield return null;
 	}
 
 	public void MoveToClickPosition()
@@ -91,30 +127,61 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-				if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
+				if (hit.transform.gameObject.GetComponent<Character>() != null)
 				{
-					Debug.Log("Clicked dead dude");
-					EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
+					{
+                        EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
+                        EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+					}
 				}
-				
-				//hit.transform.gameObject.GetComponent<MaterialSwitcher>().SwitchMaterial();
-			}
+				else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
+				{
+					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
+					{
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+					}
+				}
+            }
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-            else if (hit.transform.gameObject.tag == "Item")
-		    {
-                EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
-            }
-		    else
-		    {
-		        EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
-		        agent.stoppingDistance = 1.2f;
-		        agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
-		        attacking = false;
-		    }
+			else if (hit.transform.gameObject.tag == "Item")
+			{
+				EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
+			}
+			else
+			{
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				agent.stoppingDistance = 1.2f;
+				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
+				attacking = false;
+			}
 		}
 	}
+	private void Attacking()
+	{
+		character.isInCombat = true;
+		agent.SetDestination(character.target.transform.position);
+		distanceToTarget = agent.remainingDistance;
+		if (distanceToTarget < agent.stoppingDistance)
+		{
+			character.RotateTowards(character.target.transform);
+			if (counter <= 0)
+			{
+				character.DealDamage();
+				character.animator.SetTrigger("Attack");
+				counter = attackSpeed;
+			}
+			else
+			{
+				counter -= Time.deltaTime;
+			}
+		}
+	}
+
+
 }
+

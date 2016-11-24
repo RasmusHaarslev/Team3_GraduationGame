@@ -73,8 +73,19 @@ public class LevelWon : GameEvent
 public class PositionClicked : GameEvent
 {
     public Vector3 position;
+
     public PositionClicked(Vector3 clickPosition) {
         position = clickPosition;
+    }
+}
+
+public class EnemyClicked : GameEvent
+{
+    public GameObject enemy;
+
+    public EnemyClicked(GameObject enemy)
+    {
+        this.enemy = enemy;
     }
 }
 
@@ -172,10 +183,16 @@ public class FollowStateEvent : GameEvent
 
 public class AllyDeathEvent : GameEvent
 {
-	public AllyDeathEvent()
+    public Character deadAlly;
+
+    public AllyDeathEvent()
 	{
 
 	}
+    public AllyDeathEvent(Character deadAlly)
+    {
+        this.deadAlly = deadAlly;
+    }
 }
 
 public class ItemSpawned : GameEvent
@@ -209,5 +226,13 @@ public class ChangeFormationEvent : GameEvent
 	public ChangeFormationEvent(GameObject hunter)
 	{
 		this.hunter = hunter;
+	}
+}
+
+public class CommandEvent : GameEvent
+{
+	public CommandEvent()
+	{
+
 	}
 }

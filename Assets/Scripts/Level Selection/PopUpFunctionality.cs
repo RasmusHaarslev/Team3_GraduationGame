@@ -28,7 +28,6 @@ public class PopUpFunctionality : MonoBehaviour {
     //Scout Cost
     public int minimumScoutCost;
     public int maximumScoutCost;
-    int scoutCost;
 
     void OnEnable()
     {
@@ -38,11 +37,6 @@ public class PopUpFunctionality : MonoBehaviour {
     void OnDisable()
     {
         EventManager.Instance.StopListening<SetupPopUp>(InitialisePopUP);
-    }
-
-    void Start()
-    {
-        scoutCost = Random.Range(minimumScoutCost, maximumScoutCost);
     }
 
     public void InitialisePopUP(SetupPopUp e)
@@ -62,7 +56,7 @@ public class PopUpFunctionality : MonoBehaviour {
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
         btnScout.GetComponent<Button>().onClick.AddListener(delegate { Scout(node); });
 
-        btnScout.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Scout For") + " : " + scoutCost;
+        btnScout.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Scout For") + " : " + nodeScript.scoutCost;
         btnPlay.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Enter For") + " : " + nodeScript.TravelCost;
         tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.tribeCamps;
         foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
@@ -126,6 +120,8 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play");     
+
         confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
 
@@ -139,6 +135,8 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "scout");
+
         confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
 
@@ -149,7 +147,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void AcceptScout(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(-scoutCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().scoutCost));
 
         btnScout.SetActive(false);
         NotScoutedPanel.SetActive(false);
@@ -186,15 +184,14 @@ public class PopUpFunctionality : MonoBehaviour {
     public void AcceptPlay(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
-        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));        
 
-        PlayerPrefs.SetInt("NodeId", node.GetComponent<Node>().NodeId);
-        PlayerPrefs.SetInt("LevelDifficulty", node.GetComponent<Node>().Level);
-        PlayerPrefs.SetInt("TribeCamps", node.GetComponent<Node>().tribeCamps);
-        PlayerPrefs.SetInt("FoodAmount", node.GetComponent<Node>().foodAmount);
-        PlayerPrefs.SetInt("ScrapAmount", node.GetComponent<Node>().scrapAmount);
-        PlayerPrefs.SetInt("ItemDropAmount", node.GetComponent<Node>().itemDropAmount);
+        PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);
+        PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, node.GetComponent<Node>().Level);
+        PlayerPrefs.SetInt(StringResources.TribeCampsPrefsName, node.GetComponent<Node>().tribeCamps);
+        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
+        PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
+        PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
         // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
 
