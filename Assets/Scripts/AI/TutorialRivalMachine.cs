@@ -151,9 +151,9 @@ public class TutorialRivalMachine : CoroutineMachine
 				character.animator.SetTrigger("Attack");
 				yield return new WaitForSeconds(character.damageSpeed);
 				character.DealDamage();
-				yield return new TransitionTo(StartState, DefaultTransition);
 			}
 		}
+		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)

@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private int AlliesAlive;
     private bool PlayerAlive;
 
+	[SerializeField]
     private int EnemiesAlive = 0;
     private int ItemsLeft = 0;
     public bool inCombat = false;
