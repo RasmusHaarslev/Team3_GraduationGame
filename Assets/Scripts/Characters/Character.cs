@@ -29,7 +29,11 @@ public class Character : MonoBehaviour
 	//Combat state values
 	public bool isInCombat = false;
 	public bool isDead = false;
+	public bool isFleeing = false;
 	bool deadEvent = false;
+	[Range(0, 99)]
+	public int randomTargetProbability = 25;
+
 	//model values
 	//private Dictionary<string, Transform> slots;
 	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;
@@ -59,7 +63,10 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		animator.SetBool("isAware", isInCombat);
+		if (agent.velocity.normalized.magnitude < 0.2f)
+		{
+			animator.SetBool("isAware", isInCombat);
+		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{
@@ -86,10 +93,13 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
+				if (!isFleeing) { 
 				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
+				GetComponentInChildren<AggroRange>().gameObject.SetActive(false);
 				// VESO REMOVE THIS:
 				GetComponent<RagdollControl>().EnableRagDoll();
 
@@ -104,6 +114,10 @@ public class Character : MonoBehaviour
 			}
 			isInCombat = false;
 			isDead = true;
+		}
+		if (!isInCombat)
+		{
+			currentOpponents.Clear();
 		}
 	}
 
@@ -210,8 +224,7 @@ public class Character : MonoBehaviour
 			foreach (GameObject opp in currentOpponents)
 			{
 				var hunter = opp.GetComponent<HunterStateMachine>();
-
-				if (UnityEngine.Random.Range(0, 1) == 1)
+				if (UnityEngine.Random.Range(0, 100) < randomTargetProbability)
 				{
 					target = FindRandomEnemy();
 				}
@@ -289,7 +302,6 @@ public class Character : MonoBehaviour
 	{
 		if (!isInCombat)
 		{
-			//Debug.Log(characterBaseValues.Type);
 			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
 			{
 				targetParent = e.parent;
@@ -306,14 +318,11 @@ public class Character : MonoBehaviour
 		{
 			case EquippableitemValues.type.polearm:
 				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
-				Debug.Log("polearm");
 				break;
 			case EquippableitemValues.type.rifle:
 				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
-				Debug.Log("rifle");
 				break;
 			case EquippableitemValues.type.shield:
-				Debug.Log("shield");
 				Manager_Audio.PlaySound(Manager_Audio.attackShield, this.gameObject);
 				break;
 		}
@@ -378,10 +387,13 @@ public class Character : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		if (e.enemy == target && characterBaseValues.Type == CharacterValues.type.Player)
+		if (e.enemy == target && (characterBaseValues.Type == CharacterValues.type.Player))
 		{
-			target = null;
 			currentOpponents.Remove(target);
+			target = null;
+		}
+		if (characterBaseValues.Type == CharacterValues.type.Hunter) {
+			currentOpponents.Remove(e.enemy);
 		}
 	}
 }

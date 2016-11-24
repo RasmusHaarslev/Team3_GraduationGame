@@ -18,7 +18,8 @@ public class GameController : MonoBehaviour {
     public int _SCRAPS = 10;
     public int _PREMIUM = 10;
 
-    public DataService dataService;
+    [HideInInspector]
+    public DataService _dataService;
 
     #region Setup Instance
     private static GameController _instance;
@@ -81,7 +82,7 @@ public class GameController : MonoBehaviour {
         _instance = this;
         DontDestroyOnLoad(gameObject);
 
-        dataService = new DataService(StringResources.databaseName);
+        _dataService = new DataService(StringResources.databaseName);
 
         if (PlayerPrefs.HasKey("Food"))
         {
@@ -160,7 +161,7 @@ public class GameController : MonoBehaviour {
     public void LoseGame()
     {
         PlayerPrefs.DeleteAll();
-
+        DataService dataService = new DataService(StringResources.databaseName);
         dataService.ResetDatabase();
-    }
+	}
 }
