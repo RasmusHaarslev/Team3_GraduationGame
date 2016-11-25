@@ -136,25 +136,6 @@ public class GameController : MonoBehaviour
             scenes.Add(line);
         }
 
-        //scenes.Add("LevelPrototype02");
-        //scenes.Add("LevelPrototype03");
-        //scenes.Add("LevelPrototype04");
-        //scenes.Add("LevelPrototype05");
-        //scenes.Add("LevelPrototype06");
-        //scenes.Add("LevelPrototype02");
-        //scenes.Add("LevelPrototype03");
-        //scenes.Add("LevelPrototype04");
-        //scenes.Add("LevelPrototype05");
-        //scenes.Add("LevelPrototype06");
-
-        //foreach (var scene in sceneDirectory.GetFiles())
-        //{
-        //    if (scene.Name.EndsWith(".unity"))
-        //    {
-        //        scenes.Add(scene.Name.Split('.')[0]);
-        //    }
-        //}
-
         var randomScene = scenes[UnityEngine.Random.Range(0, scenes.Count - 1)];
         SceneManager.LoadScene(randomScene);
     }
@@ -177,6 +158,6 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("Food", InitialFood);
         PlayerPrefs.SetInt("Villagers", InitialVillages);
         PlayerPrefs.SetInt("Scraps", InitialScrap);
-        PlayerPrefs.SetInt("Premium", InitialPremium);
+        PlayerPrefs.SetInt("Premium", InitialPremium + (CampManager.Instance.Upgrades.MaxVillages*2));
     }
 }
