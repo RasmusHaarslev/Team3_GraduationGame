@@ -26,10 +26,7 @@ public class LevelManager : MonoBehaviour
     }
 
     void Update()
-    { /*
-        if (Input.GetKeyDown(KeyCode.A))
-            GenerateNewItems();
-        */
+    { 
         if (huntersAndPlayer.Count == 0)
         {
             huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));

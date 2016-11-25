@@ -9,7 +9,25 @@ public class LevelGenerator : MonoBehaviour
 {
     public int enemyStatsMultiplier = 1;
     public int enemyStatsAdditive = 1;
+    
+    [Header("Enemy Placement and Scaling")]
+    [Tooltip("Parameter usually passed from the level selection. It will influence the hardness of the level.")]
     public int difficultyLevel = 5;
+    [Tooltip("Number of camps that will be spawned.")]
+    public int campsNumber = 4;
+    [Tooltip("How many levels a World contains.")]
+    public int worldLength = 4; //how many levels are present inside a World
+    [Range(0f,1f)]
+    [Tooltip("Probability before which an enemy will have the tier decreased.")]
+    public float downScaleThreshold = 0.3f;
+    [Range(0f, 1f)]
+    [Tooltip("Probability after which an enemy will have the tier increased.")]
+    public float upScaleThreshold = 0.7f;
+
+
+    private int levelStep = 0; //the local level value inside a World
+    private int levelStatsScale = 0;
+
 
     private DataService dataService;
 
@@ -17,6 +35,10 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel, difficultyLevel);
+        campsNumber = PlayerPrefs.GetInt(StringResources.TribeCampsPrefsName, campsNumber);
+
+        levelStep = difficultyLevel%worldLength; 
+        levelStatsScale = (int)Mathf.Floor((difficultyLevel - 1) / worldLength);
 
         dataService = new DataService(StringResources.databaseName);
 
@@ -24,12 +46,10 @@ public class LevelGenerator : MonoBehaviour
 
         dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
 
-		//TODO acquire data from playerprefs
-
-		//spawn the other character from the Points of Interests
-		spawnEnemies();
+        //spawn the other character from the Points of Interests
+        spawnEnemies();
     }
-
+    
 	void OnEnable()
 	{
 		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
@@ -43,6 +63,13 @@ public class LevelGenerator : MonoBehaviour
 
     }
 
+    [ExecuteInEditMode]
+    void OnValidate()
+    {
+        if (downScaleThreshold > upScaleThreshold)
+            upScaleThreshold = downScaleThreshold + 0.05f;
+       
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -64,7 +91,7 @@ public class LevelGenerator : MonoBehaviour
         PointOfInterestManager.EncounterType[] types =
             (from poi in pointsOfInterests select poi.type).Distinct().ToArray(); //getting distinct values!
         //print("Number of tiers types found " + types.Length);
-        PointOfInterestManager[] currentPOIs;
+        List<PointOfInterestManager> currentPOIs;
         CharacterSpawner[] currentCharSpawners;
         CharacterValues[] currentTierValues = new CharacterValues[0];
         GameObject currentCharacter;
@@ -72,7 +99,7 @@ public class LevelGenerator : MonoBehaviour
         {
 
             //gather all the PointOfInterestManager of that type
-            currentPOIs = (from poi in pointsOfInterests where poi.type == type select poi).ToArray();
+            currentPOIs = (from poi in pointsOfInterests where poi.type == type select poi).ToList();
             //gather all the gameobjects tiers for the corresponding CharacterValues.type, put that on an array, in ascending order
             switch (type)
             {
@@ -92,8 +119,8 @@ public class LevelGenerator : MonoBehaviour
                     break;
 
             }
-            //scaling values of enemies
-            ScaleCharactersValuesByLevel(currentTierValues);
+            //scale POIs by level
+            ScalePOIs(ref currentPOIs);
 
             foreach (PointOfInterestManager POI in currentPOIs)
             //gets all the characters spawners and spawn the characters based on the tier
@@ -103,38 +130,91 @@ public class LevelGenerator : MonoBehaviour
                 {
                     currentCharacter = dataService.GenerateCharacterFromValues(currentTierValues[charSpawn.tier - 1],
                         charSpawn.transform.position, charSpawn.transform.rotation);
-                    /*
-                    //create character with values based on the index of the tier [assuming that for each type, the tier will be unique, so for example we have only one wolf for wolf tier 2]
-                    currentCharacter = Instantiate(
-                        Resources.Load(StringResources.charactersPrefabsPath +
-                                       currentTierValues[charSpawn.tier - 1].prefabName),
-                        //Resources.Load(StringResources.charactersPrefabsPath + currentTiers[charSpawn.tier - 1].name)
-                        charSpawn.transform.position, charSpawn.transform.rotation) as GameObject;
-                    //assign the values ONCE it is istanced
-                    currentCharacter.GetComponent<Character>().init(currentTierValues[charSpawn.tier - 1]);
-                    */
-
+                   
                     EventManager.Instance.TriggerEvent(new EnemySpawned(currentTierValues[charSpawn.tier - 1]));
                     //parent the character to the character spawn point
                     currentCharacter.transform.parent = charSpawn.transform;
 
                 }
             }
-
+            
         }
+
+        //scaling tiers and values of enemies
+        ScaleCharactersValuesByLevel();
     }
 
-
-    public void ScaleCharactersValuesByLevel(IEnumerable<CharacterValues> charactersValues)
+    /// <summary>
+    /// Scale the difficulty of each POI.
+    /// Disable certain spawn based on difficulty level and other parameters set in the inspector.
+    /// Randomly increases/decreases tiers based on public variables
+    /// </summary>
+    public void ScalePOIs(ref List<PointOfInterestManager> currentPOIs)
     {
-        foreach (CharacterValues charValues in charactersValues)
+        int minPOIEnemiesNumber = levelStep+1;
+        int maxPOIEnemiesNumber = Mathf.Clamp(levelStep + 2, 0, 5);
+     
+        CharacterSpawner[] currentCharSpawners = new CharacterSpawner[0];
+        int currentCharSpawnersMaxIndex;
+        int enemyToDisableQuantity = 0;
+        int maxIndexToIncrease = 0;
+        //reducing the number of camps based on the player prefs parameter
+        if (campsNumber < currentPOIs.Count)
+        {
+            int campsToRemoveNumber = campsNumber - currentPOIs.Count;
+            for (int i = 0; i < campsToRemoveNumber; i++)
+            {
+                currentPOIs.RemoveAt(Random.Range(0, currentPOIs.Count - 1)); 
+            }
+        }
+        
+        foreach (PointOfInterestManager POI in currentPOIs)
+        //gets all the characters spawners and spawn the characters based on the tier
+        {
+            currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
+            if (currentCharSpawners.Length >= 5)
+            {
+                enemyToDisableQuantity = Random.Range(5 - minPOIEnemiesNumber, maxPOIEnemiesNumber);
+                //print("disabling " + enemyToDisableQuantity + " in a POI");
+                currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
+                currentCharSpawnersMaxIndex = currentCharSpawners.Length - 1;
+                for (int i = 0; i < enemyToDisableQuantity; i++)
+                {
+                    currentCharSpawners[currentCharSpawnersMaxIndex - i].gameObject.SetActive(false); //TODO for now only disabling!
+                                                                                                      //destroy the spawns that are not used
+
+                    //EventManager.Instance.TriggerEvent(new EnemyDeathEvent(null));
+                }
+                maxIndexToIncrease = currentCharSpawnersMaxIndex - enemyToDisableQuantity;
+                for (int j = 0; j < maxIndexToIncrease; j++) //modifying the remaining spawn tiers
+                {
+                    float dice = 0;
+                    dice = Random.Range(0.0f, 1.0f);
+                    
+                    if (dice < downScaleThreshold)
+                        currentCharSpawners[j].tier = Mathf.Clamp(currentCharSpawners[j].tier - 2, 1, 6);
+                            //6 is the highest tier number
+                    else if (dice > upScaleThreshold)
+                        currentCharSpawners[j].tier = Mathf.Clamp(currentCharSpawners[j].tier + 2, 1, 6);
+                }
+            }
+            else Debug.LogError("A Point of Interest was found with less than 5 character spawners!");
+
+        }
+
+    }
+
+    public void ScaleCharactersValuesByLevel()
+    {
+        Character[] characters = GetComponentsInChildren<Character>();
+
+        foreach (Character c in characters)
         {
             //increase values TODO all of them??
-            charValues.damage = ScaleParameter(charValues.damage);
-            charValues.health = ScaleParameter(charValues.health);
+            c.damage = ScaleParameter(c.damage);
+            c.health = ScaleParameter(c.health);
 
-
-            charValues.tier = difficultyLevel + charValues.tier;
+            
         }
     }
 
@@ -144,8 +224,10 @@ public class LevelGenerator : MonoBehaviour
     /// <param name="values"></param>
     private int ScaleParameter(int value)
     {
-        return value + (difficultyLevel * enemyStatsMultiplier) + enemyStatsAdditive;
+        return value + (levelStatsScale * enemyStatsMultiplier) + enemyStatsAdditive;
     }
+
+
 
 }
 

@@ -18,6 +18,7 @@ public class EffectManager : MonoBehaviour {
 
     private void checkTarget(EnemyDeathEvent e)
     {
+        
         if (e.enemy.transform == _currentTarget.transform.parent)
         {
             _currentTarget.GetComponent<ParticleSystem>().Stop();
