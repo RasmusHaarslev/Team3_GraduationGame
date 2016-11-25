@@ -15,6 +15,7 @@ public class PanelScript : MonoBehaviour {
     public Transform solidersSpawnPosition;
     GameObject charactersFellowship;
     public List<Camera> soldierCameraList = new List<Camera>();
+    public List<Light> SpotLightList = new List<Light>();
     Character currentSoldier;
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
@@ -176,21 +177,25 @@ public class PanelScript : MonoBehaviour {
         if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
             soldierCameraList[0].enabled = true;
+            SpotLightList[0].enabled = true;
             DeactivateCamera(0);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 10)
         {
             soldierCameraList[1].enabled = true;
+            SpotLightList[1].enabled = true;
             DeactivateCamera(1);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 11)
         {
             soldierCameraList[2].enabled = true;
+            SpotLightList[2].enabled = true;
             DeactivateCamera(2);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 12)
         {
             soldierCameraList[3].enabled = true;
+            SpotLightList[3].enabled = true;
             DeactivateCamera(3);
         }
     }
@@ -202,8 +207,20 @@ public class PanelScript : MonoBehaviour {
             if(i != cameraIndex)
             {
                 soldierCameraList[i].enabled = false;
+               
             }   
         }     
+    }
+
+    public void DeactivateSpotligths()
+    {
+       foreach(Light spotlight in SpotLightList)
+        {
+            if(spotlight.enabled == true)
+            {
+                spotlight.enabled = false;
+            }
+        }
     }
     #endregion
 
