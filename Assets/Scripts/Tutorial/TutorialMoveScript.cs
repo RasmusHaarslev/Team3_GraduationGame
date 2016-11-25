@@ -2,13 +2,13 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class MoveScript : MonoBehaviour
+public class TutorialMoveScript : MonoBehaviour
 {
 
 	NavMeshAgent agent;
 	public bool movement = true;
 	public bool attacking = false;
-	Character character;
+	TutorialPlayerCharacter character;
 	float distanceToTarget;
 	float attackSpeed;
 	float counter = 0;
@@ -26,7 +26,7 @@ public class MoveScript : MonoBehaviour
 	{
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
 		agent = GetComponent<NavMeshAgent>();
-		character = GetComponent<Character>();
+		character = GetComponent<TutorialPlayerCharacter>();
 	}
 
 	void OnDisable()
@@ -68,25 +68,11 @@ public class MoveScript : MonoBehaviour
 				}
 				if (attacking)
 				{
-
 					if (character.target != null)
 					{
 						if (character.target.GetComponent<TutorialCharacter>() != null)
 						{
-							if ((!character.target.GetComponent<TutorialCharacter>().isDead))
-							{
-								Attacking();
-							}
-							else
-							{
-								agent.Resume();
-								character.isInCombat = false;
-								attacking = false;
-							}
-						}
-						else if (character.target.GetComponent<Character>() != null)
-						{
-							if (character.target != null && (!character.target.GetComponent<Character>().isDead))
+							if (!character.target.GetComponent<TutorialCharacter>().isDead)
 							{
 								Attacking();
 							}
@@ -100,7 +86,8 @@ public class MoveScript : MonoBehaviour
 					}
 				}
 			}
-		} else
+		}
+		else
 		{
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 			StartCoroutine(LoseScene());
@@ -127,15 +114,16 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-				if (hit.transform.gameObject.GetComponent<Character>() != null)
+				if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
 				{
-					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
+					Debug.Log("hit enemy");
+					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
 					{
-                        EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
-                        EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
 				}
-            }
+			}
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
@@ -156,6 +144,7 @@ public class MoveScript : MonoBehaviour
 	}
 	private void Attacking()
 	{
+		Debug.Log("in combat");
 		character.isInCombat = true;
 		agent.SetDestination(character.target.transform.position);
 		distanceToTarget = agent.remainingDistance;
@@ -164,6 +153,7 @@ public class MoveScript : MonoBehaviour
 			character.RotateTowards(character.target.transform);
 			if (counter <= 0)
 			{
+				Debug.Log("attack!!!!!");	
 				character.DealDamage();
 				character.animator.SetTrigger("Attack");
 				counter = attackSpeed;

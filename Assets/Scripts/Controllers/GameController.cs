@@ -48,6 +48,11 @@ public class GameController : MonoBehaviour {
         EventManager.Instance.StopListening<ChangeResources>(UpdateResources);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     public void UpdateResources(ChangeResources e)
     {
         if (_FOOD + e.food < 0)

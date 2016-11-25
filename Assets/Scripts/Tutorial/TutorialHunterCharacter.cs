@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-public class Character : MonoBehaviour
+public class TutorialHunterCharacter : MonoBehaviour
 {
 	//values gained from the database
 	public CharacterValues characterBaseValues;
@@ -45,7 +45,6 @@ public class Character : MonoBehaviour
 	public Transform torsoSlot;
 	public Transform legsSlot;
 
-
 	public EquippableitemValues.type equippedWeaponType;
 	public CharacterValues.type characterType;
 
@@ -73,7 +72,7 @@ public class Character : MonoBehaviour
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{
-			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (isDead == false)
 			{
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
@@ -82,7 +81,6 @@ public class Character : MonoBehaviour
 				animator.SetTrigger("Die");
 				if (deadEvent == false)
 				{
-					EventManager.Instance.TriggerEvent(new AllyDeathEvent(this));
 					if (isMale)
 					{
 						Manager_Audio.PlaySound(Manager_Audio.deathMale1, this.gameObject);
@@ -92,27 +90,6 @@ public class Character : MonoBehaviour
 						Manager_Audio.PlaySound(Manager_Audio.deathFemale1, this.gameObject);
 					}
 					deadEvent = true;
-				}
-			}
-			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
-			{
-				if (!isFleeing) { 
-				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
-				}
-				GetComponent<Collider>().enabled = false;
-				agent.enabled = false;
-				animator.SetTrigger("Die");
-				GetComponentInChildren<AggroRange>().gameObject.SetActive(false);
-				// VESO REMOVE THIS:
-				GetComponent<RagdollControl>().EnableRagDoll();
-
-				if (isMale)
-				{
-					Manager_Audio.PlaySound(Manager_Audio.evilDeathMale1, this.gameObject);
-				}
-				else
-				{
-					Manager_Audio.PlaySound(Manager_Audio.evilDeathFemale1, this.gameObject);
 				}
 			}
 			isInCombat = false;
@@ -127,20 +104,13 @@ public class Character : MonoBehaviour
 	void OnEnable()
 	{
 		agent = GetComponent<NavMeshAgent>();
-
 		animator = GetComponent<Animator>();
+
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 
-		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
-		{EquippableitemValues.slot.head, headSlot },
-		{EquippableitemValues.slot.torso, torsoSlot },
-		{EquippableitemValues.slot.leftHand, leftHandSlot },
-		{EquippableitemValues.slot.rightHand, rightHandSlot},
-		{EquippableitemValues.slot.legs, legsSlot }
-	};
 		damageSpeed = Mathf.Clamp(damageSpeed, 1.1f, damageSpeed);
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
@@ -159,69 +129,6 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 	}
 
-	/// <summary>
-	/// Set the character values passed in the parameter
-	/// </summary>
-	/// <param name="initValues"></param>
-	public void init(CharacterValues initValues)
-	{
-		characterBaseValues = initValues;
-		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-		health = initValues.health;
-		range = initValues.range;
-		damage = initValues.damage;
-		damageSpeed = initValues.damageSpeed;
-		currentHealth = health;
-		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
-		{
-			animator = GetComponent<Animator>();
-		}
-		isMale = initValues.isMale;
-	}
-
-	/// <summary>
-	/// Changes the stats and spawn the item on the right character slot
-	/// </summary>
-	/// <param name="item"></param>
-	void EquipItems(IEnumerable<GameObject> equips)
-	{
-		EquippableitemValues currentEquipValues;
-
-		foreach (GameObject equip in equips)
-		{
-			currentEquipValues = equip.GetComponent<EquippableItem>().itemValues;
-			if (currentEquipValues != null)
-			{
-				//checking if another item is equipped in the item slot
-				if (equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null)
-				{
-					//if thats the case, remove the values and remove the old object
-					DetachItem(currentEquipValues.Slot);
-				}
-				//parent and position the item on the appropriate slot
-				equip.transform.parent = equippableSpots[currentEquipValues.Slot]; equip.transform.localPosition = Vector3.zero;
-				//add the new item values
-				health += currentEquipValues.health;
-
-				damage += currentEquipValues.damage;
-				damageSpeed = currentEquipValues.damageSpeed;
-				range = currentEquipValues.range;
-			}
-			else
-			{
-				print("Trying to equip " + equip.name + " that is not an equippable item!");
-			}
-		}
-	}
-
-	void DetachItem(EquippableitemValues.slot slotToDetatch)
-	{
-		//remove item values from total on the player
-		EquippableitemValues itemValuesToDetatch = equippableSpots[slotToDetatch].GetComponentInChildren<EquippableitemValues>();
-		//detatch and remove the item from the game
-		//TODO complete here and find a way to communicate with the database
-	}
-
 	// Finds the appropriate target based on traits
 	public void TargetOpponent()
 	{
@@ -229,55 +136,18 @@ public class Character : MonoBehaviour
 		{
 			FindCurrentOpponents();
 		}
-
-		if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
-		{
-			foreach (GameObject opp in currentOpponents)
-			{
-				var hunter = opp.GetComponent<HunterStateMachine>();
-				if (UnityEngine.Random.Range(0, 100) < randomTargetProbability)
-				{
-					target = FindRandomEnemy();
-				}
-				else
-				{
-					target = FindNearestEnemy();
-				}
-			}
-		}
-		else
-		{
-			target = FindNearestEnemy();
-		}
+		target = FindNearestEnemy();
 	}
 
 	private void FindCurrentOpponents()
 	{
-		if (gameObject.tag == "Unfriendly")
+		foreach (Transform child in targetParent.transform)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman)
+			foreach (Transform child2 in child)
 			{
-				List<GameObject> friendlies = new List<GameObject>();
-				friendlies.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
-				friendlies.Add(GameObject.FindGameObjectWithTag("Player"));
-
-				foreach (GameObject child in friendlies)
+				if (child2.gameObject.tag == "Unfriendly")
 				{
-					currentOpponents.Add(child);
-				}
-
-			}
-		}
-		else
-		{
-			foreach (Transform child in targetParent.transform)
-			{
-				foreach (Transform child2 in child)
-				{
-					if (child2.gameObject.tag == "Unfriendly")
-					{
-						currentOpponents.Add(child2.gameObject);
-					}
+					currentOpponents.Add(child2.gameObject);
 				}
 			}
 		}
@@ -311,14 +181,12 @@ public class Character : MonoBehaviour
 
 	private void StartCombatState(EnemySpottedEvent e)
 	{
+		Debug.Log("received");
 		if (!isInCombat)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
-			{
-				targetParent = e.parent;
-				TargetOpponent();
-				isInCombat = true;
-			}
+			targetParent = e.parent;
+			TargetOpponent();
+			isInCombat = true;
 		}
 	}
 
@@ -340,25 +208,11 @@ public class Character : MonoBehaviour
 
 		if (isMale)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
-			{
-				Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
-			}
-			else
-			{
-				Manager_Audio.PlaySound(Manager_Audio.evilAttackMale1, this.gameObject);
-			}
+			Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
 		}
 		else
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
-			{
-				Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
-			}
-			else
-			{
-				Manager_Audio.PlaySound(Manager_Audio.evilAttackFemale1, this.gameObject);
-			}
+			Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
 		}
 
 		if (target != null)
@@ -398,14 +252,7 @@ public class Character : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		if (e.enemy == target && (characterBaseValues.Type == CharacterValues.type.Player))
-		{
-			currentOpponents.Remove(target);
-			target = null;
-		}
-		if (characterBaseValues.Type == CharacterValues.type.Hunter) {
-			currentOpponents.Remove(e.enemy);
-		}
+		currentOpponents.Remove(e.enemy);
 	}
 }
 
