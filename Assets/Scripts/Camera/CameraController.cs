@@ -7,8 +7,10 @@ public class CameraController : MonoBehaviour
     [HideInInspector]
 	public GameObject player;
 
-	#region Inspector fields
-	[Tooltip("Sets the distance away from the player")]
+    #region Inspector fields
+    [Tooltip("Defines the Field of view (could just be on the cam?)")]
+    public float FieldOfView = 53.58f;
+    [Tooltip("Sets the distance away from the player")]
 	public float Distance = 15f;
 	[Tooltip("Sets the height relative to the player")]
 	public float Height = 8f;
@@ -56,6 +58,7 @@ public class CameraController : MonoBehaviour
 	float distance;
 	float slerp;
     float rotationSlerp;
+    private Camera mainCamera;
     #endregion
 
     // Use this for initialization
@@ -75,7 +78,8 @@ public class CameraController : MonoBehaviour
 		else
 		{
 			player = GameObject.FindGameObjectWithTag("Player");
-		}
+            mainCamera = this.GetComponent<Camera>();
+        }
 	}
 
 	void TransformPosition()
@@ -93,7 +97,9 @@ public class CameraController : MonoBehaviour
 		Vector3 positionTarget = OverridePosition ? OverriddenPosition : player.transform.position + new Vector3(0, height, -distance);
 
 		transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * slerp);
-	}
+
+        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, FieldOfView, Time.deltaTime * slerp);
+    }
 
 	private void SetHeight()
 	{
