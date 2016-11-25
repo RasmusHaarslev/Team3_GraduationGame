@@ -20,8 +20,7 @@
 				<Event Id="604685473" Name="DiscoverFriendly" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendly" MaxAttenuation="0.000000"/>
 				<Event Id="1392836774" Name="FriendlyDie" ObjectPath="\Events\Default Work Unit\TriggerEvents\FriendlyDie" MaxAttenuation="0.000000"/>
 				<Event Id="1292318918" Name="Play_CharSel" ObjectPath="\Events\Default Work Unit\UI\Play_CharSel"/>
-				<Event Id="2169471766" Name="Play_ClearMap1" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap1"/>
-				<Event Id="2169471765" Name="Play_ClearMap2" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap2"/>
+				<Event Id="1757332637" Name="Play_ClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap"/>
 				<Event Id="1164893191" Name="Play_CommandSel" ObjectPath="\Events\Default Work Unit\UI\Play_CommandSel"/>
 				<Event Id="4074757615" Name="Play_CommandUI" ObjectPath="\Events\Default Work Unit\UI\Play_CommandUI"/>
 				<Event Id="3643034395" Name="Play_EvilFemaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack"/>
@@ -41,6 +40,8 @@
 				<Event Id="1918433323" Name="Play_MenuAmbience" ObjectPath="\Events\Default Work Unit\Play_MenuAmbience"/>
 				<Event Id="2570041344" Name="Play_MenuMusic" ObjectPath="\Events\Default Work Unit\Play_MenuMusic"/>
 				<Event Id="3719726781" Name="Play_MenuUI" ObjectPath="\Events\Default Work Unit\UI\Play_MenuUI"/>
+				<Event Id="1694930636" Name="Play_NodeFade" ObjectPath="\Events\Default Work Unit\UI\Play_NodeFade"/>
+				<Event Id="3493304896" Name="Play_NonClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_NonClearMap"/>
 				<Event Id="623878550" Name="Play_OpenMapUI" ObjectPath="\Events\Default Work Unit\UI\Play_OpenMapUI"/>
 				<Event Id="2149966355" Name="Play_PickRiffle" ObjectPath="\Events\Default Work Unit\UI\Play_PickRiffle"/>
 				<Event Id="3454913730" Name="Play_PickShield" ObjectPath="\Events\Default Work Unit\UI\Play_PickShield"/>
@@ -83,6 +84,10 @@
 					<ShortName>FemaleWarrior1Attack2.wav</ShortName>
 					<Path>SFX/FemaleWarrior1Attack2_52BD694B.wem</Path>
 				</File>
+				<File Id="51067484" Language="SFX">
+					<ShortName>FriendlyDieStinger1.wav</ShortName>
+					<Path>SFX/FriendlyDieStinger1_67BB40F9.wem</Path>
+				</File>
 				<File Id="52315870" Language="SFX">
 					<ShortName>FootstepsConc5.wav</ShortName>
 					<Path>SFX/FootstepsConc5_76A9233F.wem</Path>
@@ -98,6 +103,10 @@
 				<File Id="79608986" Language="SFX">
 					<ShortName>EvilFemaleWarrior1Attack1.wav</ShortName>
 					<Path>SFX/EvilFemaleWarrior1Attack1_52BD694B.wem</Path>
+				</File>
+				<File Id="120499320" Language="SFX">
+					<ShortName>FriendlyDieStinger2.wav</ShortName>
+					<Path>SFX/FriendlyDieStinger2_67BB40F9.wem</Path>
 				</File>
 				<File Id="126401319" Language="SFX">
 					<ShortName>BoneHitSweet4.wav</ShortName>
@@ -259,10 +268,6 @@
 					<ShortName>MaleWarrior1Attack1.wav</ShortName>
 					<Path>SFX/MaleWarrior1Attack1_52BD694B.wem</Path>
 				</File>
-				<File Id="365469786" Language="SFX">
-					<ShortName>CombatTrans.wav</ShortName>
-					<Path>SFX/CombatTrans_67BB40F9.wem</Path>
-				</File>
 				<File Id="368430150" Language="SFX">
 					<ShortName>FootStepsBoot9.wav</ShortName>
 					<Path>SFX/FootStepsBoot9_76A9233F.wem</Path>
@@ -298,6 +303,10 @@
 				<File Id="431530333" Language="SFX">
 					<ShortName>FootStepsBoot5.wav</ShortName>
 					<Path>SFX/FootStepsBoot5_76A9233F.wem</Path>
+				</File>
+				<File Id="435279165" Language="SFX">
+					<ShortName>FriendlyDieStinger3.wav</ShortName>
+					<Path>SFX/FriendlyDieStinger3_67BB40F9.wem</Path>
 				</File>
 				<File Id="446135141" Language="SFX">
 					<ShortName>FemaleWarrior1Attack1.wav</ShortName>
@@ -395,10 +404,6 @@
 					<ShortName>FootStepsBoot3.wav</ShortName>
 					<Path>SFX/FootStepsBoot3_76A9233F.wem</Path>
 				</File>
-				<File Id="620914224" Language="SFX">
-					<ShortName>Stinger3.wav</ShortName>
-					<Path>SFX/Stinger3_67BB40F9.wem</Path>
-				</File>
 				<File Id="621111750" Language="SFX">
 					<ShortName>FemaleWarrior2Attack4.wav</ShortName>
 					<Path>SFX/FemaleWarrior2Attack4_52BD694B.wem</Path>
@@ -417,7 +422,7 @@
 				</File>
 				<File Id="648197445" Language="SFX">
 					<ShortName>WalkTapUI.wav</ShortName>
-					<Path>SFX/WalkTapUI_FEF7B421.wem</Path>
+					<Path>SFX/WalkTapUI_AAE17008.wem</Path>
 				</File>
 				<File Id="649023967" Language="SFX">
 					<ShortName>WindFlags.wav</ShortName>
@@ -481,7 +486,7 @@
 				</File>
 				<File Id="718727633" Language="SFX">
 					<ShortName>UI_Click.wav</ShortName>
-					<Path>SFX/UI_Click_B02CB821.wem</Path>
+					<Path>SFX/UI_Click_98B69302.wem</Path>
 				</File>
 				<File Id="722501933" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack3.wav</ShortName>
@@ -543,6 +548,10 @@
 					<ShortName>FootStepsBoot1.wav</ShortName>
 					<Path>SFX/FootStepsBoot1_76A9233F.wem</Path>
 				</File>
+				<File Id="829725817" Language="SFX">
+					<ShortName>ToExplore.wav</ShortName>
+					<Path>SFX/ToExplore_67BB40F9.wem</Path>
+				</File>
 				<File Id="840939363" Language="SFX">
 					<ShortName>EvilFemaleWarrior2Attack3.wav</ShortName>
 					<Path>SFX/EvilFemaleWarrior2Attack3_52BD694B.wem</Path>
@@ -590,6 +599,10 @@
 				<File Id="941490590" Language="SFX">
 					<ShortName>HItSweet1.wav</ShortName>
 					<Path>SFX/HItSweet1_52BD694B.wem</Path>
+				</File>
+				<File Id="941738491" Language="SFX">
+					<ShortName>NonClearMap.wav</ShortName>
+					<Path>SFX/NonClearMap_52BD694B.wem</Path>
 				</File>
 				<File Id="969021496" Language="SFX">
 					<ShortName>ScrollUI.wav</ShortName>
