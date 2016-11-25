@@ -4,15 +4,28 @@ using System.Collections;
 public class AggroRange : MonoBehaviour
 {
 	public float verticalTriggerOffset = 1.5f;
+	LevelGenerator levelGenerator;
+
+	void Start()
+	{
+		levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
+	}
+
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly")
 		{
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
-				if (!transform.parent.GetComponent<Character>().isDead)
+				if (levelGenerator.isTutorial)
 				{
-					EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
+					if (!transform.parent.GetComponent<TutorialCharacter>().isDead)
+						EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
+				}
+				else 
+				{
+					if (!transform.parent.GetComponent<Character>().isDead) 
+						EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
 				}
 			}
 		}

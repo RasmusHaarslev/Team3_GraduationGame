@@ -71,22 +71,48 @@ public class TutorialRivalMachine : CoroutineMachine
 		{
 			if (character.currentOpponents.Count != 0)
 			{
-				if (!character.target.GetComponent<Character>().isDead)
+				if (character.target != null)
 				{
-					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
-					if (distanceToTarget < agent.stoppingDistance)
+					if (character.target.GetComponent<TutorialHunterCharacter>() != null)
 					{
-						yield return new TransitionTo(CombatState, DefaultTransition);
+						if (!character.target.GetComponent<TutorialHunterCharacter>().isDead)
+						{
+							distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+							if (distanceToTarget < agent.stoppingDistance)
+							{
+								yield return new TransitionTo(CombatState, DefaultTransition);
+							}
+							else
+							{
+								yield return new TransitionTo(EngageState, DefaultTransition);
+							}
+						}
+						else
+						{
+							character.currentOpponents.Remove(character.target);
+							character.target = character.FindNearestEnemy();
+						}
 					}
-					else
+					else if (character.target.GetComponent<TutorialPlayerCharacter>() != null)
 					{
-						yield return new TransitionTo(EngageState, DefaultTransition);
+						if (!character.target.GetComponent<TutorialPlayerCharacter>().isDead)
+						{
+							distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+							if (distanceToTarget < agent.stoppingDistance)
+							{
+								yield return new TransitionTo(CombatState, DefaultTransition);
+							}
+							else
+							{
+								yield return new TransitionTo(EngageState, DefaultTransition);
+							}
+						}
+						else
+						{
+							character.currentOpponents.Remove(character.target);
+							character.target = character.FindNearestEnemy();
+						}
 					}
-				}
-				else
-				{
-					character.currentOpponents.Remove(character.target);
-					character.target = character.FindNearestEnemy();
 				}
 			}
 			else
