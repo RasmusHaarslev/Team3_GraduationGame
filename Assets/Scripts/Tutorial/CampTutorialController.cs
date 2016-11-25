@@ -20,8 +20,8 @@ public class CampTutorialController : MonoBehaviour
         levelSelectionGenerator = GameObject.Find("LevelSelectionGenerator");
 
         if (PlayerPrefs.HasKey("TutorialCompleted"))
-            if (PlayerPrefs.GetInt("TutorialCompleted") == 1)
-                gameObject.SetActive(false);
+            if (PlayerPrefs.GetInt("TutorialCompleted") == 0)
+                gameObject.SetActive(true);
     }
 
     public void NextPanel()

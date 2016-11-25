@@ -40,15 +40,15 @@ public class LevelManager : MonoBehaviour
 
     void SetGameState()
     {
-        foreach (var friendly in huntersAndPlayer)
-        {
-            if (friendly.GetComponent<Character>().isInCombat)
-            {
-                inCombat = true;
-                Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.fightSnapshot);
-                return;
-            }
-        }
+        //foreach (var friendly in huntersAndPlayer)
+        //{
+        //    if (friendly.GetComponent<Character>().isInCombat)
+        //    {
+        //        inCombat = true;
+        //        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.fightSnapshot);
+        //        return;
+        //    }
+        //}
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.exploreSnapshot);
         inCombat = false;
     }

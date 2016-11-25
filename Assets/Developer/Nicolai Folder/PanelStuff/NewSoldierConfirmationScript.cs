@@ -10,7 +10,7 @@ public class NewSoldierConfirmationScript : MonoBehaviour
     public GameObject yesButton;
     public GameObject noButton;
     PanelScript panelScript;
-    GameObject silhouette;
+    //GameObject silhouette;
 
     void Start()
     {

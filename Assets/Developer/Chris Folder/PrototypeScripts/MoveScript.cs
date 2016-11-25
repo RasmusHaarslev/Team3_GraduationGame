@@ -135,13 +135,6 @@ public class MoveScript : MonoBehaviour
                         EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
 				}
-				else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
-				{
-					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
-					{
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
-					}
-				}
             }
 			else if (hit.transform.gameObject.tag == "Player")
 			{
