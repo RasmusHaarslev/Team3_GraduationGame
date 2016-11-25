@@ -117,7 +117,6 @@ public class MoveScript : MonoBehaviour
 
 	public void MoveToClickPosition()
 	{
-
 		RaycastHit hit;
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
 		{
@@ -148,7 +147,11 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-			else if (hit.transform.gameObject.tag == "Item")
+            else if (hit.transform.gameObject.tag == "Friendly")
+            {
+
+            }
+            else if (hit.transform.gameObject.tag == "Item")
 			{
 				EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
 			}
