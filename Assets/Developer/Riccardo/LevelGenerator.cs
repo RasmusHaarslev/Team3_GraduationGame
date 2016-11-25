@@ -24,18 +24,22 @@ public class LevelGenerator : MonoBehaviour
 
         dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
 
-        Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
-		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
+		//TODO acquire data from playerprefs
 
-        //TODO acquire data from playerprefs
-
-        //spawn the other character from the Points of Interests
-        spawnEnemies();
+		//spawn the other character from the Points of Interests
+		spawnEnemies();
     }
+
+	void OnEnable()
+	{
+		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
+		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
+	}
 
     void OnDisable()
     {
         Manager_Audio.PlaySound(Manager_Audio.baseAmbienceStop, this.gameObject);
+		Manager_Audio.PlaySound(Manager_Audio.musicExploreStop, this.gameObject);
 
     }
 
@@ -55,8 +59,8 @@ public class LevelGenerator : MonoBehaviour
 
     public void spawnEnemies()
     {
-        //iterate trough all possible types
-        PointOfInterestManager[] pointsOfInterests = GetComponentsInChildren<PointOfInterestManager>();
+		//iterate trough all possible types
+		PointOfInterestManager[] pointsOfInterests = GetComponentsInChildren<PointOfInterestManager>();
         PointOfInterestManager.EncounterType[] types =
             (from poi in pointsOfInterests select poi.type).Distinct().ToArray(); //getting distinct values!
         //print("Number of tiers types found " + types.Length);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.ModuleDesigner.Scripts.BaseClasses;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.ModuleDesigner.Scripts
 {
@@ -15,7 +16,7 @@ namespace Assets.ModuleDesigner.Scripts
         public Boolean KeepGizmo = true;
 
         [Header("Output objects")]
-        public TriggerReceiver[] Targets;
+        public List<TriggerReceiver> Targets;
 
         void OnTriggerEnter(Collider other)
         {
@@ -49,6 +50,25 @@ namespace Assets.ModuleDesigner.Scripts
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
+
+            #region checkingStuff
+            List<TriggerReceiver> Removes = new List<TriggerReceiver>();
+            foreach (var obj in Targets)
+            {
+                if (obj == null)
+                {
+                    Removes.Add(obj);
+                }
+            }
+            foreach (var obj in Removes)
+            {
+                if (obj == null)
+                {
+                    Targets.Remove(obj);
+
+                }
+            }
+            #endregion
 
             foreach (var obj in Targets)
             {

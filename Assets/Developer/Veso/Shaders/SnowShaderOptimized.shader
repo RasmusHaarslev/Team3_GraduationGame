@@ -3,6 +3,7 @@
 		_MainColor("Main Color", Color) = (1.0,1.0,1.0,1.0)
 		_MainTex("Base (RGB)", 2D) = "white" {}
 		_Bump("Bump", 2D) = "bump" {}
+   		_BumpPower ("Normal Map Power", Range (0, 1.5)) = 0.1 
 		_Snow("Level of snow", Range(1, -1)) = 1
 		_SnowColor("Color of snow", Color) = (1.0,1.0,1.0,1.0)
 		_SnowDirection("Direction of snow", Vector) = (0,1,0)
@@ -24,7 +25,7 @@
 	float4 _MainColor;
 	float4 _SnowDirection;
 	float _SnowDepth;
-	float _Shininess;
+	float _Shininess,_BumpPower;
 
 
 	struct Input {
@@ -58,12 +59,19 @@
 	void surf(Input IN, inout SurfaceOutput o)
 	{
 		half4 c = tex2D(_MainTex, IN.uv_MainTex);
-		o.Normal = UnpackNormal(tex2D(_Bump, IN.uv_Bump));
+		float3 unpackedNormal = UnpackNormal(tex2D(_Bump, IN.uv_Bump));
+		o.Normal = float3(unpackedNormal.x*_BumpPower,unpackedNormal.y*_BumpPower,unpackedNormal.z);
 		if (dot(WorldNormalVector(IN, o.Normal), _SnowDirection.xyz) >= _Snow)
 			o.Albedo = _SnowColor.rgb;
-		else
+		else{
 			o.Albedo = c.rgb * _MainColor;
+
+		}
+			
 		o.Alpha = 1;
+
+
+
 	}
 	ENDCG
 	}

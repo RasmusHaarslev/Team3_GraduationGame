@@ -2,16 +2,17 @@
 using System.Collections;
 using Assets.ModuleDesigner.Scripts.BaseClasses;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.ModuleDesigner.Scripts
 {
     public class Delayer : TriggerReceiver
     {
         [Header("Delay options")]
-        public int DelayInSeconds = 0;
+        public float DelayInSeconds = 0;
 
         [Header("Output objects")]
-        public TriggerReceiver[] Targets;
+        public List<TriggerReceiver> Targets;
 
         public override void TriggerEnter()
         {
@@ -47,6 +48,24 @@ namespace Assets.ModuleDesigner.Scripts
             Gizmos.color = Color.blue;
             //Gizmos.DrawCube(transform.position, transform.localScale);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
+
+            #region checkingStuff
+            List<TriggerReceiver> Removes = new List<TriggerReceiver>();
+            foreach (var obj in Targets)
+            {
+                if (obj == null)
+                {
+                    Removes.Add(obj);
+                }
+            }
+            foreach (var obj in Removes)
+            {
+                if (obj == null)
+                {
+                    Targets.Remove(obj);
+                }
+            }
+            #endregion
 
             foreach (var obj in Targets)
             {
