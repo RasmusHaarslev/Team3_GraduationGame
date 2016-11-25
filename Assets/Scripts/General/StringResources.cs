@@ -109,7 +109,32 @@ public class StringResources
 "BESNIK",
 "LUCA",
 "YOSKA",
-"TOBAR"};
+"TOBAR",
+"KASPER",
+"JOACHIM",
+"LARS",
+"OTTO",
+"OSCAR",
+"MUHAMMED",
+"MALIK",
+"MORTEN",
+"RIKARD",
+"ALEKSY",
+"KASIMIERZ",
+"KONSTANTY",
+"KORNELIUSZ",
+"KRYSZTOF",
+"AHMED",
+"BAHADIR",
+"BASAK",
+"CHENGIZ",
+"DENIZ",
+"ERDEM",
+"IBRAHIM",
+"KHALID",
+"SEBNEM",
+"SULEIMAN",
+"ZEHEB"};
 
     public static string[] femaleNames = new[] { "TEA",
 "AGNES",
@@ -134,12 +159,37 @@ public class StringResources
 "HABIBAH",
 "ELIZA",
 "ESHAL",
-"INAAYA"};
+"INAAYA",
+"CÆCILIA",
+"URSULA",
+"EMILY",
+"ANNA",
+"OLGA",
+"KAREN",
+"BENTE",
+"BANAAN",
+"MAYA",
+"AGATA",
+"ALESKA",
+"EMILJA",
+"ESTERA",
+"OLESIA",
+"ARUBA",
+"DILARA",
+"FATIMAH",
+"FATMA",
+"JAMILIA",
+"LAMYA",
+"MELEK",
+"PINAR",
+"SHAKELA",
+"YAZ",
+"ZULMA"};
 
 
     #endregion
 
-    // Use this for initialization
+        // Use this for initialization
     void Start () {
 	
 	}
