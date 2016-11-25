@@ -45,6 +45,9 @@ public class TutorialCharacter : MonoBehaviour
 	public CharacterValues.type characterType;
 
 	public bool isMale = true;
+	[Range(0, 99)]
+	public int randomTargetProbability = 25;
+	float isFleeingValue;
 
 	// Use this for initialization
 	void Start()
@@ -61,13 +64,7 @@ public class TutorialCharacter : MonoBehaviour
 	{
 		if (target != null)
 		{
-			if (target.GetComponent<Character>() != null && target.GetComponent<Character>().isFleeing)
-			{
-				isInCombat = false;
-				currentOpponents.Clear();
-				target = null;
-			}
-			if (target.GetComponent<TutorialCharacter>() != null && target.GetComponent<TutorialCharacter>().isFleeing)
+			if ((target.GetComponent<TutorialHunterCharacter>() != null && target.GetComponent<TutorialHunterCharacter>().isFleeing) || (target.GetComponent<TutorialPlayerCharacter>() != null && target.GetComponent<TutorialPlayerCharacter>().isFleeing))
 			{
 				isInCombat = false;
 				currentOpponents.Clear();
@@ -80,7 +77,10 @@ public class TutorialCharacter : MonoBehaviour
 		{
 			if (isDead == false)
 			{
-				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				if (!isFleeing)
+				{
+					EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
@@ -98,6 +98,10 @@ public class TutorialCharacter : MonoBehaviour
 			}
 			isInCombat = false;
 			isDead = true;
+		}
+		if (!isInCombat)
+		{
+			currentOpponents.Clear();
 		}
 	}
 
@@ -183,7 +187,7 @@ public class TutorialCharacter : MonoBehaviour
 		{
 			var hunter = opp.GetComponent<HunterStateMachine>();
 
-			if (UnityEngine.Random.Range(0, 1) == 1)
+			if (UnityEngine.Random.Range(0, 100) < randomTargetProbability)
 			{
 				target = FindRandomEnemy();
 			}
@@ -323,8 +327,8 @@ public class TutorialCharacter : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		target = null;
 		currentOpponents.Remove(target);
+		target = null;
 	}
 }
 
