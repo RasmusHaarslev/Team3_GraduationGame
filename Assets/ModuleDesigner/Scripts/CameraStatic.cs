@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class CameraSwitch : TriggerReceiver
+    public class CameraStatic : TriggerReceiver
     {
         private Camera mainCamera;
         private Camera switchedCamera;
@@ -29,7 +29,6 @@ namespace Assets.ModuleDesigner.Scripts
 
         public override void Expose(GameObject go)
         {
-            this.GetComponentInChildren<CameraHelper>().Target = go;
             OnValidate();
         }
 
@@ -49,6 +48,10 @@ namespace Assets.ModuleDesigner.Scripts
             Gizmos.color = new Color(1,0,0,0.5f);
             //Gizmos.DrawSphere(transform.position, 0.25f);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
+
+            var CameraPos = this.GetComponentInChildren<Camera>().gameObject.transform.position;
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(this.transform.position + new Vector3(0, 0.5f, 0), CameraPos - new Vector3(0, 0.5f, 0));
         }
 
         void OnValidate()

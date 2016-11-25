@@ -430,7 +430,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Play_ClearMap1" ID="{5EF170C4-F393-4A38-9809-C9EF0795A37A}">
+						<Event Name="Play_NodeFade" ID="{5EF170C4-F393-4A38-9809-C9EF0795A37A}">
 							<ChildrenList>
 								<Action Name="Play" ID="{3DC3CC0D-FB2E-48C1-B103-356B7396A54F}" ShortID="875022136" Type="Play" Scope="One" Global="false">
 									<ElementList>
@@ -488,12 +488,23 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Play_ClearMap2" ID="{37E715C5-B1A1-4A1F-B035-BE3FE2E9B4B0}">
+						<Event Name="Play_ClearMap" ID="{37E715C5-B1A1-4A1F-B035-BE3FE2E9B4B0}">
 							<ChildrenList>
 								<Action Name="Play" ID="{FB37EFA5-32A4-4E63-BCE2-C5F9A8D56580}" ShortID="266937263" Type="Play" Scope="One" Global="false">
 									<ElementList>
 										<Element ID="{09BD15F9-3DEA-44A6-AFDB-19D1FF5C3457}" Global="false">
 											<ObjectRef Name="ClearMapPt2" ID="{7A115C1F-682A-4A88-951F-8D615FBAC299}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_NonClearMap" ID="{42851A00-257D-4306-B6B8-CA80C72B0949}">
+							<ChildrenList>
+								<Action Name="Play" ID="{1761DD82-9D84-490F-8111-2C297E098FC4}" ShortID="393616785" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{D8E7336D-6D5D-4CC0-A3F1-CA9DEB9E9F03}" Global="false">
+											<ObjectRef Name="NonClearMap" ID="{E0ED9D64-C084-47A4-A906-93819173E030}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>

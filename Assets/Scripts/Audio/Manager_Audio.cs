@@ -70,8 +70,11 @@ public class Manager_Audio : MonoBehaviour {
     public static string play_scrollMap = "Play_ScrollMap";
     public static string stop_scrollMap = "Stop_ScrollMap";
 
+    public static string play_fadeNode = "Play_NodeFade";
     public static string play_clearMap = "Play_ClearMap";
     public static string play_unlockNewMaps = "Play_UnlockNewMaps";
+    public static string play_lostMap = "Play_NonClearMap";
+
     public static string play_charSel = "Play_CharSel";
 
     public static string adjustMusicVolume = "MusicVol";
