@@ -18,13 +18,13 @@ Event	ID	Name			Wwise Object Path	Notes
 	1496010068	Play_ShieldHit			\Default Work Unit\Combat\Play_ShieldHit	
 	1629463520	DiscoverEnemy			\Default Work Unit\TriggerEvents\DiscoverEnemy	
 	1661144613	Play_windFlags			\Default Work Unit\Ambience\Play_windFlags	
+	1694930636	Play_NodeFade			\Default Work Unit\UI\Play_NodeFade	
+	1757332637	Play_ClearMap			\Default Work Unit\UI\Play_ClearMap	
 	1820147880	Play_GenericHit			\Default Work Unit\Combat\Play_GenericHit	
 	1918433323	Play_MenuAmbience			\Default Work Unit\Play_MenuAmbience	
 	1938796326	Play_windNoiseQuiet			\Default Work Unit\Ambience\Play_windNoiseQuiet	
 	2143972174	Play_UseSpear			\Default Work Unit\Combat\Play_UseSpear	
 	2149966355	Play_PickRiffle			\Default Work Unit\UI\Play_PickRiffle	
-	2169471765	Play_ClearMap2			\Default Work Unit\UI\Play_ClearMap2	
-	2169471766	Play_ClearMap1			\Default Work Unit\UI\Play_ClearMap1	
 	2412941441	Play_LeaderAttack			\Default Work Unit\Combat\Play_LeaderAttack	
 	2491028491	Play_EvilFemaleWarrior1Death			\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Death	
 	2570041344	Play_MenuMusic			\Default Work Unit\Play_MenuMusic	
@@ -37,6 +37,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3296022196	Play_EvilMaleWarrior1Attack			\Default Work Unit\Warriors\Play_EvilMaleWarrior1Attack	
 	3454913730	Play_PickShield			\Default Work Unit\UI\Play_PickShield	
 	3484799022	Stop_ExploreMusic			\Default Work Unit\Stop_ExploreMusic	
+	3493304896	Play_NonClearMap			\Default Work Unit\UI\Play_NonClearMap	
 	3552896197	Play_FemaleWarrior1Attack			\Default Work Unit\Warriors\Play_FemaleWarrior1Attack	
 	3643034395	Play_EvilFemaleWarrior1Attack			\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack	
 	3689491696	Play_MaleWarrior1Death			\Default Work Unit\Warriors\Play_MaleWarrior1Death	
@@ -72,7 +73,6 @@ Custom State	ID	Name	State Group	Owner		Notes
 	694792509	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windhowl		
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	1003381729	UnlockMapPitch			\Default Work Unit\UnlockMapPitch	
 	1633960628	ScrollPitch			\Default Work Unit\ScrollPitch	
 
 Trigger	ID	Name			Wwise Object Path	Notes
@@ -86,10 +86,12 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	19545444	MaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior2Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack4		40543
 	26566640	FemaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack3		30576
 	41430989	FemaleWarrior1Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack2		30657
+	51067484	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FriendlyDieStinger1_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		46383
 	52315870	FootstepsConc5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootstepsConc5_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc5		2447
 	55096845	FootStepsBoot10	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot10_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot10		2473
 	55443062	FemaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack3		31095
 	79608986	EvilFemaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack1		29862
+	120499320	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FriendlyDieStinger2_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		46040
 	129200692	EvilFemaleWarrior1Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior1Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack2		30624
 	160583729	WindQuiter	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\WindQuiter_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windNoiseQuiet\WindQuiter		391981
 	166559896	MaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack4		40672
@@ -108,7 +110,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	262551881	FemaleWarrior2Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior2Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior2Death\FemaleWarrior2Death2		59426
 	263839022	FootstepsConc4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootstepsConc4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc4		2235
 	271916395	FemaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death2		49414
-	274771103	UnlockNewMaps	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\UnlockNewMaps_35B854C8.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\UnlockNewMaps		10896
+	274771103	UnlockNewMaps	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\UnlockNewMaps_35B854C8.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\UnlockNewMaps		8925
 	283084582	MaleWarrior2Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior2Attack6_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack6		49287
 	283116526	EvilMaleWarrior2Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilMaleWarrior2Death3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior2Death\EvilMaleWarrior2Death3		37074
 	287159919	ShieldHit	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ShieldHit_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\ShieldHit\ShieldHit		4320
@@ -120,7 +122,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	324456182	MaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack2		40894
 	325237437	CombatTest	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\CombatTest_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Combat\CombatTest\CombatTest		281860
 	326011935	Wind_deepTone2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\Wind_deepTone2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindDeep2\Wind_deepTone2		803409
-	326129756	ClearMapPt2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ClearMapPt2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClearMapPt2		27210
+	326129756	ClearMapPt2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ClearMapPt2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClearMapPt2		27300
 	328503743	EvilFemaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack2		30052
 	335228985	FootStepsSneak7	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsSneak7_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak7		2818
 	341578845	EnemyNearLayer	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EnemyNearLayer_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\EnemyNear\Enemy\EnemyNearLayer		608872
@@ -128,7 +130,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	351867575	GenericHit1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\GenericHit1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit1		9489
 	356655512	EvilFemaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior1Death2_B801D84C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior1Death\EvilFemaleWarrior1Death2		30105
 	364989889	MaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack1		41195
-	365469786	CombatTrans	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\CombatTrans_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\CombatTrans\CombatTrans		136145
 	368430150	FootStepsBoot9	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot9_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot9		2695
 	376855293	FootStepsBoot2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot2		2013
 	377000719	FootstepsConc9	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootstepsConc9_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc9		2571
@@ -138,6 +139,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	424388683	FemaleWarrior2Death4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior2Death4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior2Death\FemaleWarrior2Death4		49660
 	430592716	FemaleWarrior2Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior2Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack5		40943
 	431530333	FootStepsBoot5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot5_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot5		2582
+	435279165	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FriendlyDieStinger3_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		47334
 	446135141	FemaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack1		30645
 	453473293	EvilMaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilMaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior2Attack\EvilMaleWarrior2Attack2		29744
 	458564501	Gun1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\Gun1_EC853E84.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun1		23247
@@ -158,16 +160,15 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	565719652	FemaleWarrior1Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Attack6_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack6		30357
 	566128289	MaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior1Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior1Death\MaleWarrior1Death2		49053
 	574431990	FootStepsBoot7	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot7_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot7		2771
-	578675284	ClearMapPt1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ClearMapPt1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClearMapPt1		24660
+	578675284	ClearMapPt1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ClearMapPt1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClearMapPt1		17795
 	613587420	EvilFemaleWarrior1Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior1Death3_DDD27514.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior1Death\EvilFemaleWarrior1Death3		49174
 	615639292	FemaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack4		40709
 	617761867	FootStepsBoot3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot3_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot3		2857
-	620914224	Stinger3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\Stinger3_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\Stinger3		176484
 	621111750	FemaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior2Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack4		40896
 	621422572	BoneHitSweet1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\BoneHitSweet1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet1		10598
 	633922746	EvilFemaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack3		29970
 	635379905	FootstepsConc6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootstepsConc6_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc6		2372
-	648197445	WalkTapUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\WalkTapUI_FEF7B421.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\WalkTapUI		7720
+	648197445	WalkTapUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\WalkTapUI_AAE17008.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\WalkTapUI		2766
 	649023967	WindFlags	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\WindFlags_8E8F09D1.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windFlags\WindFlags		141166
 	659933923	FemaleWarrior2Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior2Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack1		40681
 	662274387	EvilMaleWarrior2Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilMaleWarrior2Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior2Death\EvilMaleWarrior2Death2		29230
@@ -183,7 +184,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	711651648	FootStepsBoot4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot4		2155
 	716460009	MaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack3		40613
 	716938442	MaleWarrior1Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior1Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack5		40638
-	718727633	MenuUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\UI_Click_B02CB821.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\MenuUI		1379
+	718727633	MenuUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\UI_Click_98B69302.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\MenuUI		1023
 	722501933	EvilMaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilMaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior1Attack\EvilMaleWarrior1Attack3		40745
 	725859429	BoneHitSweet2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\BoneHitSweet2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet2		8666
 	727701744	UseKnife	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\UseKnife_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\UseKnife		5379
@@ -199,6 +200,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	808857810	FemaleWarrior1Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FemaleWarrior1Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death1		48411
 	809645592	Whoosh2_16_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\Whoosh2_16.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_16_1		5321
 	822594266	FootStepsBoot1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot1		1217
+	829725817	CombatTrans	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ToExplore_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\CombatTrans\CombatTrans		922509
 	840939363	EvilFemaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilFemaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack3		40184
 	878074695	MaleWarrior2Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior2Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack5		30357
 	879139088	FootStepsBoot6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsBoot6_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot6		2501
@@ -211,6 +213,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	933282720	EvilMaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\EvilMaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior1Attack\EvilMaleWarrior1Attack4		41305
 	934244384	MaleWarrior1Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\MaleWarrior1Attack6_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack6		40602
 	941490590	HItSweet1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\HItSweet1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet1		12525
+	941738491	NonClearMap	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\NonClearMap_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\NonClearMap		34214
 	969021496	ScrollUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\ScrollUI_6CD8A14D.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ScrollMap\ScrollUI		16821
 	974275100	STINGER1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\STINGER1_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\DiscoverEnemy\STINGER1		140476
 	974952532	FootStepsSneak4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Windows\SFX\FootStepsSneak4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak4		2227

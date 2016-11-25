@@ -20,8 +20,8 @@ public class CampTutorialController : MonoBehaviour
         levelSelectionGenerator = GameObject.Find("LevelSelectionGenerator");
 
         if (PlayerPrefs.HasKey("TutorialCompleted"))
-            if (PlayerPrefs.GetInt("TutorialCompleted") == 1)
-                gameObject.SetActive(false);
+            if (PlayerPrefs.GetInt("TutorialCompleted") == 0)
+                gameObject.SetActive(true);
     }
 
     public void NextPanel()
@@ -91,8 +91,22 @@ public class CampTutorialController : MonoBehaviour
 
     public void EnterLevel()
     {
-        PlayerPrefs.SetInt("TutorialCompleted", 1);
-        gameObject.SetActive(false);
-        GameController.Instance.LoadLevel();
-    }
+		gameObject.SetActive(false);
+		GameObject level0 = GameObject.Find("0.0");
+		Node node0 = level0.GetComponent<Node>();
+		
+		PlayerPrefs.SetInt("TutorialCompleted", 1);
+
+		Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+		EventManager.Instance.TriggerEvent(new ChangeResources(-node0.GetComponent<Node>().TravelCost));
+
+		PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node0.GetComponent<Node>().NodeId);
+		PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, node0.GetComponent<Node>().Level);
+		PlayerPrefs.SetInt(StringResources.TribeCampsPrefsName, node0.GetComponent<Node>().tribeCamps);
+		PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node0.GetComponent<Node>().foodAmount);
+		PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node0.GetComponent<Node>().scrapAmount);
+		PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node0.GetComponent<Node>().itemDropAmount);
+
+		GameController.Instance.LoadScene("LevelEnterCutscene");
+	}
 }

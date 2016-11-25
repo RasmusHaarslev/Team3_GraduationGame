@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	public bool isFleeing = false;
+
 	bool deadEvent = false;
 	[Range(0, 99)]
 	public int randomTargetProbability = 25;
@@ -71,6 +72,28 @@ public class Character : MonoBehaviour
 			animator.SetBool("isAware", isInCombat);
 		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
+
+		if (target != null)
+		{
+			if (target.GetComponent<Character>() != null)
+			{
+				if (target.GetComponent<Character>().isFleeing)
+				{
+					currentOpponents.Clear();
+					target = null;
+					isInCombat = false;
+				}
+			} else if (target.GetComponent<TutorialCharacter>() != null)
+			{
+				if (target.GetComponent<TutorialCharacter>().isFleeing)
+				{
+					isInCombat = false;
+					currentOpponents.Clear();
+					target = null;
+				}
+			}
+		}
+
 		if (currentHealth <= 0)
 		{
 			if (isDead == false && characterBaseValues.Type == CharacterValues.type.Hunter)
@@ -96,8 +119,9 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman))
 			{
-				if (!isFleeing) { 
-				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				if (!isFleeing)
+				{
+					EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
@@ -340,7 +364,7 @@ public class Character : MonoBehaviour
 
 		if (isMale)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
 			}
@@ -351,7 +375,7 @@ public class Character : MonoBehaviour
 		}
 		else
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
 			}
@@ -403,7 +427,8 @@ public class Character : MonoBehaviour
 			currentOpponents.Remove(target);
 			target = null;
 		}
-		if (characterBaseValues.Type == CharacterValues.type.Hunter) {
+		if (characterBaseValues.Type == CharacterValues.type.Hunter)
+		{
 			currentOpponents.Remove(e.enemy);
 		}
 	}

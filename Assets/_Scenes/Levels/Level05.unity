@@ -2663,7 +2663,15 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0.15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135000012732972790, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 135000010791243034, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 135000013846997672, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 135000010281324778, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000011345814538, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000013132672902, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000012210355602, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
+    - {fileID: 114000014108435512, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 41dd1e871be0b334b80a6ecf1687c55f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1724089204
@@ -2954,9 +2962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 4096
-  lowerPoolSize: 2048
-  streamingPoolSize: 1024
+  defaultPoolSize: 32768
+  lowerPoolSize: 16384
+  streamingPoolSize: 8192
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1

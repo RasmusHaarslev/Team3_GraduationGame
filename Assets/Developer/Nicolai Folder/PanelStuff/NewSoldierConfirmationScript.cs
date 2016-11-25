@@ -10,7 +10,7 @@ public class NewSoldierConfirmationScript : MonoBehaviour
     public GameObject yesButton;
     public GameObject noButton;
     PanelScript panelScript;
-    GameObject silhouette;
+    //GameObject silhouette;
 
     void Start()
     {
@@ -21,6 +21,7 @@ public class NewSoldierConfirmationScript : MonoBehaviour
 
     public void ActivateConfirmationPanel()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
         backgroundConfirmationPanel.SetActive(true);
         yesButton.GetComponent<Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<Button>().onClick.RemoveAllListeners();

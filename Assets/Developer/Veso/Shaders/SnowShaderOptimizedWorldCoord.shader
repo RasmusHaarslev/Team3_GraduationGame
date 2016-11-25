@@ -3,6 +3,7 @@
 		_MainColor("Main Color", Color) = (1.0,1.0,1.0,1.0)
 		_MainTex("Base (RGB)", 2D) = "white" {}
 		_Bump("Bump", 2D) = "bump" {}
+   		_BumpPower ("Normal Map Power", Range (-3, 5)) = 0.1 
 		_Snow("Level of snow", Range(1, -1)) = 1
 		_SnowColor("Color of snow", Color) = (1.0,1.0,1.0,1.0)
 		_SnowDirection("Direction of snow", Vector) = (0,1,0)
@@ -10,7 +11,6 @@
 		_SpecColor ("Specular Color", Color) = (0.5,0.5,0.5,1)
    		_Shininess ("Shininess", Range (0.01, 1)) = 0.078125 
    		_Scale ("Texture Scale", float) = 1 
-   		
 	}
 		SubShader{
 		Tags{ "RenderType" = "Opaque" }
@@ -27,7 +27,7 @@
 	float4 _SnowDirection;
 	float _SnowDepth;
 	float _Shininess;
-	float _Scale;
+	float _Scale,_BumpPower;
 
 	struct Input {
 		float2 uv_MainTex;
@@ -77,7 +77,8 @@
 			c = tex2D(_MainTex, UV*_Scale);
 		}
 
-		o.Normal = UnpackNormal(tex2D(_Bump, IN.uv_Bump));
+		float3 unpackedNormal = UnpackNormal(tex2D(_Bump, IN.uv_Bump));
+		o.Normal = float3(unpackedNormal.x*_BumpPower,unpackedNormal.y*_BumpPower,unpackedNormal.z);
 		if (dot(WorldNormalVector(IN, o.Normal), _SnowDirection.xyz) >= _Snow)
 			o.Albedo = _SnowColor.rgb;
 		else

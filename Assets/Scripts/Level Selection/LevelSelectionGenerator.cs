@@ -86,7 +86,7 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
-                EventManager.Instance.TriggerEvent(new LevelCleared());
+                EventManager.Instance.TriggerEvent(new LevelCleared(true));
                 GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
                 Node nodeScript = nodeCleared.GetComponent<Node>();     
 
@@ -97,9 +97,12 @@ public class LevelSelectionGenerator : MonoBehaviour
                     nodes.GetComponent<Node>().canPlay = true;
                 }
 
-                    InstantiateRows(1);
+                InstantiateRows(1);
 
                 PlayerPrefs.SetInt("LevelResult", 0);
+            } else
+            {
+                EventManager.Instance.TriggerEvent(new LevelCleared(false));
             }
 
             SaveDict(new SaveLevelsToXML());
@@ -256,8 +259,6 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             totalAmountRows += 1;
         }
-
-        initialiseDropDown();
 
         SaveLoadLevels.SaveLevels(nodesInRows);
     }
@@ -417,38 +418,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         from.transform.localScale = new Vector3(1, 1, 1);        
     }
 
-    /// <summary>
-    /// Button click (Temporary Functionality)
-    /// </summary>
-    /// <param name="amount">Will insert the number of rows</param>
-    public void AddItemToGrid(int amount)
-    {
-        InstantiateRows(amount);
-    }
-
-    void initialiseDropDown()
-    {
-        var dropdown = dropDown.GetComponent<Dropdown>();
-        dropdown.options.Clear();
-        for (int i = 0; i <= totalAmountRows - 2; i++)
-        {
-            dropdown.options.Add(new Dropdown.OptionData(i.ToString()));
-        }
-
-        if (totalAmountRows + 1 == amountOfRows)
-        {
-            dropdown.onValueChanged.AddListener(delegate
-            {
-                myDropdownValueChangedHandler(dropdown);
-            });
-        }
-    }
-
-    private void myDropdownValueChangedHandler(Dropdown target)
-    {
-        SetScrollPosition(target.value);
-    }
-
     public void SetScrollPosition(int rowNumber)
     {
         /* SETUP SCROLL POSITION */
@@ -456,8 +425,8 @@ public class LevelSelectionGenerator : MonoBehaviour
         float rowToGoTo = rowHeight * rowNumber;
         float gridYPosition = -(((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight) + rowToGoTo;
 
-        Vector2 initPos = scrollingGrid.GetComponent<RectTransform>().anchoredPosition;
-        Vector2 desPos = new Vector2(0, gridYPosition);
+        Vector2 initPos = new Vector2(scrollingGrid.GetComponent<RectTransform>().anchoredPosition.x, scrollingGrid.GetComponent<RectTransform>().anchoredPosition.y - (((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight));
+        Vector2 desPos = new Vector2(0, gridYPosition + 192);
 
         StartCoroutine(MoveFromTo(initPos, desPos, 0.5f));
     }
@@ -475,7 +444,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         }
         Manager_Audio.PlaySound(Manager_Audio.stop_scrollMap, gameObject);
     }
-
     #endregion
 
     private void SaveDict(SaveLevelsToXML e)
