@@ -3,6 +3,7 @@ using Assets.ModuleDesigner.Scripts.BaseClasses;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 namespace Assets.ModuleDesigner.Scripts
 {
@@ -14,7 +15,7 @@ namespace Assets.ModuleDesigner.Scripts
         public float ChanceForTrigger = 50.0f;
 
         [Header("Output objects")]
-        public TriggerReceiver[] Targets;
+        public List<TriggerReceiver> Targets;
         
         void Start()
         {
@@ -59,6 +60,24 @@ namespace Assets.ModuleDesigner.Scripts
             Gizmos.color = Color.green;
             //Gizmos.DrawCube(transform.position, transform.localScale);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
+
+            #region checkingStuff
+            List<TriggerReceiver> Removes = new List<TriggerReceiver>();
+            foreach (var obj in Targets)
+            {
+                if (obj == null)
+                {
+                    Removes.Add(obj);
+                }
+            }
+            foreach (var obj in Removes)
+            {
+                if (obj == null)
+                {
+                    Targets.Remove(obj);
+                }
+            }
+            #endregion
 
             foreach (var obj in Targets)
             {
