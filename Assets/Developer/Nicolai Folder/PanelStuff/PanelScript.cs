@@ -62,7 +62,7 @@ public class PanelScript : MonoBehaviour {
             {
                 foreach (Transform soldiertrans in solidersSpawnPosition)
                 {
-                    if (silhouetteGO.transform.localPosition == soldiertrans.localPosition)
+                    if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
                         print("adding as new Character");
                         newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
@@ -163,7 +163,7 @@ public class PanelScript : MonoBehaviour {
         {
             for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
             {
-                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position, Quaternion.identity);
+                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
                 //silhouetteList.Add(silhouette);
             }
         }
