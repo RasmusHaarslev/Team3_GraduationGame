@@ -130,7 +130,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
-		if (!character.isDead)
+		if (!character.isDead && character.target != null)
 		{
 			agent.Resume();
 			agent.stoppingDistance = character.range;
@@ -148,6 +148,7 @@ public class RivalStateMachine : CoroutineMachine
 			character.animator.SetTrigger("Attack");
 			yield return new WaitForSeconds(character.damageSpeed);
 			character.DealDamage();
+			Debug.Log(gameObject.name);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
