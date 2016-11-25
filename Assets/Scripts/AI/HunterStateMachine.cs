@@ -341,6 +341,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
