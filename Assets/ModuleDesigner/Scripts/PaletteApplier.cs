@@ -38,8 +38,8 @@ namespace Assets.ModuleDesigner.Scripts
             RenderSettings.ambientEquatorColor = ambientEquatorColor;
             RenderSettings.ambientGroundColor = ambientGroundColor;
 
-            walkableGroundMaterial.SetColor("_Color", walkableGroundColor);
-            nonWalkableGroundMaterial.SetColor("_Color", nonWalkableGroundColor);
+            walkableGroundMaterial.SetColor("_MainColor", walkableGroundColor);
+            nonWalkableGroundMaterial.SetColor("_MainColor", nonWalkableGroundColor);
         }
 
         //Collectively parses all colors in a palette, and sends them to appropriate
