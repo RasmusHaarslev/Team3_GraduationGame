@@ -239,6 +239,14 @@ public class Node : MonoBehaviour {
 
         return childrens;
     }
+    
+    public void TriggerSound(int changeSound)
+    {
+        // 0 - Lose
+        // 1 - Unlock
+        // 2 - Clear
+        Debug.Log(changeSound);
+    }
     #endregion
 }
 

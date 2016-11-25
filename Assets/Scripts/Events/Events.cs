@@ -8,8 +8,11 @@ public class SaveLevelsToXML : GameEvent
 
 public class LevelCleared : GameEvent
 {
-    public LevelCleared()
+    public bool isCleared;
+
+    public LevelCleared(bool isCleared)
     {
+        this.isCleared = isCleared;
     }
 }
 
