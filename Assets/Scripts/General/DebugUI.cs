@@ -412,6 +412,7 @@ public class DebugUI : MonoBehaviour
     public void ResetGame()
     {
         PlayerPrefs.DeleteAll();
+        GameController.Instance.ResetResources();
     }
 
 }
