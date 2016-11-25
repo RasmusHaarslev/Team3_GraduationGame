@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class CameraSwitch : TriggerReceiver
+    public class CameraStatic : TriggerReceiver
     {
         public float SlerpAmount;
 
