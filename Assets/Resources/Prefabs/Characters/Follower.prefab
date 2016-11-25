@@ -6357,12 +6357,15 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
+  randomTargetProbability: 25
   rightHandSlot: {fileID: 4000010267765884}
   leftHandSlot: {fileID: 4000011231404588}
   headSlot: {fileID: 4000012275467350}
   torsoSlot: {fileID: 4000013299733896}
   legsSlot: {fileID: 4000013299733896}
   equippedWeaponType: 0
+  characterType: 0
   isMale: 0
 --- !u!114 &114000014005325176
 MonoBehaviour:
@@ -6378,6 +6381,8 @@ MonoBehaviour:
   rigidbody: {fileID: 54000013429122434}
   playerCapsuleCollider: {fileID: 136000011258601800}
   playerSphereCollider: {fileID: 0}
+  pushForceOnDeath: 10
+  forceModePush: 1
 --- !u!135 &135000013923013834
 SphereCollider:
   m_ObjectHideFlags: 1

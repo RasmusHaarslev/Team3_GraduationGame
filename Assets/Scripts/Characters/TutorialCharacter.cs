@@ -28,6 +28,8 @@ public class TutorialCharacter : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	bool deadEvent = false;
+	public bool isFleeing = false;
+
 	//model values
 	//private Dictionary<string, Transform> slots;
 	public Dictionary<EquippableitemValues.slot, Transform> equippableSpots;
@@ -57,6 +59,21 @@ public class TutorialCharacter : MonoBehaviour
 
 	void Update()
 	{
+		if (target != null)
+		{
+			if (target.GetComponent<Character>() != null && target.GetComponent<Character>().isFleeing)
+			{
+				isInCombat = false;
+				currentOpponents.Clear();
+				target = null;
+			}
+			if (target.GetComponent<TutorialCharacter>() != null && target.GetComponent<TutorialCharacter>().isFleeing)
+			{
+				isInCombat = false;
+				currentOpponents.Clear();
+				target = null;
+			}
+		}
 		animator.SetBool("isAware", isInCombat);
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
