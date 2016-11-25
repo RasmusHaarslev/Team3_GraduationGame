@@ -6,7 +6,8 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public int InitialFood = 10;
     public int InitialVillages = 10;
@@ -56,15 +57,15 @@ public class GameController : MonoBehaviour {
     public void UpdateResources(ChangeResources e)
     {
         if (_FOOD + e.food < 0)
-		{
-			e.villager = e.villager - (Mathf.Abs(e.food) - _FOOD);
-			e.food = -_FOOD;
+        {
+            e.villager = e.villager - (Mathf.Abs(e.food) - _FOOD);
+            e.food = -_FOOD;
         }
 
-		_FOOD 		= (_FOOD + e.food < 0) 			? 0 : _FOOD + e.food;
-		_VILLAGERS 	= (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
-		_SCRAPS 	= (_SCRAPS + e.scraps < 0) 		? 0 : _SCRAPS + e.scraps;
-		_PREMIUM 	= (_PREMIUM + e.premium < 0) 	? 0 : _PREMIUM + e.premium;
+        _FOOD = (_FOOD + e.food < 0) ? 0 : _FOOD + e.food;
+        _VILLAGERS = (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
+        _SCRAPS = (_SCRAPS + e.scraps < 0) ? 0 : _SCRAPS + e.scraps;
+        _PREMIUM = (_PREMIUM + e.premium < 0) ? 0 : _PREMIUM + e.premium;
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
         SaveResources();
     }
@@ -159,14 +160,28 @@ public class GameController : MonoBehaviour {
         //    }
         //}
 
-        var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
+        var randomScene = scenes[UnityEngine.Random.Range(0, scenes.Count - 1)];
         SceneManager.LoadScene(randomScene);
     }
 
     public void LoseGame()
     {
         PlayerPrefs.DeleteAll();
+        ResetResources();
         DataService dataService = new DataService(StringResources.databaseName);
         dataService.ResetDatabase();
-	}
+    }
+
+    public void ResetResources()
+    {
+        _FOOD = InitialFood;
+        _VILLAGERS = InitialVillages;
+        _SCRAPS = InitialScrap;
+        _PREMIUM = InitialPremium;
+
+        PlayerPrefs.SetInt("Food", InitialFood);
+        PlayerPrefs.SetInt("Villagers", InitialVillages);
+        PlayerPrefs.SetInt("Scraps", InitialScrap);
+        PlayerPrefs.SetInt("Premium", InitialPremium);
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.ModuleDesigner.Scripts.BaseClasses;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.ModuleDesigner.Scripts
 {
@@ -8,7 +9,7 @@ namespace Assets.ModuleDesigner.Scripts
     {
         [Header("Objects")]
         [Tooltip("Should contain objects the trigger should affect")]
-        public GameObject[] ObjectsToAffect;
+        public List<GameObject> ObjectsToAffect;
 
         [Header("Rotation settings")]
         public float RotateDegrees;
@@ -73,6 +74,25 @@ namespace Assets.ModuleDesigner.Scripts
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
+
+            #region checkingStuff
+            List<GameObject> Removes = new List<GameObject>();
+            foreach (var obj in ObjectsToAffect)
+            {
+                if (obj == null)
+                {
+                    Removes.Add(obj);
+                }
+            }
+            foreach (var obj in Removes)
+            {
+                if (obj == null)
+                {
+                    ObjectsToAffect.Remove(obj);
+
+                }
+            }
+            #endregion
 
             foreach (var obj in ObjectsToAffect)
             {
