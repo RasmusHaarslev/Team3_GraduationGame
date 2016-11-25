@@ -16,18 +16,16 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_unlockNewMaps, gameObject);
-        //Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
-        {
-            
+        {            
             panelScript.panelList[3].SetActive(true);
             panelScript.panelList[0].SetActive(true);
         }
 
         if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
         {
-            Debug.Log(panelScript);
+            Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
             panelScript.UpdateSoldierStats(gameObject);
             panelScript.ActivateCamera(gameObject);
             panelScript.panelList[3].SetActive(true);
@@ -41,16 +39,12 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
         if (gameObject.CompareTag("Silhouette") && panelScript.panelList[6].activeSelf == false)
         {
-            //if (!panelScript.alreadyGeneratedNewSoldiers)
-            //{
-            //    panelScript.GetNewSoldiers();
-            //    panelScript.alreadyGeneratedNewSoldiers = true;
-            //}
             if (!isAlreadyOpen)
             {
                 panelScript.GetNewSoldiers();
                 isAlreadyOpen = true;
             }
+            
             panelScript.silhouetteGO = gameObject;
             panelScript.panelList[3].SetActive(true);
             panelScript.panelList[6].SetActive(true);

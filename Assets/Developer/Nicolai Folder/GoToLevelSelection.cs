@@ -79,6 +79,8 @@ public class GoToLevelSelection : MonoBehaviour {
     {
         Node nodeScript = node.GetComponent<Node>();
         List<GameObject> nodeList = nodeScript.Links.Select(l => l.To).ToList();
+
+        Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
         node.GetComponent<Animator>().SetTrigger("IsCleared");
         yield return new WaitForSeconds(1f);
 
@@ -87,7 +89,9 @@ public class GoToLevelSelection : MonoBehaviour {
 
         foreach (var childNode in nodeList)
         {
-            if (!childNode.GetComponent<Node>().isCleared) { 
+            if (!childNode.GetComponent<Node>().isCleared)
+            {
+                Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
                 childNode.GetComponent<Animator>().SetTrigger("IsUnlocked");
                 yield return new WaitForSeconds(1f);
             }
@@ -105,6 +109,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
     IEnumerator initLose(GameObject node)
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
         node.GetComponent<Animator>().SetTrigger("IsLost");
         yield return new WaitForSeconds(1f);
     }

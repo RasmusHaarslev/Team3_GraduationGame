@@ -244,8 +244,19 @@ public class Node : MonoBehaviour {
     {
         // 0 - Lose
         // 1 - Unlock
+
         // 2 - Clear
-        Debug.Log(changeSound);
+        switch(changeSound) {
+            case 0:
+                Manager_Audio.PlaySound(Manager_Audio.play_lostMap, gameObject);
+                break;
+            case 1:
+                Manager_Audio.PlaySound(Manager_Audio.play_unlockNewMaps, gameObject);
+                break;
+            case 2:
+                Manager_Audio.PlaySound(Manager_Audio.play_clearMap, gameObject);
+                break;
+        }
     }
     #endregion
 }
