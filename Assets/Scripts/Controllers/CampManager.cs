@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CampManager : MonoBehaviour
 {
-    public CampUpgrades Upgrades;
+    public CampUpgrades Upgrades = new CampUpgrades();
     public int GatherCost;
     public int GatherCostIncrease;
 
@@ -62,7 +62,7 @@ public class CampManager : MonoBehaviour
 
     void Awake()
     {
-        
+
     }
 
     public void SaveUpgrades()
@@ -75,7 +75,7 @@ public class CampManager : MonoBehaviour
         stream.Close();
     }
 
-    private void LoadUpgrades()
+    public void LoadUpgrades()
     {
         var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
 
@@ -137,7 +137,7 @@ public class CampManager : MonoBehaviour
 
     public void FinishUpgradeNow()
     {
-        Upgrades.UpgradeInProgress = true;
+        Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Gold -= FinishUpgradeCost;
 
@@ -248,24 +248,24 @@ public class CampUpgrades
 {
     #region State
     [XmlAttribute("UpgradeInProgress")]
-    public bool UpgradeInProgress;
+    public bool UpgradeInProgress = false;
     [XmlAttribute("UpgradeBought")]
-    public string UpgradeBought;
+    public string UpgradeBought  ="";
 
     #endregion
 
     #region Upgradeables
 
     [XmlAttribute("GatherLevel")]
-    public int GatherLevel;
+    public int GatherLevel = 0;
     [XmlAttribute("MaxVillages")]
-    public int MaxVillages;
+    public int MaxVillages = 0;
     [XmlAttribute("BlacksmithLevel")]
-    public int BlacksmithLevel;
+    public int BlacksmithLevel = 0;
     [XmlAttribute("LeaderHealthLevel")]
-    public int LeaderHealthLevel;
+    public int LeaderHealthLevel = 0;
     [XmlAttribute("LeaderStrengthLevel")]
-    public int LeaderStrengthLevel;
+    public int LeaderStrengthLevel = 0;
 
     #endregion
 
