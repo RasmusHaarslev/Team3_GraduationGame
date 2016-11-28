@@ -118,6 +118,9 @@ public class TutorialRivalMachine : CoroutineMachine
 							character.target = character.FindNearestEnemy();
 						}
 					}
+				} else
+				{
+					character.target = character.FindNearestEnemy();
 				}
 			}
 			else
