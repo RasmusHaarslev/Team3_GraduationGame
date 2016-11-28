@@ -151,7 +151,7 @@ public class TutorialMoveScript : MonoBehaviour
 			}
 			else
 			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
 				attacking = false;

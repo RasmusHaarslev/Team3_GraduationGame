@@ -11,7 +11,6 @@ public class ClickingEffect : MonoBehaviour
     void Start()
     {
         _particleSystem = GetComponent<ParticleSystem>();
-        //_particleSystem.Play();
     }
 }
 
