@@ -164,25 +164,29 @@ public class LevelGenerator : MonoBehaviour
             int campsToRemoveNumber = campsNumber - currentPOIs.Count;
             for (int i = 0; i < campsToRemoveNumber; i++)
             {
-                currentPOIs.RemoveAt(Random.Range(0, currentPOIs.Count - 1)); 
+                int indexPOIToRemove = Random.Range(0, currentPOIs.Count - 1);
+                currentPOIs.ElementAt(indexPOIToRemove).gameObject.SetActive(false);
+                currentPOIs.RemoveAt(indexPOIToRemove); 
             }
         }
         
         foreach (PointOfInterestManager POI in currentPOIs)
         //gets all the characters spawners and spawn the characters based on the tier
         {
-            currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
+            currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>(true);
+            foreach (CharacterSpawner charSpawn in currentCharSpawners)
+            {
+                charSpawn.gameObject.SetActive(true); //enabling all the char spawns inside the POI
+            }
             if (currentCharSpawners.Length >= 5)
             {
                 enemyToDisableQuantity = Random.Range(5 - minPOIEnemiesNumber, maxPOIEnemiesNumber);
-                //print("disabling " + enemyToDisableQuantity + " in a POI");
+                print("between "+ (5 - minPOIEnemiesNumber)+" and "+ maxPOIEnemiesNumber + "disabling " + enemyToDisableQuantity + " in a POI");
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
                 currentCharSpawnersMaxIndex = currentCharSpawners.Length - 1;
                 for (int i = 0; i < enemyToDisableQuantity; i++)
                 {
-                    currentCharSpawners[currentCharSpawnersMaxIndex - i].gameObject.SetActive(false); //TODO for now only disabling!
-                                                                                                      //destroy the spawns that are not used
-
+                    currentCharSpawners[currentCharSpawnersMaxIndex - i].gameObject.SetActive(false); //TODO for now only disabling!                                                                                                     
                     //EventManager.Instance.TriggerEvent(new EnemyDeathEvent(null));
                 }
                 maxIndexToIncrease = currentCharSpawnersMaxIndex - enemyToDisableQuantity;
