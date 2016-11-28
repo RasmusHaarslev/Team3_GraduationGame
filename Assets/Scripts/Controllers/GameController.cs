@@ -13,11 +13,13 @@ public class GameController : MonoBehaviour
     public int InitialVillages = 10;
     public int InitialScrap = 10;
     public int InitialPremium = 10;
+    public int InitialDaysSurvived = 0;
 
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
     public int _SCRAPS = 10;
     public int _PREMIUM = 10;
+    public int _DAYS_SURVIVED = 0;
 
     [HideInInspector]
     public DataService _dataService;
@@ -96,6 +98,7 @@ public class GameController : MonoBehaviour
             _VILLAGERS = PlayerPrefs.GetInt("Villagers");
             _SCRAPS = PlayerPrefs.GetInt("Scraps");
             _PREMIUM = PlayerPrefs.GetInt("Premium");
+            _DAYS_SURVIVED = PlayerPrefs.GetInt("DaysSurvived");
         }
         else
         {
@@ -103,6 +106,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("Villagers", InitialVillages);
             PlayerPrefs.SetInt("Scraps", InitialScrap);
             PlayerPrefs.SetInt("Premium", InitialPremium);
+            PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
         }
     }
 
