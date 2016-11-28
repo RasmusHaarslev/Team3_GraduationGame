@@ -30,4 +30,9 @@ public class LevelCanvasManager : MonoBehaviour {
         //activate new items panel
         listController.transform.parent.parent.gameObject.SetActive(true);
     }
+
+    public void LoadFleeCutScene()
+    {
+        GameController.Instance.LoadScene("LevelFleeCutscene");
+    }
 }
