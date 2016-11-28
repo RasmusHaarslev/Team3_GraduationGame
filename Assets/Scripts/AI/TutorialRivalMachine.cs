@@ -65,6 +65,11 @@ public class TutorialRivalMachine : CoroutineMachine
 		averageHealth = poimanager.GetAverageCharactersHealth();
 		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
+			if (!character.isFleeing)
+			{
+				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				character.isFleeing = true;
+			}
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
 		if (character.isInCombat)
@@ -156,7 +161,7 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
-		if (!character.isDead)
+		if (!character.isDead && character.target != null)
 		{
 			agent.Resume();
 			agent.stoppingDistance = character.range;
@@ -173,7 +178,6 @@ public class TutorialRivalMachine : CoroutineMachine
 			if (character.target != null)
 			{
 				character.RotateTowards(character.target.transform);
-				agent.Stop();
 				character.animator.SetTrigger("Attack");
 				yield return new WaitForSeconds(character.damageSpeed);
 				character.DealDamage();

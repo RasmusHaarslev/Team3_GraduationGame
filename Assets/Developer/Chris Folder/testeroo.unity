@@ -1222,7 +1222,7 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7,
     type: 2}
-  m_PrefabInternal: {fileID: 1364343819}
+  m_PrefabInternal: {fileID: 914297248}
 --- !u!1 &37424641
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3083,31 @@ Prefab:
       propertyPath: m_Name
       value: TutorialFollower (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: currentHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: legsSlot
+      value: 
+      objectReference: {fileID: 789815740}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: torsoSlot
+      value: 
+      objectReference: {fileID: 789815740}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: headSlot
+      value: 
+      objectReference: {fileID: 1157905546}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
   m_IsPrefabParent: 0
@@ -15155,6 +15180,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 2059247963}
   leftHandSlot: {fileID: 2039532688}
   headSlot: {fileID: 571108419}
@@ -15163,6 +15189,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &542943483
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -21789,6 +21816,11 @@ Transform:
   - {fileID: 621630475}
   m_Father: {fileID: 716964553}
   m_RootOrder: 0
+--- !u!4 &789815740 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000013895188828, guid: 78f25e071844ed548b5e2574e39b5af7,
+    type: 2}
+  m_PrefabInternal: {fileID: 914297248}
 --- !u!1 &791152017
 GameObject:
   m_ObjectHideFlags: 0
@@ -25144,6 +25176,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012284428924, guid: c1b2088177f29ba48b3ed5d56e6c8844,
     type: 2}
   m_PrefabInternal: {fileID: 652531802}
+--- !u!1001 &914297248
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2070043672}
+    m_Modifications:
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.9300003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.7599983
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 7.9800034
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &915040634
 GameObject:
   m_ObjectHideFlags: 0
@@ -29158,6 +29232,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 1360523361}
   leftHandSlot: {fileID: 485623465}
   headSlot: {fileID: 299631101}
@@ -29166,6 +29241,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &1075234444
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -30836,6 +30912,11 @@ Transform:
   - {fileID: 742308748}
   m_Father: {fileID: 1824114807}
   m_RootOrder: 14
+--- !u!4 &1157905546 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000013043267646, guid: 78f25e071844ed548b5e2574e39b5af7,
+    type: 2}
+  m_PrefabInternal: {fileID: 914297248}
 --- !u!1 &1157926813
 GameObject:
   m_ObjectHideFlags: 0
@@ -34383,6 +34464,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 756996937}
   leftHandSlot: {fileID: 1898105288}
   headSlot: {fileID: 235193479}
@@ -34391,6 +34473,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &1288319091
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -34726,6 +34809,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 1443388260}
   leftHandSlot: {fileID: 32419138}
   headSlot: {fileID: 1536001776}
@@ -34734,6 +34818,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &1297262507
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -36707,53 +36792,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1364343819
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2070043672}
-    m_Modifications:
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.9300003
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.7599983
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 7.9800034
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012665125846, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010546847598, guid: 78f25e071844ed548b5e2574e39b5af7,
-        type: 2}
-      propertyPath: rigidbody
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1365455104
 Prefab:
@@ -41314,6 +41352,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 734763919}
   leftHandSlot: {fileID: 1418315311}
   headSlot: {fileID: 415309544}
@@ -41322,6 +41361,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &1525570960
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -46887,6 +46927,31 @@ Prefab:
       propertyPath: m_Name
       value: TutorialFollower (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: currentHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: legsSlot
+      value: 
+      objectReference: {fileID: 789815740}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: torsoSlot
+      value: 
+      objectReference: {fileID: 789815740}
+    - target: {fileID: 114000011449458056, guid: 78f25e071844ed548b5e2574e39b5af7,
+        type: 2}
+      propertyPath: headSlot
+      value: 
+      objectReference: {fileID: 1157905546}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78f25e071844ed548b5e2574e39b5af7, type: 2}
   m_IsPrefabParent: 0
@@ -47633,6 +47698,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 426726078}
   leftHandSlot: {fileID: 38856226}
   headSlot: {fileID: 651171944}
@@ -47641,6 +47707,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &1731787269
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -54273,6 +54340,7 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
   rightHandSlot: {fileID: 1517576214}
   leftHandSlot: {fileID: 104823981}
   headSlot: {fileID: 811651861}
@@ -54281,6 +54349,7 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!195 &1962553993
 NavMeshAgent:
   m_ObjectHideFlags: 0

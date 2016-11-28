@@ -117,7 +117,6 @@ public class TutorialHunterCharacter : MonoBehaviour
 
 	private void CommandAnimator(CommandEvent e)
 	{
-		Debug.Log("received ");
 		animator.SetTrigger("IssueCommand");
 	}
 
@@ -181,7 +180,6 @@ public class TutorialHunterCharacter : MonoBehaviour
 
 	private void StartCombatState(EnemySpottedEvent e)
 	{
-		Debug.Log("received");
 		if (!isInCombat)
 		{
 			targetParent = e.parent;

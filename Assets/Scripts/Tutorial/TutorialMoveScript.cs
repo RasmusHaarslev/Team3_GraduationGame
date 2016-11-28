@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class TutorialMoveScript : MonoBehaviour
@@ -15,6 +16,7 @@ public class TutorialMoveScript : MonoBehaviour
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
+	List<GameObject> hunters = new List<GameObject>();
 
 	// Use this for initialization
 	void Start()
@@ -47,6 +49,21 @@ public class TutorialMoveScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (hunters.Count == 0)
+		{
+			hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+		}
+		int counter = 0;
+		foreach (var hunter in hunters)
+		{
+			if (hunter.GetComponent<TutorialHunterCharacter>().isInCombat)
+			{
+				character.isInCombat = true;
+				counter++;
+			}
+		}
+		if (counter == 0)
+			character.isInCombat = false;
 		if (!isFleeing)
 		{
 			attackSpeed = character.damageSpeed;

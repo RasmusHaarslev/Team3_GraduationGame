@@ -408,7 +408,6 @@ public class Character : MonoBehaviour
 			{
 				Manager_Audio.PlaySound(Manager_Audio.shieldHit, this.gameObject);
 			}
-
 			currentHealth -= e.damage;
 		}
 	}
