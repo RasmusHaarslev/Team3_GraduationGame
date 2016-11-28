@@ -1163,7 +1163,7 @@ GameObject:
   - 114: {fileID: 114000011820308390}
   - 114: {fileID: 114000010505145156}
   m_Layer: 5
-  m_Name: CampPanel 1
+  m_Name: CampPanel1_old
   m_TagString: CampPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5430,7 +5430,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 114000010689946874}
-  CampManager: {fileID: 114000014161016584}
 --- !u!114 &114000011306902486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8952,6 +8951,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  SpotLightList: []
   newSoldierStatsList:
   - newIndividualSoldierStatsList:
     - {fileID: 1000010272942736}
@@ -9986,27 +9986,10 @@ MonoBehaviour:
   Level7_Time: 144000
   Level8_Time: 288000
   Level9_Above_Time: 576000
-  TextLevels:
-  - {fileID: 114000013879748118}
-  - {fileID: 114000010293719614}
-  - {fileID: 114000011750755774}
-  - {fileID: 114000010308241112}
-  TextCosts:
-  - {fileID: 114000011896369754}
-  - {fileID: 114000011296849482}
-  - {fileID: 114000012764973882}
-  - {fileID: 114000011015110300}
-  Buttons:
-  - {fileID: 114000011150212942}
-  - {fileID: 114000012578990192}
-  - {fileID: 114000012587042234}
-  - {fileID: 114000010950202996}
-  FinishNow: {fileID: 114000012905247398}
-  FinishConfirmationPanel: {fileID: 1000013247778080}
-  InsufficientPremiumPanel: {fileID: 1000010298471422}
-  UpgradeConfirmationPanel: {fileID: 1000011738895738}
-  InsufficientScrapsPanel: {fileID: 1000010593517638}
-  ConfirmationShade: {fileID: 1000012899384424}
+  amountOfSeconds: 0
+  tempUpgradeName: 
+  tempCost: 0
+  tempGold: 0
 --- !u!114 &114000014164081046
 MonoBehaviour:
   m_ObjectHideFlags: 1

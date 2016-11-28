@@ -323,6 +323,7 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (!character.isDead)
 		{
 			agent.Resume();
@@ -334,12 +335,14 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator StayState()
 	{
+		character.animator.SetBool("isAware", false);
 		agent.Stop();
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator FleeState()
 	{
+		character.animator.SetBool("isAware", false);
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
@@ -350,6 +353,7 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (character.target.GetComponent<TutorialCharacter>() != null)
 		{
 			if (!character.target.GetComponent<TutorialCharacter>().isInCombat)
@@ -374,6 +378,16 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		}
+		else
+		{
+			character.animator.SetBool("isAware", false);
+		}
 		agent.Stop();
 		if (character.target != null)
 		{

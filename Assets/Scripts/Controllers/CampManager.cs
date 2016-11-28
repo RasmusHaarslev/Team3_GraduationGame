@@ -34,21 +34,11 @@ public class CampManager : MonoBehaviour
     public int Level9_Above_Time;
     #endregion
 
-    public Text[] TextLevels;
-	public Text[] TextCosts;
-    public Button[] Buttons;
-    public Button FinishNow;
-	public GameObject FinishConfirmationPanel;
-	public GameObject InsufficientPremiumPanel;
-	public GameObject UpgradeConfirmationPanel;
-	public GameObject InsufficientScrapsPanel;
-	public GameObject ConfirmationShade;
-
     #region
-    private double amountOfSeconds = 0.0;
-    private string tempUpgradeName = "";
-    private int tempCost = 0;
-    private int tempGold = 0;
+    public double amountOfSeconds = 0.0;
+    public string tempUpgradeName = "";
+    public int tempCost = 0;
+    public int tempGold = 0;
     #endregion
 
     #region Setup Instance
@@ -70,19 +60,14 @@ public class CampManager : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    void Awake()
     {
-        LoadUpgrades();
+        
     }
 
-    private void SaveUpgrades()
+    public void SaveUpgrades()
     {
         var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
-
-        foreach (var but in Buttons)
-            but.interactable = !Upgrades.UpgradeInProgress;
-
-        FinishNow.interactable = Upgrades.UpgradeInProgress;
 
         var serializer = new XmlSerializer(typeof(CampUpgrades));
         var stream = new FileStream(path, FileMode.Create);
@@ -99,12 +84,9 @@ public class CampManager : MonoBehaviour
             var serializer = new XmlSerializer(typeof(CampUpgrades));
             var stream = new FileStream(path, FileMode.Open);
             Upgrades = serializer.Deserialize(stream) as CampUpgrades;
-            Upgrades.GetCurrency();
-			FinishNow.interactable = Upgrades.UpgradeInProgress;
-
-            SetLevels();
-			SetCosts ();
             stream.Close();
+
+            Upgrades.GetCurrency();
         }
         else {
             Upgrades = new CampUpgrades();
@@ -153,16 +135,6 @@ public class CampManager : MonoBehaviour
         tempCost = 0;
     }
 
-    public void FinishUpgradeClicked()
-    {
-		if (GameController.Instance._PREMIUM < FinishUpgradeCost)
-			InsufficientPremiumPanel.SetActive (true);
-		else
-			FinishConfirmationPanel.SetActive (true);
-
-		ConfirmationShade.SetActive (true);
-    }
-
     public void FinishUpgradeNow()
     {
         Upgrades.UpgradeInProgress = true;
@@ -175,7 +147,7 @@ public class CampManager : MonoBehaviour
         FinishUpgrade();
     }
 
-    private void FinishUpgrade()
+    public void FinishUpgrade()
     {
         switch (Upgrades.UpgradeBought)
         {
@@ -202,28 +174,15 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = "";
         SaveUpgrades();
-        SetLevels();
-		SetCosts ();
     }
 
     #region Upgrade Buttons
-
-	private void OpenUpgradePopUp(int cost) {
-		if (cost > GameController.Instance._SCRAPS)
-			InsufficientScrapsPanel.SetActive (true);
-		else
-			UpgradeConfirmationPanel.SetActive (true);
-
-		ConfirmationShade.SetActive (true);
-	}
 
     public void UpgradeGather()
     {
         tempUpgradeName     = "Gather";
         tempCost            = GatherCost + (GatherCostIncrease * Upgrades.GatherLevel);
         amountOfSeconds     = GetTimeForUpgrade(Upgrades.GatherLevel);
-
-		OpenUpgradePopUp (tempCost);
     }
 
     public void UpgradeVillages()
@@ -231,8 +190,6 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "Villages";
         tempCost = MaxVillagesCost + (MaxVillagesCostIncrease * Upgrades.MaxVillages);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
-
-		OpenUpgradePopUp (tempCost);
     }
 
     public void UpgradeLeaderHealth()
@@ -240,8 +197,6 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "LeaderHealth";
         tempCost = LeaderHealthCost + (LeaderHealthCostIncrease * Upgrades.LeaderHealthLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderHealthLevel);
-
-		OpenUpgradePopUp (tempCost);
     }
 
     public void UpgradeLeaderStrength()
@@ -249,25 +204,7 @@ public class CampManager : MonoBehaviour
         tempUpgradeName = "LeaderStrength";
         tempCost = LeaderStrengthCost + (LeaderStrengthCostIncrease * Upgrades.LeaderStrengthLevel);
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
-
-		OpenUpgradePopUp (tempCost);
     }
-
-    private void SetLevels()
-    {
-        TextLevels[0].text = Upgrades.GatherLevel+"";
-        TextLevels[1].text = Upgrades.MaxVillages + "";
-        TextLevels[2].text = Upgrades.LeaderHealthLevel + "";
-        TextLevels[3].text = Upgrades.LeaderStrengthLevel + "";
-    }
-
-	private void SetCosts()
-	{
-		TextCosts[0].text = GatherCost + Upgrades.GatherLevel * GatherCostIncrease + "";
-		TextCosts[1].text = MaxVillagesCost + Upgrades.MaxVillages * MaxVillagesCostIncrease + "";
-		TextCosts[2].text = LeaderHealthCost + Upgrades.LeaderHealthLevel * LeaderHealthCostIncrease + "";
-		TextCosts[3].text = LeaderStrengthCost + Upgrades.LeaderStrengthLevel * LeaderStrengthCostIncrease + "";
-	}
 
     #endregion
 
@@ -310,18 +247,24 @@ public class CampManager : MonoBehaviour
 public class CampUpgrades
 {
     #region State
-
+    [XmlAttribute("UpgradeInProgress")]
     public bool UpgradeInProgress;
+    [XmlAttribute("UpgradeBought")]
     public string UpgradeBought;
 
     #endregion
 
     #region Upgradeables
 
+    [XmlAttribute("GatherLevel")]
     public int GatherLevel;
+    [XmlAttribute("MaxVillages")]
     public int MaxVillages;
+    [XmlAttribute("BlacksmithLevel")]
     public int BlacksmithLevel;
+    [XmlAttribute("LeaderHealthLevel")]
     public int LeaderHealthLevel;
+    [XmlAttribute("LeaderStrengthLevel")]
     public int LeaderStrengthLevel;
 
     #endregion
