@@ -241,3 +241,11 @@ public class CommandEvent : GameEvent
 
 	}
 }
+
+public class ClearedCampEvent : GameEvent
+{
+	public ClearedCampEvent()
+	{
+
+	}
+}
