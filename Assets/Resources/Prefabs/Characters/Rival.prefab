@@ -257,6 +257,7 @@ GameObject:
   - 114: {fileID: 114000012818992694}
   - 114: {fileID: 114000010363417700}
   - 54: {fileID: 54000013852121386}
+  - 114: {fileID: 114000010738752216}
   m_Layer: 0
   m_Name: Rival
   m_TagString: Unfriendly
@@ -6280,7 +6281,7 @@ MonoBehaviour:
   rigidbody: {fileID: 54000013852121386}
   playerCapsuleCollider: {fileID: 136000010628322942}
   playerSphereCollider: {fileID: 135000011475029890}
-  pushForceOnDeath: 200
+  pushForceOnDeath: 10
   forceModePush: 1
 --- !u!114 &114000010397392406
 MonoBehaviour:
@@ -6330,6 +6331,21 @@ MonoBehaviour:
   distanceToTarget: 3.4028235e+38
   fleeHealthLimit: 0.5
   averageHealth: 0
+--- !u!114 &114000010738752216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010372709548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b221b62c11b584e90112daade9c43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleMaterials:
+  - {fileID: 2100000, guid: 9b02e879f6d501b4da538ad13cc0e642, type: 2}
+  - {fileID: 2100000, guid: c4aadef2c35ada5479050e3789b9f423, type: 2}
+  - {fileID: 2100000, guid: 24ad218c9687d1d4697c92bafd9e1cfc, type: 2}
 --- !u!114 &114000012277029350
 MonoBehaviour:
   m_ObjectHideFlags: 1

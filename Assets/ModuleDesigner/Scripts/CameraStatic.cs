@@ -6,37 +6,25 @@ namespace Assets.ModuleDesigner.Scripts
 {
     public class CameraStatic : TriggerReceiver
     {
-        public float SlerpAmount;
-
         private Camera mainCamera;
-        private Camera targetCamera;
-        private bool Enabled = false;
+        private Camera switchedCamera;
 
         void Start()
         {
             mainCamera = Camera.main;
-            targetCamera = GetComponentInChildren<Camera>();
-        }
-
-        void Update()
-        {
-            if (Enabled)
-            {
-                mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, targetCamera.transform.position, Time.deltaTime * SlerpAmount);
-                mainCamera.transform.rotation = Quaternion.Slerp(mainCamera.transform.rotation, targetCamera.transform.rotation, Time.deltaTime * SlerpAmount);
-            }
+            switchedCamera = GetComponentInChildren<Camera> ();
         }
 
         public override void TriggerEnter()
         {
-            mainCamera.GetComponent<CameraController>().enabled = false;
-            Enabled = true;
+            mainCamera.enabled = false;
+            switchedCamera.enabled = true;
         }
 
         public override void TriggerExit()
         {
-            mainCamera.GetComponent<CameraController>().enabled = true;
-            Enabled = false;
+            mainCamera.enabled = true;
+            switchedCamera.enabled = false;
         }
 
         public override void Expose(GameObject go)

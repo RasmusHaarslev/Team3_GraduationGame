@@ -15,6 +15,7 @@ public class PanelScript : MonoBehaviour {
     public Transform solidersSpawnPosition;
     GameObject charactersFellowship;
     public List<Camera> soldierCameraList = new List<Camera>();
+    public List<Light> SpotLightList = new List<Light>();
     Character currentSoldier;
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
@@ -61,7 +62,7 @@ public class PanelScript : MonoBehaviour {
             {
                 foreach (Transform soldiertrans in solidersSpawnPosition)
                 {
-                    if (silhouetteGO.transform.localPosition == soldiertrans.localPosition)
+                    if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
                         print("adding as new Character");
                         newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
@@ -162,7 +163,7 @@ public class PanelScript : MonoBehaviour {
         {
             for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
             {
-                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position, Quaternion.identity);
+                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
                 //silhouetteList.Add(silhouette);
             }
         }
@@ -176,21 +177,25 @@ public class PanelScript : MonoBehaviour {
         if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
             soldierCameraList[0].enabled = true;
+            SpotLightList[0].enabled = true;
             DeactivateCamera(0);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 10)
         {
             soldierCameraList[1].enabled = true;
+            SpotLightList[1].enabled = true;
             DeactivateCamera(1);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 11)
         {
             soldierCameraList[2].enabled = true;
+            SpotLightList[2].enabled = true;
             DeactivateCamera(2);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 12)
         {
             soldierCameraList[3].enabled = true;
+            SpotLightList[3].enabled = true;
             DeactivateCamera(3);
         }
     }
@@ -202,8 +207,20 @@ public class PanelScript : MonoBehaviour {
             if(i != cameraIndex)
             {
                 soldierCameraList[i].enabled = false;
+               
             }   
         }     
+    }
+
+    public void DeactivateSpotligths()
+    {
+       foreach(Light spotlight in SpotLightList)
+        {
+            if(spotlight.enabled == true)
+            {
+                spotlight.enabled = false;
+            }
+        }
     }
     #endregion
 

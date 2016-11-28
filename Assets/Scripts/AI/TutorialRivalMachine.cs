@@ -65,28 +65,59 @@ public class TutorialRivalMachine : CoroutineMachine
 		averageHealth = poimanager.GetAverageCharactersHealth();
 		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
+			if (!character.isFleeing)
+			{
+				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+				character.isFleeing = true;
+			}
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
 		if (character.isInCombat)
 		{
 			if (character.currentOpponents.Count != 0)
 			{
-				if (!character.target.GetComponent<Character>().isDead)
+				if (character.target != null)
 				{
-					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
-					if (distanceToTarget < agent.stoppingDistance)
+					if (character.target.GetComponent<TutorialHunterCharacter>() != null)
 					{
-						yield return new TransitionTo(CombatState, DefaultTransition);
+						if (!character.target.GetComponent<TutorialHunterCharacter>().isDead)
+						{
+							distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+							if (distanceToTarget < agent.stoppingDistance)
+							{
+								yield return new TransitionTo(CombatState, DefaultTransition);
+							}
+							else
+							{
+								yield return new TransitionTo(EngageState, DefaultTransition);
+							}
+						}
+						else
+						{
+							character.currentOpponents.Remove(character.target);
+							character.target = character.FindNearestEnemy();
+						}
 					}
-					else
+					else if (character.target.GetComponent<TutorialPlayerCharacter>() != null)
 					{
-						yield return new TransitionTo(EngageState, DefaultTransition);
+						if (!character.target.GetComponent<TutorialPlayerCharacter>().isDead)
+						{
+							distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+							if (distanceToTarget < agent.stoppingDistance)
+							{
+								yield return new TransitionTo(CombatState, DefaultTransition);
+							}
+							else
+							{
+								yield return new TransitionTo(EngageState, DefaultTransition);
+							}
+						}
+						else
+						{
+							character.currentOpponents.Remove(character.target);
+							character.target = character.FindNearestEnemy();
+						}
 					}
-				}
-				else
-				{
-					character.currentOpponents.Remove(character.target);
-					character.target = character.FindNearestEnemy();
 				}
 			}
 			else
@@ -130,7 +161,7 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
-		if (!character.isDead)
+		if (!character.isDead && character.target != null)
 		{
 			agent.Resume();
 			agent.stoppingDistance = character.range;
@@ -147,7 +178,6 @@ public class TutorialRivalMachine : CoroutineMachine
 			if (character.target != null)
 			{
 				character.RotateTowards(character.target.transform);
-				agent.Stop();
 				character.animator.SetTrigger("Attack");
 				yield return new WaitForSeconds(character.damageSpeed);
 				character.DealDamage();
