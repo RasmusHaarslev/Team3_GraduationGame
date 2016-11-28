@@ -67,11 +67,11 @@ public class Character : MonoBehaviour
 	{
 		//isFleeingValue = isFleeing ? 1 : 0;
 		//animator.SetFloat("isWounded", isFleeingValue);
-		if (agent.velocity.normalized.magnitude < 0.2f)
+		if (!isInCombat)
 		{
-			animator.SetBool("isAware", isInCombat);
+			animator.SetBool("isAware", false);
 		}
-		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
+		animator?.SetFloat("Speed", agent.velocity.magnitude, 0.15f, Time.deltaTime);
 
 		if (target != null)
 		{
@@ -83,7 +83,8 @@ public class Character : MonoBehaviour
 					target = null;
 					isInCombat = false;
 				}
-			} else if (target.GetComponent<TutorialCharacter>() != null)
+			}
+			else if (target.GetComponent<TutorialCharacter>() != null)
 			{
 				if (target.GetComponent<TutorialCharacter>().isFleeing)
 				{
