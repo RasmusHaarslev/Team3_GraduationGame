@@ -32,10 +32,15 @@ public class EffectManager : MonoBehaviour {
             _currentClick.GetComponent<ParticleSystem>().Stop();
 
         if (_currentClick == null)
-            _currentClick = (GameObject)Instantiate(Clicking);
+            if (e.hitted.gameObject.name != "Ground")
+            {
+                _currentClick = (GameObject)Instantiate(Clicking);
+            }
 
-        _currentClick.transform.position = e.position + new Vector3(0,0.5f,0);
-        _currentClick.GetComponent<ParticleSystem>().Play();
+        if (e.hitted.gameObject.name != "Ground") {             
+            _currentClick.transform.position = e.position + new Vector3(0, 0.5f, 0);
+            _currentClick.GetComponent<ParticleSystem>().Play();
+        }
     }
 
     private void setTarget(EnemyClicked e)

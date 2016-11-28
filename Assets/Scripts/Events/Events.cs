@@ -76,9 +76,11 @@ public class LevelWon : GameEvent
 public class PositionClicked : GameEvent
 {
     public Vector3 position;
+    public Transform hitted;
 
-    public PositionClicked(Vector3 clickPosition) {
+    public PositionClicked(Vector3 clickPosition, Transform hitted) {
         position = clickPosition;
+        this.hitted = hitted;
     }
 }
 
