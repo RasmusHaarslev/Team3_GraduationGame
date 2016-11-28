@@ -25,6 +25,7 @@ GameObject:
   - 114: {fileID: 114000011974331336}
   - 114: {fileID: 114000010681911106}
   - 114: {fileID: 114000011936170768}
+  - 114: {fileID: 114000010039844916}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -45,6 +46,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000010039844916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010129510254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e73be0bbd46f744a32473f5be48d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000010388689940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250c2de6546b6534c8814ffc8fbc1cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialFood: 10
+  InitialVillages: 10
+  InitialScrap: 10
+  InitialPremium: 10
   _FOOD: 10
   _VILLAGERS: 10
-  _COINS: 10
+  _SCRAPS: 10
+  _PREMIUM: 10
+  _dataService: {fileID: 0}

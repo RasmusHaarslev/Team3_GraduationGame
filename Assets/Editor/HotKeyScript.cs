@@ -61,5 +61,11 @@ namespace Assets.Editor
         {
             BuildScript.ScenesToTxt();
         }
+
+        [MenuItem("Tools/Disconnect Prefab")]
+        static void DisconnectPrefab()
+        {
+            PrefabUtility.DisconnectPrefabInstance(Selection.activeGameObject);
+        }
     }
 }

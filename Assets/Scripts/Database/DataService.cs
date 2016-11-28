@@ -725,7 +725,7 @@ public class DataService : MonoBehaviour
                 }
                 //add the new item values
                 //to the character prefab
-                Debug.Log(character.characterBaseValues.name + " " + currentEquipValues.name);
+                //Debug.Log(character.characterBaseValues.name + " " + currentEquipValues.name);
                 character.health += currentEquipValues.health;
                 character.damage += currentEquipValues.damage;
                 character.damageSpeed = currentEquipValues.damageSpeed;
