@@ -45,11 +45,11 @@ public class Manager_Audio : MonoBehaviour {
 	public static string evilDeathFemale2 = "Play_EvilFemaleWarrior2Death";
 
 	public static string genericHit = "Play_GenericHit";
+	public static string shieldHit = "Play_ShieldHit";
 
 	public static string attackSpear = "Play_UseSpear";
 	public static string attackShield = "Play_UseShield";
 	public static string attackRiffle = "Play_UseRiffle";
-	public static string shieldHit = "Play_ShieldHit";
 
 	public static string wind1 = "Play_WindDeep1";
 	public static string leaderFootStep = "Play_LeaderFootStep";
@@ -70,8 +70,11 @@ public class Manager_Audio : MonoBehaviour {
     public static string play_scrollMap = "Play_ScrollMap";
     public static string stop_scrollMap = "Stop_ScrollMap";
 
+    public static string play_fadeNode = "Play_NodeFade";
     public static string play_clearMap = "Play_ClearMap";
     public static string play_unlockNewMaps = "Play_UnlockNewMaps";
+    public static string play_lostMap = "Play_NonClearMap";
+
     public static string play_charSel = "Play_CharSel";
 
     public static string adjustMusicVolume = "MusicVol";

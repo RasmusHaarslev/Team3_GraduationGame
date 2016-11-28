@@ -24,6 +24,7 @@ public class LevelGenerator : MonoBehaviour
     [Tooltip("Probability after which an enemy will have the tier increased.")]
     public float upScaleThreshold = 0.7f;
 
+    public bool isTutorial = false;
 
     private int levelStep = 0; //the local level value inside a World
     private int levelStatsScale = 0;
@@ -42,26 +43,37 @@ public class LevelGenerator : MonoBehaviour
 
         dataService = new DataService(StringResources.databaseName);
 
-        dataService.CreateDB();
+		dataService = new DataService(StringResources.databaseName);
 
-        dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
+		dataService.CreateDB();
 
-        //spawn the other character from the Points of Interests
-        spawnEnemies();
-    }
-    
+
+		if (!isTutorial)
+		{
+			dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
+		}
+//		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
+//		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
+		//TODO acquire data from playerprefs
+
+		//spawn the other character from the Points of Interests
+		spawnEnemies();
+	}
+
+
 	void OnEnable()
 	{
 		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
 		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
 	}
 
-    void OnDisable()
-    {
-        Manager_Audio.PlaySound(Manager_Audio.baseAmbienceStop, this.gameObject);
+	void OnDisable()
+	{
+		Manager_Audio.PlaySound(Manager_Audio.baseAmbienceStop, this.gameObject);
 		Manager_Audio.PlaySound(Manager_Audio.musicExploreStop, this.gameObject);
 
-    }
+	}
+
 
     [ExecuteInEditMode]
     void OnValidate()
@@ -70,6 +82,7 @@ public class LevelGenerator : MonoBehaviour
             upScaleThreshold = downScaleThreshold + 0.05f;
        
     }
+
     /// <summary>
     /// 
     /// </summary>
@@ -81,13 +94,14 @@ public class LevelGenerator : MonoBehaviour
     public void Init(int difficultyLevel, int wolfPackCount, int tribesmanPackCount, int lootCount, int environmentType)
     {
 
-    }
+	}
 
 
-    public void spawnEnemies()
-    {
+	public void spawnEnemies()
+	{
 		//iterate trough all possible types
 		PointOfInterestManager[] pointsOfInterests = GetComponentsInChildren<PointOfInterestManager>();
+
         PointOfInterestManager.EncounterType[] types =
             (from poi in pointsOfInterests select poi.type).Distinct().ToArray(); //getting distinct values!
         //print("Number of tiers types found " + types.Length);

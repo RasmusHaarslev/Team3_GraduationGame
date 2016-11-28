@@ -155,7 +155,6 @@ public class HunterStateMachine : CoroutineMachine
 						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
-							character.isInCombat = false;
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
@@ -352,25 +351,17 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
-		if (character.target.GetComponent<TutorialCharacter>() != null)
-		{
-			if (!character.target.GetComponent<TutorialCharacter>().isInCombat)
-			{
-				character.isInCombat = false;
-				yield return new TransitionTo(StartState, DefaultTransition);
-			}
-		}
-		else if (character.target.GetComponent<Character>() != null)
+		if (character.target != null && character.target.GetComponent<Character>() != null)
 		{
 			if (!character.target.GetComponent<Character>().isInCombat)
 			{
 				character.isInCombat = false;
 				yield return new TransitionTo(StartState, DefaultTransition);
 			}
+			agent.Resume();
+			agent.stoppingDistance = character.range;
+			agent.SetDestination(character.target.transform.position);
 		}
-		agent.Resume();
-		agent.stoppingDistance = character.range;
-		agent.SetDestination(character.target.transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -387,21 +378,13 @@ public class HunterStateMachine : CoroutineMachine
 					yield return new TransitionTo(StartState, DefaultTransition);
 				}
 			}
-			if (character.target.GetComponent<TutorialCharacter>() != null)
-			{
-				if (!character.target.GetComponent<TutorialCharacter>().isInCombat)
-				{
-					character.isInCombat = false;
-					yield return new TransitionTo(StartState, DefaultTransition);
-				}
-			}
 			character.RotateTowards(character.target.transform);
 			character.animator.SetTrigger("Attack");
 			yield return new WaitForSeconds(character.damageSpeed);
 			character.DealDamage();
 			lowAttentionSpanCounter--;
-			yield return new TransitionTo(StartState, DefaultTransition);
 		}
+		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator DeadState()

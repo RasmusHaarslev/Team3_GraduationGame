@@ -364,7 +364,7 @@ public class Character : MonoBehaviour
 
 		if (isMale)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
 			}
@@ -375,7 +375,7 @@ public class Character : MonoBehaviour
 		}
 		else
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
 			}
@@ -408,7 +408,6 @@ public class Character : MonoBehaviour
 			{
 				Manager_Audio.PlaySound(Manager_Audio.shieldHit, this.gameObject);
 			}
-
 			currentHealth -= e.damage;
 		}
 	}

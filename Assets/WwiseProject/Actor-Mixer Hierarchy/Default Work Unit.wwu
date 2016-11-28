@@ -621,7 +621,7 @@
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>1</Value>
+										<Value>2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -731,7 +731,7 @@
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5091,7 +5091,7 @@
 								</Property>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>-200</Value>
+										<Value>30</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -5107,7 +5107,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>1</Value>
+										<Value>2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5122,9 +5122,10 @@
 							<ChildrenList>
 								<AudioFileSource Name="UI_Click" ID="{4CC4C5BB-1D46-4F87-961A-7E1942E24885}" ShortID="718727633">
 									<PropertyList>
-										<Property Name="FadeOutDuration" Type="Real64" Value="0.0542066965371122"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0149210070607382"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.0300308876285744"/>
 										<Property Name="FadeOutShape" Type="int16" Value="1"/>
-										<Property Name="TrimEnd" Type="Real64" Value="0.0991585912264249"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.0411744245473536"/>
 									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>UI_Click.wav</AudioFile>
@@ -5177,12 +5178,12 @@
 							<PropertyList>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>38</Value>
+										<Value>16</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
-										<Value>45</Value>
+										<Value>30</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Pitch" Type="int32">
@@ -5213,7 +5214,9 @@
 							<ChildrenList>
 								<AudioFileSource Name="WalkTapUI" ID="{88B98904-6733-4959-B795-C4CB7326118F}" ShortID="648197445">
 									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="0.0122762569652223"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.00781216352332326"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.179679761036435"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.275657770037264"/>
 									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>WalkTapUI.wav</AudioFile>
@@ -5498,47 +5501,6 @@
 										<Value>15</Value>
 									</ValueList>
 								</Property>
-								<Property Name="Pitch" Type="int32">
-									<ValueList>
-										<Value>-300</Value>
-									</ValueList>
-									<RTPCList>
-										<RTPC Name="" ID="{D86932C7-1705-465E-B168-0D5BF608A2CC}" ShortID="483671934">
-											<ReferenceList>
-												<Reference Name="ControlInput">
-													<ObjectRef Name="UnlockMapPitch" ID="{DB9CE2FA-F795-4532-9384-A00B22B7D14B}" WorkUnitID="{AF8BB386-55BF-49A9-970A-610545106FDF}"/>
-												</Reference>
-											</ReferenceList>
-											<Curve Name="" ID="{D9E025EF-259A-4B66-A43E-9C9B49BCB9DC}">
-												<PropertyList>
-													<Property Name="Flags" Type="int32" Value="65537"/>
-												</PropertyList>
-												<PointList>
-													<Point>
-														<XPos>1</XPos>
-														<YPos>-200</YPos>
-														<Flags>5</Flags>
-													</Point>
-													<Point>
-														<XPos>2</XPos>
-														<YPos>0</YPos>
-														<Flags>0</Flags>
-													</Point>
-													<Point>
-														<XPos>3</XPos>
-														<YPos>300</YPos>
-														<Flags>0</Flags>
-													</Point>
-													<Point>
-														<XPos>4</XPos>
-														<YPos>498</YPos>
-														<Flags>37</Flags>
-													</Point>
-												</PointList>
-											</Curve>
-										</RTPC>
-									</RTPCList>
-								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
 										<Value>-2</Value>
@@ -5691,12 +5653,12 @@
 								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
-										<Value>15</Value>
+										<Value>6</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5763,6 +5725,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="ClearMapPt1" ID="{C00CAC5D-3CFB-4B43-9573-FE29758C2A49}" ShortID="596069962" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>280</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -5798,6 +5767,25 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="ClearMapPt2" ID="{AFD018D6-3474-4826-9878-C8F243BBC96C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="NonClearMap" ID="{E0ED9D64-C084-47A4-A906-93819173E030}" ShortID="421006045" Type="SoundFX">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="NonClearMap" ID="{2D1D71C5-2417-4CA5-AB4A-92FCBEE149A5}" ShortID="941738491">
+									<Language>SFX</Language>
+									<AudioFile>NonClearMap.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="NonClearMap" ID="{2D1D71C5-2417-4CA5-AB4A-92FCBEE149A5}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
@@ -6974,7 +6962,7 @@
 						<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>2</Value>
+								<Value>1</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>

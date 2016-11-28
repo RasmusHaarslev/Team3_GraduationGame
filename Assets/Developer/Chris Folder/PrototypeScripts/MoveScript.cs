@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class MoveScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class MoveScript : MonoBehaviour
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
+	List<GameObject> hunters = new List<GameObject>();
 
 	// Use this for initialization
 	void Start()
@@ -47,6 +49,21 @@ public class MoveScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(hunters.Count == 0)
+		{
+			hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+		}
+		int counter = 0;
+		foreach (var hunter in hunters)
+		{
+			if (hunter.GetComponent<Character>().isInCombat)
+			{
+				character.isInCombat = true;
+				counter++;
+			}
+		}
+		if(counter == 0)
+			character.isInCombat = false;
 		if (!isFleeing)
 		{
 			attackSpeed = character.damageSpeed;
@@ -62,7 +79,6 @@ public class MoveScript : MonoBehaviour
 				if (Input.GetKey(KeyCode.Mouse0))
 				{
 					agent.Resume();
-					character.isInCombat = false;
 					//attacking = false;
 					MoveToClickPosition();
 				}
@@ -80,7 +96,6 @@ public class MoveScript : MonoBehaviour
 							else
 							{
 								agent.Resume();
-								character.isInCombat = false;
 								attacking = false;
 							}
 						}
@@ -93,7 +108,6 @@ public class MoveScript : MonoBehaviour
 							else
 							{
 								agent.Resume();
-								character.isInCombat = false;
 								attacking = false;
 							}
 						}
@@ -133,13 +147,6 @@ public class MoveScript : MonoBehaviour
 					{
                         EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
                         EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
-					}
-				}
-				else if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
-				{
-					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
-					{
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
 				}
             }
