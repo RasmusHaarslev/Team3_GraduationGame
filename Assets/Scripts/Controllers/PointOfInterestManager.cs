@@ -12,8 +12,8 @@ public class PointOfInterestManager : MonoBehaviour
 	public int radius = 8;
 	private int EnemiesAlive = 0;
 	private LevelGenerator levelGenerator;
-	private List<GameObject> enemies = new List<GameObject>();
-
+	public List<GameObject> enemies = new List<GameObject>();
+	private bool isEnemiesSet = false;
 	public enum EncounterType
 	{
 		choice,
@@ -38,11 +38,14 @@ public class PointOfInterestManager : MonoBehaviour
 
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
-		if(enemies.Contains(e.enemy))
-			EnemiesAlive--;
-		if (EnemiesAlive == 0)
+		if (enemies.Contains(e.enemy))
 		{
-			EventManager.Instance.TriggerEvent(new ClearedCampEvent());
+			enemies.Remove(e.enemy);
+			if (enemies.Count == 0)
+			{
+				EventManager.Instance.TriggerEvent(new ClearedCampEvent());
+			}
+
 		}
 	}
 
@@ -74,7 +77,7 @@ public class PointOfInterestManager : MonoBehaviour
 
 	void Update()
 	{
-		if (enemies.Count == 0)
+		if (!isEnemiesSet)
 		{
 			foreach (Transform child in transform)
 			{
@@ -86,8 +89,8 @@ public class PointOfInterestManager : MonoBehaviour
 					}
 				}
 			}
+			isEnemiesSet = true;
 		}
-		EnemiesAlive = enemies.Count;
 	}
 
 	public float GetAverageCharactersHealth()
@@ -135,7 +138,7 @@ public class PointOfInterestManager : MonoBehaviour
 				originalAverageHealth = averageHealth;
 			}
 		}
-		
+
 		return averageHealth;
 	}
 }
