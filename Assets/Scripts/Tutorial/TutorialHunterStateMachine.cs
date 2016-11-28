@@ -153,9 +153,8 @@ public class TutorialHunterStateMachine : CoroutineMachine
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
 						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
-						if (!leader.GetComponent<MoveScript>().attacking)
+						if (!leader.GetComponent<TutorialMoveScript>().attacking)
 						{
-							character.isInCombat = false;
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
@@ -430,7 +429,7 @@ public class TutorialHunterStateMachine : CoroutineMachine
 	private GameObject CodependantTarget()
 	{
 		GameObject target;
-		target = leader.GetComponent<Character>().target;
+		target = leader.GetComponent<TutorialPlayerCharacter>().target;
 		return target;
 	}
 
@@ -442,14 +441,6 @@ public class TutorialHunterStateMachine : CoroutineMachine
 			if (enemy.GetComponent<TutorialCharacter>() != null)
 			{
 				if (enemy.GetComponent<TutorialCharacter>().target == leader)
-				{
-					target = enemy;
-					break;
-				}
-			}
-			if (enemy.GetComponent<Character>() != null)
-			{
-				if (enemy.GetComponent<Character>().target == leader)
 				{
 					target = enemy;
 					break;
