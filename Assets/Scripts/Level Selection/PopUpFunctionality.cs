@@ -120,7 +120,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play");     
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play"); 
 
         confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -192,6 +192,7 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
         PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
+        PlayerPrefs.SetInt(StringResources.DaysSurvived, GameController.Instance._DAYS_SURVIVED+1);
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
         // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
 
