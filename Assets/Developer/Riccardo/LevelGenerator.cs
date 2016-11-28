@@ -175,9 +175,10 @@ public class LevelGenerator : MonoBehaviour
         //reducing the number of camps based on the player prefs parameter
         if (campsNumber < currentPOIs.Count)
         {
-            int campsToRemoveNumber = campsNumber - currentPOIs.Count;
+            int campsToRemoveNumber = currentPOIs.Count - campsNumber;
             for (int i = 0; i < campsToRemoveNumber; i++)
             {
+				print("disabling one POI");
                 int indexPOIToRemove = Random.Range(0, currentPOIs.Count - 1);
                 currentPOIs.ElementAt(indexPOIToRemove).gameObject.SetActive(false);
                 currentPOIs.RemoveAt(indexPOIToRemove); 
