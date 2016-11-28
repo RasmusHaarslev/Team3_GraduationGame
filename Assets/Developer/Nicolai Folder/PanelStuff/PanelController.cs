@@ -19,8 +19,10 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
         {            
-            panelScript.panelList[3].SetActive(true);
+            //panelScript.panelList[3].SetActive(true);
             panelScript.panelList[0].SetActive(true);
+            var panel = panelScript.panelList[0].GetComponentInChildren<CampUIController>(true).gameObject;
+            panel.SetActive(true);
         }
 
         if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)

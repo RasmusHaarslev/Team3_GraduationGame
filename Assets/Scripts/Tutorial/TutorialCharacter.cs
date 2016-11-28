@@ -71,7 +71,10 @@ public class TutorialCharacter : MonoBehaviour
 				target = null;
 			}
 		}
-		animator.SetBool("isAware", isInCombat);
+		if (!isInCombat)
+		{
+			animator.SetBool("isAware", false);
+		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)
 		{

@@ -57,20 +57,22 @@ public class SimpleInputScript : MonoBehaviour
 		{
 			if (simpleCommandsManager.currentCommand.SequenceEqual(command))
 			{
-				if (command == simpleCommandsManager.commandsList[0])
+				if (command == simpleCommandsManager.commandsList[0] && !simpleCommandsManager.inDefenseState)
 				{
 					Debug.Log("defend");
 					EventManager.Instance.TriggerEvent(new DefendStateEvent());
-
-					ChangeColor(0);
+                    simpleCommandsManager.inDefenseState = true;
+                    simpleCommandsManager.currentCommandBtnText.text = "Defend";
+                    ChangeColor(0);
 					break;
 				}
-				if (command == simpleCommandsManager.commandsList[1])
+				if (command == simpleCommandsManager.commandsList[0] && simpleCommandsManager.inDefenseState)
 				{
 					EventManager.Instance.TriggerEvent(new OffensiveStateEvent());
 					Debug.Log("offensive");
-
-					ChangeColor(1);
+                    simpleCommandsManager.inDefenseState = false;
+                    simpleCommandsManager.currentCommandBtnText.text = "Attack";
+                    ChangeColor(0);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[2])
@@ -81,18 +83,22 @@ public class SimpleInputScript : MonoBehaviour
 					ChangeColor(2);
 					break;
 				}
-				if (command == simpleCommandsManager.commandsList[3])
+				if (command == simpleCommandsManager.commandsList[4] && !simpleCommandsManager.inFollowState)
 				{
 					EventManager.Instance.TriggerEvent(new FollowStateEvent());
 					Debug.Log("follow");
-					ChangeColor(3);
+                    simpleCommandsManager.inFollowState = true;
+                    simpleCommandsManager.currentCommandBtnText.text = "Stay";
+                    ChangeColor(4);
 					break;
 				}
-				if (command == simpleCommandsManager.commandsList[4])
+				if (command == simpleCommandsManager.commandsList[4] && simpleCommandsManager.inFollowState)
 				{
 					EventManager.Instance.TriggerEvent(new StayStateEvent());
 					Debug.Log("stay");
-					ChangeColor(4);
+                    simpleCommandsManager.inFollowState = false;
+                    simpleCommandsManager.currentCommandBtnText.text = "Follow";
+                    ChangeColor(4);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[5])
@@ -160,7 +166,7 @@ public class SimpleInputScript : MonoBehaviour
 
 	void ChangeColor(int index)
 	{
-		buttons[index].GetComponent<Image>().color = new Color(0, 0, 0);
+		buttons[index].GetComponent<Image>().color = new Color(255, 255, 255);
 		buttons[index].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
 	}
 
