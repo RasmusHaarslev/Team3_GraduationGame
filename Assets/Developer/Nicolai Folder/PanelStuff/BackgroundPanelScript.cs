@@ -28,6 +28,7 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
             }
             gameObject.SetActive(false);
             panelScript.DeactivateSpotligths();
+            panelScript.DeactivateNewSoldiers();
         }
        
     }
