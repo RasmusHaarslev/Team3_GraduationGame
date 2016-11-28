@@ -74,9 +74,10 @@ public class MoveScript : MonoBehaviour
 			}
 			if (movement)
 			{
-				if (Input.GetKeyDown(KeyCode.Mouse0))
+				if (Input.GetKeyDown(KeyCode.Mouse0)) { 
 					Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
-				if (Input.GetKey(KeyCode.Mouse0))
+                }
+                if (Input.GetKey(KeyCode.Mouse0))
 				{
 					agent.Resume();
 					//attacking = false;
@@ -161,7 +162,7 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
 				attacking = false;

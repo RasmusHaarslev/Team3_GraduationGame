@@ -133,7 +133,6 @@ public class TutorialMoveScript : MonoBehaviour
 				agent.SetDestination(hit.transform.position);
 				if (hit.transform.gameObject.GetComponent<TutorialCharacter>() != null)
 				{
-					Debug.Log("hit enemy");
 					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<TutorialCharacter>().isDead)
 					{
 						EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
@@ -152,7 +151,7 @@ public class TutorialMoveScript : MonoBehaviour
 			}
 			else
 			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
 				attacking = false;
@@ -161,7 +160,6 @@ public class TutorialMoveScript : MonoBehaviour
 	}
 	private void Attacking()
 	{
-		Debug.Log("in combat");
 		character.isInCombat = true;
 		agent.SetDestination(character.target.transform.position);
 		distanceToTarget = agent.remainingDistance;
@@ -170,7 +168,6 @@ public class TutorialMoveScript : MonoBehaviour
 			character.RotateTowards(character.target.transform);
 			if (counter <= 0)
 			{
-				Debug.Log("attack!!!!!");	
 				character.DealDamage();
 				character.animator.SetTrigger("Attack");
 				counter = attackSpeed;

@@ -3,13 +3,7 @@ using System.Collections;
 
 public class AggroRange : MonoBehaviour
 {
-	public float verticalTriggerOffset = 1.5f;
-	LevelGenerator levelGenerator;
-
-	void Start()
-	{
-		levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
-	}
+	public float verticalTriggerOffset = 1.0f;
 
 	void OnTriggerEnter(Collider col)
 	{
@@ -17,16 +11,9 @@ public class AggroRange : MonoBehaviour
 		{
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
-				if (levelGenerator.isTutorial)
-				{
-					if (!transform.parent.GetComponent<TutorialCharacter>().isDead)
-						EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
-				}
-				else 
-				{
-					if (!transform.parent.GetComponent<Character>().isDead) 
-						EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
-				}
+				Debug.Log((col.transform.position.y - transform.position.y));
+				if (!transform.parent.GetComponent<Character>().isDead)
+					EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
 			}
 		}
 	}
