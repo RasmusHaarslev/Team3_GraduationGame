@@ -155,7 +155,6 @@ public class HunterStateMachine : CoroutineMachine
 						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
-							character.isInCombat = false;
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
@@ -359,10 +358,10 @@ public class HunterStateMachine : CoroutineMachine
 				character.isInCombat = false;
 				yield return new TransitionTo(StartState, DefaultTransition);
 			}
+			agent.Resume();
+			agent.stoppingDistance = character.range;
+			agent.SetDestination(character.target.transform.position);
 		}
-		agent.Resume();
-		agent.stoppingDistance = character.range;
-		agent.SetDestination(character.target.transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
