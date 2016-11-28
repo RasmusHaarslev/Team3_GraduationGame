@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using System;
 
 public class PointOfInterestManager : MonoBehaviour
 {
@@ -10,8 +10,10 @@ public class PointOfInterestManager : MonoBehaviour
 	public EncounterType type;
 	[Range(3, 20)]
 	public int radius = 8;
+	private int EnemiesAlive = 0;
 	private LevelGenerator levelGenerator;
-
+	public List<GameObject> enemies = new List<GameObject>();
+	private bool isEnemiesSet = false;
 	public enum EncounterType
 	{
 		choice,
@@ -19,6 +21,33 @@ public class PointOfInterestManager : MonoBehaviour
 		wolf
 	}
 
+	void OnEnable()
+	{
+		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
+	}
+
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+	}
+
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
+	private void EnemyDeath(EnemyDeathEvent e)
+	{
+		if (enemies.Contains(e.enemy))
+		{
+			enemies.Remove(e.enemy);
+			if (enemies.Count == 0)
+			{
+				EventManager.Instance.TriggerEvent(new ClearedCampEvent());
+			}
+
+		}
+	}
 
 	void OnDrawGizmos()
 	{
@@ -43,6 +72,24 @@ public class PointOfInterestManager : MonoBehaviour
 			case EncounterType.wolf:
 				transform.Find("WolfDecor").gameObject.SetActive(true);
 				break;
+		}
+	}
+
+	void Update()
+	{
+		if (!isEnemiesSet)
+		{
+			foreach (Transform child in transform)
+			{
+				foreach (Transform childchild in child)
+				{
+					if (childchild.tag == "Unfriendly")
+					{
+						enemies.Add(childchild.gameObject);
+					}
+				}
+			}
+			isEnemiesSet = true;
 		}
 	}
 
@@ -91,7 +138,7 @@ public class PointOfInterestManager : MonoBehaviour
 				originalAverageHealth = averageHealth;
 			}
 		}
-		
+
 		return averageHealth;
 	}
 }
