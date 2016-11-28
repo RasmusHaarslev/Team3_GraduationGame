@@ -195,7 +195,7 @@ public class LevelGenerator : MonoBehaviour
             if (currentCharSpawners.Length >= 5)
             {
                 enemyToDisableQuantity = Random.Range(5 - minPOIEnemiesNumber, maxPOIEnemiesNumber);
-                print("between "+ (5 - minPOIEnemiesNumber)+" and "+ maxPOIEnemiesNumber + "disabling " + enemyToDisableQuantity + " in a POI");
+                //print("between "+ (5 - minPOIEnemiesNumber)+" and "+ maxPOIEnemiesNumber + "disabling " + enemyToDisableQuantity + " in a POI");
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
                 currentCharSpawnersMaxIndex = currentCharSpawners.Length - 1;
                 for (int i = 0; i < enemyToDisableQuantity; i++)
