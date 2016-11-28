@@ -422,26 +422,7 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "\nDefault bone length found in this file is different
-      form the one found in the source avatar:\n\t'bind_spine_a_01' : position error
-      = 14.434406 mm\n\t'bind_l_fingerLeft_a_01' : position error = 9.537842 mm\n\t'bind_l_fingerLeft_c_01'
-      : position error = 11.414425 mm\n\nInbetween bone default rotation found in
-      this file is different from the one found in the source avatar:\n\t'bind_l_ankle_01'
-      : rotation error = 6.647837 deg\n\t'bind_r_ankle_01' : rotation error = 7.183064
-      deg\n\t'bind_spine_b_01' : rotation error = 3.503122 deg\n\t'bind_spine_c_01'
-      : rotation error = 3.500581 deg\n\t'bind_l_wrist_01' : rotation error = 125.275864
-      deg\n\t'bind_r_wrist_01' : rotation error = 38.002449 deg\n\nClip 'IdleRifle'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'bind_pelvis_01'
-      has translation animation that will be discarded.\n\t'bind_pelvis_01' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'bind_l_ankle_01'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_r_ankle_01'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_spine_a_01'
-      has translation animation that will be discarded.\n\t'bind_spine_b_01' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'bind_spine_c_01'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_l_wrist_01'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bind_r_wrist_01'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
@@ -450,7 +431,441 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: IdleRifle
+      takeName: IdleRifle
+      firstFrame: 0
+      lastFrame: 639
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: grp_controls
+        weight: 1
+      - path: grp_controls/anim_world_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_l_elbow_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_l_knee_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_r_elbow_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_r_knee_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01/grp_anim_l_FK_lowerLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01/grp_anim_l_FK_lowerLeg_01/anim_l_FK_lowerLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01/grp_anim_l_FK_lowerLeg_01/anim_l_FK_lowerLeg_01/grp_anim_l_FK_ankle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01/grp_anim_l_FK_lowerLeg_01/anim_l_FK_lowerLeg_01/grp_anim_l_FK_ankle_01/anim_l_FK_ankle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01/grp_anim_l_FK_lowerLeg_01/anim_l_FK_lowerLeg_01/grp_anim_l_FK_ankle_01/anim_l_FK_ankle_01/grp_anim_l_FK_ball_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_l_FK_upperLeg_01/anim_l_FK_upperLeg_01/grp_anim_l_FK_lowerLeg_01/anim_l_FK_lowerLeg_01/grp_anim_l_FK_ankle_01/anim_l_FK_ankle_01/grp_anim_l_FK_ball_01/anim_l_FK_ball_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01/grp_anim_r_FK_lowerLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01/grp_anim_r_FK_lowerLeg_01/anim_r_FK_lowerLeg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01/grp_anim_r_FK_lowerLeg_01/anim_r_FK_lowerLeg_01/grp_anim_r_FK_ankle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01/grp_anim_r_FK_lowerLeg_01/anim_r_FK_lowerLeg_01/grp_anim_r_FK_ankle_01/anim_r_FK_ankle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01/grp_anim_r_FK_lowerLeg_01/anim_r_FK_lowerLeg_01/grp_anim_r_FK_ankle_01/anim_r_FK_ankle_01/grp_anim_r_FK_ball_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_pelvis_01/grp_anim_r_FK_upperLeg_01/anim_r_FK_upperLeg_01/grp_anim_r_FK_lowerLeg_01/anim_r_FK_lowerLeg_01/grp_anim_r_FK_ankle_01/anim_r_FK_ankle_01/grp_anim_r_FK_ball_01/anim_r_FK_ball_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/anim_neck_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/anim_neck_a_01/anim_neck_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_clavicle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_clavicle_01/anim_l_clavicle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_FK_upperArm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_FK_upperArm_01/anim_l_FK_upperArm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_FK_upperArm_01/anim_l_FK_upperArm_01/grp_anim_l_FK_elbow_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_FK_upperArm_01/anim_l_FK_upperArm_01/grp_anim_l_FK_elbow_01/anim_l_FK_elbow_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_FK_upperArm_01/anim_l_FK_upperArm_01/grp_anim_l_FK_elbow_01/anim_l_FK_elbow_01/grp_anim_l_FK_wrist_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_l_FK_upperArm_01/anim_l_FK_upperArm_01/grp_anim_l_FK_elbow_01/anim_l_FK_elbow_01/grp_anim_l_FK_wrist_01/anim_l_FK_wrist_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_clavicle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_clavicle_01/anim_r_clavicle_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_FK_upperArm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_FK_upperArm_01/anim_r_FK_upperArm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_FK_upperArm_01/anim_r_FK_upperArm_01/grp_anim_r_FK_elbow_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_FK_upperArm_01/anim_r_FK_upperArm_01/grp_anim_r_FK_elbow_01/anim_r_FK_elbow_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_FK_upperArm_01/anim_r_FK_upperArm_01/grp_anim_r_FK_elbow_01/anim_r_FK_elbow_01/grp_anim_r_FK_wrist_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/anim_root_01/anim_spine_a_01/anim_spine_b_01/anim_spine_c_01/anim_chest_01/grp_anim_r_FK_upperArm_01/anim_r_FK_upperArm_01/grp_anim_r_FK_elbow_01/anim_r_FK_elbow_01/grp_anim_r_FK_wrist_01/anim_r_FK_wrist_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_l_IK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_l_IK_arm_01/anim_l_IK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_l_IKFKIK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_l_IKFKIK_arm_01/anim_l_IKFKIK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_l_IKFKIK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_l_IKFKIK_leg_01/anim_l_IKFKIK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_r_IK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_r_IK_arm_01/anim_r_IK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_r_IKFKIK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_r_IKFKIK_arm_01/anim_r_IKFKIK_arm_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_r_IKFKIK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_anim_r_IKFKIK_leg_01/anim_r_IKFKIK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerLeft_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerLeft_a_01/anim_l_fingerLeft_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerLeft_a_01/anim_l_fingerLeft_a_01/grp_anim_l_fingerLeft_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerLeft_a_01/anim_l_fingerLeft_a_01/grp_anim_l_fingerLeft_b_01/anim_l_fingerLeft_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerLeft_a_01/anim_l_fingerLeft_a_01/grp_anim_l_fingerLeft_b_01/anim_l_fingerLeft_b_01/grp_anim_l_fingerLeft_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerLeft_a_01/anim_l_fingerLeft_a_01/grp_anim_l_fingerLeft_b_01/anim_l_fingerLeft_b_01/grp_anim_l_fingerLeft_c_01/anim_l_fingerLeft_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerRight_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerRight_a_01/anim_l_fingerRight_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerRight_a_01/anim_l_fingerRight_a_01/grp_anim_l_fingerRight_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerRight_a_01/anim_l_fingerRight_a_01/grp_anim_l_fingerRight_b_01/anim_l_fingerRight_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerRight_a_01/anim_l_fingerRight_a_01/grp_anim_l_fingerRight_b_01/anim_l_fingerRight_b_01/grp_anim_l_fingerRight_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_fingerRight_a_01/anim_l_fingerRight_a_01/grp_anim_l_fingerRight_b_01/anim_l_fingerRight_b_01/grp_anim_l_fingerRight_c_01/anim_l_fingerRight_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_thumb_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_thumb_a_01/anim_l_thumb_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_thumb_a_01/anim_l_thumb_a_01/grp_anim_l_thumb_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_thumb_a_01/anim_l_thumb_a_01/grp_anim_l_thumb_b_01/anim_l_thumb_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_thumb_a_01/anim_l_thumb_a_01/grp_anim_l_thumb_b_01/anim_l_thumb_b_01/grp_anim_l_thumb_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_handControls_01/grp_anim_l_thumb_a_01/anim_l_thumb_a_01/grp_anim_l_thumb_b_01/anim_l_thumb_b_01/grp_anim_l_thumb_c_01/anim_l_thumb_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_IK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_IK_leg_01/anim_l_IK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_IK_leg_01/anim_l_IK_leg_01/anim_l_heel_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_IK_leg_01/anim_l_IK_leg_01/anim_l_heel_01/anim_l_toe_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_IK_leg_01/anim_l_IK_leg_01/anim_l_heel_01/anim_l_toe_01/anim_l_ball_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_l_IK_leg_01/anim_l_IK_leg_01/anim_l_heel_01/anim_l_toe_01/anim_l_toeTranslate_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerLeft_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerLeft_a_01/anim_r_fingerLeft_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerLeft_a_01/anim_r_fingerLeft_a_01/grp_anim_r_fingerLeft_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerLeft_a_01/anim_r_fingerLeft_a_01/grp_anim_r_fingerLeft_b_01/anim_r_fingerLeft_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerLeft_a_01/anim_r_fingerLeft_a_01/grp_anim_r_fingerLeft_b_01/anim_r_fingerLeft_b_01/grp_anim_r_fingerLeft_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerLeft_a_01/anim_r_fingerLeft_a_01/grp_anim_r_fingerLeft_b_01/anim_r_fingerLeft_b_01/grp_anim_r_fingerLeft_c_01/anim_r_fingerLeft_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerRight_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerRight_a_01/anim_r_fingerRight_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerRight_a_01/anim_r_fingerRight_a_01/grp_anim_r_fingerRight_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerRight_a_01/anim_r_fingerRight_a_01/grp_anim_r_fingerRight_b_01/anim_r_fingerRight_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerRight_a_01/anim_r_fingerRight_a_01/grp_anim_r_fingerRight_b_01/anim_r_fingerRight_b_01/grp_anim_r_fingerRight_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_fingerRight_a_01/anim_r_fingerRight_a_01/grp_anim_r_fingerRight_b_01/anim_r_fingerRight_b_01/grp_anim_r_fingerRight_c_01/anim_r_fingerRight_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_thumb_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_thumb_a_01/anim_r_thumb_a_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_thumb_a_01/anim_r_thumb_a_01/grp_anim_r_thumb_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_thumb_a_01/anim_r_thumb_a_01/grp_anim_r_thumb_b_01/anim_r_thumb_b_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_thumb_a_01/anim_r_thumb_a_01/grp_anim_r_thumb_b_01/anim_r_thumb_b_01/grp_anim_r_thumb_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_handControls_01/grp_anim_r_thumb_a_01/anim_r_thumb_a_01/grp_anim_r_thumb_b_01/anim_r_thumb_b_01/grp_anim_r_thumb_c_01/anim_r_thumb_c_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_IK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_IK_leg_01/anim_r_IK_leg_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_IK_leg_01/anim_r_IK_leg_01/anim_r_heel_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_IK_leg_01/anim_r_IK_leg_01/anim_r_heel_01/anim_r_toe_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_IK_leg_01/anim_r_IK_leg_01/anim_r_heel_01/anim_r_toe_01/anim_r_ball_01
+        weight: 1
+      - path: grp_controls/anim_world_01/anim_worldOffset_01/grp_r_IK_leg_01/anim_r_IK_leg_01/anim_r_heel_01/anim_r_toe_01/anim_r_toeTranslate_01
+        weight: 1
+      - path: grp_extras
+        weight: 1
+      - path: grp_extras/ik_l_rp_arm_01
+        weight: 1
+      - path: grp_extras/ik_l_rp_leg_01
+        weight: 1
+      - path: grp_extras/ik_l_sc_ball_01
+        weight: 1
+      - path: grp_extras/ik_l_sc_toes_01
+        weight: 1
+      - path: grp_extras/ik_r_rp_arm_01
+        weight: 1
+      - path: grp_extras/ik_r_rp_leg_01
+        weight: 1
+      - path: grp_extras/ik_r_sc_ball_01
+        weight: 1
+      - path: grp_extras/ik_r_sc_toes_01
+        weight: 1
+      - path: grp_extras/jDrv_l_heel_01
+        weight: 1
+      - path: grp_extras/jDrv_l_heel_01/jDrv_l_toe_01
+        weight: 1
+      - path: grp_extras/jDrv_l_heel_01/jDrv_l_toe_01/jDrv_l_foot_01
+        weight: 1
+      - path: grp_extras/jDrv_l_heel_01/jDrv_l_toe_01/jDrv_l_foot_01/jDrv_l_ankle_01
+        weight: 1
+      - path: grp_extras/jDrv_r_heel_01
+        weight: 1
+      - path: grp_extras/jDrv_r_heel_01/jDrv_r_toe_01
+        weight: 1
+      - path: grp_extras/jDrv_r_heel_01/jDrv_r_toe_01/jDrv_r_foot_01
+        weight: 1
+      - path: grp_extras/jDrv_r_heel_01/jDrv_r_toe_01/jDrv_r_foot_01/jDrv_r_ankle_01
+        weight: 1
+      - path: grp_mesh
+        weight: 1
+      - path: grp_mesh/geo_char_b_01
+        weight: 1
+      - path: grp_rig
+        weight: 1
+      - path: grp_rig/jDrv_root_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_l_upperLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_l_upperLeg_01/bind_l_lowerLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_l_upperLeg_01/bind_l_lowerLeg_01/bind_l_ankle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_l_upperLeg_01/bind_l_lowerLeg_01/bind_l_ankle_01/bind_l_foot_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_l_upperLeg_01/bind_l_lowerLeg_01/bind_l_ankle_01/bind_l_foot_01/be_l_toe_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_r_upperLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_r_upperLeg_01/bind_r_lowerLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_r_upperLeg_01/bind_r_lowerLeg_01/bind_r_ankle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_r_upperLeg_01/bind_r_lowerLeg_01/bind_r_ankle_01/bind_r_foot_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/bind_r_upperLeg_01/bind_r_lowerLeg_01/bind_r_ankle_01/bind_r_foot_01/be_r_toe_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_l_FK_upperLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_l_FK_upperLeg_01/jDrv_l_FK_lowerLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_l_FK_upperLeg_01/jDrv_l_FK_lowerLeg_01/jDrv_l_FK_ankle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_l_IK_upperLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_l_IK_upperLeg_01/jDrv_l_IK_lowerLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_l_IK_upperLeg_01/jDrv_l_IK_lowerLeg_01/jDrv_l_IK_ankle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_r_FK_upperLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_r_FK_upperLeg_01/jDrv_r_FK_lowerLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_r_FK_upperLeg_01/jDrv_r_FK_lowerLeg_01/jDrv_r_FK_ankle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_r_IK_upperLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_r_IK_upperLeg_01/jDrv_r_IK_lowerLeg_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_pelvis_01/jDrv_r_IK_upperLeg_01/jDrv_r_IK_lowerLeg_01/jDrv_r_IK_ankle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/be_l_clavicle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_fingerLeft_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_fingerLeft_a_01/bind_l_fingerLeft_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_fingerLeft_a_01/bind_l_fingerLeft_b_01/bind_l_fingerLeft_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_fingerRight_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_fingerRight_a_01/bind_l_fingerRight_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_fingerRight_a_01/bind_l_fingerRight_b_01/bind_l_fingerRight_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_thumb_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_thumb_a_01/bind_l_thumb_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_l_clavicle_01/bind_l_upperArm_01/bind_l_lowerArm_01/bind_l_wrist_01/bind_l_hand_01/bind_l_thumb_a_01/bind_l_thumb_b_01/bind_l_thumb_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_neck_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_neck_a_01/bind_neck_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_neck_a_01/bind_neck_b_01/bind_head_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/be_r_clavicle_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_fingerLeft_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_fingerLeft_a_01/bind_r_fingerLeft_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_fingerLeft_a_01/bind_r_fingerLeft_b_01/bind_r_fingerLeft_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_fingerRight_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_fingerRight_a_01/bind_r_fingerRight_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_fingerRight_a_01/bind_r_fingerRight_b_01/bind_r_fingerRight_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_thumb_a_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_thumb_a_01/bind_r_thumb_b_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/bind_r_clavicle_01/bind_r_upperArm_01/bind_r_lowerArm_01/bind_r_wrist_01/bind_r_hand_01/bind_r_thumb_a_01/bind_r_thumb_b_01/bind_r_thumb_c_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/jDrv_l_FK_upperArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/jDrv_l_FK_upperArm_01/jDrv_l_FK_elbow_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/jDrv_l_FK_upperArm_01/jDrv_l_FK_elbow_01/jDrv_l_FK_wrist_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/jDrv_r_FK_upperArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/jDrv_r_FK_upperArm_01/jDrv_r_FK_elbow_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/bind_spine_a_01/bind_spine_b_01/bind_spine_c_01/bind_chest_01/jDrv_r_FK_upperArm_01/jDrv_r_FK_elbow_01/jDrv_r_FK_wrist_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/jDrv_l_IK_upperArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/jDrv_l_IK_upperArm_01/jDrv_l_IK_elbow_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/jDrv_l_IK_upperArm_01/jDrv_l_IK_elbow_01/jDrv_l_IK_wrist_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/jDrv_r_IK_upperArm_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/jDrv_r_IK_upperArm_01/jDrv_r_IK_elbow_01
+        weight: 1
+      - path: grp_rig/jDrv_root_01/jDrv_r_IK_upperArm_01/jDrv_r_IK_elbow_01/jDrv_r_IK_wrist_01
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -476,327 +891,7 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    human:
-    - boneName: jDrv_root_01
-      humanName: Hips
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_upperLeg_01
-      humanName: LeftUpperLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_upperLeg_01
-      humanName: RightUpperLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_lowerLeg_01
-      humanName: LeftLowerLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_lowerLeg_01
-      humanName: RightLowerLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_foot_01
-      humanName: LeftFoot
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_foot_01
-      humanName: RightFoot
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_spine_a_01
-      humanName: Spine
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_chest_01
-      humanName: Chest
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_neck_a_01
-      humanName: Neck
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_neck_b_01
-      humanName: Head
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_clavicle_01
-      humanName: LeftShoulder
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_clavicle_01
-      humanName: RightShoulder
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_upperArm_01
-      humanName: LeftUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_upperArm_01
-      humanName: RightUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_lowerArm_01
-      humanName: LeftLowerArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_lowerArm_01
-      humanName: RightLowerArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_hand_01
-      humanName: LeftHand
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_hand_01
-      humanName: RightHand
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: be_l_toe_01
-      humanName: LeftToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: be_r_toe_01
-      humanName: RightToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_head_01
-      humanName: RightEye
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_thumb_a_01
-      humanName: Left Thumb Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_thumb_b_01
-      humanName: Left Thumb Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_thumb_c_01
-      humanName: Left Thumb Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_fingerRight_a_01
-      humanName: Left Middle Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_fingerRight_b_01
-      humanName: Left Middle Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_fingerRight_c_01
-      humanName: Left Middle Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_fingerLeft_a_01
-      humanName: Left Little Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_fingerLeft_b_01
-      humanName: Left Little Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_l_fingerLeft_c_01
-      humanName: Left Little Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_thumb_a_01
-      humanName: Right Thumb Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_thumb_b_01
-      humanName: Right Thumb Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_thumb_c_01
-      humanName: Right Thumb Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_fingerRight_a_01
-      humanName: Right Middle Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_fingerRight_b_01
-      humanName: Right Middle Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_fingerRight_c_01
-      humanName: Right Middle Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_fingerLeft_a_01
-      humanName: Right Little Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_fingerLeft_b_01
-      humanName: Right Little Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: bind_r_fingerLeft_c_01
-      humanName: Right Little Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+    human: []
     skeleton:
     - name: Character_01(Clone)
       position: {x: -0, y: 0, z: 0.12497865}
