@@ -4,7 +4,7 @@
 		_MainTex("Base (RGB)", 2D) = "white" {}
 		_Bump("Bump", 2D) = "bump" {}
 		_BumpPower ("Normal Map Power", Range (0, 2)) = 1 
-		_Snow("Level of snow", Range(1, -1)) = 1
+		_Snow("Level of snow", Range(0.9, 0.9999)) = 1
 		_SnowColor("Color of snow", Color) = (1.0,1.0,1.0,1.0)
 		_SnowDirection("Direction of snow", Vector) = (0,1,0)
 		_SnowDepth("Depth of snow", Range(0,1)) = 0
@@ -71,6 +71,8 @@
 		        o.Albedo = _SnowColor.rgb;
 		    else
 		        o.Albedo = c.rgb * _MainColor;
+
+		    o.Albedo = normalize(o.Albedo);
 		    o.Alpha = 1;
 		}
 		ENDCG
