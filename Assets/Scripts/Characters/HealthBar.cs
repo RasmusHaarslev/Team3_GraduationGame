@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour {
 	public float barDisplay;
@@ -45,7 +46,7 @@ public class HealthBar : MonoBehaviour {
 	void OnGUI()
 	{
 		// draw the background:
-		if (!character.isDead)
+		if (!character.isDead && SceneManager.GetActiveScene().name != "CampManagement")
 		{
 			if (barDisplay <= 0.25)
 			{
