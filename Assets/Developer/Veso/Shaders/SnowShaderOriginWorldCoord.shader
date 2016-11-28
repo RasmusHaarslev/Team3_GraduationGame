@@ -41,39 +41,39 @@
 
 		void surf(Input IN, inout SurfaceOutputStandard o)
 		{
-			half4 c;
+			//half4 c;
 			float2 UV;
 
-		    //half4 c = tex2D(_MainTex, IN.uv_MainTex);
+		    half4 c = tex2D(_MainTex, IN.uv_MainTex);
 
 		   
-			if(abs(IN.worldNormal.x)>0.5)
-			{
-				UV = IN.worldPos.yz;
-				c = tex2D(_MainTex,UV*_TextureScale);
-			}
-			else if(abs(IN.worldNormal.y)>0.5)
-			{
-				UV = IN.worldPos.xz;
-				c = tex2D(_MainTex,UV*_TextureScale);
-			} 
-			else 
-			{
-				UV = IN.worldPos.xy;
-				c = tex2D(_MainTex,UV*_TextureScale);
-			}
+//			if(abs(IN.worldNormal.x)>0.5)
+//			{
+//				UV = IN.worldPos.yz;
+//				c = tex2D(_MainTex,UV*_TextureScale);
+//			}
+//			else if(abs(IN.worldNormal.y)>0.5)
+//			{
+//				UV = IN.worldPos.xz;
+//				c = tex2D(_MainTex,UV*_TextureScale);
+//			} 
+//			else 
+//			{
+//				UV = IN.worldPos.xy;
+//				c = tex2D(_MainTex,UV*_TextureScale);
+//			}
 
 			float3 unpackedNormal = UnpackNormal(tex2D(_Bump, IN.uv_Bump));
-			o.Normal = float3(unpackedNormal.x*_BumpPower,unpackedNormal.y*_BumpPower,unpackedNormal.z);
+			o.Normal =  normalize(float3(unpackedNormal.x,unpackedNormal.y,unpackedNormal.z*_BumpPower));
 
 
 		    if (dot(WorldNormalVector(IN, o.Normal), _SnowDirection.xyz) >= _Snow)
-		        o.Albedo = _SnowColor.rgb;
+		        o.Albedo = normalize(_SnowColor.rgb);
 		    else
-		        o.Albedo = c.rgb * _MainColor;
+		        o.Albedo =c.rgb * _MainColor;
 
-		    o.Albedo = normalize(o.Albedo);
-		    o.Alpha = 1;
+		    //o.Albedo = o.Albedo;
+		    //o.Alpha = 1;
 		}
 		ENDCG
 	}
