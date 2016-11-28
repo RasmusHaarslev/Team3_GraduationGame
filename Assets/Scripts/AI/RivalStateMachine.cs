@@ -106,6 +106,7 @@ public class RivalStateMachine : CoroutineMachine
 	IEnumerator RoamState()
 	{
 		agent.Resume();
+		character.animator.SetBool("isAware", false);
 		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
 		yield return new TransitionTo(StartState, DefaultTransition);
@@ -120,6 +121,7 @@ public class RivalStateMachine : CoroutineMachine
 	{
 		if (!character.isDead)
 		{
+			character.animator.SetBool("isAware", false);
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
@@ -130,6 +132,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (!character.isDead && character.target != null)
 		{
 			agent.Resume();
@@ -141,14 +144,24 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		} else
+		{
+			character.animator.SetBool("isAware", false);
+		}
 		if (!character.isDead)
 		{
+			character.animator.SetTrigger("Attack");
 			agent.Stop();
 			character.RotateTowards(character.target.transform);
-			character.animator.SetTrigger("Attack");
+			agent.velocity = Vector3.zero;
+			transform.position = transform.position;
 			yield return new WaitForSeconds(character.damageSpeed);
 			character.DealDamage();
-			Debug.Log(gameObject.name);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
