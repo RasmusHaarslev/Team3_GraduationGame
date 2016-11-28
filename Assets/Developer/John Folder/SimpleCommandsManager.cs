@@ -11,6 +11,11 @@ public class SimpleCommandsManager : MonoBehaviour
     public int previousIndex = -1; //int previousIndex = -1;
     public  List<List<int>> commandsList = new List<List<int>>();
     public Button button;
+    public Text currentCommandBtnText;
+
+    public bool inDefenseState = true;
+    public bool inFollowState = true;
+
     bool clickUp;
 
     void Start()
