@@ -45,7 +45,7 @@ public class HealthBar : MonoBehaviour {
 	void OnGUI()
 	{
 		// draw the background:
-		if (character.isInCombat)
+		if (!character.isDead)
 		{
 			if (barDisplay <= 0.25)
 			{
