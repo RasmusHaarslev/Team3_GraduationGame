@@ -2225,7 +2225,6 @@ RectTransform:
   - {fileID: 464504684}
   - {fileID: 806777830}
   - {fileID: 999091583}
-  - {fileID: 974973614}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
@@ -5869,25 +5868,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000012712110350, guid: 00c5b9596b6dc05409e792e10720e6a6,
     type: 2}
   m_PrefabInternal: {fileID: 102278316}
---- !u!224 &974973614
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224000012442538818, guid: 525d20ba46eb3144e927c250581204a5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1894857139}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 250578367}
-  m_RootOrder: 4
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &999091582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5936,7 +5916,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 999091582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88279cbb7b8ae274bad2815cd37169e4, type: 3}
+  m_Script: {fileID: 11500000, guid: fcdcc78f48d69d14fb00abd9e6eacd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &999091585
@@ -6037,7 +6017,9 @@ MonoBehaviour:
   damagePointsChance: 0.5
   camsAndNewSoldiersPosition: {fileID: 698691673}
   silhouette: {fileID: 1000013866563540, guid: 2b54e38e37b215d4e9d763698a2a3ff9, type: 2}
+  alreadyGeneratedNewSoldiers: 0
   silhouetteGO: {fileID: 0}
+  silhouettePosList: []
 --- !u!1 &1023307609
 GameObject:
   m_ObjectHideFlags: 0
@@ -9120,137 +9102,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1888113953}
   m_Mesh: {fileID: 4300010, guid: 3f5a6efff76daa249ac8865d14a81fc8, type: 3}
---- !u!1 &1894857139
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012522091216, guid: 525d20ba46eb3144e927c250581204a5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 974973614}
-  - 114: {fileID: 1894857142}
-  - 114: {fileID: 1894857141}
-  - 114: {fileID: 1894857140}
-  m_Layer: 5
-  m_Name: CampPanel
-  m_TagString: CampPanel
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1894857140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1894857139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcdcc78f48d69d14fb00abd9e6eacd80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1894857141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010649711682, guid: 525d20ba46eb3144e927c250581204a5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1894857139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9c80f0c191513c4089379a682035965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newWeaponsNumber: 1
-  increasePointsMultiplier: 2
-  increasePointsAdder: 10
-  damagePercentageShield: 0.28
-  healthPercentageShield: 0.58000004
-  damageSpeedPercentageShield: 0.08
-  shieldRange: 1
-  damagePercentagePolearm: 0.28
-  healthPercentagePolearm: 0.08
-  damageSpeedPercentagePolearm: 0.58000004
-  polearmRange: 3
-  damagePercentageRifle: 0.3
-  healthPercentageRifle: 0.4
-  damageSpeedPercentageRifle: 0.1
-  rifleRange: 9
---- !u!114 &1894857142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013696251608, guid: 525d20ba46eb3144e927c250581204a5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1894857139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7ab9868edc45944ad43a020a35b602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panelList:
-  - {fileID: 0}
-  - {fileID: 1549162695}
-  - {fileID: 671039312}
-  - {fileID: 1549162697}
-  - {fileID: 1549162694}
-  - {fileID: 1549162698}
-  - {fileID: 1549162699}
-  soldierStatsList:
-  - {fileID: 1549162707}
-  - {fileID: 1549162706}
-  - {fileID: 1549162705}
-  - {fileID: 1549162704}
-  - {fileID: 1549162703}
-  - {fileID: 1549162702}
-  - {fileID: 1549162701}
-  - {fileID: 1549162700}
-  solidersSpawnPosition: {fileID: 4000010994751428, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  soldierCameraList:
-  - {fileID: 351520952}
-  - {fileID: 1071830327}
-  - {fileID: 1217307233}
-  - {fileID: 1790236700}
-  SpotLightList:
-  - {fileID: 1058555737}
-  - {fileID: 479798777}
-  - {fileID: 1562434770}
-  - {fileID: 65434256}
-  newSoldierStatsList:
-  - newIndividualSoldierStatsList:
-    - {fileID: 1549162731}
-    - {fileID: 1549162730}
-    - {fileID: 1549162729}
-    - {fileID: 1549162728}
-    - {fileID: 1549162727}
-    - {fileID: 1549162726}
-    - {fileID: 1549162725}
-    - {fileID: 1549162724}
-  - newIndividualSoldierStatsList:
-    - {fileID: 1549162723}
-    - {fileID: 1549162722}
-    - {fileID: 1549162721}
-    - {fileID: 1549162720}
-    - {fileID: 1549162719}
-    - {fileID: 1549162718}
-    - {fileID: 1549162717}
-    - {fileID: 1549162716}
-  - newIndividualSoldierStatsList:
-    - {fileID: 1549162715}
-    - {fileID: 1549162714}
-    - {fileID: 1549162713}
-    - {fileID: 1549162712}
-    - {fileID: 1549162711}
-    - {fileID: 1549162710}
-    - {fileID: 1549162709}
-    - {fileID: 1549162708}
-  newCharPoints: 15
-  damagePointsChance: 0.5
-  camsAndNewSoldiersPosition: {fileID: 698691673}
-  silhouette: {fileID: 1000013866563540, guid: 2b54e38e37b215d4e9d763698a2a3ff9, type: 2}
-  silhouetteGO: {fileID: 0}
 --- !u!1 &1972717181
 GameObject:
   m_ObjectHideFlags: 0
