@@ -249,3 +249,8 @@ public class ClearedCampEvent : GameEvent
 
 	}
 }
+
+public class LanguageChanged : GameEvent
+{
+    public LanguageChanged() { }
+}
