@@ -88,7 +88,6 @@ public class Manager_Audio : MonoBehaviour {
 	public static string CommandUI = "Play_CommandUI";
 	public static string HoverCommandUI = "Play_CommandSel";
 
-
 	public static void PlaySound(string name,GameObject objectPos)
 	{
 		AkSoundEngine.PostEvent (name, objectPos);
