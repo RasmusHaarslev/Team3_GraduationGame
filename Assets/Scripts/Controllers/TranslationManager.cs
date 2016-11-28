@@ -18,8 +18,7 @@ public class TranslationManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                GameObject go = new GameObject("Translator");
-                var manager = go.AddComponent<TranslationManager>();
+                var manager = GameController.Instance.gameObject.AddComponent<TranslationManager>();
                 manager.LoadLanguage();
 
                 _instance = manager;
@@ -48,6 +47,17 @@ public class TranslationManager : MonoBehaviour
         while ((line = reader.ReadLine()) != null)
         {
             ProcessLine(line);
+        }
+    }
+
+    public string GetCurrentLanguage()
+    {
+        if (English)
+        {
+            return "English";
+        } else
+        {
+            return "Danish";
         }
     }
 
