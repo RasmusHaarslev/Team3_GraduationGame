@@ -25,6 +25,7 @@ public class SimpleCommandsScript : MonoBehaviour, IPointerEnterHandler, IPointe
             GetComponent<Image>().color = new Color(0, 160, 0);
         }
         simpleCommandsManager.FillCurrentCommandList(int.Parse(gameObject.name));
+        simpleCommandsManager.currentCommandBtnText = this.GetComponentInChildren<Text>();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -33,10 +34,10 @@ public class SimpleCommandsScript : MonoBehaviour, IPointerEnterHandler, IPointe
         if (gameObject.name != "0")
         {
             GetComponent<RectTransform>().localScale = new Vector2(1f, 1f);
-            GetComponent<Image>().color = new Color(0, 0, 0);
+            GetComponent<Image>().color = new Color(255, 255, 255);
         }
         if (simpleCommandsManager.currentCommand.Count > 1) { 
-        simpleCommandsManager.RemoveCurrentCommandList(1);
+            simpleCommandsManager.RemoveCurrentCommandList(1);
         }
     }
 
