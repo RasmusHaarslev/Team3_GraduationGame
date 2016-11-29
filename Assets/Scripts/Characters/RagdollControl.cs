@@ -115,7 +115,8 @@ public class RagdollControl : MonoBehaviour
 	{
 		for (int i = 0; i < collidersRagdoll.Count; i++)
 		{
-			collidersRagdoll[i].enabled = isEnabled;
+            if(collidersRagdoll[i].gameObject.name != "TapCollider")
+			    collidersRagdoll[i].enabled = isEnabled;
 		}
 	}
 
