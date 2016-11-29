@@ -7,7 +7,7 @@
 					<PropertyList>
 						<Property Name="BusVolume" Type="Real64">
 							<ValueList>
-								<Value>-1</Value>
+								<Value>-2</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -46,6 +46,16 @@
 										</RTPC>
 									</RTPCList>
 								</Property>
+								<Property Name="HdrReleaseTime" Type="Real64">
+									<ValueList>
+										<Value>0.1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrThreshold" Type="Real64">
+									<ValueList>
+										<Value>-14</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Effect0" PluginName="Wwise Compressor" CompanyID="0" PluginID="108" PluginType="3">
@@ -53,20 +63,11 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}">
-									<PropertyList>
-										<Property Name="BusVolume" Type="Real64">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-								</Bus>
 								<Bus Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}">
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>-12</Value>
+												<Value>-5</Value>
 											</ValueList>
 										</Property>
 										<Property Name="Lowpass" Type="int16">
@@ -74,7 +75,23 @@
 												<Value>18</Value>
 											</ValueList>
 										</Property>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>10</Value>
+											</ValueList>
+										</Property>
+										<Property Name="OverrideMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Effect0" PluginName="Wwise Compressor" CompanyID="0" PluginID="108" PluginType="3">
+											<ObjectRef Name="Gentle_Program_Compressor_Minus_14dB_RMS" ID="{1595E6B0-DD58-4363-A3F0-DF0C96EC7C17}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+										</Reference>
+									</ReferenceList>
 									<StateInfo>
 										<StateGroupList>
 											<StateGroupInfo>
@@ -94,40 +111,119 @@
 										</CustomStateList>
 									</StateInfo>
 								</Bus>
-								<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}">
-									<PropertyList>
-										<Property Name="BusVolume" Type="Real64">
-											<ValueList>
-												<Value>-4</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<StateInfo>
-										<StateGroupList>
-											<StateGroupInfo>
-												<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
-											</StateGroupInfo>
-										</StateGroupList>
-										<CustomStateList>
-											<CustomState>
-												<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
-												<State Name="Custom State" ID="{8EB029F0-123F-4DF6-9A7E-642E9B24472B}" ShortID="317658611">
-													<PropertyList>
-														<Property Name="Lowpass" Type="int16" Value="40"/>
-													</PropertyList>
-												</State>
-											</CustomState>
-										</CustomStateList>
-									</StateInfo>
-								</Bus>
 								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}">
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>2</Value>
+												<Value>3</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
+								</Bus>
+								<Bus Name="HDR" ID="{117F7EEC-C136-402D-B421-F08190FECC8D}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+										<Property Name="HdrEnable" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
+										<Property Name="HdrRatio" Type="Real64">
+											<ValueList>
+												<Value>58</Value>
+											</ValueList>
+										</Property>
+										<Property Name="HdrReleaseTime" Type="Real64">
+											<ValueList>
+												<Value>0.2</Value>
+											</ValueList>
+										</Property>
+										<Property Name="HdrThreshold" Type="Real64">
+											<ValueList>
+												<Value>-16</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<Bus Name="CombatSFX" ID="{267C7A05-0FD6-48CC-BACC-D3136C260547}">
+											<PropertyList>
+												<Property Name="BusVolume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+												<Property Name="HdrRatio" Type="Real64">
+													<ValueList>
+														<Value>64</Value>
+													</ValueList>
+												</Property>
+												<Property Name="HdrReleaseTime" Type="Real64">
+													<ValueList>
+														<Value>0.2</Value>
+													</ValueList>
+												</Property>
+												<Property Name="HdrThreshold" Type="Real64">
+													<ValueList>
+														<Value>-24</Value>
+													</ValueList>
+												</Property>
+												<Property Name="MaxDuckVolume" Type="Real64" Value="-7.5"/>
+												<Property Name="RecoveryTime" Type="Real64" Value="0"/>
+											</PropertyList>
+											<StateInfo>
+												<StateGroupList>
+													<StateGroupInfo>
+														<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
+													</StateGroupInfo>
+												</StateGroupList>
+												<CustomStateList>
+													<CustomState>
+														<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+														<State Name="Custom State" ID="{8EB029F0-123F-4DF6-9A7E-642E9B24472B}" ShortID="317658611">
+															<PropertyList>
+																<Property Name="Lowpass" Type="int16" Value="40"/>
+															</PropertyList>
+														</State>
+													</CustomState>
+												</CustomStateList>
+											</StateInfo>
+											<DuckingList>
+												<DuckItem>
+													<BusRef Name="Music" ID="{5724D256-1278-4FEA-828D-56431668FF78}"/>
+													<DuckingParam>
+														<Volume>-2</Volume>
+														<FadeInTime>0.100000001490116</FadeInTime>
+														<FadeOutTime>0.100000001490116</FadeOutTime>
+														<FadeCurve>FadeLog3</FadeCurve>
+													</DuckingParam>
+												</DuckItem>
+											</DuckingList>
+										</Bus>
+										<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}">
+											<PropertyList>
+												<Property Name="BusVolume" Type="Real64">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="HdrRatio" Type="Real64">
+													<ValueList>
+														<Value>50</Value>
+													</ValueList>
+												</Property>
+												<Property Name="HdrThreshold" Type="Real64">
+													<ValueList>
+														<Value>-15</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+										</Bus>
+										<Bus Name="3DEffects" ID="{80ADAEC7-2B8B-49AB-A2A9-BA5FDF282917}"/>
+									</ChildrenList>
 								</Bus>
 								<Bus Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}"/>
 							</ChildrenList>
@@ -165,6 +261,26 @@
 											</Curve>
 										</RTPC>
 									</RTPCList>
+								</Property>
+								<Property Name="HdrEnable" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrRatio" Type="Real64">
+									<ValueList>
+										<Value>69</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrReleaseTime" Type="Real64">
+									<ValueList>
+										<Value>0.1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrThreshold" Type="Real64">
+									<ValueList>
+										<Value>-2</Value>
+									</ValueList>
 								</Property>
 							</PropertyList>
 							<ChildrenList>
