@@ -17,7 +17,7 @@ public class BridgeAudioControl : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider col)
+	void OnTriggerExit(Collider col)
 	{
 		if(col.CompareTag("Player"))
 		{
