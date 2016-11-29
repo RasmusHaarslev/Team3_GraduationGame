@@ -55,9 +55,13 @@ namespace Assets.Editor
 
                     if (GUILayout.Button("Save"))
                     {
-                        var go = Instantiate(prefabScript.gameObject);
-                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
-                        Destroy(go);
+                        var go = Instantiate(levelGeneratorScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, levelGeneratorScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go);
+
+                        var go2 = Instantiate(gameControllerScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go2, gameControllerScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go2);
                     }
                 }
                 catch (Exception e)
