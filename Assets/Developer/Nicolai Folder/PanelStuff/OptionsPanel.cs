@@ -9,14 +9,12 @@ public class OptionsPanel : MonoBehaviour {
 
     void Start()
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuMusic, gameObject);
-        Manager_Audio.PlaySound(Manager_Audio.play_menuAmbience, gameObject);
+       
     }
 
     void OnDisable()
     {
-        Manager_Audio.PlaySound(Manager_Audio.stop_menuMusic, gameObject);
-        Manager_Audio.PlaySound(Manager_Audio.stop_menuAmbience, gameObject);
+       
     }
 
     public void TogglePanelOpen()
