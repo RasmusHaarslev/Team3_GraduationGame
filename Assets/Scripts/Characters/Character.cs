@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
 
 	bool deadEvent = false;
 	[Range(0, 99)]
-	public int randomTargetProbability = 25;
+	public int randomTargetProbability = 40;
 	float isFleeingValue;
 
 	//model values
