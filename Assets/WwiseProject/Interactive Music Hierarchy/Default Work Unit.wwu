@@ -1628,6 +1628,129 @@
 										</MusicPlaylistItem>
 									</Playlist>
 								</MusicPlaylistContainer>
+								<MusicSegment Name="DieCombat" ID="{81963944-5BE0-4E1E-A8A5-96E913829C51}" ShortID="277521820">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="6486.48526077097"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="DieCombat" ID="{D7621BED-F6FB-4251-9C29-9AE2073D9245}" ShortID="799338891">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="DieCombat" ID="{C67B90B2-A435-4231-B6FA-CCC75520F111}" ShortID="333081232">
+													<Language>SFX</Language>
+													<AudioFile>DieCombat.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<TransitionList>
+												<MusicTransition Name="Root" ID="{A88D9352-CCF5-4E18-9CFF-C84F25A1B2BC}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</TransitionList>
+											<SequenceList>
+												<MusicTrackSequence Name="" ID="{6D527B73-A0AC-4B3A-BB71-C96EFC769CC7}">
+													<ClipList>
+														<MusicClip Name="DieCombat" ID="{60C271D4-19F2-4F3B-9CE0-E9D726B9BC08}">
+															<PropertyList>
+																<Property Name="EndTrimOffset" Type="Real64" Value="6486.48526077097"/>
+																<Property Name="FadeInMode" Type="int16" Value="0"/>
+																<Property Name="FadeOutMode" Type="int16" Value="0"/>
+															</PropertyList>
+															<AudioSourceRef Name="DieCombat" ID="{C67B90B2-A435-4231-B6FA-CCC75520F111}"/>
+														</MusicClip>
+													</ClipList>
+												</MusicTrackSequence>
+											</SequenceList>
+										</MusicTrack>
+									</ChildrenList>
+									<CueList>
+										<MusicCue Name="Entry Cue" ID="{B4452A58-0725-48EF-B5A3-F317309AD486}"/>
+										<MusicCue Name="Exit Cue" ID="{874DF8BA-4E25-48D4-B3C9-611A6792E246}">
+											<PropertyList>
+												<Property Name="CueType" Type="int16" Value="1"/>
+												<Property Name="TimeMs" Type="Real64" Value="6486.48526077097"/>
+											</PropertyList>
+										</MusicCue>
+									</CueList>
+								</MusicSegment>
+								<MusicSegment Name="WinCombat" ID="{15E6490A-2877-4377-A5BB-E199E1366C7C}" ShortID="259951971">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="9729.72789115646"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="WinCombat" ID="{2263CB57-E354-4743-88FD-7F169EDB5BE6}" ShortID="372055793">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="WinCombat" ID="{73C311B4-F80A-4448-BD4F-62B0109C4B2E}" ShortID="745734160">
+													<Language>SFX</Language>
+													<AudioFile>WinCombat.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<TransitionList>
+												<MusicTransition Name="Root" ID="{DD426769-406E-4C58-AB57-33AD26A1591F}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</TransitionList>
+											<SequenceList>
+												<MusicTrackSequence Name="" ID="{51BA805F-1785-4BE9-871E-F1AB9D68A83F}">
+													<ClipList>
+														<MusicClip Name="WinCombat" ID="{2AFC9CA7-43DC-41AC-88D3-BD40E672CF0C}">
+															<PropertyList>
+																<Property Name="EndTrimOffset" Type="Real64" Value="9729.72789115646"/>
+																<Property Name="FadeInMode" Type="int16" Value="0"/>
+																<Property Name="FadeOutDuration" Type="Real64" Value="2978.48812994586"/>
+															</PropertyList>
+															<AudioSourceRef Name="WinCombat" ID="{73C311B4-F80A-4448-BD4F-62B0109C4B2E}"/>
+														</MusicClip>
+													</ClipList>
+												</MusicTrackSequence>
+											</SequenceList>
+										</MusicTrack>
+									</ChildrenList>
+									<CueList>
+										<MusicCue Name="Entry Cue" ID="{7730A193-ED2B-4BA5-8A1C-DE8BD004E856}"/>
+										<MusicCue Name="Exit Cue" ID="{4BAFC618-F143-4FE3-AA93-3F95ECC6386A}">
+											<PropertyList>
+												<Property Name="CueType" Type="int16" Value="1"/>
+												<Property Name="TimeMs" Type="Real64" Value="9729.72789115646"/>
+											</PropertyList>
+										</MusicCue>
+									</CueList>
+								</MusicSegment>
 							</ChildrenList>
 							<StateInfo>
 								<StateGroupList>
@@ -1846,6 +1969,63 @@
 												</DestinationFadeIn>
 											</TransitionInfo>
 										</MusicTransition>
+										<MusicTransition Name="Transition" ID="{F0DC098A-E861-4423-B5B8-5A5C9DD85EB8}">
+											<PropertyList>
+												<Property Name="DestinationContextType" Type="int16" Value="2"/>
+												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="2"/>
+												<Property Name="PlayDestinationPreEntry" Type="bool" Value="False"/>
+												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
+												<Property Name="SourceContextType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="DestinationContextObject">
+													<ObjectRef Name="WinCombat" ID="{15E6490A-2877-4377-A5BB-E199E1366C7C}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+												</Reference>
+												<Reference Name="SourceContextObject">
+													<ObjectRef Name="Combat" ID="{197E3D62-07CB-46DE-A405-19183295EC0E}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+												</Reference>
+											</ReferenceList>
+											<TransitionInfo>
+												<SourceFadeOut>
+													<MusicFade Name="Source Fade-out" ID="{78DEE34E-3195-4B3B-ACC4-13E71D981852}">
+														<PropertyList>
+															<Property Name="FadeOffset" Type="Real64" Value="0.25"/>
+															<Property Name="FadeTime" Type="Real64" Value="0.25"/>
+															<Property Name="FadeType" Type="int16" Value="1"/>
+														</PropertyList>
+													</MusicFade>
+												</SourceFadeOut>
+											</TransitionInfo>
+										</MusicTransition>
+										<MusicTransition Name="Transition" ID="{C62643BE-21AE-4A8F-9519-48ABF6B4765C}">
+											<PropertyList>
+												<Property Name="DestinationContextType" Type="int16" Value="2"/>
+												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="2"/>
+												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
+												<Property Name="SourceContextType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="DestinationContextObject">
+													<ObjectRef Name="DieCombat" ID="{81963944-5BE0-4E1E-A8A5-96E913829C51}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+												</Reference>
+												<Reference Name="SourceContextObject">
+													<ObjectRef Name="Combat" ID="{197E3D62-07CB-46DE-A405-19183295EC0E}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+												</Reference>
+											</ReferenceList>
+											<TransitionInfo>
+												<SourceFadeOut>
+													<MusicFade Name="Source Fade-out" ID="{488680DE-B46D-46CB-8CB6-44D77029B560}">
+														<PropertyList>
+															<Property Name="FadeOffset" Type="Real64" Value="0.25"/>
+															<Property Name="FadeTime" Type="Real64" Value="0.25"/>
+															<Property Name="FadeType" Type="int16" Value="1"/>
+														</PropertyList>
+													</MusicFade>
+												</SourceFadeOut>
+											</TransitionInfo>
+										</MusicTransition>
 									</ChildrenList>
 									<TransitionInfo/>
 								</MusicTransition>
@@ -1904,6 +2084,22 @@
 									</Path>
 									<AudioNodeInfo>
 										<AudioNodeRef Name="EnemyNear" ID="{8C2DDA39-8DC7-4EED-AFB6-DA1BBF25EACD}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}" Platform="Linked"/>
+									</AudioNodeInfo>
+								</Entry>
+								<Entry>
+									<Path>
+										<PathElementRef Name="Lose" ID="{EE432795-624A-4375-BBBB-F183D28CD04E}"/>
+									</Path>
+									<AudioNodeInfo>
+										<AudioNodeRef Name="DieCombat" ID="{81963944-5BE0-4E1E-A8A5-96E913829C51}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}" Platform="Linked"/>
+									</AudioNodeInfo>
+								</Entry>
+								<Entry>
+									<Path>
+										<PathElementRef Name="Win" ID="{09534D19-5ECF-4CAB-8563-C40F93CDA1D6}"/>
+									</Path>
+									<AudioNodeInfo>
+										<AudioNodeRef Name="WinCombat" ID="{15E6490A-2877-4377-A5BB-E199E1366C7C}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}" Platform="Linked"/>
 									</AudioNodeInfo>
 								</Entry>
 							</EntryList>
