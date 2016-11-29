@@ -22,13 +22,15 @@ public class ChangeResources : GameEvent
     public int scraps;
     public int villager;
     public int premium;
+    public int daysSurvived;
 
-    public ChangeResources(int food = 0, int scraps = 0, int villager = 0, int premium = 0)
+    public ChangeResources(int food = 0, int scraps = 0, int villager = 0, int premium = 0, int daysSurvived = 0)
     {
         this.food = food;
         this.scraps = scraps;
         this.villager = villager;
         this.premium = premium;
+        this.daysSurvived = daysSurvived;
     }
 }
 

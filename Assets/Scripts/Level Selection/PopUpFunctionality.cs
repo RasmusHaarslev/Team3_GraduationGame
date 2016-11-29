@@ -192,7 +192,9 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
         PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
-        PlayerPrefs.SetInt(StringResources.DaysSurvived, GameController.Instance._DAYS_SURVIVED+1);
+
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
         // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
 
