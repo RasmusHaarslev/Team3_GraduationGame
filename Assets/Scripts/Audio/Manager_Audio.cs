@@ -10,15 +10,23 @@ public class Manager_Audio : MonoBehaviour {
 
     public static bool musicToggle = true;
     public static bool fxToggle = true;
+	public static string bridgeState = "Bridge";
+	public static string bridgeOn = "OnBridge";
+	public static string bridgeOff = "OffBridge";
+
+	//state container
+	public static string playStateGroupContainer = "ExploreState";
+	public static string winState = "Win";
+	public static string loseState = "Lose";
+	public static string exploreSnapshot = "Exploring";
+	public static string fightSnapshot = "inCombat";
 
 	public static string baseAmbiencePlay = "Play_GroundAmbience";
 	public static string baseAmbienceStop = "Stop_GroundAmbience";
 	public static string musicExploreStart = "Play_ExploreMusic";
 	public static string musicExploreStop = "Stop_ExploreMusic";
 	public static string walkTapUISound = "Play_WalkTapUI";
-	public static string playStateGroupContainer = "ExploreState";
-	public static string exploreSnapshot = "Exploring";
-	public static string fightSnapshot = "inCombat";
+
 
 	public static string commandWheelContainer = "CommandWheel";
 	public static string openWheel = "On";
