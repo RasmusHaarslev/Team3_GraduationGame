@@ -153,9 +153,8 @@ public class TutorialHunterStateMachine : CoroutineMachine
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
 						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
-						if (!leader.GetComponent<MoveScript>().attacking)
+						if (!leader.GetComponent<TutorialMoveScript>().attacking)
 						{
-							character.isInCombat = false;
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
@@ -324,6 +323,7 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (!character.isDead)
 		{
 			agent.Resume();
@@ -335,12 +335,14 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator StayState()
 	{
+		character.animator.SetBool("isAware", false);
 		agent.Stop();
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator FleeState()
 	{
+		character.animator.SetBool("isAware", false);
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
@@ -351,6 +353,7 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (character.target.GetComponent<TutorialCharacter>() != null)
 		{
 			if (!character.target.GetComponent<TutorialCharacter>().isInCombat)
@@ -375,6 +378,16 @@ public class TutorialHunterStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		}
+		else
+		{
+			character.animator.SetBool("isAware", false);
+		}
 		agent.Stop();
 		if (character.target != null)
 		{
@@ -430,7 +443,7 @@ public class TutorialHunterStateMachine : CoroutineMachine
 	private GameObject CodependantTarget()
 	{
 		GameObject target;
-		target = leader.GetComponent<Character>().target;
+		target = leader.GetComponent<TutorialPlayerCharacter>().target;
 		return target;
 	}
 
@@ -442,14 +455,6 @@ public class TutorialHunterStateMachine : CoroutineMachine
 			if (enemy.GetComponent<TutorialCharacter>() != null)
 			{
 				if (enemy.GetComponent<TutorialCharacter>().target == leader)
-				{
-					target = enemy;
-					break;
-				}
-			}
-			if (enemy.GetComponent<Character>() != null)
-			{
-				if (enemy.GetComponent<Character>().target == leader)
 				{
 					target = enemy;
 					break;

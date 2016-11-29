@@ -155,7 +155,6 @@ public class HunterStateMachine : CoroutineMachine
 						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
-							character.isInCombat = false;
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
@@ -324,6 +323,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (!character.isDead)
 		{
 			agent.Resume();
@@ -341,6 +341,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		character.animator.SetBool("isAware", false);
 		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
@@ -352,6 +353,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (character.target != null && character.target.GetComponent<Character>() != null)
 		{
 			if (!character.target.GetComponent<Character>().isInCombat)
@@ -359,15 +361,24 @@ public class HunterStateMachine : CoroutineMachine
 				character.isInCombat = false;
 				yield return new TransitionTo(StartState, DefaultTransition);
 			}
+			agent.Resume();
+			agent.stoppingDistance = character.range;
+			agent.SetDestination(character.target.transform.position);
 		}
-		agent.Resume();
-		agent.stoppingDistance = character.range;
-		agent.SetDestination(character.target.transform.position);
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		} else
+		{
+			character.animator.SetBool("isAware", false);
+		}
 		agent.Stop();
 		if (character.target != null)
 		{
@@ -381,6 +392,7 @@ public class HunterStateMachine : CoroutineMachine
 			}
 			character.RotateTowards(character.target.transform);
 			character.animator.SetTrigger("Attack");
+
 			yield return new WaitForSeconds(character.damageSpeed);
 			character.DealDamage();
 			lowAttentionSpanCounter--;

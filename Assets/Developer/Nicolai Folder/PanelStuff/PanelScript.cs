@@ -24,10 +24,10 @@ public class PanelScript : MonoBehaviour {
     public float damagePointsChance = 0.5f;
     public Transform camsAndNewSoldiersPosition;
     public GameObject silhouette;
-    //public bool alreadyGeneratedNewSoldiers = false;
+    public bool alreadyGeneratedNewSoldiers = false;
     List<GameObject> newSoldiersList = new List<GameObject>();
     public GameObject silhouetteGO;
-    //public List<GameObject> silhouetteList = new List<GameObject>();
+    public List<Transform> silhouettePosList = new List<Transform>();
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -52,6 +52,66 @@ public class PanelScript : MonoBehaviour {
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
+    }
+
+    public void ActivateNewSoldiers(Transform silhouetteTrans)
+    {
+        //foreach(Transform silTrans in silhouettePosList)
+        //{
+        //    print(silTrans.position);
+        //    if (silhouetteGO.transform.position == silTrans.position)
+        //    {
+        //        print(silhouetteGO.transform.position);
+
+
+        //        for (int i = silhouettePosList.IndexOf(silTrans) * 3; i < silhouettePosList.IndexOf(silTrans) * 3 + 3; i++)
+        //        {
+
+        //            if (newSoldiersList[i].activeSelf == false)
+        //            {
+        //                newSoldiersList[i].SetActive(true);
+        //            }
+
+        //        }
+
+        //    }
+        //}
+        foreach (GameObject soldier in newSoldiersList)
+        {
+            if (soldier.activeSelf == false)
+            {
+                soldier.SetActive(true);
+            }
+        }
+        /////
+        foreach (Transform trans in camsAndNewSoldiersPosition)
+        {
+            if (trans.gameObject.GetComponentInChildren<Camera>().isActiveAndEnabled == false && trans.gameObject.GetComponentInChildren<Light>().isActiveAndEnabled == false)
+            {
+                trans.gameObject.GetComponentInChildren<Camera>().enabled = true;
+                trans.gameObject.GetComponentInChildren<Light>().enabled = true;
+            }
+        }
+    }
+
+    public void DeactivateNewSoldiers()
+    {
+        foreach(GameObject soldier in newSoldiersList)
+        {
+            if(soldier.activeSelf == true)
+            {
+                soldier.SetActive(false);
+            }
+        }
+
+        foreach(Transform trans in camsAndNewSoldiersPosition)
+        {
+            if (trans.gameObject.GetComponentInChildren<Camera>().isActiveAndEnabled == true && trans.gameObject.GetComponentInChildren<Light>().isActiveAndEnabled == true)
+            {
+                trans.gameObject.GetComponentInChildren<Camera>().enabled = false;
+                trans.gameObject.GetComponentInChildren<Light>().enabled = false;
+            }
+        }
     }
 
     public void SpawnNewSoldier(int index)
@@ -94,7 +154,7 @@ public class PanelScript : MonoBehaviour {
                         }
                     }
                 }  
-               
+          
             }
             else
             {
@@ -102,7 +162,20 @@ public class PanelScript : MonoBehaviour {
             }
         }
         newSoldiersList.Clear();
+        alreadyGeneratedNewSoldiers = false;
         Destroy(silhouetteGO);
+    }
+
+    public void RerollSoldiers()
+    {
+        foreach (GameObject soldier in newSoldiersList)
+        {     
+            Destroy(soldier);
+        }
+        newSoldiersList.Clear();
+        
+        GetNewSoldiers();
+
     }
 
     public void GetNewSoldiers()
@@ -111,15 +184,16 @@ public class PanelScript : MonoBehaviour {
         {
             newSoldiersList.Add(GenerateNewHunter(trans));
         }
-        //newSoldiersList.Add(GenerateNewHunter());
-        //newSoldiersList.Add(GenerateNewHunter());
-        //newSoldiersList.Add(GenerateNewHunter());      
-        newSoldiersList[0].GetComponent<NavMeshAgent>().enabled = false;
-        newSoldiersList[1].GetComponent<NavMeshAgent>().enabled = false;
-        newSoldiersList[2].GetComponent<NavMeshAgent>().enabled = false;
-        newSoldiersList[0].GetComponent<HunterStateMachine>().enabled = false;
-        newSoldiersList[1].GetComponent<HunterStateMachine>().enabled = false;
-        newSoldiersList[2].GetComponent<HunterStateMachine>().enabled = false;
+        
+        foreach (GameObject newSoldier in newSoldiersList)
+        {
+            if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
+            { 
+                newSoldier.GetComponent<NavMeshAgent>().enabled = false;
+                newSoldier.GetComponent<HunterStateMachine>().enabled = false;
+            }
+        }   
+        
         //newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
         //newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
         //newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
@@ -127,6 +201,8 @@ public class PanelScript : MonoBehaviour {
         FillInNewSoldierStats();
     
     }
+
+
 
     void InitializeSoldiers()
     {

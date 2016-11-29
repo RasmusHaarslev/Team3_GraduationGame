@@ -118,6 +118,9 @@ public class TutorialRivalMachine : CoroutineMachine
 							character.target = character.FindNearestEnemy();
 						}
 					}
+				} else
+				{
+					character.target = character.FindNearestEnemy();
 				}
 			}
 			else
@@ -136,6 +139,7 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator RoamState()
 	{
+		character.animator.SetBool("isAware", false);
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
@@ -151,6 +155,7 @@ public class TutorialRivalMachine : CoroutineMachine
 	{
 		if (!character.isDead)
 		{
+			character.animator.SetBool("isAware", false);
 			character.isInCombat = false;
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
@@ -161,6 +166,7 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		character.animator.SetBool("isAware", false);
 		if (!character.isDead && character.target != null)
 		{
 			agent.Resume();
@@ -172,6 +178,16 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		}
+		else
+		{
+			character.animator.SetBool("isAware", false);
+		}
 		if (!character.isDead)
 		{
 			agent.Stop();

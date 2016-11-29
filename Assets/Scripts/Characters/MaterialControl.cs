@@ -4,6 +4,7 @@ using System.Collections;
 public class MaterialControl : MonoBehaviour {
 	public Material[] possibleMaterials;
 	public SkinnedMeshRenderer mesh;
+
 	void OnEnable () 
 	{
 		mesh = GetComponentInChildren<SkinnedMeshRenderer> ();

@@ -13,11 +13,13 @@ public class GameController : MonoBehaviour
     public int InitialVillages = 10;
     public int InitialScrap = 10;
     public int InitialPremium = 10;
+    public int InitialDaysSurvived = 0;
 
     public int _FOOD = 10;
     public int _VILLAGERS = 10;
     public int _SCRAPS = 10;
     public int _PREMIUM = 10;
+    public int _DAYS_SURVIVED = 0;
 
     [HideInInspector]
     public DataService _dataService;
@@ -96,6 +98,7 @@ public class GameController : MonoBehaviour
             _VILLAGERS = PlayerPrefs.GetInt("Villagers");
             _SCRAPS = PlayerPrefs.GetInt("Scraps");
             _PREMIUM = PlayerPrefs.GetInt("Premium");
+            _DAYS_SURVIVED = PlayerPrefs.GetInt("DaysSurvived");
         }
         else
         {
@@ -103,6 +106,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("Villagers", InitialVillages);
             PlayerPrefs.SetInt("Scraps", InitialScrap);
             PlayerPrefs.SetInt("Premium", InitialPremium);
+            PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
         }
     }
 
@@ -141,25 +145,6 @@ public class GameController : MonoBehaviour
             scenes.Add(line);
         }
 
-        //scenes.Add("LevelPrototype02");
-        //scenes.Add("LevelPrototype03");
-        //scenes.Add("LevelPrototype04");
-        //scenes.Add("LevelPrototype05");
-        //scenes.Add("LevelPrototype06");
-        //scenes.Add("LevelPrototype02");
-        //scenes.Add("LevelPrototype03");
-        //scenes.Add("LevelPrototype04");
-        //scenes.Add("LevelPrototype05");
-        //scenes.Add("LevelPrototype06");
-
-        //foreach (var scene in sceneDirectory.GetFiles())
-        //{
-        //    if (scene.Name.EndsWith(".unity"))
-        //    {
-        //        scenes.Add(scene.Name.Split('.')[0]);
-        //    }
-        //}
-
         var randomScene = scenes[UnityEngine.Random.Range(0, scenes.Count - 1)];
         SceneManager.LoadScene(randomScene);
     }
@@ -182,6 +167,6 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("Food", InitialFood);
         PlayerPrefs.SetInt("Villagers", InitialVillages);
         PlayerPrefs.SetInt("Scraps", InitialScrap);
-        PlayerPrefs.SetInt("Premium", InitialPremium);
+        PlayerPrefs.SetInt("Premium", InitialPremium + (CampManager.Instance.Upgrades.MaxVillages*2));
     }
 }

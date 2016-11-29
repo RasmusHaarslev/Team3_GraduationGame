@@ -6281,7 +6281,7 @@ MonoBehaviour:
   rigidbody: {fileID: 54000013852121386}
   playerCapsuleCollider: {fileID: 136000010628322942}
   playerSphereCollider: {fileID: 135000011475029890}
-  pushForceOnDeath: 10
+  pushForceOnDeath: 100
   forceModePush: 1
 --- !u!114 &114000010397392406
 MonoBehaviour:
@@ -6346,6 +6346,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9b02e879f6d501b4da538ad13cc0e642, type: 2}
   - {fileID: 2100000, guid: c4aadef2c35ada5479050e3789b9f423, type: 2}
   - {fileID: 2100000, guid: 24ad218c9687d1d4697c92bafd9e1cfc, type: 2}
+  mesh: {fileID: 0}
 --- !u!114 &114000012277029350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6357,7 +6358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af77555bf6ac29846a2b046ca68ac22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalTriggerOffset: 1.5
+  verticalTriggerOffset: 1
 --- !u!114 &114000012818992694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6369,6 +6370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0279683ab453c2e43b23a4dc21f4e8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasFootsteps: 0
+  hasWeaponSounds: 1
 --- !u!114 &114000013609391926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7042,7 +7045,7 @@ NavMeshAgent:
   m_AngularSpeed: 1000
   m_StoppingDistance: 1.2
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

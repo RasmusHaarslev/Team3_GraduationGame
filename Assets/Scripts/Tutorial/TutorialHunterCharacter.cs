@@ -65,9 +65,9 @@ public class TutorialHunterCharacter : MonoBehaviour
 	{
 		//isFleeingValue = isFleeing ? 1 : 0;
 		//animator.SetFloat("isWounded", isFleeingValue);
-		if (agent.velocity.normalized.magnitude < 0.2f)
+		if (!isInCombat)
 		{
-			animator.SetBool("isAware", isInCombat);
+			animator.SetBool("isAware", false);
 		}
 		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
 		if (currentHealth <= 0)

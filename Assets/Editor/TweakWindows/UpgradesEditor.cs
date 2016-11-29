@@ -38,7 +38,7 @@ namespace Assets.Editor
                 try
                 {
                     string path = AssetDatabase.GUIDToAssetPath(guids.FirstOrDefault());
-                    prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<CampManager>();
+                    prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponentInChildren<CampManager>();
 
                     GUILayout.Label("Basic upgrades and increase pr level", EditorStyles.boldLabel);
 
