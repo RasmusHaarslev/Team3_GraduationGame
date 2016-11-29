@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Weapon");
             string[] guids = AssetDatabase.FindAssets("t:Prefab LevelGenerator");
 
             if (guids.Length == 0)
@@ -62,6 +63,13 @@ namespace Assets.Editor
                     prefabScript.damageSpeedPercentageRifle = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentageRifle, 0.0f, 1.0f);
                     prefabScript.healthPercentageRifle = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentageRifle, 0.0f, 1.0f);
                     prefabScript.rifleRange = EditorGUILayout.IntField("Range", prefabScript.rifleRange);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        Destroy(go);
+                    }
                 }
                 catch (Exception e) {
                     GUILayout.Label("The prefab is messed up, go to Peter!", EditorStyles.boldLabel);

@@ -18,12 +18,14 @@ namespace Assets.Editor
         {
             // Get existing open window or if none, make a new one:
             UpgradesEditor window = (UpgradesEditor)EditorWindow.GetWindow(typeof(UpgradesEditor));
+            
             window.Show();
         }
 
         void OnGUI()
         {
-            string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesPanel");
+            this.titleContent = new GUIContent("Upgrades");
+            string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesGroup");
 
             if (guids.Length == 0)
             {
@@ -67,6 +69,13 @@ namespace Assets.Editor
                     prefabScript.Level7_Time = EditorGUILayout.IntField("Seconds for level 7", prefabScript.Level7_Time);
                     prefabScript.Level8_Time = EditorGUILayout.IntField("Seconds for level 8", prefabScript.Level8_Time);
                     prefabScript.Level9_Above_Time = EditorGUILayout.IntField("Seconds for level 9+", prefabScript.Level9_Above_Time);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject.transform.parent.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject.transform.parent.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go);
+                    }
                 }
                 catch (Exception e)
                 {

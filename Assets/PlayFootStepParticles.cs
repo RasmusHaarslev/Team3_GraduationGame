@@ -13,7 +13,7 @@ public class PlayFootStepParticles : MonoBehaviour {
 	
 	public void PlayLeftStep()
 	{
-		if(hasFootStepParticles)
+		if(hasFootStepParticles && leftFoot != null)
 		{
 			leftFoot.Play ();
 		}
@@ -21,7 +21,7 @@ public class PlayFootStepParticles : MonoBehaviour {
 
 	public void PlayRightStep()
 	{
-		if(hasFootStepParticles)
+		if(hasFootStepParticles && rightFoot != null)
 		{
 			rightFoot.Play ();
 		}

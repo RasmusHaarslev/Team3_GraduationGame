@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Lootboxes");
             string[] guids = AssetDatabase.FindAssets("t:Prefab Lootbox");
 
             if (guids.Length == 0)
@@ -45,6 +46,12 @@ namespace Assets.Editor
                     prefabScript.MinimumScrap = EditorGUILayout.IntField("Minimum value in box", prefabScript.MinimumScrap);
                     prefabScript.MaxScrap = EditorGUILayout.IntField("Max value in box", prefabScript.MaxScrap);
                     prefabScript.ScaleByLevel = EditorGUILayout.FloatField("Min/max scale factor", prefabScript.ScaleByLevel);
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go);
+                    }
                 }
                 catch (Exception e) {
                     GUILayout.Label("The prefab is messed up, go to Peter!", EditorStyles.boldLabel);
