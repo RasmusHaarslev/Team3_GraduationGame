@@ -57,11 +57,11 @@ namespace Assets.Editor
                     {
                         var go = Instantiate(levelGeneratorScript.gameObject);
                         PrefabUtility.ReplacePrefab(go, levelGeneratorScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
-                        Destroy(go);
+                        DestroyImmediate(go);
 
                         var go2 = Instantiate(gameControllerScript.gameObject);
                         PrefabUtility.ReplacePrefab(go2, gameControllerScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
-                        Destroy(go2);
+                        DestroyImmediate(go2);
                     }
                 }
                 catch (Exception e)

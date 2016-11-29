@@ -44,7 +44,7 @@ namespace Assets.Editor
                     {
                         var go = Instantiate(prefabScript.gameObject);
                         PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
-                        Destroy(go);
+                        DestroyImmediate(go);
                     }
 
                 }
