@@ -40,6 +40,12 @@ namespace Assets.Editor
                     prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<CampManager>();
 
                     GUILayout.Label("Character stuff coming", EditorStyles.boldLabel);
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        Destroy(go);
+                    }
 
                 }
                 catch (Exception e)

@@ -67,6 +67,13 @@ namespace Assets.Editor
                     prefabScript.Level7_Time = EditorGUILayout.IntField("Seconds for level 7", prefabScript.Level7_Time);
                     prefabScript.Level8_Time = EditorGUILayout.IntField("Seconds for level 8", prefabScript.Level8_Time);
                     prefabScript.Level9_Above_Time = EditorGUILayout.IntField("Seconds for level 9+", prefabScript.Level9_Above_Time);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        Destroy(go);
+                    }
                 }
                 catch (Exception e)
                 {

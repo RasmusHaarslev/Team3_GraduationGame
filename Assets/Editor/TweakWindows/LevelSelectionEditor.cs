@@ -45,6 +45,12 @@ namespace Assets.Editor
 
                     GUILayout.Label("Probabilities", EditorStyles.boldLabel);
                     prefabScript.probabilityTribes = EditorGUILayout.IntSlider("Probability of tribe",prefabScript.probabilityTribes, 0, 5);
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        Destroy(go);
+                    }
 
                 }
                 catch (Exception e) {
