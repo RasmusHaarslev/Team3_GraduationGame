@@ -23,6 +23,11 @@ public class RemoveOnDeath : MonoBehaviour {
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 	}
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
 	void EnemyDeath(EnemyDeathEvent e)
 	{
 		if (e.enemy == transform.parent.gameObject)
