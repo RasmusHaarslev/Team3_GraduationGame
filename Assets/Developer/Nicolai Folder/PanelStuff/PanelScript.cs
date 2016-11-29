@@ -279,8 +279,6 @@ public class PanelScript : MonoBehaviour {
 
     private void SetCampAnimation(Character soldier)
     {
-        Debug.Log("Setting up animation");
-
         // Switches the animator out with the camp animator.
         RuntimeAnimatorController newController = (RuntimeAnimatorController)Resources.Load("CampIdleControllers/CampIdleControllerUpdated");
         soldier.GetComponent<Animator>().runtimeAnimatorController = newController;
@@ -288,13 +286,37 @@ public class PanelScript : MonoBehaviour {
         if (soldier.transform.position == solidersSpawnPosition.GetChild(0).position) {
             switch (soldier.equippedWeaponType) {
                 case EquippableitemValues.type.polearm:
-                    soldier.animator.Play("SpearBoxIdle");
+                    soldier.animator.Play("StandingIdleSpear1");
+
+                    Vector3 newPosition1 = new Vector3(0.034f, -0.061f, -0.092f);
+                    Quaternion newRotation1 = Quaternion.Euler(88.096f, -230.06f, -55.345f);
+
+                    if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1) {
+                        soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition1;
+                        soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation1;
+                    }
+                    else {
+                        soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition1;
+                        soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation1;
+                    }
                     break;
                 case EquippableitemValues.type.rifle:
-                    soldier.animator.Play("RifleBoxIdle");
+                    soldier.animator.Play("StandingIdleRifle1");
+
+                    Vector3 newPosition2 = new Vector3(0.019f, -0.041f, -0.022f);
+                    Quaternion newRotation2 = Quaternion.Euler(6.115f, 168.97f, -33.529f);
+
+                    if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1) {
+                        soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition2;
+                        soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation2;
+                    }
+                    else {
+                        soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition2;
+                        soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation2;
+                    }
                     break;
                 case EquippableitemValues.type.shield:
-                    soldier.animator.Play("ShieldBoxIdle");
+                    soldier.animator.Play("StandingIdleShield1");
                     break;
             }
         }
@@ -326,48 +348,15 @@ public class PanelScript : MonoBehaviour {
         }
         else if (soldier.transform.position == solidersSpawnPosition.GetChild(3).position)
         {
-            int randomNumber = UnityEngine.Random.Range(1, 3);
-
             switch (soldier.equippedWeaponType) {
                 case EquippableitemValues.type.polearm:
-                    soldier.animator.Play("StandingIdleSpear" + randomNumber);
-
-                    if (randomNumber == 1)
-                    {
-                        Vector3 newPosition = new Vector3(0.034f, -0.061f, -0.092f);
-                        Quaternion newRotation = Quaternion.Euler(88.096f, -230.06f, -55.345f);
-
-                        if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1)
-                        {
-                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition;
-                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation;
-                        }
-                        else
-                        {
-                            soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition;
-                            soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation;
-                        }
-                    }
+                    soldier.animator.Play("StandingIdleSpear2");
                     break;
                 case EquippableitemValues.type.rifle:
-                    soldier.animator.Play("StandingIdleRifle" + randomNumber);
-
-                    if (randomNumber == 1) {
-                        Vector3 newPosition = new Vector3(0.019f, -0.041f, -0.022f);
-                        Quaternion newRotation = Quaternion.Euler(6.115f, 168.97f, -33.529f);
-
-                        if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1) {
-                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition;
-                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation;
-                        }
-                        else {
-                            soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition;
-                            soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation;
-                        }
-                    }
+                    soldier.animator.Play("StandingIdleRifle2");
                     break;
                 case EquippableitemValues.type.shield:
-                    soldier.animator.Play("StandingIdleShield" + randomNumber);
+                    soldier.animator.Play("StandingIdleShield2");
                     break;
             }
         }
