@@ -91,6 +91,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &1000011497345884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013220863496}
+  - 65: {fileID: 65000011596864600}
+  - 114: {fileID: 114000012161382602}
+  m_Layer: 13
+  m_Name: BridgeSoundTrigger (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011553780934
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011407999226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 47.92538, y: 15.430838, z: -101.37398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -188,6 +205,7 @@ Transform:
   - {fileID: 4000011355175682}
   - {fileID: 4000012736182140}
   - {fileID: 4000010176074336}
+  - {fileID: 4000013220863496}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000011314469284
@@ -268,6 +286,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000010411580740}
   m_RootOrder: 1
+--- !u!4 &4000013220863496
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011497345884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.09, z: 8.57}
+  m_LocalScale: {x: 3.7124999, y: 2.2070308, z: 17.317312}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010411580740}
+  m_RootOrder: 8
 --- !u!4 &4000013986107010
 Transform:
   m_ObjectHideFlags: 1
@@ -401,6 +432,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2248116, y: 0.1, z: 2.86}
   m_Center: {x: 0, y: -0.53, z: 7}
+--- !u!65 &65000011596864600
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011497345884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000012106640392
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -425,3 +468,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2248116, y: 0.1, z: 2.8}
   m_Center: {x: 0, y: -0.14, z: 4.23}
+--- !u!114 &114000012161382602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011497345884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c05a92d1a60eb04386b675a62f8ea8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
