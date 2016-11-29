@@ -338,10 +338,10 @@ public class PanelScript : MonoBehaviour {
             foreach (var stat in newSoldierStats)
             {
 
-                if (stat.name == "Type")
-                {
-                    stat.GetComponent<Text>().text = "Type: " + newCharacterSoldierList[i].Type.ToString();
-                }
+                //if (stat.name == "Type")
+                //{
+                //    stat.GetComponent<Text>().text = "Type: " + newCharacterSoldierList[i].Type.ToString();
+                //}
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = "Damage: " + newCharacterSoldierList[i].damage.ToString();
@@ -386,17 +386,17 @@ public class PanelScript : MonoBehaviour {
         currentSoldier = soldier.GetComponent<Character>();
         foreach(var stat in soldierStatsList)
         {        
-            if (stat.name == "Type")
-            {
-                if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
-                {
-                    stat.GetComponent<Text>().text = "Leader";
-                }
-                else
-                {
-                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
-                }
-            }
+            //if (stat.name == "Type")
+            //{
+            //    if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
+            //    {
+            //        stat.GetComponent<Text>().text = "Leader";
+            //    }
+            //    else
+            //    {
+            //        stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
+            //    }
+            //}
             if (stat.name == "Damage")
             {
                 stat.GetComponent<Text>().text = currentSoldier.damage.ToString();
@@ -438,9 +438,14 @@ public class PanelScript : MonoBehaviour {
 
     public void ActivateInventoryPanel()
     {
-        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToArray());
-        panelList[4].SetActive(true);
 
+        //panelList[4].GetComponent<EquippableItemUIListController>().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToList().Add(dataService.GetCharacterEquippableItemsValues(currentSoldier.characterBaseValues.id).FirstOrDefault()).ToArray());
+        List<EquippableitemValues> weaponsList = dataService.GetEquippableItemsValuesFromInventory().ToList();
+        weaponsList.Insert(0, currentSoldier.GetComponentInChildren<EquippableItem>().itemValues);
+        
+        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(weaponsList.ToArray());
+        panelList[4].SetActive(true);
+        
     }
 
     public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
@@ -469,9 +474,9 @@ public class PanelScript : MonoBehaviour {
         //    }
         //}
 
-        panelList[4].SetActive(false);
-        panelList[5].SetActive(false);
-        panelList[1].SetActive(true);
+        //panelList[4].SetActive(false);
+        //panelList[5].SetActive(false);
+        //panelList[1].SetActive(true);
     }
 
     #endregion

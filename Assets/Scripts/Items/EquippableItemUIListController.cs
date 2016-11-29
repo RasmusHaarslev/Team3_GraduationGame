@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class EquippableItemUIListController : MonoBehaviour
 {
@@ -21,9 +22,11 @@ public class EquippableItemUIListController : MonoBehaviour
         //adding the new list
         foreach (EquippableitemValues values in itemsValues)
         {
+            
             GameObject newItem = Instantiate(ListItemPrefab) as GameObject;
             UIListEquippableItemController controller = newItem.GetComponent<UIListEquippableItemController>();
             //controller.Icon.sprite = animal.Icon;
+            
             controller.name.text = values.name;
             controller.damage.text = "Damage: " + values.damage;
             controller.damageSpeed.text = "Damage Speed: " + values.damageSpeed;
@@ -51,7 +54,7 @@ public class EquippableItemUIListController : MonoBehaviour
             newItem.transform.localPosition = Vector3.zero;
             newItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-
+        GetComponentInChildren<UIListEquippableItemController>().GetComponent<Image>().color = new Color32(0, 85, 250, 116);
     }
 
 
