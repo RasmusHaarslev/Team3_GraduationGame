@@ -19,8 +19,11 @@
 				<Event Id="1629463520" Name="DiscoverEnemy" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverEnemy" MaxAttenuation="0.000000"/>
 				<Event Id="604685473" Name="DiscoverFriendly" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendly" MaxAttenuation="0.000000"/>
 				<Event Id="1392836774" Name="FriendlyDie" ObjectPath="\Events\Default Work Unit\TriggerEvents\FriendlyDie" MaxAttenuation="0.000000"/>
+				<Event Id="255852841" Name="Play_BoxPickup" ObjectPath="\Events\Default Work Unit\UI\Play_BoxPickup"/>
+				<Event Id="2290791599" Name="Play_CampUpgrade" ObjectPath="\Events\Default Work Unit\UI\Play_CampUpgrade"/>
 				<Event Id="1292318918" Name="Play_CharSel" ObjectPath="\Events\Default Work Unit\UI\Play_CharSel"/>
 				<Event Id="1757332637" Name="Play_ClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap"/>
+				<Event Id="2441431792" Name="Play_ClickClearedMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClickClearedMap"/>
 				<Event Id="1164893191" Name="Play_CommandSel" ObjectPath="\Events\Default Work Unit\UI\Play_CommandSel"/>
 				<Event Id="4074757615" Name="Play_CommandUI" ObjectPath="\Events\Default Work Unit\UI\Play_CommandUI"/>
 				<Event Id="3643034395" Name="Play_EvilFemaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack"/>
@@ -32,6 +35,7 @@
 				<Event Id="324117657" Name="Play_FemaleWarrior1Death" ObjectPath="\Events\Default Work Unit\Warriors\Play_FemaleWarrior1Death"/>
 				<Event Id="1820147880" Name="Play_GenericHit" ObjectPath="\Events\Default Work Unit\Combat\Play_GenericHit" MaxAttenuation="15.000000"/>
 				<Event Id="3254793675" Name="Play_GroundAmbience" ObjectPath="\Events\Default Work Unit\Ambience\Play_GroundAmbience"/>
+				<Event Id="939012970" Name="Play_IntoLevel" ObjectPath="\Events\Default Work Unit\UI\Play_IntoLevel"/>
 				<Event Id="2412941441" Name="Play_LeaderAttack" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderAttack" MaxAttenuation="0.000000"/>
 				<Event Id="441061787" Name="Play_LeaderFootStep" ObjectPath="\Events\Default Work Unit\test\Play_LeaderFootStep" MaxAttenuation="15.000000"/>
 				<Event Id="2785405380" Name="Play_LeaderHit" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderHit" MaxAttenuation="0.000000"/>
@@ -43,6 +47,7 @@
 				<Event Id="1694930636" Name="Play_NodeFade" ObjectPath="\Events\Default Work Unit\UI\Play_NodeFade"/>
 				<Event Id="3493304896" Name="Play_NonClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_NonClearMap"/>
 				<Event Id="623878550" Name="Play_OpenMapUI" ObjectPath="\Events\Default Work Unit\UI\Play_OpenMapUI"/>
+				<Event Id="845273596" Name="Play_PaperPickup" ObjectPath="\Events\Default Work Unit\UI\Play_PaperPickup"/>
 				<Event Id="2149966355" Name="Play_PickRiffle" ObjectPath="\Events\Default Work Unit\UI\Play_PickRiffle"/>
 				<Event Id="3454913730" Name="Play_PickShield" ObjectPath="\Events\Default Work Unit\UI\Play_PickShield"/>
 				<Event Id="3974976660" Name="Play_PickSpear" ObjectPath="\Events\Default Work Unit\UI\Play_PickSpear"/>
@@ -66,7 +71,7 @@
 			<IncludedMemoryFiles>
 				<File Id="7581663" Language="SFX">
 					<ShortName>PickUpGeneral3.wav</ShortName>
-					<Path>SFX/PickUpGeneral3_A585CBFD.wem</Path>
+					<Path>SFX/PickUpGeneral3_06FE9075.wem</Path>
 				</File>
 				<File Id="16900475" Language="SFX">
 					<ShortName>EvilFemaleWarrior2Attack1.wav</ShortName>
@@ -86,7 +91,7 @@
 				</File>
 				<File Id="51067484" Language="SFX">
 					<ShortName>FriendlyDieStinger1.wav</ShortName>
-					<Path>SFX/FriendlyDieStinger1_67BB40F9.wem</Path>
+					<Path>SFX/FriendlyDieStinger1_617C1CCC.wem</Path>
 				</File>
 				<File Id="52315870" Language="SFX">
 					<ShortName>FootstepsConc5.wav</ShortName>
@@ -106,11 +111,11 @@
 				</File>
 				<File Id="120499320" Language="SFX">
 					<ShortName>FriendlyDieStinger2.wav</ShortName>
-					<Path>SFX/FriendlyDieStinger2_67BB40F9.wem</Path>
+					<Path>SFX/FriendlyDieStinger2_617C1CCC.wem</Path>
 				</File>
 				<File Id="126401319" Language="SFX">
 					<ShortName>BoneHitSweet4.wav</ShortName>
-					<Path>SFX/BoneHitSweet4_52BD694B.wem</Path>
+					<Path>SFX/BoneHitSweet4_C5B73D32.wem</Path>
 				</File>
 				<File Id="129200692" Language="SFX">
 					<ShortName>EvilFemaleWarrior1Attack2.wav</ShortName>
@@ -146,15 +151,15 @@
 				</File>
 				<File Id="216648221" Language="SFX">
 					<ShortName>Gun4.wav</ShortName>
-					<Path>SFX/Gun4_260F97FF.wem</Path>
+					<Path>SFX/Gun4_BA12C4ED.wem</Path>
 				</File>
 				<File Id="224430769" Language="SFX">
 					<ShortName>WeaponWhoosh3.wav</ShortName>
-					<Path>SFX/WeaponWhoosh3_76A9233F.wem</Path>
+					<Path>SFX/WeaponWhoosh3_63DB481E.wem</Path>
 				</File>
 				<File Id="231591206" Language="SFX">
 					<ShortName>Whoosh1_13.1.wav</ShortName>
-					<Path>SFX/Whoosh1_13.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh1_13.1_63DB481E.wem</Path>
 				</File>
 				<File Id="243269753" Language="SFX">
 					<ShortName>EvilMaleWarrior2Death1.wav</ShortName>
@@ -170,7 +175,7 @@
 				</File>
 				<File Id="261638308" Language="SFX">
 					<ShortName>Whoosh1_11.1.wav</ShortName>
-					<Path>SFX/Whoosh1_11.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh1_11.1_63DB481E.wem</Path>
 				</File>
 				<File Id="262551881" Language="SFX">
 					<ShortName>FemaleWarrior2Death2.wav</ShortName>
@@ -190,7 +195,7 @@
 				</File>
 				<File Id="275824737" Language="SFX">
 					<ShortName>BoneHitSweet3.wav</ShortName>
-					<Path>SFX/BoneHitSweet3_52BD694B.wem</Path>
+					<Path>SFX/BoneHitSweet3_C5B73D32.wem</Path>
 				</File>
 				<File Id="283084582" Language="SFX">
 					<ShortName>MaleWarrior2Attack6.wav</ShortName>
@@ -202,11 +207,15 @@
 				</File>
 				<File Id="287159919" Language="SFX">
 					<ShortName>ShieldHit.wav</ShortName>
-					<Path>SFX/ShieldHit_76A9233F.wem</Path>
+					<Path>SFX/ShieldHit_63DB481E.wem</Path>
 				</File>
 				<File Id="288609740" Language="SFX">
 					<ShortName>FootStepsSneak5.wav</ShortName>
 					<Path>SFX/FootStepsSneak5_76A9233F.wem</Path>
+				</File>
+				<File Id="302328586" Language="SFX">
+					<ShortName>ClickClearedMap.wav</ShortName>
+					<Path>SFX/ClickClearedMap_106DA3D3.wem</Path>
 				</File>
 				<File Id="304019341" Language="SFX">
 					<ShortName>EvilFemaleWarrior1Attack4.wav</ShortName>
@@ -222,7 +231,7 @@
 				</File>
 				<File Id="315478133" Language="SFX">
 					<ShortName>GenericHit3.wav</ShortName>
-					<Path>SFX/GenericHit3_76A9233F.wem</Path>
+					<Path>SFX/GenericHit3_EEA2F668.wem</Path>
 				</File>
 				<File Id="324456182" Language="SFX">
 					<ShortName>MaleWarrior2Attack2.wav</ShortName>
@@ -230,7 +239,7 @@
 				</File>
 				<File Id="325237437" Language="SFX">
 					<ShortName>CombatTest.wav</ShortName>
-					<Path>SFX/CombatTest_67BB40F9.wem</Path>
+					<Path>SFX/CombatTest_617C1CCC.wem</Path>
 				</File>
 				<File Id="326011935" Language="SFX">
 					<ShortName>Wind_deepTone2.wav</ShortName>
@@ -250,15 +259,15 @@
 				</File>
 				<File Id="341578845" Language="SFX">
 					<ShortName>EnemyNearLayer.wav</ShortName>
-					<Path>SFX/EnemyNearLayer_67BB40F9.wem</Path>
+					<Path>SFX/EnemyNearLayer_617C1CCC.wem</Path>
 				</File>
 				<File Id="342779998" Language="SFX">
 					<ShortName>HItSweet2.wav</ShortName>
-					<Path>SFX/HItSweet2_52BD694B.wem</Path>
+					<Path>SFX/HItSweet2_C5B73D32.wem</Path>
 				</File>
 				<File Id="351867575" Language="SFX">
 					<ShortName>GenericHit1.wav</ShortName>
-					<Path>SFX/GenericHit1_76A9233F.wem</Path>
+					<Path>SFX/GenericHit1_EEA2F668.wem</Path>
 				</File>
 				<File Id="356655512" Language="SFX">
 					<ShortName>EvilFemaleWarrior1Death2.wav</ShortName>
@@ -284,13 +293,17 @@
 					<ShortName>EvilMaleWarrior2Attack1.wav</ShortName>
 					<Path>SFX/EvilMaleWarrior2Attack1_52BD694B.wem</Path>
 				</File>
+				<File Id="413973724" Language="SFX">
+					<ShortName>Wind3.wav</ShortName>
+					<Path>SFX/Wind3_0DC9021D.wem</Path>
+				</File>
 				<File Id="415257002" Language="SFX">
 					<ShortName>Whoosh2_14.1.wav</ShortName>
-					<Path>SFX/Whoosh2_14.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh2_14.1_63DB481E.wem</Path>
 				</File>
 				<File Id="419983902" Language="SFX">
 					<ShortName>Whoosh2_13.1.wav</ShortName>
-					<Path>SFX/Whoosh2_13.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh2_13.1_63DB481E.wem</Path>
 				</File>
 				<File Id="424388683" Language="SFX">
 					<ShortName>FemaleWarrior2Death4.wav</ShortName>
@@ -306,7 +319,7 @@
 				</File>
 				<File Id="435279165" Language="SFX">
 					<ShortName>FriendlyDieStinger3.wav</ShortName>
-					<Path>SFX/FriendlyDieStinger3_67BB40F9.wem</Path>
+					<Path>SFX/FriendlyDieStinger3_617C1CCC.wem</Path>
 				</File>
 				<File Id="446135141" Language="SFX">
 					<ShortName>FemaleWarrior1Attack1.wav</ShortName>
@@ -318,27 +331,23 @@
 				</File>
 				<File Id="458564501" Language="SFX">
 					<ShortName>Gun1.wav</ShortName>
-					<Path>SFX/Gun1_EC853E84.wem</Path>
+					<Path>SFX/Gun1_D9E4A659.wem</Path>
 				</File>
 				<File Id="478117380" Language="SFX">
 					<ShortName>ExploreToCombat.wav</ShortName>
-					<Path>SFX/ExploreToCombat_67BB40F9.wem</Path>
+					<Path>SFX/ExploreToCombat_617C1CCC.wem</Path>
 				</File>
 				<File Id="482940210" Language="SFX">
 					<ShortName>CommandActivate.wav</ShortName>
-					<Path>SFX/CommandActivate_06979BBF.wem</Path>
+					<Path>SFX/CommandActivate_FCFCC85A.wem</Path>
 				</File>
 				<File Id="489717547" Language="SFX">
 					<ShortName>GenericHit2.wav</ShortName>
-					<Path>SFX/GenericHit2_76A9233F.wem</Path>
+					<Path>SFX/GenericHit2_EEA2F668.wem</Path>
 				</File>
 				<File Id="496179797" Language="SFX">
 					<ShortName>OpenMapUI.wav</ShortName>
 					<Path>SFX/OpenMapUI_76A9233F.wem</Path>
-				</File>
-				<File Id="498871414" Language="SFX">
-					<ShortName>BaseWind1.wav</ShortName>
-					<Path>SFX/BaseWind1_52BD694B.wem</Path>
 				</File>
 				<File Id="511754566" Language="SFX">
 					<ShortName>EvilFemaleWarrior2Attack4.wav</ShortName>
@@ -350,11 +359,15 @@
 				</File>
 				<File Id="520676070" Language="SFX">
 					<ShortName>PickGun.wav</ShortName>
-					<Path>SFX/PickGun_76A9233F.wem</Path>
+					<Path>SFX/PickGun_7A7BB3FA.wem</Path>
+				</File>
+				<File Id="532667783" Language="SFX">
+					<ShortName>CampUpgrade.wav</ShortName>
+					<Path>SFX/CampUpgrade_76A9233F.wem</Path>
 				</File>
 				<File Id="539353889" Language="SFX">
 					<ShortName>PickSpear.wav</ShortName>
-					<Path>SFX/PickSpear_76A9233F.wem</Path>
+					<Path>SFX/PickSpear_6E079BA0.wem</Path>
 				</File>
 				<File Id="541087840" Language="SFX">
 					<ShortName>MaleWarrior1Attack3.wav</ShortName>
@@ -363,10 +376,6 @@
 				<File Id="541305267" Language="SFX">
 					<ShortName>FootStepsSneak6.wav</ShortName>
 					<Path>SFX/FootStepsSneak6_76A9233F.wem</Path>
-				</File>
-				<File Id="551871948" Language="SFX">
-					<ShortName>BaseWind2.wav</ShortName>
-					<Path>SFX/BaseWind2_52BD694B.wem</Path>
 				</File>
 				<File Id="557867700" Language="SFX">
 					<ShortName>MaleWarrior2Death1.wav</ShortName>
@@ -388,6 +397,10 @@
 					<ShortName>FootStepsBoot7.wav</ShortName>
 					<Path>SFX/FootStepsBoot7_76A9233F.wem</Path>
 				</File>
+				<File Id="578309304" Language="SFX">
+					<ShortName>Wind1.wav</ShortName>
+					<Path>SFX/Wind1_0DC9021D.wem</Path>
+				</File>
 				<File Id="578675284" Language="SFX">
 					<ShortName>ClearMapPt1.wav</ShortName>
 					<Path>SFX/ClearMapPt1_76A9233F.wem</Path>
@@ -400,6 +413,10 @@
 					<ShortName>FemaleWarrior1Attack4.wav</ShortName>
 					<Path>SFX/FemaleWarrior1Attack4_52BD694B.wem</Path>
 				</File>
+				<File Id="616645350" Language="SFX">
+					<ShortName>BoxPickup.wav</ShortName>
+					<Path>SFX/BoxPickup_76A9233F.wem</Path>
+				</File>
 				<File Id="617761867" Language="SFX">
 					<ShortName>FootStepsBoot3.wav</ShortName>
 					<Path>SFX/FootStepsBoot3_76A9233F.wem</Path>
@@ -410,7 +427,7 @@
 				</File>
 				<File Id="621422572" Language="SFX">
 					<ShortName>BoneHitSweet1.wav</ShortName>
-					<Path>SFX/BoneHitSweet1_52BD694B.wem</Path>
+					<Path>SFX/BoneHitSweet1_C5B73D32.wem</Path>
 				</File>
 				<File Id="633922746" Language="SFX">
 					<ShortName>EvilFemaleWarrior1Attack3.wav</ShortName>
@@ -422,11 +439,15 @@
 				</File>
 				<File Id="648197445" Language="SFX">
 					<ShortName>WalkTapUI.wav</ShortName>
-					<Path>SFX/WalkTapUI_AAE17008.wem</Path>
+					<Path>SFX/WalkTapUI_C53348C1.wem</Path>
 				</File>
 				<File Id="649023967" Language="SFX">
 					<ShortName>WindFlags.wav</ShortName>
 					<Path>SFX/WindFlags_8E8F09D1.wem</Path>
+				</File>
+				<File Id="656517016" Language="SFX">
+					<ShortName>PickWeapon.wav</ShortName>
+					<Path>SFX/PickWeapon_46A1D091.wem</Path>
 				</File>
 				<File Id="659933923" Language="SFX">
 					<ShortName>FemaleWarrior2Attack1.wav</ShortName>
@@ -462,11 +483,7 @@
 				</File>
 				<File Id="700338299" Language="SFX">
 					<ShortName>Whoosh1_10.1.wav</ShortName>
-					<Path>SFX/Whoosh1_10.1_76A9233F.wem</Path>
-				</File>
-				<File Id="703474157" Language="SFX">
-					<ShortName>STINGER2.wav</ShortName>
-					<Path>SFX/STINGER2_67BB40F9.wem</Path>
+					<Path>SFX/Whoosh1_10.1_63DB481E.wem</Path>
 				</File>
 				<File Id="709964075" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack1.wav</ShortName>
@@ -486,7 +503,7 @@
 				</File>
 				<File Id="718727633" Language="SFX">
 					<ShortName>UI_Click.wav</ShortName>
-					<Path>SFX/UI_Click_98B69302.wem</Path>
+					<Path>SFX/UI_Click_DB84FB10.wem</Path>
 				</File>
 				<File Id="722501933" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack3.wav</ShortName>
@@ -494,11 +511,11 @@
 				</File>
 				<File Id="725859429" Language="SFX">
 					<ShortName>BoneHitSweet2.wav</ShortName>
-					<Path>SFX/BoneHitSweet2_52BD694B.wem</Path>
+					<Path>SFX/BoneHitSweet2_C5B73D32.wem</Path>
 				</File>
 				<File Id="727701744" Language="SFX">
 					<ShortName>UseKnife.wav</ShortName>
-					<Path>SFX/UseKnife_76A9233F.wem</Path>
+					<Path>SFX/UseKnife_1D515E29.wem</Path>
 				</File>
 				<File Id="758504064" Language="SFX">
 					<ShortName>MaleWarrior2Death3.wav</ShortName>
@@ -506,7 +523,7 @@
 				</File>
 				<File Id="770749179" Language="SFX">
 					<ShortName>Whoosh1_12.1.wav</ShortName>
-					<Path>SFX/Whoosh1_12.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh1_12.1_63DB481E.wem</Path>
 				</File>
 				<File Id="770759645" Language="SFX">
 					<ShortName>FootstepsConc10.wav</ShortName>
@@ -514,7 +531,7 @@
 				</File>
 				<File Id="770786379" Language="SFX">
 					<ShortName>PickShield.wav</ShortName>
-					<Path>SFX/PickShield_76A9233F.wem</Path>
+					<Path>SFX/PickShield_A1BE5068.wem</Path>
 				</File>
 				<File Id="780577038" Language="SFX">
 					<ShortName>MaleWarrior2Death2.wav</ShortName>
@@ -526,7 +543,7 @@
 				</File>
 				<File Id="801096615" Language="SFX">
 					<ShortName>Gun2.wav</ShortName>
-					<Path>SFX/Gun2_AB9BD74D.wem</Path>
+					<Path>SFX/Gun2_08D3F363.wem</Path>
 				</File>
 				<File Id="806466304" Language="SFX">
 					<ShortName>UICommandWheelPlace.wav</ShortName>
@@ -542,7 +559,7 @@
 				</File>
 				<File Id="809645592" Language="SFX">
 					<ShortName>Whoosh2_16.1.wav</ShortName>
-					<Path>SFX/Whoosh2_16.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh2_16.1_63DB481E.wem</Path>
 				</File>
 				<File Id="822594266" Language="SFX">
 					<ShortName>FootStepsBoot1.wav</ShortName>
@@ -550,11 +567,15 @@
 				</File>
 				<File Id="829725817" Language="SFX">
 					<ShortName>ToExplore.wav</ShortName>
-					<Path>SFX/ToExplore_67BB40F9.wem</Path>
+					<Path>SFX/ToExplore_617C1CCC.wem</Path>
 				</File>
 				<File Id="840939363" Language="SFX">
 					<ShortName>EvilFemaleWarrior2Attack3.wav</ShortName>
 					<Path>SFX/EvilFemaleWarrior2Attack3_52BD694B.wem</Path>
+				</File>
+				<File Id="873571352" Language="SFX">
+					<ShortName>PaperPickup.wav</ShortName>
+					<Path>SFX/PaperPickup_76A9233F.wem</Path>
 				</File>
 				<File Id="878074695" Language="SFX">
 					<ShortName>MaleWarrior2Attack5.wav</ShortName>
@@ -566,11 +587,11 @@
 				</File>
 				<File Id="884459593" Language="SFX">
 					<ShortName>GenericHit4.wav</ShortName>
-					<Path>SFX/GenericHit4_76A9233F.wem</Path>
+					<Path>SFX/GenericHit4_EEA2F668.wem</Path>
 				</File>
 				<File Id="892394023" Language="SFX">
 					<ShortName>Gun3.wav</ShortName>
-					<Path>SFX/Gun3_D99D619C.wem</Path>
+					<Path>SFX/Gun3_91429DF2.wem</Path>
 				</File>
 				<File Id="903775774" Language="SFX">
 					<ShortName>FootStepsSneak9.wav</ShortName>
@@ -578,11 +599,11 @@
 				</File>
 				<File Id="907180585" Language="SFX">
 					<ShortName>ShieldHit2.wav</ShortName>
-					<Path>SFX/ShieldHit2_76A9233F.wem</Path>
+					<Path>SFX/ShieldHit2_63DB481E.wem</Path>
 				</File>
 				<File Id="910498308" Language="SFX">
 					<ShortName>ExploreMusic.wav</ShortName>
-					<Path>SFX/ExploreMusic_67BB40F9.wem</Path>
+					<Path>SFX/ExploreMusic_617C1CCC.wem</Path>
 				</File>
 				<File Id="920421814" Language="SFX">
 					<ShortName>FootStepsSneak1.wav</ShortName>
@@ -598,7 +619,7 @@
 				</File>
 				<File Id="941490590" Language="SFX">
 					<ShortName>HItSweet1.wav</ShortName>
-					<Path>SFX/HItSweet1_52BD694B.wem</Path>
+					<Path>SFX/HItSweet1_C5B73D32.wem</Path>
 				</File>
 				<File Id="941738491" Language="SFX">
 					<ShortName>NonClearMap.wav</ShortName>
@@ -610,7 +631,7 @@
 				</File>
 				<File Id="974275100" Language="SFX">
 					<ShortName>STINGER1.wav</ShortName>
-					<Path>SFX/STINGER1_67BB40F9.wem</Path>
+					<Path>SFX/STINGER1_617C1CCC.wem</Path>
 				</File>
 				<File Id="974952532" Language="SFX">
 					<ShortName>FootStepsSneak4.wav</ShortName>
@@ -618,15 +639,27 @@
 				</File>
 				<File Id="977541870" Language="SFX">
 					<ShortName>CharSelBreath.wav</ShortName>
-					<Path>SFX/CharSelBreath_C3045FBF.wem</Path>
+					<Path>SFX/CharSelBreath_7E956652.wem</Path>
+				</File>
+				<File Id="982349721" Language="SFX">
+					<ShortName>WindSnowStorm.wav</ShortName>
+					<Path>SFX/WindSnowStorm_0DC9021D.wem</Path>
 				</File>
 				<File Id="985656569" Language="SFX">
 					<ShortName>Whoosh2_15.1.wav</ShortName>
-					<Path>SFX/Whoosh2_15.1_76A9233F.wem</Path>
+					<Path>SFX/Whoosh2_15.1_63DB481E.wem</Path>
 				</File>
 				<File Id="988992703" Language="SFX">
 					<ShortName>WeaponWhoosh4.wav</ShortName>
-					<Path>SFX/WeaponWhoosh4_76A9233F.wem</Path>
+					<Path>SFX/WeaponWhoosh4_63DB481E.wem</Path>
+				</File>
+				<File Id="994790039" Language="SFX">
+					<ShortName>IntoLevel.wav</ShortName>
+					<Path>SFX/IntoLevel_8C998047.wem</Path>
+				</File>
+				<File Id="998786905" Language="SFX">
+					<ShortName>DiscoverStingerMusic1.wav</ShortName>
+					<Path>SFX/DiscoverStingerMusic1_617C1CCC.wem</Path>
 				</File>
 				<File Id="1003963535" Language="SFX">
 					<ShortName>EvilMaleWarrior1Death2.wav</ShortName>
@@ -662,7 +695,7 @@
 				</File>
 				<File Id="1021285412" Language="SFX">
 					<ShortName>WeaponWhoosh2.wav</ShortName>
-					<Path>SFX/WeaponWhoosh2_76A9233F.wem</Path>
+					<Path>SFX/WeaponWhoosh2_63DB481E.wem</Path>
 				</File>
 				<File Id="1021315475" Language="SFX">
 					<ShortName>MaleWarrior1Death3.wav</ShortName>
@@ -674,7 +707,7 @@
 				</File>
 				<File Id="1030912603" Language="SFX">
 					<ShortName>Flee.wav</ShortName>
-					<Path>SFX/Flee_67BB40F9.wem</Path>
+					<Path>SFX/Flee_617C1CCC.wem</Path>
 				</File>
 				<File Id="1031252976" Language="SFX">
 					<ShortName>EvilMaleWarrior1Death1.wav</ShortName>
@@ -682,7 +715,7 @@
 				</File>
 				<File Id="1033245744" Language="SFX">
 					<ShortName>WeaponWhoosh1.wav</ShortName>
-					<Path>SFX/WeaponWhoosh1_76A9233F.wem</Path>
+					<Path>SFX/WeaponWhoosh1_63DB481E.wem</Path>
 				</File>
 				<File Id="1046654003" Language="SFX">
 					<ShortName>WindHowl.wav</ShortName>
@@ -694,7 +727,7 @@
 				</File>
 				<File Id="1060629324" Language="SFX">
 					<ShortName>HItSweet3.wav</ShortName>
-					<Path>SFX/HItSweet3_52BD694B.wem</Path>
+					<Path>SFX/HItSweet3_C5B73D32.wem</Path>
 				</File>
 				<File Id="1068821334" Language="SFX">
 					<ShortName>FootStepsSneak2.wav</ShortName>
