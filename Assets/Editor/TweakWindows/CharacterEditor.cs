@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Characters");
             string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesPanel");
             if (guids.Length == 0)
             {
@@ -39,7 +40,7 @@ namespace Assets.Editor
                     string path = AssetDatabase.GUIDToAssetPath(guids.FirstOrDefault());
                     prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<CampManager>();
 
-                    GUILayout.Label("Character stuff coming", EditorStyles.boldLabel);
+                    GUILayout.Label("Sorry, use the database stuff..", EditorStyles.boldLabel);
                     if (GUILayout.Button("Save"))
                     {
                         var go = Instantiate(prefabScript.gameObject);
