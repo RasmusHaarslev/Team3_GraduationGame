@@ -42,9 +42,6 @@ namespace Assets.Editor
                     string path = AssetDatabase.GUIDToAssetPath(guids.FirstOrDefault());
                     gameControllerScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<GameController>();
 
-                    string path2 = AssetDatabase.GUIDToAssetPath(guids2.FirstOrDefault());
-                    levelGeneratorScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<LevelSelectionGenerator>();
-
                     GUILayout.Label("Initial resources", EditorStyles.boldLabel);
                     gameControllerScript.InitialFood = EditorGUILayout.IntField("Initial food", gameControllerScript.InitialFood);
                     gameControllerScript.InitialVillages = EditorGUILayout.IntField("Initial villages", gameControllerScript.InitialVillages);
@@ -55,10 +52,6 @@ namespace Assets.Editor
 
                     if (GUILayout.Button("Save"))
                     {
-                        var go = Instantiate(levelGeneratorScript.gameObject);
-                        PrefabUtility.ReplacePrefab(go, levelGeneratorScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
-                        DestroyImmediate(go);
-
                         var go2 = Instantiate(gameControllerScript.gameObject);
                         PrefabUtility.ReplacePrefab(go2, gameControllerScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
                         DestroyImmediate(go2);

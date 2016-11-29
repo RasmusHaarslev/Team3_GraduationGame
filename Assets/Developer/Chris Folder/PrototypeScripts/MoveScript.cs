@@ -17,6 +17,7 @@ public class MoveScript : MonoBehaviour
 	bool isDead = false;
 	bool isFleeing = false;
 	List<GameObject> hunters = new List<GameObject>();
+	bool hasShot = false;
 
 	// Use this for initialization
 	void Start()
@@ -74,10 +75,11 @@ public class MoveScript : MonoBehaviour
 			}
 			if (movement)
 			{
-				if (Input.GetKeyDown(KeyCode.Mouse0)) { 
+				if (Input.GetKeyDown(KeyCode.Mouse0))
+				{
 					Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
-                }
-                if (Input.GetKey(KeyCode.Mouse0))
+				}
+				if (Input.GetKey(KeyCode.Mouse0))
 				{
 					agent.Resume();
 					//attacking = false;
@@ -133,6 +135,7 @@ public class MoveScript : MonoBehaviour
 
 	public void MoveToClickPosition()
 	{
+		agent.updateRotation = true;
 		agent.Resume();
 		character.animator.SetBool("isAware", false);
 		RaycastHit hit;
@@ -145,13 +148,13 @@ public class MoveScript : MonoBehaviour
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
 
-                Character currentTarget = hit.transform.gameObject.GetComponentInParent<Character>();
-                if (currentTarget == null)
-                {
-                    currentTarget = hit.transform.gameObject.GetComponent<Character>();
-                }
+				Character currentTarget = hit.transform.gameObject.GetComponentInParent<Character>();
+				if (currentTarget == null)
+				{
+					currentTarget = hit.transform.gameObject.GetComponent<Character>();
+				}
 
-                if (currentTarget != null)
+				if (currentTarget != null)
 				{
 					if (character.isInCombat && !currentTarget.isDead)
 					{
@@ -171,8 +174,6 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
-				agent.updatePosition = true;
-				agent.updateRotation = true;
 				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
@@ -206,12 +207,21 @@ public class MoveScript : MonoBehaviour
 			}
 			if (counter <= 0)
 			{
-				character.DealDamage();
+				hasShot = false;
 				character.animator.SetTrigger("Attack");
 				counter = attackSpeed;
 			}
 			else
 			{
+				if (attackSpeed - 0.6f >= counter)
+				{
+					if (!hasShot)
+					{
+						character.DealDamage();
+						hasShot = true;
+					}
+				}
+
 				counter -= Time.deltaTime;
 			}
 		}

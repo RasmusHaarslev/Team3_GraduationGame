@@ -27,7 +27,6 @@ public class Manager_Audio : MonoBehaviour {
 	public static string musicExploreStop = "Stop_ExploreMusic";
 	public static string walkTapUISound = "Play_WalkTapUI";
 
-
 	public static string commandWheelContainer = "CommandWheel";
 	public static string openWheel = "On";
 	public static string closeWheel = "Off";
@@ -66,8 +65,9 @@ public class Manager_Audio : MonoBehaviour {
 
     public static string play_menuClick = "Play_MenuUI";
     public static string play_menuMusic = "Play_MenuMusic";
-    public static string play_menuAmbience = "Play_MenuAmbience";
     public static string stop_menuMusic = "Stop_MenuMusic";
+
+	public static string play_menuAmbience = "Play_MenuAmbience";
     public static string stop_menuAmbience = "Stop_MenuAmbience";
 
     public static string play_pickShield = "Play_PickShield";
@@ -95,6 +95,7 @@ public class Manager_Audio : MonoBehaviour {
 
 	public static string CommandUI = "Play_CommandUI";
 	public static string HoverCommandUI = "Play_CommandSel";
+
 
 	public static void PlaySound(string name,GameObject objectPos)
 	{
