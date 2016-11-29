@@ -14,17 +14,10 @@ public class BridgeAudioControl : MonoBehaviour {
 				isSoundChanged = true;
 				Manager_Audio.ChangeState (Manager_Audio.bridgeState,Manager_Audio.bridgeOn);
 			}
-		}
-	}
-
-	void OnTriggerEnter(Collider col)
-	{
-		if(col.CompareTag("Player"))
-		{
-			if(isSoundChanged)
+			if (isSoundChanged)
 			{
 				isSoundChanged = false;
-				Manager_Audio.ChangeState (Manager_Audio.bridgeState,Manager_Audio.bridgeOff);
+				Manager_Audio.ChangeState(Manager_Audio.bridgeState, Manager_Audio.bridgeOff);
 			}
 		}
 	}
