@@ -12,13 +12,14 @@ public class GetFreeGold : MonoBehaviour
     public void GetGoldTeeth(int amount)
     {
         confirmPanel.SetActive(true);
-        confirmPanel.GetComponent<ConfirmPanel>().SetupText(null, "BuyTeeth");
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(null, "BuyTeeth", amount);
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { BuyCurrency(amount); });
     }
 
     public void BuyCurrency(int teeths)
     {
+        confirmPanel.SetActive(false);
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: teeths));
     }
 }

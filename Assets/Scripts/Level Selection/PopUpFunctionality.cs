@@ -63,10 +63,7 @@ public class PopUpFunctionality : MonoBehaviour {
         scrapsText.text = TranslationManager.Instance.GetTranslation("Scraps") + " : " + nodeScript.scrapAmount;
         //interestPointsText.text = TranslationManager.Instance.GetTranslation("Enemy Tribes") + " : " + nodeScript.CampsInNode;
         //choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
-        //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;
-
-        Debug.Log("Scout Cost : " + nodeScript.scoutCost);
-        Debug.Log("Food Cost : " + nodeScript.TravelCost);
+        //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;        
 
         if (nodeScript.canPlay && !nodeScript.isCleared)
         {
@@ -123,7 +120,9 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play"); 
+        int value = GameController.Instance._FOOD - node.GetComponent<Node>().TravelCost;
+
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
 
         confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();

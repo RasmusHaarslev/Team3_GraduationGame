@@ -41,6 +41,7 @@ public class Node : MonoBehaviour {
     /* AMOUNT OF RESOURCE DROPS */
     public int foodAmount;
     public int scrapAmount;
+    public int goldTeethAmount;
 
     /* AMOUNT OF ITEM DROPS */
     public int itemDropAmount;
@@ -185,7 +186,7 @@ public class Node : MonoBehaviour {
         }
 
         // SCRAP COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 SCRAPS 
-        scrapAmount = 10;
+        scrapAmount = Random.Range(0,6);
     }
     #endregion
 

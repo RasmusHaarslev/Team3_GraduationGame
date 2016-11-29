@@ -57,6 +57,7 @@ public class LevelSelectionGenerator : MonoBehaviour
     int totalAmountRows;
     int nodeCounter = 0;
     int numOfParents = 0;
+    int goldteethDrop = 2;
     #endregion
 
     public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
@@ -233,6 +234,11 @@ public class LevelSelectionGenerator : MonoBehaviour
                 GameObject newNode = Instantiate(nodePrefab);
                 ResetTransform(newNode, row);
 
+                if (nodeCounter % 10 == 0)
+                {
+                    goldteethDrop = 2;                    
+                }
+
                 SetupValuesInNode(newNode);
 
                 newNode.name = (totalAmountRows) + "." + j;
@@ -384,11 +390,19 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     void SetupValuesInNode(GameObject node)
     {
+        bool containTeeth = UnityEngine.Random.Range(0, 3) == 2 ? true : false;
+
         node.GetComponent<Node>().Level = totalAmountRows;
         node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost);
         node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(LowestScoutCost, HighestScoutCost);
         node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, MaxItemDropAmount);
 
+        if (containTeeth && goldteethDrop > 0) {
+            int teethAmount = UnityEngine.Random.Range(1, goldteethDrop+1);
+            node.GetComponent<Node>().goldTeethAmount = teethAmount;
+            goldteethDrop -= teethAmount;
+            Debug.Log("Node : " + node.name + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!!");
+        }
 
         //      node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
         /*      node.GetComponent<Node>().probabilityWolves = probabilityWolves;
