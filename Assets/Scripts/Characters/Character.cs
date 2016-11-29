@@ -415,7 +415,6 @@ public class Character : MonoBehaviour
 
 	public void RotateTowards(Transform target)
 	{
-		agent.updatePosition = false;
 		agent.updateRotation = false;
 		Vector3 direction = (target.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3

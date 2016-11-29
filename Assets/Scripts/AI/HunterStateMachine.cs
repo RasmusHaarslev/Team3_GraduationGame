@@ -294,7 +294,6 @@ public class HunterStateMachine : CoroutineMachine
 			}
 			else
 			{
-				agent.updatePosition = true;
 				agent.updateRotation = true;
 				if (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit)
 				{
@@ -355,6 +354,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		agent.updateRotation = true;
 		character.animator.SetBool("isAware", false);
 		if (character.target != null && character.target.GetComponent<Character>() != null)
 		{
@@ -381,7 +381,6 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			character.animator.SetBool("isAware", false);
 		}
-		agent.Stop();
 		if (character.target != null)
 		{
 			if (character.target.GetComponent<Character>() != null)
@@ -392,14 +391,13 @@ public class HunterStateMachine : CoroutineMachine
 					yield return new TransitionTo(StartState, DefaultTransition);
 				}
 			}
-			agent.updatePosition = false;
 			agent.updateRotation = false;
 			character.RotateTowards(character.target.transform);
 			character.animator.SetTrigger("Attack");
-
-			yield return new WaitForSeconds(character.damageSpeed);
+			yield return new WaitForSeconds(0.60f);
 			character.DealDamage();
 			lowAttentionSpanCounter--;
+			yield return new WaitForSeconds(character.damageSpeed);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
