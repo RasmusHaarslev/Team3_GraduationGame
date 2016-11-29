@@ -19,7 +19,7 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     public int amountOfRows = 0;
 
-    [Tooltip("The distribution of wolve camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
+/*    [Tooltip("The distribution of wolve camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
     [Range(0, 6)]
     public int probabilityWolves;
     [Tooltip("The distribution of tribe camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
@@ -28,21 +28,30 @@ public class LevelSelectionGenerator : MonoBehaviour
     [Tooltip("The distribution of choice camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
     [Range(0, 6)]
     public int probabilityChoices;
+    */
 
     [Tooltip("Determine the max amonut of items that drop within a single level")]
-    [Range(0, 55)]
-    public int itemDropAmount;
+    [Range(2, 10)]
+    public int MaxItemDropAmount;
 
-    [Tooltip("This should always contain the number of different levels we have")]
-    public int numberOfScenes;
+/*    [Tooltip("This should always contain the number of different levels we have")]
+    public int numberOfScenes; */
 
     [Tooltip("Lowest amount of food to use to go to a level")]
-    [Range(0, 55)]
+    [Range(0, 10)]
     public int LowestTravelCost;
 
     [Tooltip("Highest amount of food to use to go to a level")]
-    [Range(0, 55)]
+    [Range(0, 10)]
     public int HighestTravelCost;
+
+    [Tooltip("Lowest amount of food to use to scout a level")]
+    [Range(0, 10)]
+    public int LowestScoutCost;
+
+    [Tooltip("Highest amount of food to use to scout a level")]
+    [Range(0, 10)]
+    public int HighestScoutCost;
 
     int numOfLastLevels = 1;
     int totalAmountRows;
@@ -377,12 +386,14 @@ public class LevelSelectionGenerator : MonoBehaviour
     {
         node.GetComponent<Node>().Level = totalAmountRows;
         node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost);
-        node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(1, 5);
-        node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
-        node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, itemDropAmount);
-        node.GetComponent<Node>().probabilityWolves = probabilityWolves;
-        node.GetComponent<Node>().probabilityTribes = probabilityTribes;
-        node.GetComponent<Node>().probabilityChoice = probabilityChoices;
+        node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(LowestScoutCost, HighestScoutCost);
+        node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, MaxItemDropAmount);
+
+
+        //      node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
+        /*      node.GetComponent<Node>().probabilityWolves = probabilityWolves;
+                node.GetComponent<Node>().probabilityTribes = probabilityTribes;
+                node.GetComponent<Node>().probabilityChoice = probabilityChoices; */
     }
 
     #region Helper function

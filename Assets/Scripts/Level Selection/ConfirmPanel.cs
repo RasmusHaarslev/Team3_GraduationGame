@@ -32,5 +32,9 @@ public class ConfirmPanel : MonoBehaviour {
         {
             txtHeader.text = TranslationManager.Instance.GetTranslation("ConfirmFlee");
         }
+        else if (mode == "flee")
+        {
+            txtHeader.text = TranslationManager.Instance.GetTranslation("BuyTeeth");
+        }
     }
 }

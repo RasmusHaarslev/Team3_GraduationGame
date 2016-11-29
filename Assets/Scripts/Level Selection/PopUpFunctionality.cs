@@ -65,6 +65,9 @@ public class PopUpFunctionality : MonoBehaviour {
         //choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
         //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;
 
+        Debug.Log("Scout Cost : " + nodeScript.scoutCost);
+        Debug.Log("Food Cost : " + nodeScript.TravelCost);
+
         if (nodeScript.canPlay && !nodeScript.isCleared)
         {
             if (nodeScript.isScouted)
