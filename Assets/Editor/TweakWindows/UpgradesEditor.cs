@@ -70,8 +70,8 @@ namespace Assets.Editor
 
                     if (GUILayout.Button("Save"))
                     {
-                        var go = Instantiate(prefabScript.gameObject);
-                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        var go = Instantiate(prefabScript.gameObject.transform.parent.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject.transform.parent.gameObject, ReplacePrefabOptions.ReplaceNameBased);
                         DestroyImmediate(go);
                     }
                 }
