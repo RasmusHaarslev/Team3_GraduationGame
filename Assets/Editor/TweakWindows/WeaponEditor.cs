@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Weapon");
             string[] guids = AssetDatabase.FindAssets("t:Prefab LevelGenerator");
 
             if (guids.Length == 0)

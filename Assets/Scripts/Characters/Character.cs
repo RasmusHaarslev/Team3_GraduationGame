@@ -84,15 +84,6 @@ public class Character : MonoBehaviour
 					isInCombat = false;
 				}
 			}
-			else if (target.GetComponent<TutorialCharacter>() != null)
-			{
-				if (target.GetComponent<TutorialCharacter>().isFleeing)
-				{
-					isInCombat = false;
-					currentOpponents.Clear();
-					target = null;
-				}
-			}
 		}
 
 		if (currentHealth <= 0)

@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Level selection");
             string[] guids = AssetDatabase.FindAssets("t:Prefab LevelSelectionGenerator");
 
             if (guids.Length == 0)
