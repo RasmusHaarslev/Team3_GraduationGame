@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System;
+using UnityEngine.Networking;
 
 public class PanelScript : MonoBehaviour {
 
@@ -232,7 +233,9 @@ public class PanelScript : MonoBehaviour {
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-
+            
+            // Switches the animator out with the camp animator.
+            SetCampAnimation(soldiersList[i].GetComponent<Character>());
         }
       
         if(solidersSpawnPosition.childCount != soldiersList.Count)
@@ -244,6 +247,102 @@ public class PanelScript : MonoBehaviour {
             }
         }
 
+    }
+
+    private void SetCampAnimation(Character soldier)
+    {
+        Debug.Log("Setting up animation");
+
+        // Switches the animator out with the camp animator.
+        RuntimeAnimatorController newController = (RuntimeAnimatorController)Resources.Load("CampIdleControllers/CampIdleControllerUpdated");
+        soldier.GetComponent<Animator>().runtimeAnimatorController = newController;
+        
+        if (soldier.transform.position == solidersSpawnPosition.GetChild(0).position) {
+            switch (soldier.equippedWeaponType) {
+                case EquippableitemValues.type.polearm:
+                    soldier.animator.Play("SpearBoxIdle");
+                    break;
+                case EquippableitemValues.type.rifle:
+                    soldier.animator.Play("RifleBoxIdle");
+                    break;
+                case EquippableitemValues.type.shield:
+                    soldier.animator.Play("ShieldBoxIdle");
+                    break;
+            }
+        }
+        else if (soldier.transform.position == solidersSpawnPosition.GetChild(1).position) {
+            switch (soldier.equippedWeaponType) {
+                case EquippableitemValues.type.polearm:
+                    soldier.animator.Play("SpearBoxIdle");
+                    break;
+                case EquippableitemValues.type.rifle:
+                    soldier.animator.Play("RifleBoxIdle");
+                    break;
+                case EquippableitemValues.type.shield:
+                    soldier.animator.Play("ShieldBoxIdle");
+                    break;
+            }
+        }
+        else if (soldier.transform.position == solidersSpawnPosition.GetChild(2).position) {
+            switch (soldier.equippedWeaponType) {
+                case EquippableitemValues.type.polearm:
+                    soldier.animator.Play("SpearSquatIdle");
+                    break;
+                case EquippableitemValues.type.rifle:
+                    soldier.animator.Play("RifleSquatIdle");
+                    break;
+                case EquippableitemValues.type.shield:
+                    soldier.animator.Play("ShieldSquatIdle");
+                    break;
+            }
+        }
+        else if (soldier.transform.position == solidersSpawnPosition.GetChild(3).position)
+        {
+            int randomNumber = UnityEngine.Random.Range(1, 3);
+
+            switch (soldier.equippedWeaponType) {
+                case EquippableitemValues.type.polearm:
+                    soldier.animator.Play("StandingIdleSpear" + randomNumber);
+
+                    if (randomNumber == 1)
+                    {
+                        Vector3 newPosition = new Vector3(0.034f, -0.061f, -0.092f);
+                        Quaternion newRotation = Quaternion.Euler(88.096f, -230.06f, -55.345f);
+
+                        if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1)
+                        {
+                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition;
+                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation;
+                        }
+                        else
+                        {
+                            soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition;
+                            soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation;
+                        }
+                    }
+                    break;
+                case EquippableitemValues.type.rifle:
+                    soldier.animator.Play("StandingIdleRifle" + randomNumber);
+
+                    if (randomNumber == 1) {
+                        Vector3 newPosition = new Vector3(0.019f, -0.041f, -0.022f);
+                        Quaternion newRotation = Quaternion.Euler(6.115f, 168.97f, -33.529f);
+
+                        if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1) {
+                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition;
+                            soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation;
+                        }
+                        else {
+                            soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition;
+                            soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation;
+                        }
+                    }
+                    break;
+                case EquippableitemValues.type.shield:
+                    soldier.animator.Play("StandingIdleShield" + randomNumber);
+                    break;
+            }
+        }
     }
 
     #region Cameras
@@ -416,10 +515,10 @@ public class PanelScript : MonoBehaviour {
 
     public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
     {
-
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
         UpdateSoldierStats(currentSoldier.gameObject);
+        SetCampAnimation(currentSoldier);
 
         //foreach (var camera in soldierCameraList)
         //{
