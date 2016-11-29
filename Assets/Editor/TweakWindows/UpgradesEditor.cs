@@ -23,7 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
-            string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesPanel");
+            string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesGroup");
 
             if (guids.Length == 0)
             {
