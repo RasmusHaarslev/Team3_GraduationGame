@@ -121,7 +121,8 @@ public class TutorialMoveScript : MonoBehaviour
 
 	public void MoveToClickPosition()
 	{
-
+		agent.Resume();
+		character.animator.SetBool("isAware", false);
 		RaycastHit hit;
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
 		{
@@ -151,7 +152,7 @@ public class TutorialMoveScript : MonoBehaviour
 			}
 			else
 			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
 				attacking = false;
@@ -165,7 +166,23 @@ public class TutorialMoveScript : MonoBehaviour
 		distanceToTarget = agent.remainingDistance;
 		if (distanceToTarget < agent.stoppingDistance)
 		{
+			agent.Stop();
 			character.RotateTowards(character.target.transform);
+			if (character.isInCombat)
+			{
+				if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+				{
+					character.animator.SetBool("isAware", true);
+				}
+				else
+				{
+					character.animator.SetBool("isAware", false);
+				}
+			}
+			else
+			{
+				character.animator.SetBool("isAware", false);
+			}
 			if (counter <= 0)
 			{
 				character.DealDamage();

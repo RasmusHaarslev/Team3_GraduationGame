@@ -33,7 +33,19 @@ public class OptionsMenu : MonoBehaviour {
         LanguageHeader.transform.GetChild(0).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("LanguageHeader");
         LanguageHeader.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("English");
         LanguageHeader.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Danish");
+
+        Music.transform.GetChild(0).GetComponent<Toggle>().isOn = Manager_Audio.musicToggle;
+        FX.transform.GetChild(0).GetComponent<Toggle>().isOn = Manager_Audio.fxToggle;
+
+        if (TranslationManager.Instance.GetCurrentLanguage() == "English") {
+            LanguageHeader.transform.GetChild(1).GetChild(0).GetComponent<Toggle>().isOn = true;
+            LanguageHeader.transform.GetChild(2).GetChild(0).GetComponent<Toggle>().isOn = false;
+        } else {
+            LanguageHeader.transform.GetChild(1).GetChild(0).GetComponent<Toggle>().isOn = false;
+            LanguageHeader.transform.GetChild(2).GetChild(0).GetComponent<Toggle>().isOn = true;
+        }
     }
+
     #region MUSIC OPTIONS
     public void ToggleMusic()
     {
@@ -92,5 +104,6 @@ public class OptionsMenu : MonoBehaviour {
         }
 
         UpdateText();
+        EventManager.Instance.TriggerEvent(new LanguageChanged());
     }
 }

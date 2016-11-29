@@ -66,11 +66,7 @@ public class TutorialPlayerCharacter : MonoBehaviour
 	{
 		//isFleeingValue = isFleeing ? 1 : 0;
 		//animator.SetFloat("isWounded", isFleeingValue);
-		if (agent.velocity.normalized.magnitude < 0.01f)
-		{
-			animator.SetBool("isAware", isInCombat);
-		}
-		else
+		if (!isInCombat)
 		{
 			animator.SetBool("isAware", false);
 		}

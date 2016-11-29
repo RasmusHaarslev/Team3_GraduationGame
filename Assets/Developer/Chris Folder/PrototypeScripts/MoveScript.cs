@@ -49,7 +49,7 @@ public class MoveScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(hunters.Count == 0)
+		if (hunters.Count == 0)
 		{
 			hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
 		}
@@ -62,7 +62,7 @@ public class MoveScript : MonoBehaviour
 				counter++;
 			}
 		}
-		if(counter == 0)
+		if (counter == 0)
 			character.isInCombat = false;
 		if (!isFleeing)
 		{
@@ -74,9 +74,10 @@ public class MoveScript : MonoBehaviour
 			}
 			if (movement)
 			{
-				if (Input.GetKeyDown(KeyCode.Mouse0))
+				if (Input.GetKeyDown(KeyCode.Mouse0)) { 
 					Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
-				if (Input.GetKey(KeyCode.Mouse0))
+                }
+                if (Input.GetKey(KeyCode.Mouse0))
 				{
 					agent.Resume();
 					//attacking = false;
@@ -114,7 +115,8 @@ public class MoveScript : MonoBehaviour
 					}
 				}
 			}
-		} else
+		}
+		else
 		{
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 			StartCoroutine(LoseScene());
@@ -131,7 +133,8 @@ public class MoveScript : MonoBehaviour
 
 	public void MoveToClickPosition()
 	{
-
+		agent.Resume();
+		character.animator.SetBool("isAware", false);
 		RaycastHit hit;
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
 		{
@@ -145,11 +148,11 @@ public class MoveScript : MonoBehaviour
 				{
 					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
 					{
-                        EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
-                        EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
 					}
 				}
-            }
+			}
 			else if (hit.transform.gameObject.tag == "Player")
 			{
 				attacking = false;
@@ -161,7 +164,7 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point));
+				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
 				attacking = false;
@@ -175,7 +178,23 @@ public class MoveScript : MonoBehaviour
 		distanceToTarget = agent.remainingDistance;
 		if (distanceToTarget < agent.stoppingDistance)
 		{
+			agent.Stop();
 			character.RotateTowards(character.target.transform);
+			if (character.isInCombat)
+			{
+				if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+				{
+					character.animator.SetBool("isAware", true);
+				}
+				else
+				{
+					character.animator.SetBool("isAware", false);
+				}
+			}
+			else
+			{
+				character.animator.SetBool("isAware", false);
+			}
 			if (counter <= 0)
 			{
 				character.DealDamage();
