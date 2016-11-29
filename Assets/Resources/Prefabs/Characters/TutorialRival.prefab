@@ -3835,7 +3835,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011979578274}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.662624, y: 48.344635, z: -75.043686}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -6274,14 +6274,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011979578274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10698e07650ca7b4eb47462a8d13a807, type: 3}
+  m_Script: {fileID: 11500000, guid: 5703541ddc01cbc4db2f1a308321a7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  damage: 2
+  health: 5
+  damage: 5
   range: 2
-  damageSpeed: 2
-  currentHealth: 10
+  damageSpeed: 5
+  currentHealth: 5
   animator: {fileID: 0}
   target: {fileID: 0}
   currentOpponents: []
@@ -6289,14 +6289,16 @@ MonoBehaviour:
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
-  rightHandSlot: {fileID: 4000010324974926}
-  leftHandSlot: {fileID: 4000012082146252}
-  headSlot: {fileID: 4000012067485698}
-  torsoSlot: {fileID: 4000011203421496}
-  legsSlot: {fileID: 4000011203421496}
+  isFleeing: 0
+  rightHandSlot: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  headSlot: {fileID: 0}
+  torsoSlot: {fileID: 0}
+  legsSlot: {fileID: 0}
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
+  randomTargetProbability: 25
 --- !u!114 &114000011824833912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6352,6 +6354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0279683ab453c2e43b23a4dc21f4e8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasFootsteps: 1
+  hasWeaponSounds: 1
 --- !u!114 &114000014014865628
 MonoBehaviour:
   m_ObjectHideFlags: 1
