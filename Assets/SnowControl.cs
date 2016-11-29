@@ -14,35 +14,35 @@ public class SnowControl : MonoBehaviour {
 
 	public SnowAmount _snowAmount;
 	public ParticleSystem[] particles;
-	public float littleAmount=3,midAmount = 10,heavyAmount = 20;
+	[SerializeField] float maxSnowAmount=100;
 
 	// Use this for initialization
-	void OnEnable () {
+	void OnEnable () 
+	{
+		HandleParticlesOnEnable (_snowAmount);
+	}
+
+	public void HandleParticlesOnEnable(SnowAmount _snowAmount)
+	{
 		switch(_snowAmount)
 		{
 		case SnowAmount.little:
-			ChangeSnowAmountParticles (littleAmount);
+			ChangeSnowAmountParticles (maxSnowAmount*0.3f);
 			break;
 		case SnowAmount.mid:
-			ChangeSnowAmountParticles (midAmount);
+			ChangeSnowAmountParticles (maxSnowAmount*0.7f);
 			break;
 		case SnowAmount.heavy:
-			ChangeSnowAmountParticles (heavyAmount);
+			ChangeSnowAmountParticles (maxSnowAmount);
 			break;
 		}
 	}
-	
-	// Update is called once per frame
-	void ChangeSnowAmountParticles (float amount) {
 
-//		ParticleSystem.EmissionModule emission;
-//
-//		emission.rate = amount;
-
+	public void ChangeSnowAmountParticles (float amount) 
+	{
 		for(int i = 0;i<particles.Length;i++)
 		{
 			var em = particles [i].emission;
-
 			em.rate = amount;
 		}
 	}
