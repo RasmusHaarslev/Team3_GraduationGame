@@ -26,6 +26,7 @@ public class SimpleInputScript : MonoBehaviour
 
 	void Start()
 	{
+		Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
 		levelManager = UnityEngine.Object.FindObjectOfType<LevelManager>();
 		levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
 	}
@@ -59,19 +60,19 @@ public class SimpleInputScript : MonoBehaviour
 			{
 				if (command == simpleCommandsManager.commandsList[0] && !simpleCommandsManager.inDefenseState)
 				{
-					Debug.Log("defend");
+					//Debug.Log("defend");
 					EventManager.Instance.TriggerEvent(new DefendStateEvent());
                     simpleCommandsManager.inDefenseState = true;
-                    simpleCommandsManager.currentCommandBtnText.text = "Defend";
+                    simpleCommandsManager.currentCommandBtnText.text = "Defensive";
                     ChangeColor(0);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[0] && simpleCommandsManager.inDefenseState)
 				{
 					EventManager.Instance.TriggerEvent(new OffensiveStateEvent());
-					Debug.Log("offensive");
+					//Debug.Log("offensive");
                     simpleCommandsManager.inDefenseState = false;
-                    simpleCommandsManager.currentCommandBtnText.text = "Attack";
+                    simpleCommandsManager.currentCommandBtnText.text = "Offensive";
                     ChangeColor(0);
 					break;
 				}

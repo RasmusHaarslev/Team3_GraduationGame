@@ -104,7 +104,7 @@ public class DataService : MonoBehaviour
                 range = 2,
                 prefabName = StringResources.playerPrefabName,
                 materialName = StringResources.playerMaterialName
-            },
+            },/*
          new CharacterValues
             {
                 id = 2,
@@ -149,7 +149,7 @@ public class DataService : MonoBehaviour
                 targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
                 prefabName = StringResources.follower1PrefabName,
                 materialName = StringResources.follower1MaterialName
-            },/*
+            },
           new CharacterValues
             {
                 name = "Yasmin",
@@ -492,11 +492,29 @@ public class DataService : MonoBehaviour
 
     #region character methods
     
+
+
+    public CharacterValues[] GetNewHuntersValues()
+    {
+        return (_connection.Table<CharacterValues>().Where(x => x.Type == CharacterValues.type.NewHunter)).ToArray();
+    }
+
     /// <summary>
     /// Add values to db and returns the id
     /// </summary>
     /// <param name="hunterValues"></param>
     /// <returns></returns>
+    /// 
+    public void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
+    {
+        _connection.Update(charValToUpdate);
+    }
+    public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
+    {
+        
+            _connection.Delete(charValuesToDelete);
+    }
+
     public int AddcharacterToDbByValues(CharacterValues hunterValues)
     {
         _connection.Insert(hunterValues);

@@ -125,9 +125,12 @@ public class PanelScript : MonoBehaviour {
                 {
                     if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
-                        print("adding as new Character");
-                        newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
-                        print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
+                        //print("adding as new Character");
+                        //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
+                        //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
+                        CharacterValues valuesToKeep = newSoldiersList[i].GetComponent<Character>().characterBaseValues;
+                        valuesToKeep.Type = CharacterValues.type.Hunter;
+                        dataService.UpdateCharacterValuesInDb(valuesToKeep);
 
                         GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
                         print("id of the weapon "+newWeapon.GetComponent<EquippableItem>().itemValues.id );
@@ -154,12 +157,16 @@ public class PanelScript : MonoBehaviour {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                         }
                     }
-                }  
-          
+                }
+                
+                //print(valuesToKeep.id);
+                
             }
             else
             {
                 Destroy(newSoldiersList[i]);
+                //TODO continue from here
+                dataService.DeleteCharactersValuesFromDb(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
             }
         }
         newSoldiersList.Clear();
@@ -181,11 +188,32 @@ public class PanelScript : MonoBehaviour {
 
     public void GetNewSoldiers()
     {
-        foreach (Transform trans in camsAndNewSoldiersPosition)
-        {
-            newSoldiersList.Add(GenerateNewHunter(trans));
-        }
+
         
+        CharacterValues[] newHuntersValues = dataService.GetNewHuntersValues();
+        print(newHuntersValues.Length);
+        //check if there are already new hunters into database
+        if (newHuntersValues.Length < 3)
+        { 
+            //add one new hunter
+            foreach (Transform trans in camsAndNewSoldiersPosition)
+            {
+
+                newSoldiersList.Add(GenerateNewHunter(trans));
+            }
+
+        }
+        else {
+            newCharacterSoldierList = newHuntersValues.ToList<CharacterValues>();
+            int i = 0;
+            foreach (Transform trans in camsAndNewSoldiersPosition)
+            { //if we have 3 new hunters values, generate them and add to the list
+                
+                newSoldiersList.Add(dataService.GenerateCharacterFromValues(newHuntersValues[i], trans.position));
+                i++;
+            }
+        }
+
         foreach (GameObject newSoldier in newSoldiersList)
         {
             if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
@@ -401,6 +429,7 @@ public class PanelScript : MonoBehaviour {
 
     void FillInNewSoldierStats()
     {
+        print(newCharacterSoldierList.Count);
         int i = 0;
         foreach (var newSoldierStats in newSoldierStatsList)
         {
@@ -548,22 +577,29 @@ public class PanelScript : MonoBehaviour {
 
     public GameObject GenerateNewHunter(Transform newSoldierTrans)
     {
-        CharacterValues newCharValues = GenerateNewCharacterValues();
+        CharacterValues newCharValues = GenerateNewHunterValues();
+        //add to database
+        dataService.AddcharacterToDbByValues(newCharValues);
+
         GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
        
         //create new weapon for new soldier
         Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
         EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+        //save the weapon in db
+        newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
+        //spawn weapon
         IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
         Character hunterChar = hunter.GetComponent<Character>();
-        //generate  and attach the weapon
+        //attach the weapon
+        
         dataService.equipItemsToCharacter(newWeapon, hunterChar);
 
         return hunter;
 
     }
 
-    public CharacterValues GenerateNewCharacterValues()
+    public CharacterValues GenerateNewHunterValues()
     {
         CharacterValues newCharValues = new CharacterValues();
         //generate prefab 
@@ -595,10 +631,11 @@ public class PanelScript : MonoBehaviour {
 
         //generate stats
         newCharValues = GenerateNewCharacterStats(newCharValues);
-       
+
+        newCharValues.Type = CharacterValues.type.NewHunter;
 
         newCharacterSoldierList.Add(newCharValues);
-   
+        
         return newCharValues;
     }
 

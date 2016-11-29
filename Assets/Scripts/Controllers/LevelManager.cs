@@ -211,13 +211,15 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseGame(string scene = "PlayerDeathCutscene")
 	{
-		GameController.Instance.LoseGame();
+        Manager_Audio.ChangeState(Manager_Audio.exploreSnapshot, Manager_Audio.loseState);
+        GameController.Instance.LoseGame();
 		GameController.Instance.LoadScene(scene);
 	}
 
 	public void LoseLevel()
 	{
-		EventManager.Instance.TriggerEvent(new LevelLost());
+        Manager_Audio.ChangeState(Manager_Audio.exploreSnapshot, Manager_Audio.loseState);
+        EventManager.Instance.TriggerEvent(new LevelLost());
 		PlayerPrefs.SetInt("LevelResult", 0);
 
 		GameController.Instance.LoadScene("LevelFleeCutscene");
@@ -225,7 +227,8 @@ public class LevelManager : MonoBehaviour
 
 	public void WinLevel()
 	{
-		EventManager.Instance.TriggerEvent(new LevelWon());
+        Manager_Audio.ChangeState(Manager_Audio.exploreSnapshot, Manager_Audio.winState);
+        EventManager.Instance.TriggerEvent(new LevelWon());
 		EventManager.Instance.TriggerEvent(
 			new ChangeResources(
 				food: PlayerPrefs.GetInt("FoodAmount"),

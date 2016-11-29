@@ -9,16 +9,16 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour
 {
 
-    public int InitialFood = 10;
+    public int InitialFood = 8;
     public int InitialVillages = 10;
-    public int InitialScrap = 10;
-    public int InitialPremium = 10;
+    public int InitialScrap = 0;
+    public int InitialPremium = 0;
     public int InitialDaysSurvived = 0;
 
-    public int _FOOD = 10;
+    public int _FOOD = 8;
     public int _VILLAGERS = 10;
-    public int _SCRAPS = 10;
-    public int _PREMIUM = 10;
+    public int _SCRAPS = 0;
+    public int _PREMIUM = 0;
     public int _DAYS_SURVIVED = 0;
 
     [HideInInspector]
@@ -60,14 +60,15 @@ public class GameController : MonoBehaviour
     {
         if (_FOOD + e.food < 0)
         {
-            e.villager = e.villager - (Mathf.Abs(e.food) - _FOOD);
-            e.food = -_FOOD;
+            e.villager = e.villager - 1;
         }
 
         _FOOD = (_FOOD + e.food < 0) ? 0 : _FOOD + e.food;
         _VILLAGERS = (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
         _SCRAPS = (_SCRAPS + e.scraps < 0) ? 0 : _SCRAPS + e.scraps;
         _PREMIUM = (_PREMIUM + e.premium < 0) ? 0 : _PREMIUM + e.premium;
+        _DAYS_SURVIVED = (_DAYS_SURVIVED + e.daysSurvived < 0) ? 0 : _DAYS_SURVIVED + e.daysSurvived;
+
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
         SaveResources();
     }
@@ -78,6 +79,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("Villagers", _VILLAGERS);
         PlayerPrefs.SetInt("Scraps", _SCRAPS);
         PlayerPrefs.SetInt("Premium", _PREMIUM);
+        PlayerPrefs.SetInt("DaysSurvived", _DAYS_SURVIVED);
     }
 
     void Awake()
@@ -163,10 +165,12 @@ public class GameController : MonoBehaviour
         _VILLAGERS = InitialVillages;
         _SCRAPS = InitialScrap;
         _PREMIUM = InitialPremium;
+        _DAYS_SURVIVED = InitialDaysSurvived;
 
         PlayerPrefs.SetInt("Food", InitialFood);
-        PlayerPrefs.SetInt("Villagers", InitialVillages);
+        PlayerPrefs.SetInt("Villagers", InitialVillages + (CampManager.Instance.Upgrades.MaxVillages));
         PlayerPrefs.SetInt("Scraps", InitialScrap);
-        PlayerPrefs.SetInt("Premium", InitialPremium + (CampManager.Instance.Upgrades.MaxVillages*2));
+        PlayerPrefs.SetInt("Premium", InitialPremium);
+        PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
     }
 }

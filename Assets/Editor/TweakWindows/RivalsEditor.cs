@@ -44,6 +44,13 @@ namespace Assets.Editor
                     prefabScript.fleeHealthLimit = EditorGUILayout.FloatField("Flee health limit", prefabScript.fleeHealthLimit);
 
                     GUILayout.Label("Maybe more?...", EditorStyles.boldLabel);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go);
+                    }
                 }
                 catch (Exception e) {
                     GUILayout.Label("The prefab is messed up, go to Peter!", EditorStyles.boldLabel);

@@ -20,6 +20,7 @@ public class PopUpFunctionality : MonoBehaviour {
     // Right side shown when you have scouted
     public Text foodText;
     public Text scrapsText;
+    public Text goldTeethsText;
 
     // Not scouted panel
     public GameObject NotScoutedPanel;
@@ -61,9 +62,11 @@ public class PopUpFunctionality : MonoBehaviour {
         tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.tribeCamps;
         foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
         scrapsText.text = TranslationManager.Instance.GetTranslation("Scraps") + " : " + nodeScript.scrapAmount;
+        goldTeethsText.text = nodeScript.goldTeethAmount + " " + TranslationManager.Instance.GetTranslation("GoldTeeths");
+
         //interestPointsText.text = TranslationManager.Instance.GetTranslation("Enemy Tribes") + " : " + nodeScript.CampsInNode;
         //choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
-        //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;
+        //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;        
 
         if (nodeScript.canPlay && !nodeScript.isCleared)
         {
@@ -120,7 +123,9 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play"); 
+        int value = GameController.Instance._FOOD - node.GetComponent<Node>().TravelCost;
+
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
 
         confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -192,7 +197,9 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
         PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
-        PlayerPrefs.SetInt(StringResources.DaysSurvived, GameController.Instance._DAYS_SURVIVED+1);
+
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
         // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
 

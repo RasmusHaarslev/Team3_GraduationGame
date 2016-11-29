@@ -41,6 +41,7 @@ public class Node : MonoBehaviour {
     /* AMOUNT OF RESOURCE DROPS */
     public int foodAmount;
     public int scrapAmount;
+    public int goldTeethAmount;
 
     /* AMOUNT OF ITEM DROPS */
     public int itemDropAmount;
@@ -123,9 +124,11 @@ public class Node : MonoBehaviour {
                 if (child.name == "InfoPanel")
                 {
                     child.gameObject.SetActive(true);
+
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
                     GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
                     GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
+
                     //GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
                 }
             }
@@ -176,10 +179,14 @@ public class Node : MonoBehaviour {
     void SetupResourceForThisNode()
     {
         // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
-        foodAmount = 10;
+        foodAmount = Random.Range(4, 10);
+        if (foodAmount < scoutCost*2)
+        {
+            foodAmount = scoutCost * 2;
+        }
 
         // SCRAP COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 SCRAPS 
-        scrapAmount = 10;
+        scrapAmount = Random.Range(0,6);
     }
     #endregion
 
