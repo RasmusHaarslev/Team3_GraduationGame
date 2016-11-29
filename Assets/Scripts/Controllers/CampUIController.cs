@@ -69,6 +69,7 @@ public class CampUIController : MonoBehaviour
 
     public void CancelUpgrade()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         campManager.Upgrades.UpgradeBought = "";
         campManager.Upgrades.UpgradeInProgress = false;
         campManager.tempCost = 0;
@@ -107,24 +108,28 @@ public class CampUIController : MonoBehaviour
 
     public void UpgradeGather()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         campManager.UpgradeGather();
 		OpenUpgradePopUp (campManager.tempCost);
     }
 
     public void UpgradeVillages()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         campManager.UpgradeVillages();
 		OpenUpgradePopUp (campManager.tempCost);
     }
 
     public void UpgradeLeaderHealth()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         campManager.UpgradeLeaderHealth();
 		OpenUpgradePopUp (campManager.tempCost);
     }
 
     public void UpgradeLeaderStrength()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         campManager.UpgradeLeaderStrength();
         OpenUpgradePopUp (campManager.tempCost);
     }
@@ -144,5 +149,10 @@ public class CampUIController : MonoBehaviour
 		TextCosts[2].text = campManager.LeaderHealthCost + campManager.Upgrades.LeaderHealthLevel * campManager.LeaderHealthCostIncrease + "";
 		TextCosts[3].text = campManager.LeaderStrengthCost + campManager.Upgrades.LeaderStrengthLevel * campManager.LeaderStrengthCostIncrease + "";
 	}
+
+    public void CloseSound()
+    {    
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+    }
     #endregion
 }
