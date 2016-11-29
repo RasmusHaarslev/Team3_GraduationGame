@@ -229,13 +229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a232823a9e3484d8c288df9ce46817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snowAmount: 2
+  _snowAmount: 1
   particles:
   - {fileID: 198000012352089390}
   - {fileID: 198000011291474950}
-  littleAmount: 4
-  midAmount: 10
-  heavyAmount: 20
+  maxSnowAmount: 60
 --- !u!114 &114000010672473128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -378,7 +376,7 @@ ParticleSystem:
   moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 1
-  randomSeed: -1541709502
+  randomSeed: -1081938076
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -725,7 +723,7 @@ ParticleSystem:
       minMaxState: 3
     randomizeRotationDirection: 0
     gravityModifier: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10000
     size3D: 0
     rotation3D: 0
   ShapeModule:
@@ -735,9 +733,9 @@ ParticleSystem:
     radius: 1
     angle: 25
     length: 5
-    boxX: 30
-    boxY: 30
-    boxZ: 1
+    boxX: 40
+    boxY: 40
+    boxZ: 2
     arc: 360
     placementMode: 0
     m_Mesh: {fileID: 0}
@@ -2072,7 +2070,7 @@ ParticleSystem:
   moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 1
-  randomSeed: -2090711672
+  randomSeed: 969769233
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2419,7 +2417,7 @@ ParticleSystem:
       minMaxState: 3
     randomizeRotationDirection: 1
     gravityModifier: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10000
     size3D: 0
     rotation3D: 0
   ShapeModule:
@@ -2429,9 +2427,9 @@ ParticleSystem:
     radius: 1
     angle: 25
     length: 5
-    boxX: 30
-    boxY: 30
-    boxZ: 1
+    boxX: 40
+    boxY: 40
+    boxZ: 2
     arc: 360
     placementMode: 0
     m_Mesh: {fileID: 0}
