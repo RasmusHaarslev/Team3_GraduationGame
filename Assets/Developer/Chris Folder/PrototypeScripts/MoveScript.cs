@@ -144,12 +144,19 @@ public class MoveScript : MonoBehaviour
 				attacking = true;
 				agent.stoppingDistance = character.range;
 				agent.SetDestination(hit.transform.position);
-				if (hit.transform.gameObject.GetComponent<Character>() != null)
+
+                Character currentTarget = hit.transform.gameObject.GetComponentInParent<Character>();
+                if (currentTarget == null)
+                {
+                    currentTarget = hit.transform.gameObject.GetComponent<Character>();
+                }
+
+                if (currentTarget != null)
 				{
-					if (!character.isInCombat && !hit.transform.gameObject.GetComponent<Character>().isDead)
+					if (character.isInCombat && !currentTarget.isDead)
 					{
-						EventManager.Instance.TriggerEvent(new EnemyClicked(hit.transform.gameObject));
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(hit.transform.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
 					}
 				}
 			}
@@ -164,6 +171,8 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
+				agent.updatePosition = true;
+				agent.updateRotation = true;
 				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));

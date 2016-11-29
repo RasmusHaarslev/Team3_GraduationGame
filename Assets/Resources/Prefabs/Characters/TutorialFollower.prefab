@@ -5016,7 +5016,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014027835446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9300003, y: -0.7599983, z: 7.9800034}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -6295,6 +6295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0279683ab453c2e43b23a4dc21f4e8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasFootsteps: 1
+  hasWeaponSounds: 1
 --- !u!114 &114000010546847598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6319,14 +6321,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000014027835446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec607a415d95efb4ebb2ba3ac94f62cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e3c3ef530f7dac46b9b94edc14882b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 5
   damage: 5
   range: 2
   damageSpeed: 2
-  currentHealth: 1
+  currentHealth: 5
   animator: {fileID: 0}
   target: {fileID: 0}
   currentOpponents: []
@@ -6336,11 +6338,11 @@ MonoBehaviour:
   isDead: 0
   isFleeing: 0
   randomTargetProbability: 25
-  rightHandSlot: {fileID: 4000013263291496}
-  leftHandSlot: {fileID: 4000011894611654}
-  headSlot: {fileID: 4000013043267646}
-  torsoSlot: {fileID: 4000013895188828}
-  legsSlot: {fileID: 4000013895188828}
+  rightHandSlot: {fileID: 0}
+  leftHandSlot: {fileID: 0}
+  headSlot: {fileID: 0}
+  torsoSlot: {fileID: 0}
+  legsSlot: {fileID: 0}
   equippedWeaponType: 0
   characterType: 0
   isMale: 1
@@ -6352,16 +6354,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000014027835446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191e8a0f12fed3f408738e8fee9389c0, type: 3}
+  m_Script: {fileID: 11500000, guid: cf53a2184d4df1543b0dd38a427b8c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   fearfulHealthLimit: 25
   maxLowAttentionSpanCounter: 1
-  traitProjection: {fileID: 1000014163232138, guid: acd5a47785ced8a4e80f11120784d612,
-    type: 2}
-  commandVisualisation: {fileID: 1000014290574664, guid: ce5ccfd7f50d8aa4db49f31df7e738f4,
-    type: 2}
+  traitProjection: {fileID: 0}
+  commandVisualisation: {fileID: 0}
   attacked: 0
   combatCommandState: 0
   targetTrait: 0
