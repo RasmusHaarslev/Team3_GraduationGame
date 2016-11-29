@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Rivals");
             string[] guids = AssetDatabase.FindAssets("t:Prefab Rival");
 
             if (guids.Length == 0)

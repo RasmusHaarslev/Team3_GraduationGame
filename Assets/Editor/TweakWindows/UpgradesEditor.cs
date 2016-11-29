@@ -18,11 +18,13 @@ namespace Assets.Editor
         {
             // Get existing open window or if none, make a new one:
             UpgradesEditor window = (UpgradesEditor)EditorWindow.GetWindow(typeof(UpgradesEditor));
+            
             window.Show();
         }
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Upgrades");
             string[] guids = AssetDatabase.FindAssets("t:Prefab CampUpgradesGroup");
 
             if (guids.Length == 0)

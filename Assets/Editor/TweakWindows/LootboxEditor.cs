@@ -23,6 +23,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Lootboxes");
             string[] guids = AssetDatabase.FindAssets("t:Prefab Lootbox");
 
             if (guids.Length == 0)
