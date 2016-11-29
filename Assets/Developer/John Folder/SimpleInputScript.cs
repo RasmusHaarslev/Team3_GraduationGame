@@ -26,6 +26,7 @@ public class SimpleInputScript : MonoBehaviour
 
 	void Start()
 	{
+		Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
 		levelManager = UnityEngine.Object.FindObjectOfType<LevelManager>();
 		levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
 	}
