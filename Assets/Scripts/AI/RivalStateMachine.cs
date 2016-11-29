@@ -51,7 +51,7 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			if (!character.isDead)
 			{
-				character.RotateTowards(character.target.transform);
+				//character.RotateTowards(character.target.transform);
 			}
 		}
 	}
@@ -98,6 +98,8 @@ public class RivalStateMachine : CoroutineMachine
 		}
 		else
 		{
+			agent.updatePosition = true;
+			agent.updateRotation = true;
 			yield return new TransitionTo(RoamState, DefaultTransition);
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
@@ -119,6 +121,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.updateRotation = true;
 		if (!character.isDead)
 		{
 			character.animator.SetBool("isAware", false);
@@ -132,6 +135,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
+		agent.updateRotation = true;
 		character.animator.SetBool("isAware", false);
 		if (!character.isDead && character.target != null)
 		{
@@ -149,19 +153,20 @@ public class RivalStateMachine : CoroutineMachine
 			character.animator.SetBool("isAware", true);
 			transform.position = transform.position;
 			agent.Stop();
-		} else
+		}
+		else
 		{
 			character.animator.SetBool("isAware", false);
 		}
 		if (!character.isDead)
 		{
-			character.animator.SetTrigger("Attack");
-			agent.Stop();
+			agent.updateRotation = false;
 			character.RotateTowards(character.target.transform);
-			agent.velocity = Vector3.zero;
-			transform.position = transform.position;
-			yield return new WaitForSeconds(character.damageSpeed);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(0.60f);
 			character.DealDamage();
+			yield return new WaitForSeconds(character.damageSpeed);
+
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}

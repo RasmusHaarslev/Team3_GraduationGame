@@ -7,8 +7,8 @@ public class MaterialControl : MonoBehaviour {
 
 	void OnEnable () 
 	{
-		mesh = GetComponentInChildren<SkinnedMeshRenderer> ();
-		mesh.sharedMaterial = possibleMaterials[Random.Range(0,possibleMaterials.Length)];
+		//mesh = GetComponentInChildren<SkinnedMeshRenderer> ();
+		//mesh.sharedMaterial = possibleMaterials[Random.Range(0,possibleMaterials.Length)];
 	}
 
 }
