@@ -52,6 +52,13 @@ namespace Assets.Editor
                     gameControllerScript.InitialPremium = EditorGUILayout.IntField("Initial premium", gameControllerScript.InitialPremium);
 
                     GUILayout.Label("More to come...", EditorStyles.boldLabel);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        Destroy(go);
+                    }
                 }
                 catch (Exception e)
                 {
