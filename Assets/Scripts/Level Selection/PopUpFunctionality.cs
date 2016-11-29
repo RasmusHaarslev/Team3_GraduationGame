@@ -20,6 +20,7 @@ public class PopUpFunctionality : MonoBehaviour {
     // Right side shown when you have scouted
     public Text foodText;
     public Text scrapsText;
+    public Text goldTeethsText;
 
     // Not scouted panel
     public GameObject NotScoutedPanel;
@@ -61,6 +62,8 @@ public class PopUpFunctionality : MonoBehaviour {
         tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.tribeCamps;
         foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
         scrapsText.text = TranslationManager.Instance.GetTranslation("Scraps") + " : " + nodeScript.scrapAmount;
+        goldTeethsText.text = nodeScript.goldTeethAmount + " " + TranslationManager.Instance.GetTranslation("GoldTeeths");
+
         //interestPointsText.text = TranslationManager.Instance.GetTranslation("Enemy Tribes") + " : " + nodeScript.CampsInNode;
         //choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
         //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;        

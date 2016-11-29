@@ -234,8 +234,9 @@ public class LevelSelectionGenerator : MonoBehaviour
                 GameObject newNode = Instantiate(nodePrefab);
                 ResetTransform(newNode, row);
 
-                if (nodeCounter % 10 == 0)
+                if (totalAmountRows % 10 == 0)
                 {
+                    Debug.Log("RESET GOLD TEETH" + " ROW COUNTS : " + totalAmountRows);
                     goldteethDrop = 2;                    
                 }
 
@@ -401,7 +402,7 @@ public class LevelSelectionGenerator : MonoBehaviour
             int teethAmount = UnityEngine.Random.Range(1, goldteethDrop+1);
             node.GetComponent<Node>().goldTeethAmount = teethAmount;
             goldteethDrop -= teethAmount;
-            Debug.Log("Node : " + node.name + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!!");
+            Debug.Log("GOLD LEFT : " + goldteethDrop + " Row : " + amountOfRows + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!! : " + teethAmount);
         }
 
         //      node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);

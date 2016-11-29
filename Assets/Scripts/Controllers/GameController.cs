@@ -61,11 +61,9 @@ public class GameController : MonoBehaviour
         if (_FOOD + e.food < 0)
         {
             e.villager = e.villager - 1;
-        } else
-        {
-            _FOOD = (_FOOD + e.food < 0) ? 0 : _FOOD + e.food;
         }
 
+        _FOOD = (_FOOD + e.food < 0) ? 0 : _FOOD + e.food;
         _VILLAGERS = (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
         _SCRAPS = (_SCRAPS + e.scraps < 0) ? 0 : _SCRAPS + e.scraps;
         _PREMIUM = (_PREMIUM + e.premium < 0) ? 0 : _PREMIUM + e.premium;
