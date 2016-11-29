@@ -89,7 +89,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
         foreach (var childNode in nodeList)
         {
-            if (!childNode.GetComponent<Node>().isCleared)
+            if (!childNode.GetComponent<Node>().isCleared && !childNode.GetComponent<Node>().canPlay)
             {
                 Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
                 childNode.GetComponent<Animator>().SetTrigger("IsUnlocked");
