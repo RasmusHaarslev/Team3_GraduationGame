@@ -279,6 +279,7 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FollowState()
 	{
 		character.animator.SetBool("isAware", false);
+		character.isInCombat = false;
 		if (!character.isDead)
 		{
 			agent.Resume();
