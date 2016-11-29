@@ -50,6 +50,7 @@ public class Node : MonoBehaviour {
     public bool isCleared = false;
     public bool isScouted = false;
     public bool canPlay = false;
+    public bool isOpen = false;
     #endregion
 
     #region UI VARIABLES
@@ -76,6 +77,7 @@ public class Node : MonoBehaviour {
         if (id == 1)
         {
             canPlay = true;
+            isOpen = true;
         }
 
         if (wolveCamps == 0 && tribeCamps == 0 && choiceCamps == 0) { 
