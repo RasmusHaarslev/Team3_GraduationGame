@@ -21,11 +21,12 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
             {
                 if (child.gameObject.activeSelf == true)
                 {
-                    if(gameObject.name != "LevelSelection" && gameObject.name != "CampUpgradesPanel")
+                    if(gameObject.name != "LevelSelection" && gameObject.name != "CampUpgradesPanel" && child.name != "StoreFrontPanel")
                         child.gameObject.SetActive(false);
 
                 }
             }
+
             gameObject.SetActive(false);
             panelScript.DeactivateSpotligths();
             panelScript.DeactivateNewSoldiers();
