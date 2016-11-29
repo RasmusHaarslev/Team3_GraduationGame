@@ -47,11 +47,11 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			agent.Stop();
 		}
-		if (character.target != null)
+		if (character.target != null && !character.isFleeing)
 		{
 			if (!character.isDead)
 			{
-				//character.RotateTowards(character.target.transform);
+				character.RotateTowards(character.target.transform);
 			}
 		}
 	}
