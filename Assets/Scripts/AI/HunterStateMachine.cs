@@ -306,7 +306,7 @@ public class HunterStateMachine : CoroutineMachine
 		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(GameObject.FindGameObjectWithTag("FriendlyFleePoint").transform.position);
+		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		if (agent.remainingDistance < agent.stoppingDistance)
 		{
 			gameObject.SetActive(false);
