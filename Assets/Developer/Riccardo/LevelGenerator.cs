@@ -61,17 +61,7 @@ public class LevelGenerator : MonoBehaviour
 	}
 
 
-	void OnEnable()
-	{
-		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
-		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
-	}
 
-	void OnDisable()
-	{
-		Manager_Audio.PlaySound(Manager_Audio.baseAmbienceStop, this.gameObject);
-		Manager_Audio.PlaySound(Manager_Audio.musicExploreStop, this.gameObject);
-	}
 
 
     [ExecuteInEditMode]

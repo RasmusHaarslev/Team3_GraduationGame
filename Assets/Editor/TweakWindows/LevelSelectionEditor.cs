@@ -57,6 +57,13 @@ namespace Assets.Editor
 
                     GUILayout.Label("Highest Scout Cost", EditorStyles.boldLabel);
                     prefabScript.HighestScoutCost = EditorGUILayout.IntSlider("Highest amount of food it takes to Scout", prefabScript.HighestScoutCost, prefabScript.LowestScoutCost, 6);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go);
+                    }
                 }
                 catch (Exception e) {
                     GUILayout.Label("The prefab is messed up, go to Peter!", EditorStyles.boldLabel);

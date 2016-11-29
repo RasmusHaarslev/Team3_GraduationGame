@@ -27,7 +27,8 @@ public class CharacterValues
 		Tribesman,
 		Wolf,
 		Hunter,
-		Player
+		Player,
+        NewHunter
 	}
 
 	public enum TargetTrait
