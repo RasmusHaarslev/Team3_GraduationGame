@@ -24,6 +24,7 @@ namespace Assets.Editor
 
         void OnGUI()
         {
+            this.titleContent = new GUIContent("Resources");
             string[] guids = AssetDatabase.FindAssets("t:Prefab GameController");
             string[] guids2 = AssetDatabase.FindAssets("t:Prefab LevelGenerator");
 

@@ -23,7 +23,7 @@ public class OptionsPanel : MonoBehaviour {
         if (scene != 2) { 
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
         }
-
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         BackgroundPanel.SetActive(true);
         OptionPanel.SetActive(true);
     }

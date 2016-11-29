@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
 
 	bool deadEvent = false;
 	[Range(0, 99)]
-	public int randomTargetProbability = 25;
+	public int randomTargetProbability = 40;
 	float isFleeingValue;
 
 	//model values
@@ -82,15 +82,6 @@ public class Character : MonoBehaviour
 					currentOpponents.Clear();
 					target = null;
 					isInCombat = false;
-				}
-			}
-			else if (target.GetComponent<TutorialCharacter>() != null)
-			{
-				if (target.GetComponent<TutorialCharacter>().isFleeing)
-				{
-					isInCombat = false;
-					currentOpponents.Clear();
-					target = null;
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 Event	ID	Name			Wwise Object Path	Notes
 	161668694	Play_EvilMaleWarrior1Death			\Default Work Unit\Warriors\Play_EvilMaleWarrior1Death	
 	225821351	Stop_ScrollMap			\Default Work Unit\UI\Stop_ScrollMap	
+	255852841	Play_BoxPickup			\Default Work Unit\UI\Play_BoxPickup	
 	324117657	Play_FemaleWarrior1Death			\Default Work Unit\Warriors\Play_FemaleWarrior1Death	
 	374946458	Play_MaleWarrior1Attack			\Default Work Unit\Warriors\Play_MaleWarrior1Attack	
 	441061787	Play_LeaderFootStep			\Default Work Unit\test\Play_LeaderFootStep	
@@ -8,6 +9,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	604685473	DiscoverFriendly			\Default Work Unit\TriggerEvents\DiscoverFriendly	
 	623878550	Play_OpenMapUI			\Default Work Unit\UI\Play_OpenMapUI	
 	677386556	Play_UseShield			\Default Work Unit\Combat\Play_UseShield	
+	845273596	Play_PaperPickup			\Default Work Unit\UI\Play_PaperPickup	
+	939012970	Play_IntoLevel			\Default Work Unit\UI\Play_IntoLevel	
 	955974805	Play_UseRiffle			\Default Work Unit\Combat\Play_UseRiffle	
 	1126010832	Play_ExploreMusic			\Default Work Unit\Play_ExploreMusic	
 	1164893191	Play_CommandSel			\Default Work Unit\UI\Play_CommandSel	
@@ -25,7 +28,9 @@ Event	ID	Name			Wwise Object Path	Notes
 	1938796326	Play_windNoiseQuiet			\Default Work Unit\Ambience\Play_windNoiseQuiet	
 	2143972174	Play_UseSpear			\Default Work Unit\Combat\Play_UseSpear	
 	2149966355	Play_PickRiffle			\Default Work Unit\UI\Play_PickRiffle	
+	2290791599	Play_CampUpgrade			\Default Work Unit\UI\Play_CampUpgrade	
 	2412941441	Play_LeaderAttack			\Default Work Unit\Combat\Play_LeaderAttack	
+	2441431792	Play_ClickClearedMap			\Default Work Unit\UI\Play_ClickClearedMap	
 	2491028491	Play_EvilFemaleWarrior1Death			\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Death	
 	2570041344	Play_MenuMusic			\Default Work Unit\Play_MenuMusic	
 	2753202630	Stop_MenuMusic			\Default Work Unit\Stop_MenuMusic	
@@ -47,30 +52,35 @@ Event	ID	Name			Wwise Object Path	Notes
 	4074757615	Play_CommandUI			\Default Work Unit\UI\Play_CommandUI	
 
 State Group	ID	Name			Wwise Object Path	Notes
+	1575469330	Palette			\Default Work Unit\Palette	
 	2073749505	CommandWheel			\Default Work Unit\CommandWheel	
 	4102693405	ExploreState			\Default Work Unit\ExploreState	
 
 State	ID	Name	State Group			Notes
+	245870364	Color2	Palette			
+	245870365	Color3	Palette			
+	245870367	Color1	Palette			
+	748895195	None	Palette			
 	748895195	None	CommandWheel			
 	930712164	Off	CommandWheel			
 	1651971902	On	CommandWheel			
+	221232726	Lose	ExploreState			
 	304873613	EnemyNear	ExploreState			
 	748895195	None	ExploreState			
+	979765101	Win	ExploreState			
 	1823678183	Exploring	ExploreState			
 	2864273045	Flee	ExploreState			
 	3373579172	InCombat	ExploreState			
 
 Custom State	ID	Name	State Group	Owner		Notes
-	195346193	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind1		
 	315741562	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc		
-	334453633	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind1		
 	352252775	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak		
-	380717595	On	CommandWheel	\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1		
-	432723883	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windhowl		
-	499397323	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind1_1		
+	380717595	On	CommandWheel	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1		
+	432723883	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Winds\windhowl		
+	482817259	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Winds\Ambience		
 	525853573	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot		
-	682117881	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind1_1		
-	694792509	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windhowl		
+	694792509	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\Winds\windhowl		
+	948477353	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\Winds\Ambience		
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	1633960628	ScrollPitch			\Default Work Unit\ScrollPitch	
@@ -81,97 +91,102 @@ Trigger	ID	Name			Wwise Object Path	Notes
 	1629463520	DiscoverEnemy			\Default Work Unit\DiscoverEnemy	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	7581663	CharSel	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickUpGeneral3_A585CBFD.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CharSel		5682
+	7581663	CharSel	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickUpGeneral3_06FE9075.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CharSel		6259
 	16900475	EvilFemaleWarrior2Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack1		40767
 	19545444	MaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack4		40543
 	26566640	FemaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack3		30576
 	41430989	FemaleWarrior1Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack2		30657
-	51067484	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FriendlyDieStinger1_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		46383
+	51067484	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FriendlyDieStinger1_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		46477
 	52315870	FootstepsConc5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc5_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc5		2447
 	55096845	FootStepsBoot10	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot10_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot10		2473
 	55443062	FemaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack3		31095
 	79608986	EvilFemaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack1		29862
-	120499320	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FriendlyDieStinger2_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		46040
-	126401319	BoneHitSweet4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet4		9852
+	120499320	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FriendlyDieStinger2_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		46134
+	126401319	BoneHitSweet4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet4_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet4		9934
 	129200692	EvilFemaleWarrior1Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack2		30624
-	160583729	WindQuiter	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindQuiter_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windNoiseQuiet\WindQuiter		391981
+	160583729	WindQuiter	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindQuiter_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\windNoiseQuiet\WindQuiter		391981
 	166559896	MaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack4		40672
 	168816772	EvilMaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior2Attack\EvilMaleWarrior2Attack4		38807
 	194854662	EvilFemaleWarrior2Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior2Death\EvilFemaleWarrior2Death1		49700
 	202420280	FootStepsSneak8	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak8_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak8		3037
 	204138468	FemaleWarrior1Death5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Death5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death5		40496
 	206317152	FootstepsConc8	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc8_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc8		3315
-	216648221	Gun4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun4_260F97FF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun4		32089
-	224430769	WeaponWhoosh3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh3_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh3		4069
-	231591206	Whoosh1_13_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_13.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_13_1		4889
+	216648221	Gun4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun4_BA12C4ED.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun4		32881
+	224430769	WeaponWhoosh3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh3_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh3		4117
+	231591206	Whoosh1_13_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_13.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_13_1		4943
 	243269753	EvilMaleWarrior2Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior2Death\EvilMaleWarrior2Death1		35121
 	252880203	EvilMaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior2Attack\EvilMaleWarrior2Attack3		29882
 	258236682	MaleWarrior1Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior1Death\MaleWarrior1Death1		39645
-	261638308	Whoosh1_11_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_11.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_11_1		5043
+	261638308	Whoosh1_11_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_11.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_11_1		5097
 	262551881	FemaleWarrior2Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior2Death\FemaleWarrior2Death2		59426
 	263839022	FootstepsConc4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc4		2235
 	271916395	FemaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death2		49414
 	274771103	UnlockNewMaps	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\UnlockNewMaps_35B854C8.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\UnlockNewMaps		8925
-	275824737	BoneHitSweet3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet3		10007
+	275824737	BoneHitSweet3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet3_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet3		10095
 	283084582	MaleWarrior2Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack6_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack6		49287
 	283116526	EvilMaleWarrior2Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Death3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior2Death\EvilMaleWarrior2Death3		37074
-	287159919	ShieldHit	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ShieldHit_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\ShieldHit\ShieldHit		4320
+	287159919	ShieldHit	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ShieldHit_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\ShieldHit\ShieldHit		4368
 	288609740	FootStepsSneak5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak5_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak5		2518
+	302328586	ClickClearedMap	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ClickClearedMap_106DA3D3.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClickClearedMap		5301
 	304019341	EvilFemaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack4		30363
 	305583618	FemaleWarrior1Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Death3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death3		49273
 	306161913	FootstepsConc1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc1		1747
-	315478133	GenericHit3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit3_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit3		9581
+	315478133	GenericHit3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit3_EEA2F668.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit3		9761
 	324456182	MaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack2		40894
-	325237437	CombatTest	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CombatTest_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Combat\CombatTest\CombatTest		281860
-	326011935	Wind_deepTone2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Wind_deepTone2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\WindDeep2\Wind_deepTone2		803409
+	325237437	CombatTest	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CombatTest_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\Combat\CombatTest\CombatTest		281972
+	326011935	Wind_deepTone2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Wind_deepTone2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\WindDeep2\Wind_deepTone2		803409
 	326129756	ClearMapPt2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ClearMapPt2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClearMapPt2		27300
 	328503743	EvilFemaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack2		30052
+	333081232	DieCombat	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\DieCombat_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\DieCombat\DieCombat		126566
 	335228985	FootStepsSneak7	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak7_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak7		2818
-	341578845	EnemyNearLayer	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EnemyNearLayer_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\EnemyNear\Enemy\EnemyNearLayer		608872
-	342779998	HItSweet2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\HItSweet2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet2		9019
-	351867575	GenericHit1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit1		9489
+	341578845	EnemyNearLayer	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EnemyNearLayer_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\EnemyNear\Enemy\EnemyNearLayer		608984
+	342779998	HItSweet2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\HItSweet2_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet2		9107
+	351867575	GenericHit1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit1_EEA2F668.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit1		9675
 	356655512	EvilFemaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Death2_B801D84C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior1Death\EvilFemaleWarrior1Death2		30105
 	364989889	MaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack1		41195
 	368430150	FootStepsBoot9	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot9_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot9		2695
 	376855293	FootStepsBoot2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot2		2013
 	377000719	FootstepsConc9	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc9_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc9		2571
 	404528175	EvilMaleWarrior2Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior2Attack\EvilMaleWarrior2Attack1		38991
-	415257002	Whoosh2_14_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_14.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_14_1		5030
-	419983902	Whoosh2_13_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_13.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_13_1		4997
+	413973724	Wind3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Wind3_0DC9021D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\Ambience\Wind2\Wind3		312736
+	415257002	Whoosh2_14_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_14.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_14_1		5084
+	419983902	Whoosh2_13_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_13.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_13_1		5051
 	424388683	FemaleWarrior2Death4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Death4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior2Death\FemaleWarrior2Death4		49660
 	430592716	FemaleWarrior2Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack5		40943
 	431530333	FootStepsBoot5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot5_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot5		2582
-	435279165	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FriendlyDieStinger3_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		47334
+	435279165	FriendlyDieStinger1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FriendlyDieStinger3_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\FriendlyDie\FriendlyDieStinger1		47428
 	446135141	FemaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack1		30645
 	453473293	EvilMaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior2Attack\EvilMaleWarrior2Attack2		29744
-	458564501	Gun1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun1_EC853E84.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun1		23247
-	478117380	ExploreToCombat	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ExploreToCombat_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\ExploreToCombat\ExploreToCombat		110356
-	482940210	CommandActivate	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CommandActivate_06979BBF.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CommandActivate		11176
-	489717547	GenericHit2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit2		9007
+	458564501	Gun1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun1_D9E4A659.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun1		24219
+	478117380	ExploreToCombat	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ExploreToCombat_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\ExploreToCombat\ExploreToCombat		118073
+	482940210	CommandActivate	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CommandActivate_FCFCC85A.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CommandActivate		11206
+	489717547	GenericHit2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit2_EEA2F668.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit2		9187
 	496179797	OpenMapUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\OpenMapUI_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\OpenMapUI		11895
-	498871414	BaseWind1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BaseWind1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind1\BaseWind1		189113
 	511754566	EvilFemaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack4		39975
 	515354177	MenuAmbience	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MenuAmbience_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\MenuAmb\MenuAmbience		324815
-	520676070	PickGun	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickGun_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickGun		5986
-	539353889	PickSpear	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickSpear_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickSpear		6610
+	520676070	PickGun	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickGun_7A7BB3FA.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickGun		5345
+	532667783	CampUpgrade	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CampUpgrade_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CampUpgrade		24269
+	539353889	PickSpear	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickSpear_6E079BA0.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickSpear		6341
 	541087840	MaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack3		40433
 	541305267	FootStepsSneak6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak6_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak6		2332
-	551871948	BaseWind2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BaseWind2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\BaseWind1_1\BaseWind2		226585
 	557867700	MaleWarrior2Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior2Death\MaleWarrior2Death1		49405
 	560043211	FemaleWarrior2Attack2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Attack2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack2		40311
 	565719652	FemaleWarrior1Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack6_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack6		30357
 	566128289	MaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior1Death\MaleWarrior1Death2		49053
 	574431990	FootStepsBoot7	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot7_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot7		2771
+	578309304	Wind1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Wind1_0DC9021D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\Ambience\Wind1\Wind1		496999
 	578675284	ClearMapPt1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ClearMapPt1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ClearMapPt1		17795
 	613587420	EvilFemaleWarrior1Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Death3_DDD27514.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior1Death\EvilFemaleWarrior1Death3		49174
 	615639292	FemaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack4		40709
+	616645350	BoxPickup	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoxPickup_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\BoxPickup		30573
 	617761867	FootStepsBoot3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot3_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot3		2857
 	621111750	FemaleWarrior2Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack4		40896
-	621422572	BoneHitSweet1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet1		10598
+	621422572	BoneHitSweet1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet1_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet1		10686
 	633922746	EvilFemaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior1Attack\EvilFemaleWarrior1Attack3		29970
 	635379905	FootstepsConc6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc6_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc6		2372
-	648197445	WalkTapUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WalkTapUI_AAE17008.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\WalkTapUI		2766
-	649023967	WindFlags	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindFlags_8E8F09D1.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windFlags\WindFlags		141166
+	648197445	WalkTapUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WalkTapUI_C53348C1.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\WalkTapUI		2802
+	649023967	WindFlags	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindFlags_8E8F09D1.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\windFlags\WindFlags		141166
+	656517016	PickWeapon	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickWeapon_46A1D091.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickWeapon		14479
 	659933923	FemaleWarrior2Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior2Attack\FemaleWarrior2Attack1		40681
 	662274387	EvilMaleWarrior2Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior2Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior2Death\EvilMaleWarrior2Death2		29230
 	665137889	FemaleWarrior2Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior2Death\FemaleWarrior2Death1		48347
@@ -180,48 +195,52 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	683580329	CommandSel	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CommandSel_A504E0EF.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CommandSel		5089
 	696283885	FemaleWarrior1Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleAttack\FemaleWarrior1Attack\FemaleWarrior1Attack5		31007
 	697623040	EvilFemaleWarrior1Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior1Death1_06BB1F3D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior1Death\EvilFemaleWarrior1Death1		29278
-	700338299	Whoosh1_10_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_10.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_10_1		5001
-	703474157	STINGER1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\STINGER2_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\FriendlyStinger\STINGER1		974883
+	700338299	Whoosh1_10_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_10.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_10_1		5055
 	709964075	EvilMaleWarrior1Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior1Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior1Attack\EvilMaleWarrior1Attack1		40073
 	711651648	FootStepsBoot4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot4		2155
 	716460009	MaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack3		40613
 	716938442	MaleWarrior1Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack5		40638
-	718727633	MenuUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\UI_Click_98B69302.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\MenuUI		1023
+	718727633	MenuUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\UI_Click_DB84FB10.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\MenuUI		1023
 	722501933	EvilMaleWarrior1Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior1Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior1Attack\EvilMaleWarrior1Attack3		40745
-	725859429	BoneHitSweet2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet2		8666
-	727701744	UseKnife	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\UseKnife_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\UseKnife		5379
+	725859429	BoneHitSweet2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\BoneHitSweet2_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\BoneHitSweet2		8754
+	727701744	UseKnife	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\UseKnife_1D515E29.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\UseKnife		5457
+	745734160	WinCombat	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WinCombat_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\WinCombat\WinCombat		135321
 	758504064	MaleWarrior2Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Death3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior2Death\MaleWarrior2Death3		59740
-	770749179	Whoosh1_12_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_12.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_12_1		4802
+	770749179	Whoosh1_12_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh1_12.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh\Whoosh1_12_1		4856
 	770759645	FootstepsConc10	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc10_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc10		2429
-	770786379	PickShield	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickShield_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickShield		4230
+	770786379	PickShield	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PickShield_A1BE5068.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PickShield		3980
 	780577038	MaleWarrior2Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior2Death\MaleWarrior2Death2		46820
 	800645584	EvilFemaleWarrior2Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EVilFemaleDeath\EvilFemaleWarrior2Death\EvilFemaleWarrior2Death2		48923
-	801096615	Gun2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun2_AB9BD74D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun2		29732
+	801096615	Gun2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun2_08D3F363.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun2		30452
 	806466304	CommandUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\UICommandWheelPlace_25D944B9.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CommandUI		17144
 	808645515	FemaleWarrior1Death4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Death4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death4		49710
 	808857810	FemaleWarrior1Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior1Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior1Death\FemaleWarrior1Death1		48411
-	809645592	Whoosh2_16_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_16.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_16_1		5321
+	809645592	Whoosh2_16_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_16.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_16_1		5375
 	822594266	FootStepsBoot1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot1		1217
-	829725817	CombatTrans	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ToExplore_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\CombatTrans\CombatTrans		922509
+	829725817	CombatTrans	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ToExplore_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\CombatTrans\CombatTrans		922627
 	840939363	EvilFemaleWarrior2Attack3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilFemaleWarrior2Attack3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilFemaleAttack\EvilFemaleWarrior2Attack\EvilFemaleWarrior2Attack3		40184
+	873571352	PaperPickup	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\PaperPickup_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\PaperPickup		8562
 	878074695	MaleWarrior2Attack5	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack5_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack5		30357
 	879139088	FootStepsBoot6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot6_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot6		2501
-	884459593	GenericHit4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit4		9350
-	892394023	Gun3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun3_D99D619C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun3		34325
+	884459593	GenericHit4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\GenericHit4_EEA2F668.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\GenericHit\GenericHit4		9530
+	892394023	Gun3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Gun3_91429DF2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\Gun\Gun3		35159
 	903775774	FootStepsSneak9	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak9_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak9		2739
-	907180585	ShieldHit2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ShieldHit2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\ShieldHit\ShieldHit2		3836
-	910498308	ExploreMusic	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ExploreMusic_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Explore\ExploreMusic\ExploreMusic		845052
+	907180585	ShieldHit2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ShieldHit2_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\ShieldHit\ShieldHit2		3884
+	910498308	ExploreMusic	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ExploreMusic_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\Explore\ExploreMusic\ExploreMusic		845170
 	920421814	FootStepsSneak1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak1		1713
 	933282720	EvilMaleWarrior1Attack4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior1Attack4_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleAttack\EvilMaleWarrior1Attack\EvilMaleWarrior1Attack4		41305
 	934244384	MaleWarrior1Attack6	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Attack6_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior1Attack\MaleWarrior1Attack6		40602
-	941490590	HItSweet1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\HItSweet1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet1		12525
+	941490590	HItSweet1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\HItSweet1_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet1		12607
 	941738491	NonClearMap	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\NonClearMap_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\NonClearMap		34214
 	969021496	ScrollUI	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\ScrollUI_6CD8A14D.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\ScrollMap\ScrollUI		16821
-	974275100	STINGER1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\STINGER1_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\DiscoverEnemy\STINGER1		140476
+	974275100	STINGER1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\STINGER1_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\DiscoverEnemy\STINGER1		140582
 	974952532	FootStepsSneak4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak4		2227
-	977541870	CharSelBreath	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CharSelBreath_C3045FBF.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CharSelBreath		20403
-	985656569	Whoosh2_15_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_15.1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_15_1		5105
-	988992703	WeaponWhoosh4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh4_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh4		4169
+	977541870	CharSelBreath	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\CharSelBreath_7E956652.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\CharSelBreath		5309
+	982349721	WindSnowStorm	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindSnowStorm_0DC9021D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\Ambience\Storm\WindSnowStorm		513555
+	985656569	Whoosh2_15_1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Whoosh2_15.1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhoosh_1\Whoosh2_15_1		5159
+	988992703	WeaponWhoosh4	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh4_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh4		4217
+	994790039	IntoLevel	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\IntoLevel_8C998047.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\IntoLevel		11689
+	998786905	DiscoverStingerMusic1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\DiscoverStingerMusic1_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\FriendlyStinger\DiscoverStingerMusic1		98164
 	1003963535	EvilMaleWarrior1Death2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior1Death2_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior1Death\EvilMaleWarrior1Death2		39399
 	1005907116	FootStepsSneak10	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak10_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak10		2278
 	1006973814	FootstepsConc2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc2		2231
@@ -230,15 +249,15 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	1012540128	FootStepsBoot8	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsBoot8_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Boot\FootStepsBoot8		3044
 	1016996831	FootStepsSneak3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak3_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak3		3012
 	1018785266	MenuMusic	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MenuMusic_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\MenuMusic\MenuMusic\MenuMusic		978277
-	1021285412	WeaponWhoosh2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh2		3815
+	1021285412	WeaponWhoosh2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh2_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh2		3863
 	1021315475	MaleWarrior1Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior1Death3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleDeath\MaleWarrior1Death\MaleWarrior1Death3		49607
 	1024090050	FemaleWarrior2Death3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FemaleWarrior2Death3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\FemaleDeath\FemaleWarrior2Death\FemaleWarrior2Death3		50120
-	1030912603	Flee	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Flee_67BB40F9.wem		\Interactive Music Hierarchy\Default Work Unit\ExploreMusic1\Flee\Flee\Flee		227639
+	1030912603	Flee	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\Flee_617C1CCC.wem		\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusic1\Flee\Flee\Flee		227751
 	1031252976	EvilMaleWarrior1Death1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\EvilMaleWarrior1Death1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\EvilMaleDeath\EvilMaleWarrior1Death\EvilMaleWarrior1Death1		49030
-	1033245744	WeaponWhoosh1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh1_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh1		4457
-	1046654003	WindHowl	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindHowl_A2302EE3.wem		\Actor-Mixer Hierarchy\Default Work Unit\WindsProto\windhowl\WindHowl		303856
+	1033245744	WeaponWhoosh1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WeaponWhoosh1_63DB481E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\WeaponWhooshDeep\WeaponWhoosh1		4505
+	1046654003	WindHowl	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\WindHowl_A2302EE3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Winds\windhowl\WindHowl		303856
 	1048173959	MaleWarrior2Attack1	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\MaleWarrior2Attack1_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Warriors\MaleAttack\MaleWarrior2Attack\MaleWarrior2Attack1		41298
-	1060629324	HItSweet3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\HItSweet3_52BD694B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet3		11769
+	1060629324	HItSweet3	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\HItSweet3_C5B73D32.wem		\Actor-Mixer Hierarchy\Default Work Unit\Weapons\HitSweet\HItSweet3		11851
 	1068821334	FootStepsSneak2	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootStepsSneak2_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak\FootStepsSneak2		2360
 	1070500024	FootstepsConc7	Z:\Volumes\Macintosh HD\DADIU\GraduationGame\TheREALGIT\Assets\WwiseProject\.cache\Android\SFX\FootstepsConc7_76A9233F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc\FootstepsConc7		2572
 
