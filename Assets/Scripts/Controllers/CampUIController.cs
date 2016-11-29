@@ -89,7 +89,7 @@ public class CampUIController : MonoBehaviour
         campManager.FinishUpgradeNow();
 
         // Update premium resource in GameController.
-        EventManager.Instance.TriggerEvent(new ChangeResources(premium: -campManager.FinishUpgradeCost));
+        EventManager.Instance.TriggerEvent(new ChangeResources(premium: -(campManager.FinishUpgradeCost*((int)TimeLeftInSeconds()/campManager.Level9_Above_Time) ) ) );
 
         campManager.FinishUpgrade();
         SetLevels();
