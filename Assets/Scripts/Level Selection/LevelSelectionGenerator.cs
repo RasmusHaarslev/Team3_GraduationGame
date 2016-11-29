@@ -19,7 +19,7 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     public int amountOfRows = 0;
 
-    [Tooltip("The distribution of wolve camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
+/*    [Tooltip("The distribution of wolve camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
     [Range(0, 6)]
     public int probabilityWolves;
     [Tooltip("The distribution of tribe camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
@@ -28,26 +28,36 @@ public class LevelSelectionGenerator : MonoBehaviour
     [Tooltip("The distribution of choice camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
     [Range(0, 6)]
     public int probabilityChoices;
+    */
 
     [Tooltip("Determine the max amonut of items that drop within a single level")]
-    [Range(0, 55)]
-    public int itemDropAmount;
+    [Range(2, 10)]
+    public int MaxItemDropAmount;
 
-    [Tooltip("This should always contain the number of different levels we have")]
-    public int numberOfScenes;
+/*    [Tooltip("This should always contain the number of different levels we have")]
+    public int numberOfScenes; */
 
     [Tooltip("Lowest amount of food to use to go to a level")]
-    [Range(0, 55)]
+    [Range(0, 10)]
     public int LowestTravelCost;
 
     [Tooltip("Highest amount of food to use to go to a level")]
-    [Range(0, 55)]
+    [Range(0, 10)]
     public int HighestTravelCost;
+
+    [Tooltip("Lowest amount of food to use to scout a level")]
+    [Range(0, 10)]
+    public int LowestScoutCost;
+
+    [Tooltip("Highest amount of food to use to scout a level")]
+    [Range(0, 10)]
+    public int HighestScoutCost;
 
     int numOfLastLevels = 1;
     int totalAmountRows;
     int nodeCounter = 0;
     int numOfParents = 0;
+    int goldteethDrop = 2;
     #endregion
 
     public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
@@ -86,7 +96,7 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             if (PlayerPrefs.GetInt("LevelResult") != 0)
             {
-                EventManager.Instance.TriggerEvent(new LevelCleared());
+                EventManager.Instance.TriggerEvent(new LevelCleared(true));
                 GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
                 Node nodeScript = nodeCleared.GetComponent<Node>();     
 
@@ -97,9 +107,12 @@ public class LevelSelectionGenerator : MonoBehaviour
                     nodes.GetComponent<Node>().canPlay = true;
                 }
 
-                    InstantiateRows(1);
+                InstantiateRows(1);
 
                 PlayerPrefs.SetInt("LevelResult", 0);
+            } else
+            {
+                EventManager.Instance.TriggerEvent(new LevelCleared(false));
             }
 
             SaveDict(new SaveLevelsToXML());
@@ -221,6 +234,12 @@ public class LevelSelectionGenerator : MonoBehaviour
                 GameObject newNode = Instantiate(nodePrefab);
                 ResetTransform(newNode, row);
 
+                if (totalAmountRows % 10 == 0)
+                {
+                    Debug.Log("RESET GOLD TEETH" + " ROW COUNTS : " + totalAmountRows);
+                    goldteethDrop = 2;                    
+                }
+
                 SetupValuesInNode(newNode);
 
                 newNode.name = (totalAmountRows) + "." + j;
@@ -256,8 +275,6 @@ public class LevelSelectionGenerator : MonoBehaviour
 
             totalAmountRows += 1;
         }
-
-        initialiseDropDown();
 
         SaveLoadLevels.SaveLevels(nodesInRows);
     }
@@ -374,14 +391,24 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     void SetupValuesInNode(GameObject node)
     {
+        bool containTeeth = UnityEngine.Random.Range(0, 3) == 2 ? true : false;
+
         node.GetComponent<Node>().Level = totalAmountRows;
         node.GetComponent<Node>().TravelCost = UnityEngine.Random.Range(LowestTravelCost, HighestTravelCost);
-        node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(1, 5);
-        node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
-        node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, itemDropAmount);
-        node.GetComponent<Node>().probabilityWolves = probabilityWolves;
-        node.GetComponent<Node>().probabilityTribes = probabilityTribes;
-        node.GetComponent<Node>().probabilityChoice = probabilityChoices;
+        node.GetComponent<Node>().scoutCost = UnityEngine.Random.Range(LowestScoutCost, HighestScoutCost);
+        node.GetComponent<Node>().itemDropAmount = UnityEngine.Random.Range(1, MaxItemDropAmount);
+
+        if (containTeeth && goldteethDrop > 0) {
+            int teethAmount = UnityEngine.Random.Range(1, goldteethDrop+1);
+            node.GetComponent<Node>().goldTeethAmount = teethAmount;
+            goldteethDrop -= teethAmount;
+            Debug.Log("GOLD LEFT : " + goldteethDrop + " Row : " + amountOfRows + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!! : " + teethAmount);
+        }
+
+        //      node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
+        /*      node.GetComponent<Node>().probabilityWolves = probabilityWolves;
+                node.GetComponent<Node>().probabilityTribes = probabilityTribes;
+                node.GetComponent<Node>().probabilityChoice = probabilityChoices; */
     }
 
     #region Helper function
@@ -417,38 +444,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         from.transform.localScale = new Vector3(1, 1, 1);        
     }
 
-    /// <summary>
-    /// Button click (Temporary Functionality)
-    /// </summary>
-    /// <param name="amount">Will insert the number of rows</param>
-    public void AddItemToGrid(int amount)
-    {
-        InstantiateRows(amount);
-    }
-
-    void initialiseDropDown()
-    {
-        var dropdown = dropDown.GetComponent<Dropdown>();
-        dropdown.options.Clear();
-        for (int i = 0; i <= totalAmountRows - 2; i++)
-        {
-            dropdown.options.Add(new Dropdown.OptionData(i.ToString()));
-        }
-
-        if (totalAmountRows + 1 == amountOfRows)
-        {
-            dropdown.onValueChanged.AddListener(delegate
-            {
-                myDropdownValueChangedHandler(dropdown);
-            });
-        }
-    }
-
-    private void myDropdownValueChangedHandler(Dropdown target)
-    {
-        SetScrollPosition(target.value);
-    }
-
     public void SetScrollPosition(int rowNumber)
     {
         /* SETUP SCROLL POSITION */
@@ -456,8 +451,8 @@ public class LevelSelectionGenerator : MonoBehaviour
         float rowToGoTo = rowHeight * rowNumber;
         float gridYPosition = -(((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight) + rowToGoTo;
 
-        Vector2 initPos = scrollingGrid.GetComponent<RectTransform>().anchoredPosition;
-        Vector2 desPos = new Vector2(0, gridYPosition);
+        Vector2 initPos = new Vector2(scrollingGrid.GetComponent<RectTransform>().anchoredPosition.x, scrollingGrid.GetComponent<RectTransform>().anchoredPosition.y - (((totalAmountRows + 1 - 3.0f) / 2.0f) * rowHeight));
+        Vector2 desPos = new Vector2(0, gridYPosition + 192);
 
         StartCoroutine(MoveFromTo(initPos, desPos, 0.5f));
     }
@@ -475,7 +470,6 @@ public class LevelSelectionGenerator : MonoBehaviour
         }
         Manager_Audio.PlaySound(Manager_Audio.stop_scrollMap, gameObject);
     }
-
     #endregion
 
     private void SaveDict(SaveLevelsToXML e)

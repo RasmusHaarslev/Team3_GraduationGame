@@ -18,8 +18,9 @@ public class StringResources
         public static string FoodAmountPrefsName = "FoodAmount";
         public static string ScrapAmountPrefsName = "ScrapAmount";
         public static string ItemDropAmountPrefsName = "ItemDropAmount";
+        public static string DaysSurvived = "DaysSurvived";
 
-#endregion
+    #endregion
 
     #region PREFABS
 
@@ -66,10 +67,10 @@ public class StringResources
 
     public static string shield1MaterialName = "Shield1Material";
 
-    public static string[] maleHuntersMaterials = new[] { "MaleHunterMaterial1", "MaleHunterMaterial2", "MaleHunterMaterial3", "MaleHunterMaterial4", "MaleHunterMaterial5" };
+    public static string[] maleHuntersMaterials = new[] { "Hunter_Male_1", "Hunter_Male_2", "Hunter_Male_3", "Hunter_Male_4", "Hunter_Male_5", "Hunter_Male_6", "Hunter_Male_7", "Hunter_Male_8", "Hunter_Male_9" };
 
-    public static string[] femaleHuntersMaterials = new[] { "FemaleHunterMaterial1", "FemaleHunterMaterial2", "FemaleHunterMaterial3", "FemaleHunterMaterial4", "FemaleHunterMaterial5" };
-    
+    public static string[] femaleHuntersMaterials = new[] { "Hunter_Female_1", "Hunter_Female_2", "Hunter_Female_3", "Hunter_Female_4", "Hunter_Female_5", "Hunter_Female_6", "Hunter_Female_7", "Hunter_Female_8", "Hunter_Female_9" };
+
 
     #endregion
 
@@ -109,7 +110,32 @@ public class StringResources
 "BESNIK",
 "LUCA",
 "YOSKA",
-"TOBAR"};
+"TOBAR",
+"KASPER",
+"JOACHIM",
+"LARS",
+"OTTO",
+"OSCAR",
+"MUHAMMED",
+"MALIK",
+"MORTEN",
+"RIKARD",
+"ALEKSY",
+"KASIMIERZ",
+"KONSTANTY",
+"KORNELIUSZ",
+"KRYSZTOF",
+"AHMED",
+"BAHADIR",
+"BASAK",
+"CHENGIZ",
+"DENIZ",
+"ERDEM",
+"IBRAHIM",
+"KHALID",
+"SEBNEM",
+"SULEIMAN",
+"ZEHEB"};
 
     public static string[] femaleNames = new[] { "TEA",
 "AGNES",
@@ -134,12 +160,37 @@ public class StringResources
 "HABIBAH",
 "ELIZA",
 "ESHAL",
-"INAAYA"};
+"INAAYA",
+"CÆCILIA",
+"URSULA",
+"EMILY",
+"ANNA",
+"OLGA",
+"KAREN",
+"BENTE",
+"BANAAN",
+"MAYA",
+"AGATA",
+"ALESKA",
+"EMILJA",
+"ESTERA",
+"OLESIA",
+"ARUBA",
+"DILARA",
+"FATIMAH",
+"FATMA",
+"JAMILIA",
+"LAMYA",
+"MELEK",
+"PINAR",
+"SHAKELA",
+"YAZ",
+"ZULMA"};
 
 
     #endregion
 
-    // Use this for initialization
+        // Use this for initialization
     void Start () {
 	
 	}

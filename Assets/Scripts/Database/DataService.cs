@@ -104,7 +104,7 @@ public class DataService : MonoBehaviour
                 range = 2,
                 prefabName = StringResources.playerPrefabName,
                 materialName = StringResources.playerMaterialName
-            },
+            },/*
          new CharacterValues
             {
                 id = 2,
@@ -149,7 +149,7 @@ public class DataService : MonoBehaviour
                 targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
                 prefabName = StringResources.follower1PrefabName,
                 materialName = StringResources.follower1MaterialName
-            },/*
+            },
           new CharacterValues
             {
                 name = "Yasmin",
@@ -492,11 +492,29 @@ public class DataService : MonoBehaviour
 
     #region character methods
     
+
+
+    public CharacterValues[] GetNewHuntersValues()
+    {
+        return (_connection.Table<CharacterValues>().Where(x => x.Type == CharacterValues.type.NewHunter)).ToArray();
+    }
+
     /// <summary>
     /// Add values to db and returns the id
     /// </summary>
     /// <param name="hunterValues"></param>
     /// <returns></returns>
+    /// 
+    public void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
+    {
+        _connection.Update(charValToUpdate);
+    }
+    public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
+    {
+        
+            _connection.Delete(charValuesToDelete);
+    }
+
     public int AddcharacterToDbByValues(CharacterValues hunterValues)
     {
         _connection.Insert(hunterValues);
@@ -523,9 +541,7 @@ public class DataService : MonoBehaviour
                 //istantiate player
                 GameObject charGameObject = GenerateCharacterFromValues(fellowshipValues[i], spawners[i].transform.position, spawners[i].transform.rotation);
                 charGameObject.transform.parent = fellowship.transform;
-            }
-            
-            
+            }            
         }
         else
         {
@@ -544,9 +560,7 @@ public class DataService : MonoBehaviour
             _connection.Delete(charToRemove);
 
             return true;
-
         }
-
         return false;
     }
 
@@ -555,7 +569,7 @@ public class DataService : MonoBehaviour
         return _connection.Table<CharacterValues>().Where(x => x.name == characterName).FirstOrDefault();
 
     }
-    /**/
+
     public IEnumerable<EquippableitemValues> GetCharacterEquippableItemsValues(int characterId)
     {
         string q = "select equip.* from  EquippableitemValues equip where equip.characterId = ?";
@@ -563,6 +577,7 @@ public class DataService : MonoBehaviour
 
         return equipIds;
     }
+
     /// <summary>
     /// Gives the gameobject list of equippable items for the given character id.
     /// </summary>
@@ -600,21 +615,8 @@ public class DataService : MonoBehaviour
     {
         //get informations from database
         CharacterValues charValues = GetCharacterValuesByName(characterName);
-        //load character prefab, weapons prefab and attach them
-        //print(StringResources.charactersPrefabsPath + charValues.prefabName);
-        //load prefab
         GameObject characterGameObject = GenerateCharacterFromValues(charValues, position, rotation);
-        /*
-        print("inside Prefabs: "+ StringResources.charactersPrefabsPath + charValues.prefabName);
-		GameObject characterGameObject = Instantiate(Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
-		//assign values to prefab
-		characterGameObject.GetComponent<Character>().init(charValues);
-       
-		//spawn weapons 
-		List<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id)) as List<GameObject>; 
 
-		equipItemsToCharacter(equips, characterGameObject.GetComponent<Character>());
- */
         return characterGameObject;
     }
 
@@ -674,11 +676,12 @@ public class DataService : MonoBehaviour
     public IEnumerable<GameObject> GenerateEquippableItemsFromValues(IEnumerable<EquippableitemValues> equipValues)
     {
         List<GameObject> equips = new List<GameObject>();
-        GameObject currentEquip = new GameObject();
+        GameObject currentEquip;
+
         foreach (EquippableitemValues values in equipValues)
         {
-
             currentEquip = Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + values.prefabName)) as GameObject;
+            
             if (values.materialName != null)
             {
                 currentEquip.GetComponent<Renderer>().material = Instantiate(Resources.Load(StringResources.itemsMaterialsPath + values.materialName) as Material);
@@ -740,7 +743,7 @@ public class DataService : MonoBehaviour
                 }
                 //add the new item values
                 //to the character prefab
-                Debug.Log(character.characterBaseValues.name + " " + currentEquipValues.name);
+                //Debug.Log(character.characterBaseValues.name + " " + currentEquipValues.name);
                 character.health += currentEquipValues.health;
                 character.damage += currentEquipValues.damage;
                 character.damageSpeed = currentEquipValues.damageSpeed;
@@ -796,9 +799,7 @@ public class DataService : MonoBehaviour
         _connection.Insert(values);
         values.id = _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
 
-        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();
-
-
+        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();        
     }
 
     public int AddWeaponInDbByValues(EquippableitemValues itemValues)
@@ -817,7 +818,6 @@ public class DataService : MonoBehaviour
 
         itemsValues = _connection.Query<EquippableitemValues>(query);
 
-
         return itemsValues;
     }
 
@@ -835,7 +835,6 @@ public class DataService : MonoBehaviour
         }
        
     }
-
     #endregion
 
 }

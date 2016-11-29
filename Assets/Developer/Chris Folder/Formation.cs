@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System;
 
 public class Formation : MonoBehaviour
-{
-
+{ 
 	public Dictionary<GameObject, Transform> formationPositions = new Dictionary<GameObject, Transform>();
-
 	public List<Transform> frontPositions;
 	public List<Transform> rearPositions;
-
 	public List<GameObject> followers;
 	public List<bool> rears;
+	int numberOfFollowers = 0;
+
 
 	void OnEnable()
 	{
@@ -50,16 +49,18 @@ public class Formation : MonoBehaviour
 		if (followers.Count == 0)
 		{
 			followers.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
-			formationPositions.Add(followers[0], frontPositions[0]);
-			formationPositions.Add(followers[1], frontPositions[1]);
-			formationPositions.Add(followers[2], frontPositions[2]);
+			numberOfFollowers = followers.Count;
+			for (int i = 0; i < numberOfFollowers; i++)
+			{
+				formationPositions.Add(followers[i], frontPositions[i]);
+			}
 			rears.Add(false);
 			rears.Add(false);
 			rears.Add(false);
 		}
 		else
 		{
-			for(int i = 0; i < 3; i++)
+			for(int i = 0; i < numberOfFollowers; i++)
 			{
 				if(rears[i] == false)
 				{

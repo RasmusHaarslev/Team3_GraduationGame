@@ -8,8 +8,11 @@ public class SaveLevelsToXML : GameEvent
 
 public class LevelCleared : GameEvent
 {
-    public LevelCleared()
+    public bool isCleared;
+
+    public LevelCleared(bool isCleared)
     {
+        this.isCleared = isCleared;
     }
 }
 
@@ -19,13 +22,15 @@ public class ChangeResources : GameEvent
     public int scraps;
     public int villager;
     public int premium;
+    public int daysSurvived;
 
-    public ChangeResources(int food = 0, int scraps = 0, int villager = 0, int premium = 0)
+    public ChangeResources(int food = 0, int scraps = 0, int villager = 0, int premium = 0, int daysSurvived = 0)
     {
         this.food = food;
         this.scraps = scraps;
         this.villager = villager;
         this.premium = premium;
+        this.daysSurvived = daysSurvived;
     }
 }
 
@@ -73,9 +78,11 @@ public class LevelWon : GameEvent
 public class PositionClicked : GameEvent
 {
     public Vector3 position;
+    public Transform hitted;
 
-    public PositionClicked(Vector3 clickPosition) {
+    public PositionClicked(Vector3 clickPosition, Transform hitted) {
         position = clickPosition;
+        this.hitted = hitted;
     }
 }
 
@@ -235,4 +242,17 @@ public class CommandEvent : GameEvent
 	{
 
 	}
+}
+
+public class ClearedCampEvent : GameEvent
+{
+	public ClearedCampEvent()
+	{
+
+	}
+}
+
+public class LanguageChanged : GameEvent
+{
+    public LanguageChanged() { }
 }

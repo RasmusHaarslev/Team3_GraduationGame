@@ -2,13 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandler
 {
     public RawImage Icon;
     public Text name, damage, damageSpeed, range, health;
     public EquippableitemValues itemValues;
-
+    public GameObject weaponCams;
     public void OnPointerClick(PointerEventData eventData)
     {
         if (itemValues.Type == EquippableitemValues.type.rifle) {

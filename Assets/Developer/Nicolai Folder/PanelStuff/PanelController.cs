@@ -7,7 +7,7 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 {
     PanelScript panelScript;
     public GameObject levelSelectionGenerator;
-    bool isAlreadyOpen = false;
+    //bool isAlreadyOpen = false;
 
     void Start()
     {
@@ -16,18 +16,18 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_unlockNewMaps, gameObject);
-        //Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (gameObject.CompareTag("Tent") && panelScript.panelList[0].activeSelf == false)
-        {
-            
-            panelScript.panelList[3].SetActive(true);
+        {            
+            //panelScript.panelList[3].SetActive(true);
             panelScript.panelList[0].SetActive(true);
+            var panel = panelScript.panelList[0].GetComponentInChildren<CampUIController>(true).gameObject;
+            panel.SetActive(true);
         }
 
         if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
         {
-            Debug.Log(panelScript);
+            Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
             panelScript.UpdateSoldierStats(gameObject);
             panelScript.ActivateCamera(gameObject);
             panelScript.panelList[3].SetActive(true);
@@ -41,17 +41,21 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
 
         if (gameObject.CompareTag("Silhouette") && panelScript.panelList[6].activeSelf == false)
         {
-            //if (!panelScript.alreadyGeneratedNewSoldiers)
+            //if (!isAlreadyOpen)
             //{
             //    panelScript.GetNewSoldiers();
-            //    panelScript.alreadyGeneratedNewSoldiers = true;
+            //    panelScript.silhouettePosList.Add(gameObject.transform);
+            //    isAlreadyOpen = true;
             //}
-            if (!isAlreadyOpen)
+            if (!panelScript.alreadyGeneratedNewSoldiers)
             {
                 panelScript.GetNewSoldiers();
-                isAlreadyOpen = true;
+                //panelScript.silhouettePosList.Add(gameObject.transform);
+                panelScript.alreadyGeneratedNewSoldiers = true;
             }
+
             panelScript.silhouetteGO = gameObject;
+            panelScript.ActivateNewSoldiers(gameObject.transform);
             panelScript.panelList[3].SetActive(true);
             panelScript.panelList[6].SetActive(true);
         }

@@ -3,7 +3,8 @@ using System.Collections;
 
 public class AggroRange : MonoBehaviour
 {
-	public float verticalTriggerOffset = 1.5f;
+	public float verticalTriggerOffset = 1.0f;
+
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly")
@@ -11,9 +12,7 @@ public class AggroRange : MonoBehaviour
 			if ((col.transform.position.y - transform.position.y) < verticalTriggerOffset)
 			{
 				if (!transform.parent.GetComponent<Character>().isDead)
-				{
 					EventManager.Instance.TriggerEvent(new EnemySpottedEvent(gameObject.transform.parent.parent.parent.gameObject));
-				}
 			}
 		}
 	}

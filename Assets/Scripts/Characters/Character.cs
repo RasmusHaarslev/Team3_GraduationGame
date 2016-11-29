@@ -67,11 +67,11 @@ public class Character : MonoBehaviour
 	{
 		//isFleeingValue = isFleeing ? 1 : 0;
 		//animator.SetFloat("isWounded", isFleeingValue);
-		if (agent.velocity.normalized.magnitude < 0.2f)
+		if (!isInCombat)
 		{
-			animator.SetBool("isAware", isInCombat);
+			animator.SetBool("isAware", false);
 		}
-		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
+		animator?.SetFloat("Speed", agent.velocity.magnitude, 0.15f, Time.deltaTime);
 
 		if (target != null)
 		{
@@ -82,14 +82,6 @@ public class Character : MonoBehaviour
 					currentOpponents.Clear();
 					target = null;
 					isInCombat = false;
-				}
-			} else if (target.GetComponent<TutorialCharacter>() != null)
-			{
-				if (target.GetComponent<TutorialCharacter>().isFleeing)
-				{
-					isInCombat = false;
-					currentOpponents.Clear();
-					target = null;
 				}
 			}
 		}
@@ -190,10 +182,11 @@ public class Character : MonoBehaviour
 	public void init(CharacterValues initValues)
 	{
 		characterBaseValues = initValues;
-		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-		health = initValues.health;
-		range = initValues.range;
-		damage = initValues.damage;
+        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+        //Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
+		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
+        range = initValues.range;
+		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;
 		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
@@ -364,7 +357,7 @@ public class Character : MonoBehaviour
 
 		if (isMale)
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackMale1, this.gameObject);
 			}
@@ -375,7 +368,7 @@ public class Character : MonoBehaviour
 		}
 		else
 		{
-			if (characterBaseValues.Type == CharacterValues.type.Hunter)
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player)
 			{
 				Manager_Audio.PlaySound(Manager_Audio.attackFemale1, this.gameObject);
 			}
@@ -408,13 +401,13 @@ public class Character : MonoBehaviour
 			{
 				Manager_Audio.PlaySound(Manager_Audio.shieldHit, this.gameObject);
 			}
-
 			currentHealth -= e.damage;
 		}
 	}
 
 	public void RotateTowards(Transform target)
 	{
+		agent.updateRotation = false;
 		Vector3 direction = (target.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
 		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);

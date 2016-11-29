@@ -3,10 +3,23 @@ using System.Collections;
 
 public class LevelCanvasManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public GameObject fleePopUp;
+
+    void OnEnable()
+    {
+        EventManager.Instance.StartListening<FleeStateEvent>(ShowPopUp);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Instance.StopListening<FleeStateEvent>(ShowPopUp);
+    }
+
+    public void ShowPopUp(FleeStateEvent e)
+    {
+        fleePopUp.SetActive(true);
+        fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>().SetupText(null, "flee");
+    }
 
     public void DisplayEndLootItems(EquippableitemValues[] newItemsValues)
     {
@@ -18,4 +31,8 @@ public class LevelCanvasManager : MonoBehaviour {
         listController.transform.parent.parent.gameObject.SetActive(true);
     }
 
+    public void LoadFleeCutScene()
+    {
+        GameController.Instance.LoadScene("LevelFleeCutscene");
+    }
 }
