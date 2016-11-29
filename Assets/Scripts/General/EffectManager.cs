@@ -54,7 +54,7 @@ public class EffectManager : MonoBehaviour {
             _currentTarget = (GameObject)Instantiate(Target);
 
         _currentTarget.transform.SetParent(e.enemy.transform);
-        _currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 1f, 0);
+        _currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 0f, 0);
         _currentTarget.GetComponent<ParticleSystem>().Play();
     }
 }
