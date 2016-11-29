@@ -117,7 +117,7 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (!character.isDead)
 			{
-				character.RotateTowards(character.target.transform);
+				//character.RotateTowards(character.target.transform);
 			}
 		}
 	}
@@ -294,6 +294,8 @@ public class HunterStateMachine : CoroutineMachine
 			}
 			else
 			{
+				agent.updatePosition = true;
+				agent.updateRotation = true;
 				if (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit)
 				{
 					ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
@@ -390,6 +392,8 @@ public class HunterStateMachine : CoroutineMachine
 					yield return new TransitionTo(StartState, DefaultTransition);
 				}
 			}
+			agent.updatePosition = false;
+			agent.updateRotation = false;
 			character.RotateTowards(character.target.transform);
 			character.animator.SetTrigger("Attack");
 

@@ -16,4 +16,16 @@ public class BridgeAudioControl : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnTriggerExit(Collider col)
+	{
+		if(col.CompareTag("Player"))
+		{
+			if(isSoundChanged)
+			{
+				isSoundChanged = false;
+				Manager_Audio.ChangeState (Manager_Audio.bridgeState,Manager_Audio.bridgeOff);
+			}
+		}
+	}
 }
