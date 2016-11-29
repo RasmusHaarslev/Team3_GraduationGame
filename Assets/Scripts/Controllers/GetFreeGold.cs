@@ -11,6 +11,7 @@ public class GetFreeGold : MonoBehaviour
 
     public void GetGoldTeeth(int amount)
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         confirmPanel.SetActive(true);
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(null, "BuyTeeth", amount);
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -19,6 +20,7 @@ public class GetFreeGold : MonoBehaviour
 
     public void BuyCurrency(int teeths)
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         confirmPanel.SetActive(false);
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: teeths));
     }

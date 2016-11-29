@@ -23,13 +23,26 @@ namespace Assets.Editor
 
         void OnGUI()
         {
-            string[] guids = AssetDatabase.FindAssets("t:Prefab Rival");
+            this.titleContent = new GUIContent("Rivals");
+            string[] lookFor = new string[] { "Assets/Resources/Prefabs/Characters" };
+            string[] guids = AssetDatabase.FindAssets("t:Prefab Rival", lookFor);
+
+            string path = "";
+            foreach (var fab in guids)
+            {
+                var temppath = AssetDatabase.GUIDToAssetPath(fab);
+
+                if (temppath.Contains("/Rival.prefab"))
+                {
+                    path = temppath;
+                }
+            }
 
             if (guids.Length == 0)
             {
                 GUILayout.Label("The prefab is missing, go to Peter!", EditorStyles.boldLabel);
             }
-            else if (guids.Length > 1)
+            else if (guids.Length > 1 && path == "")
             {
                 GUILayout.Label("More than one prefabs with same name, go to Peter!", EditorStyles.boldLabel);
             }
@@ -37,7 +50,6 @@ namespace Assets.Editor
             {
                 try
                 {
-                    string path = AssetDatabase.GUIDToAssetPath(guids.FirstOrDefault());
                     prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<RivalStateMachine>();
 
                     GUILayout.Label("General", EditorStyles.boldLabel);

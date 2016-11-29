@@ -12,7 +12,7 @@ public class MoveScript : MonoBehaviour
 	Character character;
 	float distanceToTarget;
 	float attackSpeed;
-	float counter = 0;
+	float counter = 0.6f;
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
@@ -135,51 +135,77 @@ public class MoveScript : MonoBehaviour
 
 	public void MoveToClickPosition()
 	{
-		agent.updateRotation = true;
-		agent.Resume();
-		character.animator.SetBool("isAware", false);
-		RaycastHit hit;
-		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-		{
-			if (hit.transform.gameObject.tag == "Unfriendly")
-			{
-				character.target = hit.transform.gameObject;
-				attacking = true;
-				agent.stoppingDistance = character.range;
-				agent.SetDestination(hit.transform.position);
+        agent.updateRotation = true;
+        agent.Resume();
+        character.animator.SetBool("isAware", false);
 
-				Character currentTarget = hit.transform.gameObject.GetComponentInParent<Character>();
-				if (currentTarget == null)
-				{
-					currentTarget = hit.transform.gameObject.GetComponent<Character>();
-				}
+        bool enemyHit = false;
+        GameObject firstEnemyHit = null;
+        Vector3 firstGroundHitPoint = new Vector3();
+        Transform firstGroundHitTransform = null;
 
-				if (currentTarget != null)
-				{
-					if (character.isInCombat && !currentTarget.isDead)
-					{
-						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
-					}
-				}
-			}
-			else if (hit.transform.gameObject.tag == "Player")
-			{
-				attacking = false;
-				agent.stoppingDistance = 1.2f;
-			}
-			else if (hit.transform.gameObject.tag == "Item")
-			{
-				EventManager.Instance.TriggerEvent(new ItemClicked(hit.transform.GetComponent<ClickableItem>()));
-			}
-			else
-			{
-				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
-				agent.stoppingDistance = 1.2f;
-				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
-				attacking = false;
-			}
-		}
+        RaycastHit[] hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 1000);
+        Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction.normalized * 500f);
+        if (hits.Length > 0)
+        {
+            foreach (var hit in hits)
+            {
+                if (hit.transform.gameObject.tag == "Unfriendly")
+                {
+                    enemyHit = true;
+                    firstEnemyHit = hit.transform.gameObject;
+                    break;
+                }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
+                {
+                    if (Vector3.Distance(firstGroundHitPoint, Camera.main.transform.position) > Vector3.Distance(hit.point, Camera.main.transform.position))
+                    {
+                        firstGroundHitPoint = hit.point;
+                        firstGroundHitTransform = hit.transform;
+                    }
+                }
+            }
+
+            if (hits[0].transform.gameObject.tag == "Unfriendly" || enemyHit)
+            {
+                character.target = firstEnemyHit;
+                attacking = true;
+                agent.stoppingDistance = character.range;
+                agent.SetDestination(firstEnemyHit.transform.position);
+
+                Character currentTarget = firstEnemyHit.GetComponentInParent<Character>();
+                if (currentTarget == null)
+                {
+                    currentTarget = firstEnemyHit.GetComponent<Character>();
+                }
+
+                if (currentTarget != null)
+                {
+                    if (!currentTarget.isDead)
+                    {
+                        EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
+                        EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
+                    }
+                }
+            }
+            else if (hits[0].transform.gameObject.tag == "Player")
+            {
+                attacking = false;
+                agent.stoppingDistance = 1.2f;
+            }
+            else if (hits[0].transform.gameObject.tag == "Item")
+            {
+                EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
+            }
+            else if (hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            {
+                EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
+                agent.stoppingDistance = 1.2f;
+                agent.SetDestination(new Vector3(firstGroundHitPoint.x, firstGroundHitPoint.y, firstGroundHitPoint.z));
+                attacking = false;
+
+            }
+        }
 	}
 	private void Attacking()
 	{
@@ -205,9 +231,11 @@ public class MoveScript : MonoBehaviour
 			{
 				character.animator.SetBool("isAware", false);
 			}
+
 			if (counter <= 0)
 			{
 				hasShot = false;
+				character.animator.SetBool("isAware", true);
 				character.animator.SetTrigger("Attack");
 				counter = attackSpeed;
 			}

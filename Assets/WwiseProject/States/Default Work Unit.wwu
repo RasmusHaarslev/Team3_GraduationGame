@@ -37,6 +37,8 @@
 						<State Name="EnemyNear" ID="{8A8D9332-02BE-4FBD-99BF-E118BF6BEBDB}"/>
 						<State Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
 						<State Name="Flee" ID="{41A74B5C-2969-4338-9A9E-2E909F653E56}"/>
+						<State Name="Lose" ID="{EE432795-624A-4375-BBBB-F183D28CD04E}"/>
+						<State Name="Win" ID="{09534D19-5ECF-4CAB-8563-C40F93CDA1D6}"/>
 					</ChildrenList>
 					<TransitionList>
 						<Transition>
@@ -52,6 +54,24 @@
 							<IsShared>false</IsShared>
 						</Transition>
 					</TransitionList>
+				</StateGroup>
+				<StateGroup Name="Palette" ID="{A0B1C30E-3D0D-4A0D-9D91-5E2363635721}">
+					<ChildrenList>
+						<State Name="None" ID="{97DB6869-57D4-4A4B-BD2D-C2986B56E14F}"/>
+						<State Name="Color1" ID="{FDF7993E-B557-4D9C-9048-F7E53CD6ECC3}"/>
+						<State Name="Color2" ID="{CD1D01CF-54BA-4EA5-8369-E8234EADD8FB}"/>
+						<State Name="Color3" ID="{1CED0D20-1A7E-49D1-BBF5-E874DE51AACE}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}">
+					<PropertyList>
+						<Property Name="DefaultTransitionTime" Type="Real64" Value="2.5"/>
+					</PropertyList>
+					<ChildrenList>
+						<State Name="None" ID="{E45C1EF8-C488-4AFD-9D15-EB8BCFDDEEFC}"/>
+						<State Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+						<State Name="OffBridge" ID="{27F75BAF-74C9-48C8-9514-D9DCCB5329C5}"/>
+					</ChildrenList>
 				</StateGroup>
 			</ChildrenList>
 		</WorkUnit>
