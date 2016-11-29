@@ -258,6 +258,7 @@ GameObject:
   - 114: {fileID: 114000010363417700}
   - 54: {fileID: 54000013852121386}
   - 114: {fileID: 114000010738752216}
+  - 114: {fileID: 114000012042221156}
   m_Layer: 0
   m_Name: Rival
   m_TagString: Unfriendly
@@ -379,6 +380,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013659104888}
   - 65: {fileID: 65000013956300760}
+  - 114: {fileID: 114000014268163262}
   m_Layer: 14
   m_Name: TapCollider
   m_TagString: Unfriendly
@@ -6389,6 +6391,20 @@ MonoBehaviour:
   - {fileID: 2100000, guid: c4aadef2c35ada5479050e3789b9f423, type: 2}
   - {fileID: 2100000, guid: 24ad218c9687d1d4697c92bafd9e1cfc, type: 2}
   mesh: {fileID: 0}
+--- !u!114 &114000012042221156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010372709548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23e1c79b7234c741807a72426a6f1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFoot: {fileID: 0}
+  rightFoot: {fileID: 0}
+  hasFootStepParticles: 0
 --- !u!114 &114000012277029350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6427,6 +6443,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barDisplay: 0
   size: {x: 120, y: 15}
+--- !u!114 &114000014268163262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010561746768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b00dac21884e7943a13d6efc383c47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135000011475029890
 SphereCollider:
   m_ObjectHideFlags: 1
