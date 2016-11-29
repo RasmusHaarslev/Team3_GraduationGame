@@ -8,7 +8,7 @@ public class CharacterSpawner : MonoBehaviour
 {
 
     //public string characterName;
-    [Range(1,3)]
+    [Range(1,6)]
     public int tier = 1;
     private Color GizmoColor = Color.red;
     private float gizmoSize = 1.0f;
@@ -16,8 +16,8 @@ public class CharacterSpawner : MonoBehaviour
     /**/
     void OnDrawGizmos()
     {
-        GizmoColor = new Color(1f, (3 - tier) * 0.5f, 0f, 1f);
-        gizmoSize = 0.5f + tier * 0.5f;
+        GizmoColor = new Color((tier+1) % 2f, 1f - tier * 0.225f, tier % 2f, 1f);
+        gizmoSize = 0.5f + Mathf.Floor((tier-1)/2) * 0.5f;
 
         Gizmos.color = GizmoColor;
         Gizmos.DrawSphere(transform.position, gizmoSize * 0.3f);
