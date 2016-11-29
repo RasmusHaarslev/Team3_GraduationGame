@@ -29,7 +29,7 @@ GameObject:
   - 114: {fileID: 114000011871992980}
   - 114: {fileID: 114000010025336348}
   m_Layer: 0
-  m_Name: Rival_old
+  m_Name: Enemy_old
   m_TagString: Unfriendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0279683ab453c2e43b23a4dc21f4e8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasFootsteps: 1
+  hasWeaponSounds: 1
 --- !u!114 &114000011871992980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05029e0756104cb48a9ed0ee0ca73f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
+  playerCapsuleCollider: {fileID: 0}
+  playerSphereCollider: {fileID: 0}
+  pushForceOnDeath: 10
+  forceModePush: 1
 --- !u!114 &114000013335739844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,17 +173,23 @@ MonoBehaviour:
   range: 0
   damageSpeed: 0
   currentHealth: 0
+  animator: {fileID: 0}
   target: {fileID: 0}
   currentOpponents: []
   isCurrentTargetAlive: 0
   rotationSpeed: 2
   isInCombat: 0
   isDead: 0
+  isFleeing: 0
+  randomTargetProbability: 25
   rightHandSlot: {fileID: 0}
   leftHandSlot: {fileID: 0}
   headSlot: {fileID: 0}
   torsoSlot: {fileID: 0}
   legsSlot: {fileID: 0}
+  equippedWeaponType: 0
+  characterType: 0
+  isMale: 1
 --- !u!114 &114000013388398048
 MonoBehaviour:
   m_ObjectHideFlags: 1
