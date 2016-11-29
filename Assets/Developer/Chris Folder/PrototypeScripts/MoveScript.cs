@@ -171,6 +171,8 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
+				agent.updatePosition = true;
+				agent.updateRotation = true;
 				EventManager.Instance.TriggerEvent(new PositionClicked(hit.point, hit.transform));
 				agent.stoppingDistance = 1.2f;
 				agent.SetDestination(new Vector3(hit.point.x, hit.point.y, hit.point.z));
