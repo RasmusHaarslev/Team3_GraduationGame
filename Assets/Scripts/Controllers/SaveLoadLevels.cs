@@ -33,6 +33,7 @@ public class SaveLoadLevels
 
                 xmlNode.NodeId = currentNode.NodeId;
                 xmlNode.TravelCost = currentNode.TravelCost;
+                xmlNode.scoutCost = currentNode.scoutCost;
                 xmlNode.sceneSelection = currentNode.sceneSelection;
                 xmlNode.CampsInNode = currentNode.CampsInNode;
                 xmlNode.probabilityWolves = currentNode.probabilityWolves;
@@ -43,6 +44,7 @@ public class SaveLoadLevels
                 xmlNode.choiceCamps = currentNode.choiceCamps;
                 xmlNode.foodAmount = currentNode.foodAmount;
                 xmlNode.scrapAmount = currentNode.scrapAmount;
+                xmlNode.goldTeethAmount = currentNode.goldTeethAmount;
                 xmlNode.itemDropAmount = currentNode.itemDropAmount;
                 xmlNode.isCleared = currentNode.isCleared;
                 xmlNode.isScouted = currentNode.isScouted;
@@ -103,6 +105,7 @@ public class SaveLoadLevels
                 currentNode.NodeId = node.NodeId;
                 currentNode.Level = row.Level;
                 currentNode.TravelCost = node.TravelCost;
+                currentNode.scoutCost = node.scoutCost;
                 currentNode.sceneSelection = node.sceneSelection;
                 currentNode.CampsInNode = node.CampsInNode;
                 currentNode.probabilityWolves = node.probabilityWolves;
@@ -113,6 +116,7 @@ public class SaveLoadLevels
                 currentNode.choiceCamps = node.choiceCamps;
                 currentNode.foodAmount = node.foodAmount;
                 currentNode.scrapAmount = node.scrapAmount;
+                currentNode.goldTeethAmount = node.goldTeethAmount;
                 currentNode.itemDropAmount = node.itemDropAmount;
                 currentNode.isCleared = node.isCleared;
                 currentNode.isScouted = node.isScouted;
@@ -184,6 +188,8 @@ public class NodeXML
     public int NodeId;
     [XmlAttribute("travelCost")]
     public int TravelCost;
+    [XmlAttribute("scoutCost")]
+    public int scoutCost;
     [XmlAttribute("sceneSelection")]
     public int sceneSelection;
     [XmlAttribute("CampsInNode")]
@@ -204,6 +210,8 @@ public class NodeXML
     public int foodAmount;
     [XmlAttribute("scrapAmount")]
     public int scrapAmount;
+    [XmlAttribute("goldTeethAmount")]
+    public int goldTeethAmount;
     [XmlAttribute("itemDropAmount")]
     public int itemDropAmount;
     [XmlAttribute("isCleared")]

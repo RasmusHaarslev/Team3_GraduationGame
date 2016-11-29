@@ -43,15 +43,20 @@ namespace Assets.Editor
                     GUILayout.Label("General", EditorStyles.boldLabel);
                     prefabScript.amountOfRows = EditorGUILayout.IntField("Amount of rows generated",prefabScript.amountOfRows);
 
-                    GUILayout.Label("Probabilities", EditorStyles.boldLabel);
-                    prefabScript.probabilityTribes = EditorGUILayout.IntSlider("Probability of tribe",prefabScript.probabilityTribes, 0, 5);
-                    if (GUILayout.Button("Save"))
-                    {
-                        var go = Instantiate(prefabScript.gameObject);
-                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
-                        DestroyImmediate(go);
-                    }
+                    GUILayout.Label("Item Drops", EditorStyles.boldLabel);
+                    prefabScript.MaxItemDropAmount = EditorGUILayout.IntSlider("Max Amount of items dropped", prefabScript.MaxItemDropAmount, 2, 5);
 
+                    GUILayout.Label("Lowest Travel Cost", EditorStyles.boldLabel);
+                    prefabScript.LowestTravelCost = EditorGUILayout.IntSlider("Minimum amount of food it takes to Travel", prefabScript.LowestTravelCost, 0, 3);
+
+                    GUILayout.Label("Highest Travel Cost", EditorStyles.boldLabel);
+                    prefabScript.MaxItemDropAmount = EditorGUILayout.IntSlider("Highest amount of food it takes to Travel", prefabScript.HighestTravelCost, prefabScript.LowestTravelCost, 6);
+
+                    GUILayout.Label("Lowest Scout Cost", EditorStyles.boldLabel);
+                    prefabScript.LowestScoutCost = EditorGUILayout.IntSlider("Minimum amount of food it takes to Scout", prefabScript.LowestScoutCost, 0, 3);
+
+                    GUILayout.Label("Highest Scout Cost", EditorStyles.boldLabel);
+                    prefabScript.HighestScoutCost = EditorGUILayout.IntSlider("Highest amount of food it takes to Scout", prefabScript.HighestScoutCost, prefabScript.LowestScoutCost, 6);
                 }
                 catch (Exception e) {
                     GUILayout.Label("The prefab is messed up, go to Peter!", EditorStyles.boldLabel);
