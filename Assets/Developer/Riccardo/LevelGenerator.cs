@@ -71,7 +71,6 @@ public class LevelGenerator : MonoBehaviour
 	{
 		Manager_Audio.PlaySound(Manager_Audio.baseAmbienceStop, this.gameObject);
 		Manager_Audio.PlaySound(Manager_Audio.musicExploreStop, this.gameObject);
-
 	}
 
 
