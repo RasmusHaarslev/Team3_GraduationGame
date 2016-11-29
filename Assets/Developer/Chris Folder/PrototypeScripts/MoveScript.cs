@@ -12,7 +12,7 @@ public class MoveScript : MonoBehaviour
 	Character character;
 	float distanceToTarget;
 	float attackSpeed;
-	float counter = 0;
+	float counter = 0.6f;
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
@@ -205,9 +205,11 @@ public class MoveScript : MonoBehaviour
 			{
 				character.animator.SetBool("isAware", false);
 			}
+
 			if (counter <= 0)
 			{
 				hasShot = false;
+				character.animator.SetBool("isAware", true);
 				character.animator.SetTrigger("Attack");
 				counter = attackSpeed;
 			}
