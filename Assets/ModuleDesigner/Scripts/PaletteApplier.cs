@@ -5,13 +5,15 @@ using UnityEngine;
 
 namespace Assets.ModuleDesigner.Scripts
 {
-    public class PaletteApplier : TriggerReceiver
+    public class PaletteApplier : MonoBehaviour
     {
-        [Header("Output objects")]
-        public TriggerReceiver[] Targets;
+        [Header("Options"),Tooltip("Amount of rows between palette switch")]
+        public int PaletteInterval = 2;
+
+        [Header("Materials to change")]
         public Material walkableGroundMaterial;
         public Material nonWalkableGroundMaterial;
-        public int paletteNumber = 1;
+        private int paletteNumber = 1;
 
         //Declare colors
         private Color ambientSkyColor;
@@ -21,16 +23,43 @@ namespace Assets.ModuleDesigner.Scripts
         private Color walkableGroundColor;
         private Color nonWalkableGroundColor;
 
-        public override void TriggerEnter()
+        void OnEnable()
         {
+            EventManager.Instance.StartListening<LevelStarted>(ChangePalette);
+        }
+
+        void OnDisable()
+        {
+            EventManager.Instance.StopListening<LevelStarted>(ChangePalette);
+        }
+
+        public void ChangePalette(LevelStarted e)
+        {
+            paletteNumber = PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName);
+            paletteNumber = ((int)(paletteNumber * (1.0f/(float) PaletteInterval))) % 3;
+
             //Parse colors
             switch (paletteNumber)
             {
                 default:
-                case 1: //Yellow palette
-                    {   parseColors("#D7D1B4", "#A5A08A", "#647388", "#5F4B03", "#472A00");  } break;
-                case 2: //Red/purple palette
-                    {   parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");  } break;
+                case 0: //Yellow palette
+                    {
+                        parseColors("#D7D1B4", "#A5A08A", "#647388", "#5F4B03", "#472A00");
+                    }
+                    Manager_Audio.ChangeState("Palette","Color1");
+                    break;
+                case 1: //Red/purple palette
+                    {
+                        parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
+                    }
+                    Manager_Audio.ChangeState("Palette", "Color2");
+                    break;
+                case 2: 
+                    {
+                        parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
+                    }
+                    Manager_Audio.ChangeState("Palette", "Color3");
+                    break;
             }
 
             //Apply colors
@@ -53,46 +82,5 @@ namespace Assets.ModuleDesigner.Scripts
             ColorUtility.TryParseHtmlString(c5, out ambientGroundColor);
         }
 
-        public override void TriggerExit()
-        { 
-            //
-        }
-
-        void OnDrawGizmos()
-        {
-            if (KeepGizmo)
-                OnDrawGizmosSelected();
-        }
-
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
-
-            foreach (var obj in Targets) 
-            {
-                obj.ShowGizmos();
-                Gizmos.color = Color.green;
-                Gizmos.DrawLine(this.transform.position + new Vector3(0, 0.5f, 0), obj.transform.position - new Vector3(0, 0.5f, 0));
-            }
-        }
-
-        void OnValidate()
-        {
-            foreach (var target in Targets)
-            {
-                target.Expose(this.gameObject);
-            }
-        }
-
-        public override void Expose(GameObject go)
-        {
-
-        }
-
-        public override void ShowGizmos()
-        {
-            OnDrawGizmos();
-        }
     }
 }

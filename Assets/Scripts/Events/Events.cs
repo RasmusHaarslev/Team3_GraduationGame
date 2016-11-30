@@ -34,6 +34,11 @@ public class ChangeResources : GameEvent
     }
 }
 
+public class LevelStarted : GameEvent
+{
+    public LevelStarted() { }
+}
+
 public class ResourcesUpdated : GameEvent
 {
     public ResourcesUpdated() { }
