@@ -166,18 +166,18 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
-	private void CommandAnimator(CommandEvent e)
-	{
-		Debug.Log("received ");
-		animator.SetTrigger("IssueCommand");
-	}
-
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
+	}
+
+	private void CommandAnimator(CommandEvent e)
+	{
+		Debug.Log("received");
+		animator.SetTrigger("IssueCommand");
 	}
 
 	/// <summary>
