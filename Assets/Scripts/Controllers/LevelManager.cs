@@ -211,14 +211,14 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseGame(string scene = "PlayerDeathCutscene")
 	{
-        Manager_Audio.ChangeState(Manager_Audio.exploreSnapshot, Manager_Audio.loseState);
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
         GameController.Instance.LoseGame();
 		GameController.Instance.LoadScene(scene);
 	}
 
 	public void LoseLevel()
 	{
-        Manager_Audio.ChangeState(Manager_Audio.exploreSnapshot, Manager_Audio.loseState);
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
         EventManager.Instance.TriggerEvent(new LevelLost());
 		PlayerPrefs.SetInt("LevelResult", 0);
 
@@ -227,7 +227,7 @@ public class LevelManager : MonoBehaviour
 
 	public void WinLevel()
 	{
-        Manager_Audio.ChangeState(Manager_Audio.exploreSnapshot, Manager_Audio.winState);
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
         EventManager.Instance.TriggerEvent(new LevelWon());
 		EventManager.Instance.TriggerEvent(
 			new ChangeResources(
