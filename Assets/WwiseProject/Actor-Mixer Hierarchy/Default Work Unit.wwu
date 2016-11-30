@@ -3,7 +3,7 @@
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{C4D12083-B419-4C5F-968F-41DE6713577F}" PersistMode="Standalone">
 			<ChildrenList>
-				<Folder Name="WindsProto" ID="{986FDA46-4EB7-4F9C-BE5A-8F0E15DA2CFC}" ShortID="70718881">
+				<Folder Name="Winds" ID="{986FDA46-4EB7-4F9C-BE5A-8F0E15DA2CFC}" ShortID="70718881">
 					<ChildrenList>
 						<RandomSequenceContainer Name="WindDeep2" ID="{C3269D62-410D-4377-8A01-3E06B86863A6}" ShortID="660176530">
 							<PropertyList>
@@ -614,14 +614,13 @@
 								<ItemRef Name="WindQuiter" ID="{3867AD94-00B3-42FE-9CEC-87C5C74BBCAF}"/>
 							</Playlist>
 						</RandomSequenceContainer>
-						<RandomSequenceContainer Name="BaseWind1" ID="{D618987E-1774-4E26-8986-9B090ECF0BB5}" ShortID="842760751">
+						<SwitchContainer Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" ShortID="355062941">
 							<PropertyList>
-								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="27"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>2</Value>
+										<Value>-10</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -634,37 +633,12 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="BaseWind1" ID="{60F011B9-771C-424B-97D8-85E0F299A059}" ShortID="160254264" Type="SoundFX">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="BaseWind1" ID="{D54F9DFC-CF03-4652-83F6-E48771918E1A}" ShortID="498871414">
-											<Language>SFX</Language>
-											<AudioFile>BaseWind1.wav</AudioFile>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="BaseWind1" ID="{D54F9DFC-CF03-4652-83F6-E48771918E1A}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="BaseWind1_01" ID="{E5A0013D-7DF8-41F5-BAC7-07C2385B93EB}" ShortID="575914953" Type="SoundFX">
+								<RandomSequenceContainer Name="Wind1" ID="{027027A1-05C9-456B-8594-4819CB695DE0}" ShortID="924296243">
 									<PropertyList>
-										<Property Name="Pitch" Type="int32">
-											<ValueList>
-												<Value>-100</Value>
-											</ValueList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-1</Value>
-											</ValueList>
-										</Property>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+										<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -675,18 +649,132 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="BaseWind1" ID="{987AC8A3-8AEA-4C39-BAE4-166ACB2BC2D0}" ShortID="199210938">
-											<Language>SFX</Language>
-											<AudioFile>BaseWind1.wav</AudioFile>
-											<ConvertedFileIDList>
-												<File ID="498871414"/>
-											</ConvertedFileIDList>
-										</AudioFileSource>
+										<Sound Name="Wind1" ID="{8B1CD2C5-C627-40DB-B130-2B59DFF42A45}" ShortID="376883191" Type="SoundFX">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Wind1" ID="{629E00BD-07AD-49CA-8BAC-3AEAD75827EF}" ShortID="578309304">
+													<Language>SFX</Language>
+													<AudioFile>Wind1.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Wind1" ID="{629E00BD-07AD-49CA-8BAC-3AEAD75827EF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="BaseWind1" ID="{987AC8A3-8AEA-4C39-BAE4-166ACB2BC2D0}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
+									<Playlist>
+										<ItemRef Name="Wind1" ID="{8B1CD2C5-C627-40DB-B130-2B59DFF42A45}"/>
+									</Playlist>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Wind2" ID="{703A7F4A-10E5-452A-895C-532FD557DC72}" ShortID="18892226">
+									<PropertyList>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+										<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Wind3" ID="{4A4E5E03-5911-42B7-8F6F-AB58ABE819A2}" ShortID="696615346" Type="SoundFX">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Wind3" ID="{C4C2C93F-3AD6-4CDB-8464-4EF786139866}" ShortID="413973724">
+													<Language>SFX</Language>
+													<AudioFile>Wind3.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Wind3" ID="{C4C2C93F-3AD6-4CDB-8464-4EF786139866}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<Playlist>
+										<ItemRef Name="Wind3" ID="{4A4E5E03-5911-42B7-8F6F-AB58ABE819A2}"/>
+									</Playlist>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="Storm" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}" ShortID="587118837">
+									<PropertyList>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismResetPlaylistEachPlay" Type="bool" Value="False"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+										<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="WindSnowStorm" ID="{C8BD6E88-BF79-4347-81F8-4CC742FD8E31}" ShortID="151589316" Type="SoundFX">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="WindSnowStorm" ID="{2D7843DF-879A-403C-9B5D-6989451B35FB}" ShortID="982349721">
+													<Language>SFX</Language>
+													<AudioFile>WindSnowStorm.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="WindSnowStorm" ID="{2D7843DF-879A-403C-9B5D-6989451B35FB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+									<Playlist>
+										<ItemRef Name="WindSnowStorm" ID="{C8BD6E88-BF79-4347-81F8-4CC742FD8E31}"/>
+									</Playlist>
+								</RandomSequenceContainer>
 							</ChildrenList>
 							<StateInfo>
 								<StateGroupList>
@@ -700,146 +788,67 @@
 								<CustomStateList>
 									<CustomState>
 										<StateRef Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
-										<State Name="Custom State" ID="{7782FD6D-079E-4B74-BCFA-BEEA259AD288}" ShortID="195346193">
-											<PropertyList>
-												<Property Name="Lowpass" Type="int16" Value="50"/>
-												<Property Name="Volume" Type="Real64" Value="-3"/>
-											</PropertyList>
-										</State>
-									</CustomState>
-									<CustomState>
-										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
-										<State Name="Custom State" ID="{4A7D9C0A-7E17-4BCA-AB42-345202E236BB}" ShortID="334453633">
+										<State Name="Custom State" ID="{C6CE1D0C-634A-4ACD-9F35-41B5D0BD0B03}" ShortID="948477353">
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="60"/>
-												<Property Name="Volume" Type="Real64" Value="-2"/>
-											</PropertyList>
-										</State>
-									</CustomState>
-								</CustomStateList>
-							</StateInfo>
-							<Playlist>
-								<ItemRef Name="BaseWind1" ID="{60F011B9-771C-424B-97D8-85E0F299A059}"/>
-								<ItemRef Name="BaseWind1_01" ID="{E5A0013D-7DF8-41F5-BAC7-07C2385B93EB}"/>
-							</Playlist>
-						</RandomSequenceContainer>
-						<RandomSequenceContainer Name="BaseWind1_1" ID="{4E54076B-8F76-4F7A-9A20-3A9BB96F03EA}" ShortID="909705214">
-							<PropertyList>
-								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-2</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="BaseWind2" ID="{B7B4A692-B209-4A10-8869-7FC9F76D8B64}" ShortID="730883407" Type="SoundFX">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="BaseWind2" ID="{328E131D-52A9-4D96-AC9B-AA29ABEF47C9}" ShortID="551871948">
-											<Language>SFX</Language>
-											<AudioFile>BaseWind2.wav</AudioFile>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="BaseWind2" ID="{328E131D-52A9-4D96-AC9B-AA29ABEF47C9}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="BaseWind2_01" ID="{4A5D461C-54D9-4E84-BD49-10BF029BE6F3}" ShortID="299553298" Type="SoundFX">
-									<PropertyList>
-										<Property Name="Pitch" Type="int32">
-											<ValueList>
-												<Value>-100</Value>
-											</ValueList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-4</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="BaseWind2" ID="{51099F1F-C6FF-492B-ABF1-116FBD124152}" ShortID="436484479">
-											<Language>SFX</Language>
-											<AudioFile>BaseWind2.wav</AudioFile>
-											<ConvertedFileIDList>
-												<File ID="551871948"/>
-											</ConvertedFileIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="BaseWind2" ID="{51099F1F-C6FF-492B-ABF1-116FBD124152}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-							<StateInfo>
-								<StateGroupList>
-									<StateGroupInfo>
-										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
-									</StateGroupInfo>
-									<StateGroupInfo>
-										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
-									</StateGroupInfo>
-								</StateGroupList>
-								<CustomStateList>
-									<CustomState>
-										<StateRef Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
-										<State Name="Custom State" ID="{81CA3833-5289-405A-BF66-734CD2642259}" ShortID="499397323">
-											<PropertyList>
-												<Property Name="Lowpass" Type="int16" Value="40"/>
-												<Property Name="Volume" Type="Real64" Value="-12"/>
+												<Property Name="Volume" Type="Real64" Value="-3"/>
 											</PropertyList>
 										</State>
 									</CustomState>
 									<CustomState>
 										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
-										<State Name="Custom State" ID="{DAF0D26F-F48E-40FF-8A25-4F3443567787}" ShortID="682117881">
+										<State Name="Custom State" ID="{E0A55E68-25F8-48BF-86F0-73C763533F04}" ShortID="482817259">
 											<PropertyList>
-												<Property Name="Lowpass" Type="int16" Value="50"/>
-												<Property Name="Pitch" Type="int32" Value="-200"/>
+												<Property Name="Lowpass" Type="int16" Value="60"/>
 												<Property Name="Volume" Type="Real64" Value="-3"/>
 											</PropertyList>
 										</State>
 									</CustomState>
 								</CustomStateList>
 							</StateInfo>
-							<Playlist>
-								<ItemRef Name="BaseWind2" ID="{B7B4A692-B209-4A10-8869-7FC9F76D8B64}"/>
-								<ItemRef Name="BaseWind2_01" ID="{4A5D461C-54D9-4E84-BD49-10BF029BE6F3}"/>
-							</Playlist>
-						</RandomSequenceContainer>
+							<GroupingInfo>
+								<GroupRef Name="Palette" ID="{A0B1C30E-3D0D-4A0D-9D91-5E2363635721}"/>
+								<DefaultSwitchRef Name="Color2" ID="{CD1D01CF-54BA-4EA5-8369-E8234EADD8FB}"/>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="Wind2" ID="{703A7F4A-10E5-452A-895C-532FD557DC72}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Wind1" ID="{027027A1-05C9-456B-8594-4819CB695DE0}"/>
+									</GroupingBehavior>
+									<GroupingBehavior>
+										<ItemRef Name="Storm" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="Color3" ID="{1CED0D20-1A7E-49D1-BBF5-E874DE51AACE}"/>
+										<ItemList>
+											<ItemRef Name="Storm" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Color1" ID="{FDF7993E-B557-4D9C-9048-F7E53CD6ECC3}"/>
+										<ItemList>
+											<ItemRef Name="Wind1" ID="{027027A1-05C9-456B-8594-4819CB695DE0}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Color2" ID="{CD1D01CF-54BA-4EA5-8369-E8234EADD8FB}"/>
+										<ItemList>
+											<ItemRef Name="Wind2" ID="{703A7F4A-10E5-452A-895C-532FD557DC72}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
+							</GroupingInfo>
+						</SwitchContainer>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Weapons" ID="{A0920B0C-261E-4A38-881F-707EFA5EF507}" ShortID="658874926">
 					<ChildrenList>
 						<Sound Name="HItByShield" ID="{2A765743-6FA8-4028-971C-4E55E82A68F7}" ShortID="916633109" Type="SoundFX">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="LoopCount" Type="int32" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
@@ -876,6 +885,8 @@
 						</Sound>
 						<Sound Name="UseKnife" ID="{7DD8A071-59F0-4F39-A72C-396B674E5444}" ShortID="536452148" Type="SoundFX">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="38"/>
 								<Property Name="LoopCount" Type="int32" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ModifierList>
@@ -930,6 +941,13 @@
 						</Sound>
 						<RandomSequenceContainer Name="Gun" ID="{5EFC85E5-A3C3-4614-B7AB-5BA777EFF3D5}" ShortID="873785797">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>6</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="77"/>
 								<Property Name="Highpass" Type="int16">
 									<ModifierList>
 										<ModifierInfo>
@@ -975,7 +993,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>1</Value>
+										<Value>-8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1008,6 +1026,1122 @@
 											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>Gun1.wav</AudioFile>
+											<PropertyCurveList>
+												<PropertyCurve PropertyName="HdrEnvelope">
+													<Curve Name="" ID="{2EDB65F1-5869-4E49-B191-9B78B5556EFC}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="1"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>0.198346421122551</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>0.00997732426303855</XPos>
+																<YPos>0.171185165643692</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.0199546485260771</XPos>
+																<YPos>0.123681008815765</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.0299319727891156</XPos>
+																<YPos>0.0941425561904907</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.0498866213151927</XPos>
+																<YPos>0.0724204555153847</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.0698412698412698</XPos>
+																<YPos>0.0785080268979073</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.0897959183673469</XPos>
+																<YPos>0.047664251178503</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.0997732426303855</XPos>
+																<YPos>0.0509036406874657</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.119727891156463</XPos>
+																<YPos>0.0389879979193211</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.129705215419501</XPos>
+																<YPos>0.0645039454102516</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.13968253968254</XPos>
+																<YPos>0.0675630867481232</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.159637188208617</XPos>
+																<YPos>0.041250716894865</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.21984</XPos>
+																<YPos>0.04092</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.22982</XPos>
+																<YPos>0.02336</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.23979</XPos>
+																<YPos>0.02674</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.25975</XPos>
+																<YPos>0.01719</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.26973</XPos>
+																<YPos>0.02425</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.31345</XPos>
+																<YPos>0.03008</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.35818</XPos>
+																<YPos>0.02333</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.359183673469388</XPos>
+																<YPos>0.0302143767476082</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.369160997732426</XPos>
+																<YPos>0.0386016257107258</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.379138321995465</XPos>
+																<YPos>0.0383007898926735</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.389115646258503</XPos>
+																<YPos>0.0296951159834862</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.399092970521542</XPos>
+																<YPos>0.0379466786980629</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.40907</XPos>
+																<YPos>0.03126</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.439002267573696</XPos>
+																<YPos>0.0242788344621658</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.458956916099773</XPos>
+																<YPos>0.0326531939208508</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.47891156462585</XPos>
+																<YPos>0.0241771880537271</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.54875283446712</XPos>
+																<YPos>0.0243050456047058</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.578684807256236</XPos>
+																<YPos>0.0208414476364851</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.588662131519274</XPos>
+																<YPos>0.0245862044394016</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.608616780045351</XPos>
+																<YPos>0.0192162524908781</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.61859410430839</XPos>
+																<YPos>0.0213161185383797</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.638548752834467</XPos>
+																<YPos>0.0178315509110689</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.648526077097506</XPos>
+																<YPos>0.0188241265714169</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.668480725623583</XPos>
+																<YPos>0.0267541371285915</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.68843537414966</XPos>
+																<YPos>0.022369172424078</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.698412698412698</XPos>
+																<YPos>0.0249646119773388</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.728344671201814</XPos>
+																<YPos>0.0148707833141088</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.738321995464853</XPos>
+																<YPos>0.0157522298395634</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.748299319727891</XPos>
+																<YPos>0.0217405874282122</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.778231292517007</XPos>
+																<YPos>0.0241288132965565</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.788208616780045</XPos>
+																<YPos>0.0197412353008986</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.798185941043084</XPos>
+																<YPos>0.0236766953021288</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.838095238095238</XPos>
+																<YPos>0.0173726752400398</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.868027210884354</XPos>
+																<YPos>0.0201734565198421</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.887981859410431</XPos>
+																<YPos>0.0164379365742207</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.897959183673469</XPos>
+																<YPos>0.0202505048364401</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.947845804988662</XPos>
+																<YPos>0.0139592597261071</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.957823129251701</XPos>
+																<YPos>0.0177201479673386</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.967800453514739</XPos>
+																<YPos>0.017299884930253</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.977777777777778</XPos>
+																<YPos>0.0109427059069276</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>0.997732426303855</XPos>
+																<YPos>0.021603986620903</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.00770975056689</XPos>
+																<YPos>0.022057605907321</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.01768707482993</XPos>
+																<YPos>0.015635397285223</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.03764172335601</XPos>
+																<YPos>0.0108031630516052</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.05759637188209</XPos>
+																<YPos>0.0133475698530674</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.07755102040816</XPos>
+																<YPos>0.00990762747824192</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.09750566893424</XPos>
+																<YPos>0.0110922418534756</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.10748299319728</XPos>
+																<YPos>0.00873253773897886</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.12743764172336</XPos>
+																<YPos>0.00733095034956932</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.16734693877551</XPos>
+																<YPos>0.00914241001009941</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.19727891156463</XPos>
+																<YPos>0.00893346965312958</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.20725623582766</XPos>
+																<YPos>0.0077146296389401</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.24716553287982</XPos>
+																<YPos>0.00751110585406423</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.2671201814059</XPos>
+																<YPos>0.0114772655069828</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.27709750566893</XPos>
+																<YPos>0.00833732914179564</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.28707482993197</XPos>
+																<YPos>0.00670178839936852</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.29705215419501</XPos>
+																<YPos>0.0100004421547055</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.30702947845805</XPos>
+																<YPos>0.0105339717119932</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.33696145124717</XPos>
+																<YPos>0.00419824849814177</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.37687074829932</XPos>
+																<YPos>0.00509040616452694</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.38684807256236</XPos>
+																<YPos>0.00591276865452528</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.41678004535147</XPos>
+																<YPos>0.00560981268063188</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.43673469387755</XPos>
+																<YPos>0.00918397773057222</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.44671201814059</XPos>
+																<YPos>0.00831911433488131</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.45668934240363</XPos>
+																<YPos>0.00541619397699833</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.46666666666667</XPos>
+																<YPos>0.00348302046768367</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.49659863945578</XPos>
+																<YPos>0.00278854183852673</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.51655328798186</XPos>
+																<YPos>0.00394658930599689</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.5265306122449</XPos>
+																<YPos>0.00329368631355464</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.54648526077097</XPos>
+																<YPos>0.00339656067080796</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.56643990929705</XPos>
+																<YPos>0.00256485026329756</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.59637188208617</XPos>
+																<YPos>0.0029089841991663</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.60634920634921</XPos>
+																<YPos>0.00247228587977588</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.62630385487528</XPos>
+																<YPos>0.00336777116172016</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.64625850340136</XPos>
+																<YPos>0.00328839477151632</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.66621315192744</XPos>
+																<YPos>0.00357419811189175</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.68616780045351</XPos>
+																<YPos>0.00311900861561298</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.70612244897959</XPos>
+																<YPos>0.00342064932920039</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.73605442176871</XPos>
+																<YPos>0.00236487784422934</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.75600907029478</XPos>
+																<YPos>0.00236879754811525</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.76598639455782</XPos>
+																<YPos>0.00208211271092296</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.7859410430839</XPos>
+																<YPos>0.00262015080079436</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.82585034013605</XPos>
+																<YPos>0.0018542124889791</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.84580498866213</XPos>
+																<YPos>0.00243407976813614</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.87573696145125</XPos>
+																<YPos>0.00187992106657475</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.89569160997732</XPos>
+																<YPos>0.00202242378145456</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.93560090702948</XPos>
+																<YPos>0.0015652832807973</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.94557823129252</XPos>
+																<YPos>0.0018612960120663</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.96553287981859</XPos>
+																<YPos>0.0016868335660547</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.98548752834467</XPos>
+																<YPos>0.00203729956410825</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>1.99546485260771</XPos>
+																<YPos>0.00191786140203476</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.00544217687075</XPos>
+																<YPos>0.00154787371866405</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.01541950113379</XPos>
+																<YPos>0.001440389896743</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.03537414965986</XPos>
+																<YPos>0.00155675818677992</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.0453514739229</XPos>
+																<YPos>0.00135122425854206</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.07528344671202</XPos>
+																<YPos>0.00113453436642885</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.08526077097506</XPos>
+																<YPos>0.00131994299590588</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.12517006802721</XPos>
+																<YPos>0.00148095993790776</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.14512471655329</XPos>
+																<YPos>0.00125703786034137</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.15510204081633</XPos>
+																<YPos>0.00148719432763755</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.18503401360544</XPos>
+																<YPos>0.00129570881836116</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.2249433106576</XPos>
+																<YPos>0.00132963911164552</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.24489795918367</XPos>
+																<YPos>0.00116833590436727</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.26485260770975</XPos>
+																<YPos>0.00148370442911983</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.27482993197279</XPos>
+																<YPos>0.00121883768588305</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.29478458049887</XPos>
+																<YPos>0.00115694699343294</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.3047619047619</XPos>
+																<YPos>0.00101521832402796</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.34467120181406</XPos>
+																<YPos>0.00114153453614563</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.36462585034014</XPos>
+																<YPos>0.00100217887666076</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.37460317460317</XPos>
+																<YPos>0.00114498101174831</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.42448979591837</XPos>
+																<YPos>0.00100358040072024</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.44444444444444</XPos>
+																<YPos>0.000995337846688926</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.45442176870748</XPos>
+																<YPos>0.000842764507979155</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.46439909297052</XPos>
+																<YPos>0.00104728492442518</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.49433106575964</XPos>
+																<YPos>0.000925388361793011</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.50430839002268</XPos>
+																<YPos>0.000777494802605361</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.51428571428571</XPos>
+																<YPos>0.000944221974350512</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.54421768707483</XPos>
+																<YPos>0.00107551051769406</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.55419501133787</XPos>
+																<YPos>0.000896965619176626</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.62403628117914</XPos>
+																<YPos>0.000857402104884386</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.63401360544218</XPos>
+																<YPos>0.000702158315107226</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.67392290249433</XPos>
+																<YPos>0.000651257229037583</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.68390022675737</XPos>
+																<YPos>0.000761856732424349</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.71383219954649</XPos>
+																<YPos>0.000667863001581281</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.73378684807256</XPos>
+																<YPos>0.000736289948690683</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.75374149659864</XPos>
+																<YPos>0.00056470453273505</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.79365079365079</XPos>
+																<YPos>0.000642731669358909</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.80362811791383</XPos>
+																<YPos>0.000832525489386171</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.82358276643991</XPos>
+																<YPos>0.000903412932530046</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.85351473922902</XPos>
+																<YPos>0.000756825320422649</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.86349206349206</XPos>
+																<YPos>0.000554709462448955</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.89342403628118</XPos>
+																<YPos>0.000593558710534126</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.90340136054422</XPos>
+																<YPos>0.00080845010234043</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.92335600907029</XPos>
+																<YPos>0.000635590229649097</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.93333333333333</XPos>
+																<YPos>0.000756029214244336</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.94331065759637</XPos>
+																<YPos>0.000631721224635839</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>2.98321995464853</XPos>
+																<YPos>0.000606474233791232</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.0031746031746</XPos>
+																<YPos>0.000410858017858118</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.02312925170068</XPos>
+																<YPos>0.000627770263236016</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.03310657596372</XPos>
+																<YPos>0.000492696941364557</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.04308390022676</XPos>
+																<YPos>0.000586956040933728</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.0530612244898</XPos>
+																<YPos>0.00149156304541975</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.06303854875283</XPos>
+																<YPos>0.00188526196870953</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.07301587301587</XPos>
+																<YPos>0.00134490721393377</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.08299319727891</XPos>
+																<YPos>0.000531284022144973</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.09297052154195</XPos>
+																<YPos>0.000455281988251954</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.10294784580499</XPos>
+																<YPos>0.000574838777538389</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.11292517006803</XPos>
+																<YPos>0.00081657717237249</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.14285714285714</XPos>
+																<YPos>0.000650329457130283</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.16281179138322</XPos>
+																<YPos>0.000687163963448256</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.1827664399093</XPos>
+																<YPos>0.000380295765353367</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.20272108843537</XPos>
+																<YPos>0.00037951854756102</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.22267573696145</XPos>
+																<YPos>0.000520164787303656</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.24263038548753</XPos>
+																<YPos>0.000308802467770875</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.27256235827664</XPos>
+																<YPos>0.000387540203519166</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.29251700680272</XPos>
+																<YPos>0.000308735616272315</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.30249433106576</XPos>
+																<YPos>0.000390378088923171</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.33242630385488</XPos>
+																<YPos>0.000354925286956131</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.34240362811791</XPos>
+																<YPos>0.000292164244456217</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.36235827664399</XPos>
+																<YPos>0.000393343536416069</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.38231292517007</XPos>
+																<YPos>0.000263399502728134</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.40226757369614</XPos>
+																<YPos>0.000356441276380792</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.45215419501134</XPos>
+																<YPos>0.000370126072084531</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.46213151927438</XPos>
+																<YPos>0.00030303027597256</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.48208616780045</XPos>
+																<YPos>0.000311920884996653</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.49206349206349</XPos>
+																<YPos>0.000424937403295189</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.50204081632653</XPos>
+																<YPos>0.000494738691486418</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.53197278911565</XPos>
+																<YPos>0.00033915601670742</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.56190476190476</XPos>
+																<YPos>0.000273321726126596</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.5718820861678</XPos>
+																<YPos>0.00027827569283545</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.59183673469388</XPos>
+																<YPos>0.000239085842622444</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.61179138321995</XPos>
+																<YPos>0.000314158969558775</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.64172335600907</XPos>
+																<YPos>0.00031952335848473</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.66167800453515</XPos>
+																<YPos>0.000256698753219098</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.68163265306122</XPos>
+																<YPos>0.000313090917188674</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.71156462585034</XPos>
+																<YPos>0.000224453251576051</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.73151927437642</XPos>
+																<YPos>0.000288242095848545</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.77142857142857</XPos>
+																<YPos>0.000333512522047386</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.79138321995465</XPos>
+																<YPos>0.000259027874562889</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.80136054421769</XPos>
+																<YPos>0.000290341966319829</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.81133786848073</XPos>
+																<YPos>0.000349855778040364</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.8312925170068</XPos>
+																<YPos>0.000373028364265338</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.85124716553288</XPos>
+																<YPos>0.000342460058163851</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.86122448979592</XPos>
+																<YPos>0.000298402330372483</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.87120181405896</XPos>
+																<YPos>0.000312952324748039</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.93106575963719</XPos>
+																<YPos>0.000176201327121817</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.97097505668934</XPos>
+																<YPos>0.000206057855393738</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>3.98095238095238</XPos>
+																<YPos>0.000248237396590412</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.04081632653061</XPos>
+																<YPos>0.000192768697161227</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.05079365079365</XPos>
+																<YPos>0.000261157983914018</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.06077097505669</XPos>
+																<YPos>0.000262691406533122</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.07074829931973</XPos>
+																<YPos>0.00018215220188722</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.10068027210884</XPos>
+																<YPos>0.000174687229446135</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.13061224489796</XPos>
+																<YPos>0.000216506712604314</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.16054421768707</XPos>
+																<YPos>0.000155139743583277</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.17052154195011</XPos>
+																<YPos>0.000159810530021787</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.20045351473923</XPos>
+																<YPos>0.000114408547233324</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.22040816326531</XPos>
+																<YPos>0.000216748536331579</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.23038548752834</XPos>
+																<YPos>0.000217306893318892</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.26031746031746</XPos>
+																<YPos>0.00011494381033117</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.29024943310658</XPos>
+																<YPos>0.00020288243831601</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.30022675736961</XPos>
+																<YPos>0.000179621754796244</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.31020408163265</XPos>
+																<YPos>0.000105675935628824</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.32018140589569</XPos>
+																<YPos>0.000145973404869437</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.34013605442177</XPos>
+																<YPos>0.000178649905137718</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.35011337868481</XPos>
+																<YPos>0.000234491206356324</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.36009070294785</XPos>
+																<YPos>0.000211251695873216</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.37006802721088</XPos>
+																<YPos>0.000139909636345692</YPos>
+																<Flags>0</Flags>
+															</Point>
+															<Point>
+																<XPos>4.38802721088435</XPos>
+																<YPos>0.000156979789608158</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</PropertyCurve>
+											</PropertyCurveList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
@@ -1087,6 +2221,7 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="WeaponWhoosh" ID="{2426F049-DAAC-4E61-8594-998F8DEA32D4}" ShortID="668681903">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
 										<Value>25</Value>
@@ -1139,7 +2274,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-3</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -1246,6 +2381,13 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="GenericHit" ID="{50EC7E71-CD2E-4D93-B15D-85883980BED5}" ShortID="774436718">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>7</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="61"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
 										<Value>18</Value>
@@ -1398,6 +2540,7 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="ShieldHit" ID="{A4B7963C-613F-445C-9D1D-AC27D4003E9C}" ShortID="405125595">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
@@ -1459,6 +2602,7 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="WeaponWhooshDeep" ID="{4D2EB1A9-C15A-47C1-9326-6ABF699684EC}" ShortID="609883562">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
 										<Value>18</Value>
@@ -1606,6 +2750,7 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="HitSweet" ID="{8B91A255-1C7C-4695-86C2-680D116281CB}" ShortID="540424288">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
 										<Value>31</Value>
@@ -1616,7 +2761,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-1</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1775,6 +2920,7 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="WeaponWhoosh_1" ID="{14F5335A-2BC4-497F-9FB6-3CB4F1DCC8BE}" ShortID="1020458476">
 							<PropertyList>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
 										<Value>15</Value>
@@ -1938,7 +3084,18 @@
 					<ChildrenList>
 						<RandomSequenceContainer Name="EvilFemaleAttack" ID="{A64DAC4F-E6F0-49D6-B131-FFB2E26CA30D}" ShortID="398370889">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -2191,7 +3348,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="EVilFemaleDeath" ID="{43823C8D-E8BC-497B-BC5C-05EA476B1165}" ShortID="121148574">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -2399,7 +3567,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="EvilMaleAttack" ID="{A40D78CC-0D1A-4681-A1B9-BD01E00E73D2}" ShortID="693027108">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-6</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -2671,7 +3850,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="EvilMaleDeath" ID="{AD59A51B-37AD-45CF-B417-810386E28A6B}" ShortID="798500803">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -2867,7 +4057,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="FemaleAttack" ID="{17D70ECB-1059-430E-A5D7-949D1DCDDEF9}" ShortID="661947825">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-4</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -3177,7 +4378,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="FemaleDeath" ID="{5D35BCEF-B6C7-4EB4-BE22-E43ED1EE5F3C}" ShortID="856731446">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -3449,7 +4661,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="MaleAttack" ID="{8E6F7DDB-74C5-44BD-8F40-B822A2E81426}" ShortID="379517731">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -3645,6 +4868,11 @@
 										</Property>
 										<Property Name="PositioningType" Type="int16" Value="1"/>
 										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -3785,7 +5013,18 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="MaleDeath" ID="{A9277524-9A64-4D3C-BA86-4E0EA39AFAE1}" ShortID="322593578">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-4</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -5176,6 +6415,13 @@
 						</Sound>
 						<Sound Name="WalkTapUI" ID="{013345D9-0052-4D96-B784-B26BAB3EF540}" ShortID="802293253" Type="SoundFX">
 							<PropertyList>
+								<Property Name="HdrActiveRange" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="16"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
 										<Value>16</Value>
@@ -5195,8 +6441,21 @@
 											<Modifier Name="" ID="{E273FEF4-C37A-4D0C-A3EA-DA325B661544}">
 												<PropertyList>
 													<Property Name="Enabled" Type="bool" Value="True"/>
-													<Property Name="Max" Type="Real64" Value="40"/>
-													<Property Name="Min" Type="Real64" Value="-100"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{049463AB-34E2-4255-AE41-3F983D04D98D}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="1"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
 												</PropertyList>
 											</Modifier>
 										</ModifierInfo>
@@ -5230,7 +6489,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-14</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5244,6 +6503,10 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="PickGun" ID="{803E435E-1F65-4723-A295-4208BC1B4901}" ShortID="520676070">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.074649816162789"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0328006767988012"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>PickGun.wav</AudioFile>
 								</AudioFileSource>
@@ -5254,9 +6517,14 @@
 						</Sound>
 						<Sound Name="PickShield" ID="{C6612BBD-78F5-44B7-A527-BEA1B8064B72}" ShortID="497305816" Type="SoundFX">
 							<PropertyList>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>39</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-7</Value>
+										<Value>-12</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5270,6 +6538,10 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="PickShield" ID="{03715F5F-504D-4898-B719-674E41CA184D}" ShortID="770786379">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0297677349568565"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0258278876831549"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>PickShield.wav</AudioFile>
 								</AudioFileSource>
@@ -5280,9 +6552,14 @@
 						</Sound>
 						<Sound Name="PickSpear" ID="{8A4BD3A6-6D81-4A23-ACE9-9A865A44A480}" ShortID="644886828" Type="SoundFX">
 							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-250</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-8</Value>
+										<Value>-13</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5296,6 +6573,10 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="PickSpear" ID="{70BEEF28-6F15-4F3A-B4F5-B33BE87D3DDB}" ShortID="539353889">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0455402233832993"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.00926241831524733"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>PickSpear.wav</AudioFile>
 								</AudioFileSource>
@@ -5306,9 +6587,19 @@
 						</Sound>
 						<Sound Name="OpenMapUI" ID="{E9AABCE1-34E7-48C1-8191-8BF92971165F}" ShortID="413211127" Type="SoundFX">
 							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>21</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>22</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>150</Value>
+										<Value>-100</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5443,12 +6734,12 @@
 														<PointList>
 															<Point>
 																<XPos>0</XPos>
-																<YPos>-695</YPos>
+																<YPos>-500</YPos>
 																<Flags>5</Flags>
 															</Point>
 															<Point>
 																<XPos>1</XPos>
-																<YPos>471</YPos>
+																<YPos>600</YPos>
 																<Flags>37</Flags>
 															</Point>
 														</PointList>
@@ -5501,11 +6792,6 @@
 										<Value>15</Value>
 									</ValueList>
 								</Property>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-2</Value>
-									</ValueList>
-								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -5547,7 +6833,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-1</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5562,8 +6848,8 @@
 							<ChildrenList>
 								<AudioFileSource Name="PickUpGeneral3" ID="{238BB0A7-4363-4017-95EC-1124A39586D3}" ShortID="7581663">
 									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="0.129623766355558"/>
-										<Property Name="TrimBegin" Type="Real64" Value="0.245692106164129"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.153345762812784"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.206720254841543"/>
 									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>PickUpGeneral3.wav</AudioFile>
@@ -5646,6 +6932,8 @@
 										<Value>-16</Value>
 									</ValueList>
 								</Property>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="10"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
 										<Value>17</Value>
@@ -5690,18 +6978,18 @@
 							<PropertyList>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>-330</Value>
+										<Value>-710</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>3</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
@@ -5710,11 +6998,11 @@
 							<ChildrenList>
 								<AudioFileSource Name="CharSelBreath" ID="{993329DB-4F54-46BD-9DCA-DD42E9A1A2CA}" ShortID="977541870">
 									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="0.0258086604444841"/>
-										<Property Name="FadeOutDuration" Type="Real64" Value="1.14848538977954"/>
-										<Property Name="FadeOutShape" Type="int16" Value="4"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.10108392007423"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.574242694889769"/>
+										<Property Name="FadeOutShape" Type="int16" Value="2"/>
 										<Property Name="TrimBegin" Type="Real64" Value="0.0193564953333631"/>
-										<Property Name="TrimEnd" Type="Real64" Value="1.4732443670393"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.638764346000979"/>
 									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>CharSelBreath.wav</AudioFile>
@@ -5729,6 +7017,11 @@
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
 										<Value>280</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -5751,6 +7044,18 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="ClearMapPt2" ID="{7A115C1F-682A-4A88-951F-8D615FBAC299}" ShortID="184650244" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>25</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -5770,12 +7075,29 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="NonClearMap" ID="{E0ED9D64-C084-47A4-A906-93819173E030}" ShortID="421006045" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>9</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-230</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -5786,6 +7108,216 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="NonClearMap" ID="{2D1D71C5-2417-4CA5-AB4A-92FCBEE149A5}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PickWeapon" ID="{B54E564B-2D72-4443-AFF1-93E45045DD1F}" ShortID="346601135" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>300</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PickWeapon" ID="{986DC604-1CB9-4B04-88E4-A33C46F04432}" ShortID="656517016">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0228045222465353"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>PickWeapon.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PickWeapon" ID="{986DC604-1CB9-4B04-88E4-A33C46F04432}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="BoxPickup" ID="{F0E563AC-DFFF-46CB-8C09-C7837D8A6D94}" ShortID="578115809" Type="SoundFX">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="BoxPickup" ID="{FCD8FF8B-CAE8-4ECD-B605-92C1E2348216}" ShortID="616645350">
+									<Language>SFX</Language>
+									<AudioFile>BoxPickup.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="BoxPickup" ID="{FCD8FF8B-CAE8-4ECD-B605-92C1E2348216}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CampUpgrade" ID="{0C7FEF3A-094B-4B1A-BF00-1651B6AD7C9B}" ShortID="205119402" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CampUpgrade" ID="{B81407C1-EAEF-47D1-BFB9-C6D0DB59B823}" ShortID="532667783">
+									<Language>SFX</Language>
+									<AudioFile>CampUpgrade.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CampUpgrade" ID="{B81407C1-EAEF-47D1-BFB9-C6D0DB59B823}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="ClickClearedMap" ID="{9AD34767-973A-4F58-9D1F-AD067DFD8F93}" ShortID="137634593" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="ClickClearedMap" ID="{DC3A984B-813C-480C-9C55-9D34C57B2560}" ShortID="302328586">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.12824736896947"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.224849283258161"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.013324401970854"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>ClickClearedMap.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="ClickClearedMap" ID="{DC3A984B-813C-480C-9C55-9D34C57B2560}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="IntoLevel" ID="{EEE6D96D-FED6-4688-B17C-740432DD1E23}" ShortID="217216500" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>6</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="IntoLevel" ID="{031FF054-6B2D-4519-9692-83463F530DBD}" ShortID="994790039">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0721569240387621"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>IntoLevel.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="IntoLevel" ID="{031FF054-6B2D-4519-9692-83463F530DBD}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PaperPickup" ID="{F6435FC1-1FE1-4A49-88B1-8226F272B26A}" ShortID="513106622" Type="SoundFX">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PaperPickup" ID="{8CF93696-8F40-484C-BE29-DAEE6F4BCAFD}" ShortID="873571352">
+									<Language>SFX</Language>
+									<AudioFile>PaperPickup.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PaperPickup" ID="{8CF93696-8F40-484C-BE29-DAEE6F4BCAFD}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CommandActivate_01" ID="{F1FB3B45-B65D-42ED-8261-A2D07694318E}" ShortID="290801854" Type="SoundFX">
+							<PropertyList>
+								<Property Name="GameAuxSendVolume" Type="Real64">
+									<ValueList>
+										<Value>-16</Value>
+									</ValueList>
+								</Property>
+								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
+								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="10"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>17</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>6</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-7</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CommandActivate" ID="{D2890398-7D7E-4CE9-9246-02102115B73E}" ShortID="968804334">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.000770503679225154"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.561199010603512"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.00793214149262915"/>
+										<Property Name="TrimEnd" Type="Real64" Value="1.7133425624079"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>CommandActivate.wav</AudioFile>
+									<ConvertedFileIDList>
+										<File ID="482940210"/>
+									</ConvertedFileIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CommandActivate" ID="{D2890398-7D7E-4CE9-9246-02102115B73E}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
@@ -5960,7 +7492,7 @@
 								</Property>
 								<Property Name="MaxSoundPerInstance" Type="int16">
 									<ValueList>
-										<Value>12</Value>
+										<Value>14</Value>
 									</ValueList>
 								</Property>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -6255,7 +7787,7 @@
 								</Property>
 								<Property Name="MaxSoundPerInstance" Type="int16">
 									<ValueList>
-										<Value>12</Value>
+										<Value>14</Value>
 									</ValueList>
 								</Property>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -6552,7 +8084,7 @@
 								</Property>
 								<Property Name="MaxSoundPerInstance" Type="int16">
 									<ValueList>
-										<Value>12</Value>
+										<Value>14</Value>
 									</ValueList>
 								</Property>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
@@ -6823,6 +8355,9 @@
 					</ChildrenList>
 				</Folder>
 				<RandomSequenceContainer Name="MenuDog" ID="{A65C8F6B-8D7F-4FA8-9ECB-B5A383AAB783}" ShortID="656768626">
+					<ExcludedPlatformList>
+						<Platform>Windows</Platform>
+					</ExcludedPlatformList>
 					<PropertyList>
 						<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 						<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
@@ -6956,13 +8491,13 @@
 				<RandomSequenceContainer Name="MenuAmb" ID="{CEEF3AE2-4E99-4216-94F8-146F50F72C19}" ShortID="422242404">
 					<PropertyList>
 						<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+						<Property Name="PlayMechanismResetPlaylistEachPlay" Type="bool" Value="False"/>
 						<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 						<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2"/>
 						<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-						<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>1</Value>
+								<Value>2</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -6971,7 +8506,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+							<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>

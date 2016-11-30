@@ -4,9 +4,9 @@ using System.Collections;
 public class MenuMusicControl : MonoBehaviour {
 
 	// Use this for initialization
-	void OnEnable () 
+	void Start () 
 	{
-		EnableCampAudio ();
+        EnableCampAudio ();
 	}
 	
 	// Update is called once per frame

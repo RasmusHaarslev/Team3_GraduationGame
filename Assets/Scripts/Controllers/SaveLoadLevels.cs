@@ -48,6 +48,7 @@ public class SaveLoadLevels
                 xmlNode.itemDropAmount = currentNode.itemDropAmount;
                 xmlNode.isCleared = currentNode.isCleared;
                 xmlNode.isScouted = currentNode.isScouted;
+                xmlNode.isOpen = currentNode.isOpen;
                 xmlNode.canPlay = currentNode.canPlay;
 
                 foreach(var link in currentNode.Links)
@@ -120,6 +121,7 @@ public class SaveLoadLevels
                 currentNode.itemDropAmount = node.itemDropAmount;
                 currentNode.isCleared = node.isCleared;
                 currentNode.isScouted = node.isScouted;
+                currentNode.isOpen = node.isOpen;
                 currentNode.canPlay = node.canPlay;
 
                 currentNode.OnCreate(currentNode.NodeId);
@@ -218,6 +220,8 @@ public class NodeXML
     public bool isCleared;
     [XmlAttribute("isScouted")]
     public bool isScouted;
+    [XmlAttribute("isOpen")]
+    public bool isOpen;
     [XmlAttribute("canPlay")]
     public bool canPlay;
 

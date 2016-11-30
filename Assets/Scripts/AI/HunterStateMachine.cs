@@ -72,6 +72,7 @@ public class HunterStateMachine : CoroutineMachine
 	float fearfulHealthLimit = 0.25f;
 	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
+	public float fleeSpeed = 4f; 
 
 	// Trait visualisation
 	public GameObject traitProjection;
@@ -297,6 +298,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.speed = fleeSpeed; 
 		Debug.Log("bastard fleeing");
 		character.animator.SetBool("isAware", false);
 		character.isFleeing = true;
@@ -305,6 +307,10 @@ public class HunterStateMachine : CoroutineMachine
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+		if (agent.remainingDistance < agent.stoppingDistance)
+		{
+			gameObject.SetActive(false);
+		}
 		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
