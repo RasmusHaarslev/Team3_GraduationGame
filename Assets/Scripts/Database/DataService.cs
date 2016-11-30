@@ -90,9 +90,24 @@ public class DataService : MonoBehaviour
         _connection.CreateTable<EquippableitemValues>();
         _connection.CreateTable<InventoryItem>();
 
+        //GENERATE RANDOM LEADER
+        PanelScript charGenerator = new PanelScript();
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues();
+        leaderValues.id = 1;
+        leaderValues.Type = CharacterValues.type.Player;
+        leaderValues.prefabName = StringResources.playerPrefabName;
+        leaderValues.materialName = StringResources.playerMaterialName;
+        WeaponGenerator weaponGen = new WeaponGenerator();
+        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1); //leader will have a random level 1 spear
+        leaderWeapon.characterId = 1;
+        //ENDING OF RANDOM LEADER GENERATION
+
+
+
         _connection.InsertAll(new[]
         {
-            new CharacterValues
+            leaderValues,
+            /*new CharacterValues
             {
                 id = 1,
                 name = "Daniel",
@@ -104,7 +119,7 @@ public class DataService : MonoBehaviour
                 range = 2,
                 prefabName = StringResources.playerPrefabName,
                 materialName = StringResources.playerMaterialName
-            },/*
+            },
          new CharacterValues
             {
                 id = 2,
@@ -303,7 +318,9 @@ public class DataService : MonoBehaviour
         });
 
         _connection.InsertAll(new[]
-        {
+        { //WEAPONS
+            leaderWeapon,
+            /*
              new EquippableitemValues
          {
              id = 1,
@@ -378,7 +395,7 @@ public class DataService : MonoBehaviour
              damageSpeed = 1.5f,
              range = 2,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },
+         },*/
              new EquippableitemValues
          {
              //id = 6,
@@ -455,8 +472,10 @@ public class DataService : MonoBehaviour
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          }
         });
+        /* INVENTORY ITEMS
         _connection.InsertAll(new[]
         {
+            
             new InventoryItem
             {
                 Type = InventoryItem.type.equippable,
@@ -477,7 +496,7 @@ public class DataService : MonoBehaviour
             }
             
 
-        });
+        });*/
 
     }
 
@@ -492,7 +511,6 @@ public class DataService : MonoBehaviour
 
     #region character methods
     
-
 
     public CharacterValues[] GetNewHuntersValues()
     {
@@ -512,7 +530,10 @@ public class DataService : MonoBehaviour
     public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
     {
         
-            _connection.Delete(charValuesToDelete);
+            _connection.Delete(charValuesToDelete); 
+        //delete all the equipped items associated to that character
+        _connection.Query<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id );
+
     }
 
     public int AddcharacterToDbByValues(CharacterValues hunterValues)
