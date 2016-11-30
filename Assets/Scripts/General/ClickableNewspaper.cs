@@ -18,5 +18,6 @@ public class ClickableNewspaper : ClickableItem
     public void Click(ItemClicked e)
     {
         GameObject.Find("NewspaperPanel").GetComponent<NewspaperPanelScript>().SetNewspaperImage(pageImage);
+        Destroy(this.gameObject);
     }
 }
