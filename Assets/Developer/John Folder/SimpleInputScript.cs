@@ -62,7 +62,8 @@ public class SimpleInputScript : MonoBehaviour
 				{
 					//Debug.Log("defend");
 					EventManager.Instance.TriggerEvent(new DefendStateEvent());
-                    simpleCommandsManager.inDefenseState = true;
+					EventManager.Instance.TriggerEvent(new CommandEvent());
+					simpleCommandsManager.inDefenseState = true;
                     simpleCommandsManager.currentCommandBtnText.text = "Defensive";
                     ChangeColor(0);
 					break;
@@ -70,8 +71,9 @@ public class SimpleInputScript : MonoBehaviour
 				if (command == simpleCommandsManager.commandsList[0] && simpleCommandsManager.inDefenseState)
 				{
 					EventManager.Instance.TriggerEvent(new OffensiveStateEvent());
+					EventManager.Instance.TriggerEvent(new CommandEvent());
 					//Debug.Log("offensive");
-                    simpleCommandsManager.inDefenseState = false;
+					simpleCommandsManager.inDefenseState = false;
                     simpleCommandsManager.currentCommandBtnText.text = "Offensive";
                     ChangeColor(0);
 					break;
@@ -79,6 +81,7 @@ public class SimpleInputScript : MonoBehaviour
 				if (command == simpleCommandsManager.commandsList[2])
 				{
 					EventManager.Instance.TriggerEvent(new FleeStateEvent());
+					EventManager.Instance.TriggerEvent(new CommandEvent());
 					Debug.Log("flee");
 
 					ChangeColor(2);
@@ -87,6 +90,7 @@ public class SimpleInputScript : MonoBehaviour
 				if (command == simpleCommandsManager.commandsList[4] && !simpleCommandsManager.inFollowState)
 				{
 					EventManager.Instance.TriggerEvent(new FollowStateEvent());
+					EventManager.Instance.TriggerEvent(new CommandEvent());
 					Debug.Log("follow");
                     simpleCommandsManager.inFollowState = true;
                     simpleCommandsManager.currentCommandBtnText.text = "Stay";
@@ -96,6 +100,7 @@ public class SimpleInputScript : MonoBehaviour
 				if (command == simpleCommandsManager.commandsList[4] && simpleCommandsManager.inFollowState)
 				{
 					EventManager.Instance.TriggerEvent(new StayStateEvent());
+					EventManager.Instance.TriggerEvent(new CommandEvent());
 					Debug.Log("stay");
                     simpleCommandsManager.inFollowState = false;
                     simpleCommandsManager.currentCommandBtnText.text = "Follow";

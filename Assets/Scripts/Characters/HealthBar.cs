@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class HealthBar : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class HealthBar : MonoBehaviour
 	Camera camera;
 	Vector3 screenPos;
 	GUIStyle currentStyle = null;
+	bool active = true;
 
 	// Use this for initialization
 	void Start()
@@ -34,6 +36,21 @@ public class HealthBar : MonoBehaviour
 		barDisplay = character.currentHealth / character.health;
 	}
 
+	void OnEnable()
+	{
+		EventManager.Instance.StartListening<UIPanelActiveEvent>(ActivateHealthPanel);
+	}
+
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<UIPanelActiveEvent>(ActivateHealthPanel);
+	}
+
+	private void ActivateHealthPanel(UIPanelActiveEvent e)
+	{
+		active = !active;
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -48,51 +65,55 @@ public class HealthBar : MonoBehaviour
 
 	void OnGUI()
 	{
-		// draw the background:
-		if (!character.isDead && SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing)
+		if (active)
 		{
-			if (transform.parent.gameObject.tag == "Friendly" || transform.parent.gameObject.tag == "Player")
+			// draw the background:
+			if (!character.isDead && SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing)
 			{
-				if (barDisplay <= 0.25)
+				if (transform.parent.gameObject.tag == "Friendly" || transform.parent.gameObject.tag == "Player")
 				{
-					GUI.color = new Color((float)159 / 255, (float)33 / 255, (float)33 / 255);
+					if (barDisplay <= 0.25)
+					{
+						GUI.color = new Color((float)159 / 255, (float)33 / 255, (float)33 / 255);
+					}
+					else
+					if (barDisplay <= 0.5)
+					{
+						GUI.color = new Color((float)187 / 255, (float)99 / 255, (float)35 / 255);
+					}
+					else
+					if (barDisplay <= 1.0)
+					{
+						GUI.color = new Color((float)107 / 255, (float)149 / 255, (float)25 / 255);
+					}
 				}
 				else
-				if (barDisplay <= 0.5)
 				{
-					GUI.color = new Color((float)187 / 255, (float)99 / 255, (float)35 / 255);
+					if (barDisplay <= 0.25)
+					{
+						GUI.color = new Color((float)185 / 255, (float)66 / 255, (float)167 / 255);
+					}
+					else
+					if (barDisplay <= 0.5)
+					{
+						GUI.color = new Color((float)127 / 255, (float)65 / 255, (float)190 / 255);
+					}
+					else
+					if (barDisplay <= 1.0)
+					{
+						GUI.color = new Color((float)27 / 255, (float)70 / 255, (float)158 / 255);
+					}
 				}
-				else
-				if (barDisplay <= 1.0)
-				{
-					GUI.color = new Color((float)107 / 255, (float)149 / 255, (float)25 / 255);
-				}
-			} else
-			{
-				if (barDisplay <= 0.25)
-				{
-					GUI.color = new Color((float)185 / 255, (float)66 / 255, (float)167 / 255);
-				}
-				else
-				if (barDisplay <= 0.5)
-				{
-					GUI.color = new Color((float)127 / 255, (float)65 / 255, (float)190 / 255);
-				}
-				else
-				if (barDisplay <= 1.0)
-				{
-					GUI.color = new Color((float)27 / 255, (float)70 / 255, (float)158 / 255);
-				}
-			}
-			currentStyle.normal.background = progressBarFull;
-			GUI.BeginGroup(new Rect(pos.x - size.x / 2, Screen.height - pos.y, size.x, size.y));
-			GUI.Box(new Rect(0, 0, size.x, size.y), progressBarEmpty);
+				currentStyle.normal.background = progressBarFull;
+				GUI.BeginGroup(new Rect(pos.x - size.x / 2, Screen.height - pos.y, size.x, size.y));
+				GUI.Box(new Rect(0, 0, size.x, size.y), progressBarEmpty);
 
-			// draw the filled-in part:
-			GUI.BeginGroup(new Rect(0, 0, size.x * barDisplay, size.y));
-			GUI.Box(new Rect(0, 0, size.x, size.y), progressBarFull, currentStyle);
-			GUI.EndGroup();
-			GUI.EndGroup();
+				// draw the filled-in part:
+				GUI.BeginGroup(new Rect(0, 0, size.x * barDisplay, size.y));
+				GUI.Box(new Rect(0, 0, size.x, size.y), progressBarFull, currentStyle);
+				GUI.EndGroup();
+				GUI.EndGroup();
+			}
 		}
 	}
 }
