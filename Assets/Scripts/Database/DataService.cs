@@ -92,7 +92,7 @@ public class DataService : MonoBehaviour
 
         //GENERATE RANDOM LEADER
         PanelScript charGenerator = new PanelScript();
-        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(125,0.07sf); //pass attributes points as parameter
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(125,0.07f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
         leaderValues.prefabName = StringResources.playerPrefabName;
