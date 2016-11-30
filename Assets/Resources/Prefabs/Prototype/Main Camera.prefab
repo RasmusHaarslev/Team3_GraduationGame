@@ -93,6 +93,8 @@ GameObject:
   - 45: {fileID: 45000012599563724}
   - 114: {fileID: 114000010523345100}
   - 114: {fileID: 114000012132333340}
+  - 114: {fileID: 114000014234263752}
+  - 114: {fileID: 114000010244622912}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -234,6 +236,18 @@ MonoBehaviour:
   - {fileID: 198000012352089390}
   - {fileID: 198000011291474950}
   maxSnowAmount: 60
+--- !u!114 &114000010244622912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenerId: 0
 --- !u!114 &114000010523345100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,12 +300,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tonemapper: 0
-  Exposure: 1.2
+  Exposure: 1
   LinearWhitePoint: 11.2
   ApplyDithering: 0
   QualityLevel: 0
   BlendAmount: 0
-  LutTexture: {fileID: 2800000, guid: 1df849adde279de49918e15dbec5bf7e, type: 3}
+  LutTexture: {fileID: 2800000, guid: 5059551652c0f0c40b563a0c2aba4516, type: 3}
   LutBlendTexture: {fileID: 0}
   MaskTexture: {fileID: 0}
   UseDepthMask: 0
@@ -339,6 +353,18 @@ MonoBehaviour:
   heightDensity: 2.8
   startDistance: 44.33
   fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
+--- !u!114 &114000014234263752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5b1c9d0d5c4fa4f85a80a798f0618c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AmplifyColorEffect: {fileID: 114000012132333340}
 --- !u!124 &124000010111313504
 Behaviour:
   m_ObjectHideFlags: 1

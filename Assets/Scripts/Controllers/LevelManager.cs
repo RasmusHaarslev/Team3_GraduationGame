@@ -229,6 +229,7 @@ public class LevelManager : MonoBehaviour
 	{
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
         EventManager.Instance.TriggerEvent(new LevelWon());
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 		EventManager.Instance.TriggerEvent(
 			new ChangeResources(
 				food: PlayerPrefs.GetInt("FoodAmount"),
