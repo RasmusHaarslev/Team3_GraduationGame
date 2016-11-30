@@ -257,15 +257,15 @@ public class CampUpgrades
     #region Upgradeables
 
     [XmlAttribute("GatherLevel")]
-    public int GatherLevel = 0;
+    public int GatherLevel = 1;
     [XmlAttribute("MaxVillages")]
-    public int MaxVillages = 0;
+    public int MaxVillages = 1;
     [XmlAttribute("BlacksmithLevel")]
-    public int BlacksmithLevel = 0;
+    public int BlacksmithLevel = 1;
     [XmlAttribute("LeaderHealthLevel")]
-    public int LeaderHealthLevel = 0;
+    public int LeaderHealthLevel = 1;
     [XmlAttribute("LeaderStrengthLevel")]
-    public int LeaderStrengthLevel = 0;
+    public int LeaderStrengthLevel = 1;
 
     #endregion
 
