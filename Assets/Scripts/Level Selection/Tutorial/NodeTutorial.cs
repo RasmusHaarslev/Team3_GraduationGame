@@ -66,6 +66,16 @@ public class NodeTutorial : MonoBehaviour {
     /* ROADS FROM THIS NODE */
     public List<GameObject> Links = new List<GameObject>();
 
+    void OnEnable()
+    {
+        EventManager.Instance.StartListening<TutorialDone>(DoneLevel);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Instance.StopListening<TutorialDone>(DoneLevel);
+    }
+
     void Start()
     {
         SetScrollPosition(0);
@@ -102,6 +112,14 @@ public class NodeTutorial : MonoBehaviour {
         InitialisePopUP(gameObject);
     }
 
+    public void DoneLevel(TutorialDone e)
+    {
+        if (e.strTutLevel == gameObject.name)
+        {
+            StartCoroutine(initWin(gameObject));
+        }
+    }
+
     #region WIN ANIMATION
     IEnumerator initWin(GameObject node)
     {
@@ -109,6 +127,7 @@ public class NodeTutorial : MonoBehaviour {
 
         Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
         node.GetComponent<Animator>().SetTrigger("IsCleared");
+        node.GetComponent<NodeTutorial>().isCleared = true;
         yield return new WaitForSeconds(1f);
 
         SetupUIText();
@@ -119,6 +138,7 @@ public class NodeTutorial : MonoBehaviour {
             if (!childNode.GetComponent<NodeTutorial>().isCleared && !childNode.GetComponent<NodeTutorial>().isOpen)
             {
                 childNode.GetComponent<NodeTutorial>().isOpen = true;
+                childNode.GetComponent<NodeTutorial>().canPlay = true;
                 Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
                 childNode.GetComponent<Animator>().SetTrigger("IsUnlocked");
                 yield return new WaitForSeconds(1f);
@@ -342,18 +362,27 @@ public class NodeTutorial : MonoBehaviour {
     public void AcceptPlay()
     {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
-        //EventManager.Instance.TriggerEvent(new ChangeResources(-GetComponent<NodeTutorial>().TravelCost));
+        //EventManager.Instance.TriggerEvent(new ChangeResources(-GetComponent<NodeTutorial>().TravelCost));        
+        //EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));        
 
-        /*PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, GetComponent<NodeTutorial>().NodeId);
-        PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, GetComponent<NodeTutorial>().Level);
-        PlayerPrefs.SetInt(StringResources.TribeCampsPrefsName, GetComponent<NodeTutorial>().tribeCamps);
-        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, GetComponent<NodeTutorial>().foodAmount);
-        PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, GetComponent<NodeTutorial>().scrapAmount);
-        PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, GetComponent<NodeTutorial>().itemDropAmount);
-
-        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));        
-
-        //GameController.Instance.LoadScene("LevelEnterCutscene"); */
+        switch (gameObject.name)
+        {
+            case "Tut1":
+                GameController.Instance.LoadScene("TutorialLevel01");
+                break;
+            case "Tut2":
+                GameController.Instance.LoadScene("TutorialLevel02");
+                break;
+            case "Tut3":
+                GameController.Instance.LoadScene("TutorialLevel03");
+                break;
+            case "Tut4":
+                GameController.Instance.LoadScene("TutorialLevel04");
+                break;
+            case "Tut5":
+                GameController.Instance.LoadScene("CampManagement");
+                break;
+        }        
     }
 
     public void Deny()

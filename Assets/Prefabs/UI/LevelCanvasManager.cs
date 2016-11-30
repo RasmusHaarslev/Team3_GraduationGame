@@ -51,4 +51,9 @@ public class LevelCanvasManager : MonoBehaviour
 	{
 		EventManager.Instance.TriggerEvent(new StopFleeEvent());
 	}
+
+    public void DoneTutorial(int tutlevel)
+    {
+        EventManager.Instance.TriggerEvent(new TutorialDone(tutlevel));
+    }
 }
