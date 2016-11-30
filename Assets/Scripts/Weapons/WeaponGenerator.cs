@@ -82,47 +82,54 @@ public class WeaponGenerator : MonoBehaviour
     public EquippableitemValues GenerateEquippableItem(EquippableitemValues.type type, int level)
     {
         EquippableitemValues itemValues = new EquippableitemValues();
+
         itemValues.Type = type;
 
         points = (level / 5 + 1) * increasePointsMultiplier + increasePointsAdder;
         float healthProbability = 0f; float damageProbability = 0f; float damageSpeedProbability = 0f;
+        string[] modelStrings = new string[3];
+
         switch (type)
         {
             case EquippableitemValues.type.shield:
-                itemValues.name = "Shield level " + level;
+                //picks a random model from the shields
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield] [Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield].Length - 1) ];
                 itemValues.range = shieldRange;
-                itemValues.prefabName = StringResources.shield1PrefabName;
                 itemValues.Slot = EquippableitemValues.slot.leftHand;
                 healthProbability = healthPercentageShield;
                 damageProbability = damagePercentageShield;
                 damageSpeedProbability = damageSpeedPercentageShield;
                 break;
             case EquippableitemValues.type.polearm:
-                itemValues.name = "Polearm level " + level;
+                //picks a random model from the shields
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm].Length - 1)];
                 itemValues.range = polearmRange;
-                itemValues.prefabName = StringResources.polearm1PrefabName;
                 itemValues.Slot = EquippableitemValues.slot.rightHand;
                 healthProbability = healthPercentagePolearm;
                 damageProbability = damagePercentagePolearm;
                 damageSpeedProbability = damageSpeedPercentagePolearm;
                 break;
             case EquippableitemValues.type.rifle:
-                itemValues.name = "Rifle level " + level;
+                //picks a random model from the shields
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle].Length - 1)];
                 itemValues.range = rifleRange;
-                itemValues.prefabName = StringResources.rifle1PrefabName;
                 itemValues.Slot = EquippableitemValues.slot.rightHand;
                 healthProbability = healthPercentageRifle;
                 damageProbability = damagePercentageRifle;
                 damageSpeedProbability = damageSpeedPercentageRifle;
                 break;
         }
+        
+        itemValues.name = modelStrings[0];
+        itemValues.prefabName = modelStrings[1];
+        itemValues.materialName = modelStrings[2];
+
+        itemValues.level = level;
 
         float currentPick = 0f;
         //damage and damage speed have to be at least 1
         itemValues.damageSpeed = 1;
         itemValues.damage = 1;
-        //print(healthProbability + " " + damageProbability + " " + damageSpeedProbability);
-        //print(points);
         for (int i = 0; i < points; i++)
         {
             //Random.seed = (int)System.DateTime.Now.Ticks;
@@ -143,7 +150,6 @@ public class WeaponGenerator : MonoBehaviour
 
         }
 
-        itemValues.level = level;
 
         return itemValues;
 
@@ -166,4 +172,23 @@ public class WeaponGenerator : MonoBehaviour
         return (EquippableitemValues.type)(Random.Range(0, Enum.GetNames(typeof(EquippableitemValues.type)).Length));
 
     }
+    /*
+    private string GenerateItemName(EquippableitemValues itemValues)
+    {
+        String itemName = "";
+
+        switch (itemValues.Type)
+        {
+            case EquippableitemValues.type.shield:
+                switch (itemValues.materialName)
+                {
+                       // case StringResources.shield1MaterialNames[] //TODO starting from here
+                }
+                break;
+        }
+
+        return itemName;
+    }
+    */
+
 }

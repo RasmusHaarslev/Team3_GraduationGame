@@ -72,7 +72,7 @@
 									</PropertyList>
 									<ElementList>
 										<Element ID="{C99F1CBF-CCDE-488E-8F69-B30FE9AA19A3}" Global="true">
-											<ObjectRef Name="WindHowlDrone" ID="{C0571A55-F9A3-4084-9DB9-18E87E7E0F49}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+											<ObjectRef Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -132,7 +132,7 @@
 								<Action Name="Play" ID="{BE7FB831-CD48-4393-A92B-89E11E2FA298}" ShortID="148680943" Type="Play" Scope="One" Global="false">
 									<PropertyList>
 										<Property Name="Delay" Type="Real64" Value="0.1"/>
-										<Property Name="Probability" Type="Real64" Value="40"/>
+										<Property Name="Probability" Type="Real64" Value="71"/>
 									</PropertyList>
 									<ElementList>
 										<Element ID="{74B35359-D2D3-4FD3-8CB1-E968C9606D46}" Global="false">
@@ -675,7 +675,7 @@
 							</PropertyList>
 							<ElementList>
 								<Element ID="{783DC8FE-1485-410A-BC5B-996D06C969C9}" Global="false">
-									<ObjectRef Name="ExploreMusic1" ID="{C2CAEDBD-8423-472B-8CDE-1E03ACBD1F60}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+									<ObjectRef Name="Music" ID="{F3048897-F238-4CDD-A9F7-D755D268F4B9}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
 								</Element>
 							</ElementList>
 						</Action>
@@ -686,7 +686,7 @@
 						<Action Name="Stop" ID="{E7CF3010-FCED-44D4-B3B1-D7C55289EDCA}" ShortID="863797085" Type="Stop" Scope="One" Global="true">
 							<ElementList>
 								<Element ID="{73221EBD-4A4F-4057-AA94-E0BB1BD6C917}" Global="true">
-									<ObjectRef Name="ExploreMusic1" ID="{C2CAEDBD-8423-472B-8CDE-1E03ACBD1F60}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+									<ObjectRef Name="Music" ID="{F3048897-F238-4CDD-A9F7-D755D268F4B9}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
 								</Element>
 							</ElementList>
 						</Action>
@@ -702,12 +702,6 @@
 											<ObjectRef Name="DiscoverEnemy" ID="{F75AE403-1652-461E-91D1-381F4BF2E959}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
 										</Element>
 									</ElementList>
-								</Action>
-								<Action Name="Set State" ID="{5E7ACF1C-C518-4C35-8236-CE2B75BDBB26}" ShortID="885525668" Type="SetState" Scope="All" Global="true">
-									<SetItemParam>
-										<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
-										<GroupItem Name="EnemyNear" ID="{8A8D9332-02BE-4FBD-99BF-E118BF6BEBDB}"/>
-									</SetItemParam>
 								</Action>
 							</ChildrenList>
 						</Event>
