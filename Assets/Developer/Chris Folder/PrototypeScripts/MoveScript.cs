@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 public class MoveScript : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class MoveScript : MonoBehaviour
 	bool isFleeing = false;
 	List<GameObject> hunters = new List<GameObject>();
 	bool hasShot = false;
+	public float fleeSpeed = 4f;
 
 	// Use this for initialization
 	void Start()
@@ -28,6 +30,7 @@ public class MoveScript : MonoBehaviour
 	void OnEnable()
 	{
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StartListening<StopFleeEvent>(StopFlee);
 		agent = GetComponent<NavMeshAgent>();
 		character = GetComponent<Character>();
 	}
@@ -35,12 +38,22 @@ public class MoveScript : MonoBehaviour
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StopListening<StopFleeEvent>(StopFlee);
+	}
+
+	private void StopFlee(StopFleeEvent e)
+	{
+		isFleeing = false;
+		agent.speed = 2.75f;
+		agent.Stop();
 	}
 
 	private void Flee(FleeStateEvent e)
 	{
 		isFleeing = true;
+		agent.speed = fleeSpeed;
 	}
+
 
 	void OnApplicationQuit()
 	{
@@ -121,16 +134,7 @@ public class MoveScript : MonoBehaviour
 		else
 		{
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
-			StartCoroutine(LoseScene());
 		}
-	}
-
-	IEnumerator LoseScene()
-	{
-		yield return new WaitForSeconds(5);
-
-		SceneManager.LoadScene("LevelFleeCutscene");
-		yield return null;
 	}
 
 	public void MoveToClickPosition()
