@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class RivalStateMachine : CoroutineMachine
 {
 	public float transitionTime = 0.05f;
-
+	public float fleeSpeed = 4f;
 	NavMeshAgent agent;
 	Character character;
 	Vector3 originalPosition;
@@ -47,11 +47,11 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			agent.Stop();
 		}
-		if (character.target != null)
+		if (character.target != null && !character.isFleeing)
 		{
 			if (!character.isDead)
 			{
-				//character.RotateTowards(character.target.transform);
+				character.RotateTowards(character.target.transform);
 			}
 		}
 	}
@@ -121,6 +121,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.speed = fleeSpeed;
 		agent.updateRotation = true;
 		if (!character.isDead)
 		{
@@ -129,6 +130,10 @@ public class RivalStateMachine : CoroutineMachine
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+		}
+		if (agent.remainingDistance < agent.stoppingDistance)
+		{
+			gameObject.SetActive(false);
 		}
 		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
@@ -178,7 +183,20 @@ public class RivalStateMachine : CoroutineMachine
 
 	private void OpponentsFleeing(FleeStateEvent e)
 	{
-		character.currentOpponents.Clear();
-		character.isInCombat = false;
+		foreach (var opp in character.currentOpponents)
+		{
+			if (opp.GetComponent<Character>().isFleeing == true)
+			{
+				character.currentOpponents.Remove(opp);
+			}
+			else
+			{
+				character.target = opp;
+			}
+		}
+		if (character.currentOpponents.Count == 0)
+		{
+			character.isInCombat = false;
+		}
 	}
 }

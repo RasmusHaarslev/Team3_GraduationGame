@@ -21,12 +21,27 @@ public class NewSoldierConfirmationScript : MonoBehaviour
 
     public void ActivateConfirmationPanel()
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         backgroundConfirmationPanel.SetActive(true);
         yesButton.GetComponent<Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        noButton.GetComponent<Button>().onClick.AddListener(delegate { backgroundConfirmationPanel.SetActive(false); });
-        yesButton.GetComponent<Button>().onClick.AddListener(delegate { backgroundConfirmationPanel.SetActive(false); gameObject.transform.parent.gameObject.SetActive(false); panelScript.SpawnNewSoldier(transform.GetSiblingIndex()); centralPanel.SetActive(false); });
+        noButton.GetComponent<Button>().onClick.AddListener(ConfirmNo);
+        yesButton.GetComponent<Button>().onClick.AddListener(ConfirmYes);
+    }
+
+    public void ConfirmNo()
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        backgroundConfirmationPanel.SetActive(false);
+    }
+
+    public void ConfirmYes()
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
+        backgroundConfirmationPanel.SetActive(false);
+        gameObject.transform.parent.gameObject.SetActive(false);
+        panelScript.SpawnNewSoldier(transform.GetSiblingIndex());
+        centralPanel.SetActive(false);
     }
 }
 

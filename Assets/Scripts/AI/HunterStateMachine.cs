@@ -19,6 +19,11 @@ public class HunterStateMachine : CoroutineMachine
 		EventManager.Instance.StartListening<FollowStateEvent>(Follow);
 		EventManager.Instance.StartListening<StayStateEvent>(Stay);
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StartListening<StopFleeEvent>(StopFlee);
+		if (GameObject.FindGameObjectWithTag("FleePoint") != null)
+		{
+			fleePosition = GameObject.FindGameObjectWithTag("FleePoint").transform.position;
+		}
 	}
 
 	void OnDisable()
@@ -28,6 +33,7 @@ public class HunterStateMachine : CoroutineMachine
 		EventManager.Instance.StopListening<FollowStateEvent>(Follow);
 		EventManager.Instance.StopListening<StayStateEvent>(Stay);
 		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StopListening<StopFleeEvent>(StopFlee);
 	}
 
 	void OnApplicationQuit()
@@ -55,6 +61,19 @@ public class HunterStateMachine : CoroutineMachine
 		ProjectCommand();
 		outOfCombatCommandState = OutOfCombatCommandState.Follow;
 	}
+
+	private void StopFlee(StopFleeEvent e)
+	{
+		if (!character.isDead)
+		{
+			character.animator.SetBool("isFleeing", false);
+			agent.Stop();
+			character.isFleeing = false;
+			stopFleeing = true;
+			combatCommandState = CombatCommandState.Offense;
+		}
+	}
+
 	private void Stay(StayStateEvent e)
 	{
 		ProjectCommand();
@@ -63,15 +82,25 @@ public class HunterStateMachine : CoroutineMachine
 	private void Flee(FleeStateEvent e)
 	{
 		ProjectCommand();
-		combatCommandState = CombatCommandState.Flee;
+		if (combatTrait != CharacterValues.CombatTrait.BraveFool)
+		{
+			character.animator.SetBool("isFleeing", true);
+			combatCommandState = CombatCommandState.Flee;
+		}
+		else
+		{
+			ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
+		}
 	}
 
 	#endregion
 
 	public float transitionTime = 0.05f;
-	public float fearfulHealthLimit = 25;
+	float fearfulHealthLimit = 0.25f;
 	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
+	public float fleeSpeed = 4f;
+	bool stopFleeing = false;
 
 	// Trait visualisation
 	public GameObject traitProjection;
@@ -112,13 +141,6 @@ public class HunterStateMachine : CoroutineMachine
 		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !character.isDead)
 		{
 			agent.Stop();
-		}
-		if (character.target != null)
-		{
-			if (!character.isDead)
-			{
-				//character.RotateTowards(character.target.transform);
-			}
 		}
 	}
 
@@ -167,7 +189,7 @@ public class HunterStateMachine : CoroutineMachine
 						}
 						break;
 				}
-				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
+				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < (character.health * fearfulHealthLimit)))
 				{
 					if (combatTrait == CharacterValues.CombatTrait.Fearful)
 					{
@@ -179,57 +201,12 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					if (character.currentOpponents.Count != 0)
 					{
-						if ((combatCommandState == CombatCommandState.Offense || (combatCommandState == CombatCommandState.Flee && combatTrait == CharacterValues.CombatTrait.BraveFool)))
+						if (combatCommandState == CombatCommandState.Offense)
 						{
-							if (character.target != null && character.target.GetComponent<TutorialCharacter>() != null)
-							{
-								if (!character.target.GetComponent<TutorialCharacter>().isDead)
-								{
-									if (combatTrait == CharacterValues.CombatTrait.BraveFool)
-									{
-										ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
-									}
-									if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
-									{
-										GameObject formerTarget = character.target;
-										lowAttentionSpanCounter = maxLowAttentionSpanCounter;
-										while (formerTarget == character.target)
-										{
-											if (character.currentOpponents.Count <= 1)
-											{
-												break;
-											}
-											else
-											{
-												ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
-												character.target = character.FindRandomEnemy();
-											}
-										}
-									}
-									distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
-									if (distanceToTarget < agent.stoppingDistance)
-									{
-										yield return new TransitionTo(CombatState, DefaultTransition);
-									}
-									else
-									{
-										yield return new TransitionTo(EngageState, DefaultTransition);
-									}
-								}
-								else
-								{
-									character.currentOpponents.Remove(character.target);
-									character.target = character.FindNearestEnemy();
-								}
-							}
-							else if (character.target != null && character.target.GetComponent<Character>() != null)
+							if (character.target != null && character.target.GetComponent<Character>() != null)
 							{
 								if (!character.target.GetComponent<Character>().isDead)
 								{
-									if (combatTrait == CharacterValues.CombatTrait.BraveFool)
-									{
-										ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
-									}
 									if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
 									{
 										GameObject formerTarget = character.target;
@@ -295,14 +272,12 @@ public class HunterStateMachine : CoroutineMachine
 			else
 			{
 				agent.updateRotation = true;
-				if (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit)
-				{
-					ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
-					yield return new TransitionTo(FleeState, DefaultTransition);
-				}
 				if (combatCommandState == CombatCommandState.Flee)
 				{
-					yield return new TransitionTo(FleeState, DefaultTransition);
+					if (combatTrait != CharacterValues.CombatTrait.BraveFool)
+					{
+						yield return new TransitionTo(FleeState, DefaultTransition);
+					}
 				}
 				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && combatTrait != CharacterValues.CombatTrait.Clingy)
 				{
@@ -325,6 +300,7 @@ public class HunterStateMachine : CoroutineMachine
 	IEnumerator FollowState()
 	{
 		character.animator.SetBool("isAware", false);
+		character.isInCombat = false;
 		if (!character.isDead)
 		{
 			agent.Resume();
@@ -342,14 +318,27 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.SetDestination(fleePosition);
+		agent.speed = fleeSpeed;
 		character.animator.SetBool("isAware", false);
 		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (agent.remainingDistance < agent.stoppingDistance)
+		{
+			if (agent.destination == fleePosition)
+			{
+				Debug.Log(gameObject.name + " deactivated at position: " + agent.destination);
+				gameObject.SetActive(false);
+			}
+		}
+		if (stopFleeing)
+		{
+			yield return new TransitionTo(StartState, DefaultTransition);
+		}
+		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
@@ -377,7 +366,8 @@ public class HunterStateMachine : CoroutineMachine
 			character.animator.SetBool("isAware", true);
 			transform.position = transform.position;
 			agent.Stop();
-		} else
+		}
+		else
 		{
 			character.animator.SetBool("isAware", false);
 		}

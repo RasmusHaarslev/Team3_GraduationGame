@@ -30,11 +30,11 @@ public class Character : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	public bool isFleeing = false;
+	private bool isWounded = false;
 
 	bool deadEvent = false;
 	[Range(0, 99)]
-	public int randomTargetProbability = 25;
-	float isFleeingValue;
+	public int randomTargetProbability = 40;
 
 	//model values
 	//private Dictionary<string, Transform> slots;
@@ -55,6 +55,7 @@ public class Character : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		animator.SetFloat("isWounded", 0);
 		currentHealth = health;
 	}
 
@@ -65,8 +66,12 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		//isFleeingValue = isFleeing ? 1 : 0;
-		//animator.SetFloat("isWounded", isFleeingValue);
+		if (!isWounded && currentHealth < 0.4f * health)
+		{
+			isWounded = true;
+			animator.SetFloat("isWounded", 1);
+		}
+
 		if (!isInCombat)
 		{
 			animator.SetBool("isAware", false);
@@ -82,15 +87,6 @@ public class Character : MonoBehaviour
 					currentOpponents.Clear();
 					target = null;
 					isInCombat = false;
-				}
-			}
-			else if (target.GetComponent<TutorialCharacter>() != null)
-			{
-				if (target.GetComponent<TutorialCharacter>().isFleeing)
-				{
-					isInCombat = false;
-					currentOpponents.Clear();
-					target = null;
 				}
 			}
 		}

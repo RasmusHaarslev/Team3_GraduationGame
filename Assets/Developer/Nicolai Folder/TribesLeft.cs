@@ -8,12 +8,14 @@ public class TribesLeft : MonoBehaviour {
 
     void OnEnable()
     {
-        EventManager.Instance.StartListening<ClearedCampEvent>(UpdateText);
+        EventManager.Instance.StartListening<ClearedCampEvent>(UpdateCampsLeft);
+        EventManager.Instance.StartListening<LanguageChanged>(UpdateText);
     }
 
     void OnDisable()
     {
-        EventManager.Instance.StopListening<ClearedCampEvent>(UpdateText);
+        EventManager.Instance.StopListening<ClearedCampEvent>(UpdateCampsLeft);
+        EventManager.Instance.StopListening<LanguageChanged>(UpdateText);
     }
 
 	void Start () {
@@ -21,9 +23,14 @@ public class TribesLeft : MonoBehaviour {
         GetComponent<Text>().text = campsLeft.ToString() + " " + TranslationManager.Instance.GetTranslation("TribesLeft");
 	}
 
-    public void UpdateText(ClearedCampEvent e)
+    public void UpdateCampsLeft(ClearedCampEvent e)
     {
         campsLeft -= 1;
+        GetComponent<Text>().text = campsLeft.ToString() + " " + TranslationManager.Instance.GetTranslation("TribesLeft");
+    }
+
+    public void UpdateText(LanguageChanged e)
+    {    
         GetComponent<Text>().text = campsLeft.ToString() + " " + TranslationManager.Instance.GetTranslation("TribesLeft");
     }
 }
