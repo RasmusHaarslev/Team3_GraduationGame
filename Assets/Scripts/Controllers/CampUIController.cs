@@ -34,6 +34,7 @@ public class CampUIController : MonoBehaviour
 
     public void PerformUpgrade()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_campUpgrade, gameObject);
         DateTime End = DateTime.Now.AddSeconds(campManager.amountOfSeconds);
 
         PlayerPrefs.SetString("UpgradeEnd", End.ToString());

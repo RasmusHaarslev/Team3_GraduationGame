@@ -82,6 +82,9 @@ public class Manager_Audio : MonoBehaviour {
     public static string play_clearMap = "Play_ClearMap";
     public static string play_unlockNewMaps = "Play_UnlockNewMaps";
     public static string play_lostMap = "Play_NonClearMap";
+    public static string play_clickClearedNode = "Play_ClickClearedMap";
+    public static string play_campUpgrade = "Play_CampUpgrade";
+    public static string play_intoLevel = "Play_IntoLevel";
 
     public static string play_charSel = "Play_CharSel";
 
