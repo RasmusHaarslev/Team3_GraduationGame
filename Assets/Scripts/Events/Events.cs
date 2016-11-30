@@ -34,6 +34,11 @@ public class ChangeResources : GameEvent
     }
 }
 
+public class LevelStarted : GameEvent
+{
+    public LevelStarted() { }
+}
+
 public class ResourcesUpdated : GameEvent
 {
     public ResourcesUpdated() { }
@@ -255,4 +260,12 @@ public class ClearedCampEvent : GameEvent
 public class LanguageChanged : GameEvent
 {
     public LanguageChanged() { }
+}
+
+public class StopFleeEvent : GameEvent
+{
+	public StopFleeEvent()
+	{
+
+	}
 }
