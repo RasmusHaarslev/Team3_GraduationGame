@@ -201,13 +201,12 @@ public class MoveScript : MonoBehaviour
             {
                 EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
             }
-            else if (hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            else
             {
                 EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
                 agent.stoppingDistance = 1.2f;
                 agent.SetDestination(new Vector3(firstGroundHitPoint.x, firstGroundHitPoint.y, firstGroundHitPoint.z));
                 attacking = false;
-
             }
         }
 	}

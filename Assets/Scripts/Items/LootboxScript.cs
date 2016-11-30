@@ -50,6 +50,7 @@ public class LootboxScript : MonoBehaviour
 
     IEnumerator Pickup()
     {
+        Manager_Audio.PlaySound("Play_BoxPickup", this.gameObject);
         while (text.color.a > 0.01f)
         {
             text.transform.position += new Vector3(0f, 0.01f, 0f);
