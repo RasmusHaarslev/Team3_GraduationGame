@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class EquippableItemUIListController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class EquippableItemUIListController : MonoBehaviour
     public GameObject ContentPanel;
     private GameObject ListItemPrefab;
     //public GameObject cameraWeapons;
-    
+    bool firstDrawn = false;
    public void GenerateItemsList(IEnumerable<EquippableitemValues> itemsValues)
     {
         ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
@@ -21,12 +22,20 @@ public class EquippableItemUIListController : MonoBehaviour
         //adding the new list
         foreach (EquippableitemValues values in itemsValues)
         {
+            
             GameObject newItem = Instantiate(ListItemPrefab) as GameObject;
             UIListEquippableItemController controller = newItem.GetComponent<UIListEquippableItemController>();
+            if (!firstDrawn)
+            {
+                newItem.GetComponent<Image>().color = controller.selectedColor;
+                firstDrawn = true;
+            }
             //controller.Icon.sprite = animal.Icon;
+            controller.type.text = "Type: " + values.Type.ToString();
+            controller.level.text = "Level: " + values.level.ToString();
             controller.name.text = values.name;
             controller.damage.text = "Damage: " + values.damage;
-            controller.damageSpeed.text = "Damage Speed: " + values.damageSpeed;
+            controller.damageSpeed.text = "Atk Speed: " + values.damageSpeed;
             controller.health.text = "Health: " + values.health;
             controller.range.text = "Range: " + values.range;
             controller.itemValues = values;
@@ -51,7 +60,9 @@ public class EquippableItemUIListController : MonoBehaviour
             newItem.transform.localPosition = Vector3.zero;
             newItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-
+        firstDrawn = false;
+        //GetComponentInChildren<UIListEquippableItemController>().GetComponent<Image>().color = new Color32(0, 85, 250, 116);
+        //print(GetComponentInChildren<UIListEquippableItemController>().GetComponentInChildren<Text>().text);
     }
 
 

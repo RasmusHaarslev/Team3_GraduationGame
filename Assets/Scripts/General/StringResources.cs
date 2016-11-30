@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -61,11 +62,38 @@ public class StringResources
 
     public static string follower2MaterialName = "Follower2Material";
 
-    public static string rifle1MaterialName = "Rifle1Material";
 
-    public static string polearm1MaterialName = "Polearm1Material";
-
-    public static string shield1MaterialName = "Shield1Material";
+    public static Dictionary<EquippableitemValues.type, string[][]> equipItemsModelsStrings = // shield -> ["shield name","prefab name","material name"]
+        new Dictionary<EquippableitemValues.type, string[][]>
+        {
+            {
+                EquippableitemValues.type.shield, new[]
+                {
+                    new[] { "Riot Shield", "Shield1", "Shield1AMaterial" },
+                    new[] { "Rusted Barrier", "Shield1", "Shield1BMaterial" },
+                    new[] { "Moss-covered Plate", "Shield1", "Shield1CMaterial" },
+                    new[] { "Stop Sign", "Shield2", "Shield2AMaterial" }            
+                }
+            },
+            {
+                EquippableitemValues.type.polearm, new[]
+                {
+                    new[] { "Stick Blade", "Polearm1", "Polearm1AMaterial" },
+                    new[] { "Army Pike", "Polearm1", "Polearm1BMaterial" },
+                    new[] { "Ranged Cutter", "Polearm1", "Polearm1CMaterial" }
+                }
+            },
+            {
+                EquippableitemValues.type.rifle, new[]
+                {
+                    new[] { "Hunting Rifle", "Rifle1", "Rifle1AMaterial" },
+                    new[] { "Carabine", "Rifle1", "Rifle1BMaterial" },
+                    new[] { "Old Musket", "Rifle1", "Rifle1CMaterial" }
+                }
+            }
+        };
+    
+    
 
     public static string[] maleHuntersMaterials = new[] { "Hunter_Male_1", "Hunter_Male_2", "Hunter_Male_3", "Hunter_Male_4", "Hunter_Male_5", "Hunter_Male_6", "Hunter_Male_7", "Hunter_Male_8", "Hunter_Male_9" };
 
@@ -190,13 +218,5 @@ public class StringResources
 
     #endregion
 
-        // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+     
 }

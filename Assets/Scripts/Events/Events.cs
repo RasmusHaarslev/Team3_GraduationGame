@@ -261,3 +261,11 @@ public class LanguageChanged : GameEvent
 {
     public LanguageChanged() { }
 }
+
+public class StopFleeEvent : GameEvent
+{
+	public StopFleeEvent()
+	{
+
+	}
+}

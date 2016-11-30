@@ -27,7 +27,7 @@ public class BackgroundInventoryScript : MonoBehaviour, IPointerClickHandler
                 }
             }
             gameObject.SetActive(false);
-            panelScript.panelList[1].SetActive(true);
+            //panelScript.panelList[1].SetActive(true);
         }
 
     }

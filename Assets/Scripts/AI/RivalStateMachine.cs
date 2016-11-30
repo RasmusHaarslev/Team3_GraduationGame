@@ -183,7 +183,20 @@ public class RivalStateMachine : CoroutineMachine
 
 	private void OpponentsFleeing(FleeStateEvent e)
 	{
-		character.currentOpponents.Clear();
-		character.isInCombat = false;
+		foreach (var opp in character.currentOpponents)
+		{
+			if (opp.GetComponent<Character>().isFleeing == true)
+			{
+				character.currentOpponents.Remove(opp);
+			}
+			else
+			{
+				character.target = opp;
+			}
+		}
+		if (character.currentOpponents.Count == 0)
+		{
+			character.isInCombat = false;
+		}
 	}
 }

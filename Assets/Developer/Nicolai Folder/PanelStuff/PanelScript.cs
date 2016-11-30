@@ -125,6 +125,9 @@ public class PanelScript : MonoBehaviour {
                 {
                     if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
+
+                        //soldier.animator.SetInteger("IdleAction", 8);
+
                         //print("adding as new Character");
                         //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
                         //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
@@ -144,7 +147,8 @@ public class PanelScript : MonoBehaviour {
                         newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                         newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
                         newSoldiersList[i].AddComponent<PanelController>();
-                        if(soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
+                        SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
                         }
@@ -156,10 +160,11 @@ public class PanelScript : MonoBehaviour {
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                         }
+                        EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
                     }
                 }
                 
-                //print(valuesToKeep.id);
+              
                 
             }
             else
@@ -426,29 +431,21 @@ public class PanelScript : MonoBehaviour {
             foreach (var stat in newSoldierStats)
             {
 
-                if (stat.name == "Type")
-                {
-                    stat.GetComponent<Text>().text = "Type: " + newCharacterSoldierList[i].Type.ToString();
-                }
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = "Damage: " + newCharacterSoldierList[i].damage.ToString();
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = "Name: " + newCharacterSoldierList[i].name;
-                }
-                if (stat.name == "Description")
-                {
-                    stat.GetComponent<Text>().text = "Description: " + newCharacterSoldierList[i].description;
-                }
+                    stat.GetComponent<Text>().text =  newCharacterSoldierList[i].name;
+                }               
                 if (stat.name == "Health")
                 {
                     stat.GetComponent<Text>().text = "Health: " + newCharacterSoldierList[i].health.ToString();
                 }
                 if (stat.name == "Damage Speed")
                 {
-                    stat.GetComponent<Text>().text = "Damage speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
+                    stat.GetComponent<Text>().text = "Attack speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
                 }
                 if (stat.name == "Range")
                 {
@@ -456,11 +453,11 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
                 }
                 if (stat.name == "Target Trait")
                 {
-					stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+					stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
                 }
 
             }
@@ -474,40 +471,37 @@ public class PanelScript : MonoBehaviour {
         currentSoldier = soldier.GetComponent<Character>();
         foreach(var stat in soldierStatsList)
         {        
-            if (stat.name == "Type")
-            {
-                if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
-                {
-                    stat.GetComponent<Text>().text = "Leader";
-                }
-                else
-                {
-                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
-                }
-            }
+            //if (stat.name == "Type")
+            //{
+            //    if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
+            //    {
+            //        stat.GetComponent<Text>().text = "Leader";
+            //    }
+            //    else
+            //    {
+            //        stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
+            //    }
+            //}
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = currentSoldier.damage.ToString();
+                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.damage.ToString();
             }
             if (stat.name == "Soldier Name")
             {
                 stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
             }
-            if (stat.name == "Description")
-            {
-                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.description;
-            }
+           
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = currentSoldier.health.ToString();
+                stat.GetComponent<Text>().text = "Health: " + currentSoldier.health.ToString();
             }
             if (stat.name == "Damage Speed")
             {
-                stat.GetComponent<Text>().text =  currentSoldier.damageSpeed.ToString();
+                stat.GetComponent<Text>().text = "Attack speed: " + currentSoldier.damageSpeed.ToString();
             }
             if (stat.name == "Range")
             {
-                stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
             }
             if (stat.name == "Combat Trait")
             {
@@ -526,9 +520,15 @@ public class PanelScript : MonoBehaviour {
 
     public void ActivateInventoryPanel()
     {
-        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToArray());
-        panelList[4].SetActive(true);
 
+        //panelList[4].GetComponent<EquippableItemUIListController>().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToList().Add(dataService.GetCharacterEquippableItemsValues(currentSoldier.characterBaseValues.id).FirstOrDefault()).ToArray());
+        List<EquippableitemValues> weaponsList = dataService.GetEquippableItemsValuesFromInventory().ToList();
+        weaponsList.Insert(0, currentSoldier.GetComponentInChildren<EquippableItem>().itemValues);
+
+        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(weaponsList.ToArray());
+        
+        panelList[4].SetActive(true);
+        
     }
 
     public void AssignWeaponToSoldier(EquippableitemValues weaponValues)
@@ -557,9 +557,9 @@ public class PanelScript : MonoBehaviour {
         //    }
         //}
 
-        panelList[4].SetActive(false);
-        panelList[5].SetActive(false);
-        panelList[1].SetActive(true);
+        //panelList[4].SetActive(false);
+        //panelList[5].SetActive(false);
+        //panelList[1].SetActive(true);
     }
 
     #endregion
