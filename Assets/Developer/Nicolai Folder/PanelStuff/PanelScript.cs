@@ -588,8 +588,13 @@ public class PanelScript : MonoBehaviour {
 
     }
 
-    public CharacterValues GenerateNewHunterValues()
+    public CharacterValues GenerateNewHunterValues(int points = 0, float strenghtProbab = 0)
     {
+        if (points != 0)
+            newCharPoints = points;
+        if (strenghtProbab != 0)
+            damagePointsChance = strenghtProbab;
+
         CharacterValues newCharValues = new CharacterValues();
         //generate prefab 
         newCharValues.prefabName = StringResources.follower1PrefabName;
