@@ -176,8 +176,10 @@ public class Character : MonoBehaviour
 
 	private void CommandAnimator(CommandEvent e)
 	{
-		Debug.Log("received");
-		animator.SetTrigger("IssueCommand");
+		if (characterBaseValues.Type == CharacterValues.type.Player)
+		{
+			animator.SetTrigger("IssueCommand");
+		}
 	}
 
 	/// <summary>
@@ -187,10 +189,10 @@ public class Character : MonoBehaviour
 	public void init(CharacterValues initValues)
 	{
 		characterBaseValues = initValues;
-        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-        //Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
+		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
 		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
-        range = initValues.range;
+		range = initValues.range;
 		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;
