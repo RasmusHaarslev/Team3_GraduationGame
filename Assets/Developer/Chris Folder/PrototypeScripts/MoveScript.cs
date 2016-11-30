@@ -207,7 +207,6 @@ public class MoveScript : MonoBehaviour
                 agent.stoppingDistance = 1.2f;
                 agent.SetDestination(new Vector3(firstGroundHitPoint.x, firstGroundHitPoint.y, firstGroundHitPoint.z));
                 attacking = false;
-
             }
         }
 	}
