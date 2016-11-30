@@ -19,7 +19,7 @@ public class Manager_Audio : MonoBehaviour {
 	public static string winState = "Win";
 	public static string loseState = "Lose";
 	public static string exploreSnapshot = "Exploring";
-	public static string fightSnapshot = "inCombat";
+	public static string fightSnapshot = "InCombat";
 
 	public static string baseAmbiencePlay = "Play_GroundAmbience";
 	public static string baseAmbienceStop = "Stop_GroundAmbience";
