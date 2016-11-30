@@ -8,6 +8,7 @@ public enum PalleteType
 	Pallete2 = 2,
 	Pallete3 = 3
 }
+
 [System.Serializable]
 public class PalleteSettings
 {
@@ -44,7 +45,6 @@ public class ControlPallete : MonoBehaviour {
 		if(newPallet != null)
 		{
 			_amplifyColorEffect.LutTexture = newPallet;
-
 		}
 	}
 
