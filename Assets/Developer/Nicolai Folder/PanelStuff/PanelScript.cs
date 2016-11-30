@@ -426,10 +426,6 @@ public class PanelScript : MonoBehaviour {
             foreach (var stat in newSoldierStats)
             {
 
-                //if (stat.name == "Type")
-                //{
-                //    stat.GetComponent<Text>().text = "Type: " + newCharacterSoldierList[i].Type.ToString();
-                //}
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = "Damage: " + newCharacterSoldierList[i].damage.ToString();
@@ -437,18 +433,14 @@ public class PanelScript : MonoBehaviour {
                 if (stat.name == "Soldier Name")
                 {
                     stat.GetComponent<Text>().text = "Name: " + newCharacterSoldierList[i].name;
-                }
-                if (stat.name == "Description")
-                {
-                    stat.GetComponent<Text>().text = "Description: " + newCharacterSoldierList[i].description;
-                }
+                }               
                 if (stat.name == "Health")
                 {
                     stat.GetComponent<Text>().text = "Health: " + newCharacterSoldierList[i].health.ToString();
                 }
                 if (stat.name == "Damage Speed")
                 {
-                    stat.GetComponent<Text>().text = "Damage speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
+                    stat.GetComponent<Text>().text = "Attack speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
                 }
                 if (stat.name == "Range")
                 {
@@ -456,11 +448,11 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text =  Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
                 }
                 if (stat.name == "Target Trait")
                 {
-					stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+					stat.GetComponent<Text>().text =  Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
                 }
 
             }
@@ -487,27 +479,24 @@ public class PanelScript : MonoBehaviour {
             //}
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = currentSoldier.damage.ToString();
+                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.damage.ToString();
             }
             if (stat.name == "Soldier Name")
             {
                 stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
             }
-            if (stat.name == "Description")
-            {
-                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.description;
-            }
+           
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = currentSoldier.health.ToString();
+                stat.GetComponent<Text>().text = "Health: " + currentSoldier.health.ToString();
             }
             if (stat.name == "Damage Speed")
             {
-                stat.GetComponent<Text>().text =  currentSoldier.damageSpeed.ToString();
+                stat.GetComponent<Text>().text = "Attack speed: " + currentSoldier.damageSpeed.ToString();
             }
             if (stat.name == "Range")
             {
-                stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
             }
             if (stat.name == "Combat Trait")
             {

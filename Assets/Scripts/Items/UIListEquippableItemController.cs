@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandler
 {
     public RawImage Icon;
-    public Text name, damage, damageSpeed, range, health;
+    public Text name, damage, damageSpeed, range, health, type, level;
     public EquippableitemValues itemValues;
     public GameObject weaponCams;
     Color32 selectedColor = new Color32(0, 85, 250, 116);

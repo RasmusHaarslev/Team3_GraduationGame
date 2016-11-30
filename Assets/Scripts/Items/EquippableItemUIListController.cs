@@ -22,14 +22,15 @@ public class EquippableItemUIListController : MonoBehaviour
         //adding the new list
         foreach (EquippableitemValues values in itemsValues)
         {
-            
+      
             GameObject newItem = Instantiate(ListItemPrefab) as GameObject;
             UIListEquippableItemController controller = newItem.GetComponent<UIListEquippableItemController>();
             //controller.Icon.sprite = animal.Icon;
-            
+            controller.type.text = "Type: " + values.Type.ToString();
+            controller.level.text = "Level: " + values.level.ToString();
             controller.name.text = values.name;
             controller.damage.text = "Damage: " + values.damage;
-            controller.damageSpeed.text = "Damage Speed: " + values.damageSpeed;
+            controller.damageSpeed.text = "Atk Speed: " + values.damageSpeed;
             controller.health.text = "Health: " + values.health;
             controller.range.text = "Range: " + values.range;
             controller.itemValues = values;
