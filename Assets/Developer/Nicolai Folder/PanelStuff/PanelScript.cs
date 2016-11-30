@@ -125,6 +125,9 @@ public class PanelScript : MonoBehaviour {
                 {
                     if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
+
+                        //soldier.animator.SetInteger("IdleAction", 8);
+
                         //print("adding as new Character");
                         //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
                         //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
@@ -144,7 +147,8 @@ public class PanelScript : MonoBehaviour {
                         newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                         newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
                         newSoldiersList[i].AddComponent<PanelController>();
-                        if(soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
+                        SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
                         }
@@ -156,10 +160,11 @@ public class PanelScript : MonoBehaviour {
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                         }
+                        EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
                     }
                 }
                 
-                //print(valuesToKeep.id);
+              
                 
             }
             else
@@ -432,7 +437,7 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = "Name: " + newCharacterSoldierList[i].name;
+                    stat.GetComponent<Text>().text =  newCharacterSoldierList[i].name;
                 }               
                 if (stat.name == "Health")
                 {
@@ -448,11 +453,11 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text =  Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
                 }
                 if (stat.name == "Target Trait")
                 {
-					stat.GetComponent<Text>().text =  Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+					stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
                 }
 
             }
@@ -519,8 +524,9 @@ public class PanelScript : MonoBehaviour {
         //panelList[4].GetComponent<EquippableItemUIListController>().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToList().Add(dataService.GetCharacterEquippableItemsValues(currentSoldier.characterBaseValues.id).FirstOrDefault()).ToArray());
         List<EquippableitemValues> weaponsList = dataService.GetEquippableItemsValuesFromInventory().ToList();
         weaponsList.Insert(0, currentSoldier.GetComponentInChildren<EquippableItem>().itemValues);
-        
+
         panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(weaponsList.ToArray());
+        
         panelList[4].SetActive(true);
         
     }

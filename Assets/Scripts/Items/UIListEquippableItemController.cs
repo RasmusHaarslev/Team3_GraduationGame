@@ -10,7 +10,7 @@ public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandle
     public Text name, damage, damageSpeed, range, health, type, level;
     public EquippableitemValues itemValues;
     public GameObject weaponCams;
-    Color32 selectedColor = new Color32(0, 85, 250, 116);
+    public Color32 selectedColor = new Color32(0, 85, 250, 116);
     Color32 defaultColor = new Color32(154, 154, 154, 116);
     public void OnPointerClick(PointerEventData eventData)
     {
