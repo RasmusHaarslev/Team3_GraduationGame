@@ -81,9 +81,16 @@ public class HunterStateMachine : CoroutineMachine
 	}
 	private void Flee(FleeStateEvent e)
 	{
-		character.animator.SetBool("isFleeing", true);
 		ProjectCommand();
-		combatCommandState = CombatCommandState.Flee;
+		if (combatTrait != CharacterValues.CombatTrait.BraveFool)
+		{
+			character.animator.SetBool("isFleeing", true);
+			combatCommandState = CombatCommandState.Flee;
+		}
+		else
+		{
+			ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
+		}
 	}
 
 	#endregion
@@ -194,12 +201,8 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					if (character.currentOpponents.Count != 0)
 					{
-						if ((combatCommandState == CombatCommandState.Offense || (combatCommandState == CombatCommandState.Flee && combatTrait == CharacterValues.CombatTrait.BraveFool)))
+						if (combatCommandState == CombatCommandState.Offense)
 						{
-							if (combatCommandState == CombatCommandState.Flee && combatTrait == CharacterValues.CombatTrait.BraveFool)
-							{
-								ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
-							}
 							if (character.target != null && character.target.GetComponent<Character>() != null)
 							{
 								if (!character.target.GetComponent<Character>().isDead)
@@ -271,7 +274,10 @@ public class HunterStateMachine : CoroutineMachine
 				agent.updateRotation = true;
 				if (combatCommandState == CombatCommandState.Flee)
 				{
-					yield return new TransitionTo(FleeState, DefaultTransition);
+					if (combatTrait != CharacterValues.CombatTrait.BraveFool)
+					{
+						yield return new TransitionTo(FleeState, DefaultTransition);
+					}
 				}
 				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && combatTrait != CharacterValues.CombatTrait.Clingy)
 				{
