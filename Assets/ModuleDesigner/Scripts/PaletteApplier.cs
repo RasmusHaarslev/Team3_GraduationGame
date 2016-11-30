@@ -46,18 +46,21 @@ namespace Assets.ModuleDesigner.Scripts
                     {
                         parseColors("#D7D1B4", "#A5A08A", "#647388", "#5F4B03", "#472A00");
                     }
+                    Debug.Log("Color palette 1");
                     Manager_Audio.ChangeState("Palette","Color1");
                     break;
                 case 1: //Red/purple palette
                     {
                         parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
                     }
+                    Debug.Log("Color palette 2");
                     Manager_Audio.ChangeState("Palette", "Color2");
                     break;
                 case 2: 
                     {
                         parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
                     }
+                    Debug.Log("Color palette 3");
                     Manager_Audio.ChangeState("Palette", "Color3");
                     break;
             }
