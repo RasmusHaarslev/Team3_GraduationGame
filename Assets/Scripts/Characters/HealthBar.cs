@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class HealthBar : MonoBehaviour {
+public class HealthBar : MonoBehaviour
+{
 	public float barDisplay;
 	Vector3 pos;
 	public Vector2 size = new Vector2(120, 15);
@@ -14,7 +15,8 @@ public class HealthBar : MonoBehaviour {
 	GUIStyle currentStyle = null;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		character = transform.parent.gameObject.GetComponent<Character>();
 		camera = Camera.main;
 		progressBarFull = new Texture2D((int)size.x, (int)size.y);
@@ -29,41 +31,61 @@ public class HealthBar : MonoBehaviour {
 		progressBarFull.Apply();
 		screenPos = camera.WorldToScreenPoint(transform.position);
 		pos = screenPos;
-		barDisplay = character.currentHealth/character.health;
+		barDisplay = character.currentHealth / character.health;
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		if(currentStyle == null)
+	void Update()
+	{
+		if (currentStyle == null)
 		{
 			currentStyle = new GUIStyle();
 		}
 		screenPos = camera.WorldToScreenPoint(transform.position);
 		pos = new Vector2(screenPos.x, screenPos.y + 100);
-		barDisplay = character.currentHealth/character.health;
+		barDisplay = character.currentHealth / character.health;
 	}
 
 	void OnGUI()
 	{
 		// draw the background:
-		if (!character.isDead && SceneManager.GetActiveScene().name != "CampManagement")
+		if (!character.isDead && SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing)
 		{
-			if (barDisplay <= 0.25)
+			if (transform.parent.gameObject.tag == "Friendly" || transform.parent.gameObject.tag == "Player")
 			{
-				GUI.color = new Color((float)159 / 255, (float)33 / 255, (float)33 / 255);
-			}
-			else
-			if (barDisplay <= 0.5)
+				if (barDisplay <= 0.25)
+				{
+					GUI.color = new Color((float)159 / 255, (float)33 / 255, (float)33 / 255);
+				}
+				else
+				if (barDisplay <= 0.5)
+				{
+					GUI.color = new Color((float)187 / 255, (float)99 / 255, (float)35 / 255);
+				}
+				else
+				if (barDisplay <= 1.0)
+				{
+					GUI.color = new Color((float)107 / 255, (float)149 / 255, (float)25 / 255);
+				}
+			} else
 			{
-				GUI.color = new Color((float)187 / 255, (float)99 / 255, (float)35 / 255);
-			}
-			else
-			if (barDisplay <= 1.0)
-			{
-				GUI.color = new Color((float)107 / 255, (float)149 / 255, (float)25 / 255);
+				if (barDisplay <= 0.25)
+				{
+					GUI.color = new Color((float)185 / 255, (float)66 / 255, (float)167 / 255);
+				}
+				else
+				if (barDisplay <= 0.5)
+				{
+					GUI.color = new Color((float)127 / 255, (float)65 / 255, (float)190 / 255);
+				}
+				else
+				if (barDisplay <= 1.0)
+				{
+					GUI.color = new Color((float)27 / 255, (float)70 / 255, (float)158 / 255);
+				}
 			}
 			currentStyle.normal.background = progressBarFull;
-			GUI.BeginGroup(new Rect(pos.x - size.x/2, Screen.height - pos.y, size.x, size.y));
+			GUI.BeginGroup(new Rect(pos.x - size.x / 2, Screen.height - pos.y, size.x, size.y));
 			GUI.Box(new Rect(0, 0, size.x, size.y), progressBarEmpty);
 
 			// draw the filled-in part:
