@@ -100,6 +100,7 @@ public class HunterStateMachine : CoroutineMachine
 	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
 	public float fleeSpeed = 4f;
+	public float stayAttackDistance = 10f;
 	bool stopFleeing = false;
 
 	// Trait visualisation
@@ -189,6 +190,11 @@ public class HunterStateMachine : CoroutineMachine
 						}
 						break;
 				}
+				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && distanceToTarget > stayAttackDistance && combatTrait != CharacterValues.CombatTrait.Clingy)
+				{
+					yield return new TransitionTo(StayState, DefaultTransition);
+				}
+
 				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < (character.health * fearfulHealthLimit)))
 				{
 					if (combatTrait == CharacterValues.CombatTrait.Fearful)
@@ -330,12 +336,12 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (agent.destination == fleePosition)
 			{
-				Debug.Log(gameObject.name + " deactivated at position: " + agent.destination);
 				gameObject.SetActive(false);
 			}
 		}
 		if (stopFleeing)
 		{
+			character.isFleeing = false;
 			yield return new TransitionTo(StartState, DefaultTransition);
 		}
 		yield return new TransitionTo(FleeState, DefaultTransition);

@@ -40,6 +40,7 @@ public class LevelCanvasManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		fleePopUp.SetActive(true);
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 		if (fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>() != null)
 		{
 			fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>().SetupText(null, "flee");
@@ -49,6 +50,17 @@ public class LevelCanvasManager : MonoBehaviour
 
 	public void StopFlee()
 	{
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 		EventManager.Instance.TriggerEvent(new StopFleeEvent());
 	}
+
+    public void DoneTutorial(int tutlevel)
+    {
+        if (tutlevel != 5) { 
+            EventManager.Instance.TriggerEvent(new TutorialDone(tutlevel));
+        }else
+        {
+            GameController.Instance.LoadScene("CampManagement");
+        }
+    }
 }

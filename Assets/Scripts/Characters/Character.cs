@@ -166,18 +166,20 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
-	private void CommandAnimator(CommandEvent e)
-	{
-		Debug.Log("received ");
-		animator.SetTrigger("IssueCommand");
-	}
-
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
+	}
+
+	private void CommandAnimator(CommandEvent e)
+	{
+		if (characterBaseValues.Type == CharacterValues.type.Player)
+		{
+			animator.SetTrigger("IssueCommand");
+		}
 	}
 
 	/// <summary>
@@ -187,10 +189,10 @@ public class Character : MonoBehaviour
 	public void init(CharacterValues initValues)
 	{
 		characterBaseValues = initValues;
-        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-        //Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
+		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
 		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
-        range = initValues.range;
+		range = initValues.range;
 		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;

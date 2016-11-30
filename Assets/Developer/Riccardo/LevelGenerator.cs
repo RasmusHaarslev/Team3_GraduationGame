@@ -7,8 +7,8 @@ using System.Security.Cryptography.X509Certificates;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public int enemyStatsMultiplier = 1;
-    public int enemyStatsAdditive = 1;
+    public float enemyStatsMultiplier = 1;
+    public float enemyStatsAdditive = 1;
     
     [Header("Enemy Placement and Scaling")]
     [Tooltip("Parameter usually passed from the level selection. It will influence the hardness of the level.")]
@@ -232,7 +232,7 @@ public class LevelGenerator : MonoBehaviour
     /// <param name="values"></param>
     private int ScaleParameter(int value)
     {
-        return value + (levelStatsScale * enemyStatsMultiplier) + enemyStatsAdditive;
+        return (int) (value + (levelStatsScale * enemyStatsMultiplier) + enemyStatsAdditive);
     }
 
 

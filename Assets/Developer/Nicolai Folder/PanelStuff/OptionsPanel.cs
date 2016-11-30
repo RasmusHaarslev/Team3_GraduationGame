@@ -24,6 +24,7 @@ public class OptionsPanel : MonoBehaviour {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
         }
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
         BackgroundPanel.SetActive(true);
         OptionPanel.SetActive(true);
     }

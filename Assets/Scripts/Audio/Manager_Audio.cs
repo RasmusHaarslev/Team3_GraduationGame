@@ -94,7 +94,7 @@ public class Manager_Audio : MonoBehaviour {
 
     public static string discoverFriendly = "DiscoverFriendly";
 	public static string discoverEnemy = "DiscoverEnemy";
-	public static string friendlyDeath = "CombatFriendlyDie";
+	public static string friendlyDeath = "FriendlyDie";
 
 	public static string CommandUI = "Play_CommandUI";
 	public static string HoverCommandUI = "Play_CommandSel";

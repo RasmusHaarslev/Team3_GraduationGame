@@ -49,7 +49,7 @@ class BuildScript
         {
             if (scene.Name.EndsWith(".unity"))
             {
-                scenes.Add("Assets/_Scenes/Tutorial/" + scene.Name);
+                scenes.Add("Assets/_Scenes/Tutorials/" + scene.Name);
             }
         }
 
