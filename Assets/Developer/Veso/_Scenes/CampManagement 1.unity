@@ -90,11 +90,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!108 &65434256 stripped
-Light:
-  m_PrefabParentObject: {fileID: 108000011434165744, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 451243312}
 --- !u!1001 &102278316
 Prefab:
   m_ObjectHideFlags: 0
@@ -579,11 +574,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000011576785520, guid: d7f986adc682ebf4ca6b94848daf6c8e,
     type: 2}
   m_PrefabInternal: {fileID: 578931038}
---- !u!108 &479798777 stripped
-Light:
-  m_PrefabParentObject: {fileID: 108000010253938282, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 451243312}
 --- !u!1001 &578931038
 Prefab:
   m_ObjectHideFlags: 0
@@ -1549,10 +1539,10 @@ MonoBehaviour:
   - {fileID: 1217307233}
   - {fileID: 1790236700}
   SpotLightList:
-  - {fileID: 1058555737}
-  - {fileID: 479798777}
-  - {fileID: 1562434770}
-  - {fileID: 65434256}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   newSoldierStatsList:
   - newIndividualSoldierStatsList:
     - {fileID: 1549162731}
@@ -1588,11 +1578,6 @@ MonoBehaviour:
   alreadyGeneratedNewSoldiers: 0
   silhouetteGO: {fileID: 0}
   silhouettePosList: []
---- !u!108 &1058555737 stripped
-Light:
-  m_PrefabParentObject: {fileID: 108000013860017112, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 451243312}
 --- !u!20 &1071830327 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20000014250554884, guid: cc0e44a9d98cb5244a054b6072d879bb,
@@ -1713,6 +1698,48 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000010935127356, guid: baaba8dba41717c48a5d8891cac1a28f,
     type: 2}
   m_PrefabInternal: {fileID: 1219609866}
+--- !u!1001 &1537098124
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013658691360, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 375e28fb3ddb98943bfb10ab1e0068c2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!224 &1549162693 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000010129519644, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
@@ -1903,11 +1930,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011171949318, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
     type: 2}
   m_PrefabInternal: {fileID: 2044605953}
---- !u!108 &1562434770 stripped
-Light:
-  m_PrefabParentObject: {fileID: 108000012298616230, guid: cc0e44a9d98cb5244a054b6072d879bb,
-    type: 2}
-  m_PrefabInternal: {fileID: 451243312}
 --- !u!20 &1790236700 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20000013878394960, guid: cc0e44a9d98cb5244a054b6072d879bb,
