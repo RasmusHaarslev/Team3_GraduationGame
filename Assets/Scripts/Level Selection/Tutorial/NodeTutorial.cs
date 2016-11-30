@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class NodeTutorial : MonoBehaviour {
 
@@ -68,6 +69,24 @@ public class NodeTutorial : MonoBehaviour {
 
     void OnEnable()
     {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "TutorialLevel01":
+                SetScrollPosition(0);
+                break;
+            case "TutorialLevel02":
+                SetScrollPosition(1);
+                break;
+            case "TutorialLevel03":
+                SetScrollPosition(2);
+                break;
+            case "TutorialLevel04":
+                SetScrollPosition(3);
+                break;
+            case "TutorialLevel05":
+                SetScrollPosition(4);
+                break;
+        }
         EventManager.Instance.StartListening<TutorialDone>(DoneLevel);
     }
 
@@ -78,7 +97,6 @@ public class NodeTutorial : MonoBehaviour {
 
     void Start()
     {
-        SetScrollPosition(0);
         SetupNodes();
     }
 
@@ -184,7 +202,7 @@ public class NodeTutorial : MonoBehaviour {
     public void SetScrollPosition(int rowNumber)
     {
         /* SETUP SCROLL POSITION */
-        float rowHeight = 192*rowNumber;
+        float rowHeight = 384*rowNumber;
 
         Vector2 initPos = new Vector2(scrollingGrid.GetComponent<RectTransform>().anchoredPosition.x, -500f);
         Vector2 desPos = new Vector2(scrollingGrid.GetComponent<RectTransform>().anchoredPosition.x, -500 + rowHeight);

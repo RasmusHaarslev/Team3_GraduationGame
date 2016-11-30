@@ -56,6 +56,11 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void DoneTutorial(int tutlevel)
     {
-        EventManager.Instance.TriggerEvent(new TutorialDone(tutlevel));
+        if (tutlevel != 5) { 
+            EventManager.Instance.TriggerEvent(new TutorialDone(tutlevel));
+        }else
+        {
+            GameController.Instance.LoadScene("CampManagement");
+        }
     }
 }
