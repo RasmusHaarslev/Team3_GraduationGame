@@ -269,3 +269,12 @@ public class StopFleeEvent : GameEvent
 
 	}
 }
+
+public class UIPanelActiveEvent : GameEvent
+{
+	public bool panelActive = false;
+	public UIPanelActiveEvent()
+	{
+		panelActive = !panelActive;
+	}
+}
