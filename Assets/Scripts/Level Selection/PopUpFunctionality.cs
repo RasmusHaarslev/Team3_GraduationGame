@@ -45,8 +45,10 @@ public class PopUpFunctionality : MonoBehaviour {
         GameObject node = e.node;
         Node nodeScript = node.GetComponent<Node>();
 
-        if (nodeScript.isCleared)
+        if (nodeScript.isCleared) { 
+            Manager_Audio.PlaySound(Manager_Audio.play_clickClearedNode, gameObject);
             return;
+        }
 
         invisPanel.SetActive(true);
 
@@ -188,7 +190,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void AcceptPlay(GameObject node)
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
         EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));        
 
         PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameplayAudioControl : MonoBehaviour {
 
-	void OnEnable()
+	void Start()
 	{
 		EnableExploreStuffAudio ();
 	}
