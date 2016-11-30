@@ -17,7 +17,7 @@ class BuildScript
 
         // Todo
         string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
-        string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + "_build.apk";
+        string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH") + "_build.apk";
         PlayerSettings.productName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
 
         // Create build folder if not yet exists
