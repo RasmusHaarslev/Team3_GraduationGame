@@ -18,7 +18,12 @@ public class TribesLeft : MonoBehaviour {
         EventManager.Instance.StopListening<LanguageChanged>(UpdateText);
     }
 
-	void Start () {
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
+    void Start () {
         campsLeft = PlayerPrefs.GetInt(StringResources.TribeCampsPrefsName, 4);
         GetComponent<Text>().text = campsLeft.ToString() + " " + TranslationManager.Instance.GetTranslation("TribesLeft");
 	}

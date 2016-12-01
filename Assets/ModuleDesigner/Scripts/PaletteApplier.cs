@@ -35,6 +35,11 @@ public class PaletteApplier : MonoBehaviour
         EventManager.Instance.StopListening<LevelStarted>(ChangePalette);
     }
 
+    void OnApplicationExit()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     public void ChangePalette(LevelStarted e)
     {
         paletteNumber = PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName);

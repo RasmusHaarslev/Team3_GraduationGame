@@ -62,6 +62,11 @@ public class DebugUI : MonoBehaviour
         //Application.logMessageReceived -= HandleLog;
     }
 
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
     private void Lost(LevelLost e)
     {
         showDebug = false;

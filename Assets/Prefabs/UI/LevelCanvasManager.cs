@@ -16,7 +16,12 @@ public class LevelCanvasManager : MonoBehaviour
 		EventManager.Instance.StopListening<FleeStateEvent>(ShowPopUp);
 	}
 
-	public void ShowPopUp(FleeStateEvent e)
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
+    public void ShowPopUp(FleeStateEvent e)
 	{
 		StartCoroutine(Flee());
 	}

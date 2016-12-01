@@ -40,6 +40,11 @@ public class PopUpFunctionality : MonoBehaviour {
         EventManager.Instance.StopListening<SetupPopUp>(InitialisePopUP);
     }
 
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
     public void InitialisePopUP(SetupPopUp e)
     {
         GameObject node = e.node;
