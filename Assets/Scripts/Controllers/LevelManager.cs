@@ -16,7 +16,10 @@ public class LevelManager : MonoBehaviour
 	private int ItemsLeft = 0;
 	public bool inCombat = false;
 
-	private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
+    public string NextLevel = "";
+    public bool IsTutorial = false;
+
+    private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
 	public List<GameObject> huntersAndPlayer = new List<GameObject>();
 	LevelGenerator levelGenerator;
 
@@ -176,7 +179,7 @@ public class LevelManager : MonoBehaviour
 
 	void PlayerDeath(PlayerDeathEvent e)
 	{
-		LoseGame("PlayerDeathCutscene");
+		LoseGame("CampManagement");
 	}
 
 	void LootReceived(EnemyDeathEvent e)
@@ -201,7 +204,7 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
 		{
-			LoseGame("AllyDeathCutscene");
+			LoseGame("CampManagement");
 		}
 		else if (AlliesAlive <= 0)
 		{
@@ -209,7 +212,7 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void LoseGame(string scene = "PlayerDeathCutscene")
+	public void LoseGame(string scene = "CampManagement")
 	{
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
         GameController.Instance.LoseGame();
@@ -229,7 +232,13 @@ public class LevelManager : MonoBehaviour
 	{
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
         EventManager.Instance.TriggerEvent(new LevelWon());
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+
+        if (IsTutorial)
+        {
+            SceneManager.LoadScene(NextLevel);
+        }
+
+        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 		EventManager.Instance.TriggerEvent(
 			new ChangeResources(
 				food: PlayerPrefs.GetInt("FoodAmount"),

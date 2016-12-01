@@ -91,15 +91,15 @@ public class DataService : MonoBehaviour
         _connection.CreateTable<InventoryItem>();
 
         //GENERATE RANDOM LEADER
-        PanelScript charGenerator = new PanelScript();
-        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(125,0.07f); //pass attributes points as parameter
+        CharacterGenerator charGenerator = new CharacterGenerator();
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null,125, 0.07f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
         leaderValues.prefabName = StringResources.playerPrefabName;
         leaderValues.materialName = StringResources.playerMaterialName;
         WeaponGenerator weaponGen = new WeaponGenerator();
-        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1); //leader will have a random level 1 spear
-        leaderWeapon.characterId = 1;
+        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1, 0.2f,0.7f,0.1f); //leader will have a random level 1 spear
+        leaderWeapon.characterId = 1;                                                                                   //damage, health and dmg-speed probability
         //ENDING OF RANDOM LEADER GENERATION
 
 
