@@ -1570,7 +1570,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010768825690}
-  - 114: {fileID: 114000013796353948}
+  - 114: {fileID: 114000012038581654}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -6346,6 +6346,19 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 2
   isMale: 1
+--- !u!114 &114000012038581654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012272256008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e3cb6518f1ef44fb3a3da1e0ab21a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barDisplay: 0
+  size: {x: 120, y: 15}
 --- !u!114 &114000012518348418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6370,19 +6383,6 @@ MonoBehaviour:
   fleePosition: {x: 0, y: 0, z: 0}
   distanceToTarget: 3.4028235e+38
   partyID: 0
---- !u!114 &114000013796353948
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012272256008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e757a1fe497b64e488951a06f81c0f39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barDisplay: 0
-  size: {x: 120, y: 15}
 --- !u!135 &135000010187610530
 SphereCollider:
   m_ObjectHideFlags: 1
