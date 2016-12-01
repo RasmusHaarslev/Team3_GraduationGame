@@ -4,6 +4,11 @@ using System;
 
 public class AudioDiscover : MonoBehaviour
 {
+	public float enemyCounter;
+	public float maxTimeBetweenEnemySightings = 3f;
+
+	public float friendlyCounter;
+	public float maxTimeBetweenFriendlySightings = 3f;
 
 	void OnEnable()
 	{
@@ -28,11 +33,32 @@ public class AudioDiscover : MonoBehaviour
 	{
 		if (col.gameObject.tag == "Unfriendly")
 		{
-			Manager_Audio.PlaySound(Manager_Audio.discoverEnemy, gameObject);
+			if (enemyCounter <= 0)
+			{
+				enemyCounter = maxTimeBetweenEnemySightings;
+				Manager_Audio.PlaySound(Manager_Audio.discoverEnemy, gameObject);
+			}
 		}
 		else if (col.gameObject.tag == "Friendly") // TODO: change tag to friendly encounter when it exists
 		{
-			Manager_Audio.PlaySound(Manager_Audio.discoverFriendly, gameObject);
+			if (enemyCounter <= 0)
+			{
+				enemyCounter = maxTimeBetweenEnemySightings;
+				Manager_Audio.PlaySound(Manager_Audio.discoverFriendly, gameObject);
+			}
+		}
+	}
+
+	void Update()
+	{
+		if(enemyCounter >= 0)
+		{
+			enemyCounter -= Time.deltaTime;
+		}
+
+		if (friendlyCounter >= 0)
+		{
+			friendlyCounter -= Time.deltaTime;
 		}
 	}
 }
