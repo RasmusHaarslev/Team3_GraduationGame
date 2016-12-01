@@ -30,11 +30,11 @@ public class Character : MonoBehaviour
 	public bool isInCombat = false;
 	public bool isDead = false;
 	public bool isFleeing = false;
+	private bool isWounded = false;
 
 	bool deadEvent = false;
 	[Range(0, 99)]
 	public int randomTargetProbability = 40;
-	float isFleeingValue;
 
 	//model values
 	//private Dictionary<string, Transform> slots;
@@ -55,6 +55,7 @@ public class Character : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		animator.SetFloat("isWounded", 0);
 		currentHealth = health;
 	}
 
@@ -65,8 +66,12 @@ public class Character : MonoBehaviour
 
 	void Update()
 	{
-		//isFleeingValue = isFleeing ? 1 : 0;
-		//animator.SetFloat("isWounded", isFleeingValue);
+		if (!isWounded && currentHealth < 0.4f * health)
+		{
+			isWounded = true;
+			animator.SetFloat("isWounded", 1);
+		}
+
 		if (!isInCombat)
 		{
 			animator.SetBool("isAware", false);
@@ -161,18 +166,20 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
-	private void CommandAnimator(CommandEvent e)
-	{
-		Debug.Log("received ");
-		animator.SetTrigger("IssueCommand");
-	}
-
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
+	}
+
+	private void CommandAnimator(CommandEvent e)
+	{
+		if (characterBaseValues.Type == CharacterValues.type.Player)
+		{
+			animator.SetTrigger("IssueCommand");
+		}
 	}
 
 	/// <summary>
@@ -182,10 +189,10 @@ public class Character : MonoBehaviour
 	public void init(CharacterValues initValues)
 	{
 		characterBaseValues = initValues;
-        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-        //Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
+		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
 		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
-        range = initValues.range;
+		range = initValues.range;
 		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;

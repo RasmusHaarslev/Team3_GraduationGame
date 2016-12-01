@@ -6,8 +6,10 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System;
 using UnityEngine.Networking;
+using System.Threading;
 
-public class PanelScript : MonoBehaviour {
+public class PanelScript : MonoBehaviour
+{
 
     public List<GameObject> panelList = new List<GameObject>();
     public List<GameObject> soldierStatsList = new List<GameObject>();
@@ -21,7 +23,7 @@ public class PanelScript : MonoBehaviour {
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
     public int newCharPoints = 15;
-    [Range (0f, 1f)]
+    [Range(0f, 1f)]
     public float damagePointsChance = 0.5f;
     public Transform camsAndNewSoldiersPosition;
     public GameObject silhouette;
@@ -97,15 +99,15 @@ public class PanelScript : MonoBehaviour {
 
     public void DeactivateNewSoldiers()
     {
-        foreach(GameObject soldier in newSoldiersList)
+        foreach (GameObject soldier in newSoldiersList)
         {
-            if(soldier.activeSelf == true)
+            if (soldier.activeSelf == true)
             {
                 soldier.SetActive(false);
             }
         }
 
-        foreach(Transform trans in camsAndNewSoldiersPosition)
+        foreach (Transform trans in camsAndNewSoldiersPosition)
         {
             if (trans.gameObject.GetComponentInChildren<Camera>().isActiveAndEnabled == true && trans.gameObject.GetComponentInChildren<Light>().isActiveAndEnabled == true)
             {
@@ -117,14 +119,17 @@ public class PanelScript : MonoBehaviour {
 
     public void SpawnNewSoldier(int index)
     {
-        for(int i = 0; i < newSoldiersList.Count; i++)
+        for (int i = 0; i < newSoldiersList.Count; i++)
         {
-            if(index == i)
+            if (index == i)
             {
                 foreach (Transform soldiertrans in solidersSpawnPosition)
                 {
                     if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
+
+                        //soldier.animator.SetInteger("IdleAction", 8);
+
                         //print("adding as new Character");
                         //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
                         //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
@@ -133,18 +138,19 @@ public class PanelScript : MonoBehaviour {
                         dataService.UpdateCharacterValuesInDb(valuesToKeep);
 
                         GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
-                        print("id of the weapon "+newWeapon.GetComponent<EquippableItem>().itemValues.id );
+                        print("id of the weapon " + newWeapon.GetComponent<EquippableItem>().itemValues.id);
                         //destroy current puppet weapon
                         Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
                         //equip weapon
                         print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
-                        
-                        dataService.equipItemsToCharacter(new[] { newWeapon },newSoldiersList[i].GetComponent<Character>());
-                        
+
+                        dataService.equipItemsToCharacter(new[] { newWeapon }, newSoldiersList[i].GetComponent<Character>());
+
                         newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                         newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
                         newSoldiersList[i].AddComponent<PanelController>();
-                        if(soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
+                        SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
                         }
@@ -156,11 +162,12 @@ public class PanelScript : MonoBehaviour {
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                         }
+                        EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
                     }
                 }
-                
-                //print(valuesToKeep.id);
-                
+
+
+
             }
             else
             {
@@ -177,58 +184,63 @@ public class PanelScript : MonoBehaviour {
     public void RerollSoldiers()
     {
         foreach (GameObject soldier in newSoldiersList)
-        {     
+        {
             Destroy(soldier);
         }
         newSoldiersList.Clear();
-        
+
         GetNewSoldiers();
 
     }
 
     public void GetNewSoldiers()
     {
+        var start = DateTime.Now;
 
-        
         CharacterValues[] newHuntersValues = dataService.GetNewHuntersValues();
-        print(newHuntersValues.Length);
+
         //check if there are already new hunters into database
         if (newHuntersValues.Length < 3)
-        { 
+        {
+            start = DateTime.Now;
             //add one new hunter
             foreach (Transform trans in camsAndNewSoldiersPosition)
             {
-
                 newSoldiersList.Add(GenerateNewHunter(trans));
             }
-
+            //print("Generating" + (DateTime.Now - start).TotalSeconds);
         }
-        else {
+        else
+        {
             newCharacterSoldierList = newHuntersValues.ToList<CharacterValues>();
             int i = 0;
             foreach (Transform trans in camsAndNewSoldiersPosition)
             { //if we have 3 new hunters values, generate them and add to the list
-                
+
                 newSoldiersList.Add(dataService.GenerateCharacterFromValues(newHuntersValues[i], trans.position));
                 i++;
             }
         }
 
+        start = DateTime.Now;
         foreach (GameObject newSoldier in newSoldiersList)
         {
             if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
-            { 
+            {
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
             }
-        }   
-        
+        }
+        //print("Removing navmesh " + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
         //newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
         //newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
         //newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
 
         FillInNewSoldierStats();
-    
+        //print("After filling " + (DateTime.Now - start).TotalSeconds);
+
+
     }
 
 
@@ -238,35 +250,35 @@ public class PanelScript : MonoBehaviour {
         int[] layersIndices = new[] { 9, 10, 11, 12 };
 
 
-        for(int i = 0; i < charactersFellowship.transform.childCount; i++)
+        for (int i = 0; i < charactersFellowship.transform.childCount; i++)
         {
             soldiersList.Add(charactersFellowship.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < soldiersList.Count; i++)      
+        for (int i = 0; i < soldiersList.Count; i++)
         {
-            
-            soldiersList[i].AddComponent<PanelController>();
-            soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;     
 
-            
-            if(soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
+            soldiersList[i].AddComponent<PanelController>();
+            soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
+
+
+            if (soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
             {
                 soldiersList[i].GetComponent<MoveScript>().enabled = false;
                 soldiersList[i].GetComponent<Formation>().enabled = false;
             }
             else
             {
-                soldiersList[i].GetComponent<HunterStateMachine>().enabled = false;              
+                soldiersList[i].GetComponent<HunterStateMachine>().enabled = false;
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-            
+
             // Switches the animator out with the camp animator.
             SetCampAnimation(soldiersList[i].GetComponent<Character>());
         }
-      
-        if(solidersSpawnPosition.childCount != soldiersList.Count)
+
+        if (solidersSpawnPosition.childCount != soldiersList.Count)
         {
             for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
             {
@@ -282,20 +294,24 @@ public class PanelScript : MonoBehaviour {
         // Switches the animator out with the camp animator.
         RuntimeAnimatorController newController = (RuntimeAnimatorController)Resources.Load("CampIdleControllers/CampIdleControllerUpdated");
         soldier.GetComponent<Animator>().runtimeAnimatorController = newController;
-        
-        if (soldier.transform.position == solidersSpawnPosition.GetChild(0).position) {
-            switch (soldier.equippedWeaponType) {
+
+        if (soldier.transform.position == solidersSpawnPosition.GetChild(0).position)
+        {
+            switch (soldier.equippedWeaponType)
+            {
                 case EquippableitemValues.type.polearm:
                     soldier.animator.Play("StandingIdleSpear1");
 
                     Vector3 newPosition1 = new Vector3(0.034f, -0.061f, -0.092f);
                     Quaternion newRotation1 = Quaternion.Euler(88.096f, -230.06f, -55.345f);
 
-                    if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1) {
+                    if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1)
+                    {
                         soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition1;
                         soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation1;
                     }
-                    else {
+                    else
+                    {
                         soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition1;
                         soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation1;
                     }
@@ -306,11 +322,13 @@ public class PanelScript : MonoBehaviour {
                     Vector3 newPosition2 = new Vector3(0.019f, -0.041f, -0.022f);
                     Quaternion newRotation2 = Quaternion.Euler(6.115f, 168.97f, -33.529f);
 
-                    if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1) {
+                    if (soldier.GetComponentsInChildren<EquippableItem>().Length > 1)
+                    {
                         soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localPosition = newPosition2;
                         soldier.GetComponentsInChildren<EquippableItem>()[1].transform.localRotation = newRotation2;
                     }
-                    else {
+                    else
+                    {
                         soldier.GetComponentInChildren<EquippableItem>().transform.localPosition = newPosition2;
                         soldier.GetComponentInChildren<EquippableItem>().transform.localRotation = newRotation2;
                     }
@@ -320,8 +338,10 @@ public class PanelScript : MonoBehaviour {
                     break;
             }
         }
-        else if (soldier.transform.position == solidersSpawnPosition.GetChild(1).position) {
-            switch (soldier.equippedWeaponType) {
+        else if (soldier.transform.position == solidersSpawnPosition.GetChild(1).position)
+        {
+            switch (soldier.equippedWeaponType)
+            {
                 case EquippableitemValues.type.polearm:
                     soldier.animator.Play("SpearBoxIdle");
                     break;
@@ -333,8 +353,10 @@ public class PanelScript : MonoBehaviour {
                     break;
             }
         }
-        else if (soldier.transform.position == solidersSpawnPosition.GetChild(2).position) {
-            switch (soldier.equippedWeaponType) {
+        else if (soldier.transform.position == solidersSpawnPosition.GetChild(2).position)
+        {
+            switch (soldier.equippedWeaponType)
+            {
                 case EquippableitemValues.type.polearm:
                     soldier.animator.Play("SpearSquatIdle");
                     break;
@@ -348,7 +370,8 @@ public class PanelScript : MonoBehaviour {
         }
         else if (soldier.transform.position == solidersSpawnPosition.GetChild(3).position)
         {
-            switch (soldier.equippedWeaponType) {
+            switch (soldier.equippedWeaponType)
+            {
                 case EquippableitemValues.type.polearm:
                     soldier.animator.Play("StandingIdleSpear2");
                     break;
@@ -365,8 +388,8 @@ public class PanelScript : MonoBehaviour {
     #region Cameras
     public void ActivateCamera(GameObject soldier)
     {
-        
-        if(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
+
+        if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
             soldierCameraList[0].enabled = true;
             SpotLightList[0].enabled = true;
@@ -394,21 +417,21 @@ public class PanelScript : MonoBehaviour {
 
     public void DeactivateCamera(int cameraIndex)
     {
-        for (int i = 0; i < charactersFellowship.transform.childCount ; i++)
+        for (int i = 0; i < charactersFellowship.transform.childCount; i++)
         {
-            if(i != cameraIndex)
+            if (i != cameraIndex)
             {
                 soldierCameraList[i].enabled = false;
-               
-            }   
-        }     
+
+            }
+        }
     }
 
     public void DeactivateSpotligths()
     {
-       foreach(Light spotlight in SpotLightList)
+        foreach (Light spotlight in SpotLightList)
         {
-            if(spotlight.enabled == true)
+            if (spotlight.enabled == true)
             {
                 spotlight.enabled = false;
             }
@@ -422,25 +445,17 @@ public class PanelScript : MonoBehaviour {
         int i = 0;
         foreach (var newSoldierStats in newSoldierStatsList)
         {
-            
+
             foreach (var stat in newSoldierStats)
             {
 
-                if (stat.name == "Type")
-                {
-                    stat.GetComponent<Text>().text = "Type: " + newCharacterSoldierList[i].Type.ToString();
-                }
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = "Damage: " + newCharacterSoldierList[i].damage.ToString();
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = "Name: " + newCharacterSoldierList[i].name;
-                }
-                if (stat.name == "Description")
-                {
-                    stat.GetComponent<Text>().text = "Description: " + newCharacterSoldierList[i].description;
+                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].name;
                 }
                 if (stat.name == "Health")
                 {
@@ -448,7 +463,7 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Damage Speed")
                 {
-                    stat.GetComponent<Text>().text = "Damage speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
+                    stat.GetComponent<Text>().text = "Attack speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
                 }
                 if (stat.name == "Range")
                 {
@@ -456,11 +471,11 @@ public class PanelScript : MonoBehaviour {
                 }
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text = "Combat Trait: " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
                 }
                 if (stat.name == "Target Trait")
                 {
-					stat.GetComponent<Text>().text = "Target Trait: " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
                 }
 
             }
@@ -472,42 +487,28 @@ public class PanelScript : MonoBehaviour {
     public void UpdateSoldierStats(GameObject soldier)
     {
         currentSoldier = soldier.GetComponent<Character>();
-        foreach(var stat in soldierStatsList)
-        {        
-            if (stat.name == "Type")
-            {
-                if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
-                {
-                    stat.GetComponent<Text>().text = "Leader";
-                }
-                else
-                {
-                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.Type.ToString();
-                }
-            }
+        foreach (var stat in soldierStatsList)
+        {
+
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = currentSoldier.damage.ToString();
+                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.characterBaseValues.damage.ToString() + " + " + (currentSoldier.damage - currentSoldier.characterBaseValues.damage) + " = " + currentSoldier.damage.ToString();
             }
             if (stat.name == "Soldier Name")
             {
                 stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
             }
-            if (stat.name == "Description")
-            {
-                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.description;
-            }
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = currentSoldier.health.ToString();
+                stat.GetComponent<Text>().text = "Health: " + currentSoldier.characterBaseValues.health.ToString() + " + " + (currentSoldier.health - currentSoldier.characterBaseValues.health) + " = " + currentSoldier.health.ToString();
             }
             if (stat.name == "Damage Speed")
             {
-                stat.GetComponent<Text>().text =  currentSoldier.damageSpeed.ToString();
+                stat.GetComponent<Text>().text = "Attack speed: " + currentSoldier.damageSpeed.ToString();
             }
             if (stat.name == "Range")
             {
-                stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
             }
             if (stat.name == "Combat Trait")
             {
@@ -519,14 +520,21 @@ public class PanelScript : MonoBehaviour {
             }
 
         }
-            
+
     }
 
     #region InventoryMethods
 
     public void ActivateInventoryPanel()
     {
-        panelList[4].GetComponent< EquippableItemUIListController >().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToArray());
+
+        //panelList[4].GetComponent<EquippableItemUIListController>().GenerateItemsList(dataService.GetEquippableItemsValuesFromInventory().ToList().Add(dataService.GetCharacterEquippableItemsValues(currentSoldier.characterBaseValues.id).FirstOrDefault()).ToArray());
+        List<EquippableitemValues> weaponsList = dataService.GetEquippableItemsValuesFromInventory().ToList();
+        weaponsList = weaponsList.OrderByDescending(o => o.level).ToList();
+        weaponsList.Insert(0, currentSoldier.GetComponentInChildren<EquippableItem>().itemValues);
+
+        panelList[4].GetComponent<EquippableItemUIListController>().GenerateItemsList(weaponsList.ToArray());
+
         panelList[4].SetActive(true);
 
     }
@@ -557,46 +565,64 @@ public class PanelScript : MonoBehaviour {
         //    }
         //}
 
-        panelList[4].SetActive(false);
-        panelList[5].SetActive(false);
-        panelList[1].SetActive(true);
+        //panelList[4].SetActive(false);
+        //panelList[5].SetActive(false);
+        //panelList[1].SetActive(true);
     }
 
     #endregion
 
     public GameObject GenerateNewHunter(Transform newSoldierTrans)
     {
+        print("---------------------------------------------------------------");
+        var start = DateTime.Now;
         CharacterValues newCharValues = GenerateNewHunterValues();
+        print("Generating character " + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
         //add to database
         dataService.AddcharacterToDbByValues(newCharValues);
-
+        print("Adding character " + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
         GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
-       
+        print("Generating values character " + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
+
         //create new weapon for new soldier
         Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
         EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+        print("Generating weapon" + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
         //save the weapon in db
         newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
+        print("Adding weapon" + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
         //spawn weapon
         IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
         Character hunterChar = hunter.GetComponent<Character>();
+        print("Spawning weapon " + (DateTime.Now - start).TotalSeconds);
+        start = DateTime.Now;
         //attach the weapon
-        
-        dataService.equipItemsToCharacter(newWeapon, hunterChar);
 
+        dataService.equipItemsToCharacter(newWeapon, hunterChar);
+        print("Rest " + (DateTime.Now - start).TotalSeconds);
         return hunter;
 
     }
 
-    public CharacterValues GenerateNewHunterValues()
+    public CharacterValues GenerateNewHunterValues(int points = 0, float strenghtProbab = 0)
     {
+        if (points != 0)
+            newCharPoints = points;
+        if (strenghtProbab != 0)
+            damagePointsChance = strenghtProbab;
+
         CharacterValues newCharValues = new CharacterValues();
         //generate prefab 
         newCharValues.prefabName = StringResources.follower1PrefabName;
         float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         //generate random name
         String characterName;
-        if(randomValue > 0.5f)//we create a Male
+        if (randomValue > 0.5f)//we create a Male
         {
             characterName = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)];
             newCharValues.isMale = true;
@@ -604,11 +630,11 @@ public class PanelScript : MonoBehaviour {
         }
         else //we create a female
         {
-            characterName =  StringResources.femaleNames[UnityEngine.Random.Range(0, StringResources.femaleNames.Length)];
+            characterName = StringResources.femaleNames[UnityEngine.Random.Range(0, StringResources.femaleNames.Length)];
             newCharValues.isMale = false;
             newCharValues.materialName = StringResources.femaleHuntersMaterials[UnityEngine.Random.Range(0, StringResources.femaleHuntersMaterials.Length)];
         }
-        
+
         //give name to soldier and assign type
         newCharValues.name = characterName;
         newCharValues.Type = CharacterValues.type.Hunter;
@@ -624,16 +650,16 @@ public class PanelScript : MonoBehaviour {
         newCharValues.Type = CharacterValues.type.NewHunter;
 
         newCharacterSoldierList.Add(newCharValues);
-        
+
         return newCharValues;
     }
 
     CharacterValues GenerateNewCharacterStats(CharacterValues charValues)
     {
         float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
-        for (int i = 0; i < newCharPoints; i ++)
+        for (int i = 0; i < newCharPoints; i++)
         {
-            if(randomValue < damagePointsChance)
+            if (randomValue < damagePointsChance)
             {
                 charValues.damage += 1;
             }
@@ -643,7 +669,7 @@ public class PanelScript : MonoBehaviour {
             }
             randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         }
-        
+
         //charValues.damageSpeed = 5; 
         //charValues.range = 5;    
 

@@ -44,12 +44,12 @@ class BuildScript
             }
         }
 
-        sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Tutorial");
+        sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Tutorials");
         foreach (var scene in sceneDirectory.GetFiles())
         {
             if (scene.Name.EndsWith(".unity"))
             {
-                scenes.Add("Assets/_Scenes/Tutorial/" + scene.Name);
+                scenes.Add("Assets/_Scenes/Tutorials/" + scene.Name);
             }
         }
 

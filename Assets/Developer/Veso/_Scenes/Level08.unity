@@ -788,6 +788,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 34
       objectReference: {fileID: 0}
+    - target: {fileID: 1000014287918590, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
   m_IsPrefabParent: 0
@@ -1969,23 +1973,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &626445712 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000014173923650, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1730745004}
---- !u!114 &626445713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 626445712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenerId: 0
 --- !u!1 &644793849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4930,6 +4917,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000014234263752, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: palleteSettings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000010171308806, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -29.859108
@@ -4961,6 +4953,46 @@ Prefab:
     - target: {fileID: 4000010171308806, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014234263752, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: pallete1
+      value: 
+      objectReference: {fileID: 2800000, guid: a66002ae3fc6d44469e1af7370218be3, type: 3}
+    - target: {fileID: 114000014234263752, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: pallete2
+      value: 
+      objectReference: {fileID: 2800000, guid: ae2a8ef8c1b5eb849a89b462e10de3ae, type: 3}
+    - target: {fileID: 114000014234263752, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: pallete3
+      value: 
+      objectReference: {fileID: 2800000, guid: 44b309e6344dd9244a5660cc3d608f05, type: 3}
+    - target: {fileID: 114000014234263752, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: palleteSettings.Array.data[0].palleteType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014234263752, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: palleteSettings.Array.data[1].palleteType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012132333340, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: Exposure
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012132333340, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: LutTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 89d583673bd32e64f909a6c6b3c6452f, type: 3}
+    - target: {fileID: 114000012132333340, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: BlendAmount
+      value: 0.64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc, type: 2}

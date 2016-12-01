@@ -34,6 +34,11 @@ public class ChangeResources : GameEvent
     }
 }
 
+public class LevelStarted : GameEvent
+{
+    public LevelStarted() { }
+}
+
 public class ResourcesUpdated : GameEvent
 {
     public ResourcesUpdated() { }
@@ -65,6 +70,16 @@ public class InstantiateGame : GameEvent {
 
 	public InstantiateGame () {}
 
+}
+
+public class TutorialDone : GameEvent
+{
+    public string strTutLevel;
+
+    public TutorialDone(int tutLevel)
+    {
+        strTutLevel = "Tut"+tutLevel.ToString();
+    }
 }
 
 public class LevelWon : GameEvent
@@ -255,4 +270,21 @@ public class ClearedCampEvent : GameEvent
 public class LanguageChanged : GameEvent
 {
     public LanguageChanged() { }
+}
+
+public class StopFleeEvent : GameEvent
+{
+	public StopFleeEvent()
+	{
+
+	}
+}
+
+public class UIPanelActiveEvent : GameEvent
+{
+	public bool panelActive = false;
+	public UIPanelActiveEvent()
+	{
+		panelActive = !panelActive;
+	}
 }

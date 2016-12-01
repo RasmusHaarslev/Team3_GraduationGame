@@ -65,12 +65,22 @@
 				</StateGroup>
 				<StateGroup Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}">
 					<PropertyList>
-						<Property Name="DefaultTransitionTime" Type="Real64" Value="2.5"/>
+						<Property Name="DefaultTransitionTime" Type="Real64" Value="2"/>
 					</PropertyList>
 					<ChildrenList>
 						<State Name="None" ID="{E45C1EF8-C488-4AFD-9D15-EB8BCFDDEEFC}"/>
 						<State Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
 						<State Name="OffBridge" ID="{27F75BAF-74C9-48C8-9514-D9DCCB5329C5}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}">
+					<PropertyList>
+						<Property Name="DefaultTransitionTime" Type="Real64" Value="2.5"/>
+					</PropertyList>
+					<ChildrenList>
+						<State Name="None" ID="{E98DFB56-1245-4349-AD7C-DFF99C463EEA}"/>
+						<State Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
+						<State Name="Stop" ID="{92EACDE8-7FD5-47A9-B1FB-AA707EC2358B}"/>
 					</ChildrenList>
 				</StateGroup>
 			</ChildrenList>

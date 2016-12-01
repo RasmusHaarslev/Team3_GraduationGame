@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class AudioDiscover : MonoBehaviour {
+public class AudioDiscover : MonoBehaviour
+{
 
 	void OnEnable()
 	{
@@ -28,7 +29,8 @@ public class AudioDiscover : MonoBehaviour {
 		if (col.gameObject.tag == "Unfriendly")
 		{
 			Manager_Audio.PlaySound(Manager_Audio.discoverEnemy, gameObject);
-		} else if (col.gameObject.tag == "Friendly") // TODO: change tag to friendly encounter when it exists
+		}
+		else if (col.gameObject.tag == "Friendly") // TODO: change tag to friendly encounter when it exists
 		{
 			Manager_Audio.PlaySound(Manager_Audio.discoverFriendly, gameObject);
 		}

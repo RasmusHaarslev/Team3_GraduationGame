@@ -92,6 +92,9 @@ GameObject:
   - 114: {fileID: 114000013351673726}
   - 45: {fileID: 45000012599563724}
   - 114: {fileID: 114000010523345100}
+  - 114: {fileID: 114000012132333340}
+  - 114: {fileID: 114000014234263752}
+  - 114: {fileID: 114000010244622912}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -197,7 +200,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -233,6 +236,18 @@ MonoBehaviour:
   - {fileID: 198000012352089390}
   - {fileID: 198000011291474950}
   maxSnowAmount: 60
+--- !u!114 &114000010244622912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenerId: 0
 --- !u!114 &114000010523345100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,6 +288,52 @@ MonoBehaviour:
   OverriddenRotationSlerp: 0
   XRotationOffset: 0
   SlerpBack: 0
+--- !u!114 &114000012132333340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e31fdf962e3e4ca3b62ec3ecc2f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tonemapper: 0
+  Exposure: 1
+  LinearWhitePoint: 11.2
+  ApplyDithering: 0
+  QualityLevel: 0
+  BlendAmount: 0
+  LutTexture: {fileID: 2800000, guid: 5059551652c0f0c40b563a0c2aba4516, type: 3}
+  LutBlendTexture: {fileID: 0}
+  MaskTexture: {fileID: 0}
+  UseDepthMask: 0
+  DepthMaskCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  UseVolumes: 0
+  ExitVolumeBlendTime: 1
+  TriggerVolumeProxy: {fileID: 0}
+  VolumeCollisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  EffectFlags:
+    components: []
+  sharedInstanceID: 354c5a38-f992-4dc6-a0ae-820782790cba
 --- !u!114 &114000013351673726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,6 +353,18 @@ MonoBehaviour:
   heightDensity: 2.8
   startDistance: 44.33
   fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
+--- !u!114 &114000014234263752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5b1c9d0d5c4fa4f85a80a798f0618c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AmplifyColorEffect: {fileID: 114000012132333340}
 --- !u!124 &124000010111313504
 Behaviour:
   m_ObjectHideFlags: 1
