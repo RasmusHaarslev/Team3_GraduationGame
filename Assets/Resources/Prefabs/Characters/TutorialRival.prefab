@@ -1565,7 +1565,7 @@ GameObject:
   - 114: {fileID: 114000013963069874}
   - 114: {fileID: 114000013369404244}
   - 54: {fileID: 54000010186178334}
-  - 114: {fileID: 114000013408108664}
+  - 114: {fileID: 114000011459815108}
   m_Layer: 0
   m_Name: TutorialRival
   m_TagString: Unfriendly
@@ -6299,6 +6299,21 @@ MonoBehaviour:
   characterType: 0
   isMale: 1
   randomTargetProbability: 25
+--- !u!114 &114000011459815108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011979578274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b59556a5952e0d48928aa52e55a6ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionTime: 0.05
+  distanceToTarget: 3.4028235e+38
+  fleeHealthLimit: 0.5
+  averageHealth: 0
 --- !u!114 &114000011824833912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6328,21 +6343,6 @@ MonoBehaviour:
   playerSphereCollider: {fileID: 135000010893568754}
   pushForceOnDeath: 10
   forceModePush: 1
---- !u!114 &114000013408108664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011979578274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a6b706fb9f3794091f672e33604b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transitionTime: 0.05
-  distanceToTarget: 3.4028235e+38
-  fleeHealthLimit: 0.5
-  averageHealth: 0
 --- !u!114 &114000013963069874
 MonoBehaviour:
   m_ObjectHideFlags: 1
