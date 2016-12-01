@@ -10,7 +10,18 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>16</Value>
+										<Value>24</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>53</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-450</Value>
 									</ValueList>
 								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
@@ -82,6 +93,7 @@
 										<Value>22</Value>
 									</ValueList>
 								</Property>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
 										<Value>-510</Value>
@@ -152,6 +164,7 @@
 										<Value>16</Value>
 									</ValueList>
 								</Property>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
 										<Value>150</Value>
@@ -165,6 +178,11 @@
 								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 								<Property Name="Spatialization" Type="bool" Value="False"/>
 								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-5</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
@@ -272,8 +290,21 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
 									</StateGroupInfo>
+									<StateGroupInfo>
+										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
+									<CustomState>
+										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+										<State Name="Custom State" ID="{FC8F77E6-BDC2-4480-A7BA-9F5560FB0777}" ShortID="335885672">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="28"/>
+												<Property Name="Pitch" Type="int32" Value="-500"/>
+												<Property Name="Volume" Type="Real64" Value="3"/>
+											</PropertyList>
+										</State>
+									</CustomState>
 									<CustomState>
 										<StateRef Name="InCombat" ID="{2C5B3B7F-55FA-49A9-A3D3-DE20F05277F8}"/>
 										<State Name="Custom State" ID="{30729F0B-87CB-48B8-97DB-8BD21D2851D7}" ShortID="694792509">
@@ -308,6 +339,7 @@
 										<Value>-1</Value>
 									</ValueList>
 								</Property>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
@@ -461,6 +493,7 @@
 						<RandomSequenceContainer Name="windNoiseQuiet" ID="{ECE50A9A-8087-4BC4-915D-241F1288F1D1}" ShortID="903607515">
 							<PropertyList>
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
@@ -571,6 +604,11 @@
 							<PropertyList>
 								<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="27"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -620,7 +658,7 @@
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="1"/>
-															<Property Name="Min" Type="Real64" Value="-4"/>
+															<Property Name="Min" Type="Real64" Value="-5"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -636,7 +674,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="Wind1_1" ID="{115C12E2-5AC6-48F7-866F-FBB42A878403}" ShortID="876128955" Type="SoundFX">
+										<Sound Name="WindPal2_1" ID="{5734B429-F9D4-4569-84EF-6FB1DFF05974}" ShortID="167472211" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -646,16 +684,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind1_1" ID="{7035DAD7-3CBD-4DD3-BC2D-92AB89BED548}" ShortID="603027801">
+												<AudioFileSource Name="WindPal2_1" ID="{74B64204-C01B-43BA-9A00-E05B8315F0B6}" ShortID="578740079">
 													<Language>SFX</Language>
-													<AudioFile>Wind1_1.wav</AudioFile>
+													<AudioFile>WindPal2_1.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind1_1" ID="{7035DAD7-3CBD-4DD3-BC2D-92AB89BED548}" Platform="Linked"/>
+												<ActiveSource Name="WindPal2_1" ID="{74B64204-C01B-43BA-9A00-E05B8315F0B6}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Wind1_2" ID="{92BF7305-7C18-4424-BDA6-6E2D7B5E94BB}" ShortID="1038048298" Type="SoundFX">
+										<Sound Name="WindPal2_2" ID="{7B24EE81-4AB8-405C-8E13-D106902B29F9}" ShortID="762853611" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -665,16 +703,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind1_2" ID="{FDD885F9-3C91-4A0E-8088-E0AED03C37C7}" ShortID="1030107931">
+												<AudioFileSource Name="WindPal2_2" ID="{C6C5261A-1E5D-4B5C-9DB6-BCF4813F351C}" ShortID="139839171">
 													<Language>SFX</Language>
-													<AudioFile>Wind1_2.wav</AudioFile>
+													<AudioFile>WindPal2_2.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind1_2" ID="{FDD885F9-3C91-4A0E-8088-E0AED03C37C7}" Platform="Linked"/>
+												<ActiveSource Name="WindPal2_2" ID="{C6C5261A-1E5D-4B5C-9DB6-BCF4813F351C}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Wind1_3" ID="{41ECF3E3-5711-49B3-B044-0CB005FC11B6}" ShortID="1030927112" Type="SoundFX">
+										<Sound Name="WindPal2_3" ID="{B9BA4922-7B4C-4D13-94F3-7DB971A88A51}" ShortID="377113230" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -684,16 +722,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind1_3" ID="{3BC9287E-8180-4645-86FD-525AB5EEF187}" ShortID="4928818">
+												<AudioFileSource Name="WindPal2_3" ID="{3C2186E2-C3E5-4314-A0F1-D6C8EB3D1E59}" ShortID="849746966">
 													<Language>SFX</Language>
-													<AudioFile>Wind1_3.wav</AudioFile>
+													<AudioFile>WindPal2_3.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind1_3" ID="{3BC9287E-8180-4645-86FD-525AB5EEF187}" Platform="Linked"/>
+												<ActiveSource Name="WindPal2_3" ID="{3C2186E2-C3E5-4314-A0F1-D6C8EB3D1E59}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Wind1_4" ID="{649A4037-D206-4715-9A40-69A034BA92B6}" ShortID="281692531" Type="SoundFX">
+										<Sound Name="WindPal2_4" ID="{1577CD12-A58B-4519-87CE-C4AEFF5AA70A}" ShortID="1038801760" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -703,13 +741,13 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind1_4" ID="{F6158807-7404-4F54-8D4E-7F8840967F3B}" ShortID="1040768445">
+												<AudioFileSource Name="WindPal2_4" ID="{45CF4DD8-CCC4-4788-A871-C8ADE7A1ED20}" ShortID="456683918">
 													<Language>SFX</Language>
-													<AudioFile>Wind1_4.wav</AudioFile>
+													<AudioFile>WindPal2_4.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind1_4" ID="{F6158807-7404-4F54-8D4E-7F8840967F3B}" Platform="Linked"/>
+												<ActiveSource Name="WindPal2_4" ID="{45CF4DD8-CCC4-4788-A871-C8ADE7A1ED20}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -718,7 +756,7 @@
 									<PropertyList>
 										<Property Name="Lowpass" Type="int16">
 											<ValueList>
-												<Value>12</Value>
+												<Value>3</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -750,16 +788,13 @@
 										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="1.5"/>
 										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>2</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{A7CD6DFF-4192-43B8-8829-2779A7385406}">
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="1"/>
-															<Property Name="Min" Type="Real64" Value="-4"/>
+															<Property Name="Min" Type="Real64" Value="-5"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -775,14 +810,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="Wind2" ID="{538AFF9D-D869-43B8-A9F3-87EE7DC884B7}" ShortID="323037615" Type="SoundFX">
-											<PropertyList>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>2</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
+										<Sound Name="WindPal1_1" ID="{6647270B-249F-46A3-9006-1CA6C5907266}" ShortID="521192635" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -792,23 +820,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind2" ID="{4FDBB32B-B86F-43CC-900A-44F1F55A2792}" ShortID="1068123160">
+												<AudioFileSource Name="WindPal1_1" ID="{F30C2A6B-EB10-42E7-95F6-BCEDC8BBB589}" ShortID="517527942">
 													<Language>SFX</Language>
-													<AudioFile>Wind2.wav</AudioFile>
+													<AudioFile>WindPal1_1.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind2" ID="{4FDBB32B-B86F-43CC-900A-44F1F55A2792}" Platform="Linked"/>
+												<ActiveSource Name="WindPal1_1" ID="{F30C2A6B-EB10-42E7-95F6-BCEDC8BBB589}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Wind2_1" ID="{B3C8441F-716C-44A6-8881-2988AF53723C}" ShortID="200362433" Type="SoundFX">
-											<PropertyList>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>3</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
+										<Sound Name="WindPal1_2" ID="{9F25874B-615C-4130-8A35-C415C162ED07}" ShortID="439016876" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -818,18 +839,18 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind2_1" ID="{C834E490-889B-4F2B-9BB2-B6E657852E38}" ShortID="973881970">
+												<AudioFileSource Name="WindPal1_2" ID="{343437E5-0710-4F33-9CB1-F1E51AE919A1}" ShortID="465341603">
 													<Language>SFX</Language>
-													<AudioFile>Wind2_1.wav</AudioFile>
+													<AudioFile>WindPal1_2.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind2_1" ID="{C834E490-889B-4F2B-9BB2-B6E657852E38}" Platform="Linked"/>
+												<ActiveSource Name="WindPal1_2" ID="{343437E5-0710-4F33-9CB1-F1E51AE919A1}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="Storm" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}" ShortID="587118837">
+								<RandomSequenceContainer Name="WinPal3" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}" ShortID="587118837">
 									<PropertyList>
 										<Property Name="Lowpass" Type="int16">
 											<ModifierList>
@@ -861,9 +882,6 @@
 										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-10</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{45EA8E8E-788A-4DA8-957B-75166686A919}">
@@ -886,7 +904,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="Wind3_1" ID="{615A54F7-3ED4-4B49-B094-30139E8548A5}" ShortID="965182570" Type="SoundFX">
+										<Sound Name="WindPal3_1" ID="{22534EAC-E57A-459E-9182-0D7CC076998E}" ShortID="63350286" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -896,16 +914,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind3_1" ID="{4B28CDFE-9AB1-438A-82E0-A72E461C772D}" ShortID="316678865">
+												<AudioFileSource Name="WindPal3_1" ID="{1C51DD05-9D64-4F4B-AC88-01CA5C0261EF}" ShortID="968838710">
 													<Language>SFX</Language>
-													<AudioFile>Wind3_1.wav</AudioFile>
+													<AudioFile>WindPal3_1.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind3_1" ID="{4B28CDFE-9AB1-438A-82E0-A72E461C772D}" Platform="Linked"/>
+												<ActiveSource Name="WindPal3_1" ID="{1C51DD05-9D64-4F4B-AC88-01CA5C0261EF}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Wind3_2" ID="{5DA00BD8-F7B7-47F9-BD7F-F2F77A8E845F}" ShortID="697687630" Type="SoundFX">
+										<Sound Name="WindPal3_2" ID="{61417375-D4DB-4EF4-8EC0-CB2160C1C827}" ShortID="162787251" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -915,16 +933,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind3_2" ID="{A8706DA9-FF01-48D8-8892-789B550A69E6}" ShortID="939290111">
+												<AudioFileSource Name="WindPal3_2" ID="{6403BC46-AD83-43A1-9DE6-41CDEE4DC80A}" ShortID="423910249">
 													<Language>SFX</Language>
-													<AudioFile>Wind3_2.wav</AudioFile>
+													<AudioFile>WindPal3_2.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind3_2" ID="{A8706DA9-FF01-48D8-8892-789B550A69E6}" Platform="Linked"/>
+												<ActiveSource Name="WindPal3_2" ID="{6403BC46-AD83-43A1-9DE6-41CDEE4DC80A}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Wind3_3" ID="{3E60C351-592D-43E1-8182-30532D32BC37}" ShortID="639541990" Type="SoundFX">
+										<Sound Name="WindPal3_3" ID="{2F3CE9FB-E70F-448F-A008-504951E8A990}" ShortID="683890258" Type="SoundFX">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -934,13 +952,13 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Wind3_3" ID="{6C10FF74-E1D5-4199-AD24-40D0F5E78537}" ShortID="1064540679">
+												<AudioFileSource Name="WindPal3_3" ID="{72DCD0B3-F531-4C62-8A7D-E6E315386B28}" ShortID="800506437">
 													<Language>SFX</Language>
-													<AudioFile>Wind3_3.wav</AudioFile>
+													<AudioFile>WindPal3_3.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Wind3_3" ID="{6C10FF74-E1D5-4199-AD24-40D0F5E78537}" Platform="Linked"/>
+												<ActiveSource Name="WindPal3_3" ID="{72DCD0B3-F531-4C62-8A7D-E6E315386B28}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -972,9 +990,10 @@
 										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
 										<State Name="Custom State" ID="{43B95649-790C-41F4-BCF6-CD616BE7F986}" ShortID="670637281">
 											<PropertyList>
-												<Property Name="Highpass" Type="int16" Value="20"/>
+												<Property Name="Highpass" Type="int16" Value="23"/>
 												<Property Name="Lowpass" Type="int16" Value="20"/>
-												<Property Name="Pitch" Type="int32" Value="-300"/>
+												<Property Name="Pitch" Type="int32" Value="-400"/>
+												<Property Name="Volume" Type="Real64" Value="3"/>
 											</PropertyList>
 										</State>
 									</CustomState>
@@ -1010,14 +1029,14 @@
 										<ItemRef Name="Windpal2" ID="{027027A1-05C9-456B-8594-4819CB695DE0}"/>
 									</GroupingBehavior>
 									<GroupingBehavior>
-										<ItemRef Name="Storm" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}"/>
+										<ItemRef Name="WinPal3" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}"/>
 									</GroupingBehavior>
 								</GroupingBehaviorList>
 								<GroupingList>
 									<Grouping>
 										<SwitchRef Name="Color3" ID="{1CED0D20-1A7E-49D1-BBF5-E874DE51AACE}"/>
 										<ItemList>
-											<ItemRef Name="Storm" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}"/>
+											<ItemRef Name="WinPal3" ID="{3BBDBCBF-1196-44A2-A315-627C9E110F11}"/>
 										</ItemList>
 									</Grouping>
 									<Grouping>
@@ -1037,6 +1056,12 @@
 						</SwitchContainer>
 						<RandomSequenceContainer Name="Tents" ID="{C17F0ECD-BBBA-415C-893F-4615196F7676}" ShortID="707804467">
 							<PropertyList>
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>33</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ModifierList>
 										<ModifierInfo>
@@ -1050,6 +1075,7 @@
 									</ModifierList>
 								</Property>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ModifierList>
 										<ModifierInfo>
@@ -1069,7 +1095,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-9</Value>
+										<Value>-7</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1146,13 +1172,23 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="BridgeCreak" ID="{B13A0795-A4E1-428B-AF27-472E188FD350}" ShortID="1017084858">
 							<PropertyList>
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>7</Value>
+										<Value>39</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>28</Value>
 									</ValueList>
 								</Property>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-30</Value>
+									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{EDFE020C-8C1E-4A88-B868-F0F2269F3DDC}">
@@ -1171,7 +1207,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>4</Value>
+										<Value>-7</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1248,6 +1284,7 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="MenuAmb" ID="{CEEF3AE2-4E99-4216-94F8-146F50F72C19}" ShortID="422242404">
 							<PropertyList>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismResetPlaylistEachPlay" Type="bool" Value="False"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
@@ -1301,7 +1338,11 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="PowerPole" ID="{43847AEE-7093-447E-A36C-645989E52C40}" ShortID="959749222">
 							<PropertyList>
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>13</Value>
+									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{1E42F383-E7C4-4508-B777-9B7106628D73}">
@@ -1314,6 +1355,7 @@
 									</ModifierList>
 								</Property>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
 										<Value>-30</Value>
@@ -1653,8 +1695,8 @@
 											<Modifier Name="" ID="{B0567AE9-F5A9-430B-BE2E-8DDE4321CD36}">
 												<PropertyList>
 													<Property Name="Enabled" Type="bool" Value="True"/>
-													<Property Name="Max" Type="Real64" Value="50"/>
-													<Property Name="Min" Type="Real64" Value="-200"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+													<Property Name="Min" Type="Real64" Value="-250"/>
 												</PropertyList>
 											</Modifier>
 										</ModifierInfo>
@@ -2944,7 +2986,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>2</Value>
+										<Value>-1</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -3075,9 +3117,6 @@
 									</ModifierList>
 								</Property>
 								<Property Name="Lowpass" Type="int16">
-									<ValueList>
-										<Value>14</Value>
-									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{9BAD1D7F-260B-4434-93A1-00814E55AA7F}">
@@ -3108,7 +3147,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-12</Value>
+										<Value>-10</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -3124,7 +3163,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="WEAPONS" ID="{7AB21706-2DAE-4F6C-9BC7-16575A5C45C9}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
+									<ObjectRef Name="Hit" ID="{FAC5E9B6-0B42-47FA-A1D8-B4B10BD690C6}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -3686,7 +3725,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-3</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
