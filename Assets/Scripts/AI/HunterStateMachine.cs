@@ -186,7 +186,6 @@ public class HunterStateMachine : CoroutineMachine
 						break;
 					case CharacterValues.TargetTrait.Loyal:
 						GameObject loyalTarget = LoyalTarget();
-//						GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 						if (!isTraitProjected)
 							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (loyalTarget != null)
