@@ -46,7 +46,12 @@ public class HealthBar : MonoBehaviour
 		EventManager.Instance.StopListening<UIPanelActiveEvent>(ActivateHealthPanel);
 	}
 
-	private void ActivateHealthPanel(UIPanelActiveEvent e)
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
+    private void ActivateHealthPanel(UIPanelActiveEvent e)
 	{
 		active = !active;
 	}

@@ -95,6 +95,11 @@ public class NodeTutorial : MonoBehaviour {
         EventManager.Instance.StopListening<TutorialDone>(DoneLevel);
     }
 
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
     void Start()
     {
         SetupNodes();

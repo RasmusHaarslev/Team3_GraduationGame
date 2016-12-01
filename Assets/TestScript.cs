@@ -16,12 +16,32 @@ public class TestScript : MonoBehaviour {
 
     public void Click()
     {
-        for (int i = 0; i<5; i++)
+        if (CharacterController.CharactersLoaded.Count == 0)
+        {
+            CharacterController.LoadCharacters();
+        }
+
+        for (int i = 0; i < 3; i++)
         {
             CharacterGenerator charGen = new CharacterGenerator();
             var characterValues = charGen.GenerateNewHunterValues();
-
-            CharacterController.SaveCharacters(new List<CharacterValues>() { characterValues });
+            CharacterController.CharactersLoaded.Add(characterValues);
         }
+
+        if (ItemController.ItemsLoaded.Count == 0)
+        {
+            ItemController.LoadItems();
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            WeaponGenerator charGen = new WeaponGenerator();
+            var itemValues = charGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 0);
+            itemValues.characterId = itemValues.characterId = CharacterController.CharactersLoaded.Count;
+            ItemController.ItemsLoaded.Add(itemValues);
+        }
+
+        ItemController.SaveItem(ItemController.ItemsLoaded );
+        CharacterController.SaveCharacters(CharacterController.CharactersLoaded );
     }
 }

@@ -156,7 +156,6 @@ public class WeaponGenerator : MonoBehaviour
 
         }
 
-
         return itemValues;
 
     }

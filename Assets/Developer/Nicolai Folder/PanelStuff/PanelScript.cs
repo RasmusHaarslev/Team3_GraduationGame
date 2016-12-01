@@ -267,6 +267,8 @@ public class PanelScript : MonoBehaviour
         //print("After filling " + (DateTime.Now - start).TotalSeconds);
         reroll = false;
 
+        ItemController.SaveItem(ItemController.ItemsLoaded);
+        CharacterController.SaveCharacters(CharacterController.CharactersLoaded);
     }
 
 
@@ -602,40 +604,62 @@ public class PanelScript : MonoBehaviour
 
     public GameObject GenerateNewHunter(Transform newSoldierTrans)
     {
-        print("---------------------------------------------------------------");
         var start = DateTime.Now;
-        CharacterValues newCharValues = GenerateNewHunterValues();
-        print("Generating character " + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
-        //add to database
-        dataService.AddcharacterToDbByValues(newCharValues);
-        print("Adding character " + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
-        GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
-        print("Generating values character " + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
+
+        var characterGenerator = new CharacterGenerator();
+        var weaponGenerator = new WeaponGenerator();
+
+        CharacterValues newCharValues = characterGenerator.GenerateNewHunterValues();
+
+        GameObject hunter = characterGenerator.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
 
         //create new weapon for new soldier
         Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
-        EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
-        print("Generating weapon" + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
+        EquippableitemValues newWeaponValues = weaponGenerator.GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+
         //save the weapon in db
-        newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
-        print("Adding weapon" + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
+        //newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
+
         //spawn weapon
-        IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
+        IEnumerable<GameObject> newWeapon = characterGenerator.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
         Character hunterChar = hunter.GetComponent<Character>();
-        print("Spawning weapon " + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
         //attach the weapon
 
-        dataService.equipItemsToCharacter(newWeapon, hunterChar);
-        print("Rest " + (DateTime.Now - start).TotalSeconds);
-        return hunter;
+        characterGenerator.equipItemsToCharacter(newWeapon, hunterChar);
+        newWeaponValues.characterId = newCharValues.id;
 
+        ItemController.ItemsLoaded.Add(newWeaponValues);
+        CharacterController.CharactersLoaded.Add(newCharValues);
+
+        newCharacterSoldierList.Add(newCharValues);
+        print("Total time " + (DateTime.Now - start).TotalSeconds);
+
+        return hunter;
     }
+
+    //public GameObject GenerateNewHunter(Transform newSoldierTrans)
+    //{
+    //    print("---------------------------------------------------------------");
+    //    var start = DateTime.Now;
+    //    CharacterValues newCharValues = GenerateNewHunterValues();
+    //    //add to database
+    //    dataService.AddcharacterToDbByValues(newCharValues);
+    //    GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
+
+    //    //create new weapon for new soldier
+    //    Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
+    //    EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+    //    //save the weapon in db
+    //    newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
+    //    //spawn weapon
+    //    IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
+    //    Character hunterChar = hunter.GetComponent<Character>();
+    //    //attach the weapon
+
+    //    dataService.equipItemsToCharacter(newWeapon, hunterChar);
+    //    print("Total " + (DateTime.Now - start).TotalSeconds);
+    //    return hunter;
+    //}
 
     public CharacterValues GenerateNewHunterValues(int points = 0, float strenghtProbab = 0)
     {

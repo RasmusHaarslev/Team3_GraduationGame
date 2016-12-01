@@ -19,11 +19,11 @@ public class CharacterController
             charactersXML.Characters.Add(entry);
         }
 
-        foreach (CharacterValues entry in characters)
-        {
-            CharactersLoaded.Add(entry);
-            charactersXML.Characters.Add(entry);
-        }
+        //foreach (CharacterValues entry in characters)
+        //{
+        //    CharactersLoaded.Add(entry);
+        //    charactersXML.Characters.Add(entry);
+        //}
 
         var path = Path.Combine(PersistentData.GetPath(), "characters.xml");
 
@@ -40,7 +40,7 @@ public class CharacterController
         if (!File.Exists(path))
         {
             Debug.LogError("No levels generated, reset game");
-            return new List<CharacterValues>();
+            return CharactersLoaded;
         }
 
         var serializer = new XmlSerializer(typeof(CharactersXML));
