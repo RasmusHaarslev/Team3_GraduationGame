@@ -2808,7 +2808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000014288726444
 GameObject:
   m_ObjectHideFlags: 1
@@ -3110,7 +3110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013150418164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -4882,7 +4882,12 @@ MonoBehaviour:
   damageSpeed: {fileID: 114000012781944476}
   range: {fileID: 114000013928684624}
   health: {fileID: 114000012397953824}
+  type: {fileID: 0}
+  level: {fileID: 0}
   weaponCams: {fileID: 1000012580963976, guid: 5437db8b0ead0834880efa60ab8356d5, type: 2}
+  selectedColor:
+    serializedVersion: 2
+    rgba: 1962562816
 --- !u!114 &114000011140222162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17175,7 +17180,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.12508202, y: -46}
-  m_SizeDelta: {x: -0.24988, y: 0}
+  m_SizeDelta: {x: -0.24988, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012477505404
 RectTransform:
@@ -17293,10 +17298,10 @@ RectTransform:
   - {fileID: 224000011188764550}
   m_Father: {fileID: 224000012460192384}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 898.87506, y: -350}
+  m_SizeDelta: {x: 1497.7501, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012529227410
 RectTransform:
