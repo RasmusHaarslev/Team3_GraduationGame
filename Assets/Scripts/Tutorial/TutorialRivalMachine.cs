@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TutorialRivalMachine : CoroutineMachine
 {
 	public float transitionTime = 0.05f;
-
+	public float fleeSpeed = 4f;
 	NavMeshAgent agent;
 	TutorialCharacter character;
 	Vector3 originalPosition;
@@ -13,9 +13,11 @@ public class TutorialRivalMachine : CoroutineMachine
 	public float fleeHealthLimit = 0.5f;
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
+	Vector3 fleePosition;
 
 	void OnEnable()
 	{
+		fleePosition = GameObject.FindGameObjectWithTag("FleePoint").transform.position;
 		character = GetComponent<TutorialCharacter>();
 		agent = GetComponent<NavMeshAgent>();
 		originalPosition = transform.position;
@@ -47,7 +49,7 @@ public class TutorialRivalMachine : CoroutineMachine
 		{
 			agent.Stop();
 		}
-		if (character.target != null)
+		if (character.target != null && !character.isFleeing)
 		{
 			if (!character.isDead)
 			{
@@ -65,11 +67,8 @@ public class TutorialRivalMachine : CoroutineMachine
 		averageHealth = poimanager.GetAverageCharactersHealth();
 		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
-			if (!character.isFleeing)
-			{
-				EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
-				character.isFleeing = true;
-			}
+			EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+			character.isFleeing = true;
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
 		if (character.isInCombat)
@@ -118,7 +117,8 @@ public class TutorialRivalMachine : CoroutineMachine
 							character.target = character.FindNearestEnemy();
 						}
 					}
-				} else
+				}
+				else
 				{
 					character.target = character.FindNearestEnemy();
 				}
@@ -131,6 +131,8 @@ public class TutorialRivalMachine : CoroutineMachine
 		}
 		else
 		{
+			agent.updatePosition = true;
+			agent.updateRotation = true;
 			yield return new TransitionTo(RoamState, DefaultTransition);
 		}
 
@@ -153,19 +155,29 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.speed = fleeSpeed;
+		agent.updateRotation = true;
 		if (!character.isDead)
 		{
 			character.animator.SetBool("isAware", false);
-			character.isInCombat = false;
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
-			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+			character.isInCombat = false;
+			agent.SetDestination(fleePosition);
 		}
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (agent.remainingDistance < agent.stoppingDistance)
+		{
+			if (agent.destination == fleePosition)
+			{
+				gameObject.SetActive(false);
+			}
+		}
+		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
 	{
+		agent.updateRotation = true;
 		character.animator.SetBool("isAware", false);
 		if (!character.isDead && character.target != null)
 		{
@@ -190,13 +202,14 @@ public class TutorialRivalMachine : CoroutineMachine
 		}
 		if (!character.isDead)
 		{
-			agent.Stop();
+			agent.updateRotation = false;
 			if (character.target != null)
 			{
 				character.RotateTowards(character.target.transform);
 				character.animator.SetTrigger("Attack");
-				yield return new WaitForSeconds(character.damageSpeed);
+				yield return new WaitForSeconds(0.60f);
 				character.DealDamage();
+				yield return new WaitForSeconds(character.damageSpeed);
 			}
 		}
 		yield return new TransitionTo(StartState, DefaultTransition);
@@ -209,7 +222,25 @@ public class TutorialRivalMachine : CoroutineMachine
 
 	private void OpponentsFleeing(FleeStateEvent e)
 	{
-		character.currentOpponents.Clear();
-		character.isInCombat = false;
+		foreach (var opp in character.currentOpponents)
+		{
+			if (opp.GetComponent<TutorialHunterCharacter>() != null && opp.GetComponent<TutorialHunterCharacter>().isFleeing == true)
+			{
+				character.currentOpponents.Remove(opp);
+			}
+			else
+			if (opp.GetComponent<TutorialPlayerCharacter>() != null && opp.GetComponent<TutorialPlayerCharacter>().isFleeing == true)
+			{
+				character.currentOpponents.Remove(opp);
+			}
+			else
+			{
+				character.target = opp;
+			}
+		}
+		if (character.currentOpponents.Count == 0)
+		{
+			character.isInCombat = false;
+		}
 	}
 }
