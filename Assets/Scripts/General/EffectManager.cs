@@ -2,59 +2,90 @@
 using System.Collections;
 using System;
 
-public class EffectManager : MonoBehaviour {
+public class EffectManager : MonoBehaviour
+{
 
-    public GameObject Clicking;
-    private GameObject _currentClick;
-    public GameObject Target;
-    private GameObject _currentTarget;
+	public GameObject Clicking;
+	private GameObject _currentClick;
+	public GameObject Target;
+	private GameObject _currentTarget;
+	private GameObject enemy;
+	private LevelGenerator levelGenerator;
 
-    // Use this for initialization
-    void OnEnable () {
-        EventManager.Instance.StartListening<PositionClicked>(positionEffect);
-        EventManager.Instance.StartListening<EnemyClicked>(setTarget);
-        EventManager.Instance.StartListening<EnemyDeathEvent>(checkTarget);
-    }
+	// Use this for initialization
+	void OnEnable()
+	{
+		EventManager.Instance.StartListening<PositionClicked>(positionEffect);
+		EventManager.Instance.StartListening<EnemyClicked>(setTarget);
+		EventManager.Instance.StartListening<EnemyDeathEvent>(checkTarget);
+	}
 
-    private void checkTarget(EnemyDeathEvent e)
-    {
-        //if (e.enemy.transform == _currentTarget.transform.parent)
-        //{
-        //    _currentTarget.GetComponent<ParticleSystem>().Stop();
-        //}
-    }
+	private void checkTarget(EnemyDeathEvent e)
+	{
+		//if (e.enemy.transform == _currentTarget.transform.parent)
+		//{
+		//    _currentTarget.GetComponent<ParticleSystem>().Stop();
+		//}
+	}
 
-    private void positionEffect(PositionClicked e)
-    {
-        if (_currentTarget != null)
-            _currentTarget.GetComponent<ParticleSystem>().Stop();
-        if (_currentClick != null)
-            _currentClick.GetComponent<ParticleSystem>().Stop();
+	void Start()
+	{
+		levelGenerator = FindObjectOfType<LevelGenerator>();
+	}
 
-        if (_currentClick == null)
-            if (e.hitted.gameObject.name != "Ground")
-            {
-                _currentClick = (GameObject)Instantiate(Clicking);
-            }
+	private void positionEffect(PositionClicked e)
+	{
+		if (_currentTarget != null)
+			_currentTarget.GetComponent<ParticleSystem>().Stop();
+		if (_currentClick != null)
+			_currentClick.GetComponent<ParticleSystem>().Stop();
 
-        if (e.hitted.gameObject.name != "Ground") {             
-            _currentClick.transform.position = e.position + new Vector3(0, 0.5f, 0);
-            _currentClick.GetComponent<ParticleSystem>().Play();
-        }
-    }
+		if (_currentClick == null)
+			if (e.hitted.gameObject.name != "Ground")
+			{
+				_currentClick = (GameObject)Instantiate(Clicking);
+			}
 
-    private void setTarget(EnemyClicked e)
-    {
-        if (_currentTarget != null)
-            _currentTarget.GetComponent<ParticleSystem>().Stop();
-        if (_currentClick != null)
-            _currentClick.GetComponent<ParticleSystem>().Stop();
+		if (e.hitted.gameObject.name != "Ground")
+		{
+			_currentClick.transform.position = e.position + new Vector3(0, 0.5f, 0);
+			_currentClick.GetComponent<ParticleSystem>().Play();
+		}
+	}
 
-        if (_currentTarget == null)
-            _currentTarget = (GameObject)Instantiate(Target);
+	private void setTarget(EnemyClicked e)
+	{
+		if (_currentTarget != null)
+			_currentTarget.GetComponent<ParticleSystem>().Stop();
+		if (_currentClick != null)
+			_currentClick.GetComponent<ParticleSystem>().Stop();
 
-        _currentTarget.transform.SetParent(e.enemy.transform);
-        _currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 0f, 0);
-        _currentTarget.GetComponent<ParticleSystem>().Play();
-    }
+		if (_currentTarget == null)
+			_currentTarget = (GameObject)Instantiate(Target);
+
+		_currentTarget.transform.SetParent(e.enemy.transform);
+		_currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 0f, 0);
+		_currentTarget.GetComponent<ParticleSystem>().Play();
+		enemy = e.enemy;
+	}
+
+	void Update()
+	{
+		if (!levelGenerator.isTutorial)
+		{
+			if (enemy != null && enemy.GetComponent<Character>().isFleeing)
+			{
+				if (_currentTarget != null)
+					_currentTarget.GetComponent<ParticleSystem>().Stop();
+			}
+		}
+		else
+		{
+			if (enemy != null && enemy.GetComponent<TutorialCharacter>().isFleeing)
+			{
+				if (_currentTarget != null)
+					_currentTarget.GetComponent<ParticleSystem>().Stop();
+			}
+		}
+	}
 }

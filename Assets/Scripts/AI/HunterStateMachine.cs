@@ -336,7 +336,6 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			if (agent.destination == fleePosition)
 			{
-				Debug.Log(gameObject.name + " deactivated at position: " + agent.destination);
 				gameObject.SetActive(false);
 			}
 		}

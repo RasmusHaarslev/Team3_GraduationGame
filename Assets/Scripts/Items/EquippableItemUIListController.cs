@@ -9,7 +9,7 @@ public class EquippableItemUIListController : MonoBehaviour
     
     public GameObject ContentPanel;
     private GameObject ListItemPrefab;
-    //public GameObject cameraWeapons;
+    int previousWeaponLevel;
     bool firstDrawn = false;
    public void GenerateItemsList(IEnumerable<EquippableitemValues> itemsValues)
     {
@@ -30,6 +30,15 @@ public class EquippableItemUIListController : MonoBehaviour
                 newItem.GetComponent<Image>().color = controller.selectedColor;
                 firstDrawn = true;
             }
+            else
+            {
+                if (previousWeaponLevel > values.level)
+                {
+
+                }
+            }
+
+            
             //controller.Icon.sprite = animal.Icon;
             controller.type.text = "Type: " + values.Type.ToString();
             controller.level.text = "Level: " + values.level.ToString();
@@ -40,8 +49,7 @@ public class EquippableItemUIListController : MonoBehaviour
             controller.range.text = "Range: " + values.range;
             controller.itemValues = values;
             
-            Debug.Log(controller.weaponCams.transform.GetChild(2).gameObject.GetComponent<Camera>().targetTexture);
-            Debug.Log(controller.Icon.texture);
+           
             if (values.Type.ToString() == "rifle")
             {
                 controller.Icon.texture = controller.weaponCams.transform.GetChild(0).gameObject.GetComponent<Camera>().targetTexture;
@@ -61,8 +69,7 @@ public class EquippableItemUIListController : MonoBehaviour
             newItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         firstDrawn = false;
-        //GetComponentInChildren<UIListEquippableItemController>().GetComponent<Image>().color = new Color32(0, 85, 250, 116);
-        //print(GetComponentInChildren<UIListEquippableItemController>().GetComponentInChildren<Text>().text);
+   
     }
 
 
