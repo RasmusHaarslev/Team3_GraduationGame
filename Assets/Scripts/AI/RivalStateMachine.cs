@@ -13,9 +13,11 @@ public class RivalStateMachine : CoroutineMachine
 	public float fleeHealthLimit = 0.5f;
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
+	Vector3 fleePosition;
 
 	void OnEnable()
 	{
+		fleePosition = GameObject.FindGameObjectWithTag("FleePoint").transform.position;
 		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
 		originalPosition = transform.position;
@@ -129,11 +131,14 @@ public class RivalStateMachine : CoroutineMachine
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
-			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+			agent.SetDestination(fleePosition);
 		}
 		if (agent.remainingDistance < agent.stoppingDistance)
 		{
-			gameObject.SetActive(false);
+			if (agent.destination == fleePosition)
+			{
+				gameObject.SetActive(false);
+			}
 		}
 		yield return new TransitionTo(FleeState, DefaultTransition);
 	}

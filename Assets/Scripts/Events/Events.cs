@@ -72,6 +72,16 @@ public class InstantiateGame : GameEvent {
 
 }
 
+public class TutorialDone : GameEvent
+{
+    public string strTutLevel;
+
+    public TutorialDone(int tutLevel)
+    {
+        strTutLevel = "Tut"+tutLevel.ToString();
+    }
+}
+
 public class LevelWon : GameEvent
 {
     public LevelWon()

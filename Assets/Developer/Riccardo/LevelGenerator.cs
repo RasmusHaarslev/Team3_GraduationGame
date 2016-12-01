@@ -7,16 +7,18 @@ using System.Security.Cryptography.X509Certificates;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public float enemyStatsMultiplier = 1;
-    public float enemyStatsAdditive = 1;
-    
+    [Tooltip("Multiplier for the enemy damage and health.")]
+    public float enemyStatsMultiplier = 0.25f;
+    //[Tooltip("Additive for the enemy damage and health.")]
+    //public float enemyStatsAdditive = 1;
+    [Tooltip("How many levels a World contains.")]
+    public int worldLength = 4; //how many levels are present inside a World
+
     [Header("Enemy Placement and Scaling")]
     [Tooltip("Parameter usually passed from the level selection. It will influence the hardness of the level.")]
     public int difficultyLevel = 5;
     [Tooltip("Number of camps that will be spawned.")]
     public int campsNumber = 4;
-    [Tooltip("How many levels a World contains.")]
-    public int worldLength = 4; //how many levels are present inside a World
     [Range(0f,1f)]
     [Tooltip("Probability before which an enemy will have the tier decreased.")]
     public float downScaleThreshold = 0.3f;
@@ -27,7 +29,7 @@ public class LevelGenerator : MonoBehaviour
     public bool isTutorial = false;
 
     private int levelStep = 0; //the local level value inside a World
-    private int levelStatsScale = 0;
+    public int worldIndex = 0;
 
 
     private DataService dataService;
@@ -39,7 +41,7 @@ public class LevelGenerator : MonoBehaviour
         campsNumber = PlayerPrefs.GetInt(StringResources.TribeCampsPrefsName, campsNumber);
 
         levelStep = difficultyLevel%worldLength; 
-        levelStatsScale = (int)Mathf.Floor((difficultyLevel - 1) / worldLength);
+        worldIndex = difficultyLevel / worldLength;
 
         dataService = new DataService(StringResources.databaseName);
 
@@ -232,7 +234,7 @@ public class LevelGenerator : MonoBehaviour
     /// <param name="values"></param>
     private int ScaleParameter(int value)
     {
-        return (int) (value + (levelStatsScale * enemyStatsMultiplier) + enemyStatsAdditive);
+        return (int) (value * ( 1 + worldIndex * enemyStatsMultiplier) ); //+ enemyStatsAdditive
     }
 
 

@@ -16,19 +16,18 @@ public class TutorialMoveScript : MonoBehaviour
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
-	List<GameObject> hunters = new List<GameObject>();
+	public List<GameObject> hunters = new List<GameObject>();
 
 	// Use this for initialization
 	void Start()
 	{
-
+		character = GetComponent<TutorialPlayerCharacter>();
+		agent = GetComponent<NavMeshAgent>();
 	}
 
 	void OnEnable()
 	{
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
-		agent = GetComponent<NavMeshAgent>();
-		character = GetComponent<TutorialPlayerCharacter>();
 	}
 
 	void OnDisable()
@@ -62,7 +61,7 @@ public class TutorialMoveScript : MonoBehaviour
 				counter++;
 			}
 		}
-		if (counter == 0)
+		if (counter == 0 && character != null)
 			character.isInCombat = false;
 		if (!isFleeing)
 		{

@@ -84,7 +84,7 @@ public class HealthBar : MonoBehaviour
 					else
 					if (barDisplay <= 1.0)
 					{
-						GUI.color = new Color((float)107 / 255, (float)149 / 255, (float)25 / 255);
+						GUI.color = new Color((float)89 / 255, (float)122 / 255, (float)22 / 255);
 					}
 				}
 				else
