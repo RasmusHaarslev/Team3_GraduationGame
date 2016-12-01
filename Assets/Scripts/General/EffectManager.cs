@@ -10,6 +10,7 @@ public class EffectManager : MonoBehaviour
 	public GameObject Target;
 	private GameObject _currentTarget;
 	private GameObject enemy;
+	private LevelGenerator levelGenerator;
 
 	// Use this for initialization
 	void OnEnable()
@@ -25,6 +26,11 @@ public class EffectManager : MonoBehaviour
 		//{
 		//    _currentTarget.GetComponent<ParticleSystem>().Stop();
 		//}
+	}
+
+	void Start()
+	{
+		levelGenerator = FindObjectOfType<LevelGenerator>();
 	}
 
 	private void positionEffect(PositionClicked e)
@@ -65,10 +71,21 @@ public class EffectManager : MonoBehaviour
 
 	void Update()
 	{
-		if (enemy != null && enemy.GetComponent<Character>().isFleeing)
+		if (!levelGenerator.isTutorial)
 		{
-			if (_currentTarget != null)
-				_currentTarget.GetComponent<ParticleSystem>().Stop();
+			if (enemy != null && enemy.GetComponent<Character>().isFleeing)
+			{
+				if (_currentTarget != null)
+					_currentTarget.GetComponent<ParticleSystem>().Stop();
+			}
+		}
+		else
+		{
+			if (enemy != null && enemy.GetComponent<TutorialCharacter>().isFleeing)
+			{
+				if (_currentTarget != null)
+					_currentTarget.GetComponent<ParticleSystem>().Stop();
+			}
 		}
 	}
 }
