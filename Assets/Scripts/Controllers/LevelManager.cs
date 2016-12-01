@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
 		{
 			EnemiesAlive = GameObject.FindGameObjectsWithTag("Unfriendly").Length;
 		}
+		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = true;
 	}
 
 	void Update()
@@ -237,6 +238,7 @@ public class LevelManager : MonoBehaviour
 			)
 		);
 		PlayerPrefs.SetInt("LevelResult", 1);
+		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 		//generate and display the new items
 		GenerateNewItems();
 	}
