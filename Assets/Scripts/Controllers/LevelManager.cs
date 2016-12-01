@@ -176,7 +176,7 @@ public class LevelManager : MonoBehaviour
 
 	void PlayerDeath(PlayerDeathEvent e)
 	{
-		LoseGame("PlayerDeathCutscene");
+		LoseGame("CampManagement");
 	}
 
 	void LootReceived(EnemyDeathEvent e)
@@ -201,7 +201,7 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
 		{
-			LoseGame("AllyDeathCutscene");
+			LoseGame("CampManagement");
 		}
 		else if (AlliesAlive <= 0)
 		{
@@ -209,7 +209,7 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void LoseGame(string scene = "PlayerDeathCutscene")
+	public void LoseGame(string scene = "CampManagement")
 	{
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
         GameController.Instance.LoseGame();
