@@ -105,7 +105,7 @@ public class CharacterGenerator
 
     public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(int characterId)
     {
-        string q = "select * from  EquippableitemValues where characterId = ? ";
+        //string q = "select * from  EquippableitemValues where characterId = ? ";
         List<EquippableitemValues> equipsValues = ItemController.ItemsLoaded.Where(c => c.characterId == characterId).ToList();
 
         return equipsValues;
