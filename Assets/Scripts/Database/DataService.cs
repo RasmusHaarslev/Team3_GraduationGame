@@ -98,8 +98,8 @@ public class DataService : MonoBehaviour
         leaderValues.prefabName = StringResources.playerPrefabName;
         leaderValues.materialName = StringResources.playerMaterialName;
         WeaponGenerator weaponGen = new WeaponGenerator();
-        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1); //leader will have a random level 1 spear
-        leaderWeapon.characterId = 1;
+        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1, 0.2f,0.7f,0.1f); //leader will have a random level 1 spear
+        leaderWeapon.characterId = 1;                                                                                   //damage, health and dmg-speed probability
         //ENDING OF RANDOM LEADER GENERATION
 
 

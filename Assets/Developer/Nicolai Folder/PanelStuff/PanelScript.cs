@@ -31,6 +31,7 @@ public class PanelScript : MonoBehaviour
     List<GameObject> newSoldiersList = new List<GameObject>();
     public GameObject silhouetteGO;
     public List<Transform> silhouettePosList = new List<Transform>();
+    bool reroll = false;
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -143,7 +144,7 @@ public class PanelScript : MonoBehaviour
                         Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
                         //equip weapon
                         print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
-
+                        
                         dataService.equipItemsToCharacter(new[] { newWeapon }, newSoldiersList[i].GetComponent<Character>());
 
                         newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
@@ -153,14 +154,26 @@ public class PanelScript : MonoBehaviour
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
+                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(2).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
+                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(3).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
+                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
                         EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
                     }
@@ -183,13 +196,26 @@ public class PanelScript : MonoBehaviour
 
     public void RerollSoldiers()
     {
-        foreach (GameObject soldier in newSoldiersList)
+        if (GameController.Instance._PREMIUM >= 200)
         {
-            Destroy(soldier);
+            reroll = true;
+            foreach (GameObject soldier in newSoldiersList)
+            {
+                dataService.DeleteCharactersValuesFromDb(soldier.GetComponent<Character>().characterBaseValues);
+                Destroy(soldier);
+            
+            }
+            newSoldiersList.Clear();
+        
+            GetNewSoldiers();
+       
+            EventManager.Instance.TriggerEvent(new ChangeResources(premium: -200));
         }
-        newSoldiersList.Clear();
+        else
+        {
 
-        GetNewSoldiers();
+        }
+        
 
     }
 
@@ -200,7 +226,7 @@ public class PanelScript : MonoBehaviour
         CharacterValues[] newHuntersValues = dataService.GetNewHuntersValues();
 
         //check if there are already new hunters into database
-        if (newHuntersValues.Length < 3)
+        if (newHuntersValues.Length < 3 || reroll)
         {
             start = DateTime.Now;
             //add one new hunter
@@ -239,7 +265,7 @@ public class PanelScript : MonoBehaviour
 
         FillInNewSoldierStats();
         //print("After filling " + (DateTime.Now - start).TotalSeconds);
-
+        reroll = false;
 
     }
 
@@ -273,6 +299,8 @@ public class PanelScript : MonoBehaviour
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
+            //dataService.GetCharacterEquippableItems(soldiersList[i].GetComponent<Character>().characterBaseValues.id);
+            soldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = layersIndices[i];
 
             // Switches the animator out with the camp animator.
             SetCampAnimation(soldiersList[i].GetComponent<Character>());
@@ -545,7 +573,7 @@ public class PanelScript : MonoBehaviour
         dataService.equipItemsToCharacter(weapon, currentSoldier);
         UpdateSoldierStats(currentSoldier.gameObject);
         SetCampAnimation(currentSoldier);
-
+        
         //foreach (var camera in soldierCameraList)
         //{
         //    if (camera.enabled == true)
