@@ -8,7 +8,7 @@ public class CharacterGenerator
     public int newCharPoints = 15;
     public float damagePointsChance = 0.5f;
 
-    public CharacterValues GenerateNewHunterValues(List<CharacterValues> newCharacterSoldierList, int points = 0, float strenghtProbab = 0)
+    public CharacterValues GenerateNewHunterValues(List<CharacterValues> newCharacterSoldierList = null, int points = 0, float strenghtProbab = 0)
     {
         if (points != 0)
             newCharPoints = points;
