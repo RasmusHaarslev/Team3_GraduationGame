@@ -14,6 +14,11 @@ public class CharacterController
     {
         var charactersXML = new CharactersXML();
 
+        foreach (CharacterValues entry in CharactersLoaded)
+        {
+            charactersXML.Characters.Add(entry);
+        }
+
         foreach (CharacterValues entry in characters)
         {
             CharactersLoaded.Add(entry);
