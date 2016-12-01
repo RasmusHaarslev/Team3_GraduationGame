@@ -64,7 +64,7 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new DefendStateEvent());
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					simpleCommandsManager.inDefenseState = true;
-                    simpleCommandsManager.currentCommandBtnText.text = "Defensive";
+                    simpleCommandsManager.currentCommandBtnText.text = "Offensive";
                     ChangeColor(0);
 					break;
 				}
@@ -74,7 +74,7 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					//Debug.Log("offensive");
 					simpleCommandsManager.inDefenseState = false;
-                    simpleCommandsManager.currentCommandBtnText.text = "Offensive";
+                    simpleCommandsManager.currentCommandBtnText.text = "Defensive";
                     ChangeColor(0);
 					break;
 				}

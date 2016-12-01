@@ -113,6 +113,7 @@ public class HunterStateMachine : CoroutineMachine
 	NavMeshAgent agent;
 	GameObject leader;
 	Formation formation;
+	bool isTraitProjected;
 
 	public enum CombatCommandState
 	{
@@ -175,7 +176,9 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
-						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
+
+						if(!isTraitProjected)
+							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
 							yield return new TransitionTo(FollowState, DefaultTransition);
@@ -183,7 +186,8 @@ public class HunterStateMachine : CoroutineMachine
 						break;
 					case CharacterValues.TargetTrait.Loyal:
 						GameObject loyalTarget = LoyalTarget();
-						ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
+						if (!isTraitProjected)
+							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (loyalTarget != null)
 						{
 							character.target = loyalTarget;
@@ -199,7 +203,8 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					if (combatTrait == CharacterValues.CombatTrait.Fearful)
 					{
-						ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
+						if (!isTraitProjected)
+							ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 					}
 					yield return new TransitionTo(FleeState, DefaultTransition);
 				}
@@ -225,7 +230,8 @@ public class HunterStateMachine : CoroutineMachine
 											}
 											else
 											{
-												ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
+												if (!isTraitProjected)
+													ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 												character.target = character.FindRandomEnemy();
 											}
 										}
@@ -294,7 +300,8 @@ public class HunterStateMachine : CoroutineMachine
 					agent.Resume();
 					if (combatTrait == CharacterValues.CombatTrait.Clingy && outOfCombatCommandState == OutOfCombatCommandState.Stay)
 					{
-						ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
+						if (!isTraitProjected)
+							ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 					}
 					yield return new TransitionTo(FollowState, DefaultTransition);
 				}
@@ -456,6 +463,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	private void ProjectTrait(CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait, CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait)
 	{
+		isTraitProjected = true;
 		StartCoroutine(TraitProjector(combatTrait, targetTrait));
 	}
 
@@ -474,6 +482,7 @@ public class HunterStateMachine : CoroutineMachine
 		proj.transform.eulerAngles = new Vector3(90, 0, 0);
 		yield return new WaitForSeconds(2f);
 		Destroy(proj);
+		isTraitProjected = false;
 		yield return null;
 	}
 

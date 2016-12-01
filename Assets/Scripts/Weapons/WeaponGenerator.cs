@@ -25,7 +25,7 @@ public class WeaponGenerator : MonoBehaviour
     [Range(0, 1)]
     public float healthPercentagePolearm = .1f;
     [Range(0, 1)]
-    public float damageSpeedPercentagePolearm = .6f;
+    public float damageSpeedPercentagePolearm = .2f;
     public int polearmRange = 3;
 
     [Header("Rifle Settings")]
