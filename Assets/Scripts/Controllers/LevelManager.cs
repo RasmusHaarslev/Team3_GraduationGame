@@ -35,11 +35,6 @@ public class LevelManager : MonoBehaviour
 		//GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = true;
 	}
 
-	void OnEnable()
-	{
-
-	}
-
 	void Update()
 	{ /*
         if (Input.GetKeyDown(KeyCode.A))
