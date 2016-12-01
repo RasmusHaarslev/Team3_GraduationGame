@@ -2572,7 +2572,7 @@ GameObject:
   - 33: {fileID: 33000011076548976}
   - 135: {fileID: 135000012011917224}
   - 23: {fileID: 23000011562924686}
-  - 114: {fileID: 114000010540944802}
+  - 114: {fileID: 114000011417903348}
   m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
@@ -6347,7 +6347,7 @@ Animator:
   m_GameObject: {fileID: 1000010712658434}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b245b8617bfa5b34fbea04ecf19c7c01, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1edad2de32e781a4fade3ec7fd1b9626, type: 2}
+  m_Controller: {fileID: 22100000, guid: fad8c9cb6e9382d4f8e3ac27692ee177, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6355,17 +6355,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010540944802
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013466893936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000011036502986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6387,9 +6376,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010712658434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b6a6b706fb9f3794091f672e33604b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionTime: 0.05
+  distanceToTarget: 3.4028235e+38
+  fleeHealthLimit: 0.5
+  averageHealth: 0
 --- !u!114 &114000011223758902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6405,6 +6398,18 @@ MonoBehaviour:
   type: 1
   radius: 6
   enemies: []
+--- !u!114 &114000011417903348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013466893936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece411ea3165ec241882a3ad4444fd14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalTriggerOffset: 1.5
 --- !u!114 &114000012574311958
 MonoBehaviour:
   m_ObjectHideFlags: 1

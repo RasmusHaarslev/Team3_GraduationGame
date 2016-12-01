@@ -2471,7 +2471,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013978968066}
-  - 114: {fileID: 114000010794140344}
+  - 114: {fileID: 114000013890070316}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -6521,7 +6521,7 @@ Animator:
   m_GameObject: {fileID: 1000011178491416}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b245b8617bfa5b34fbea04ecf19c7c01, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1edad2de32e781a4fade3ec7fd1b9626, type: 2}
+  m_Controller: {fileID: 22100000, guid: fad8c9cb6e9382d4f8e3ac27692ee177, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6571,19 +6571,6 @@ MonoBehaviour:
   maxTimeBetweenEnemySightings: 3
   friendlyCounter: 0
   maxTimeBetweenFriendlySightings: 3
---- !u!114 &114000010794140344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013249282988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e757a1fe497b64e488951a06f81c0f39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barDisplay: 0
-  size: {x: 120, y: 15}
 --- !u!114 &114000010869386464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6666,6 +6653,19 @@ MonoBehaviour:
   equippedWeaponType: 0
   characterType: 3
   isMale: 1
+--- !u!114 &114000013890070316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013249282988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b45abc4a30f874eab4b141eb99eca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barDisplay: 0
+  size: {x: 120, y: 15}
 --- !u!135 &135000011075182128
 SphereCollider:
   m_ObjectHideFlags: 1
