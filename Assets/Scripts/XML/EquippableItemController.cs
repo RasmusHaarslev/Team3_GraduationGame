@@ -8,17 +8,22 @@ using UnityEngine;
 
 public class ItemController
 {
-    public static List<ItemXML> ItemsLoaded = new List<ItemXML>();
+    public static List<EquippableitemValues> ItemsLoaded = new List<EquippableitemValues>();
 
-    public static void SaveItem(List<ItemXML> items)
+    public static void SaveItem(List<EquippableitemValues> items)
     {
         var itemsXML = new ItemsXML();
 
-        foreach (ItemXML item in items)
+        foreach (EquippableitemValues entry in ItemsLoaded)
         {
-            ItemsLoaded.Add(item);
-            itemsXML.Items.Add(item);
+            itemsXML.Items.Add(entry);
         }
+        
+        //foreach (EquippableitemValues item in items)
+        //{
+        //    ItemsLoaded.Add(item);
+        //    itemsXML.Items.Add(item);
+        //}
 
         var path = Path.Combine(PersistentData.GetPath(), "items.xml");
 
@@ -28,14 +33,14 @@ public class ItemController
         stream.Close();
     }
 
-    public static List<ItemXML> LoadItems()
+    public static List<EquippableitemValues> LoadItems()
     {
         var path = Path.Combine(PersistentData.GetPath(), "items.xml");
 
         if (!File.Exists(path))
         {
             Debug.LogError("No items generated, reset game");
-            return new List<ItemXML>();
+            return ItemsLoaded;
         }
 
         var serializer = new XmlSerializer(typeof(ItemsXML));
@@ -43,9 +48,9 @@ public class ItemController
         var container = serializer.Deserialize(stream) as ItemsXML;
         stream.Close();
 
-        ItemsLoaded = new List<ItemXML>();
+        ItemsLoaded = new List<EquippableitemValues>();
 
-        foreach (ItemXML item in container.Items)
+        foreach (EquippableitemValues item in container.Items)
         {
             ItemsLoaded.Add(item);
         }
@@ -58,42 +63,5 @@ public class ItemsXML
 {
     [XmlArray("Items")]
     [XmlArrayItem("Item")]
-    public List<ItemXML> Items = new List<ItemXML>();
-}
-
-public class ItemXML
-{
-    public int id { get; set; }
-    public string name { get; set; }
-    public type Type { get; set; }
-    public slot Slot { get; set; }
-    public int characterId { get; set; }
-    public string rarity { get; set; }
-    public int level { get; set; }
-    public string description { get; set; }
-    public int damage { get; set; }
-    public int health { get; set; }
-    public float damageSpeed { get; set; }
-    public int range { get; set; }
-    public string prefabName { get; set; }
-    public string materialName { get; set; }
-
-    public enum slot
-    {
-        head,
-        torso,
-        leftHand,
-        rightHand,
-        legs
-    }
-    public enum type
-    {
-        polearm,
-        shield,
-        rifle
-    }
-    public override string ToString()
-    {
-        return string.Format("[EquippableitemValues: Id={0}, Name={1},  prefabName={2}]", id, name, prefabName);
-    }
+    public List<EquippableitemValues> Items = new List<EquippableitemValues>();
 }

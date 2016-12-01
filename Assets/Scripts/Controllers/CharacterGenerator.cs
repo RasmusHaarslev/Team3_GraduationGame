@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 public class CharacterGenerator
 {
@@ -20,7 +21,7 @@ public class CharacterGenerator
         newCharValues.prefabName = StringResources.follower1PrefabName;
         float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         //generate random name
-        String characterName;
+        string characterName;
         if (randomValue > 0.5f)//we create a Male
         {
             characterName = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)];
@@ -51,6 +52,8 @@ public class CharacterGenerator
         if(newCharacterSoldierList != null)
             newCharacterSoldierList.Add(newCharValues);
 
+        newCharValues.id = CharacterController.CharactersLoaded.Count;
+
         return newCharValues;
     }
 
@@ -75,5 +78,28 @@ public class CharacterGenerator
 
         return charValues;
 
+    }
+
+    public GameObject GenerateCharacterFromValues(CharacterValues charValues, Vector3 position, Quaternion rotation = new Quaternion())
+    {
+        GameObject character = GameObject.Instantiate(Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName), position, rotation) as GameObject;
+
+        if (charValues.materialName != null)
+        {
+            character.GetComponentInChildren<SkinnedMeshRenderer>().material = GameObject.Instantiate(Resources.Load(StringResources.charactersMaterialsPath + charValues.materialName) as Material);
+        }
+        /**/
+        character.GetComponent<Character>().init(charValues);
+         
+        //spawn weapons 
+        if (charValues.id != 0)
+        {
+            IEnumerable<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id));
+            //equip weapons
+            equipItemsToCharacter(equips, character.GetComponent<Character>());
+        }
+        /**/
+
+        return character;
     }
 }
