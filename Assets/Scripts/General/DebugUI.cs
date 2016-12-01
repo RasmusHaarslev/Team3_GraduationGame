@@ -327,6 +327,7 @@ public class DebugUI : MonoBehaviour
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Reset Game", customButton))
                 {
                     GameController.Instance.LoseGame();
+                    SceneManager.LoadScene("CampManagement");
                 }
                 #endregion
 
