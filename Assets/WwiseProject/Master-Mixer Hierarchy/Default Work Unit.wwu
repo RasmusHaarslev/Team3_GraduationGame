@@ -67,7 +67,7 @@
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-3</Value>
 											</ValueList>
 										</Property>
 										<Property Name="Lowpass" Type="int16">
@@ -111,7 +111,15 @@
 										</CustomStateList>
 									</StateInfo>
 								</Bus>
-								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}"/>
+								<Bus Name="FootSteps" ID="{F5B6458A-4182-4D11-A5D2-93653183D27C}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 								<Bus Name="HDR" ID="{117F7EEC-C136-402D-B421-F08190FECC8D}">
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
@@ -136,7 +144,7 @@
 										</Property>
 										<Property Name="HdrThreshold" Type="Real64">
 											<ValueList>
-												<Value>-12</Value>
+												<Value>-8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -195,30 +203,30 @@
 												</DuckItem>
 											</DuckingList>
 										</Bus>
-										<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}">
-											<PropertyList>
-												<Property Name="BusVolume" Type="Real64">
-													<ValueList>
-														<Value>4</Value>
-													</ValueList>
-												</Property>
-												<Property Name="HdrRatio" Type="Real64">
-													<ValueList>
-														<Value>50</Value>
-													</ValueList>
-												</Property>
-												<Property Name="HdrThreshold" Type="Real64">
-													<ValueList>
-														<Value>-15</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-										</Bus>
 										<Bus Name="3DEffects" ID="{80ADAEC7-2B8B-49AB-A2A9-BA5FDF282917}"/>
 										<AuxBus Name="ParComp" ID="{345B6858-517B-4423-A4AF-A483B924EB1E}"/>
 									</ChildrenList>
 								</Bus>
 								<Bus Name="UI" ID="{DD07F2C7-E479-4655-BFDF-CE10350D7D98}"/>
+								<Bus Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}">
+									<PropertyList>
+										<Property Name="BusVolume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+										<Property Name="HdrRatio" Type="Real64">
+											<ValueList>
+												<Value>50</Value>
+											</ValueList>
+										</Property>
+										<Property Name="HdrThreshold" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+								</Bus>
 							</ChildrenList>
 						</Bus>
 						<Bus Name="Music" ID="{5724D256-1278-4FEA-828D-56431668FF78}">

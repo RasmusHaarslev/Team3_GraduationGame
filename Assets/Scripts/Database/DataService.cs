@@ -91,15 +91,15 @@ public class DataService : MonoBehaviour
         _connection.CreateTable<InventoryItem>();
 
         //GENERATE RANDOM LEADER
-        PanelScript charGenerator = new PanelScript();
-        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(125,0.07f); //pass attributes points as parameter
+        CharacterGenerator charGenerator = new CharacterGenerator();
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null,125, 0.07f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
         leaderValues.prefabName = StringResources.playerPrefabName;
         leaderValues.materialName = StringResources.playerMaterialName;
         WeaponGenerator weaponGen = new WeaponGenerator();
-        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1); //leader will have a random level 1 spear
-        leaderWeapon.characterId = 1;
+        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1, 0.2f,0.7f,0.1f); //leader will have a random level 1 spear
+        leaderWeapon.characterId = 1;                                                                                   //damage, health and dmg-speed probability
         //ENDING OF RANDOM LEADER GENERATION
 
 
@@ -239,8 +239,8 @@ public class DataService : MonoBehaviour
               name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 1,
-              damage = 3,
-              health = 35,
+              damage = 2,
+              health = 45,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -252,8 +252,8 @@ public class DataService : MonoBehaviour
               name = "Easy rifle tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 2,
-              damage = 3,
-              health = 35,
+              damage = 2,
+              health = 45,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -267,7 +267,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 3,
               damage = 6,
-              health = 35,
+              health = 55,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -281,7 +281,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 4,
               damage = 6,
-              health = 35,
+              health = 55,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -294,8 +294,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
-              damage = 6,
-              health = 35,
+              damage = 8,
+              health = 65,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -308,8 +308,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 6,
-              damage = 6,
-              health = 35,
+              damage = 8,
+              health = 65,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",

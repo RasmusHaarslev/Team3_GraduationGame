@@ -14,7 +14,7 @@ public class RecruitementController
 
         foreach (var soldier in soldiers)
         {
-            var charXML = new CharacterXML();
+            var charXML = new CharacterValues();
             var soldierValues = soldier.GetComponent<CharacterValues>();
 
             charXML.damage = soldierValues.damage;
@@ -32,12 +32,12 @@ public class RecruitementController
             // do something for type and both traits
             
 
-            xml.Characters.Add(charXML);
+            xml.Characters.Add(soldierValues);
         }
 
         foreach (var weapon in weapons)
         {
-            var eqXML = new ItemXML();
+            var eqXML = new EquippableitemValues();
             var equipment = weapon.GetComponent<EquippableitemValues>();
 
             eqXML.damage = equipment.damage;
@@ -54,7 +54,7 @@ public class RecruitementController
             // do something for type and slot
 
 
-            xml.Equipment.Add(eqXML);
+            xml.Equipment.Add(equipment);
         }
 
         var path = Path.Combine(PersistentData.GetPath(), "recruitement.xml");
@@ -70,10 +70,10 @@ public class RecruitementXML
 {
     [XmlArray("Characters")]
     [XmlArrayItem("Character")]
-    public List<CharacterXML> Characters = new List<CharacterXML>();
+    public List<CharacterValues> Characters = new List<CharacterValues>();
 
     [XmlArray("Items")]
     [XmlArrayItem("Item")]
-    public List<ItemXML> Equipment = new List<ItemXML>();
+    public List<EquippableitemValues> Equipment = new List<EquippableitemValues>();
 }
 

@@ -79,7 +79,7 @@ public class WeaponGenerator : MonoBehaviour
     }
 
 
-    public EquippableitemValues GenerateEquippableItem(EquippableitemValues.type type, int level)
+    public EquippableitemValues GenerateEquippableItem(EquippableitemValues.type type, int level, float dmgProb = 0, float healthProb = 0, float dmgSpeedProb = 0)
     {
         EquippableitemValues itemValues = new EquippableitemValues();
 
@@ -118,6 +118,12 @@ public class WeaponGenerator : MonoBehaviour
                 damageProbability = damagePercentageRifle;
                 damageSpeedProbability = damageSpeedPercentageRifle;
                 break;
+        }
+        if (dmgProb != 0)
+        {
+            healthProbability = healthProb;
+            damageProbability = dmgProb;
+            damageSpeedProbability = dmgSpeedProb;
         }
         
         itemValues.name = modelStrings[0];
