@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
 		levelGenerator = GetComponent<LevelGenerator>();
 		if (levelGenerator.isTutorial)
 		{
-			EnemiesAlive = GameObject.FindGameObjectsWithTag("Unfriendly").Length;
+			EnemiesAlive = GameObject.FindGameObjectsWithTag("Unfriendly").Length / 2;
 		}
 		//GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = true;
 	}
@@ -113,9 +113,6 @@ public class LevelManager : MonoBehaviour
 		EventManager.Instance.StartListening<PlayerDeathEvent>(PlayerDeath);
 		//Follower dies
 		EventManager.Instance.StartListening<AllyDeathEvent>(AllyDeath);
-
-		//Reacting on Items clicks
-		EventManager.Instance.StartListening<ItemClicked>(ReactOnItemClick);
 	}
 
 
@@ -138,9 +135,6 @@ public class LevelManager : MonoBehaviour
 		EventManager.Instance.StopListening<PlayerDeathEvent>(PlayerDeath);
 		//Follower dies
 		EventManager.Instance.StopListening<AllyDeathEvent>(AllyDeath);
-
-		//Reacting on Items clicks
-		EventManager.Instance.StopListening<ItemClicked>(ReactOnItemClick);
 	}
 
 	void OnApplicationQuit()
@@ -174,7 +168,7 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-
+		Debug.Log(EnemiesAlive);
 		CheckConditions();
 	}
 
@@ -294,16 +288,4 @@ public class LevelManager : MonoBehaviour
 		LevelCanvasManager canvasManager = GetComponentInChildren<LevelCanvasManager>();
 		canvasManager.DisplayEndLootItems(newItemsValues);
 	}
-
-	void ReactOnItemClick(ItemClicked itemClickedEvent)
-	{
-		ClickableItem clickedItem = itemClickedEvent.item;
-		switch (clickedItem.type)
-		{
-			case ClickableItem.Type.newspaper:
-				print("A Newspaper was clicked!");
-				break;
-		}
-	}
-
 }

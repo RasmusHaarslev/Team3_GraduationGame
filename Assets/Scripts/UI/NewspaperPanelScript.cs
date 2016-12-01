@@ -9,7 +9,16 @@ public class NewspaperPanelScript : MonoBehaviour {
 
     public void SetNewspaperImage(Sprite newspaper)
     {
-        NewspaperImage.sprite = newspaper;
+		if (!GameObject.Find("NewspaperPanel").transform.FindChild("NewspaperPanelContent").gameObject.activeSelf)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+		}
+		NewspaperImage.sprite = newspaper;
         ContentPanel.SetActive(true);
-    }
+	}
+
+	public void ClosePanel()
+	{
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+	}
 }

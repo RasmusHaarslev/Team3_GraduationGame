@@ -39,6 +39,7 @@ public class TutorialRivalMachine : CoroutineMachine
 		get
 		{
 			poimanager = transform.parent.parent.GetComponent<PointOfInterestManager>();
+			character = GetComponent<TutorialCharacter>();
 			return StartState;
 		}
 	}
@@ -65,7 +66,7 @@ public class TutorialRivalMachine : CoroutineMachine
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
 		averageHealth = poimanager.GetAverageCharactersHealth();
-		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
+		if (averageHealth < fleeHealthLimit * 0.25f)
 		{
 			EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 			character.isFleeing = true;

@@ -152,7 +152,7 @@ public class MoveScript : MonoBehaviour
         Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction.normalized * 500f);
         if (hits.Length > 0)
         {
-            foreach (var hit in hits)
+			foreach (var hit in hits)
             {
                 if (hit.transform.gameObject.tag == "Unfriendly")
                 {
@@ -168,7 +168,11 @@ public class MoveScript : MonoBehaviour
                         firstGroundHitTransform = hit.transform;
                     }
                 }
-            }
+				else if (hit.transform.gameObject.tag == "Item")
+				{
+					EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
+				}
+			}
 
             if (hits[0].transform.gameObject.tag == "Unfriendly" || enemyHit)
             {
