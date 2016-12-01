@@ -164,12 +164,12 @@ public class TutorialRivalMachine : CoroutineMachine
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
 			agent.SetDestination(fleePosition);
-		}
-		if (agent.remainingDistance < agent.stoppingDistance)
-		{
-			if (agent.destination == fleePosition)
+			if (agent.remainingDistance < agent.stoppingDistance)
 			{
-				gameObject.SetActive(false);
+				if (agent.destination == fleePosition)
+				{
+					gameObject.SetActive(false);
+				}
 			}
 		}
 		yield return new TransitionTo(FleeState, DefaultTransition);
