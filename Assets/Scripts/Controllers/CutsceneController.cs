@@ -12,7 +12,7 @@ public class CutsceneController : MonoBehaviour
 	// Use this for initialization
 	private void StartCutscene ()
 	{
-        Handheld.PlayFullScreenMovie("NewTest.mp4", Color.black, FullScreenMovieControlMode.Full);
+        Handheld.PlayFullScreenMovie("Cutscene1.mp4", Color.black, FullScreenMovieControlMode.Full);
         GameController.Instance.LoadScene("TutorialLevel01");
     }
 }
