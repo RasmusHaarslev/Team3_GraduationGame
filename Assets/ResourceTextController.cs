@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ResourceTextController : MonoBehaviour
 {
-   
     public string resourceName;
 
 	// Use this for initialization
@@ -12,14 +11,12 @@ public class ResourceTextController : MonoBehaviour
 	{
 	    int resourceQuantity = PlayerPrefs.GetInt(resourceName, 0);
 
-        if(resourceQuantity != 0)
-        GetComponent<Text>().text = resourceQuantity.ToString();
+        if(resourceQuantity != 0) { 
+            GetComponent<Text>().text = resourceQuantity.ToString();
+        }
         else
         {
-            transform.parent.gameObject.SetActive(false);
+            //transform.parent.gameObject.SetActive(false);
         }
-
-	}
-	
-
+	}	
 }
