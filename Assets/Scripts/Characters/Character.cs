@@ -155,7 +155,8 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Player))
 			{
-				GetComponent<RagdollControl>().EnableRagDoll();
+				animator.SetTrigger("Die");
+				//GetComponent<RagdollControl>().EnableRagDoll();
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
