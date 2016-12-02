@@ -270,9 +270,8 @@ public class LevelManager : MonoBehaviour
 
         if (IsTutorial)
         {
-            int tutLevel = (int)Char.GetNumericValue(NextLevel[NextLevel.Length - 1]);
-            Debug.Log("vALUE : " + tutLevel);
-            EventManager.Instance.TriggerEvent(new TutorialDone(tutLevel-1));
+            EventManager.Instance.TriggerEvent(new TutorialDone());
+            yield return null;
         }
 
         EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
