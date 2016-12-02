@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 public class shaderGlow : MonoBehaviour {
 
-	public bool useNormal=false;
+	public bool useNormal=true;
 	public enum allowedModes {onMouseEnter, alwaysOn, userCallFunctions};
 	public enum labelModes {onMouseEnter, whenGlowIsOn};
-	public allowedModes glowMode;
-	public bool flashing=false; //Object will flash glow
+	public allowedModes glowMode = allowedModes.alwaysOn;
+	public bool flashing= true; //Object will flash glow
 	[Range (0.5f,4.0f)]
 	public float flashSpeed=1f; //Flash speed
 	public bool noOcclusion=false; //Show glow when object is occluded
@@ -19,9 +19,9 @@ public class shaderGlow : MonoBehaviour {
 	public float glowIntensity=1f; //Glow intensity on screen of the object
 	[Range (0.5f,2.0f)]
 	public float glowOpacity=1f; //Glow opacity on screen of the object
-	public Color glowColor = Color.red; //Glow color of the object
+	public Color glowColor = new Color32(0xBA, 0xAC, 0x16, 0xFF); //Glow color of the object
 
-	public String labelToDisplay="LABEL";	//Text to show
+	public String labelToDisplay="";	//Text to show
 	public labelModes labelMode;            //onMouseEnter or whenGlowIsOn
     public Color labelColor=Color.white;	//Text color
 	public bool outlined=true;				//Set true for display outlined text
@@ -61,10 +61,10 @@ public class shaderGlow : MonoBehaviour {
         newMesh.Clear();
         newMesh.vertices = mesh.vertices;
         newMesh.triangles = triangles;
-        newMesh.uv = mesh.uv;
-        newMesh.uv2 = mesh.uv2;
-        newMesh.uv3 = mesh.uv3;
-        newMesh.uv4 = mesh.uv4;
+        //newMesh.uv = mesh.uv;
+        //newMesh.uv2 = mesh.uv2;
+        //newMesh.uv3 = mesh.uv3;
+        //newMesh.uv4 = mesh.uv4;
         newMesh.colors = mesh.colors;
         newMesh.subMeshCount = 1;
         newMesh.normals = mesh.normals;
@@ -222,32 +222,32 @@ public class shaderGlow : MonoBehaviour {
 
 	
 	
-	void OnGUI () {
-		if (!showLabel || Camera.main==null)
-			return;
-		float x=0, y=0;
-        if (labelMode == labelModes.onMouseEnter) {
-            x = Event.current.mousePosition.x - 149;
-            y = Event.current.mousePosition.y - 20;
-        }
-        else {
-            if (GetComponent<Renderer>() != null) {
-                Vector3 pos = Camera.main.WorldToScreenPoint(GetComponent<Renderer>().bounds.center);
-                x = pos.x - 150;
-                y = Screen.height - pos.y;
-            }
-            else
-            {
-                Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-                x = pos.x - 150;
-                y = Screen.height - pos.y;
-            }
-		}
-		if (outlined)
-			DrawOutline (new Rect(x,y,300,60), labelToDisplay, style, outlineColor, labelColor);
-		else
-			GUI.Label ( new Rect(x,y,300,60), labelToDisplay, style);
-	}
+	//void OnGUI () {
+	//	if (!showLabel || Camera.main==null)
+	//		return;
+	//	float x=0, y=0;
+ //       if (labelMode == labelModes.onMouseEnter) {
+ //           x = Event.current.mousePosition.x - 149;
+ //           y = Event.current.mousePosition.y - 20;
+ //       }
+ //       else {
+ //           if (GetComponent<Renderer>() != null) {
+ //               Vector3 pos = Camera.main.WorldToScreenPoint(GetComponent<Renderer>().bounds.center);
+ //               x = pos.x - 150;
+ //               y = Screen.height - pos.y;
+ //           }
+ //           else
+ //           {
+ //               Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+ //               x = pos.x - 150;
+ //               y = Screen.height - pos.y;
+ //           }
+	//	}
+	//	if (outlined)
+	//		DrawOutline (new Rect(x,y,300,60), labelToDisplay, style, outlineColor, labelColor);
+	//	else
+	//		GUI.Label ( new Rect(x,y,300,60), labelToDisplay, style);
+	//}
 
 	Color scaleFactor (Bounds meshfilter) {
 		//Vector3 size=meshfilter.mesh.bounds.size;
@@ -405,22 +405,22 @@ public class shaderGlow : MonoBehaviour {
 	}
 
     //draw text of a specified color, with a specified outline color
-    void DrawOutline(Rect position, String text, GUIStyle theStyle, Color outColor, Color inColor)
-    {
-        var backupStyle = theStyle;
-        theStyle.normal.textColor = outColor;
-        position.x--;
-        GUI.Label(position, text, style);
-        position.x += 2;
-        GUI.Label(position, text, style);
-        position.x--;
-        position.y--;
-        GUI.Label(position, text, style);
-        position.y += 2;
-        GUI.Label(position, text, style);
-        position.y--;
-        theStyle.normal.textColor = inColor;
-        GUI.Label(position, text, style);
-        theStyle = backupStyle;
-    }
+    //void DrawOutline(Rect position, String text, GUIStyle theStyle, Color outColor, Color inColor)
+    //{
+    //    var backupStyle = theStyle;
+    //    theStyle.normal.textColor = outColor;
+    //    position.x--;
+    //    GUI.Label(position, text, style);
+    //    position.x += 2;
+    //    GUI.Label(position, text, style);
+    //    position.x--;
+    //    position.y--;
+    //    GUI.Label(position, text, style);
+    //    position.y += 2;
+    //    GUI.Label(position, text, style);
+    //    position.y--;
+    //    theStyle.normal.textColor = inColor;
+    //    GUI.Label(position, text, style);
+    //    theStyle = backupStyle;
+    //}
 }
