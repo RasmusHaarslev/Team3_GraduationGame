@@ -19,6 +19,7 @@ public class NewspaperPanelScript : MonoBehaviour {
 
 	public void ClosePanel()
 	{
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+        Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
+        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 	}
 }
