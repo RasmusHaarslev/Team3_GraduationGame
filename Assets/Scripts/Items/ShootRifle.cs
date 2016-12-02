@@ -4,7 +4,6 @@ using System.Collections;
 public class ShootRifle : MonoBehaviour {
 
 	[SerializeField]ParticleSystem[] muzzles;
-
 	// Use this for initialization
 	void OnEnable () 
 	{
