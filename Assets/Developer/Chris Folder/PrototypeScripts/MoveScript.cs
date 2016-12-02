@@ -12,8 +12,8 @@ public class MoveScript : MonoBehaviour
 	public bool attacking = false;
 	Character character;
 	float distanceToTarget;
-	float attackSpeed;
-	float counter = 0.6f;
+	public float attackSpeed;
+	public float counter = 0f;
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
@@ -100,32 +100,16 @@ public class MoveScript : MonoBehaviour
 				}
 				if (attacking)
 				{
-
 					if (character.target != null)
 					{
-						if (character.target.GetComponent<TutorialCharacter>() != null)
+						if (character.target != null && !character.target.GetComponent<Character>().isDead)
 						{
-							if ((!character.target.GetComponent<TutorialCharacter>().isDead))
-							{
-								Attacking();
-							}
-							else
-							{
-								agent.Resume();
-								attacking = false;
-							}
+							Attacking();
 						}
-						else if (character.target.GetComponent<Character>() != null)
+						else
 						{
-							if (character.target != null && (!character.target.GetComponent<Character>().isDead))
-							{
-								Attacking();
-							}
-							else
-							{
-								agent.Resume();
-								attacking = false;
-							}
+							agent.Resume();
+							attacking = false;
 						}
 					}
 				}
@@ -139,100 +123,93 @@ public class MoveScript : MonoBehaviour
 
 	public void MoveToClickPosition()
 	{
-        agent.updateRotation = true;
-        agent.Resume();
-        character.animator.SetBool("isAware", false);
+		agent.updateRotation = true;
+		agent.Resume();
+		character.animator.SetBool("isAware", false);
 
-        bool enemyHit = false;
-        GameObject firstEnemyHit = null;
-        Vector3 firstGroundHitPoint = new Vector3();
-        Transform firstGroundHitTransform = null;
+		bool enemyHit = false;
+		GameObject firstEnemyHit = null;
+		Vector3 firstGroundHitPoint = new Vector3();
+		Transform firstGroundHitTransform = null;
 
-        RaycastHit[] hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 1000);
-        Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction.normalized * 500f);
-        if (hits.Length > 0)
-        {
+		RaycastHit[] hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 1000);
+		Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction.normalized * 500f);
+		if (hits.Length > 0)
+		{
 			foreach (var hit in hits)
-            {
-                if (hit.transform.gameObject.tag == "Unfriendly")
-                {
-                    enemyHit = true;
-                    firstEnemyHit = hit.transform.gameObject;
-                    break;
-                }
-                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
-                {
-                    if (Vector3.Distance(firstGroundHitPoint, Camera.main.transform.position) > Vector3.Distance(hit.point, Camera.main.transform.position))
-                    {
-                        firstGroundHitPoint = hit.point;
-                        firstGroundHitTransform = hit.transform;
-                    }
-                }
+			{
+				if (hit.transform.gameObject.tag == "Unfriendly")
+				{
+					enemyHit = true;
+					firstEnemyHit = hit.transform.gameObject;
+					break;
+				}
+				else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
+				{
+					if (Vector3.Distance(firstGroundHitPoint, Camera.main.transform.position) > Vector3.Distance(hit.point, Camera.main.transform.position))
+					{
+						firstGroundHitPoint = hit.point;
+						firstGroundHitTransform = hit.transform;
+					}
+				}
 				else if (hit.transform.gameObject.tag == "Item")
 				{
 					EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
 				}
 			}
 
-            if (hits[0].transform.gameObject.tag == "Unfriendly" || enemyHit)
-            {
-                character.target = firstEnemyHit;
-                attacking = true;
-                agent.stoppingDistance = character.range;
-                agent.SetDestination(firstEnemyHit.transform.position);
+			if (hits[0].transform.gameObject.tag == "Unfriendly" || enemyHit)
+			{
+				character.target = firstEnemyHit;
+				attacking = true;
+				agent.stoppingDistance = character.range;
+				agent.SetDestination(firstEnemyHit.transform.position);
 
-                Character currentTarget = firstEnemyHit.GetComponentInParent<Character>();
-                if (currentTarget == null)
-                {
-                    currentTarget = firstEnemyHit.GetComponent<Character>();
-                }
+				Character currentTarget = firstEnemyHit.GetComponentInParent<Character>();
+				if (currentTarget == null)
+				{
+					currentTarget = firstEnemyHit.GetComponent<Character>();
+				}
 
-                if (currentTarget != null)
-                {
-                    if (!currentTarget.isDead)
-                    {
-                        EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
-                        EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
-                    }
-                }
-            }
-            else if (hits[0].transform.gameObject.tag == "Player")
-            {
-                attacking = false;
-                agent.stoppingDistance = 1.2f;
-            }
-            else if (hits[0].transform.gameObject.tag == "Item")
-            {
-                EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
-            }
-            else
-            {
-                EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
-                agent.stoppingDistance = 1.2f;
-                agent.SetDestination(new Vector3(firstGroundHitPoint.x, firstGroundHitPoint.y, firstGroundHitPoint.z));
-                attacking = false;
-            }
-        }
+				if (currentTarget != null)
+				{
+					if (!currentTarget.isDead)
+					{
+						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
+					}
+				}
+			}
+			else if (hits[0].transform.gameObject.tag == "Player")
+			{
+				attacking = false;
+				agent.stoppingDistance = 1.2f;
+			}
+			else if (hits[0].transform.gameObject.tag == "Item")
+			{
+				EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
+			}
+			else
+			{
+				EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
+				agent.stoppingDistance = 1.2f;
+				agent.SetDestination(new Vector3(firstGroundHitPoint.x, firstGroundHitPoint.y, firstGroundHitPoint.z));
+				attacking = false;
+			}
+		}
 	}
 	private void Attacking()
 	{
 		character.isInCombat = true;
 		agent.SetDestination(character.target.transform.position);
-		distanceToTarget = agent.remainingDistance;
+		distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
 		if (distanceToTarget < agent.stoppingDistance)
 		{
 			agent.Stop();
 			character.RotateTowards(character.target.transform);
 			if (character.isInCombat)
 			{
-				if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-				{
-					character.animator.SetBool("isAware", true);
-				}
-				else
-				{
-					character.animator.SetBool("isAware", false);
-				}
+				character.animator.SetBool("isAware", true);
 			}
 			else
 			{
@@ -248,20 +225,19 @@ public class MoveScript : MonoBehaviour
 			}
 			else
 			{
-				if (attackSpeed - 0.6f >= counter)
+				if (attackSpeed - 0.6f >= counter && !hasShot)
 				{
-					if (!hasShot)
+					if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
 					{
-						character.DealDamage();
-						hasShot = true;
+					Debug.Log("Player damages");
+					character.DealDamage();
+					hasShot = true;
 					}
 				}
-
 				counter -= Time.deltaTime;
 			}
 		}
+
 	}
-
-
 }
 

@@ -179,7 +179,6 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-		Debug.Log(EnemiesAlive);
 		CheckConditions();
 	}
 
@@ -259,12 +258,14 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator WinGameCoroutine(string scene = "CampManagement")
     {
-        while (Time.timeScale > 0.2f)
-        {
-            Time.timeScale -= 0.1f;
+        //while (Time.timeScale > 0.2f)
+        //{
+        //    Time.timeScale -= 0.1f;
 
-            yield return new WaitForSeconds(0.5f);
-        }
+        //    yield return new WaitForSeconds(0.5f);
+        //}
+
+        yield return new WaitForSeconds(0.5f);
 
         EventManager.Instance.TriggerEvent(new LevelWon());
 
