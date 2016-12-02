@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class CutsceneController : MonoBehaviour
 	// Use this for initialization
 	private void StartCutscene ()
 	{
-        Handheld.PlayFullScreenMovie("Cutscene1.mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
+        Handheld.PlayFullScreenMovie("soundtest.mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
         GameController.Instance.LoadScene("TutorialLevel01");
     }
 }
