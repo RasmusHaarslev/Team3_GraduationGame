@@ -148,9 +148,9 @@ public class PanelScript : MonoBehaviour
                 newSoldiersList.Add(newHunter);
                 newHuntersValues[i] = newHunter.GetComponent<Character>().characterBaseValues;
                 newHunterEquipsValues[i] = newHunter.GetComponentInChildren<EquippableItem>().itemValues;
-                newHuntersValues[i].id = 10 + i;
-                newHunterEquipsValues[i].id = 10 + i;
-                newHunterEquipsValues[i].characterId = 10 + i;
+                newHuntersValues[i].id = 20 + i; //todo id handled here
+                newHunterEquipsValues[i].id = 20 + i;
+                newHunterEquipsValues[i].characterId = 20 + i;
                 //print(newHuntersValues[i].id);
                 i++;
 
@@ -214,12 +214,12 @@ public class PanelScript : MonoBehaviour
                         //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
                         CharacterValues valuesToKeep = newSoldiersList[i].GetComponent<Character>().characterBaseValues;
                         valuesToKeep.Type = CharacterValues.type.Hunter;
-                        valuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier + 1;
+                        valuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier ;
                         EquippableitemValues equipValuesToKeep = newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues;
-                        equipValuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier + 1;
+                        equipValuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier ;
                         equipValuesToKeep.characterId = equipValuesToKeep.id;
                        
-                       
+                        print("updating char id "+valuesToKeep.id);
                         dataService.UpdateCharacterValuesInDb(valuesToKeep);
                         dataService.UpdateEquipItemValues(equipValuesToKeep);
                        
