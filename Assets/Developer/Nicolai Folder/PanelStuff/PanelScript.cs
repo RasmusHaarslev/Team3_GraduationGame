@@ -179,6 +179,12 @@ public class PanelScript : MonoBehaviour
             {
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
+                newSoldier.GetComponent<PlayFootStepParticles>().enabled = false;
+                
+                if (newSoldier.GetComponentsInChildren<ShootRifle>().Count() > 0)
+                {
+                    newSoldier.GetComponentsInChildren<ShootRifle>()[0].enabled = false;
+                }
             }
         }
         newCharacterSoldierList = newHuntersValues.ToList();
@@ -238,7 +244,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter1");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -246,7 +252,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter2");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -254,7 +260,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter3");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -502,6 +508,10 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<PanelController>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
+            if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
+            {
+                soldiersList[i].GetComponentsInChildren<ShootRifle>()[0].enabled = false;
+            }
 
             if (soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
             {
@@ -685,7 +695,7 @@ public class PanelScript : MonoBehaviour
     void FillInNewSoldierStats()
     {
         
-        print("soldier list count in Fill "+newCharacterSoldierList.Count);
+
         int i = 0;
         foreach (var newSoldierStats in newSoldierStatsList)
         {
