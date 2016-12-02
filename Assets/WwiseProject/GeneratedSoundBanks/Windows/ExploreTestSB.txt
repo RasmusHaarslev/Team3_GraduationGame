@@ -13,6 +13,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	845273596	Play_PaperPickup			\Default Work Unit\UI\Play_PaperPickup	
 	939012970	Play_IntoLevel			\Default Work Unit\UI\Play_IntoLevel	
 	955974805	Play_UseRiffle			\Default Work Unit\Combat\Play_UseRiffle	
+	979765101	Win			\Default Work Unit\Ambience\Win	
 	1126010832	Play_ExploreMusic			\Default Work Unit\Play_ExploreMusic	
 	1164893191	Play_CommandSel			\Default Work Unit\UI\Play_CommandSel	
 	1292318918	Play_CharSel			\Default Work Unit\UI\Play_CharSel	
@@ -37,6 +38,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2570041344	Play_MenuMusic			\Default Work Unit\Play_MenuMusic	
 	2753202630	Stop_MenuMusic			\Default Work Unit\Stop_MenuMusic	
 	2785405380	Play_LeaderHit			\Default Work Unit\Combat\Play_LeaderHit	
+	3062004145	DiscoverFriendlyExit			\Default Work Unit\TriggerEvents\DiscoverFriendlyExit	
 	3104904358	Play_windhowl			\Default Work Unit\Ambience\Play_windhowl	
 	3125842213	Stop_GroundAmbience			\Default Work Unit\Ambience\Stop_GroundAmbience	
 	3142926109	Play_ScrollMap			\Default Work Unit\UI\Play_ScrollMap	
@@ -58,6 +60,7 @@ State Group	ID	Name			Wwise Object Path	Notes
 	1575469330	Palette			\Default Work Unit\Palette	
 	2068062714	Bridge			\Default Work Unit\Bridge	
 	2073749505	CommandWheel			\Default Work Unit\CommandWheel	
+	2711559228	ViewPointEvent			\Default Work Unit\ViewPointEvent	
 	4102693405	ExploreState			\Default Work Unit\ExploreState	
 
 State	ID	Name	State Group			Notes
@@ -71,6 +74,9 @@ State	ID	Name	State Group			Notes
 	748895195	None	CommandWheel			
 	930712164	Off	CommandWheel			
 	1651971902	On	CommandWheel			
+	748895195	None	ViewPointEvent			
+	788884573	Stop	ViewPointEvent			
+	1281810935	Start	ViewPointEvent			
 	221232726	Lose	ExploreState			
 	748895195	None	ExploreState			
 	979765101	Win	ExploreState			
@@ -80,6 +86,7 @@ State	ID	Name	State Group			Notes
 Custom State	ID	Name	State Group	Owner		Notes
 	8558331	Lose	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\Ambience\Ambience		
 	165176235	OnBridge	Bridge	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusicPalette1		
+	188462326	Start	ViewPointEvent	\Actor-Mixer Hierarchy\Default Work Unit\Ambience\Ambience		
 	315741562	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Conc		
 	335885672	OnBridge	Bridge	\Actor-Mixer Hierarchy\Default Work Unit\Ambience\windhowl		
 	352252775	On	CommandWheel	\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Sneak		
@@ -91,6 +98,9 @@ Custom State	ID	Name	State Group	Owner		Notes
 	581881222	On	CommandWheel	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusicPalette1		
 	670637281	OnBridge	Bridge	\Actor-Mixer Hierarchy\Default Work Unit\Ambience\Ambience		
 	694792509	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\Ambience\windhowl		
+	758750828	Start	ViewPointEvent	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusicPalette2\Explore		
+	831179970	Start	ViewPointEvent	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusicPalette1\Explore		
+	905314723	Start	ViewPointEvent	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusicPalette3\Explore		
 	948477353	InCombat	ExploreState	\Actor-Mixer Hierarchy\Default Work Unit\Ambience\Ambience		
 	1041713942	OnBridge	Bridge	\Interactive Music Hierarchy\Default Work Unit\Music\ExploreMusicPalette2		
 

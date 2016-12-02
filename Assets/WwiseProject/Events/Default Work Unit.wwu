@@ -111,6 +111,16 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Win" ID="{2609A5BA-A3EE-47EB-BF76-5F17CFC2BE95}">
+							<ChildrenList>
+								<Action Name="Set State" ID="{FE6B7FDE-0377-4B0B-B250-FCE5443C29AE}" ShortID="86000039" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
+										<GroupItem Name="Win" ID="{09534D19-5ECF-4CAB-8563-C40F93CDA1D6}"/>
+									</SetItemParam>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="test" ID="{2D8BB1E7-F912-4398-BE1B-14271DC78BC3}" ShortID="141014388">
@@ -695,6 +705,12 @@
 								</Element>
 							</ElementList>
 						</Action>
+						<Action Name="Set State" ID="{746DE940-72D0-4583-8776-8D260ABE19A8}" ShortID="697573640" Type="SetState" Scope="All" Global="true">
+							<SetItemParam>
+								<Group Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
+								<GroupItem Name="Stop" ID="{92EACDE8-7FD5-47A9-B1FB-AA707EC2358B}"/>
+							</SetItemParam>
+						</Action>
 						<Action Name="Set State" ID="{4FAD9667-8061-4CB8-B64F-7F353532903F}" ShortID="49037251" Type="SetState" Scope="All" Global="true">
 							<SetItemParam>
 								<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
@@ -740,7 +756,16 @@
 						</Event>
 						<Event Name="DiscoverFriendly" ID="{8F12BFAD-EBD3-47BF-AD75-B5ACF4324B46}">
 							<ChildrenList>
+								<Action Name="Set State" ID="{A58DEE83-1C8C-4C0C-A9D4-2606D6BF8375}" ShortID="472038130" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
+										<GroupItem Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
+									</SetItemParam>
+								</Action>
 								<Action Name="Trigger" ID="{D856EEAA-5539-4763-B663-9AAB3D188AC5}" ShortID="665576251" Type="Trigger" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="Delay" Type="Real64" Value="2"/>
+									</PropertyList>
 									<ElementList>
 										<Element ID="{F797F9E3-9731-4561-8408-254B70A6B3A2}" Global="true">
 											<ObjectRef Name="DiscoverFriendly" ID="{BB4CDBF5-5633-441F-963B-EF4830AD2CF4}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
@@ -757,6 +782,16 @@
 											<ObjectRef Name="FriendlyDie" ID="{68A81C50-9576-4B37-B808-4C4669F0738E}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
 										</Element>
 									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="DiscoverFriendlyExit" ID="{15CFBA7B-70D4-4D85-8EBB-4FD539809F8F}">
+							<ChildrenList>
+								<Action Name="Set State" ID="{F55AF173-F8A7-43AF-AD2C-54FB1C294E17}" ShortID="218211545" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
+										<GroupItem Name="Stop" ID="{92EACDE8-7FD5-47A9-B1FB-AA707EC2358B}"/>
+									</SetItemParam>
 								</Action>
 							</ChildrenList>
 						</Event>
