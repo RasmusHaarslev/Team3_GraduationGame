@@ -56,6 +56,7 @@ public class PanelScript : MonoBehaviour
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
         InitializeSoldiers();
+        InitializeNewHunters();
     }
 
     public void ActivateNewSoldiers(Transform silhouetteTrans)
@@ -80,6 +81,7 @@ public class PanelScript : MonoBehaviour
 
         //    }
         //}
+        /*
         foreach (GameObject soldier in newSoldiersList)
         {
             if (soldier.activeSelf == false)
@@ -87,6 +89,7 @@ public class PanelScript : MonoBehaviour
                 soldier.SetActive(true);
             }
         }
+        
         /////
         foreach (Transform trans in camsAndNewSoldiersPosition)
         {
@@ -96,10 +99,12 @@ public class PanelScript : MonoBehaviour
                 trans.gameObject.GetComponentInChildren<Light>().enabled = true;
             }
         }
+        */
     }
 
     public void DeactivateNewSoldiers()
     {
+        /*
         foreach (GameObject soldier in newSoldiersList)
         {
             if (soldier.activeSelf == true)
@@ -107,7 +112,7 @@ public class PanelScript : MonoBehaviour
                 soldier.SetActive(false);
             }
         }
-
+        
         foreach (Transform trans in camsAndNewSoldiersPosition)
         {
             if (trans.gameObject.GetComponentInChildren<Camera>().isActiveAndEnabled == true && trans.gameObject.GetComponentInChildren<Light>().isActiveAndEnabled == true)
@@ -116,9 +121,170 @@ public class PanelScript : MonoBehaviour
                 trans.gameObject.GetComponentInChildren<Light>().enabled = false;
             }
         }
+        */
+    }
+
+    public void InitializeNewHunters(bool isFirstTime = true)
+    {
+        var start1 = DateTime.Now;
+        CharacterValues[] newHuntersValues = new CharacterValues[1];
+        if (isFirstTime)
+            newHuntersValues = dataService.GetNewHuntersValues();
+        EquippableitemValues[] newHunterEquipsValues;
+        if (newHuntersValues.Length < 3 || reroll)
+        {
+            var start = DateTime.Now;
+            //creating new values for hunters
+            newSoldiersList.Clear(); //clears the old list
+            //add 3 new hunters
+            newHuntersValues = new CharacterValues[3];
+            newHunterEquipsValues = new EquippableitemValues[3];
+            int i = 0;
+            GameObject newHunter;
+            foreach (Transform trans in camsAndNewSoldiersPosition)
+            {
+                newHunter = GenerateNewHunterGameObject(trans);
+                newSoldiersList.Add(newHunter);
+                newHuntersValues[i] = newHunter.GetComponent<Character>().characterBaseValues;
+                newHunterEquipsValues[i] = newHunter.GetComponentInChildren<EquippableItem>().itemValues;
+                newHuntersValues[i].id = 10 + i;
+                newHunterEquipsValues[i].id = 10 + i;
+                newHunterEquipsValues[i].characterId = 10 + i;
+                //print(newHuntersValues[i].id);
+                i++;
+
+            }
+            print("Creation of 3 models " + (DateTime.Now - start).TotalMilliseconds);
+
+            dataService.UpdateCharactersValues(newHuntersValues);
+            dataService.UpdateEquipItemsValues(newHunterEquipsValues);
+            
+        }
+        else
+        {
+            EquippableitemValues[] newhuntersEquips = dataService.GetNewHuntersEquipValues();
+            newCharacterSoldierList = newHuntersValues.ToList();
+            int i = 0;
+            foreach (Transform trans in camsAndNewSoldiersPosition)
+            { //if we have 3 new hunters values, generate them and add to the list
+                newSoldiersList.Add(dataService.spawnCharacterGameObject(newHuntersValues[i], newhuntersEquips[i], trans));
+
+                i++;
+            }
+        }
+
+        foreach (GameObject newSoldier in newSoldiersList)
+        {
+            if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
+            {
+                newSoldier.GetComponent<NavMeshAgent>().enabled = false;
+                newSoldier.GetComponent<HunterStateMachine>().enabled = false;
+            }
+        }
+        newCharacterSoldierList = newHuntersValues.ToList();
+        print("new char soldier list "+newCharacterSoldierList.Count);
+        //print("Entire initialize new hunters "+(DateTime.Now-start1).TotalMilliseconds);
+        //FillInNewSoldierStats();
+        reroll = false;
     }
 
     public void SpawnNewSoldier(int index)
+    {
+        var start = DateTime.Now;
+        for (int i = 0; i < newSoldiersList.Count; i++)
+        {
+            if (index == i)
+            {
+                foreach (Transform soldiertrans in solidersSpawnPosition)
+                {
+                    if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
+                    {
+
+                        //soldier.animator.SetInteger("IdleAction", 8);
+
+                        //print("adding as new Character");
+                        //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
+                        //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
+                        CharacterValues valuesToKeep = newSoldiersList[i].GetComponent<Character>().characterBaseValues;
+                        valuesToKeep.Type = CharacterValues.type.Hunter;
+                        valuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier + 1;
+                        EquippableitemValues equipValuesToKeep = newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues;
+                        equipValuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier + 1;
+                        equipValuesToKeep.characterId = equipValuesToKeep.id;
+                       
+                       
+                        dataService.UpdateCharacterValuesInDb(valuesToKeep);
+                        dataService.UpdateEquipItemValues(equipValuesToKeep);
+                       
+                        /*
+                                                GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
+                                                print("id of the weapon " + newWeapon.GetComponent<EquippableItem>().itemValues.id);
+
+                                                //destroy current puppet weapon
+                                                Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
+                                                //equip weapon
+                                                print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
+
+                                                dataService.equipItemsToCharacter(new[] { newWeapon }, newSoldiersList[i].GetComponent<Character>());
+                                                */
+                        //newSoldiersList[i].transform.parent = soldiertrans;
+                        newSoldiersList[i].transform.position = soldiertrans.position;
+                        newSoldiersList[i].transform.rotation = soldiertrans.rotation;
+                        /* newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
+                         newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;*/
+                        newSoldiersList[i].AddComponent<PanelController>();
+                        SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
+                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
+                        }
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(2).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
+                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
+                        }
+                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(3).localPosition)
+                        {
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
+                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
+                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
+                        }
+                        EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
+                    }
+                }
+
+
+
+            }
+            else
+            {
+                Destroy(newSoldiersList[i]);
+                //TODO can improve !!
+                //dataService.DeleteCharactersValuesFromDb(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
+            }
+        }
+        //after the hunter is placed 
+        newSoldiersList.Clear();
+        alreadyGeneratedNewSoldiers = false;
+        Destroy(silhouetteGO);
+
+        InitializeNewHunters(false);
+        //FillInNewSoldierStats();
+
+        print("whole thing " + (DateTime.Now - start).TotalMilliseconds);
+    }
+
+    /*
+     public void SpawnNewSoldier(int index)
     {
         for (int i = 0; i < newSoldiersList.Count; i++)
         {
@@ -185,40 +351,87 @@ public class PanelScript : MonoBehaviour
             else
             {
                 Destroy(newSoldiersList[i]);
-                //TODO continue from here
+                
                 dataService.DeleteCharactersValuesFromDb(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
             }
         }
         newSoldiersList.Clear();
         alreadyGeneratedNewSoldiers = false;
         Destroy(silhouetteGO);
-    }
+    } 
+     * */
 
     public void RerollSoldiers()
     {
+        print("doing reroll");
         if (GameController.Instance._PREMIUM >= 200)
         {
             reroll = true;
+            /**/
             foreach (GameObject soldier in newSoldiersList)
             {
-                dataService.DeleteCharactersValuesFromDb(soldier.GetComponent<Character>().characterBaseValues);
+                //dataService.DeleteCharactersValuesFromDb(soldier.GetComponent<Character>().characterBaseValues);
                 Destroy(soldier);
-            
+
             }
+            
             newSoldiersList.Clear();
-        
-            GetNewSoldiers();
-       
+            InitializeNewHunters(false);
+            //GetNewSoldiers();
+            FillInNewSoldierStats();
+
             EventManager.Instance.TriggerEvent(new ChangeResources(premium: -200));
         }
         else
         {
 
         }
-        
+
 
     }
+    //happens when clicking on an empty figure
+    public void GetNewSoldiers()
+    {
 
+        //if reroll was pressed
+        if (reroll)
+        {
+            print("doing reroll");
+            newSoldiersList.Clear(); //clears the old list
+            //add 3 new hunters
+            foreach (Transform trans in camsAndNewSoldiersPosition)
+            {
+                newSoldiersList.Add(GenerateNewHunterGameObject(trans));
+            }
+            //TODO save new values into database async
+        }/*
+        else
+        {
+            newCharacterSoldierList = newHuntersValues.ToList();
+            int i = 0;
+            foreach (Transform trans in camsAndNewSoldiersPosition)
+            { //if we have 3 new hunters values, generate them and add to the list
+
+                newSoldiersList.Add(dataService.GenerateCharacterFromValues(newHuntersValues[i], trans.position));
+                i++;
+            }
+        }
+        
+        foreach (GameObject newSoldier in newSoldiersList)
+        {
+            if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
+            {
+                newSoldier.GetComponent<NavMeshAgent>().enabled = false;
+                newSoldier.GetComponent<HunterStateMachine>().enabled = false;
+            }
+        }
+        */
+        FillInNewSoldierStats();
+
+        reroll = false;
+
+    }
+    /*
     public void GetNewSoldiers()
     {
         var start = DateTime.Now;
@@ -226,13 +439,13 @@ public class PanelScript : MonoBehaviour
         CharacterValues[] newHuntersValues = dataService.GetNewHuntersValues();
 
         //check if there are already new hunters into database
-        if (newHuntersValues.Length < 3 || reroll)
+        if (reroll)
         {
             start = DateTime.Now;
             //add one new hunter
             foreach (Transform trans in camsAndNewSoldiersPosition)
             {
-                newSoldiersList.Add(GenerateNewHunter(trans));
+                newSoldiersList.Add(GenerateNewHunterGameObject(trans));
             }
             //print("Generating" + (DateTime.Now - start).TotalSeconds);
         }
@@ -271,7 +484,7 @@ public class PanelScript : MonoBehaviour
         CharacterController.SaveCharacters(CharacterController.CharactersLoaded);
     }
 
-
+*/
 
     void InitializeSoldiers()
     {
@@ -471,7 +684,8 @@ public class PanelScript : MonoBehaviour
 
     void FillInNewSoldierStats()
     {
-        print(newCharacterSoldierList.Count);
+        
+        print("soldier list count in Fill "+newCharacterSoldierList.Count);
         int i = 0;
         foreach (var newSoldierStats in newSoldierStatsList)
         {
@@ -575,7 +789,10 @@ public class PanelScript : MonoBehaviour
         dataService.equipItemsToCharacter(weapon, currentSoldier);
         UpdateSoldierStats(currentSoldier.gameObject);
         SetCampAnimation(currentSoldier);
+
         
+
+
         //foreach (var camera in soldierCameraList)
         //{
         //    if (camera.enabled == true)
@@ -602,7 +819,23 @@ public class PanelScript : MonoBehaviour
 
     #endregion
 
-    public GameObject GenerateNewHunter(Transform newSoldierTrans)
+    public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
+    {
+        var weaponGenerator = GetComponent<WeaponGenerator>();
+
+        CharacterValues newCharValues = GenerateNewHunterValues();
+        //create new weapon for new soldier
+        Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
+        EquippableitemValues newWeaponValues = weaponGenerator.GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
+
+        GameObject hunter = dataService.spawnCharacterGameObject(newCharValues, newWeaponValues, newSoldierTrans);
+        hunter.transform.localPosition = Vector3.zero;
+        newCharacterSoldierList.Add(newCharValues);
+
+        return hunter;
+    }
+    /*
+    public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
     {
         var start = DateTime.Now;
 
@@ -636,8 +869,8 @@ public class PanelScript : MonoBehaviour
 
         return hunter;
     }
-
-    //public GameObject GenerateNewHunter(Transform newSoldierTrans)
+    */
+    //public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
     //{
     //    print("---------------------------------------------------------------");
     //    var start = DateTime.Now;
@@ -701,7 +934,7 @@ public class PanelScript : MonoBehaviour
 
         newCharValues.Type = CharacterValues.type.NewHunter;
 
-        newCharacterSoldierList.Add(newCharValues);
+        //newCharacterSoldierList.Add(newCharValues);
 
         return newCharValues;
     }
