@@ -17,6 +17,8 @@ public class LootboxScript : MonoBehaviour
     private bool PickedUp = false;
     private int randomizedAmount;
 
+    public bool isTutorial = false;
+
     // Use this for initialization
     void Start()
     {
@@ -43,7 +45,12 @@ public class LootboxScript : MonoBehaviour
             glow.Stop();
             received.Play();
             StartCoroutine(Pickup());
-            PlayerPrefs.SetInt("GainedScrap", PlayerPrefs.GetInt("GainedScrap") + randomizedAmount);
+            if (!isTutorial) { 
+            PlayerPrefs.SetInt("ScrapAmount", PlayerPrefs.GetInt("ScrapAmount") + randomizedAmount);
+            } else
+            {
+                EventManager.Instance.TriggerEvent(new ChangeResources(scraps: randomizedAmount));
+            }
             PickedUp = true;
         }
     }

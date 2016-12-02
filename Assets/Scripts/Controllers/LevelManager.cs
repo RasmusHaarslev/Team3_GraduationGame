@@ -282,6 +282,7 @@ public class LevelManager : MonoBehaviour
                 scraps: PlayerPrefs.GetInt("ScrapAmount")
             )
         );
+
         PlayerPrefs.SetInt("LevelResult", 1);
         //GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
         //generate and display the new items
