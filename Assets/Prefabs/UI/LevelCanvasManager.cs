@@ -5,6 +5,7 @@ public class LevelCanvasManager : MonoBehaviour
 {
 
 	public GameObject fleePopUp;
+    public bool isTutorial = false;
 
 	void OnEnable()
 	{
@@ -28,13 +29,15 @@ public class LevelCanvasManager : MonoBehaviour
 
 	public void DisplayEndLootItems(EquippableitemValues[] newItemsValues)
 	{
-		print("executing loot items!");
-		//display them on the panel
-		EquippableItemUIListController listController = GetComponentInChildren<EquippableItemUIListController>(true);
-		listController.GenerateItemsList(newItemsValues);
-		//activate new items panel
-		listController.transform.parent.parent.gameObject.SetActive(true);
-	}
+        if(!isTutorial) { 
+            print("executing loot items!");
+		    //display them on the panel
+		    EquippableItemUIListController listController = GetComponentInChildren<EquippableItemUIListController>(true);
+		    listController.GenerateItemsList(newItemsValues);
+		    //activate new items panel
+		    listController.transform.parent.parent.gameObject.SetActive(true);
+        }
+    }
 
 	public void LoadFleeCutScene()
 	{
@@ -58,14 +61,4 @@ public class LevelCanvasManager : MonoBehaviour
 		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 		EventManager.Instance.TriggerEvent(new StopFleeEvent());
 	}
-
-    public void DoneTutorial(int tutlevel)
-    {
-        if (tutlevel != 5) { 
-            EventManager.Instance.TriggerEvent(new TutorialDone(tutlevel));
-        }else
-        {
-            GameController.Instance.LoadScene("CampManagement");
-        }
-    }
 }

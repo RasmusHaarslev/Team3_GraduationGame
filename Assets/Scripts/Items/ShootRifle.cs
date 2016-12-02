@@ -15,14 +15,6 @@ public class ShootRifle : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetButtonDown("Fire1"))
-		{
-			Shoot ();
-		}
-	}
-
 	public void Shoot()
 	{
 		for(int i =0;i<muzzles.Length;i++)
