@@ -2,16 +2,17 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CutsceneController : MonoBehaviour {
-
+public class CutsceneController : MonoBehaviour
+{
     void Start()
     {
-        Invoke("StartCutscene", 1.0f);
+        Invoke("StartCutscene", 3.0f);
     }
 
 	// Use this for initialization
-	public void StartCutscene () {
-        Debug.Log("hej");
+	private void StartCutscene ()
+	{
         Handheld.PlayFullScreenMovie("NewTest.mp4", Color.black, FullScreenMovieControlMode.Full);
+        GameController.Instance.LoadScene("TutorialLevel01");
     }
 }
