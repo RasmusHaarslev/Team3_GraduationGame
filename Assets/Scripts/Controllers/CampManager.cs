@@ -137,6 +137,7 @@ public class CampManager : MonoBehaviour
 
     public void FinishUpgradeNow()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_buyGold, gameObject);
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Gold -= FinishUpgradeCost;

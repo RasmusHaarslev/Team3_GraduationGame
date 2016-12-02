@@ -20,7 +20,7 @@ public class GetFreeGold : MonoBehaviour
 
     public void BuyCurrency(int teeths)
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_buyGold, gameObject);
         confirmPanel.SetActive(false);
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: teeths));
     }
