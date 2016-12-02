@@ -288,7 +288,7 @@ public class PanelScript : MonoBehaviour
 
             soldiersList[i].AddComponent<PanelController>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
-
+            soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
 
             if (soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
             {
@@ -522,7 +522,7 @@ public class PanelScript : MonoBehaviour
 
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.characterBaseValues.damage.ToString() + " + " + (currentSoldier.damage - currentSoldier.characterBaseValues.damage) + " = " + currentSoldier.damage.ToString();
+                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.characterBaseValues.damage.ToString() + " + " + (currentSoldier.damage - currentSoldier.characterBaseValues.damage) ;
             }
             if (stat.name == "Soldier Name")
             {
@@ -530,7 +530,7 @@ public class PanelScript : MonoBehaviour
             }
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = "Health: " + currentSoldier.characterBaseValues.health.ToString() + " + " + (currentSoldier.health - currentSoldier.characterBaseValues.health) + " = " + currentSoldier.health.ToString();
+                stat.GetComponent<Text>().text = "Health: " + currentSoldier.characterBaseValues.health.ToString() + " + " + (currentSoldier.health - currentSoldier.characterBaseValues.health);
             }
             if (stat.name == "Damage Speed")
             {
