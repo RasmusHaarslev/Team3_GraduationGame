@@ -49,7 +49,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
   m_Fog: 0
-  m_FogColor: {r: 0.29475152, g: 0.5344828, b: 0.5027537, a: 1}
+  m_FogColor: {r: 0.5344828, g: 0.5344828, b: 0.5344828, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 4
@@ -5211,6 +5211,10 @@ Prefab:
     - target: {fileID: 4000011666081974, guid: ebe9415c7f21e3c4f887af629e52b422, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011666081974, guid: ebe9415c7f21e3c4f887af629e52b422, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebe9415c7f21e3c4f887af629e52b422, type: 2}
@@ -13193,12 +13197,27 @@ Prefab:
     - target: {fileID: 114000013351673726, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000010244622912, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013351673726, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: height
+      value: 22.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013351673726, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: heightFog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013351673726, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: heightDensity
+      value: 0.36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc, type: 2}
