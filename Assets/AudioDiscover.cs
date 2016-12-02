@@ -4,11 +4,7 @@ using System;
 
 public class AudioDiscover : MonoBehaviour
 {
-	public float enemyCounter;
-	public float maxTimeBetweenEnemySightings = 3f;
-
-	public float friendlyCounter;
-	public float maxTimeBetweenFriendlySightings = 3f;
+	public bool enemyDiscovered = false;
 
 	void OnEnable()
 	{
@@ -33,32 +29,13 @@ public class AudioDiscover : MonoBehaviour
 	{
 		if (col.gameObject.tag == "Unfriendly")
 		{
-			if (enemyCounter <= 0)
+			if (!enemyDiscovered)
 			{
-				enemyCounter = maxTimeBetweenEnemySightings;
 				Manager_Audio.PlaySound(Manager_Audio.discoverEnemy, gameObject);
+				enemyDiscovered = true;
 			}
 		}
-		else if (col.gameObject.tag == "Friendly") // TODO: change tag to friendly encounter when it exists
-		{
-			if (enemyCounter <= 0)
-			{
-				enemyCounter = maxTimeBetweenEnemySightings;
-				Manager_Audio.PlaySound(Manager_Audio.discoverFriendly, gameObject);
-			}
-		}
+
 	}
 
-	void Update()
-	{
-		if(enemyCounter >= 0)
-		{
-			enemyCounter -= Time.deltaTime;
-		}
-
-		if (friendlyCounter >= 0)
-		{
-			friendlyCounter -= Time.deltaTime;
-		}
-	}
 }
