@@ -168,7 +168,7 @@ public class GameController : MonoBehaviour
         _DAYS_SURVIVED = InitialDaysSurvived;
 
         PlayerPrefs.SetInt("Food", InitialFood);
-        PlayerPrefs.SetInt("Villagers", InitialVillages + (CampManager.Instance.Upgrades.MaxVillages));
+        PlayerPrefs.SetInt("Villagers", InitialVillages + (CampManager.Instance.Upgrades.MaxVillages) - 1);
         PlayerPrefs.SetInt("Scraps", InitialScrap);
         PlayerPrefs.SetInt("Premium", InitialPremium);
         PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
