@@ -10,7 +10,7 @@ using System.Threading;
 
 public class PanelScript : MonoBehaviour
 {
-
+    CampTopPanel campTopPanelScript;
     public List<GameObject> panelList = new List<GameObject>();
     public List<GameObject> soldierStatsList = new List<GameObject>();
     List<GameObject> soldiersList = new List<GameObject>();
@@ -52,6 +52,7 @@ public class PanelScript : MonoBehaviour
 
     void Start()
     {
+        campTopPanelScript = GetComponentInChildren<CampTopPanel>();
         dataService = new DataService(StringResources.databaseName);
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
@@ -264,6 +265,7 @@ public class PanelScript : MonoBehaviour
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
+                        campTopPanelScript.ScaleVillageCount();
                         EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
                     }
                 }
@@ -386,6 +388,7 @@ public class PanelScript : MonoBehaviour
             //GetNewSoldiers();
             FillInNewSoldierStats();
 
+            campTopPanelScript.ScalePremiumCount();
             EventManager.Instance.TriggerEvent(new ChangeResources(premium: -200));
         }
         else
@@ -506,10 +509,12 @@ public class PanelScript : MonoBehaviour
         {
 
             soldiersList[i].AddComponent<PanelController>();
+            soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
+               
                 soldiersList[i].GetComponentsInChildren<ShootRifle>()[0].enabled = false;
             }
 
@@ -524,8 +529,8 @@ public class PanelScript : MonoBehaviour
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-            //dataService.GetCharacterEquippableItems(soldiersList[i].GetComponent<Character>().characterBaseValues.id);
-            soldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = layersIndices[i];
+            soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
+            
 
             // Switches the animator out with the camp animator.
             SetCampAnimation(soldiersList[i].GetComponent<Character>());

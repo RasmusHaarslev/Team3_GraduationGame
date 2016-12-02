@@ -11,6 +11,10 @@ public class CampTopPanel : MonoBehaviour {
 
     public Text txtDaysSurvived;
 
+    float growFactor = 2f;
+    float maxSize = 2f;
+    float waitTime = 1f;
+
     void OnEnable()
     {
         EventManager.Instance.StartListening<ResourcesUpdated>(UpdateResources);
@@ -48,4 +52,18 @@ public class CampTopPanel : MonoBehaviour {
     public void UpdateText(LanguageChanged e) {
         txtDaysSurvived.text = GameController.Instance._DAYS_SURVIVED.ToString() + " " + TranslationManager.Instance.GetTranslation("DaysSurvived");
     }
+
+   
+    public void ScaleVillageCount()
+    {
+        VillageCount.transform.GetComponent<Animation>().Play();
+    }
+
+    public void ScalePremiumCount()
+    {
+        PremiumCount.transform.GetComponent<Animation>().Play();
+    }
+
+
+
 }
