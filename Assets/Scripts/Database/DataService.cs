@@ -20,6 +20,8 @@ public class DataService : MonoBehaviour
 
     private SQLiteConnection _connection;
 
+    private SQLiteAsyncConnection _asyncConnection;
+
     public DataService(string DatabaseName)
     {
 
@@ -66,6 +68,8 @@ public class DataService : MonoBehaviour
         var dbPath = filepath;
 #endif
         _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+        _connection.BusyTimeout = TimeSpan.FromSeconds(2);
+        _asyncConnection = new SQLiteAsyncConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         //Debug.Log("Final PATH: " + dbPath);
 
     }
@@ -92,13 +96,15 @@ public class DataService : MonoBehaviour
 
         //GENERATE RANDOM LEADER
         CharacterGenerator charGenerator = new CharacterGenerator();
-        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null,125, 0.07f); //pass attributes points as parameter
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null, 125, 0.07f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
+        leaderValues.isMale = true; //Leader can only be male!
+        leaderValues.name = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)]; //male name
         leaderValues.prefabName = StringResources.playerPrefabName;
         leaderValues.materialName = StringResources.playerMaterialName;
         WeaponGenerator weaponGen = new WeaponGenerator();
-        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1, 0.2f,0.7f,0.1f); //leader will have a random level 1 spear
+        EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1, 0.2f, 0.7f, 0.1f); //leader will have a random level 1 spear
         leaderWeapon.characterId = 1;                                                                                   //damage, health and dmg-speed probability
         //ENDING OF RANDOM LEADER GENERATION
 
@@ -107,6 +113,45 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         {
             leaderValues,
+          new CharacterValues
+            {
+              id = 2,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+              id = 3,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+              id = 4,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
             /*new CharacterValues
             {
                 id = 1,
@@ -235,7 +280,7 @@ public class DataService : MonoBehaviour
           },*/
           new CharacterValues
           {
-              id = 4,
+              id = 5,
               name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 1,
@@ -248,7 +293,7 @@ public class DataService : MonoBehaviour
           },
           new CharacterValues
           {
-              id = 5,
+              id = 6,
               name = "Easy rifle tribesman",
               Type = CharacterValues.type.Tribesman,
               tier = 2,
@@ -261,7 +306,7 @@ public class DataService : MonoBehaviour
           },
           new CharacterValues
           {
-              id = 6,
+              id = 7,
               name = "Medium mellee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -275,7 +320,7 @@ public class DataService : MonoBehaviour
           },
           new CharacterValues
           {
-              id = 7,
+              id = 8,
               name = "Medium rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -289,7 +334,7 @@ public class DataService : MonoBehaviour
           },
             new CharacterValues
           {
-                id = 8,
+                id = 9,
               name = "Hard mellee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -301,9 +346,48 @@ public class DataService : MonoBehaviour
               prefabName = "Rival",
               materialName = "RivalTribesmanTier5-6Material"
           },
+          new CharacterValues
+            {
+              id = 10,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+              id = 11,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+              id = 12,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
             new CharacterValues
           {
-                id = 9,
+                id = 13,
               name = "Hard rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -510,36 +594,82 @@ public class DataService : MonoBehaviour
     }
 
     #region character methods
-    
+
+    public GameObject spawnCharacterGameObject(CharacterValues charValues, EquippableitemValues equipValues, Transform position = null)
+    {
+        GameObject character;
+        if (position != null)
+        {
+            character = Instantiate(Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName), position) as GameObject;
+        }
+
+        else
+        {
+            character = Instantiate(Resources.Load(StringResources.charactersPrefabsPath + charValues.prefabName)) as GameObject;
+        }
+
+
+        if (charValues.materialName != null)
+        {
+            character.GetComponentInChildren<SkinnedMeshRenderer>().material = Instantiate(Resources.Load(StringResources.charactersMaterialsPath + charValues.materialName) as Material);
+        }
+        /**/
+        character.GetComponent<Character>().init(charValues);
+        character.transform.localPosition = Vector3.zero;
+        //spawn weapon
+        GameObject currentEquip = Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + equipValues.prefabName)) as GameObject;
+
+        if (equipValues.materialName != null)
+        {
+            currentEquip.GetComponent<Renderer>().material = Instantiate(Resources.Load(StringResources.itemsMaterialsPath + equipValues.materialName) as Material);
+        }
+        currentEquip.GetComponent<EquippableItem>().init(equipValues);
+
+        //equip weapon
+        equipItemToCharacterGameObject(ref currentEquip, ref character);
+
+
+        return character;
+    }
+
+    public async void UpdateCharactersValues(CharacterValues[] charsValues)
+    {
+
+        foreach (CharacterValues val in charsValues)
+            await _asyncConnection.InsertOrReplaceAsync(val);
+    }
 
     public CharacterValues[] GetNewHuntersValues()
     {
-        return (_connection.Table<CharacterValues>().Where(x => x.Type == CharacterValues.type.NewHunter)).ToArray();
+        return _connection.Query<CharacterValues>("SELECT * FROM CharacterValues WHERE id IN (10, 11, 12)").ToArray();
     }
-
+    public EquippableitemValues[] GetNewHuntersEquipValues()
+    {
+        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE id IN (10, 11, 12)").ToArray();
+    }
     /// <summary>
     /// Add values to db and returns the id
     /// </summary>
     /// <param name="hunterValues"></param>
     /// <returns></returns>
     /// 
-    public void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
+    public async void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
     {
-        _connection.Update(charValToUpdate);
+        await _asyncConnection.InsertOrReplaceAsync(charValToUpdate);
     }
     public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
     {
-        
-            _connection.Delete(charValuesToDelete); 
+
+        _connection.Delete(charValuesToDelete);
         //delete all the equipped items associated to that character
-        _connection.Query<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id );
+        _connection.Query<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
 
     }
 
     public int AddcharacterToDbByValues(CharacterValues hunterValues)
     {
         _connection.Insert(hunterValues);
-        return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()"); 
+        return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
     }
 
     public IEnumerable<CharacterValues> GetFellowshipValues()
@@ -557,12 +687,12 @@ public class DataService : MonoBehaviour
 
         if (spawners.Length == 4)
         {
-            for(int i=0; i < fellowshipValues.Length;i++)
+            for (int i = 0; i < fellowshipValues.Length; i++)
             {
                 //istantiate player
                 GameObject charGameObject = GenerateCharacterFromValues(fellowshipValues[i], spawners[i].transform.position, spawners[i].transform.rotation);
                 charGameObject.transform.parent = fellowship.transform;
-            }            
+            }
         }
         else
         {
@@ -576,7 +706,7 @@ public class DataService : MonoBehaviour
 
     public bool RemoveCharacter(CharacterValues charToRemove)
     {
-        if(charToRemove.id != 0)
+        if (charToRemove.id != 0)
         {
             _connection.Delete(charToRemove);
 
@@ -674,10 +804,11 @@ public class DataService : MonoBehaviour
         character.GetComponent<Character>().init(charValues);
 
         //spawn weapons 
-        if(charValues.id != 0) { 
-        IEnumerable<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id));
-        //equip weapons
-        equipItemsToCharacter(equips, character.GetComponent<Character>());
+        if (charValues.id != 0)
+        {
+            IEnumerable<GameObject> equips = GenerateEquippableItemsFromValues(GetCharacterEquippedItemsValues(charValues.id));
+            //equip weapons
+            equipItemsToCharacter(equips, character.GetComponent<Character>());
         }
         /**/
 
@@ -702,7 +833,7 @@ public class DataService : MonoBehaviour
         foreach (EquippableitemValues values in equipValues)
         {
             currentEquip = Instantiate(Resources.Load(StringResources.equippableItemsPrefabsPath + values.prefabName)) as GameObject;
-            
+
             if (values.materialName != null)
             {
                 currentEquip.GetComponent<Renderer>().material = Instantiate(Resources.Load(StringResources.itemsMaterialsPath + values.materialName) as Material);
@@ -713,6 +844,76 @@ public class DataService : MonoBehaviour
         }
 
         return equips;
+    }
+
+    public void equipItemToCharacterGameObject(ref GameObject equip, ref GameObject charGO)
+    {
+        EquippableitemValues currentEquipValues;
+        Character character = charGO.GetComponent<Character>();
+        currentEquipValues = equip.GetComponent<EquippableItem>().itemValues;
+        if (currentEquipValues != null)
+        {
+            //handling the "contstraint" to have only one weapon equipped, and considering the shield as a weapon, if the shield is present on the left, it will be removed
+            if (currentEquipValues.Type == EquippableitemValues.type.polearm ||
+                currentEquipValues.Type == EquippableitemValues.type.rifle ||
+                currentEquipValues.Type == EquippableitemValues.type.shield)
+            {
+                detatchItemFromCharacterGameObject(EquippableitemValues.slot.leftHand, ref character);
+                detatchItemFromCharacterGameObject(EquippableitemValues.slot.rightHand, ref character);
+            }
+            //checking if another item is equipped in the item slot
+            else if (character.equippableSpots[currentEquipValues.Slot].GetComponentInChildren<EquippableItem>() != null)
+            {
+                //if thats the case, remove the values and remove the old object
+                detatchItemFromCharacterGameObject(currentEquipValues.Slot, ref character);
+            }
+
+            //parent and position the item on the appropriate slot
+            equip.transform.parent = character.equippableSpots[currentEquipValues.Slot];
+            equip.transform.localPosition = equip.GetComponent<EquippableItem>().weaponPosition;
+            equip.transform.localRotation = Quaternion.Euler(equip.GetComponent<EquippableItem>().weaponRotation);
+            //handling animations
+            switch (currentEquipValues.Type)
+            {
+                case EquippableitemValues.type.polearm:
+                    character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerSpearName) as RuntimeAnimatorController;
+                    character.equippedWeaponType = EquippableitemValues.type.polearm;
+                    break;
+                case EquippableitemValues.type.shield:
+                    character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerShieldName) as RuntimeAnimatorController;
+                    character.equippedWeaponType = EquippableitemValues.type.shield;
+                    break;
+                case EquippableitemValues.type.rifle:
+                    character.gameObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(StringResources.animControllerRifleName) as RuntimeAnimatorController;
+                    character.equippedWeaponType = EquippableitemValues.type.rifle;
+                    break;
+            }
+            //add the new item values
+            //to the character prefab
+            //Debug.Log(character.characterBaseValues.name + " " + currentEquipValues.name);
+            character.health += currentEquipValues.health;
+            character.damage += currentEquipValues.damage;
+            character.damageSpeed = currentEquipValues.damageSpeed;
+            character.range = currentEquipValues.range;
+
+            //into the database
+            /*
+            if (currentEquipValues.id != 0)
+            {
+                currentEquipValues.characterId = character.characterBaseValues.id;
+                _connection.Update(currentEquipValues);
+                //remove from inventory
+                _connection.Query<InventoryItem>("DELETE FROM InventoryItem WHERE Type = " + (int)InventoryItem.type.equippable + " and deferredId = " + currentEquipValues.id);
+            }
+            */
+        }
+        else
+        {
+            print("Trying to equip " + equip.name + " that is not an equippable item!");
+
+        }
+
+
     }
 
     /// <summary>
@@ -769,22 +970,50 @@ public class DataService : MonoBehaviour
                 character.damage += currentEquipValues.damage;
                 character.damageSpeed = currentEquipValues.damageSpeed;
                 character.range = currentEquipValues.range;
-                
+
                 //into the database
-                if (currentEquipValues.id != 0) {
-                currentEquipValues.characterId = character.characterBaseValues.id;
-                _connection.Update(currentEquipValues);
-                //remove from inventory
-                _connection.Query<InventoryItem>("DELETE FROM InventoryItem WHERE Type = " + (int)InventoryItem.type.equippable + " and deferredId = " + currentEquipValues.id);
+                if (currentEquipValues.id != 0)
+                {
+                    currentEquipValues.characterId = character.characterBaseValues.id;
+                    _connection.Update(currentEquipValues);
+                    //remove from inventory
+                    _connection.Query<InventoryItem>("DELETE FROM InventoryItem WHERE Type = " + (int)InventoryItem.type.equippable + " and deferredId = " + currentEquipValues.id);
                 }
             }
             else
             {
                 print("Trying to equip " + equip.name + " that is not an equippable item!");
-
             }
         }
+    }
 
+    public void detatchItemFromCharacterGameObject(EquippableitemValues.slot slotToDetatch, ref Character character)
+    {
+        //remove item values from total on the player
+        EquippableItem itemToDetatch = character.equippableSpots[slotToDetatch].GetComponentInChildren<EquippableItem>();
+        //detatch and remove the item from the game
+        if (itemToDetatch != null)
+        {
+            //remove the item values
+            //to the character prefab
+            character.health -= itemToDetatch.healthIncrease;
+            character.damage -= itemToDetatch.damageIncrease;
+            character.damageSpeed = character.characterBaseValues.damageSpeed;
+            character.range = character.characterBaseValues.range;
+            //from database
+            /*
+            //putting that from character into inventory
+            itemToDetatch.itemValues.characterId = 0;
+            _connection.Update(itemToDetatch.itemValues);
+            //add it in inventory
+            InventoryItem inventoryItem = new InventoryItem();
+            inventoryItem.Type = InventoryItem.type.equippable;
+            inventoryItem.deferredId = itemToDetatch.itemValues.id;
+            _connection.Insert(inventoryItem);
+            */
+            //removing from scene
+            Destroy(itemToDetatch.transform.gameObject);
+        }
     }
 
     public void detatchItemFromCharacter(EquippableitemValues.slot slotToDetatch, Character character)
@@ -814,18 +1043,27 @@ public class DataService : MonoBehaviour
         }
     }
 
+    public async void UpdateEquipItemValues(EquippableitemValues itemValues)
+    {
 
+        await _asyncConnection.InsertOrReplaceAsync(itemValues);
+    }
+    public async void UpdateEquipItemsValues(EquippableitemValues[] itemsValues)
+    {
+        foreach (EquippableitemValues val in itemsValues)
+            await _asyncConnection.InsertOrReplaceAsync(val);
+    }
     public GameObject GenerateNewEquippableItemFromValues(EquippableitemValues values)
     {
         _connection.Insert(values);
         values.id = _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
 
-        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();        
+        return GenerateEquippableItemsFromValues(new List<EquippableitemValues>() { values }).FirstOrDefault();
     }
 
     public int AddWeaponInDbByValues(EquippableitemValues itemValues)
     {
-        _connection.Insert(  itemValues);
+        _connection.Insert(itemValues);
 
         return _connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
     }
@@ -842,7 +1080,7 @@ public class DataService : MonoBehaviour
         return itemsValues;
     }
 
-    public void InsertItemsValuesInInventory(IEnumerable<EquippableitemValues> itemsValues )
+    public void InsertItemsValuesInInventory(IEnumerable<EquippableitemValues> itemsValues)
     {
         foreach (EquippableitemValues itemValues in itemsValues)
         {
@@ -854,7 +1092,7 @@ public class DataService : MonoBehaviour
             inventoryItem.deferredId = itemValues.id;
             _connection.Insert(inventoryItem);
         }
-       
+
     }
     #endregion
 

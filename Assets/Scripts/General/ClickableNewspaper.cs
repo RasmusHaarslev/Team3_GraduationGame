@@ -15,9 +15,13 @@ public class ClickableNewspaper : ClickableItem
         EventManager.Instance.StopListening<ItemClicked>(Click);
     }
 
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
     public void Click(ItemClicked e)
     {
         GameObject.Find("NewspaperPanel").GetComponent<NewspaperPanelScript>().SetNewspaperImage(pageImage);
-        Destroy(this.gameObject);
     }
 }

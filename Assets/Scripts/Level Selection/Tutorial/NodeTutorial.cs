@@ -4,13 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System;
 
 public class NodeTutorial : MonoBehaviour {
 
     public GameObject scrollingGrid;
 
-    public GameObject infoPanel;
-    public GameObject notScoutPanel;
     public GameObject circularProgress;
     public Text txtIntPoints;
 
@@ -21,7 +20,6 @@ public class NodeTutorial : MonoBehaviour {
     public bool showScoutPanel = true;
 
     public int TravelCost;
-    public int scoutCost;
     public int CampsInNode;
 
     public int foodAmount;
@@ -37,32 +35,17 @@ public class NodeTutorial : MonoBehaviour {
     public bool isOpen = false;
 
     public GameObject PopUpPanel;
-    public GameObject btnScout;
     public GameObject btnPlay;
     public GameObject invisPanel;
 
     public GameObject confirmPanel;
 
-    // Left side shown when you have scouted
-    public GameObject ScoutedPanel;
-    public Text tribeText;
-
     // PopUp Text shown when you have scouted
     public Text foodText;
-    public Text scrapsText;
-    public Text goldTeethsText;
-    public Text itemText;
-
-    // Right side of node shown when you have scouted
-    public Text txtFood;
-    public Text txtScraps;
-    public Text txtTribes;
 
     // Not scouted panel
     public GameObject NotScoutedPanel;
     public Text interestPointsText;    
-
-    public List<Sprite> activationImages = new List<Sprite>();
 
     /* ROADS FROM THIS NODE */
     public List<GameObject> Links = new List<GameObject>();
@@ -87,12 +70,12 @@ public class NodeTutorial : MonoBehaviour {
                 SetScrollPosition(4);
                 break;
         }
-        EventManager.Instance.StartListening<TutorialDone>(DoneLevel);
+        DoneLevel();
     }
 
-    void OnDisable()
+    void OnApplicationQuit()
     {
-        EventManager.Instance.StopListening<TutorialDone>(DoneLevel);
+        this.enabled = false;
     }
 
     void Start()
@@ -102,27 +85,8 @@ public class NodeTutorial : MonoBehaviour {
 
     public void SetupNodes()
     {
-        if (transform.name == "Tut1")
-        {   
-            ChangeRoot();
-        }
-
-        interestPointsText.text = CampsInNode.ToString();
         GetComponent<Button>().onClick.RemoveAllListeners();
         GetComponent<Button>().onClick.AddListener(ClickNode);
-
-        if (!showInfoPanel)
-        {
-            infoPanel.SetActive(false);
-            notScoutPanel.SetActive(false);
-        }
-    }
-
-    public void ChangeRoot()
-    {
-        gameObject.GetComponent<Image>().sprite = activationImages[1];
-        canPlay = true;
-        isOpen = true;
     }
 
     public void ClickNode()
@@ -130,12 +94,23 @@ public class NodeTutorial : MonoBehaviour {
         InitialisePopUP(gameObject);
     }
 
-    public void DoneLevel(TutorialDone e)
+    public void DoneLevel()
     {
-        if (e.strTutLevel == gameObject.name)
+        string scene = SceneManager.GetActiveScene().name;
+
+        int tutLevel = (int)Char.GetNumericValue(scene[scene.Length - 1]);
+        string compare = "Tut" + tutLevel;
+
+        if (compare == gameObject.name && compare != "Tut5")
         {
             StartCoroutine(initWin(gameObject));
+            EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
+        } else if (gameObject.name == "Tut5" && compare == "Tut5")
+        {
+            EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
+            GameController.Instance.LoadScene("CampManagement");
         }
+
     }
 
     #region WIN ANIMATION
@@ -146,10 +121,10 @@ public class NodeTutorial : MonoBehaviour {
         Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
         node.GetComponent<Animator>().SetTrigger("IsCleared");
         node.GetComponent<NodeTutorial>().isCleared = true;
+
         yield return new WaitForSeconds(1f);
 
         SetupUIText();
-        node.transform.GetChild(2).gameObject.SetActive(true);
 
         foreach (var childNode in nodeList)
         {
@@ -168,31 +143,20 @@ public class NodeTutorial : MonoBehaviour {
     {
         if (isCleared)
         {
-            notScoutPanel.SetActive(false);
-            infoPanel.SetActive(false);
         }
         else if (isScouted)
         {
-            notScoutPanel.SetActive(false);
-            infoPanel.SetActive(true);
-
             foreach (RectTransform child in transform)
             {
                 if (child.name == "InfoPanel")
                 {
                     child.gameObject.SetActive(true);
-
-                    GetComponent<NodeTutorial>().txtFood.text = GetComponent<NodeTutorial>().foodAmount.ToString();
-                    GetComponent<NodeTutorial>().txtScraps.text = GetComponent<NodeTutorial>().scrapAmount.ToString();
-                    GetComponent<NodeTutorial>().txtTribes.text = GetComponent<NodeTutorial>().CampsInNode.ToString();
                 }
             }
 
         }
         else
         {
-            infoPanel.SetActive(false);
-            notScoutPanel.SetActive(true);
             txtIntPoints.text = CampsInNode.ToString();
         }
     }
@@ -240,18 +204,9 @@ public class NodeTutorial : MonoBehaviour {
 
         PopUpPanel.SetActive(true);
         btnPlay.GetComponent<Button>().onClick.RemoveAllListeners();
-        btnScout.GetComponent<Button>().onClick.RemoveAllListeners();
 
         btnPlay.GetComponent<Button>().onClick.AddListener(Play);
-        btnScout.GetComponent<Button>().onClick.AddListener(Scout);
-
-        btnScout.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Scout For") + " : " + nodeScript.scoutCost;
         btnPlay.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Enter For") + " : " + nodeScript.TravelCost;
-        tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.CampsInNode;
-        foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
-        scrapsText.text = TranslationManager.Instance.GetTranslation("Scraps") + " : " + nodeScript.scrapAmount;
-        itemText.text = nodeScript.itemDropAmount + " " + TranslationManager.Instance.GetTranslation("Items");
-        goldTeethsText.text = nodeScript.goldTeethAmount + " " + TranslationManager.Instance.GetTranslation("GoldTeeths");
 
         NotScoutedPanel.transform.GetChild(0).GetComponent<Image>().sprite = gameObject.GetComponent<Image>().sprite;
 
@@ -260,22 +215,14 @@ public class NodeTutorial : MonoBehaviour {
             if (nodeScript.isScouted)
             {
                 btnPlay.SetActive(true);
-                btnScout.SetActive(false);
-                ScoutedPanel.SetActive(true);
                 btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -462, 0);
-                ScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 29, 0);
-                ScoutedPanel.transform.GetChild(0).GetComponent<RectTransform>().localPosition = new Vector3(0, 170, 0);
-                ScoutedPanel.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector3(0, -39, 0);
-                ScoutedPanel.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector3(0, -444, 0);
 
             }
             else
             {
                 btnPlay.SetActive(true);
-                btnScout.SetActive(true);
                 NotScoutedPanel.SetActive(true);
                 btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -323, 0);
-                btnScout.GetComponent<RectTransform>().localPosition = new Vector3(0, -470, 0);
                 NotScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 150, 0);
             }
         }
@@ -284,30 +231,15 @@ public class NodeTutorial : MonoBehaviour {
             if (nodeScript.isScouted)
             {
                 btnPlay.SetActive(false);
-                btnScout.SetActive(false);
-                ScoutedPanel.SetActive(true);
                 NotScoutedPanel.SetActive(false);
-                ScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 29, 0);
-                ScoutedPanel.transform.GetChild(0).GetComponent<RectTransform>().localPosition = new Vector3(0, 170, 0);
-                ScoutedPanel.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector3(0, -39, 0);
-                ScoutedPanel.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector3(0, -444, 0);
             }
             else
             {
                 btnPlay.SetActive(false);
-                btnScout.SetActive(true);
-                ScoutedPanel.SetActive(false);
                 NotScoutedPanel.SetActive(true);
                 btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -323, 0);
-                btnScout.GetComponent<RectTransform>().localPosition = new Vector3(0, -470, 0);
                 NotScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 150, 0);
             }
-        }
-
-        if (!showScoutPanel)
-        {
-            btnScout.SetActive(false);
-            ScoutedPanel.SetActive(false);
         }
     }
 
@@ -328,60 +260,10 @@ public class NodeTutorial : MonoBehaviour {
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(AcceptPlay);
     }
 
-    public void Scout()
-    {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-
-        confirmPanel.SetActive(true);
-
-        confirmPanel.GetComponent<ConfirmPanel>().SetupText(gameObject, "scout");
-
-        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
-        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
-
-        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
-        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(AcceptScout);
-    }
-
-    public void AcceptScout()
-    {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        //EventManager.Instance.TriggerEvent(new ChangeResources(-GetComponent<NodeTutorial>().scoutCost));
-
-        btnScout.SetActive(false);
-        NotScoutedPanel.SetActive(false);
-        ScoutedPanel.SetActive(true);
-        confirmPanel.SetActive(false);
-
-        GetComponent<NodeTutorial>().isScouted = true;
-
-        foreach (RectTransform child in transform)
-        {
-            if (child.name == "InfoPanel")
-            {
-                child.gameObject.SetActive(true);
-                GetComponent<NodeTutorial>().txtFood.text = GetComponent<NodeTutorial>().foodAmount.ToString();
-                GetComponent<NodeTutorial>().txtScraps.text = GetComponent<NodeTutorial>().scrapAmount.ToString();
-                GetComponent<NodeTutorial>().txtTribes.text = GetComponent<NodeTutorial>().CampsInNode.ToString();
-            }
-            else
-            {
-                child.gameObject.SetActive(false);
-            }
-        }
-
-        btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -462, 0);
-        ScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 29, 0);
-        ScoutedPanel.transform.GetChild(0).GetComponent<RectTransform>().localPosition = new Vector3(0, 170, 0);
-        ScoutedPanel.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector3(0, -39, 0);
-        ScoutedPanel.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector3(0, -444, 0);
-    }
-
     public void AcceptPlay()
     {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
-        //EventManager.Instance.TriggerEvent(new ChangeResources(-GetComponent<NodeTutorial>().TravelCost));        
-        //EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));        
+        EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));            
 
         switch (gameObject.name)
         {
@@ -409,4 +291,26 @@ public class NodeTutorial : MonoBehaviour {
         confirmPanel.SetActive(false);
     }
     #endregion
+
+    #region TRIGGER SOUND
+    public void TriggerSound(int changeSound)
+    {
+        // 0 - Lose
+        // 1 - Unlock
+        // 2 - Clear
+        switch (changeSound)
+        {
+            case 0:
+                Manager_Audio.PlaySound(Manager_Audio.play_lostMap, gameObject);
+                break;
+            case 1:
+                Manager_Audio.PlaySound(Manager_Audio.play_unlockNewMaps, gameObject);
+                break;
+            case 2:
+                Manager_Audio.PlaySound(Manager_Audio.play_clearMap, gameObject);
+                break;
+        }
+    }
+    #endregion
+
 }

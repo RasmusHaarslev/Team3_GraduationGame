@@ -43,7 +43,7 @@ public class UpgradesController : MonoBehaviour {
             Amount.gameObject.SetActive(false);
             DailyPanel.SetActive(true);
 
-            PlayerPrefs.SetString("GatherDate", (currentDate.AddDays(-1).ToString()));
+            PlayerPrefs.SetString("GatherDate", (currentDate.ToString()));
         }
     }
 }

@@ -16,7 +16,12 @@ public class LevelCanvasManager : MonoBehaviour
 		EventManager.Instance.StopListening<FleeStateEvent>(ShowPopUp);
 	}
 
-	public void ShowPopUp(FleeStateEvent e)
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
+    public void ShowPopUp(FleeStateEvent e)
 	{
 		StartCoroutine(Flee());
 	}
@@ -53,14 +58,4 @@ public class LevelCanvasManager : MonoBehaviour
 		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 		EventManager.Instance.TriggerEvent(new StopFleeEvent());
 	}
-
-    public void DoneTutorial(int tutlevel)
-    {
-        if (tutlevel != 5) { 
-            EventManager.Instance.TriggerEvent(new TutorialDone(tutlevel));
-        }else
-        {
-            GameController.Instance.LoadScene("CampManagement");
-        }
-    }
 }

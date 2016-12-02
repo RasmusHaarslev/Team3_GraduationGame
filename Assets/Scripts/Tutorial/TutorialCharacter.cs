@@ -43,15 +43,15 @@ public class TutorialCharacter : MonoBehaviour
 
 	public EquippableitemValues.type equippedWeaponType;
 	public CharacterValues.type characterType;
-
+	private bool isWounded = false;
 	public bool isMale = true;
 	[Range(0, 99)]
-	public int randomTargetProbability = 25;
-	float isFleeingValue;
+	public int randomTargetProbability = 40;
 
 	// Use this for initialization
 	void Start()
 	{
+		animator.SetFloat("isWounded", 0);
 		currentHealth = health;
 	}
 
@@ -62,20 +62,28 @@ public class TutorialCharacter : MonoBehaviour
 
 	void Update()
 	{
-		if (target != null)
+		if (!isWounded && currentHealth < 0.4f * health)
 		{
-			if ((target.GetComponent<TutorialHunterCharacter>() != null && target.GetComponent<TutorialHunterCharacter>().isFleeing) || (target.GetComponent<TutorialPlayerCharacter>() != null && target.GetComponent<TutorialPlayerCharacter>().isFleeing))
-			{
-				isInCombat = false;
-				currentOpponents.Clear();
-				target = null;
-			}
+			isWounded = true;
+			animator.SetFloat("isWounded", 1);
 		}
+
 		if (!isInCombat)
 		{
 			animator.SetBool("isAware", false);
 		}
-		animator?.SetFloat("Speed", agent.velocity.normalized.magnitude, 0.15f, Time.deltaTime);
+		animator?.SetFloat("Speed", agent.velocity.magnitude, 0.15f, Time.deltaTime);
+
+		if (target != null)
+		{
+			if ((target.GetComponent<TutorialHunterCharacter>() != null && target.GetComponent<TutorialHunterCharacter>().isFleeing) || (target.GetComponent<TutorialPlayerCharacter>() != null && target.GetComponent<TutorialPlayerCharacter>().isFleeing))
+			{
+				currentOpponents.Clear();
+				target = null;
+				isInCombat = false;
+			}
+		}
+
 		if (currentHealth <= 0)
 		{
 			if (isDead == false)
@@ -87,6 +95,7 @@ public class TutorialCharacter : MonoBehaviour
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
+				GetComponentInChildren<TutorialAggroRange>().gameObject.SetActive(false);
 				// VESO REMOVE THIS:
 				GetComponent<RagdollControl>().EnableRagDoll();
 
@@ -115,7 +124,6 @@ public class TutorialCharacter : MonoBehaviour
 		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
-		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -132,7 +140,6 @@ public class TutorialCharacter : MonoBehaviour
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
-		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 	}
 
 	/// <summary>
@@ -323,15 +330,11 @@ public class TutorialCharacter : MonoBehaviour
 
 	public void RotateTowards(Transform target)
 	{
+		agent.updateRotation = false;
 		Vector3 direction = (target.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
 		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 	}
 
-	private void EnemyDeath(EnemyDeathEvent e)
-	{
-		currentOpponents.Remove(target);
-		target = null;
-	}
 }
 

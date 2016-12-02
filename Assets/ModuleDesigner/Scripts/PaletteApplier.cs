@@ -7,6 +7,10 @@ public class PaletteApplier : MonoBehaviour
 {
     [Header("Options"), Tooltip("Amount of rows between palette switch")]
     public int PaletteInterval = 2;
+    [Tooltip("Override palette")]
+    public bool OverridePalette = false;
+    [Tooltip("Choose the palette specifically for this level")]
+    public int CustomPalette = 2;
 
     [Header("Materials to change")]
     public Material walkableGroundMaterial;
@@ -31,10 +35,20 @@ public class PaletteApplier : MonoBehaviour
         EventManager.Instance.StopListening<LevelStarted>(ChangePalette);
     }
 
+    void OnApplicationExit()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     public void ChangePalette(LevelStarted e)
     {
         paletteNumber = PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName);
         paletteNumber = ((int)(paletteNumber * (1.0f / (float)PaletteInterval))) % 3;
+
+        if (OverridePalette)
+        {
+            paletteNumber = CustomPalette;
+        }
 
         //Parse colors
         switch (paletteNumber)
