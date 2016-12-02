@@ -34,7 +34,7 @@ public class TraitDescription : MonoBehaviour {
 			case CharacterValues.CombatTrait.NoTrait:
 				return noTrait;
 		}
-		return "yo mama";
+		return "trait error";
 	}
 
 	public string chooseTargetTraitDescription(CharacterValues characterValues)
@@ -50,6 +50,6 @@ public class TraitDescription : MonoBehaviour {
 			case CharacterValues.TargetTrait.NoTrait:
 				return noTrait;
 		}
-		return "yo mama";
+		return "trait error";
 	}
 }
