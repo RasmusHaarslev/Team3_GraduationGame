@@ -52,7 +52,6 @@ public class ConfirmPanel : MonoBehaviour
             else
             {
                 txtHeader.text = TranslationManager.Instance.GetTranslation("ConfirmSure") + " " +
-                                 node.GetComponent<NodeTutorial>().scoutCost + " " +
                                  TranslationManager.Instance.GetTranslation("Food") + " " +
                                  TranslationManager.Instance.GetTranslation("OnScouting");
             }
