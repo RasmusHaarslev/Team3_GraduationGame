@@ -158,7 +158,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
     public void AcceptScout(GameObject node)
     {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        Manager_Audio.PlaySound(Manager_Audio.play_scouting, gameObject);
         EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().scoutCost));
 
         btnScout.SetActive(false);
