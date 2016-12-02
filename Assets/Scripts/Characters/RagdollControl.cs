@@ -10,7 +10,7 @@ public class RagdollControl : MonoBehaviour
 	private List<Collider> collidersRagdoll;
 
 	private List<Rigidbody> rigidBodiesRagdoll;
-
+	public Rigidbody rigidbody;
 
 	[Tooltip("Collect player collider on main object")]
 	private Collider playerCollider;
@@ -18,7 +18,9 @@ public class RagdollControl : MonoBehaviour
 	private CapsuleCollider playerCapsuleCollider;
 	[SerializeField]
 	private SphereCollider playerSphereCollider;
-
+	[SerializeField]
+	private float pushForceOnDeath=10;
+	public ForceMode forceModePush = ForceMode.Impulse;
 	#region System
 	void Awake()
 	{
@@ -42,14 +44,21 @@ public class RagdollControl : MonoBehaviour
 
 	public void EnableRagDoll()
 	{
+		
 		if (playerCollider != null)
 		{
 			playerCollider.isTrigger = true;
 		}
 
+		foreach (var rigid in rigidBodiesRagdoll)
+		{
+				rigid.WakeUp();
+		}
+
 		ToggleColliders(true);
 		ToggleRigids(false);
 		anim.enabled = false;
+		rigidbody.AddForce(-transform.forward*pushForceOnDeath,forceModePush);
 	}
 
 	public void DisableRagDoll()
@@ -90,9 +99,15 @@ public class RagdollControl : MonoBehaviour
 	void CollectRigidBodies()
 	{
 		rigidBodiesRagdoll = new List<Rigidbody>();
-
-		rigidBodiesRagdoll.AddRange(GetComponentsInChildren<Rigidbody>());
-
+		foreach (var rigid in GetComponentsInChildren<Rigidbody>())
+		{
+			if (rigid != rigidbody)
+			{
+				rigidBodiesRagdoll.Add(rigid);
+				rigid.Sleep();
+			}
+		}
+		
 		ToggleRigids(true);
 	}
 
@@ -100,7 +115,8 @@ public class RagdollControl : MonoBehaviour
 	{
 		for (int i = 0; i < collidersRagdoll.Count; i++)
 		{
-			collidersRagdoll[i].enabled = isEnabled;
+            if(collidersRagdoll[i].gameObject.name != "TapCollider")
+			    collidersRagdoll[i].enabled = isEnabled;
 		}
 	}
 

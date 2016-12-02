@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
 {
     PanelClicked panelClickedScript;
-
+    PanelScript panelScript;
     void Start()
     {
         panelClickedScript = GetComponentInChildren<PanelClicked>();
+        panelScript = GameObject.FindGameObjectWithTag("CampPanel").GetComponent<PanelScript>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -20,12 +21,15 @@ public class BackgroundPanelScript : MonoBehaviour, IPointerClickHandler
             {
                 if (child.gameObject.activeSelf == true)
                 {
-                    if(gameObject.name != "LevelSelection")
+                    if(gameObject.name != "LevelSelection" && gameObject.name != "CampUpgradesPanel" && child.name != "StoreFrontPanel")
                         child.gameObject.SetActive(false);
 
                 }
             }
+
             gameObject.SetActive(false);
+            panelScript.DeactivateSpotligths();
+            panelScript.DeactivateNewSoldiers();
         }
        
     }

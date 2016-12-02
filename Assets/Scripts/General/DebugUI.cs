@@ -62,6 +62,11 @@ public class DebugUI : MonoBehaviour
         //Application.logMessageReceived -= HandleLog;
     }
 
+    void OnApplicationQuit()
+    {
+        this.enabled = false;
+    }
+
     private void Lost(LevelLost e)
     {
         showDebug = false;
@@ -287,7 +292,7 @@ public class DebugUI : MonoBehaviour
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Gameplay", customButton))
                 {
                     followers.Clear();
-                    GameController.Instance.LoadScene("LevelPrototype");
+                    GameController.Instance.LoadScene("LevelPrototype03");
                 }
 
                 yPosRight += height + 10;
@@ -326,7 +331,8 @@ public class DebugUI : MonoBehaviour
                 yPosRight += height + 10;
                 if (GUI.Button(new Rect(xPosRight, yPosRight, width, height), "Reset Game", customButton))
                 {
-                    PlayerPrefs.DeleteAll();
+                    GameController.Instance.LoseGame();
+                    SceneManager.LoadScene("CampManagement");
                 }
                 #endregion
 
@@ -412,6 +418,7 @@ public class DebugUI : MonoBehaviour
     public void ResetGame()
     {
         PlayerPrefs.DeleteAll();
+        GameController.Instance.ResetResources();
     }
 
 }

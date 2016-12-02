@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012713111296}
   - 65: {fileID: 65000011212046808}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Collider01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - 4: {fileID: 4000010176074336}
   - 33: {fileID: 33000012835203442}
   - 23: {fileID: 23000013227643130}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Piece02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011355175682}
   - 65: {fileID: 65000012106640392}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Collider06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012869273212}
   - 65: {fileID: 65000013148843726}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Collider05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,12 +84,29 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010411580740}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BridgeMedium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1000011497345884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013220863496}
+  - 65: {fileID: 65000011596864600}
+  - 114: {fileID: 114000012161382602}
+  m_Layer: 2
+  m_Name: BridgeSoundTrigger (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1000011553780934
 GameObject:
@@ -100,7 +117,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013986107010}
   - 65: {fileID: 65000011582518032}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Collider03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +133,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011314469284}
   - 65: {fileID: 65000010002402432}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Collider04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +150,7 @@ GameObject:
   - 4: {fileID: 4000012736182140}
   - 33: {fileID: 33000012775321796}
   - 23: {fileID: 23000011887919966}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Piece01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +166,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012956247588}
   - 65: {fileID: 65000010436190960}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Collider02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011407999226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -27.871662, y: -0.0010385566, z: -88.01056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -188,6 +205,7 @@ Transform:
   - {fileID: 4000011355175682}
   - {fileID: 4000012736182140}
   - {fileID: 4000010176074336}
+  - {fileID: 4000013220863496}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000011314469284
@@ -268,6 +286,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000010411580740}
   m_RootOrder: 1
+--- !u!4 &4000013220863496
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011497345884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.09, z: 8.57}
+  m_LocalScale: {x: 3.7124999, y: 2.2070308, z: 17.317312}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010411580740}
+  m_RootOrder: 8
 --- !u!4 &4000013986107010
 Transform:
   m_ObjectHideFlags: 1
@@ -294,7 +325,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a868a8cb92890ea4db13802e4a06d522, type: 2}
+  - {fileID: 2100000, guid: 7a74a810dde9e83498b9421458f8d09b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -323,7 +354,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a868a8cb92890ea4db13802e4a06d522, type: 2}
+  - {fileID: 2100000, guid: 7a74a810dde9e83498b9421458f8d09b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -401,6 +432,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2248116, y: 0.1, z: 2.86}
   m_Center: {x: 0, y: -0.53, z: 7}
+--- !u!65 &65000011596864600
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011497345884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000012106640392
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -425,3 +468,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2248116, y: 0.1, z: 2.8}
   m_Center: {x: 0, y: -0.14, z: 4.23}
+--- !u!114 &114000012161382602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011497345884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c05a92d1a60eb04386b675a62f8ea8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -9,6 +10,18 @@ using UnityEditor;
 public class StringResources
 {
     public static string databaseName = "gameDatabase.db";
+
+    #region RESOURCES
+    
+        public static string NodeIdPrefsName = "NodeId";
+        public static string LevelDifficultyPrefsName = "LevelDifficulty";
+        public static string TribeCampsPrefsName = "TribeCamps";
+        public static string FoodAmountPrefsName = "FoodAmount";
+        public static string ScrapAmountPrefsName = "ScrapAmount";
+        public static string ItemDropAmountPrefsName = "ItemDropAmount";
+        public static string DaysSurvived = "DaysSurvived";
+
+    #endregion
 
     #region PREFABS
 
@@ -49,34 +62,161 @@ public class StringResources
 
     public static string follower2MaterialName = "Follower2Material";
 
-    public static string rifle1MaterialName = "Rifle1Material";
 
-    public static string polearm1MaterialName = "Polearm1Material";
+    public static Dictionary<EquippableitemValues.type, string[][]> equipItemsModelsStrings = // shield -> ["shield name","prefab name","material name"]
+        new Dictionary<EquippableitemValues.type, string[][]>
+        {
+            {
+                EquippableitemValues.type.shield, new[]
+                {
+                    new[] { "Riot Shield", "Shield1", "Shield1AMaterial" },
+                    new[] { "Rusted Barrier", "Shield1", "Shield1BMaterial" },
+                    new[] { "Moss-covered Plate", "Shield1", "Shield1CMaterial" },
+                    new[] { "Stop Sign", "Shield2", "Shield2AMaterial" }            
+                }
+            },
+            {
+                EquippableitemValues.type.polearm, new[]
+                {
+                    new[] { "Stick Blade", "Polearm1", "Polearm1AMaterial" },
+                    new[] { "Army Pike", "Polearm1", "Polearm1BMaterial" },
+                    new[] { "Ranged Cutter", "Polearm1", "Polearm1CMaterial" }
+                }
+            },
+            {
+                EquippableitemValues.type.rifle, new[]
+                {
+                    new[] { "Hunting Rifle", "Rifle1", "Rifle1AMaterial" },
+                    new[] { "Carabine", "Rifle1", "Rifle1BMaterial" },
+                    new[] { "Old Musket", "Rifle1", "Rifle1CMaterial" }
+                }
+            }
+        };
+    
+    
 
-    public static string shield1MaterialName = "Shield1Material";
+    public static string[] maleHuntersMaterials = new[] { "Hunter_Male_1", "Hunter_Male_2", "Hunter_Male_3", "Hunter_Male_4", "Hunter_Male_5", "Hunter_Male_6", "Hunter_Male_7", "Hunter_Male_8", "Hunter_Male_9" };
+
+    public static string[] femaleHuntersMaterials = new[] { "Hunter_Female_1", "Hunter_Female_2", "Hunter_Female_3", "Hunter_Female_4", "Hunter_Female_5", "Hunter_Female_6", "Hunter_Female_7", "Hunter_Female_8", "Hunter_Female_9" };
+
 
     #endregion
+
 
 
     #region ANIMATIONS
 
-    public static string animControllerShieldName = "Humanoid_Shield";
+    public static string animControllerShieldName = "Humanoid_ShieldController";
 
-    public static string animControllerRifleName = "Humanoid_Riffle";
+    public static string animControllerRifleName = "Humanoid_RifleController";
 
-    public static string animControllerSpearName = "Humanoid_Spear";
+    public static string animControllerSpearName = "Humanoid_SpearController";
 
     #endregion
 
+    #region CharacterNames
+    public static string[] maleNames = new[] { "THOMAS",
+"NILS",
+"KRISTIAN",
+"CHRISTIAN",
+"SEBASTIAN",
+"VESELIN",
+"DANIEL",
+"JOHN",
+"NICOLAI",
+"PETER",
+"RASMUS",
+"RICCARDO",
+"TOBIAS",
+"LUDVIG",
+"BENJAMIN",
+"MADS",
+"HASSAN",
+"MARK",
+"MATHIAS",
+"ANDRZEJ",
+"BESNIK",
+"LUCA",
+"YOSKA",
+"TOBAR",
+"KASPER",
+"JOACHIM",
+"LARS",
+"OTTO",
+"OSCAR",
+"MUHAMMED",
+"MALIK",
+"MORTEN",
+"RIKARD",
+"ALEKSY",
+"KASIMIERZ",
+"KONSTANTY",
+"KORNELIUSZ",
+"KRYSZTOF",
+"AHMED",
+"BAHADIR",
+"BASAK",
+"CHENGIZ",
+"DENIZ",
+"ERDEM",
+"IBRAHIM",
+"KHALID",
+"SEBNEM",
+"SULEIMAN",
+"ZEHEB"};
+
+    public static string[] femaleNames = new[] { "TEA",
+"AGNES",
+"ANDREA",
+"YASMIN",
+"SHAHIDA",
+"MIRA",
+"SELMA",
+"AISHA",
+"BESS",
+"EMMA",
+"IDA",
+"LOUISE",
+"CAMILLA",
+"SUSI",
+"DIKA",
+"DONKA",
+"ESMERALDA",
+"LULUDJA",
+"NADYA",
+"AIDA",
+"HABIBAH",
+"ELIZA",
+"ESHAL",
+"INAAYA",
+"CÆCILIA",
+"URSULA",
+"EMILY",
+"ANNA",
+"OLGA",
+"KAREN",
+"BENTE",
+"BANAAN",
+"MAYA",
+"AGATA",
+"ALESKA",
+"EMILJA",
+"ESTERA",
+"OLESIA",
+"ARUBA",
+"DILARA",
+"FATIMAH",
+"FATMA",
+"JAMILIA",
+"LAMYA",
+"MELEK",
+"PINAR",
+"SHAKELA",
+"YAZ",
+"ZULMA"};
 
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    #endregion
+
+     
 }

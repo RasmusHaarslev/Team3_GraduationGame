@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEngine;
+using System.Linq;
 
 class BuildScript
 {
@@ -15,7 +17,7 @@ class BuildScript
 
         // Todo
         string buildPath = "C:/GoogleDrive/DADIU2016T3/Builds/";
-        string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + "_build.apk";
+        string fileName = DateTime.Now.ToString("yyyy-MM-dd_HH") + "_build.apk";
         PlayerSettings.productName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
 
         // Create build folder if not yet exists
@@ -42,12 +44,12 @@ class BuildScript
             }
         }
 
-        sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Tutorial");
+        sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Tutorials");
         foreach (var scene in sceneDirectory.GetFiles())
         {
             if (scene.Name.EndsWith(".unity"))
             {
-                scenes.Add("Assets/_Scenes/Tutorial/" + scene.Name);
+                scenes.Add("Assets/_Scenes/Tutorials/" + scene.Name);
             }
         }
 
@@ -59,7 +61,15 @@ class BuildScript
                 scenes.Add("Assets/_Scenes/Levels/" + scene.Name);
             }
         }
+
+        ScenesToTxt();
     }
 
-    
+    public static void ScenesToTxt()
+    {
+        var fileInfo = Directory.CreateDirectory("Assets/_Scenes/Levels").GetFiles();
+        var fileNames = fileInfo.Where(f => f.Name.EndsWith(".unity")).Select(f => f.Name.Replace(".unity", "")).ToArray();
+
+        File.WriteAllLines("Assets/Resources/ScenesList.txt", fileNames);
+    }
 }

@@ -6,12 +6,9 @@ using UnityEngine.UI;
 
 public class CampManager : MonoBehaviour
 {
-    public CampUpgrades Upgrades;
+    public CampUpgrades Upgrades = new CampUpgrades();
     public int GatherCost;
     public int GatherCostIncrease;
-
-    public int BlacksmithCost;
-    public int BlacksmithCostIncrease;
 
     public int LeaderHealthCost;
     public int LeaderHealthCostIncrease;
@@ -22,18 +19,27 @@ public class CampManager : MonoBehaviour
     public int MaxVillagesCost;
     public int MaxVillagesCostIncrease;
 
-    public Text[] TextLevels;
-    public Button[] Buttons;
-    public Button FinishNow;
+    [Tooltip("The amount of gold it costs to finish an upgrade.")]
+    public int FinishUpgradeCost;
 
     #region
-    private double amountOfSeconds = 0.0;
-    private string tempUpgradeName = "";
-    private int tempCost = 0;
-
-    private int tempGold = 0;
+    public int Level1_Time;
+    public int Level2_Time;
+    public int Level3_Time;
+    public int Level4_Time;
+    public int Level5_Time;
+    public int Level6_Time;
+    public int Level7_Time;
+    public int Level8_Time;
+    public int Level9_Above_Time;
     #endregion
 
+    #region
+    public double amountOfSeconds = 0.0;
+    public string tempUpgradeName = "";
+    public int tempCost = 0;
+    public int tempGold = 0;
+    #endregion
 
     #region Setup Instance
     private static CampManager _instance;
@@ -54,19 +60,14 @@ public class CampManager : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    void Awake()
     {
-        LoadUpgrades();
+
     }
 
-    private void SaveUpgrades()
+    public void SaveUpgrades()
     {
         var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
-
-        foreach (var but in Buttons)
-            but.interactable = !Upgrades.UpgradeInProgress;
-
-        FinishNow.interactable = Upgrades.UpgradeInProgress;
 
         var serializer = new XmlSerializer(typeof(CampUpgrades));
         var stream = new FileStream(path, FileMode.Create);
@@ -74,7 +75,7 @@ public class CampManager : MonoBehaviour
         stream.Close();
     }
 
-    private void LoadUpgrades()
+    public void LoadUpgrades()
     {
         var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
 
@@ -83,9 +84,9 @@ public class CampManager : MonoBehaviour
             var serializer = new XmlSerializer(typeof(CampUpgrades));
             var stream = new FileStream(path, FileMode.Open);
             Upgrades = serializer.Deserialize(stream) as CampUpgrades;
-            Upgrades.GetCurrency();
-            SetLevels();
             stream.Close();
+
+            Upgrades.GetCurrency();
         }
         else {
             Upgrades = new CampUpgrades();
@@ -101,6 +102,9 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeInProgress = true;
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Scrap -= tempCost;
+
+		EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -tempCost));
+
         SaveUpgrades();
     }
 
@@ -131,20 +135,19 @@ public class CampManager : MonoBehaviour
         tempCost = 0;
     }
 
-    public void FinishUpgradeClicked()
-    {
-        tempGold = (int) Mathf.Max( ((float)TimeLeftInSeconds())/10.0f, 1.0f);
-    }
-
     public void FinishUpgradeNow()
     {
-        Upgrades.UpgradeInProgress = true;
+        Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = tempUpgradeName;
-        Upgrades.Gold -= tempGold;
+        Upgrades.Gold -= FinishUpgradeCost;
+
+        // Update premium resource in GameController.
+        EventManager.Instance.TriggerEvent(new ChangeResources(premium: -FinishUpgradeCost));
+
         FinishUpgrade();
     }
 
-    private void FinishUpgrade()
+    public void FinishUpgrade()
     {
         switch (Upgrades.UpgradeBought)
         {
@@ -160,10 +163,6 @@ public class CampManager : MonoBehaviour
                 Upgrades.LeaderHealthLevel++;
                 break;
 
-            case "Blacksmith":
-                Upgrades.BlacksmithLevel++;
-                break;
-
             case "Villages":
                 Upgrades.MaxVillages++;
                 break;
@@ -175,7 +174,6 @@ public class CampManager : MonoBehaviour
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = "";
         SaveUpgrades();
-        SetLevels();
     }
 
     #region Upgrade Buttons
@@ -194,13 +192,6 @@ public class CampManager : MonoBehaviour
         amountOfSeconds = GetTimeForUpgrade(Upgrades.MaxVillages);
     }
 
-    public void UpgradeBlacksmith()
-    {
-        tempUpgradeName = "Blacksmith";
-        tempCost = BlacksmithCost + (BlacksmithCostIncrease * Upgrades.BlacksmithLevel);
-        amountOfSeconds = GetTimeForUpgrade(Upgrades.BlacksmithLevel);
-    }
-
     public void UpgradeLeaderHealth()
     {
         tempUpgradeName = "LeaderHealth";
@@ -215,49 +206,40 @@ public class CampManager : MonoBehaviour
         amountOfSeconds = GetTimeForUpgrade(Upgrades.LeaderStrengthLevel);
     }
 
-    private void SetLevels()
-    {
-        TextLevels[0].text = Upgrades.GatherLevel+"";
-        TextLevels[1].text = Upgrades.BlacksmithLevel + "";
-        TextLevels[2].text = Upgrades.MaxVillages + "";
-        TextLevels[3].text = Upgrades.LeaderHealthLevel + "";
-        TextLevels[4].text = Upgrades.LeaderStrengthLevel + "";
-    }
-
     #endregion
 
     private int GetTimeForUpgrade(int level) {
         switch (level)
         {
             case 0:
-                return 60;
+                return Level1_Time;
 
             case 1:
-                return 120;
+                return Level2_Time;
 
             case 2:
-                return 300;
+                return Level3_Time;
 
             case 3:
-                return 600;
+                return Level4_Time;
 
             case 4:
-                return 900;
+                return Level5_Time;
 
             case 5:
-                return 1200;
+                return Level6_Time;
 
             case 6:
-                return 1800;
+                return Level7_Time;
 
             case 7:
-                return 2700;
+                return Level8_Time;
 
             case 8:
-                return 3600;
+                return Level9_Above_Time;
 
             default:
-                return 7200;
+                return Level9_Above_Time;
         }
     }
 }
@@ -265,19 +247,25 @@ public class CampManager : MonoBehaviour
 public class CampUpgrades
 {
     #region State
-
-    public bool UpgradeInProgress;
-    public string UpgradeBought;
+    [XmlAttribute("UpgradeInProgress")]
+    public bool UpgradeInProgress = false;
+    [XmlAttribute("UpgradeBought")]
+    public string UpgradeBought  ="";
 
     #endregion
 
     #region Upgradeables
 
-    public int GatherLevel;
-    public int MaxVillages;
-    public int BlacksmithLevel;
-    public int LeaderHealthLevel;
-    public int LeaderStrengthLevel;
+    [XmlAttribute("GatherLevel")]
+    public int GatherLevel = 1;
+    [XmlAttribute("MaxVillages")]
+    public int MaxVillages = 1;
+    [XmlAttribute("BlacksmithLevel")]
+    public int BlacksmithLevel = 1;
+    [XmlAttribute("LeaderHealthLevel")]
+    public int LeaderHealthLevel = 1;
+    [XmlAttribute("LeaderStrengthLevel")]
+    public int LeaderStrengthLevel = 1;
 
     #endregion
 
@@ -294,7 +282,7 @@ public class CampUpgrades
 
     public void GetCurrency()
     {
-        Gold = PlayerPrefs.GetInt("Gold");
+        Gold = PlayerPrefs.GetInt("Premium");
         Food = PlayerPrefs.GetInt("Food");
         Scrap = PlayerPrefs.GetInt("Scrap");
     }

@@ -2,15 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using System;
 
 public class PointOfInterestManager : MonoBehaviour
 {
-
+	public float originalAverageHealth = 0;
 	public EncounterType type;
 	[Range(3, 20)]
 	public int radius = 8;
-
+	private int EnemiesAlive = 0;
+	private LevelGenerator levelGenerator;
+	public List<GameObject> enemies = new List<GameObject>();
+	private bool isEnemiesSet = false;
 	public enum EncounterType
 	{
 		choice,
@@ -18,6 +21,33 @@ public class PointOfInterestManager : MonoBehaviour
 		wolf
 	}
 
+	void OnEnable()
+	{
+		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
+	}
+
+	void OnDisable()
+	{
+		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
+	}
+
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
+	private void EnemyDeath(EnemyDeathEvent e)
+	{
+		if (enemies.Contains(e.enemy))
+		{
+			enemies.Remove(e.enemy);
+			if (enemies.Count == 0)
+			{
+				EventManager.Instance.TriggerEvent(new ClearedCampEvent());
+			}
+
+		}
+	}
 
 	void OnDrawGizmos()
 	{
@@ -29,7 +59,7 @@ public class PointOfInterestManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-
+		levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
 		//activate the point of interest decoraction
 		switch (type)
 		{
@@ -43,25 +73,72 @@ public class PointOfInterestManager : MonoBehaviour
 				transform.Find("WolfDecor").gameObject.SetActive(true);
 				break;
 		}
+	}
 
-
+	void Update()
+	{
+		if (!isEnemiesSet)
+		{
+			foreach (Transform child in transform)
+			{
+				foreach (Transform childchild in child)
+				{
+					if (childchild.tag == "Unfriendly")
+					{
+						enemies.Add(childchild.gameObject);
+					}
+				}
+			}
+			isEnemiesSet = true;
+		}
 	}
 
 	public float GetAverageCharactersHealth()
 	{
-		List<Character> characterList = transform.GetComponentsInChildren<Character>().ToList();
-		float s = 0;
-		float averageHealth = 0;
-		foreach (Character character in characterList)
+		if (levelGenerator == null)
 		{
-			var characterCurrentHealth = character.currentHealth;
-			if (characterCurrentHealth < 0)
-			{
-				character.currentHealth = 0;
-			}
-			s += character.currentHealth;
+			levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
 		}
-		averageHealth = s / characterList.Count;
+		float averageHealth = 0;
+		if (levelGenerator.isTutorial)
+		{
+			List<TutorialCharacter> characterList = transform.GetComponentsInChildren<TutorialCharacter>().ToList();
+			float s = 0;
+			foreach (var character in characterList)
+			{
+				var characterCurrentHealth = character.currentHealth;
+				if (characterCurrentHealth < 0)
+				{
+					character.currentHealth = 0;
+				}
+				s += character.currentHealth;
+			}
+			averageHealth = s / characterList.Count;
+			if (originalAverageHealth == 0)
+			{
+				originalAverageHealth = averageHealth;
+			}
+		}
+		else
+		{
+			List<Character> characterList = transform.GetComponentsInChildren<Character>().ToList();
+			float s = 0;
+			foreach (var character in characterList)
+			{
+				var characterCurrentHealth = character.currentHealth;
+				if (characterCurrentHealth < 0)
+				{
+					character.currentHealth = 0;
+				}
+				s += character.currentHealth;
+			}
+			averageHealth = s / characterList.Count;
+			if (originalAverageHealth == 0)
+			{
+				originalAverageHealth = averageHealth;
+			}
+		}
+
 		return averageHealth;
 	}
 }

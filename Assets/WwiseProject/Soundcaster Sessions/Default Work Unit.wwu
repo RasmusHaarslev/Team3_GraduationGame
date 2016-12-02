@@ -10,27 +10,27 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="Play_CommandUI" ID="{F39907A3-7BEE-428F-91FA-984C3E433B03}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="Play_ExploreMusic" ID="{99B7739F-4507-42BF-980E-5D84E46EF66B}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="LeaderFootStep" ID="{C141F8C6-89C8-4F24-B5C2-31AEA7574A55}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<ObjectRef Name="Play_WalkTapUI" ID="{6C4A0697-B95B-414A-BC3F-7E641F9CDA09}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="MenuMusic" ID="{6D0AC137-B9A1-41A3-BA00-1FCF0E5CEBB1}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
-							<Position X="2" Y="1"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="MenuAmbience" ID="{1E78B28A-8A8E-4C3D-9B8C-2E93A36B8BC8}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<ObjectRef Name="Play_MenuAmbience" ID="{6879E80F-BF50-4155-9A6A-A13360C6A201}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
 							<Position X="3" Y="0"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="MenuUI" ID="{9C4B2527-E6FC-411A-A3CB-B4B9301A09C2}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
-							<Position X="3" Y="1"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="UnlockMapPitch" ID="{DB9CE2FA-F795-4532-9384-A00B22B7D14B}"/>
+							<Value>1.99264705882353</Value>
+						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="ScrollPitch" ID="{41578AE1-05BE-45DB-898D-9B4D7C319930}"/>
 							<Value>0</Value>
@@ -45,7 +45,81 @@
 						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Flee" ID="{41A74B5C-2969-4338-9A9E-2E909F653E56}"/>
+						<CurrentStateRef Name="Color1" ID="{FDF7993E-B557-4D9C-9048-F7E53CD6ECC3}"/>
+						<CurrentStateRef Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
+						<CurrentStateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+				<SoundcasterSession Name="Combat" ID="{1ED11324-6598-430F-86B9-E6CE6193D2CB}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_UseRiffle" ID="{398EBCD8-E168-43D6-9ACE-B68CFFD2179B}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="MenuAmb" ID="{CEEF3AE2-4E99-4216-94F8-146F50F72C19}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="BridgeCreak" ID="{B13A0795-A4E1-428B-AF27-472E188FD350}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Music" ID="{F3048897-F238-4CDD-A9F7-D755D268F4B9}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_GenericHit" ID="{8E75B34E-B5BF-47CE-BA8B-A760F410DFC8}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="windhowl" ID="{436AA435-E321-4EFD-9DDF-74B3FABB707B}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="1" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_UseSpear" ID="{4646B8A3-30D9-4EC6-B50C-504A976DA7EE}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Tents" ID="{C17F0ECD-BBBA-415C-893F-4615196F7676}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+							<Position X="2" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_LeaderFootStep" ID="{ADB5E9DD-D508-48CE-80B9-E6D3ABF6BD52}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="FriendlyDie" ID="{434E53FA-0E14-48A1-995E-1F7F066FD00B}" WorkUnitID="{6D2569F7-334E-4ABF-A523-1CF8A9B50939}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="UnlockMapPitch" ID="{DB9CE2FA-F795-4532-9384-A00B22B7D14B}"/>
+							<Value>1</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="ScrollPitch" ID="{41578AE1-05BE-45DB-898D-9B4D7C319930}"/>
+							<Value>0.770981507823613</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SFXVol" ID="{8226DE71-C143-47F5-8117-8303CB00D423}"/>
+							<Value>1</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="MusicVol" ID="{DF5A4AB7-D6DB-4E82-9D7D-FB8B83B42EC6}"/>
+							<Value>1</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="OffBridge" ID="{27F75BAF-74C9-48C8-9514-D9DCCB5329C5}"/>
+						<CurrentStateRef Name="Color3" ID="{1CED0D20-1A7E-49D1-BBF5-E874DE51AACE}"/>
+						<CurrentStateRef Name="Exploring" ID="{8B4E55AE-E3B7-4429-9EBE-4CAADFE8BA42}"/>
 						<CurrentStateRef Name="Off" ID="{3B5B2475-5352-4B42-B52E-56891BE510DB}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true"/>

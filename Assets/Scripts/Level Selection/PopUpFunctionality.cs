@@ -9,25 +9,26 @@ public class PopUpFunctionality : MonoBehaviour {
     public GameObject btnPlay;
     public GameObject invisPanel;
 
+    public GameObject confirmPanel;
+
     // Left side shown when you have scouted
-    public GameObject LeftPanel;
-    public Text wolveText;
+    public GameObject ScoutedPanel;
+    //public Text wolveText;
     public Text tribeText;
-    public Text choiceText;
+    //public Text choiceText;
 
     // Right side shown when you have scouted
-    public GameObject RightPanel;
     public Text foodText;
-    public Text coinsText;
+    public Text scrapsText;
+    public Text goldTeethsText;
 
     // Not scouted panel
-    public GameObject NotScouted;
-    public Text interestPointsText;
+    public GameObject NotScoutedPanel;
+    //public Text interestPointsText;
 
     //Scout Cost
     public int minimumScoutCost;
     public int maximumScoutCost;
-    int scoutCost;
 
     void OnEnable()
     {
@@ -39,9 +40,9 @@ public class PopUpFunctionality : MonoBehaviour {
         EventManager.Instance.StopListening<SetupPopUp>(InitialisePopUP);
     }
 
-    void Start()
+    void OnApplicationQuit()
     {
-        scoutCost = Random.Range(minimumScoutCost, maximumScoutCost);
+        this.enabled = false;
     }
 
     public void InitialisePopUP(SetupPopUp e)
@@ -49,8 +50,10 @@ public class PopUpFunctionality : MonoBehaviour {
         GameObject node = e.node;
         Node nodeScript = node.GetComponent<Node>();
 
-        if (nodeScript.isCleared)
+        if (nodeScript.isCleared) { 
+            Manager_Audio.PlaySound(Manager_Audio.play_clickClearedNode, gameObject);
             return;
+        }
 
         invisPanel.SetActive(true);
 
@@ -61,111 +64,119 @@ public class PopUpFunctionality : MonoBehaviour {
         btnPlay.GetComponent<Button>().onClick.AddListener(delegate { Play(node); });
         btnScout.GetComponent<Button>().onClick.AddListener(delegate { Scout(node); });
 
-        btnScout.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Scout For") + " : " + scoutCost;
-        btnPlay.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Enter For") + " : " + nodeScript.TravelCost;
-        wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;
+        btnScout.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Scout For") + " : " + nodeScript.scoutCost;
+        btnPlay.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Enter For") + " : " + nodeScript.TravelCost;
         tribeText.text = TranslationManager.Instance.GetTranslation("Tribe Camps") + " : " + nodeScript.tribeCamps;
-        choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
         foodText.text = TranslationManager.Instance.GetTranslation("Food") + " : " + nodeScript.foodAmount;
-        coinsText.text = TranslationManager.Instance.GetTranslation("Coins") + " : " + nodeScript.coinAmount;
-        interestPointsText.text = TranslationManager.Instance.GetTranslation("Interest Points") + " : " + nodeScript.CampsInNode;
+        scrapsText.text = TranslationManager.Instance.GetTranslation("Scraps") + " : " + nodeScript.scrapAmount;
+        goldTeethsText.text = nodeScript.goldTeethAmount + " " + TranslationManager.Instance.GetTranslation("GoldTeeths");
 
-        
+        //interestPointsText.text = TranslationManager.Instance.GetTranslation("Enemy Tribes") + " : " + nodeScript.CampsInNode;
+        //choiceText.text = TranslationManager.Instance.GetTranslation("Choice Camps") + " : " + nodeScript.choiceCamps;
+        //wolveText.text = TranslationManager.Instance.GetTranslation("Wolve Dens") + " : " + nodeScript.wolveCamps;        
 
         if (nodeScript.canPlay && !nodeScript.isCleared)
         {
             if (nodeScript.isScouted)
             {
                 btnPlay.SetActive(true);
-                // Left Panel
-                LeftPanel.SetActive(true);
-                // Right Panel
-                RightPanel.SetActive(true);
+                btnScout.SetActive(false);
+                ScoutedPanel.SetActive(true);
+                btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -462, 0);
+                ScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 29, 0);
+                ScoutedPanel.transform.GetChild(0).GetComponent<RectTransform>().localPosition = new Vector3(0, 170, 0);
+                ScoutedPanel.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector3(0, -39, 0);
+                ScoutedPanel.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector3(0, -444, 0);
             }
             else
             {
                 btnPlay.SetActive(true);
                 btnScout.SetActive(true);
-                NotScouted.SetActive(true);
+                NotScoutedPanel.SetActive(true);
+                btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -323, 0);
+                btnScout.GetComponent<RectTransform>().localPosition = new Vector3(0, -470, 0);
+                NotScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 150, 0);
             }
         }
         else if (!nodeScript.canPlay)
         {
             if (nodeScript.isScouted)
             {
-                // Left Panel
-                LeftPanel.SetActive(true);
-                // Right Panel
-                RightPanel.SetActive(true);
+                btnPlay.SetActive(false);
+                btnScout.SetActive(false);
+                ScoutedPanel.SetActive(true);
+                NotScoutedPanel.SetActive(false);
+                ScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 29, 0);
+                ScoutedPanel.transform.GetChild(0).GetComponent<RectTransform>().localPosition = new Vector3(0, 170, 0);
+                ScoutedPanel.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector3(0, -39, 0);
+                ScoutedPanel.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector3(0, -444, 0);
             }
             else
             {
+                btnPlay.SetActive(false);
                 btnScout.SetActive(true);
-                NotScouted.SetActive(true);
+                ScoutedPanel.SetActive(false);
+                NotScoutedPanel.SetActive(true);
+                btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -323, 0);
+                btnScout.GetComponent<RectTransform>().localPosition = new Vector3(0, -470, 0);
+                NotScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 150, 0);
             }
-        }
-        else
-        {
-            Debug.Log("Show Panel - You have cleared this level");
         }
     }
 
     public void Play(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(node.GetComponent<Node>().TravelCost));
-        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
 
-        /*           
-        public int Level;
-        public int wolveCamps;
-        public int tribeCamps;
-        public int choiceCamps;
-        public int foodAmount;
-        public int coinAmount;
-        public int itemDropAmount;
-        */
+        confirmPanel.SetActive(true);
 
-        PlayerPrefs.SetInt("NodeId", node.GetComponent<Node>().NodeId);
-        PlayerPrefs.SetInt("LevelDifficulty", node.GetComponent<Node>().Level);
-        PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
-        PlayerPrefs.SetInt("TribeCamps", node.GetComponent<Node>().tribeCamps);
-        PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
-        PlayerPrefs.SetInt("FoodAmount", node.GetComponent<Node>().foodAmount);
-        PlayerPrefs.SetInt("CoinAmount", node.GetComponent<Node>().coinAmount);
-        PlayerPrefs.SetInt("ItemDropAmount", node.GetComponent<Node>().itemDropAmount);
+        int value = GameController.Instance._FOOD - node.GetComponent<Node>().TravelCost;
 
-        // IF NOT DEBUG USE THIS
-        GameController.Instance.LoadScene("LevelEnterCutscene");
-        //GameController.Instance.LoadScene(node.GetComponent<Node>().sceneSelection);
-        //GameController.Instance.LoadLevel();
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
+
+        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
+        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
+
+        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
+        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptPlay(node); });
     }
 
     public void Scout(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(scoutCost));
+
+        confirmPanel.SetActive(true);
+
+        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "scout");
+
+        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
+        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
+
+        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
+        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptScout(node); });
+    }
+
+    public void AcceptScout(GameObject node)
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().scoutCost));
 
         btnScout.SetActive(false);
-        NotScouted.SetActive(false);
-
-        // Left Panel
-        LeftPanel.SetActive(true);
-
-        // Right Panel
-        RightPanel.SetActive(true);
+        NotScoutedPanel.SetActive(false);
+        ScoutedPanel.SetActive(true);
+        confirmPanel.SetActive(false);
 
         node.GetComponent<Node>().isScouted = true;
 
         foreach (RectTransform child in node.transform)
         {
-           if(child.name == "InfoPanel")
+            if (child.name == "InfoPanel")
             {
                 child.gameObject.SetActive(true);
                 node.GetComponent<Node>().txtFood.text = node.GetComponent<Node>().foodAmount.ToString();
-                node.GetComponent<Node>().txtCoins.text = node.GetComponent<Node>().coinAmount.ToString();
+                node.GetComponent<Node>().txtScraps.text = node.GetComponent<Node>().scrapAmount.ToString();
                 node.GetComponent<Node>().txtTribes.text = node.GetComponent<Node>().tribeCamps.ToString();
-                node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
+                //   node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
             }
             else
             {
@@ -173,6 +184,39 @@ public class PopUpFunctionality : MonoBehaviour {
             }
         }
 
-        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());        
+        btnPlay.GetComponent<RectTransform>().localPosition = new Vector3(0, -462, 0);
+        ScoutedPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 29, 0);
+        ScoutedPanel.transform.GetChild(0).GetComponent<RectTransform>().localPosition = new Vector3(0, 170, 0);
+        ScoutedPanel.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector3(0, -39, 0);
+        ScoutedPanel.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector3(0, -444, 0);
+
+        EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
     }
+
+    public void AcceptPlay(GameObject node)
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));        
+
+        PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);
+        PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, node.GetComponent<Node>().Level);
+        PlayerPrefs.SetInt(StringResources.TribeCampsPrefsName, node.GetComponent<Node>().tribeCamps);
+        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
+        PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
+        PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
+
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        EventManager.Instance.TriggerEvent(new LevelStarted());
+
+        // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
+        // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
+
+        GameController.Instance.LoadScene("LevelEnterCutscene");
+    }
+
+    public void Deny()
+    {
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
+        confirmPanel.SetActive(false);
+    } 
 }

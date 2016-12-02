@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Assets.ModuleDesigner.Scripts.BaseClasses;
+using UnityEditor;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+namespace Assets.Editor
+{
+    class RivalsEditor : EditorWindow
+    {
+        public RivalStateMachine prefabScript;
+
+        [MenuItem("Tweaks/Rivals Editor")]
+        static void Init()
+        {
+            // Get existing open window or if none, make a new one:
+            RivalsEditor window = (RivalsEditor)EditorWindow.GetWindow(typeof(RivalsEditor));
+            window.Show();
+        }
+
+        void OnGUI()
+        {
+            this.titleContent = new GUIContent("Rivals");
+            string[] lookFor = new string[] { "Assets/Resources/Prefabs/Characters" };
+            string[] guids = AssetDatabase.FindAssets("t:Prefab Rival", lookFor);
+
+            string path = "";
+            foreach (var fab in guids)
+            {
+                var temppath = AssetDatabase.GUIDToAssetPath(fab);
+
+                if (temppath.Contains("/Rival.prefab"))
+                {
+                    path = temppath;
+                }
+            }
+
+            if (guids.Length == 0)
+            {
+                GUILayout.Label("The prefab is missing, go to Peter!", EditorStyles.boldLabel);
+            }
+            else if (guids.Length > 1 && path == "")
+            {
+                GUILayout.Label("More than one prefabs with same name, go to Peter!", EditorStyles.boldLabel);
+            }
+            else
+            {
+                try
+                {
+                    prefabScript = (AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject).GetComponent<RivalStateMachine>();
+
+                    GUILayout.Label("General", EditorStyles.boldLabel);
+                    prefabScript.fleeHealthLimit = EditorGUILayout.FloatField("Flee health limit", prefabScript.fleeHealthLimit);
+
+                    GUILayout.Label("Maybe more?...", EditorStyles.boldLabel);
+
+                    if (GUILayout.Button("Save"))
+                    {
+                        var go = Instantiate(prefabScript.gameObject);
+                        PrefabUtility.ReplacePrefab(go, prefabScript.gameObject, ReplacePrefabOptions.ReplaceNameBased);
+                        DestroyImmediate(go);
+                    }
+                }
+                catch (Exception e) {
+                    GUILayout.Label("The prefab is messed up, go to Peter!", EditorStyles.boldLabel);
+                }
+            }
+        }
+
+    }
+}

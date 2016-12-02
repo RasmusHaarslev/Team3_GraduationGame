@@ -5,17 +5,19 @@ using System.Collections.Generic;
 public class RivalStateMachine : CoroutineMachine
 {
 	public float transitionTime = 0.05f;
-
+	public float fleeSpeed = 4f;
 	NavMeshAgent agent;
 	Character character;
 	Vector3 originalPosition;
 	public float distanceToTarget = float.MaxValue;
-	public int fleeHealthLimit = 3;
+	public float fleeHealthLimit = 0.5f;
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
+	Vector3 fleePosition;
 
 	void OnEnable()
 	{
+		fleePosition = GameObject.FindGameObjectWithTag("FleePoint").transform.position;
 		character = GetComponent<Character>();
 		agent = GetComponent<NavMeshAgent>();
 		originalPosition = transform.position;
@@ -25,6 +27,11 @@ public class RivalStateMachine : CoroutineMachine
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<FleeStateEvent>(OpponentsFleeing);
+	}
+
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
 	}
 
 	protected override StateRoutine InitialState
@@ -38,7 +45,11 @@ public class RivalStateMachine : CoroutineMachine
 
 	void Update()
 	{
-		if (character.target != null)
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !character.isDead)
+		{
+			agent.Stop();
+		}
+		if (character.target != null && !character.isFleeing)
 		{
 			if (!character.isDead)
 			{
@@ -54,8 +65,10 @@ public class RivalStateMachine : CoroutineMachine
 			yield return new TransitionTo(DeadState, DefaultTransition);
 		}
 		averageHealth = poimanager.GetAverageCharactersHealth();
-		if (averageHealth < fleeHealthLimit)
+		if (averageHealth < fleeHealthLimit * poimanager.originalAverageHealth)
 		{
+			EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
+			character.isFleeing = true;
 			yield return new TransitionTo(FleeState, DefaultTransition);
 		}
 		if (character.isInCombat)
@@ -84,19 +97,20 @@ public class RivalStateMachine : CoroutineMachine
 			{
 				character.isInCombat = false;
 			}
-
 		}
 		else
 		{
+			agent.updatePosition = true;
+			agent.updateRotation = true;
 			yield return new TransitionTo(RoamState, DefaultTransition);
 		}
-
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator RoamState()
 	{
 		agent.Resume();
+		character.animator.SetBool("isAware", false);
 		agent.stoppingDistance = 1.2f;
 		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
 		yield return new TransitionTo(StartState, DefaultTransition);
@@ -109,18 +123,31 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.speed = fleeSpeed;
+		agent.updateRotation = true;
 		if (!character.isDead)
 		{
+			character.animator.SetBool("isAware", false);
 			agent.Resume();
 			agent.stoppingDistance = 1.2f;
-			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
+			character.isInCombat = false;
+			agent.SetDestination(fleePosition);
 		}
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (agent.remainingDistance < agent.stoppingDistance)
+		{
+			if (agent.destination == fleePosition)
+			{
+				gameObject.SetActive(false);
+			}
+		}
+		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
 	{
-		if (!character.isDead)
+		agent.updateRotation = true;
+		character.animator.SetBool("isAware", false);
+		if (!character.isDead && character.target != null)
 		{
 			agent.Resume();
 			agent.stoppingDistance = character.range;
@@ -131,11 +158,26 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator CombatState()
 	{
-		character.RotateTowards(character.target.transform);
-		agent.Stop();
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
-		character.RotateTowards(character.target.transform);
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		}
+		else
+		{
+			character.animator.SetBool("isAware", false);
+		}
+		if (!character.isDead)
+		{
+			agent.updateRotation = false;
+			character.RotateTowards(character.target.transform);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(0.60f);
+			character.DealDamage();
+			yield return new WaitForSeconds(character.damageSpeed);
+
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -146,7 +188,20 @@ public class RivalStateMachine : CoroutineMachine
 
 	private void OpponentsFleeing(FleeStateEvent e)
 	{
-		character.currentOpponents.Clear();
-		character.isInCombat = false;
+		foreach (var opp in character.currentOpponents)
+		{
+			if (opp.GetComponent<Character>().isFleeing == true)
+			{
+				character.currentOpponents.Remove(opp);
+			}
+			else
+			{
+				character.target = opp;
+			}
+		}
+		if (character.currentOpponents.Count == 0)
+		{
+			character.isInCombat = false;
+		}
 	}
 }

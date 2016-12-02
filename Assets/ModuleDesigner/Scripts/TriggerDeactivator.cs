@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.ModuleDesigner.Scripts.BaseClasses;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.ModuleDesigner.Scripts
 {
@@ -8,8 +9,8 @@ namespace Assets.ModuleDesigner.Scripts
     {
         [Header("Objects")]
         [Tooltip("Should contain objects the trigger should affect")]
-        public GameObject[] ObjectsToAffect;
-
+        public List<GameObject> ObjectsToAffect;
+            
         void Start()
         {
             TriggerExit();
@@ -51,9 +52,27 @@ namespace Assets.ModuleDesigner.Scripts
         {
             //Gizmos.color = Color.yellow;
             //Gizmos.DrawSphere(transform.position, 0.5f);
-            Gizmos.color = ObjectsToAffect.Length > 0 ? Color.green : Color.red;
+            Gizmos.color = ObjectsToAffect.Count > 0 ? Color.green : Color.red;
             //Gizmos.DrawSphere(transform.position + new Vector3(0, 0.75f, 0), 0.25f);
             Gizmos.DrawMesh(gizmoMesh, transform.position, transform.rotation, Vector3.one);
+
+            #region checkingStuff
+            List<GameObject> Removes = new List<GameObject>();
+            foreach (var obj in ObjectsToAffect)
+            {
+                if (obj == null)
+                {
+                    Removes.Add(obj);
+                }
+            }
+            foreach (var obj in Removes)
+            {
+                if (obj == null)
+                {
+                    ObjectsToAffect.Remove(obj);
+                }
+            }
+            #endregion
 
             foreach (var obj in ObjectsToAffect)
             {

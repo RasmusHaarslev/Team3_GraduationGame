@@ -19,6 +19,11 @@ public class HunterStateMachine : CoroutineMachine
 		EventManager.Instance.StartListening<FollowStateEvent>(Follow);
 		EventManager.Instance.StartListening<StayStateEvent>(Stay);
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StartListening<StopFleeEvent>(StopFlee);
+		if (GameObject.FindGameObjectWithTag("FleePoint") != null)
+		{
+			fleePosition = GameObject.FindGameObjectWithTag("FleePoint").transform.position;
+		}
 	}
 
 	void OnDisable()
@@ -28,6 +33,12 @@ public class HunterStateMachine : CoroutineMachine
 		EventManager.Instance.StopListening<FollowStateEvent>(Follow);
 		EventManager.Instance.StopListening<StayStateEvent>(Stay);
 		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
+		EventManager.Instance.StopListening<StopFleeEvent>(StopFlee);
+	}
+
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
 	}
 
 	#endregion
@@ -36,42 +47,73 @@ public class HunterStateMachine : CoroutineMachine
 
 	private void Defense(DefendStateEvent e)
 	{
+		ProjectCommand();
 		combatCommandState = CombatCommandState.Defense;
 	}
 
 	private void Offense(OffensiveStateEvent e)
 	{
+		ProjectCommand();
 		combatCommandState = CombatCommandState.Offense;
 	}
 	private void Follow(FollowStateEvent e)
 	{
+		ProjectCommand();
 		outOfCombatCommandState = OutOfCombatCommandState.Follow;
 	}
+
+	private void StopFlee(StopFleeEvent e)
+	{
+		if (!character.isDead)
+		{
+			character.animator.SetBool("isFleeing", false);
+			agent.Stop();
+			character.isFleeing = false;
+			stopFleeing = true;
+			combatCommandState = CombatCommandState.Offense;
+		}
+	}
+
 	private void Stay(StayStateEvent e)
 	{
+		ProjectCommand();
 		outOfCombatCommandState = OutOfCombatCommandState.Stay;
 	}
 	private void Flee(FleeStateEvent e)
 	{
-		combatCommandState = CombatCommandState.Flee;
+		ProjectCommand();
+		if (combatTrait != CharacterValues.CombatTrait.BraveFool)
+		{
+			character.animator.SetBool("isFleeing", true);
+			combatCommandState = CombatCommandState.Flee;
+		}
+		else
+		{
+			ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
+		}
 	}
 
 	#endregion
 
 	public float transitionTime = 0.05f;
-	public float fearfulHealthLimit = 25;
-	public int maxLowAttentionSpanCounter = 3;
+	float fearfulHealthLimit = 0.25f;
+	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
+	public float fleeSpeed = 4f;
+	public float stayAttackDistance = 10f;
+	bool stopFleeing = false;
 
 	// Trait visualisation
 	public GameObject traitProjection;
 	bool traitVisualised = false;
+	public GameObject commandVisualisation;
 
 	public bool attacked = false;
 	Character character;
 	NavMeshAgent agent;
 	GameObject leader;
 	Formation formation;
+	bool isTraitProjected;
 
 	public enum CombatCommandState
 	{
@@ -98,12 +140,9 @@ public class HunterStateMachine : CoroutineMachine
 
 	void Update()
 	{
-		if (character.target != null)
+		if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !character.isDead)
 		{
-			if (!character.isDead)
-			{
-				character.RotateTowards(character.target.transform);
-			}
+			agent.Stop();
 		}
 	}
 
@@ -137,27 +176,35 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
-						ProjectTrait();
+
+						if(!isTraitProjected)
+							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
-							character.isInCombat = false;
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
 					case CharacterValues.TargetTrait.Loyal:
 						GameObject loyalTarget = LoyalTarget();
-						ProjectTrait();
+						if (!isTraitProjected)
+							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (loyalTarget != null)
 						{
 							character.target = loyalTarget;
 						}
 						break;
 				}
-				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < fearfulHealthLimit))
+				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && distanceToTarget > stayAttackDistance && combatTrait != CharacterValues.CombatTrait.Clingy)
+				{
+					yield return new TransitionTo(StayState, DefaultTransition);
+				}
+
+				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < (character.health * fearfulHealthLimit)))
 				{
 					if (combatTrait == CharacterValues.CombatTrait.Fearful)
 					{
-						ProjectTrait();
+						if (!isTraitProjected)
+							ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 					}
 					yield return new TransitionTo(FleeState, DefaultTransition);
 				}
@@ -165,51 +212,67 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					if (character.currentOpponents.Count != 0)
 					{
-						if ((combatCommandState == CombatCommandState.Offense || (combatCommandState == CombatCommandState.Flee && combatTrait == CharacterValues.CombatTrait.BraveFool)))
+						if (combatCommandState == CombatCommandState.Offense)
 						{
-							if (!character.target.GetComponent<Character>().isDead)
+							if (character.target != null && character.target.GetComponent<Character>() != null)
 							{
-								if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
+								if (!character.target.GetComponent<Character>().isDead)
 								{
-									GameObject formerTarget = character.target;
-									lowAttentionSpanCounter = maxLowAttentionSpanCounter;
-									while (formerTarget == character.target)
+									if (lowAttentionSpanCounter <= 0 && targetTrait == CharacterValues.TargetTrait.LowAttentionSpan)
 									{
-										if (character.currentOpponents.Count <= 1)
+										GameObject formerTarget = character.target;
+										lowAttentionSpanCounter = maxLowAttentionSpanCounter;
+										while (formerTarget == character.target)
 										{
-											break;
-										}
-										else
-										{
-											ProjectTrait();
-											character.target = character.FindRandomEnemy();
+											if (character.currentOpponents.Count <= 1)
+											{
+												break;
+											}
+											else
+											{
+												if (!isTraitProjected)
+													ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
+												character.target = character.FindRandomEnemy();
+											}
 										}
 									}
-								}
-								distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
-								if (distanceToTarget < agent.stoppingDistance)
-								{
-									yield return new TransitionTo(CombatState, DefaultTransition);
+									distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+									if (distanceToTarget < agent.stoppingDistance)
+									{
+										yield return new TransitionTo(CombatState, DefaultTransition);
+									}
+									else
+									{
+										yield return new TransitionTo(EngageState, DefaultTransition);
+									}
 								}
 								else
 								{
-									yield return new TransitionTo(EngageState, DefaultTransition);
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
 								}
-							}
-							else
-							{
-								character.currentOpponents.Remove(character.target);
-								character.target = character.FindNearestEnemy();
 							}
 						}
 						else if (combatCommandState == CombatCommandState.Defense)
 						{
-							if (character.target.GetComponent<Character>().isDead)
+							if (character.target.GetComponent<TutorialCharacter>() != null)
 							{
-								character.currentOpponents.Remove(character.target);
-								character.target = character.FindNearestEnemy();
+								if (character.target.GetComponent<TutorialCharacter>().isDead)
+								{
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
+								}
+								yield return new TransitionTo(DefenseState, DefaultTransition);
 							}
-							yield return new TransitionTo(DefenseState, DefaultTransition);
+							else if (character.target.GetComponent<Character>() != null)
+							{
+								if (character.target.GetComponent<Character>().isDead)
+								{
+									character.currentOpponents.Remove(character.target);
+									character.target = character.FindNearestEnemy();
+								}
+								yield return new TransitionTo(DefenseState, DefaultTransition);
+							}
 						}
 					}
 					else
@@ -220,6 +283,14 @@ public class HunterStateMachine : CoroutineMachine
 			}
 			else
 			{
+				agent.updateRotation = true;
+				if (combatCommandState == CombatCommandState.Flee)
+				{
+					if (combatTrait != CharacterValues.CombatTrait.BraveFool)
+					{
+						yield return new TransitionTo(FleeState, DefaultTransition);
+					}
+				}
 				if (outOfCombatCommandState == OutOfCombatCommandState.Stay && combatTrait != CharacterValues.CombatTrait.Clingy)
 				{
 					yield return new TransitionTo(StayState, DefaultTransition);
@@ -229,7 +300,8 @@ public class HunterStateMachine : CoroutineMachine
 					agent.Resume();
 					if (combatTrait == CharacterValues.CombatTrait.Clingy && outOfCombatCommandState == OutOfCombatCommandState.Stay)
 					{
-						ProjectTrait();
+						if (!isTraitProjected)
+							ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 					}
 					yield return new TransitionTo(FollowState, DefaultTransition);
 				}
@@ -240,9 +312,14 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
-		agent.Resume();
-		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(formation.formationPositions[gameObject].position);
+		character.animator.SetBool("isAware", false);
+		character.isInCombat = false;
+		if (!character.isDead)
+		{
+			agent.Resume();
+			agent.stoppingDistance = 1.2f;
+			agent.SetDestination(formation.formationPositions[gameObject].position);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -254,30 +331,77 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		agent.SetDestination(fleePosition);
+		agent.speed = fleeSpeed;
+		character.animator.SetBool("isAware", false);
+		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
-		yield return new TransitionTo(StartState, DefaultTransition);
+		if (agent.remainingDistance < agent.stoppingDistance)
+		{
+			if (agent.destination == fleePosition)
+			{
+				gameObject.SetActive(false);
+			}
+		}
+		if (stopFleeing)
+		{
+			character.isFleeing = false;
+			yield return new TransitionTo(StartState, DefaultTransition);
+		}
+		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
 	IEnumerator EngageState()
 	{
-		agent.Resume();
-		agent.stoppingDistance = character.range;
-		agent.SetDestination(character.target.transform.position);
+		agent.updateRotation = true;
+		character.animator.SetBool("isAware", false);
+		if (character.target != null && character.target.GetComponent<Character>() != null)
+		{
+			if (!character.target.GetComponent<Character>().isInCombat)
+			{
+				character.isInCombat = false;
+				yield return new TransitionTo(StartState, DefaultTransition);
+			}
+			agent.Resume();
+			agent.stoppingDistance = character.range;
+			agent.SetDestination(character.target.transform.position);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator CombatState()
 	{
-		agent.Stop();
-		character.RotateTowards(character.target.transform);
-		yield return new WaitForSeconds(character.damageSpeed);
-		character.DealDamage();
-		lowAttentionSpanCounter--;
-		character.RotateTowards(character.target.transform);
+		if (!character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+		{
+			character.animator.SetBool("isAware", true);
+			transform.position = transform.position;
+			agent.Stop();
+		}
+		else
+		{
+			character.animator.SetBool("isAware", false);
+		}
+		if (character.target != null)
+		{
+			if (character.target.GetComponent<Character>() != null)
+			{
+				if (!character.target.GetComponent<Character>().isInCombat)
+				{
+					character.isInCombat = false;
+					yield return new TransitionTo(StartState, DefaultTransition);
+				}
+			}
+			agent.updateRotation = false;
+			character.RotateTowards(character.target.transform);
+			character.animator.SetTrigger("Attack");
+			yield return new WaitForSeconds(0.60f);
+			character.DealDamage();
+			lowAttentionSpanCounter--;
+			yield return new WaitForSeconds(character.damageSpeed);
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -317,33 +441,54 @@ public class HunterStateMachine : CoroutineMachine
 		GameObject target = null;
 		foreach (GameObject enemy in character.currentOpponents)
 		{
-			if (enemy.GetComponent<Character>().target == leader)
+			if (enemy.GetComponent<TutorialCharacter>() != null)
 			{
-				target = enemy;
-				break;
+				if (enemy.GetComponent<TutorialCharacter>().target == leader)
+				{
+					target = enemy;
+					break;
+				}
+			}
+			if (enemy.GetComponent<Character>() != null)
+			{
+				if (enemy.GetComponent<Character>().target == leader)
+				{
+					target = enemy;
+					break;
+				}
 			}
 		}
 		return target;
 	}
 
-	private void ProjectTrait()
+	private void ProjectTrait(CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait, CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait)
 	{
-		if (!traitVisualised)
-		{
-			StartCoroutine(TraitProjector());
-			traitVisualised = true;
-		}
+		isTraitProjected = true;
+		StartCoroutine(TraitProjector(combatTrait, targetTrait));
 	}
 
-	IEnumerator TraitProjector()
+	IEnumerator TraitProjector(CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait, CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait)
 	{
 		GameObject proj = Instantiate(traitProjection);
+		if (combatTrait != CharacterValues.CombatTrait.NoTrait)
+		{
+			proj.GetComponent<traitText>().trait = combatTrait.ToString();
+		}
+		else
+		{
+			proj.GetComponent<traitText>().trait = targetTrait.ToString();
+		}
 		proj.transform.SetParent(gameObject.transform, false);
 		proj.transform.eulerAngles = new Vector3(90, 0, 0);
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(2f);
 		Destroy(proj);
-		traitVisualised = false;
+		isTraitProjected = false;
 		yield return null;
+	}
+
+	public void ProjectCommand()
+	{
+		Instantiate(commandVisualisation, transform.position + new Vector3(0, 2.2f, 0.2f), transform.rotation, gameObject.transform);
 	}
 }
 

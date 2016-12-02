@@ -6,11 +6,23 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
-    public int _FOOD = 10;
+    public int InitialFood = 8;
+    public int InitialVillages = 10;
+    public int InitialScrap = 0;
+    public int InitialPremium = 0;
+    public int InitialDaysSurvived = 0;
+
+    public int _FOOD = 8;
     public int _VILLAGERS = 10;
-    public int _COINS = 10;
+    public int _SCRAPS = 0;
+    public int _PREMIUM = 0;
+    public int _DAYS_SURVIVED = 0;
+
+    [HideInInspector]
+    public DataService _dataService;
 
     #region Setup Instance
     private static GameController _instance;
@@ -39,12 +51,35 @@ public class GameController : MonoBehaviour {
         EventManager.Instance.StopListening<ChangeResources>(UpdateResources);
     }
 
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
+
     public void UpdateResources(ChangeResources e)
     {
-        _FOOD -= e.food;
-        _VILLAGERS -= e.villager;
-        _COINS -= e.coins;
+        if (_FOOD + e.food < 0)
+        {
+            e.villager = e.villager - 1;
+        }
+
+        _FOOD = (_FOOD + e.food < 0) ? 0 : _FOOD + e.food;
+        _VILLAGERS = (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
+        _SCRAPS = (_SCRAPS + e.scraps < 0) ? 0 : _SCRAPS + e.scraps;
+        _PREMIUM = (_PREMIUM + e.premium < 0) ? 0 : _PREMIUM + e.premium;
+        _DAYS_SURVIVED = (_DAYS_SURVIVED + e.daysSurvived < 0) ? 0 : _DAYS_SURVIVED + e.daysSurvived;
+
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
+        SaveResources();
+    }
+
+    private void SaveResources()
+    {
+        PlayerPrefs.SetInt("Food", _FOOD);
+        PlayerPrefs.SetInt("Villagers", _VILLAGERS);
+        PlayerPrefs.SetInt("Scraps", _SCRAPS);
+        PlayerPrefs.SetInt("Premium", _PREMIUM);
+        PlayerPrefs.SetInt("DaysSurvived", _DAYS_SURVIVED);
     }
 
     void Awake()
@@ -56,6 +91,25 @@ public class GameController : MonoBehaviour {
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _dataService = new DataService(StringResources.databaseName);
+
+        if (PlayerPrefs.HasKey("Food"))
+        {
+            _FOOD = PlayerPrefs.GetInt("Food");
+            _VILLAGERS = PlayerPrefs.GetInt("Villagers");
+            _SCRAPS = PlayerPrefs.GetInt("Scraps");
+            _PREMIUM = PlayerPrefs.GetInt("Premium");
+            _DAYS_SURVIVED = PlayerPrefs.GetInt("DaysSurvived");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Food", InitialFood);
+            PlayerPrefs.SetInt("Villagers", InitialVillages);
+            PlayerPrefs.SetInt("Scraps", InitialScrap);
+            PlayerPrefs.SetInt("Premium", InitialPremium);
+            PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
+        }
     }
 
     public void LoadScene(string scene)
@@ -82,18 +136,41 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        var sceneDirectory = Directory.CreateDirectory("Assets/_Scenes/Levels");
+        var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
+
+        System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
         List<string> scenes = new List<string>();
 
-        foreach (var scene in sceneDirectory.GetFiles())
+        string line;
+        while ((line = reader.ReadLine()) != null)
         {
-            if (scene.Name.EndsWith(".unity"))
-            {
-                scenes.Add(scene.Name.Split('.')[0]);
-            }
+            scenes.Add(line);
         }
 
-        var randomScene = scenes[UnityEngine.Random.Range(0,scenes.Count-1)];
+        var randomScene = scenes[UnityEngine.Random.Range(0, scenes.Count - 1)];
         SceneManager.LoadScene(randomScene);
+    }
+
+    public void LoseGame()
+    {
+        PlayerPrefs.DeleteAll();
+        ResetResources();
+        DataService dataService = new DataService(StringResources.databaseName);
+        dataService.ResetDatabase();
+    }
+
+    public void ResetResources()
+    {
+        _FOOD = InitialFood;
+        _VILLAGERS = InitialVillages;
+        _SCRAPS = InitialScrap;
+        _PREMIUM = InitialPremium;
+        _DAYS_SURVIVED = InitialDaysSurvived;
+
+        PlayerPrefs.SetInt("Food", InitialFood);
+        PlayerPrefs.SetInt("Villagers", InitialVillages + (CampManager.Instance.Upgrades.MaxVillages));
+        PlayerPrefs.SetInt("Scraps", InitialScrap);
+        PlayerPrefs.SetInt("Premium", InitialPremium);
+        PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
     }
 }

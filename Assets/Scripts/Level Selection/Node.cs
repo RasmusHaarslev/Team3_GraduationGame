@@ -7,10 +7,11 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
-public class Node : MonoBehaviour {    
+public class Node : MonoBehaviour {
 
     #region VARIABLES
-    public const int _MAXCAMPS = 6;
+    public const int _MINCAMPS = 2;
+    public const int _MAXCAMPS = 4;
 
     /* UNIQUE IDENTIFIER */
     public int NodeId;
@@ -20,6 +21,7 @@ public class Node : MonoBehaviour {
 
     /* FOOD COST TO GO TO THIS LEVEL */
     public int TravelCost;
+    public int scoutCost;
 
     /* THE SCENE TO LOAD WHEN PLAYING LEVEL */
     public int sceneSelection;
@@ -38,7 +40,8 @@ public class Node : MonoBehaviour {
 
     /* AMOUNT OF RESOURCE DROPS */
     public int foodAmount;
-    public int coinAmount;
+    public int scrapAmount;
+    public int goldTeethAmount;
 
     /* AMOUNT OF ITEM DROPS */
     public int itemDropAmount;
@@ -47,6 +50,7 @@ public class Node : MonoBehaviour {
     public bool isCleared = false;
     public bool isScouted = false;
     public bool canPlay = false;
+    public bool isOpen = false;
     #endregion
 
     #region UI VARIABLES
@@ -54,7 +58,7 @@ public class Node : MonoBehaviour {
     public GameObject infoPanel;
     public GameObject unknownPanel;
     public Text txtFood;
-    public Text txtCoins;
+    public Text txtScraps;
     public Text txtTribes;
     public Text txtWolves;
     public Text txtIntPoints;
@@ -73,7 +77,9 @@ public class Node : MonoBehaviour {
         if (id == 1)
         {
             canPlay = true;
+            isOpen = true;
         }
+
         if (wolveCamps == 0 && tribeCamps == 0 && choiceCamps == 0) { 
             SetupCampsForThisNode();
             SetupResourceForThisNode();
@@ -84,6 +90,23 @@ public class Node : MonoBehaviour {
 
         SetupImage();
         SetupUIText();
+    }
+
+    public void SetupImage()
+    {
+        if (isCleared)
+        {
+            GetComponent<Image>().sprite = activationImages[2];
+            GetComponent<Image>().color = Color.green;
+        }
+        else if (!isCleared && canPlay)
+        {
+            GetComponent<Image>().sprite = activationImages[1];
+        }
+        else
+        {
+            GetComponent<Image>().sprite = activationImages[0];
+        }
     }
 
     public void SetupUIText()
@@ -103,10 +126,12 @@ public class Node : MonoBehaviour {
                 if (child.name == "InfoPanel")
                 {
                     child.gameObject.SetActive(true);
+
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
-                    GetComponent<Node>().txtCoins.text = GetComponent<Node>().coinAmount.ToString();
+                    GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
                     GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
-                    GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
+
+                    //GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
                 }
             }
 
@@ -123,10 +148,12 @@ public class Node : MonoBehaviour {
     /// </summary>
     void SetupCampsForThisNode()
     {
-        int noCamps = Random.Range(1, _MAXCAMPS);
+        int noCamps = Random.Range(_MINCAMPS, _MAXCAMPS+1);
         CampsInNode = noCamps;
 
-        IEnumerable<int> rangeWolves = Enumerable.Range(0, probabilityWolves);
+        tribeCamps += CampsInNode;
+
+        /*IEnumerable<int> rangeWolves = Enumerable.Range(0, probabilityWolves);
         IEnumerable<int> rangeTribes = Enumerable.Range(probabilityWolves, probabilityTribes);
         IEnumerable<int> rangeChoices = Enumerable.Range(probabilityWolves + probabilityTribes, probabilityChoice);
 
@@ -148,16 +175,20 @@ public class Node : MonoBehaviour {
             {
                 choiceCamps += 1;
             }
-        }
+        } */
     }
 
     void SetupResourceForThisNode()
     {
         // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
-        foodAmount = 10;
+        foodAmount = Random.Range(4, 10);
+        if (foodAmount < scoutCost*2)
+        {
+            foodAmount = scoutCost * 2;
+        }
 
-        // COIN COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 COINS 
-        coinAmount = 10;
+        // SCRAP COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 SCRAPS 
+        scrapAmount = Random.Range(0,6);
     }
     #endregion
 
@@ -187,21 +218,6 @@ public class Node : MonoBehaviour {
     }
 
     #region Get Functions for this node
-    public void SetupImage()
-    {
-        if (isCleared)
-        {
-            GetComponent<Image>().sprite = activationImages[0];
-            GetComponent<Image>().color = Color.green;
-        } else if (!isCleared && canPlay)
-        {
-            GetComponent<Image>().sprite = activationImages[0];
-        } else
-        {
-            GetComponent<Image>().sprite = activationImages[1];
-        }
-    }
-
     public List<Link> GetParents()
     {
         List<Link> parents = new List<Link>();
@@ -231,6 +247,25 @@ public class Node : MonoBehaviour {
         }
 
         return childrens;
+    }
+    
+    public void TriggerSound(int changeSound)
+    {
+        // 0 - Lose
+        // 1 - Unlock
+
+        // 2 - Clear
+        switch(changeSound) {
+            case 0:
+                Manager_Audio.PlaySound(Manager_Audio.play_lostMap, gameObject);
+                break;
+            case 1:
+                Manager_Audio.PlaySound(Manager_Audio.play_unlockNewMaps, gameObject);
+                break;
+            case 2:
+                Manager_Audio.PlaySound(Manager_Audio.play_clearMap, gameObject);
+                break;
+        }
     }
     #endregion
 }

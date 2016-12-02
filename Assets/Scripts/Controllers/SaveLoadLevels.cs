@@ -10,7 +10,8 @@ using UnityEngine;
 public class SaveLoadLevels
 {
     public static Dictionary<int, GameObject> AllLevelsLoaded = new Dictionary<int, GameObject>();
-    public static int maxRowsCleared = 0;
+    public static int maxRowsCleared = -1;
+    public static GameObject lastNodeCleared;
 
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
@@ -32,6 +33,7 @@ public class SaveLoadLevels
 
                 xmlNode.NodeId = currentNode.NodeId;
                 xmlNode.TravelCost = currentNode.TravelCost;
+                xmlNode.scoutCost = currentNode.scoutCost;
                 xmlNode.sceneSelection = currentNode.sceneSelection;
                 xmlNode.CampsInNode = currentNode.CampsInNode;
                 xmlNode.probabilityWolves = currentNode.probabilityWolves;
@@ -41,10 +43,12 @@ public class SaveLoadLevels
                 xmlNode.tribeCamps = currentNode.tribeCamps;
                 xmlNode.choiceCamps = currentNode.choiceCamps;
                 xmlNode.foodAmount = currentNode.foodAmount;
-                xmlNode.coinAmount = currentNode.coinAmount;
+                xmlNode.scrapAmount = currentNode.scrapAmount;
+                xmlNode.goldTeethAmount = currentNode.goldTeethAmount;
                 xmlNode.itemDropAmount = currentNode.itemDropAmount;
                 xmlNode.isCleared = currentNode.isCleared;
                 xmlNode.isScouted = currentNode.isScouted;
+                xmlNode.isOpen = currentNode.isOpen;
                 xmlNode.canPlay = currentNode.canPlay;
 
                 foreach(var link in currentNode.Links)
@@ -102,6 +106,7 @@ public class SaveLoadLevels
                 currentNode.NodeId = node.NodeId;
                 currentNode.Level = row.Level;
                 currentNode.TravelCost = node.TravelCost;
+                currentNode.scoutCost = node.scoutCost;
                 currentNode.sceneSelection = node.sceneSelection;
                 currentNode.CampsInNode = node.CampsInNode;
                 currentNode.probabilityWolves = node.probabilityWolves;
@@ -111,17 +116,21 @@ public class SaveLoadLevels
                 currentNode.tribeCamps = node.tribeCamps;
                 currentNode.choiceCamps = node.choiceCamps;
                 currentNode.foodAmount = node.foodAmount;
-                currentNode.coinAmount = node.coinAmount;
+                currentNode.scrapAmount = node.scrapAmount;
+                currentNode.goldTeethAmount = node.goldTeethAmount;
                 currentNode.itemDropAmount = node.itemDropAmount;
                 currentNode.isCleared = node.isCleared;
                 currentNode.isScouted = node.isScouted;
+                currentNode.isOpen = node.isOpen;
                 currentNode.canPlay = node.canPlay;
 
                 currentNode.OnCreate(currentNode.NodeId);
 
                 // Finds the max rows
-                if (node.isCleared && row.Level > maxRowsCleared)
+                if (node.isCleared && row.Level > maxRowsCleared) { 
                     maxRowsCleared = row.Level;
+                    lastNodeCleared = nodeObject;
+                }
 
                 AllLevelsLoaded.Add(node.NodeId, nodeObject);
             }
@@ -181,6 +190,8 @@ public class NodeXML
     public int NodeId;
     [XmlAttribute("travelCost")]
     public int TravelCost;
+    [XmlAttribute("scoutCost")]
+    public int scoutCost;
     [XmlAttribute("sceneSelection")]
     public int sceneSelection;
     [XmlAttribute("CampsInNode")]
@@ -199,14 +210,18 @@ public class NodeXML
     public int choiceCamps;
     [XmlAttribute("foodAmount")]
     public int foodAmount;
-    [XmlAttribute("coinAmount")]
-    public int coinAmount;
+    [XmlAttribute("scrapAmount")]
+    public int scrapAmount;
+    [XmlAttribute("goldTeethAmount")]
+    public int goldTeethAmount;
     [XmlAttribute("itemDropAmount")]
     public int itemDropAmount;
     [XmlAttribute("isCleared")]
     public bool isCleared;
     [XmlAttribute("isScouted")]
     public bool isScouted;
+    [XmlAttribute("isOpen")]
+    public bool isOpen;
     [XmlAttribute("canPlay")]
     public bool canPlay;
 

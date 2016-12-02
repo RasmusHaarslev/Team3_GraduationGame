@@ -6,20 +6,11 @@ using UnityEngine;
 
 public class ClickingEffect : MonoBehaviour
 {
-    private ParticleSystem particleSystem;
+    private ParticleSystem _particleSystem;
 
     void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
-        particleSystem.Play();
-    }
-
-    void Update()
-    {
-        if (!particleSystem.isPlaying)
-        {
-            Destroy(this.gameObject);
-        }
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 }
 

@@ -16,15 +16,17 @@ public class BackgroundOptionPanelScript : MonoBehaviour, IPointerClickHandler
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (panelClickedScript.isClicked)
         {
-            foreach (Transform child in gameObject.transform)
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+			foreach (Transform child in gameObject.transform)
             {
                 if (child.gameObject.activeSelf == true)
                 {
                     child.gameObject.SetActive(false);
-
                 }
             }
+            Debug.Log("Clicking : " + gameObject);
             gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
 
     }

@@ -15,7 +15,7 @@ public class BackgroundInventoryScript : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-
+        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (panelClickedScript.isClicked)
         {
             foreach (Transform child in gameObject.transform)
@@ -27,7 +27,7 @@ public class BackgroundInventoryScript : MonoBehaviour, IPointerClickHandler
                 }
             }
             gameObject.SetActive(false);
-            panelScript.panelList[1].SetActive(true);
+            //panelScript.panelList[1].SetActive(true);
         }
 
     }

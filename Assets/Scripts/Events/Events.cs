@@ -6,18 +6,37 @@ public class SaveLevelsToXML : GameEvent
     public SaveLevelsToXML () { }
 }
 
+public class LevelCleared : GameEvent
+{
+    public bool isCleared;
+
+    public LevelCleared(bool isCleared)
+    {
+        this.isCleared = isCleared;
+    }
+}
+
 public class ChangeResources : GameEvent
 {
     public int food;
-    public int coins;
+    public int scraps;
     public int villager;
+    public int premium;
+    public int daysSurvived;
 
-    public ChangeResources(int food = 0, int coins = 0, int villager = 0)
+    public ChangeResources(int food = 0, int scraps = 0, int villager = 0, int premium = 0, int daysSurvived = 0)
     {
         this.food = food;
-        this.coins = coins;
+        this.scraps = scraps;
         this.villager = villager;
+        this.premium = premium;
+        this.daysSurvived = daysSurvived;
     }
+}
+
+public class LevelStarted : GameEvent
+{
+    public LevelStarted() { }
 }
 
 public class ResourcesUpdated : GameEvent
@@ -53,6 +72,16 @@ public class InstantiateGame : GameEvent {
 
 }
 
+public class TutorialDone : GameEvent
+{
+    public string strTutLevel;
+
+    public TutorialDone(int tutLevel)
+    {
+        strTutLevel = "Tut"+tutLevel.ToString();
+    }
+}
+
 public class LevelWon : GameEvent
 {
     public LevelWon()
@@ -64,8 +93,21 @@ public class LevelWon : GameEvent
 public class PositionClicked : GameEvent
 {
     public Vector3 position;
-    public PositionClicked(Vector3 clickPosition) {
+    public Transform hitted;
+
+    public PositionClicked(Vector3 clickPosition, Transform hitted) {
         position = clickPosition;
+        this.hitted = hitted;
+    }
+}
+
+public class EnemyClicked : GameEvent
+{
+    public GameObject enemy;
+
+    public EnemyClicked(GameObject enemy)
+    {
+        this.enemy = enemy;
     }
 }
 
@@ -163,10 +205,16 @@ public class FollowStateEvent : GameEvent
 
 public class AllyDeathEvent : GameEvent
 {
-	public AllyDeathEvent()
+    public Character deadAlly;
+
+    public AllyDeathEvent()
 	{
 
 	}
+    public AllyDeathEvent(Character deadAlly)
+    {
+        this.deadAlly = deadAlly;
+    }
 }
 
 public class ItemSpawned : GameEvent
@@ -200,5 +248,43 @@ public class ChangeFormationEvent : GameEvent
 	public ChangeFormationEvent(GameObject hunter)
 	{
 		this.hunter = hunter;
+	}
+}
+
+public class CommandEvent : GameEvent
+{
+	public CommandEvent()
+	{
+
+	}
+}
+
+public class ClearedCampEvent : GameEvent
+{
+	public ClearedCampEvent()
+	{
+
+	}
+}
+
+public class LanguageChanged : GameEvent
+{
+    public LanguageChanged() { }
+}
+
+public class StopFleeEvent : GameEvent
+{
+	public StopFleeEvent()
+	{
+
+	}
+}
+
+public class UIPanelActiveEvent : GameEvent
+{
+	public bool panelActive = false;
+	public UIPanelActiveEvent()
+	{
+		panelActive = !panelActive;
 	}
 }
