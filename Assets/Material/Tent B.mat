@@ -16,6 +16,12 @@ Material:
     serializedVersion: 2
     m_TexEnvs:
     - first:
+        name: _Bump
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _BumpMap
       second:
         m_Texture: {fileID: 0}
@@ -69,7 +75,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _SnowTexture
+      second:
+        m_Texture: {fileID: 2800000, guid: 63c6911707ca94f43a964f499be9b349, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - first:
+        name: _BumpPower
+      second: 0.1
     - first:
         name: _BumpScale
       second: 1
@@ -98,6 +113,9 @@ Material:
         name: _Mode
       second: 0
     - first:
+        name: _NoisePower
+      second: 4.59
+    - first:
         name: _OcclusionStrength
       second: 1
     - first:
@@ -105,6 +123,12 @@ Material:
       second: 0.02
     - first:
         name: _SmoothnessTextureChannel
+      second: 0
+    - first:
+        name: _Snow
+      second: 1
+    - first:
+        name: _SnowDepth
       second: 0
     - first:
         name: _SpecularHighlights
@@ -125,3 +149,12 @@ Material:
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _MainColor
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _SnowColor
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _SnowDirection
+      second: {r: 0, g: 0.4, b: 0, a: 1}
