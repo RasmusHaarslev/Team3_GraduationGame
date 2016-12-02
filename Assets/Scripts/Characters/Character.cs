@@ -25,6 +25,9 @@ public class Character : MonoBehaviour
 	public List<GameObject> currentOpponents = new List<GameObject>();
 	public bool isCurrentTargetAlive;
 	public float rotationSpeed = 2;
+	public GameObject currentWeapon;
+	public float forceThrowWeapon = 2;
+	public ShootRifle shootRifle;
 
 	//Combat state values
 	public bool isInCombat = false;
@@ -97,7 +100,14 @@ public class Character : MonoBehaviour
 			{
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
-				// VESO REMOVE THIS:
+				
+				if(currentWeapon != null)
+				{
+					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.transform.parent = null;
+					rigid.AddForce(Vector3.one*forceThrowWeapon,ForceMode.Impulse);
+				}
+
 				GetComponent<RagdollControl>().EnableRagDoll();
 				animator.SetTrigger("Die");
 				if (deadEvent == false)
@@ -120,6 +130,13 @@ public class Character : MonoBehaviour
 				{
 					EventManager.Instance.TriggerEvent(new EnemyDeathEvent(gameObject));
 				}
+
+				if (currentWeapon != null)
+				{
+					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.transform.parent = null;
+					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
 				animator.SetTrigger("Die");
@@ -135,7 +152,17 @@ public class Character : MonoBehaviour
 				{
 					Manager_Audio.PlaySound(Manager_Audio.evilDeathFemale1, this.gameObject);
 				}
+			} else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Player))
+			{
+				GetComponent<RagdollControl>().EnableRagDoll();
+				if (currentWeapon != null)
+				{
+					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.transform.parent = null;
+					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+				}
 			}
+			
 			isInCombat = false;
 			isDead = true;
 		}
@@ -148,6 +175,8 @@ public class Character : MonoBehaviour
 	void OnEnable()
 	{
 		agent = GetComponent<NavMeshAgent>();
+
+		StartCoroutine("GetWeapon");
 
 		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
@@ -172,6 +201,33 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
+	}
+
+	IEnumerator GetWeapon()
+	{
+		yield return new WaitForSeconds(1);
+		foreach (var weap in GetComponentsInChildren<Transform>())
+		{
+			if (weap.CompareTag("Weapon"))
+			{
+				currentWeapon = weap.gameObject;
+				if (equippedWeaponType == EquippableitemValues.type.rifle)
+				{
+					shootRifle = currentWeapon.GetComponent<ShootRifle>();
+				}
+				break;
+			}
+		}
+	}
+
+	public void RifleMuzzle()
+	{
+		Debug.Log("is null");
+		if (shootRifle != null)
+		{
+			Debug.Log("shoot");
+			shootRifle.Shoot();
+		}
 	}
 
 	private void CommandAnimator(CommandEvent e)
@@ -346,13 +402,18 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	public void PlaySpearSound()
+	{
+		Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
+	}
+
 	public void DealDamage()
 	{
 		EventManager.Instance.TriggerEvent(new TakeDamageEvent(damage, target));
 		switch (equippedWeaponType)
 		{
 			case EquippableitemValues.type.polearm:
-				Manager_Audio.PlaySound(Manager_Audio.attackSpear, this.gameObject);
+				
 				break;
 			case EquippableitemValues.type.rifle:
 				Manager_Audio.PlaySound(Manager_Audio.attackRiffle, this.gameObject);
@@ -402,6 +463,7 @@ public class Character : MonoBehaviour
 	{
 		if (e.target == gameObject)
 		{
+			animator.SetTrigger("TakeDamage");
 			Manager_Audio.PlaySound(Manager_Audio.genericHit, this.gameObject);
 
 			if (equippedWeaponType == EquippableitemValues.type.shield)
