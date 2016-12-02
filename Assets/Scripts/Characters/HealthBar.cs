@@ -39,14 +39,21 @@ public class HealthBar : MonoBehaviour
 	void OnEnable()
 	{
 		EventManager.Instance.StartListening<UIPanelActiveEvent>(ActivateHealthPanel);
+		EventManager.Instance.StartListening<PlayerDeathEvent>(DisableBar);
 	}
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<UIPanelActiveEvent>(ActivateHealthPanel);
+		EventManager.Instance.StopListening<PlayerDeathEvent>(DisableBar);
 	}
 
-    void OnApplicationQuit()
+	private void DisableBar(PlayerDeathEvent e)
+	{
+		active = false;
+	}
+
+void OnApplicationQuit()
     {
         this.enabled = false;
     }

@@ -345,7 +345,7 @@ public class DataService : MonoBehaviour
               range = 2,
               prefabName = "Rival",
               materialName = "RivalTribesmanTier5-6Material"
-          },
+          },/*
           new CharacterValues
             {
               id = 10,
@@ -384,10 +384,10 @@ public class DataService : MonoBehaviour
                 damageSpeed = 1,
                 range = 2,
                 prefabName = "EnemyLeader"
-            },
+            },*/
             new CharacterValues
           {
-                id = 13,
+                id = 10,
               name = "Hard rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -641,11 +641,11 @@ public class DataService : MonoBehaviour
 
     public CharacterValues[] GetNewHuntersValues()
     {
-        return _connection.Query<CharacterValues>("SELECT * FROM CharacterValues WHERE id IN (10, 11, 12)").ToArray();
+        return _connection.Query<CharacterValues>("SELECT * FROM CharacterValues WHERE id IN (20, 21, 22)").ToArray();
     }
     public EquippableitemValues[] GetNewHuntersEquipValues()
     {
-        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE id IN (10, 11, 12)").ToArray();
+        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE id IN (20, 21, 22)").ToArray();
     }
     /// <summary>
     /// Add values to db and returns the id
@@ -655,7 +655,7 @@ public class DataService : MonoBehaviour
     /// 
     public async void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
     {
-        await _asyncConnection.InsertOrReplaceAsync(charValToUpdate);
+        await _asyncConnection.UpdateAsync(charValToUpdate);
     }
     public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
     {
@@ -1045,7 +1045,7 @@ public class DataService : MonoBehaviour
 
     public async void UpdateEquipItemValues(EquippableitemValues itemValues)
     {
-
+        
         await _asyncConnection.InsertOrReplaceAsync(itemValues);
     }
     public async void UpdateEquipItemsValues(EquippableitemValues[] itemsValues)
