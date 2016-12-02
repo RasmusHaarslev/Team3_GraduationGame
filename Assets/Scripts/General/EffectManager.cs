@@ -71,21 +71,10 @@ public class EffectManager : MonoBehaviour
 
 	void Update()
 	{
-		if (!levelGenerator.isTutorial)
+		if (enemy != null && enemy.GetComponent<Character>().isFleeing)
 		{
-			if (enemy != null && enemy.GetComponent<Character>().isFleeing)
-			{
-				if (_currentTarget != null)
-					_currentTarget.GetComponent<ParticleSystem>().Stop();
-			}
-		}
-		else
-		{
-			if (enemy != null && enemy.GetComponent<TutorialCharacter>().isFleeing)
-			{
-				if (_currentTarget != null)
-					_currentTarget.GetComponent<ParticleSystem>().Stop();
-			}
+			if (_currentTarget != null)
+				_currentTarget.GetComponent<ParticleSystem>().Stop();
 		}
 	}
 }
