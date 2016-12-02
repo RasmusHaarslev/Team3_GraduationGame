@@ -271,7 +271,7 @@ public class LevelManager : MonoBehaviour
         if (IsTutorial)
         {
             EventManager.Instance.TriggerEvent(new TutorialDone());
-            return;
+            yield return null;
         }
 
         EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
