@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
 	public float rotationSpeed = 2;
 	public GameObject currentWeapon;
 	public float forceThrowWeapon = 2;
+	public ShootRifle shootRifle;
 
 	//Combat state values
 	public bool isInCombat = false;
@@ -210,8 +211,22 @@ public class Character : MonoBehaviour
 			if (weap.CompareTag("Weapon"))
 			{
 				currentWeapon = weap.gameObject;
+				if (equippedWeaponType == EquippableitemValues.type.rifle)
+				{
+					shootRifle = currentWeapon.GetComponent<ShootRifle>();
+				}
 				break;
 			}
+		}
+	}
+
+	public void RifleMuzzle()
+	{
+		Debug.Log("is null");
+		if (shootRifle != null)
+		{
+			Debug.Log("shoot");
+			shootRifle.Shoot();
 		}
 	}
 
