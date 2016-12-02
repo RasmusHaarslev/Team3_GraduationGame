@@ -179,7 +179,6 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-		Debug.Log(EnemiesAlive);
 		CheckConditions();
 	}
 
