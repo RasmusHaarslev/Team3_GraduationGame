@@ -975,8 +975,20 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
 									</StateGroupInfo>
+									<StateGroupInfo>
+										<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
+									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
+										<State Name="Custom State" ID="{5CE99AAC-2CC9-47D5-A2BA-40C86B7F33BC}" ShortID="188462326">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="30"/>
+												<Property Name="Volume" Type="Real64" Value="-8"/>
+											</PropertyList>
+										</State>
+									</CustomState>
 									<CustomState>
 										<StateRef Name="Lose" ID="{EE432795-624A-4375-BBBB-F183D28CD04E}"/>
 										<State Name="Custom State" ID="{6053FB0C-D79D-4732-9ED1-F4FE9821BA4C}" ShortID="8558331">

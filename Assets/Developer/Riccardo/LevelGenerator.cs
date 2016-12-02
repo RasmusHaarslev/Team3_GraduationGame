@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
     public int difficultyLevel = 5;
     [Tooltip("Number of camps that will be spawned.")]
     public int campsNumber = 4;
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     [Tooltip("Probability before which an enemy will have the tier decreased.")]
     public float downScaleThreshold = 0.3f;
     [Range(0f, 1f)]
@@ -40,27 +40,27 @@ public class LevelGenerator : MonoBehaviour
         difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel, difficultyLevel);
         campsNumber = PlayerPrefs.GetInt(StringResources.TribeCampsPrefsName, campsNumber);
 
-        levelStep = difficultyLevel%worldLength; 
+        levelStep = difficultyLevel % worldLength;
         worldIndex = difficultyLevel / worldLength;
 
         dataService = new DataService(StringResources.databaseName);
 
-		dataService = new DataService(StringResources.databaseName);
+        dataService = new DataService(StringResources.databaseName);
 
-		dataService.CreateDB();
+        dataService.CreateDB();
 
 
-		if (!isTutorial)
-		{
-			dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
-		}
-//		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
-//		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
-		//TODO acquire data from playerprefs
+        if (!isTutorial)
+        {
+            dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
+        }
+        //		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
+        //		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
+        //TODO acquire data from playerprefs
 
-		//spawn the other character from the Points of Interests
-		spawnEnemies();
-	}
+        //spawn the other character from the Points of Interests
+        spawnEnemies();
+    }
 
 
 
@@ -71,7 +71,7 @@ public class LevelGenerator : MonoBehaviour
     {
         if (downScaleThreshold > upScaleThreshold)
             upScaleThreshold = downScaleThreshold + 0.05f;
-       
+
     }
 
     /// <summary>
@@ -85,13 +85,13 @@ public class LevelGenerator : MonoBehaviour
     public void Init(int difficultyLevel, int wolfPackCount, int tribesmanPackCount, int lootCount, int environmentType)
     {
 
-	}
+    }
 
 
-	public void spawnEnemies()
-	{
-		//iterate trough all possible types
-		PointOfInterestManager[] pointsOfInterests = GetComponentsInChildren<PointOfInterestManager>();
+    public void spawnEnemies()
+    {
+        //iterate trough all possible types
+        PointOfInterestManager[] pointsOfInterests = GetComponentsInChildren<PointOfInterestManager>();
 
         PointOfInterestManager.EncounterType[] types =
             (from poi in pointsOfInterests select poi.type).Distinct().ToArray(); //getting distinct values!
@@ -133,16 +133,17 @@ public class LevelGenerator : MonoBehaviour
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
                 foreach (CharacterSpawner charSpawn in currentCharSpawners)
                 {
+                    print("tier of the spawn is "+ charSpawn.tier+" current tier values length "+ currentTierValues.Length+" trying to access to index "+(charSpawn.tier - 1));
                     currentCharacter = dataService.GenerateCharacterFromValues(currentTierValues[charSpawn.tier - 1],
                         charSpawn.transform.position, charSpawn.transform.rotation);
-                   
+
                     EventManager.Instance.TriggerEvent(new EnemySpawned(currentTierValues[charSpawn.tier - 1]));
                     //parent the character to the character spawn point
                     currentCharacter.transform.parent = charSpawn.transform;
 
                 }
             }
-            
+
         }
 
         //scaling tiers and values of enemies
@@ -156,9 +157,9 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     public void ScalePOIs(ref List<PointOfInterestManager> currentPOIs)
     {
-        int minPOIEnemiesNumber = levelStep+1;
+        int minPOIEnemiesNumber = levelStep + 1;
         int maxPOIEnemiesNumber = Mathf.Clamp(levelStep + 2, 0, 5);
-     
+
         CharacterSpawner[] currentCharSpawners = new CharacterSpawner[0];
         int currentCharSpawnersMaxIndex;
         int enemyToDisableQuantity = 0;
@@ -169,13 +170,13 @@ public class LevelGenerator : MonoBehaviour
             int campsToRemoveNumber = currentPOIs.Count - campsNumber;
             for (int i = 0; i < campsToRemoveNumber; i++)
             {
-				print("disabling one POI");
+                print("disabling one POI");
                 int indexPOIToRemove = Random.Range(0, currentPOIs.Count - 1);
                 currentPOIs.ElementAt(indexPOIToRemove).gameObject.SetActive(false);
-                currentPOIs.RemoveAt(indexPOIToRemove); 
+                currentPOIs.RemoveAt(indexPOIToRemove);
             }
         }
-        
+
         foreach (PointOfInterestManager POI in currentPOIs)
         //gets all the characters spawners and spawn the characters based on the tier
         {
@@ -200,10 +201,10 @@ public class LevelGenerator : MonoBehaviour
                 {
                     float dice = 0;
                     dice = Random.Range(0.0f, 1.0f);
-                    
+
                     if (dice < downScaleThreshold)
                         currentCharSpawners[j].tier = Mathf.Clamp(currentCharSpawners[j].tier - 2, 1, 6);
-                            //6 is the highest tier number
+                    //6 is the highest tier number
                     else if (dice > upScaleThreshold)
                         currentCharSpawners[j].tier = Mathf.Clamp(currentCharSpawners[j].tier + 2, 1, 6);
                 }
@@ -224,7 +225,7 @@ public class LevelGenerator : MonoBehaviour
             c.damage = ScaleParameter(c.damage);
             c.health = ScaleParameter(c.health);
 
-            
+
         }
     }
 
@@ -234,7 +235,7 @@ public class LevelGenerator : MonoBehaviour
     /// <param name="values"></param>
     private int ScaleParameter(int value)
     {
-        return (int) (value * ( 1 + worldIndex * enemyStatsMultiplier) ); //+ enemyStatsAdditive
+        return (int)(value * (1 + worldIndex * enemyStatsMultiplier)); //+ enemyStatsAdditive
     }
 
 
