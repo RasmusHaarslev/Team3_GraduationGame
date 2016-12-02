@@ -155,13 +155,14 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Player))
 			{
-				GetComponent<RagdollControl>().EnableRagDoll();
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
+				animator.SetTrigger("Die");
+				//GetComponent<RagdollControl>().EnableRagDoll();
 			}
 
 			isInCombat = false;
