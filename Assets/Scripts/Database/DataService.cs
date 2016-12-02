@@ -99,6 +99,8 @@ public class DataService : MonoBehaviour
         CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null, 125, 0.07f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
+        leaderValues.isMale = true; //Leader can only be male!
+        leaderValues.name = StringResources.maleNames[UnityEngine.Random.Range(0, StringResources.maleNames.Length)]; //male name
         leaderValues.prefabName = StringResources.playerPrefabName;
         leaderValues.materialName = StringResources.playerMaterialName;
         WeaponGenerator weaponGen = new WeaponGenerator();
@@ -344,9 +346,48 @@ public class DataService : MonoBehaviour
               prefabName = "Rival",
               materialName = "RivalTribesmanTier5-6Material"
           },
+          new CharacterValues
+            {
+              id = 10,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+              id = 11,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
+          new CharacterValues
+            {
+              id = 12,
+                name = "PLACE HOLDER - DO NOT TOUCH!",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                tier = 6,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1,
+                range = 2,
+                prefabName = "EnemyLeader"
+            },
             new CharacterValues
           {
-                id = 10,
+                id = 13,
               name = "Hard rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
