@@ -131,10 +131,11 @@ public class LevelGenerator : MonoBehaviour
             //gets all the characters spawners and spawn the characters based on the tier
             {
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
-                Debug.Log(currentCharSpawners.Length);
                 foreach (CharacterSpawner charSpawn in currentCharSpawners)
                 {
-                    currentCharacter = dataService.GenerateCharacterFromValues(currentTierValues[charSpawn.tier - 1], charSpawn.transform.position, charSpawn.transform.rotation);
+                    print("tier of the spawn is "+ charSpawn.tier+" current tier values length "+ currentTierValues.Length+" trying to access to index "+(charSpawn.tier - 1));
+                    currentCharacter = dataService.GenerateCharacterFromValues(currentTierValues[charSpawn.tier - 1],
+                        charSpawn.transform.position, charSpawn.transform.rotation);
 
                     EventManager.Instance.TriggerEvent(new EnemySpawned(currentTierValues[charSpawn.tier - 1]));
                     //parent the character to the character spawn point
