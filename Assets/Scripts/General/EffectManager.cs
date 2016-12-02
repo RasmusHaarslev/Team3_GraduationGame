@@ -55,18 +55,23 @@ public class EffectManager : MonoBehaviour
 
 	private void setTarget(EnemyClicked e)
 	{
-		if (_currentTarget != null)
-			_currentTarget.GetComponent<ParticleSystem>().Stop();
-		if (_currentClick != null)
-			_currentClick.GetComponent<ParticleSystem>().Stop();
-
-		if (_currentTarget == null)
-			_currentTarget = (GameObject)Instantiate(Target);
-
-		_currentTarget.transform.SetParent(e.enemy.transform);
-		_currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 0f, 0);
-		_currentTarget.GetComponent<ParticleSystem>().Play();
 		enemy = e.enemy;
+		if (_currentTarget != null && enemy.GetComponent<Character>().isFleeing)
+			_currentTarget.GetComponent<ParticleSystem>().Stop();
+		if (_currentClick != null && enemy.GetComponent<Character>().isFleeing)
+			_currentClick.GetComponent<ParticleSystem>().Stop();
+		if (!enemy.GetComponent<Character>().isFleeing)
+		{
+			if (_currentTarget == null)
+			{
+				_currentTarget = (GameObject)Instantiate(Target);
+				Debug.Log(enemy.GetComponent<Character>().isFleeing);
+			}
+
+			_currentTarget.transform.SetParent(e.enemy.transform);
+			_currentTarget.transform.position = e.enemy.transform.position + new Vector3(0, 0f, 0);
+			_currentTarget.GetComponent<ParticleSystem>().Play();
+		}
 	}
 
 	void Update()
