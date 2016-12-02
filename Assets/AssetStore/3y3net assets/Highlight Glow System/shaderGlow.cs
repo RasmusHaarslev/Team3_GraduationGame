@@ -59,15 +59,15 @@ public class shaderGlow : MonoBehaviour {
     {
         Mesh newMesh = new Mesh();
         newMesh.Clear();
-        newMesh.vertices = mesh.vertices;
-        newMesh.triangles = triangles;
+        //newMesh.vertices = mesh.vertices;
+        //newMesh.triangles = triangles;
         //newMesh.uv = mesh.uv;
         //newMesh.uv2 = mesh.uv2;
         //newMesh.uv3 = mesh.uv3;
         //newMesh.uv4 = mesh.uv4;
         newMesh.colors = mesh.colors;
         newMesh.subMeshCount = 1;
-        newMesh.normals = mesh.normals;
+        //newMesh.normals = mesh.normals;
         //AssetDatabase.CreateAsset(newMesh, "Assets/" + mesh.name + "_submesh[" + index + "].asset");
         return newMesh;
     }
@@ -178,8 +178,7 @@ public class shaderGlow : MonoBehaviour {
     void Start() {
 
         Component[] renderers = GetComponentsInChildren<Renderer>();
-        foreach (Renderer singleRenderer in renderers)
-            SplitInChilds(singleRenderer.gameObject);
+        
         lastColor=glowColor;
         style = new GUIStyle();
 		style.normal.textColor = labelColor;  
