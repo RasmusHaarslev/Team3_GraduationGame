@@ -155,13 +155,14 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Player))
 			{
-				GetComponent<RagdollControl>().EnableRagDoll();
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
+				animator.SetTrigger("Die");
+				//GetComponent<RagdollControl>().EnableRagDoll();
 			}
 
 			isInCombat = false;
@@ -176,9 +177,14 @@ public class Character : MonoBehaviour
 	void OnEnable()
 	{
 		agent = GetComponent<NavMeshAgent>();
-
 		StartCoroutine("GetWeapon");
-
+		if (gameObject.tag == "Player")
+		{
+			agent.avoidancePriority = 99;
+		} else
+		{
+			agent.avoidancePriority = UnityEngine.Random.Range(25, 98);
+		}
 		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
