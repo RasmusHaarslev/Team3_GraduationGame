@@ -802,10 +802,14 @@ public class PanelScript : MonoBehaviour
     {
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
+        print(currentSoldier.gameObject.layer);
+        print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
+        
         UpdateSoldierStats(currentSoldier.gameObject);
         SetCampAnimation(currentSoldier);
+        currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = currentSoldier.gameObject.layer;
+        print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
 
-        
 
 
         //foreach (var camera in soldierCameraList)
