@@ -258,12 +258,14 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator WinGameCoroutine(string scene = "CampManagement")
     {
-        while (Time.timeScale > 0.2f)
-        {
-            Time.timeScale -= 0.1f;
+        //while (Time.timeScale > 0.2f)
+        //{
+        //    Time.timeScale -= 0.1f;
 
-            yield return new WaitForSeconds(0.5f);
-        }
+        //    yield return new WaitForSeconds(0.5f);
+        //}
+
+        yield return new WaitForSeconds(0.5f);
 
         EventManager.Instance.TriggerEvent(new LevelWon());
 
@@ -280,6 +282,7 @@ public class LevelManager : MonoBehaviour
                 scraps: PlayerPrefs.GetInt("ScrapAmount")
             )
         );
+
         PlayerPrefs.SetInt("LevelResult", 1);
         //GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
         //generate and display the new items
