@@ -13,6 +13,7 @@ public class Manager_Audio : MonoBehaviour {
 	public static string bridgeState = "Bridge";
 	public static string bridgeOn = "OnBridge";
 	public static string bridgeOff = "OffBridge";
+	public static string leaderDeath = "Play_LeaderDeath";
 
 	//state container
 	public static string playStateGroupContainer = "ExploreState";
