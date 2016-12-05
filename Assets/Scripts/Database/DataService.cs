@@ -113,66 +113,66 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         {
             leaderValues,
-         new CharacterValues
-            {
-                id = 2,
-                name = "John",
-                isMale = true,
-                Type = CharacterValues.type.Hunter,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1f,
-                range = 2,
-                combatTrait = CharacterValues.CombatTrait.BraveFool,
-                targetTrait = CharacterValues.TargetTrait.NoTrait,
-                prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.maleHuntersMaterials[1]
-            },
-         new CharacterValues
-            {
-                id = 3,
-                name = "Nicolai",
-                isMale = true,
-                Type = CharacterValues.type.Hunter,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1f,
-                range = 2,
-                combatTrait = CharacterValues.CombatTrait.Clingy,
-                targetTrait = CharacterValues.TargetTrait.Loyal,
-                prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.maleHuntersMaterials[4]
-            },
-         new CharacterValues
-            {
-                id = 3,
-                name = "Peter",
-                isMale = true,
-                Type = CharacterValues.type.Hunter,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1f,
-                range = 2,
-                combatTrait = CharacterValues.CombatTrait.Fearful,
-                targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-                prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.maleHuntersMaterials[8]
-            },
-         new CharacterValues
-            {
-                id = 4,
-                name = "Christian",
-                isMale = true,
-                Type = CharacterValues.type.Wolf,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1f,
-                range = 2,
-                combatTrait = CharacterValues.CombatTrait.Clingy,
-                targetTrait = CharacterValues.TargetTrait.Loyal,
-                prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.follower1MaterialName
-            },
+         // new CharacterValues
+         //   {
+         //       id = 2,
+         //       name = "John",
+         //       isMale = true,
+         //       Type = CharacterValues.type.Hunter,
+         //       damage = 8,
+         //       health = 75,
+         //       damageSpeed = 1f,
+         //       range = 2,
+         //       combatTrait = CharacterValues.CombatTrait.BraveFool,
+         //       targetTrait = CharacterValues.TargetTrait.NoTrait,
+         //       prefabName = StringResources.follower1PrefabName,
+         //       materialName = StringResources.maleHuntersMaterials[1]
+         //   },
+         //new CharacterValues
+         //   {
+         //       id = 3,
+         //       name = "Nicolai",
+         //       isMale = true,
+         //       Type = CharacterValues.type.Hunter,
+         //       damage = 8,
+         //       health = 75,
+         //       damageSpeed = 1f,
+         //       range = 2,
+         //       combatTrait = CharacterValues.CombatTrait.Clingy,
+         //       targetTrait = CharacterValues.TargetTrait.Loyal,
+         //       prefabName = StringResources.follower1PrefabName,
+         //       materialName = StringResources.maleHuntersMaterials[4]
+         //   },
+         //new CharacterValues
+         //   {
+         //       id = 3,
+         //       name = "Peter",
+         //       isMale = true,
+         //       Type = CharacterValues.type.Hunter,
+         //       damage = 8,
+         //       health = 75,
+         //       damageSpeed = 1f,
+         //       range = 2,
+         //       combatTrait = CharacterValues.CombatTrait.Fearful,
+         //       targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
+         //       prefabName = StringResources.follower1PrefabName,
+         //       materialName = StringResources.maleHuntersMaterials[8]
+         //   },
+         //new CharacterValues
+         //   {
+         //       id = 4,
+         //       name = "Christian",
+         //       isMale = true,
+         //       Type = CharacterValues.type.Wolf,
+         //       damage = 8,
+         //       health = 75,
+         //       damageSpeed = 1f,
+         //       range = 2,
+         //       combatTrait = CharacterValues.CombatTrait.Clingy,
+         //       targetTrait = CharacterValues.TargetTrait.Loyal,
+         //       prefabName = StringResources.follower1PrefabName,
+         //       materialName = StringResources.follower1MaterialName
+         //   }, 
           new CharacterValues
           {
               id = 5,
@@ -180,7 +180,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               isMale = true,
               tier = 1,
-              damage = 2,
+              damage = 3,
               health = 45,
               damageSpeed = 2,
               range = 2,
@@ -194,7 +194,7 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 2,
-              damage = 2,
+              damage = 3,
               health = 45,
               damageSpeed = 2,
               range = 2,
@@ -236,7 +236,7 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
-              damage = 8,
+              damage = 12,
               health = 65,
               damageSpeed = 2,
               range = 2,
@@ -250,7 +250,7 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 6,
-              damage = 8,
+              damage = 12,
               health = 65,
               damageSpeed = 2,
               range = 2,
