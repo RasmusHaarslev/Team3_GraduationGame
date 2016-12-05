@@ -22,6 +22,7 @@ public class PanelScript : MonoBehaviour
     Character currentSoldier;
     public List<NewSoldierList> newSoldierStatsList;
     List<CharacterValues> newCharacterSoldierList = new List<CharacterValues>();
+    List<EquippableitemValues> newWeaponsSoldierList = new List<EquippableitemValues>();  
     public int newCharPoints = 15;
     [Range(0f, 1f)]
     public float damagePointsChance = 0.5f;
@@ -165,6 +166,7 @@ public class PanelScript : MonoBehaviour
         {
             EquippableitemValues[] newhuntersEquips = dataService.GetNewHuntersEquipValues();
             newCharacterSoldierList = newHuntersValues.ToList();
+            newWeaponsSoldierList = newhuntersEquips.ToList();
             int i = 0;
             foreach (Transform trans in camsAndNewSoldiersPosition)
             { //if we have 3 new hunters values, generate them and add to the list
@@ -710,7 +712,7 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-                    stat.GetComponent<Text>().text = "Damage: " + newCharacterSoldierList[i].damage.ToString();
+                    stat.GetComponent<Text>().text =  newCharacterSoldierList[i].damage.ToString();
                 }
                 if (stat.name == "Soldier Name")
                 {
@@ -718,29 +720,35 @@ public class PanelScript : MonoBehaviour
                 }
                 if (stat.name == "Health")
                 {
-                    stat.GetComponent<Text>().text = "Health: " + newCharacterSoldierList[i].health.ToString();
-                }
-                if (stat.name == "Damage Speed")
-                {
-                    stat.GetComponent<Text>().text = "Attack speed: " + newCharacterSoldierList[i].damageSpeed.ToString();
-                }
-                if (stat.name == "Range")
-                {
-                    stat.GetComponent<Text>().text = "Range: " + newCharacterSoldierList[i].range.ToString();
-                }
+                    stat.GetComponent<Text>().text =  newCharacterSoldierList[i].health.ToString();
+                }               
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
                 }
                 if (stat.name == "Target Trait")
                 {
-                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+                }
+                if (stat.name == "CTrait")
+                {
+                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n";
+                }
+                if (stat.name == "TTrait")
+                {
+                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" ;
+                }
+                print(newWeaponsSoldierList.Count());
+                if (stat.name == "Weapon Description")
+                {
+                    stat.GetComponent<Text>().text = newWeaponsSoldierList[i].name;
                 }
 
             }
             i++;
         }
         newCharacterSoldierList.Clear();
+        newWeaponsSoldierList.Clear();
     }
 
     public void UpdateSoldierStats(GameObject soldier)
@@ -749,9 +757,10 @@ public class PanelScript : MonoBehaviour
         foreach (var stat in soldierStatsList)
         {
 
+            EquippableitemValues characterWeaponValues = currentSoldier.GetComponentInChildren<EquippableItem>().itemValues;
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.characterBaseValues.damage.ToString() + " + " + (currentSoldier.damage - currentSoldier.characterBaseValues.damage) ;
+                stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage ;
             }
             if (stat.name == "Soldier Name")
             {
@@ -759,23 +768,35 @@ public class PanelScript : MonoBehaviour
             }
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = "Health: " + currentSoldier.characterBaseValues.health.ToString() + " + " + (currentSoldier.health - currentSoldier.characterBaseValues.health);
+                stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
             }
             if (stat.name == "Damage Speed")
             {
-                stat.GetComponent<Text>().text = "Attack speed: " + currentSoldier.damageSpeed.ToString();
+                stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
             }
             if (stat.name == "Range")
             {
-                stat.GetComponent<Text>().text = "Range: " + currentSoldier.range.ToString();
-            }
+                stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+            }          
             if (stat.name == "Combat Trait")
             {
-                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseCombatTraitDescription(currentSoldier.characterBaseValues);
+                stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseCombatTraitDescription(currentSoldier.characterBaseValues);
             }
             if (stat.name == "Target Trait")
             {
-                stat.GetComponent<Text>().text = Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" + GetComponent<TraitDescription>().chooseTargetTraitDescription(currentSoldier.characterBaseValues);
+                stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseTargetTraitDescription(currentSoldier.characterBaseValues);
+            }
+            if (stat.name == "CTrait")
+            {
+                stat.GetComponent<Text>().text = " " + Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n";
+            }
+            if (stat.name == "TTrait")
+            {
+                stat.GetComponent<Text>().text = " " + Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n";
+            }
+            if (stat.name == "Weapon Description")
+            {
+                stat.GetComponent<Text>().text = currentSoldier.GetComponentInChildren<EquippableItem>().itemValues.name;
             }
 
         }
@@ -840,6 +861,7 @@ public class PanelScript : MonoBehaviour
 
     public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
     {
+        print("helo");
         var weaponGenerator = GetComponent<WeaponGenerator>();
 
         CharacterValues newCharValues = GenerateNewHunterValues();
@@ -850,7 +872,8 @@ public class PanelScript : MonoBehaviour
         GameObject hunter = dataService.spawnCharacterGameObject(newCharValues, newWeaponValues, newSoldierTrans);
         hunter.transform.localPosition = Vector3.zero;
         newCharacterSoldierList.Add(newCharValues);
-
+        newWeaponsSoldierList.Add(newWeaponValues);
+        print(newWeaponsSoldierList);
         return hunter;
     }
     /*
