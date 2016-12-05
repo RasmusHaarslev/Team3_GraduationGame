@@ -507,8 +507,28 @@ public class DataService : MonoBehaviour
     {
         CharacterSpawner[] spawners = fellowshipLocation.gameObject.GetComponentsInChildren<CharacterSpawner>().ToArray();
         GameObject fellowship = new GameObject("PlayerFellowship");
-        CharacterValues[] fellowshipValues = GetFellowshipValues().ToArray();
+        CharacterValues[] fellowshipValues = GetFellowshipValues().ToArray(); //order by ascending ID. The first one is Always the player.
+ 
+        if (spawners.Length > 0)
+        {
+            CharacterValues currentvalues;
+            //Spawn characters based on how many spawners I find
+            for (int i = 0; i < spawners.Length; i++)
+            {
+                currentvalues = fellowshipValues.FirstOrDefault(x => x.id == spawners[i].tier);
+                if(currentvalues != null) { 
+                //istantiate a character with the id specified in the Tier of the character spawner
+                GameObject charGameObject = GenerateCharacterFromValues(currentvalues, spawners[i].transform.position, spawners[i].transform.rotation);
+                charGameObject.transform.parent = fellowship.transform;
+                }
+            }
+        }
+        else
+        {
+            print("No spawners found for the player and/or fellows!");
+        }
 
+        /*
         if (spawners.Length == 4)
         {
             for (int i = 0; i < fellowshipValues.Length; i++)
@@ -522,7 +542,7 @@ public class DataService : MonoBehaviour
         {
             print("Missing some character spawners for the player and/or fellows!");
         }
-
+        */
 
         return fellowship;
 
@@ -641,6 +661,11 @@ public class DataService : MonoBehaviour
     #endregion
     /**/
     #region equippable items methods
+
+    public IEnumerable<EquippableitemValues> GetFellowshipEquippableItemsValues()
+    { 
+        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE characterId IN (1, 2, 3, 4)");
+    }
     public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(int characterId)
     {
         string q = "select * from  EquippableitemValues where characterId = ? ";
