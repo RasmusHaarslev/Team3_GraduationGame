@@ -1887,9 +1887,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -193.61299, z: 0}
   m_Children:
   - {fileID: 1975057584}
-  - {fileID: 1380465782}
-  - {fileID: 2122344486}
-  - {fileID: 701166185}
   - {fileID: 1480584463}
   m_Father: {fileID: 113253767}
   m_RootOrder: 1
@@ -8426,6 +8423,7 @@ MonoBehaviour:
   rigidbody: {fileID: 673592905}
   playerCapsuleCollider: {fileID: 673592910}
   playerSphereCollider: {fileID: 1941650661}
+  tapCollider: {fileID: 0}
   pushForceOnDeath: 10
   forceModePush: 1
 --- !u!114 &673592907
@@ -8974,50 +8972,6 @@ Transform:
   - {fileID: 916410141}
   m_Father: {fileID: 1320975672}
   m_RootOrder: 0
---- !u!1 &701166184
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012495564934, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 701166185}
-  - 114: {fileID: 701166186}
-  m_Layer: 0
-  m_Name: Hunter3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &701166185
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000010477444598, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 701166184}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0, z: -1.47}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 186583491}
-  m_RootOrder: 3
---- !u!114 &701166186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010101162704, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 701166184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier: 1
 --- !u!1 &705354611
 GameObject:
   m_ObjectHideFlags: 0
@@ -16546,50 +16500,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1378523402}
---- !u!1 &1380465781
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000011958139044, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1380465782}
-  - 114: {fileID: 1380465783}
-  m_Layer: 0
-  m_Name: Hunter1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1380465782
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000011595211170, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1380465781}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.32, y: 0, z: -0.31}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 186583491}
-  m_RootOrder: 1
---- !u!114 &1380465783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011624638256, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1380465781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier: 1
 --- !u!1001 &1380709570
 Prefab:
   m_ObjectHideFlags: 0
@@ -18035,7 +17945,7 @@ Transform:
   - {fileID: 1188906816}
   - {fileID: 1304926322}
   m_Father: {fileID: 186583491}
-  m_RootOrder: 4
+  m_RootOrder: 1
 --- !u!114 &1480584464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25175,50 +25085,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2118141145}
---- !u!1 &2122344485
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012777641796, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2122344486}
-  - 114: {fileID: 2122344487}
-  m_Layer: 0
-  m_Name: Hunter2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2122344486
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000010962850682, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2122344485}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4, y: 0, z: -0.31}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 186583491}
-  m_RootOrder: 2
---- !u!114 &2122344487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010056225842, guid: 986b327735561964ea963c9a80aa18f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2122344485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier: 1
 --- !u!1 &2126314670
 GameObject:
   m_ObjectHideFlags: 0
