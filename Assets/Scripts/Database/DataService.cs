@@ -657,14 +657,14 @@ public class DataService : MonoBehaviour
     /// 
     public async void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
     {
-        await _asyncConnection.UpdateAsync(charValToUpdate);
+        await _asyncConnection.InsertOrReplaceAsync(charValToUpdate);
     }
-    public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
+    public async void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
     {
 
-        _connection.Delete(charValuesToDelete);
+        await _asyncConnection.DeleteAsync(charValuesToDelete);
         //delete all the equipped items associated to that character
-        _connection.Query<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
+        await _asyncConnection.QueryAsync<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
 
     }
 
