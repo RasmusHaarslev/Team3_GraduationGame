@@ -809,7 +809,16 @@
 						</Event>
 						<Event Name="DiscoverFriendlyStinger" ID="{B05FDF21-D150-407A-BEDC-9317DC8DE9CF}">
 							<ChildrenList>
+								<Action Name="Set State" ID="{C6792459-7E7B-47BC-B57C-4B07C677DFCF}" ShortID="1063680473" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
+										<GroupItem Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
+									</SetItemParam>
+								</Action>
 								<Action Name="Trigger" ID="{CE498F2E-B969-410B-B425-8E8D1A9F8F6F}" ShortID="715858224" Type="Trigger" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="Delay" Type="Real64" Value="0.9"/>
+									</PropertyList>
 									<ElementList>
 										<Element ID="{EB8298BE-0FEE-4A0F-817A-4924F37BD489}" Global="true">
 											<ObjectRef Name="DiscoverFriendly" ID="{BB4CDBF5-5633-441F-963B-EF4830AD2CF4}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
@@ -831,6 +840,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Empty" ID="{C5484559-C33D-4E6F-B75A-E5AFA7D0E32B}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
