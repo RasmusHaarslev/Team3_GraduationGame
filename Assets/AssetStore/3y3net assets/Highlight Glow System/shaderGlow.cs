@@ -19,7 +19,7 @@ public class shaderGlow : MonoBehaviour {
 	public float glowIntensity=1f; //Glow intensity on screen of the object
 	[Range (0.5f,2.0f)]
 	public float glowOpacity=1f; //Glow opacity on screen of the object
-	public Color glowColor = new Color32(0xBA, 0xAC, 0x16, 0xFF); //Glow color of the object
+	public Color glowColor = new Color32(0xd7, 0xd1, 0xb4, 0xFF); //Glow color of the object
 
 	public String labelToDisplay="";	//Text to show
 	public labelModes labelMode;            //onMouseEnter or whenGlowIsOn
