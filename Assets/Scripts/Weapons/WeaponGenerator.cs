@@ -7,8 +7,11 @@ using Random = UnityEngine.Random;
 
 public class WeaponGenerator : MonoBehaviour
 {
+    [HideInInspector]
     public int newWeaponsNumber = 1;
+    [Tooltip("Value to multiply to the current difficulty level in order to generate the number of points to assign to each new weapon.")]
     public int increasePointsMultiplier = 2;
+    [Tooltip("Value that will be added to the (difficultyLevel * increasePointsMultiplier) in order to generate the number of points to assign to each new weapon.")]
     public int increasePointsAdder = 10;
     [Header("Shield Settings")]
     [Range(0, 1)]
@@ -70,7 +73,7 @@ public class WeaponGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        newWeaponsNumber = PlayerPrefs.GetInt(StringResources.ItemDropAmountPrefsName, 1);
         //dataService = new DataService(StringResources.databaseName);
         //calculate weapons parameters
 
@@ -85,7 +88,7 @@ public class WeaponGenerator : MonoBehaviour
 
         itemValues.Type = type;
 
-        points = (level / 5 + 1) * increasePointsMultiplier + increasePointsAdder;
+        points = (level + 1) * increasePointsMultiplier + increasePointsAdder;
         float healthProbability = 0f; float damageProbability = 0f; float damageSpeedProbability = 0f;
         string[] modelStrings = new string[3];
 
@@ -93,7 +96,7 @@ public class WeaponGenerator : MonoBehaviour
         {
             case EquippableitemValues.type.shield:
                 //picks a random model from the shields
-                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield] [Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield].Length - 1) ];
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield] [Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield].Length) ];
                 itemValues.range = shieldRange;
                 itemValues.Slot = EquippableitemValues.slot.leftHand;
                 healthProbability = healthPercentageShield;
@@ -102,7 +105,7 @@ public class WeaponGenerator : MonoBehaviour
                 break;
             case EquippableitemValues.type.polearm:
                 //picks a random model from the shields
-                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm].Length - 1)];
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm].Length)];
                 itemValues.range = polearmRange;
                 itemValues.Slot = EquippableitemValues.slot.rightHand;
                 healthProbability = healthPercentagePolearm;
@@ -111,7 +114,7 @@ public class WeaponGenerator : MonoBehaviour
                 break;
             case EquippableitemValues.type.rifle:
                 //picks a random model from the shields
-                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle].Length - 1)];
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle].Length)];
                 itemValues.range = rifleRange;
                 itemValues.Slot = EquippableitemValues.slot.rightHand;
                 healthProbability = healthPercentageRifle;

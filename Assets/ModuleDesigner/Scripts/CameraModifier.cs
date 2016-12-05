@@ -33,14 +33,14 @@ namespace Assets.ModuleDesigner.Scripts
         public bool SlerpBack;
 
         [Space]
-        [Tooltip("The amount of angle added to the camera rotation compared to the player"), Range(-5.0f,5.0f)]
+        [Tooltip("The amount of angle added to the camera rotation compared to the player"), Range(-10.0f,10.0f)]
         public float XRotationOffset;
 
         public override void TriggerEnter()
         {
             print("Enter!");
             Camera.main.GetComponent<CameraController>().OverridePosition = OverridePosition;
-            Camera.main.GetComponent<CameraController>().OverriddenPosition = this.transform.position;
+            Camera.main.GetComponent<CameraController>().OverriddenPosition = Camera.main.transform.position;
 
             Camera.main.GetComponent<CameraController>().OverrideDistance = OverrideDistance;
             Camera.main.GetComponent<CameraController>().OverriddenDistance = Distance;

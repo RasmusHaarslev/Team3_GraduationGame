@@ -177,7 +177,7 @@ public class HunterStateMachine : CoroutineMachine
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
 
-						if(!isTraitProjected)
+						if (!isTraitProjected)
 							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
@@ -441,14 +441,6 @@ public class HunterStateMachine : CoroutineMachine
 		GameObject target = null;
 		foreach (GameObject enemy in character.currentOpponents)
 		{
-			if (enemy.GetComponent<TutorialCharacter>() != null)
-			{
-				if (enemy.GetComponent<TutorialCharacter>().target == leader)
-				{
-					target = enemy;
-					break;
-				}
-			}
 			if (enemy.GetComponent<Character>() != null)
 			{
 				if (enemy.GetComponent<Character>().target == leader)
@@ -457,6 +449,10 @@ public class HunterStateMachine : CoroutineMachine
 					break;
 				}
 			}
+		}
+		if (target == null)
+		{
+			target = character.FindRandomEnemy();
 		}
 		return target;
 	}

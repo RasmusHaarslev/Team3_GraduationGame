@@ -24,7 +24,7 @@ public class GoToLevelSelection : MonoBehaviour {
 
 	void OnApplicationQuit()
 	{
-		this.enabled = false;
+		//this.enabled = false;
 	}
 
 	public void ClearedLevel(LevelCleared e)

@@ -88,15 +88,18 @@ public class MoveScript : MonoBehaviour
 			}
 			if (movement)
 			{
-				if (Input.GetKeyDown(KeyCode.Mouse0))
+				if (!character.isDead)
 				{
-					Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
-				}
-				if (Input.GetKey(KeyCode.Mouse0))
-				{
-					agent.Resume();
-					//attacking = false;
-					MoveToClickPosition();
+					if (Input.GetKeyDown(KeyCode.Mouse0))
+					{
+						Manager_Audio.PlaySound(Manager_Audio.walkTapUISound, this.gameObject);
+					}
+					if (Input.GetKey(KeyCode.Mouse0))
+					{
+						agent.Resume();
+						//attacking = false;
+						MoveToClickPosition();
+					}
 				}
 				if (attacking)
 				{
@@ -176,7 +179,7 @@ public class MoveScript : MonoBehaviour
 					if (!currentTarget.isDead)
 					{
 						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject.transform.parent.parent.gameObject));
 					}
 				}
 			}
@@ -229,9 +232,8 @@ public class MoveScript : MonoBehaviour
 				{
 					if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
 					{
-					Debug.Log("Player damages");
-					character.DealDamage();
-					hasShot = true;
+						character.DealDamage();
+						hasShot = true;
 					}
 				}
 				counter -= Time.deltaTime;

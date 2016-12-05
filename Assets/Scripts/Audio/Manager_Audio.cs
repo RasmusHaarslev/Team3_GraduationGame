@@ -13,6 +13,7 @@ public class Manager_Audio : MonoBehaviour {
 	public static string bridgeState = "Bridge";
 	public static string bridgeOn = "OnBridge";
 	public static string bridgeOff = "OffBridge";
+	public static string leaderDeath = "Play_LeaderDeath";
 
 	//state container
 	public static string playStateGroupContainer = "ExploreState";
@@ -85,6 +86,8 @@ public class Manager_Audio : MonoBehaviour {
     public static string play_clickClearedNode = "Play_ClickClearedMap";
     public static string play_campUpgrade = "Play_CampUpgrade";
     public static string play_intoLevel = "Play_IntoLevel";
+    public static string play_scouting = "Play_Scout";
+    public static string play_buyGold = "Play_BuyGold";
 
     public static string play_charSel = "Play_CharSel";
 

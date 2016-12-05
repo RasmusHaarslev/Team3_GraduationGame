@@ -113,58 +113,6 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         {
             leaderValues,
-          new CharacterValues
-            {
-              id = 2,
-                name = "PLACE HOLDER - DO NOT TOUCH!",
-                isMale = false,
-                Type = CharacterValues.type.Wolf,
-                tier = 6,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
-          new CharacterValues
-            {
-              id = 3,
-                name = "PLACE HOLDER - DO NOT TOUCH!",
-                isMale = false,
-                Type = CharacterValues.type.Wolf,
-                tier = 6,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
-          new CharacterValues
-            {
-              id = 4,
-                name = "PLACE HOLDER - DO NOT TOUCH!",
-                isMale = false,
-                Type = CharacterValues.type.Wolf,
-                tier = 6,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
-            /*new CharacterValues
-            {
-                id = 1,
-                name = "Daniel",
-                isMale = true,
-                Type = CharacterValues.type.Player,
-                damage = 16,
-                health = 115,
-                damageSpeed = 1.5f,
-                range = 2,
-                prefabName = StringResources.playerPrefabName,
-                materialName = StringResources.playerMaterialName
-            },
          new CharacterValues
             {
                 id = 2,
@@ -178,7 +126,7 @@ public class DataService : MonoBehaviour
                 combatTrait = CharacterValues.CombatTrait.BraveFool,
                 targetTrait = CharacterValues.TargetTrait.NoTrait,
                 prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.follower1MaterialName
+                materialName = StringResources.maleHuntersMaterials[1]
             },
          new CharacterValues
             {
@@ -193,7 +141,7 @@ public class DataService : MonoBehaviour
                 combatTrait = CharacterValues.CombatTrait.Clingy,
                 targetTrait = CharacterValues.TargetTrait.Loyal,
                 prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.follower1MaterialName
+                materialName = StringResources.maleHuntersMaterials[4]
             },
          new CharacterValues
             {
@@ -208,81 +156,29 @@ public class DataService : MonoBehaviour
                 combatTrait = CharacterValues.CombatTrait.Fearful,
                 targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
                 prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.follower1MaterialName
+                materialName = StringResources.maleHuntersMaterials[8]
             },
-          new CharacterValues
+         new CharacterValues
             {
-                name = "Yasmin",
-                isMale = false,
+                id = 4,
+                name = "Christian",
+                isMale = true,
                 Type = CharacterValues.type.Wolf,
-                tier = 6,
                 damage = 8,
                 health = 75,
-                damageSpeed = 1,
+                damageSpeed = 1f,
                 range = 2,
-                prefabName = "EnemyLeader"
+                combatTrait = CharacterValues.CombatTrait.Clingy,
+                targetTrait = CharacterValues.TargetTrait.Loyal,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.follower1MaterialName
             },
-
-          new CharacterValues
-          {
-              name = "Young wolf",
-              Type = CharacterValues.type.Wolf,
-              tier = 1,
-              damage = 2,
-              health = 3,
-              damageSpeed = 2,
-              range = 2,
-              prefabName = "Wolf"
-          },
-          new CharacterValues
-          {
-              name = "Teen wolf",
-              Type = CharacterValues.type.Wolf,
-              tier = 2,
-              damage = 3,
-              health = 4,
-              damageSpeed = 2,
-              range = 2,
-              prefabName = "Wolf"
-          },
-          new CharacterValues
-          {
-              name = "Wolf initiate",
-              Type = CharacterValues.type.Wolf,
-              tier = 3,
-              damage = 4,
-              health = 5,
-              damageSpeed = 2,
-              range = 2,
-              prefabName = "Wolf"
-          },
-          new CharacterValues
-          {
-              name = "Mature wolf",
-              Type = CharacterValues.type.Wolf,
-              tier = 4,
-              damage = 5,
-              health = 6,
-              damageSpeed = 2,
-              range = 2,
-              prefabName = "Wolf"
-          },
-          new CharacterValues
-          {
-              name = "Leader wolf",
-              Type = CharacterValues.type.Wolf,
-              tier = 5,
-              damage = 6,
-              health = 7,
-              damageSpeed = 2,
-              range = 2,
-              prefabName = "Wolf"
-          },*/
           new CharacterValues
           {
               id = 5,
               name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
+              isMale = true,
               tier = 1,
               damage = 2,
               health = 45,
@@ -295,6 +191,7 @@ public class DataService : MonoBehaviour
           {
               id = 6,
               name = "Easy rifle tribesman",
+              isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 2,
               damage = 2,
@@ -346,48 +243,9 @@ public class DataService : MonoBehaviour
               prefabName = "Rival",
               materialName = "RivalTribesmanTier5-6Material"
           },
-          new CharacterValues
-            {
-              id = 10,
-                name = "PLACE HOLDER - DO NOT TOUCH!",
-                isMale = false,
-                Type = CharacterValues.type.Wolf,
-                tier = 6,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
-          new CharacterValues
-            {
-              id = 11,
-                name = "PLACE HOLDER - DO NOT TOUCH!",
-                isMale = false,
-                Type = CharacterValues.type.Wolf,
-                tier = 6,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
-          new CharacterValues
-            {
-              id = 12,
-                name = "PLACE HOLDER - DO NOT TOUCH!",
-                isMale = false,
-                Type = CharacterValues.type.Wolf,
-                tier = 6,
-                damage = 8,
-                health = 75,
-                damageSpeed = 1,
-                range = 2,
-                prefabName = "EnemyLeader"
-            },
             new CharacterValues
           {
-                id = 13,
+                id = 10,
               name = "Hard rifle tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
@@ -404,26 +262,13 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         { //WEAPONS
             leaderWeapon,
-            /*
-             new EquippableitemValues
-         {
-             id = 1,
-             name = "Toothpick",
-             Type = EquippableitemValues.type.polearm,
-             Slot = EquippableitemValues.slot.rightHand,
-             health = 20,
-             damage = 10,
-             damageSpeed = 2f,
-             range = 2,
-             characterId = 1,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },
              new EquippableitemValues
          {
              id = 2,
              name = "Plastic Shield",
              Type = EquippableitemValues.type.shield,
              Slot = EquippableitemValues.slot.leftHand,
+             level = 1,
              health = 20,
              damage = 10,
              damageSpeed = 2f,
@@ -434,15 +279,16 @@ public class DataService : MonoBehaviour
              new EquippableitemValues
          {
              id = 3,
-             name = "Laser Rifle 2000",
-             Type = EquippableitemValues.type.rifle,
+             name = "Initiate Spear",
+             Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
+             level = 1,
              health = 20,
              damage = 10,
              damageSpeed = 2.5f,
              range = 20,
              characterId = 3,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
+             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },
              new EquippableitemValues
          {
@@ -450,39 +296,17 @@ public class DataService : MonoBehaviour
              name = "Rifle of the Git Master Rasmus",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
+             level = 1,
              health = 25,
              damage = 15,
              damageSpeed = 1.5f,
              range = 15,
+             characterId = 4,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          },
              new EquippableitemValues
          {
-             id = 5,
-             name = "Mighty power Stick",
-             Type = EquippableitemValues.type.polearm,
-             Slot = EquippableitemValues.slot.rightHand,
-             health = 20,
-             damage = 20,
-             damageSpeed = 1.5f,
-             range = 2,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },
-             new EquippableitemValues
-         {
-             id = 6,
-             name = "Romanian Steel Bar",
-             Type = EquippableitemValues.type.polearm,
-             Slot = EquippableitemValues.slot.rightHand,
-             health = 20,
-             damage = 25,
-             damageSpeed = 1.5f,
-             range = 2,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },*/
-             new EquippableitemValues
-         {
-             //id = 6,
+             id = 7,
              name = "Easy Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -490,11 +314,11 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 2,
-             characterId = 4,
+             characterId = 5,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             //id = 4,
+             id = 8,
              name = "Easy Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -502,12 +326,12 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 9,
-             characterId = 5,
+             characterId = 6,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          },
              new EquippableitemValues
          {
-             //id = 6,
+             id = 9,
              name = "Medium Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -515,11 +339,11 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 2,
-             characterId = 6,
+             characterId = 7,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             //id = 4,
+             id = 10,
              name = "Medium Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -527,12 +351,12 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 9,
-             characterId = 7,
+             characterId = 8,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          },
              new EquippableitemValues
          {
-             //id = 6,
+             id = 11,
              name = "Hard Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -540,11 +364,11 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 2,
-             characterId = 8,
+             characterId = 9,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             //id = 4,
+             id = 12,
              name = "Hard Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -552,7 +376,7 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 9,
-             characterId = 9,
+             characterId = 10,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          }
         });
@@ -641,11 +465,11 @@ public class DataService : MonoBehaviour
 
     public CharacterValues[] GetNewHuntersValues()
     {
-        return _connection.Query<CharacterValues>("SELECT * FROM CharacterValues WHERE id IN (10, 11, 12)").ToArray();
+        return _connection.Query<CharacterValues>("SELECT * FROM CharacterValues WHERE id IN (20, 21, 22)").ToArray();
     }
     public EquippableitemValues[] GetNewHuntersEquipValues()
     {
-        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE id IN (10, 11, 12)").ToArray();
+        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE id IN (20, 21, 22)").ToArray();
     }
     /// <summary>
     /// Add values to db and returns the id
@@ -657,12 +481,12 @@ public class DataService : MonoBehaviour
     {
         await _asyncConnection.InsertOrReplaceAsync(charValToUpdate);
     }
-    public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
+    public async void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
     {
 
-        _connection.Delete(charValuesToDelete);
+        await _asyncConnection.DeleteAsync(charValuesToDelete);
         //delete all the equipped items associated to that character
-        _connection.Query<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
+        await _asyncConnection.QueryAsync<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
 
     }
 
@@ -683,8 +507,28 @@ public class DataService : MonoBehaviour
     {
         CharacterSpawner[] spawners = fellowshipLocation.gameObject.GetComponentsInChildren<CharacterSpawner>().ToArray();
         GameObject fellowship = new GameObject("PlayerFellowship");
-        CharacterValues[] fellowshipValues = GetFellowshipValues().ToArray();
+        CharacterValues[] fellowshipValues = GetFellowshipValues().ToArray(); //order by ascending ID. The first one is Always the player.
+ 
+        if (spawners.Length > 0)
+        {
+            CharacterValues currentvalues;
+            //Spawn characters based on how many spawners I find
+            for (int i = 0; i < spawners.Length; i++)
+            {
+                currentvalues = fellowshipValues.FirstOrDefault(x => x.id == spawners[i].tier);
+                if(currentvalues != null) { 
+                //istantiate a character with the id specified in the Tier of the character spawner
+                GameObject charGameObject = GenerateCharacterFromValues(currentvalues, spawners[i].transform.position, spawners[i].transform.rotation);
+                charGameObject.transform.parent = fellowship.transform;
+                }
+            }
+        }
+        else
+        {
+            print("No spawners found for the player and/or fellows!");
+        }
 
+        /*
         if (spawners.Length == 4)
         {
             for (int i = 0; i < fellowshipValues.Length; i++)
@@ -698,7 +542,7 @@ public class DataService : MonoBehaviour
         {
             print("Missing some character spawners for the player and/or fellows!");
         }
-
+        */
 
         return fellowship;
 
@@ -817,6 +661,11 @@ public class DataService : MonoBehaviour
     #endregion
     /**/
     #region equippable items methods
+
+    public IEnumerable<EquippableitemValues> GetFellowshipEquippableItemsValues()
+    { 
+        return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE characterId IN (1, 2, 3, 4)");
+    }
     public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(int characterId)
     {
         string q = "select * from  EquippableitemValues where characterId = ? ";
@@ -1045,7 +894,7 @@ public class DataService : MonoBehaviour
 
     public async void UpdateEquipItemValues(EquippableitemValues itemValues)
     {
-
+        
         await _asyncConnection.InsertOrReplaceAsync(itemValues);
     }
     public async void UpdateEquipItemsValues(EquippableitemValues[] itemsValues)

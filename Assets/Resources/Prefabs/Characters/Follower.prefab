@@ -6260,7 +6260,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!54 &54000013935568698
 Rigidbody:
@@ -6374,6 +6374,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionTime: 0.05
   maxLowAttentionSpanCounter: 3
+  fleeSpeed: 4
+  stayAttackDistance: 10
   traitProjection: {fileID: 1000014163232138, guid: acd5a47785ced8a4e80f11120784d612,
     type: 2}
   commandVisualisation: {fileID: 1000014290574664, guid: ce5ccfd7f50d8aa4db49f31df7e738f4,
@@ -6434,6 +6436,7 @@ MonoBehaviour:
   currentOpponents: []
   isCurrentTargetAlive: 0
   rotationSpeed: 2
+  forceThrowWeapon: 2
   isInCombat: 0
   isDead: 0
   isFleeing: 0

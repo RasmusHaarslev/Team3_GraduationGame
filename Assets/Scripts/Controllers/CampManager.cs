@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CampManager : MonoBehaviour
 {
-    public CampUpgrades Upgrades = new CampUpgrades();
+    public UpgradesDatabase Upgrades;
     public int GatherCost;
     public int GatherCostIncrease;
 
@@ -67,31 +67,13 @@ public class CampManager : MonoBehaviour
 
     public void SaveUpgrades()
     {
-        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
-
-        var serializer = new XmlSerializer(typeof(CampUpgrades));
-        var stream = new FileStream(path, FileMode.Create);
-        serializer.Serialize(stream, Upgrades);
-        stream.Close();
+        Upgrades = Resources.Load("ScriptableObjects/UpgradesDatabase") as UpgradesDatabase;
     }
 
     public void LoadUpgrades()
     {
-        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
-
-        if (File.Exists(path))
-        {
-            var serializer = new XmlSerializer(typeof(CampUpgrades));
-            var stream = new FileStream(path, FileMode.Open);
-            Upgrades = serializer.Deserialize(stream) as CampUpgrades;
-            stream.Close();
-
-            Upgrades.GetCurrency();
-        }
-        else {
-            Upgrades = new CampUpgrades();
-            SaveUpgrades();
-        }
+        Upgrades = Resources.Load("ScriptableObjects/UpgradesDatabase") as UpgradesDatabase;
+        Upgrades.SetCurrency();
     }
 
     public void PerformUpgrade()
@@ -137,6 +119,7 @@ public class CampManager : MonoBehaviour
 
     public void FinishUpgradeNow()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_buyGold, gameObject);
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = tempUpgradeName;
         Upgrades.Gold -= FinishUpgradeCost;
@@ -241,49 +224,5 @@ public class CampManager : MonoBehaviour
             default:
                 return Level9_Above_Time;
         }
-    }
-}
-
-public class CampUpgrades
-{
-    #region State
-    [XmlAttribute("UpgradeInProgress")]
-    public bool UpgradeInProgress = false;
-    [XmlAttribute("UpgradeBought")]
-    public string UpgradeBought  ="";
-
-    #endregion
-
-    #region Upgradeables
-
-    [XmlAttribute("GatherLevel")]
-    public int GatherLevel = 1;
-    [XmlAttribute("MaxVillages")]
-    public int MaxVillages = 1;
-    [XmlAttribute("BlacksmithLevel")]
-    public int BlacksmithLevel = 1;
-    [XmlAttribute("LeaderHealthLevel")]
-    public int LeaderHealthLevel = 1;
-    [XmlAttribute("LeaderStrengthLevel")]
-    public int LeaderStrengthLevel = 1;
-
-    #endregion
-
-
-    #region Currency
-
-    public int Gold = 0;
-    public int Scrap = 0;
-    public int Food = 0;
-
-    #endregion
-
-    public CampUpgrades() { }
-
-    public void GetCurrency()
-    {
-        Gold = PlayerPrefs.GetInt("Premium");
-        Food = PlayerPrefs.GetInt("Food");
-        Scrap = PlayerPrefs.GetInt("Scrap");
     }
 }

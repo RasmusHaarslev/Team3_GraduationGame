@@ -1,0 +1,790 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b165a823a8498d43bef8684ec50b43a, type: 3}
+  m_Name: LevelsDatabase
+  m_EditorClassIdentifier: 
+  Rows:
+  - Nodes:
+    - NodeId: 1
+      TravelCost: 3
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 9
+      scrapAmount: 3
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 1
+      isScouted: 0
+      isOpen: 1
+      canPlay: 1
+      Links:
+      - FromID: 1
+        ToID: 2
+        Hierarchy: 0
+      - FromID: 1
+        ToID: 3
+        Hierarchy: 0
+      - FromID: 1
+        ToID: 4
+        Hierarchy: 0
+    Level: 0
+  - Nodes:
+    - NodeId: 2
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 4
+      scrapAmount: 0
+      goldTeethAmount: 2
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 1
+      canPlay: 1
+      Links:
+      - FromID: 2
+        ToID: 1
+        Hierarchy: 1
+      - FromID: 2
+        ToID: 5
+        Hierarchy: 0
+      - FromID: 2
+        ToID: 6
+        Hierarchy: 0
+    - NodeId: 3
+      TravelCost: 4
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 1
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 1
+      canPlay: 1
+      Links:
+      - FromID: 3
+        ToID: 1
+        Hierarchy: 1
+      - FromID: 3
+        ToID: 6
+        Hierarchy: 0
+      - FromID: 3
+        ToID: 7
+        Hierarchy: 0
+    - NodeId: 4
+      TravelCost: 4
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 4
+      scrapAmount: 5
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 1
+      canPlay: 1
+      Links:
+      - FromID: 4
+        ToID: 1
+        Hierarchy: 1
+      - FromID: 4
+        ToID: 7
+        Hierarchy: 0
+      - FromID: 4
+        ToID: 8
+        Hierarchy: 0
+    Level: 1
+  - Nodes:
+    - NodeId: 5
+      TravelCost: 2
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 6
+      scrapAmount: 2
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 5
+        ToID: 2
+        Hierarchy: 1
+      - FromID: 5
+        ToID: 9
+        Hierarchy: 0
+    - NodeId: 6
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 3
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 6
+        ToID: 2
+        Hierarchy: 1
+      - FromID: 6
+        ToID: 3
+        Hierarchy: 1
+      - FromID: 6
+        ToID: 9
+        Hierarchy: 0
+    - NodeId: 7
+      TravelCost: 4
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 4
+      scrapAmount: 4
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 7
+        ToID: 3
+        Hierarchy: 1
+      - FromID: 7
+        ToID: 4
+        Hierarchy: 1
+      - FromID: 7
+        ToID: 9
+        Hierarchy: 0
+    - NodeId: 8
+      TravelCost: 2
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 2
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 2
+      choiceCamps: 0
+      foodAmount: 7
+      scrapAmount: 5
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 8
+        ToID: 4
+        Hierarchy: 1
+      - FromID: 8
+        ToID: 9
+        Hierarchy: 0
+    Level: 2
+  - Nodes:
+    - NodeId: 9
+      TravelCost: 4
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 2
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 2
+      choiceCamps: 0
+      foodAmount: 6
+      scrapAmount: 1
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 9
+        ToID: 5
+        Hierarchy: 1
+      - FromID: 9
+        ToID: 6
+        Hierarchy: 1
+      - FromID: 9
+        ToID: 7
+        Hierarchy: 1
+      - FromID: 9
+        ToID: 8
+        Hierarchy: 1
+      - FromID: 9
+        ToID: 10
+        Hierarchy: 0
+      - FromID: 9
+        ToID: 11
+        Hierarchy: 0
+      - FromID: 9
+        ToID: 12
+        Hierarchy: 0
+      - FromID: 9
+        ToID: 13
+        Hierarchy: 0
+    Level: 3
+  - Nodes:
+    - NodeId: 10
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 6
+      scrapAmount: 0
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 10
+        ToID: 9
+        Hierarchy: 1
+      - FromID: 10
+        ToID: 14
+        Hierarchy: 0
+    - NodeId: 11
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 7
+      scrapAmount: 0
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 11
+        ToID: 9
+        Hierarchy: 1
+      - FromID: 11
+        ToID: 14
+        Hierarchy: 0
+    - NodeId: 12
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 5
+      scrapAmount: 2
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 12
+        ToID: 9
+        Hierarchy: 1
+      - FromID: 12
+        ToID: 14
+        Hierarchy: 0
+    - NodeId: 13
+      TravelCost: 3
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 2
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 2
+      choiceCamps: 0
+      foodAmount: 9
+      scrapAmount: 0
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 13
+        ToID: 9
+        Hierarchy: 1
+      - FromID: 13
+        ToID: 14
+        Hierarchy: 0
+    Level: 4
+  - Nodes:
+    - NodeId: 14
+      TravelCost: 3
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 2
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 2
+      choiceCamps: 0
+      foodAmount: 5
+      scrapAmount: 5
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 14
+        ToID: 10
+        Hierarchy: 1
+      - FromID: 14
+        ToID: 11
+        Hierarchy: 1
+      - FromID: 14
+        ToID: 12
+        Hierarchy: 1
+      - FromID: 14
+        ToID: 13
+        Hierarchy: 1
+      - FromID: 14
+        ToID: 15
+        Hierarchy: 0
+      - FromID: 14
+        ToID: 16
+        Hierarchy: 0
+    Level: 5
+  - Nodes:
+    - NodeId: 15
+      TravelCost: 4
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 2
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 2
+      choiceCamps: 0
+      foodAmount: 4
+      scrapAmount: 1
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 15
+        ToID: 14
+        Hierarchy: 1
+      - FromID: 15
+        ToID: 17
+        Hierarchy: 0
+    - NodeId: 16
+      TravelCost: 4
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 6
+      scrapAmount: 5
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 16
+        ToID: 14
+        Hierarchy: 1
+      - FromID: 16
+        ToID: 17
+        Hierarchy: 0
+    Level: 6
+  - Nodes:
+    - NodeId: 17
+      TravelCost: 2
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 5
+      scrapAmount: 5
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 17
+        ToID: 15
+        Hierarchy: 1
+      - FromID: 17
+        ToID: 16
+        Hierarchy: 1
+      - FromID: 17
+        ToID: 18
+        Hierarchy: 0
+      - FromID: 17
+        ToID: 19
+        Hierarchy: 0
+      - FromID: 17
+        ToID: 20
+        Hierarchy: 0
+      - FromID: 17
+        ToID: 21
+        Hierarchy: 0
+    Level: 7
+  - Nodes:
+    - NodeId: 18
+      TravelCost: 2
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 7
+      scrapAmount: 2
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 18
+        ToID: 17
+        Hierarchy: 1
+      - FromID: 18
+        ToID: 22
+        Hierarchy: 0
+    - NodeId: 19
+      TravelCost: 2
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 4
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 19
+        ToID: 17
+        Hierarchy: 1
+      - FromID: 19
+        ToID: 22
+        Hierarchy: 0
+      - FromID: 19
+        ToID: 23
+        Hierarchy: 0
+    - NodeId: 20
+      TravelCost: 2
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 6
+      scrapAmount: 4
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 20
+        ToID: 17
+        Hierarchy: 1
+      - FromID: 20
+        ToID: 23
+        Hierarchy: 0
+      - FromID: 20
+        ToID: 24
+        Hierarchy: 0
+    - NodeId: 21
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 4
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 21
+        ToID: 17
+        Hierarchy: 1
+      - FromID: 21
+        ToID: 24
+        Hierarchy: 0
+    Level: 8
+  - Nodes:
+    - NodeId: 22
+      TravelCost: 4
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 1
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 22
+        ToID: 18
+        Hierarchy: 1
+      - FromID: 22
+        ToID: 19
+        Hierarchy: 1
+      - FromID: 22
+        ToID: 25
+        Hierarchy: 0
+    - NodeId: 23
+      TravelCost: 4
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 5
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 23
+        ToID: 19
+        Hierarchy: 1
+      - FromID: 23
+        ToID: 20
+        Hierarchy: 1
+      - FromID: 23
+        ToID: 25
+        Hierarchy: 0
+      - FromID: 23
+        ToID: 26
+        Hierarchy: 0
+    - NodeId: 24
+      TravelCost: 3
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 2
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 2
+      choiceCamps: 0
+      foodAmount: 7
+      scrapAmount: 2
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 24
+        ToID: 20
+        Hierarchy: 1
+      - FromID: 24
+        ToID: 21
+        Hierarchy: 1
+      - FromID: 24
+        ToID: 26
+        Hierarchy: 0
+    Level: 9
+  - Nodes:
+    - NodeId: 25
+      TravelCost: 4
+      scoutCost: 2
+      sceneSelection: 0
+      CampsInNode: 3
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 3
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 2
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 25
+        ToID: 22
+        Hierarchy: 1
+      - FromID: 25
+        ToID: 23
+        Hierarchy: 1
+    - NodeId: 26
+      TravelCost: 2
+      scoutCost: 1
+      sceneSelection: 0
+      CampsInNode: 4
+      probabilityWolves: 4
+      probabilityTribes: 2
+      probabilityChoice: 3
+      wolveCamps: 0
+      tribeCamps: 4
+      choiceCamps: 0
+      foodAmount: 8
+      scrapAmount: 0
+      goldTeethAmount: 0
+      itemDropAmount: 1
+      isCleared: 0
+      isScouted: 0
+      isOpen: 0
+      canPlay: 0
+      Links:
+      - FromID: 26
+        ToID: 23
+        Hierarchy: 1
+      - FromID: 26
+        ToID: 24
+        Hierarchy: 1
+    Level: 10

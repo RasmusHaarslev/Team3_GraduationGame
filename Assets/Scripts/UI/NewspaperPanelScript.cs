@@ -9,16 +9,23 @@ public class NewspaperPanelScript : MonoBehaviour {
 
     public void SetNewspaperImage(Sprite newspaper)
     {
-		if (!GameObject.Find("NewspaperPanel").transform.FindChild("NewspaperPanelContent").gameObject.activeSelf)
-		{
-			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
-		}
-		NewspaperImage.sprite = newspaper;
-        ContentPanel.SetActive(true);
+        if (!ContentPanel.activeSelf)
+        {
+            Manager_Audio.PlaySound("Play_PaperPickup", this.gameObject);
+            Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.openWheel);
+
+            if (!GameObject.Find("NewspaperPanel").transform.FindChild("NewspaperPanelContent").gameObject.activeSelf)
+            {
+                EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+            }
+            NewspaperImage.sprite = newspaper;
+            ContentPanel.SetActive(true);
+        }
 	}
 
 	public void ClosePanel()
 	{
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+        Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
+        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
 	}
 }

@@ -89,6 +89,7 @@ GameObject:
   - 4: {fileID: 4000012990143580}
   - 23: {fileID: 23000011915191940}
   - 33: {fileID: 33000013448598384}
+  - 114: {fileID: 114000010543535082}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -116,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012988274360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.287094, y: 11.336527, z: -11.47}
+  m_LocalPosition: {x: -11.41, y: 13.030688, z: 6.65}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -263,6 +264,33 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &114000010543535082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014077055248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0c54c083335444a993e4ce9b142dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNormal: 1
+  glowMode: 1
+  flashing: 1
+  flashSpeed: 1
+  noOcclusion: 0
+  scaleGlow: 1
+  glowIntensity: 2
+  glowOpacity: 1
+  glowColor: {r: 0.84313726, g: 0.81960785, b: 0.7058824, a: 1}
+  labelToDisplay: 
+  labelMode: 0
+  labelColor: {r: 1, g: 1, b: 1, a: 1}
+  outlined: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  textFont: {fileID: 0}
+  fontSize: 12
 --- !u!114 &114000013117133678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,11 +304,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinimumScrap: 1
   MaxScrap: 5
-  ProbabilityOfSpawn: 0.5
+  ProbabilityOfSpawn: 1
   ScaleByLevel: 0
   glow: {fileID: 198000010336343984}
   received: {fileID: 198000014211330030}
   text: {fileID: 102000013946276390}
+  isTutorial: 0
 --- !u!198 &198000010336343984
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -331,7 +360,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 1
-  randomSeed: -275023731
+  randomSeed: 1205531907
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2085,7 +2114,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 1
-  randomSeed: 2122392430
+  randomSeed: -1953322314
   InitialModule:
     serializedVersion: 2
     enabled: 1
