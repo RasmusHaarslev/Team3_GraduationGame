@@ -193,6 +193,7 @@ public class Character : MonoBehaviour
 		}
 		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
@@ -208,9 +209,26 @@ public class Character : MonoBehaviour
 		//DO NOT initialize here the equipped weapon type, because it is already done when a weapon is equipped !!//equippedWeaponType = GetComponentInChildren<EquippableItem>().itemValues.Type;
 	}
 
+	private void StartCombatState(EnemyAttackedByLeaderEvent e)
+	{
+		Debug.Log("pew pew");
+		if (!isInCombat)
+		{
+			if (this.tag == "Friendly")
+				if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
+				{
+					if (this.tag == "Friendly")
+						targetParent = e.parent;
+					TargetOpponent();
+					isInCombat = true;
+				}
+		}
+	}
+
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<EnemySpottedEvent>(StartCombatState);
+		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(StartCombatState);
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
@@ -404,8 +422,10 @@ public class Character : MonoBehaviour
 	{
 		if (!isInCombat)
 		{
+			if(this.tag == "Friendly")
 			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
 			{
+				if (this.tag == "Friendly")
 				targetParent = e.parent;
 				TargetOpponent();
 				isInCombat = true;
