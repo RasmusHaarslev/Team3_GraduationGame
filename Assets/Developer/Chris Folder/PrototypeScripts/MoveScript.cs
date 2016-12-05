@@ -232,8 +232,9 @@ public class MoveScript : MonoBehaviour
 				{
 					if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
 					{
-						character.DealDamage();
-						hasShot = true;
+					Debug.Log("Player damages");
+					character.DealDamage();
+					hasShot = true;
 					}
 				}
 				counter -= Time.deltaTime;
