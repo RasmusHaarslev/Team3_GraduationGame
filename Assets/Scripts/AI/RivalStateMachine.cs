@@ -132,10 +132,9 @@ public class RivalStateMachine : CoroutineMachine
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
 			agent.SetDestination(fleePosition);
-
 			if (agent.remainingDistance < agent.stoppingDistance)
 			{
-				if (agent.destination == fleePosition)
+				if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z)) 
 				{
 					gameObject.SetActive(false);
 				}
