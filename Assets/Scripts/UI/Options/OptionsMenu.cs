@@ -22,6 +22,7 @@ public class OptionsMenu : MonoBehaviour {
         AdjustMusicVolume();
         Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
         Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
+        UpdateText();
     }
 
 	void OnEnable () {
