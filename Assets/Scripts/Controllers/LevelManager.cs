@@ -23,17 +23,16 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> huntersAndPlayer = new List<GameObject>();
     LevelGenerator levelGenerator;
 
-    void Start()
-    {
-        PlayerAlive = true;
-        AlliesAlive = 3;
-        levelGenerator = GetComponent<LevelGenerator>();
-        if (levelGenerator.isTutorial)
-        {
-            EnemiesAlive = GameObject.FindGameObjectsWithTag("Unfriendly").Length / 2;
-        }
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = true;
-    }
+	void Start()
+	{
+		PlayerAlive = true;
+		AlliesAlive = 3;
+		levelGenerator = GetComponent<LevelGenerator>();
+		if (levelGenerator.isTutorial)
+		{
+			EnemiesAlive = GameObject.FindGameObjectsWithTag("Unfriendly").Length / 2;
+		}
+	}
 
     void Update()
     { /*
@@ -184,7 +183,7 @@ public class LevelManager : MonoBehaviour
 
 	void PlayerDeath(PlayerDeathEvent e)
 	{
-        if (!IsTutorial) { 
+        if (!IsTutorial) {
 		    LoseGame("CampManagement");
         } else
         {
@@ -298,7 +297,7 @@ public class LevelManager : MonoBehaviour
         );
 
         PlayerPrefs.SetInt("LevelResult", 1);
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
         //generate and display the new items
         GenerateNewItems();
         Time.timeScale = 1f;
