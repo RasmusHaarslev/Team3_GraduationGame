@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.264, g: 0.307, b: 0.53676474, a: 1}
   m_AmbientGroundColor: {r: 0.2492483, g: 0.2394031, b: 0.30147058, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 1
+  m_AmbientMode: 0
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -20521,6 +20521,8 @@ MonoBehaviour:
   FX: {fileID: 1373292154}
   LanguageHeader: {fileID: 1654109114}
   ToggleDanish: {fileID: 1195652310}
+  txtResourcesFoundHeader: {fileID: 0}
+  txtResourcesFound: {fileID: 0}
 --- !u!114 &537429585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24403,6 +24405,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemiesAlive: 0
   inCombat: 0
+  NextLevel: 
+  IsTutorial: 0
   huntersAndPlayer: []
 --- !u!114 &617970456
 MonoBehaviour:
@@ -24417,13 +24421,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStatsMultiplier: 1
-  enemyStatsAdditive: 1
+  worldLength: 4
   difficultyLevel: 5
   campsNumber: 4
-  worldLength: 4
   downScaleThreshold: 0.3
   upScaleThreshold: 0.7
   isTutorial: 0
+  worldIndex: 0
 --- !u!4 &617970457
 Transform:
   m_ObjectHideFlags: 0
@@ -64534,6 +64538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fleePopUp: {fileID: 2082292406}
+  isTutorial: 0
 --- !u!114 &1726284315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66468,9 +66473,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
