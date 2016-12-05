@@ -42,7 +42,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
     void OnApplicationQuit()
     {
-        this.enabled = false;
+       // this.enabled = false;
     }
 
     public void InitialisePopUP(SetupPopUp e)

@@ -104,6 +104,8 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
@@ -134,6 +136,8 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
@@ -157,12 +161,14 @@ public class Character : MonoBehaviour
 			{
 				if (currentWeapon != null)
 				{
+					Manager_Audio.PlaySound(Manager_Audio.leaderDeath, this.gameObject);
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
 				animator.SetTrigger("Die");
-				//GetComponent<RagdollControl>().EnableRagDoll();
 			}
 
 			isInCombat = false;
@@ -468,7 +474,7 @@ public class Character : MonoBehaviour
 	{
 		if (e.target == gameObject)
 		{
-			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("LocoV2"))
 			{
 				animator.SetTrigger("TakeDamage");
 			}
