@@ -250,11 +250,12 @@ public class Character : MonoBehaviour
 	public void init(CharacterValues initValues)
 	{
 		characterBaseValues = initValues;
-		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
-		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
-		range = initValues.range;
-		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
+        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+        //Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
+        health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
+
+        range = initValues.range;
+        damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;
 		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
