@@ -124,6 +124,7 @@ public class StringResources
 "DANIEL",
 "JOHN",
 "NICOLAI",
+"REINHARDT",
 "PETER",
 "RASMUS",
 "RICCARDO",

@@ -10,7 +10,7 @@ using System.Threading;
 
 public class PanelScript : MonoBehaviour
 {
-
+    CampTopPanel campTopPanelScript;
     public List<GameObject> panelList = new List<GameObject>();
     public List<GameObject> soldierStatsList = new List<GameObject>();
     List<GameObject> soldiersList = new List<GameObject>();
@@ -52,6 +52,7 @@ public class PanelScript : MonoBehaviour
 
     void Start()
     {
+        campTopPanelScript = GetComponentInChildren<CampTopPanel>();
         dataService = new DataService(StringResources.databaseName);
         dataService.CreateDB();
         charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
@@ -147,9 +148,9 @@ public class PanelScript : MonoBehaviour
                 newSoldiersList.Add(newHunter);
                 newHuntersValues[i] = newHunter.GetComponent<Character>().characterBaseValues;
                 newHunterEquipsValues[i] = newHunter.GetComponentInChildren<EquippableItem>().itemValues;
-                newHuntersValues[i].id = 10 + i;
-                newHunterEquipsValues[i].id = 10 + i;
-                newHunterEquipsValues[i].characterId = 10 + i;
+                newHuntersValues[i].id = 20 + i; //todo id handled here
+                newHunterEquipsValues[i].id = 20 + i;
+                newHunterEquipsValues[i].characterId = 20 + i;
                 //print(newHuntersValues[i].id);
                 i++;
 
@@ -179,6 +180,12 @@ public class PanelScript : MonoBehaviour
             {
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
+                newSoldier.GetComponent<PlayFootStepParticles>().enabled = false;
+                
+                if (newSoldier.GetComponentsInChildren<ShootRifle>().Count() > 0)
+                {
+                    newSoldier.GetComponentsInChildren<ShootRifle>()[0].enabled = false;
+                }
             }
         }
         newCharacterSoldierList = newHuntersValues.ToList();
@@ -207,12 +214,12 @@ public class PanelScript : MonoBehaviour
                         //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
                         CharacterValues valuesToKeep = newSoldiersList[i].GetComponent<Character>().characterBaseValues;
                         valuesToKeep.Type = CharacterValues.type.Hunter;
-                        valuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier + 1;
+                        valuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier ;
                         EquippableitemValues equipValuesToKeep = newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues;
-                        equipValuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier + 1;
+                        equipValuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier ;
                         equipValuesToKeep.characterId = equipValuesToKeep.id;
                        
-                       
+                        print("updating char id "+valuesToKeep.id);
                         dataService.UpdateCharacterValuesInDb(valuesToKeep);
                         dataService.UpdateEquipItemValues(equipValuesToKeep);
                        
@@ -238,7 +245,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter1");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -246,7 +253,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter2");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -254,10 +261,11 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter3");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
+                        campTopPanelScript.ScaleVillageCount();
                         EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
                     }
                 }
@@ -380,6 +388,7 @@ public class PanelScript : MonoBehaviour
             //GetNewSoldiers();
             FillInNewSoldierStats();
 
+            campTopPanelScript.ScalePremiumCount();
             EventManager.Instance.TriggerEvent(new ChangeResources(premium: -200));
         }
         else
@@ -500,8 +509,14 @@ public class PanelScript : MonoBehaviour
         {
 
             soldiersList[i].AddComponent<PanelController>();
+            soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
-
+            soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
+            if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
+            {
+               
+                soldiersList[i].GetComponentsInChildren<ShootRifle>()[0].enabled = false;
+            }
 
             if (soldiersList[i].GetComponent<Character>().characterBaseValues.Type == CharacterValues.type.Player)
             {
@@ -514,8 +529,8 @@ public class PanelScript : MonoBehaviour
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-            //dataService.GetCharacterEquippableItems(soldiersList[i].GetComponent<Character>().characterBaseValues.id);
-            soldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = layersIndices[i];
+            soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
+            
 
             // Switches the animator out with the camp animator.
             SetCampAnimation(soldiersList[i].GetComponent<Character>());
@@ -685,7 +700,7 @@ public class PanelScript : MonoBehaviour
     void FillInNewSoldierStats()
     {
         
-        print("soldier list count in Fill "+newCharacterSoldierList.Count);
+
         int i = 0;
         foreach (var newSoldierStats in newSoldierStatsList)
         {
@@ -736,7 +751,7 @@ public class PanelScript : MonoBehaviour
 
             if (stat.name == "Damage")
             {
-                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.characterBaseValues.damage.ToString() + " + " + (currentSoldier.damage - currentSoldier.characterBaseValues.damage) + " = " + currentSoldier.damage.ToString();
+                stat.GetComponent<Text>().text = "Damage: " + currentSoldier.characterBaseValues.damage.ToString() + " + " + (currentSoldier.damage - currentSoldier.characterBaseValues.damage) ;
             }
             if (stat.name == "Soldier Name")
             {
@@ -744,7 +759,7 @@ public class PanelScript : MonoBehaviour
             }
             if (stat.name == "Health")
             {
-                stat.GetComponent<Text>().text = "Health: " + currentSoldier.characterBaseValues.health.ToString() + " + " + (currentSoldier.health - currentSoldier.characterBaseValues.health) + " = " + currentSoldier.health.ToString();
+                stat.GetComponent<Text>().text = "Health: " + currentSoldier.characterBaseValues.health.ToString() + " + " + (currentSoldier.health - currentSoldier.characterBaseValues.health);
             }
             if (stat.name == "Damage Speed")
             {
@@ -787,10 +802,14 @@ public class PanelScript : MonoBehaviour
     {
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
+        print(currentSoldier.gameObject.layer);
+        print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
+        
         UpdateSoldierStats(currentSoldier.gameObject);
         SetCampAnimation(currentSoldier);
+        currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = currentSoldier.gameObject.layer;
+        print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
 
-        
 
 
         //foreach (var camera in soldierCameraList)
