@@ -13,7 +13,10 @@ public class OptionsMenu : MonoBehaviour {
     public GameObject LanguageHeader;
 
     public GameObject ToggleDanish;
-    
+
+    public Text txtResourcesFoundHeader;
+    public Text txtResourcesFound;
+
     void Start()
     {
         AdjustMusicVolume();
@@ -43,6 +46,12 @@ public class OptionsMenu : MonoBehaviour {
         } else {
             LanguageHeader.transform.GetChild(1).GetChild(0).GetComponent<Toggle>().isOn = false;
             LanguageHeader.transform.GetChild(2).GetChild(0).GetComponent<Toggle>().isOn = true;
+        }
+
+        if(txtResourcesFound != null)
+        {
+            txtResourcesFoundHeader.text = TranslationManager.Instance.GetTranslation("LevelCleared");
+            txtResourcesFound.text = TranslationManager.Instance.GetTranslation("ResourcesFound");
         }
     }
 
