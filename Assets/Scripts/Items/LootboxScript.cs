@@ -62,7 +62,7 @@ public class LootboxScript : MonoBehaviour
         {
             text.transform.position += new Vector3(0f, 0.01f, 0f);
             text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.005f);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.003f);
         }
         DestroyBox();
     }
