@@ -7,7 +7,7 @@ using UnityEngine;
 public class TranslationManager : MonoBehaviour
 {
     public Dictionary<string, string> LoadedTranlations = new Dictionary<string, string>();
-    private bool English;
+    public bool English;
 
     #region Setup Instance
     private static TranslationManager _instance;
