@@ -529,7 +529,7 @@ public class PanelScript : MonoBehaviour
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-            soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
+            //soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
             
 
             // Switches the animator out with the camp animator.

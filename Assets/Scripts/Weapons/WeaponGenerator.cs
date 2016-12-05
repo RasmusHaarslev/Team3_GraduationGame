@@ -93,7 +93,7 @@ public class WeaponGenerator : MonoBehaviour
         {
             case EquippableitemValues.type.shield:
                 //picks a random model from the shields
-                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield] [Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield].Length - 1) ];
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield] [Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield].Length) ];
                 itemValues.range = shieldRange;
                 itemValues.Slot = EquippableitemValues.slot.leftHand;
                 healthProbability = healthPercentageShield;
@@ -102,7 +102,7 @@ public class WeaponGenerator : MonoBehaviour
                 break;
             case EquippableitemValues.type.polearm:
                 //picks a random model from the shields
-                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm].Length - 1)];
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm].Length)];
                 itemValues.range = polearmRange;
                 itemValues.Slot = EquippableitemValues.slot.rightHand;
                 healthProbability = healthPercentagePolearm;
@@ -111,7 +111,7 @@ public class WeaponGenerator : MonoBehaviour
                 break;
             case EquippableitemValues.type.rifle:
                 //picks a random model from the shields
-                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle].Length - 1)];
+                modelStrings = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][Random.Range(0, StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle].Length)];
                 itemValues.range = rifleRange;
                 itemValues.Slot = EquippableitemValues.slot.rightHand;
                 healthProbability = healthPercentageRifle;

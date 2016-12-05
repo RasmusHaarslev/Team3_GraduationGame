@@ -283,6 +283,7 @@ public class DataService : MonoBehaviour
               id = 5,
               name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
+              isMale = true,
               tier = 1,
               damage = 2,
               health = 45,
@@ -295,6 +296,7 @@ public class DataService : MonoBehaviour
           {
               id = 6,
               name = "Easy rifle tribesman",
+              isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 2,
               damage = 2,
