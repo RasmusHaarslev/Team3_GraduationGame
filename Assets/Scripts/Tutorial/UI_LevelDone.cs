@@ -5,6 +5,7 @@ using System.Collections;
 public class UI_LevelDone : MonoBehaviour {
 
     public GameObject endingPanel;
+    public Text txtResourcesFound;
 
     void OnEnable()
     {
@@ -20,6 +21,8 @@ public class UI_LevelDone : MonoBehaviour {
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
         endingPanel.SetActive(true);
+
+        txtResourcesFound.text = TranslationManager.Instance.GetTranslation("ResourcesFound");
 
         foreach (Transform child in endingPanel.transform.GetChild(0).GetChild(1).transform)
         {
