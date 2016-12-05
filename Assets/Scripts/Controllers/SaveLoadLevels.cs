@@ -13,19 +13,22 @@ public class SaveLoadLevels
     public static int maxRowsCleared = -1;
     public static GameObject lastNodeCleared;
 
+    private static LevelsDatabase database;
+
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
-        var levels = new LevelXML();
+        database = Resources.Load("ScriptableObjects/LevelsDatabase") as LevelsDatabase;
+        database.Rows = new List<RowObject>();
 
         foreach (KeyValuePair<int, List<GameObject>> entry in levelDictionary)
         {
-            var row = new RowsXML();
+            var row = new RowObject();
 
             foreach (var node in entry.Value)
             {
                 var currentNode = node.GetComponent<Node>();
 
-                var xmlNode = new NodeXML();
+                var xmlNode = new NodeObject();
 
                 row.Level = currentNode.Level;
 
@@ -53,7 +56,7 @@ public class SaveLoadLevels
 
                 foreach(var link in currentNode.Links)
                 {
-                    var li = new LinkXML();
+                    var li = new LinkObject();
 
                     li.FromID = link.From.GetComponent<Node>().NodeId;
                     li.ToID = link.To.GetComponent<Node>().NodeId;
@@ -64,37 +67,32 @@ public class SaveLoadLevels
 
                 row.Nodes.Add(xmlNode);
             }
-            levels.Rows.Add(row);
+            database.Rows.Add(row);
         }
 
-        var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
+        //var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
 
-        var serializer = new XmlSerializer(typeof(LevelXML));
-        var stream = new FileStream(path, FileMode.Create);
-        serializer.Serialize(stream, levels);
-        stream.Close();
+        //var serializer = new XmlSerializer(typeof(LevelXML));
+        //var stream = new FileStream(path, FileMode.Create);
+        //serializer.Serialize(stream, levels);
+        //stream.Close();
     }
 
     public static Dictionary<int, List<GameObject>> LoadLevels()
     {
-        var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
+        database = Resources.Load("ScriptableObjects/LevelsDatabase") as LevelsDatabase;
 
-        if (!File.Exists(path))
+        if (database.Rows.Count() < 1)
         {
             Debug.LogError("No levels generated, reset game");
             return new Dictionary<int, List<GameObject>>();
         }
 
-        var serializer = new XmlSerializer(typeof(LevelXML));
-        var stream = new FileStream(path, FileMode.Open);
-        var container = serializer.Deserialize(stream) as LevelXML;
-        stream.Close();
-
         AllLevelsLoaded = new Dictionary<int, GameObject>();
 
         var loadedLevels = new Dictionary<int, List<GameObject>>();
 
-        foreach (RowsXML row in container.Rows)
+        foreach (RowObject row in database.Rows)
         {
             foreach (var node in row.Nodes)
             {
@@ -136,7 +134,7 @@ public class SaveLoadLevels
             }
         }
 
-        foreach (RowsXML row in container.Rows)
+        foreach (RowObject row in database.Rows)
         {
             int currentRow = row.Level;
             List<GameObject> list = new List<GameObject>();
@@ -165,77 +163,4 @@ public class SaveLoadLevels
 
         return loadedLevels;
     }
-}
-
-public class LevelXML
-{
-    [XmlArray("RowXMLs")]
-    [XmlArrayItem("RowXML")]
-    public List<RowsXML> Rows = new List<RowsXML>();
-}
-
-public class RowsXML
-{
-    [XmlArray("NodeXMLs")]
-    [XmlArrayItem("NodeXML")]
-    public List<NodeXML> Nodes = new List<NodeXML>();
-
-    [XmlAttribute("level")]
-    public int Level;
-}
-
-public class NodeXML
-{
-    [XmlAttribute("nodeID")]
-    public int NodeId;
-    [XmlAttribute("travelCost")]
-    public int TravelCost;
-    [XmlAttribute("scoutCost")]
-    public int scoutCost;
-    [XmlAttribute("sceneSelection")]
-    public int sceneSelection;
-    [XmlAttribute("CampsInNode")]
-    public int CampsInNode;
-    [XmlAttribute("probabilityWolves")]
-    public int probabilityWolves;
-    [XmlAttribute("probabilityTribes")]
-    public int probabilityTribes;
-    [XmlAttribute("probabilityChoice")]
-    public int probabilityChoice;
-    [XmlAttribute("wolveCamps")]
-    public int wolveCamps;
-    [XmlAttribute("tribeCamps")]
-    public int tribeCamps;
-    [XmlAttribute("choiceCamps")]
-    public int choiceCamps;
-    [XmlAttribute("foodAmount")]
-    public int foodAmount;
-    [XmlAttribute("scrapAmount")]
-    public int scrapAmount;
-    [XmlAttribute("goldTeethAmount")]
-    public int goldTeethAmount;
-    [XmlAttribute("itemDropAmount")]
-    public int itemDropAmount;
-    [XmlAttribute("isCleared")]
-    public bool isCleared;
-    [XmlAttribute("isScouted")]
-    public bool isScouted;
-    [XmlAttribute("isOpen")]
-    public bool isOpen;
-    [XmlAttribute("canPlay")]
-    public bool canPlay;
-
-    [XmlArray("Links")]
-    [XmlArrayItem("Link")]
-    public List<LinkXML> Links = new List<LinkXML>();
-}
-
-public class LinkXML
-{
-    [XmlAttribute("FromID")]
-    public int FromID;
-    [XmlAttribute("ToID")]
-    public int ToID;
-    [XmlAttribute("Hierarchy")]
-    public int Hierarchy;
 }
