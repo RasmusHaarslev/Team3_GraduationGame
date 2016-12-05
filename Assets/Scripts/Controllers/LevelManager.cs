@@ -282,6 +282,8 @@ public class LevelManager : MonoBehaviour
 
         EventManager.Instance.TriggerEvent(new LevelWon());
 
+        Time.timeScale = 1f;
+
         if (IsTutorial)
         {
             EventManager.Instance.TriggerEvent(new TutorialDone());
