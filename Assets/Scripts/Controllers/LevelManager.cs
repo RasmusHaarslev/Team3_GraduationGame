@@ -182,10 +182,15 @@ public class LevelManager : MonoBehaviour
         CheckConditions();
     }
 
-    void PlayerDeath(PlayerDeathEvent e)
-    {
-        LoseGame("CampManagement");
-    }
+	void PlayerDeath(PlayerDeathEvent e)
+	{
+        if (!IsTutorial) { 
+		    LoseGame("CampManagement");
+        } else
+        {
+            LoseGame(SceneManager.GetActiveScene().name);
+        }
+	}
 
     void LootReceived(EnemyDeathEvent e)
     {
@@ -201,27 +206,34 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
-    void CheckConditions()
-    {
-        if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
-        {
-            WinLevel();
+	void CheckConditions()
+	{
+		if (EnemiesAlive <= 0) //Shouldn't ever go below 0, but still
+		{
+			WinLevel();
+		}
+		else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
+		{
+            if (!IsTutorial)
+            {
+                LoseGame("CampManagement");
+            }
+            else
+            {
+                LoseGame(SceneManager.GetActiveScene().name);
+            }
         }
-        else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
-        {
-            LoseGame("CampManagement");
-        }
-        else if (AlliesAlive <= 0)
-        {
-            LoseLevel();
-        }
-    }
+		else if (AlliesAlive <= 0)
+		{
+			LoseLevel();
+		}
+	}
 
     public void LoseGame(string scene = "CampManagement")
     {
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
         Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
-        StartCoroutine(LoseGameCoroutine());
+        StartCoroutine(LoseGameCoroutine(scene));
     }
 
     IEnumerator LoseGameCoroutine(string scene = "CampManagement")
@@ -233,7 +245,9 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
         }
 
-        GameController.Instance.LoseGame();
+        if (!IsTutorial)
+            GameController.Instance.LoseGame();
+
         GameController.Instance.LoadScene(scene);
 
         Time.timeScale = 1f;
