@@ -462,7 +462,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013550711484, guid: 9a18ed9cefaba1d42af67f3d93f44556, type: 2}
       propertyPath: m_RootOrder
-      value: 53
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 1000010585661844, guid: 9a18ed9cefaba1d42af67f3d93f44556, type: 2}
       propertyPath: m_Name
@@ -1785,7 +1785,6 @@ Transform:
   m_Children:
   - {fileID: 1813454467}
   - {fileID: 501939641}
-  - {fileID: 1873124531}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1001 &367080949
@@ -2036,7 +2035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013070875994, guid: 6323612f4f7346d409c5b2d2cc70b4dd, type: 2}
       propertyPath: m_RootOrder
-      value: 49
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4000011675810520, guid: 6323612f4f7346d409c5b2d2cc70b4dd, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2472,7 +2471,7 @@ MonoBehaviour:
   KeepGizmo: 1
   gizmoMesh: {fileID: 4300006, guid: 4a9035eebec08a247b268ea94c995ad6, type: 3}
   EnterEvent: DiscoverFriendlyStringer
-  ExitEvent: 
+  ExitEvent: DiscoverFriendlyExit
 --- !u!23 &501939643
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2623,7 +2622,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014093300836, guid: e07459f840aec7945a421468faab73a5, type: 2}
       propertyPath: m_RootOrder
-      value: 51
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 4000014093300836, guid: e07459f840aec7945a421468faab73a5, type: 2}
       propertyPath: m_LocalScale.x
@@ -5332,7 +5331,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013539861238, guid: 2386e908843867e4b981636ebf6f99ac, type: 2}
       propertyPath: m_RootOrder
-      value: 51
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 4000013539861238, guid: 2386e908843867e4b981636ebf6f99ac, type: 2}
       propertyPath: m_LocalScale.x
@@ -5708,7 +5707,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013550711484, guid: 9a18ed9cefaba1d42af67f3d93f44556, type: 2}
       propertyPath: m_RootOrder
-      value: 55
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 4000013550711484, guid: 9a18ed9cefaba1d42af67f3d93f44556, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5876,7 +5875,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010815285176, guid: b39746801c2ca0842946d7f87bf70968, type: 2}
       propertyPath: m_RootOrder
-      value: 56
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 4000010815285176, guid: b39746801c2ca0842946d7f87bf70968, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6842,7 +6841,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013550711484, guid: 9a18ed9cefaba1d42af67f3d93f44556, type: 2}
       propertyPath: m_RootOrder
-      value: 52
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 1000010585661844, guid: 9a18ed9cefaba1d42af67f3d93f44556, type: 2}
       propertyPath: m_Name
@@ -8343,7 +8342,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014093300836, guid: e07459f840aec7945a421468faab73a5, type: 2}
       propertyPath: m_RootOrder
-      value: 50
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 1000012051511380, guid: e07459f840aec7945a421468faab73a5, type: 2}
       propertyPath: m_Name
@@ -8613,7 +8612,7 @@ Prefab:
         type: 2}
       propertyPath: Targets.Array.data[2]
       value: 
-      objectReference: {fileID: 1873124528}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b71f101c76c97144ca6f1c38bb92f658, type: 2}
   m_IsPrefabParent: 0
@@ -9092,7 +9091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KeepGizmo: 1
   gizmoMesh: {fileID: 4300020, guid: 4a9035eebec08a247b268ea94c995ad6, type: 3}
-  DelayInSeconds: 2
+  DelayInSeconds: 0
   Targets:
   - {fileID: 501939642}
 --- !u!1001 &1827528876
@@ -9223,93 +9222,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ca16b813114d754a81ff708061a4c90, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1873124527
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000013654711320, guid: 0e0de507bacbcc443bc50bc2d37db41b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1873124531}
-  - 33: {fileID: 1873124530}
-  - 23: {fileID: 1873124529}
-  - 114: {fileID: 1873124528}
-  m_Layer: 2
-  m_Name: WwiseEvent
-  m_TagString: ModuleNetwork
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1873124528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011102511046, guid: 0e0de507bacbcc443bc50bc2d37db41b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1873124527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79538bcc1c66f434c9c9cf5e9b35308e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KeepGizmo: 1
-  gizmoMesh: {fileID: 4300006, guid: 4a9035eebec08a247b268ea94c995ad6, type: 3}
-  EnterEvent: DiscoverFriendlyInit
-  ExitEvent: DiscoverFriendlyExit
---- !u!23 &1873124529
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 23000013425307328, guid: 0e0de507bacbcc443bc50bc2d37db41b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1873124527}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 2100000, guid: e1169c66da28c2c4b9e07eba3f093c7e, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &1873124530
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 33000013551207886, guid: 0e0de507bacbcc443bc50bc2d37db41b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1873124527}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1873124531
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000011616150634, guid: 0e0de507bacbcc443bc50bc2d37db41b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1873124527}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1856422, y: 23.666046, z: -13.035847}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 346748810}
-  m_RootOrder: 2
 --- !u!1001 &1880891550
 Prefab:
   m_ObjectHideFlags: 0
@@ -10004,7 +9916,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013392414862, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
       propertyPath: m_RootOrder
-      value: 54
+      value: 57
       objectReference: {fileID: 0}
     - target: {fileID: 4000013392414862, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
