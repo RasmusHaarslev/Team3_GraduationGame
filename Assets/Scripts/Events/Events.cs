@@ -135,10 +135,10 @@ public class EnemySpottedEvent : GameEvent {
 
 public class EnemyAttackedByLeaderEvent : GameEvent
 {
-	public GameObject enemy;
-	public EnemyAttackedByLeaderEvent(GameObject enemy)
+	public GameObject parent;
+	public EnemyAttackedByLeaderEvent(GameObject parent)
 	{
-		this.enemy = enemy;
+		this.parent = parent;
 	}
 }
 

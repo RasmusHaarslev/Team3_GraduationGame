@@ -26,17 +26,17 @@
 		#include "noiseSimplex.cginc"
 		sampler2D _MainTex,_SnowTexture;
 		sampler2D _Bump;
-		float _Snow;
-		float4 _SnowColor;
-		float4 _MainColor;
-		float4 _SnowDirection;
-		float _SnowDepth,_BumpPower;
-		float _NoisePower;
+		half _Snow;
+		half4 _SnowColor;
+		half4 _MainColor;
+		half4 _SnowDirection;
+		half _SnowDepth,_BumpPower;
+		half _NoisePower;
 
 		struct Input {
-		    float2 uv_MainTex;
-		    float2 uv_SnowTexture;
-		    float2 uv_Bump;
+		    half2 uv_MainTex;
+		    half2 uv_SnowTexture;
+		    half2 uv_Bump;
 		    float3 worldNormal;
 		   
 		    INTERNAL_DATA
@@ -54,10 +54,10 @@
 		{
 		    half4 c = tex2D(_MainTex, IN.uv_MainTex);
 		    half4 sTex = tex2D(_SnowTexture, IN.uv_SnowTexture);
-		    float ns = snoise(c*_NoisePower);
+		    half ns = snoise(c*_NoisePower);
 
 		    float3 unpackedNormal = UnpackNormal(tex2D(_Bump, IN.uv_Bump));
-			o.Normal = float3(unpackedNormal.x*_BumpPower,unpackedNormal.y*_BumpPower,unpackedNormal.z);
+			o.Normal = half3(unpackedNormal.x*_BumpPower,unpackedNormal.y*_BumpPower,unpackedNormal.z);
 
 		    if (dot(WorldNormalVector(IN, o.Normal), _SnowDirection.xyz) >= _Snow*ns)
 		        o.Albedo = sTex.rgb*_SnowColor;
