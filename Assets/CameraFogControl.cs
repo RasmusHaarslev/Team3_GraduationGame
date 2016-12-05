@@ -5,11 +5,15 @@ public class CameraFogControl : MonoBehaviour {
 	public UnityStandardAssets.ImageEffects.GlobalFogExtended fog;
 	// Use this for initialization
 	void Start () {
-		fog.Advanced.sun = GameObject.FindGameObjectWithTag ("LevelLight");
+		CollectLevelLight ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void CollectLevelLight()
+	{
+		GameObject b =  GameObject.FindGameObjectWithTag ("LevelLight");
+		if(b != null)
+		{
+			fog.Advanced.sun = b; 
+		}
 	}
 }
