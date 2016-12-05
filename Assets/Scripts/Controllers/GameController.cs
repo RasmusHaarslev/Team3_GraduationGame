@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
         {
             scenes.Add(line);
         }
-
+        Time.timeScale = 1f;
         var randomScene = scenes[UnityEngine.Random.Range(0, scenes.Count - 1)];
         SceneManager.LoadScene(randomScene);
     }
