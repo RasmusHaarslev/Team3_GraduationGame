@@ -104,6 +104,7 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<Collider>();
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
@@ -134,6 +135,7 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<Collider>();
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
@@ -157,12 +159,13 @@ public class Character : MonoBehaviour
 			{
 				if (currentWeapon != null)
 				{
+					Manager_Audio.PlaySound(Manager_Audio.leaderDeath, this.gameObject);
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<Collider>();
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
 				animator.SetTrigger("Die");
-				//GetComponent<RagdollControl>().EnableRagDoll();
 			}
 
 			isInCombat = false;
