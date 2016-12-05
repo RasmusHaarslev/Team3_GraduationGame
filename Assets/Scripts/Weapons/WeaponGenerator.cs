@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 
 public class WeaponGenerator : MonoBehaviour
 {
-    private int newWeaponsNumber = 1;
+    [HideInInspector]
+    public int newWeaponsNumber = 1;
     [Tooltip("Value to multiply to the current difficulty level in order to generate the number of points to assign to each new weapon.")]
     public int increasePointsMultiplier = 2;
     [Tooltip("Value that will be added to the (difficultyLevel * increasePointsMultiplier) in order to generate the number of points to assign to each new weapon.")]
