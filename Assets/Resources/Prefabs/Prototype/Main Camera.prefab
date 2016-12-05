@@ -94,8 +94,10 @@ GameObject:
   - 114: {fileID: 114000010523345100}
   - 114: {fileID: 114000012132333340}
   - 114: {fileID: 114000014234263752}
-  - 114: {fileID: 114000010244622912}
   - 114: {fileID: 114000011844469480}
+  - 114: {fileID: 114000010883693278}
+  - 114: {fileID: 114000012002643146}
+  - 114: {fileID: 114000012193879424}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -109,10 +111,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014173923650}
-  m_LocalRotation: {x: 0.372535, y: 0.000056516215, z: -0.000024038207, w: 0.92801815}
-  m_LocalPosition: {x: -29.859108, y: 46.30117, z: -54.539185}
+  m_LocalRotation: {x: 0.33860362, y: 0.38695306, z: -0.15533563, w: 0.8434962}
+  m_LocalPosition: {x: -29.85911, y: 46.30117, z: -54.539185}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 40.297, y: 27.542002, z: 18.394001}
+  m_LocalEulerAnglesHint: {x: 43.741, y: 49.065002, z: 0}
   m_Children:
   - {fileID: 4000013939550940}
   m_Father: {fileID: 0}
@@ -237,18 +239,6 @@ MonoBehaviour:
   - {fileID: 198000012352089390}
   - {fileID: 198000011291474950}
   maxSnowAmount: 60
---- !u!114 &114000010244622912
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenerId: 0
 --- !u!114 &114000010523345100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,6 +279,18 @@ MonoBehaviour:
   OverriddenRotationSlerp: 0
   XRotationOffset: 0
   SlerpBack: 0
+--- !u!114 &114000010883693278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenerId: 0
 --- !u!114 &114000011844469480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,6 +304,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomShader: {fileID: 4800000, guid: 043d96ab7407dec449f1d706dee8db14, type: 3}
   amount: 0
+--- !u!114 &114000012002643146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dec3c34d2798d347a642ff4578529e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 0
+  useRadialDistance: 0
+  heightFog: 1
+  height: 15
+  heightDensity: 3.64
+  startDistance: 0
+  Advanced:
+    UseScattering: 0
+    sun: {fileID: 0}
+    Turbidity: 20
+    WorldScale: 500
+    Rayleigh: 1
+    ScatteringSize: 0.867
+    ScatteringIntensity: 20
+    Bias: 0.4
+    contrast: 4.5
+    luminance: 0.05
+    lumaAmount: 1
+    Falloff: 0
+    BoostColor: 1
+  fogShaderExtended: {fileID: 4800000, guid: 750359e6d24c2984e818fad83f5577f6, type: 3}
 --- !u!114 &114000012132333340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,6 +383,18 @@ MonoBehaviour:
   EffectFlags:
     components: []
   sharedInstanceID: 354c5a38-f992-4dc6-a0ae-820782790cba
+--- !u!114 &114000012193879424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfa195b3c3f17941a8dbe1396e728dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fog: {fileID: 114000012002643146}
 --- !u!114 &114000013351673726
 MonoBehaviour:
   m_ObjectHideFlags: 1

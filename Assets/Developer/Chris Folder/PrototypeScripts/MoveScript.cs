@@ -179,7 +179,7 @@ public class MoveScript : MonoBehaviour
 					if (!currentTarget.isDead)
 					{
 						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject.transform.parent.parent.gameObject));
 					}
 				}
 			}
@@ -232,9 +232,8 @@ public class MoveScript : MonoBehaviour
 				{
 					if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
 					{
-					Debug.Log("Player damages");
-					character.DealDamage();
-					hasShot = true;
+						character.DealDamage();
+						hasShot = true;
 					}
 				}
 				counter -= Time.deltaTime;

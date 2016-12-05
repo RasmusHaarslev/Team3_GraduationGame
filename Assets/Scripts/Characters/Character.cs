@@ -104,6 +104,8 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
@@ -134,6 +136,8 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
@@ -157,12 +161,14 @@ public class Character : MonoBehaviour
 			{
 				if (currentWeapon != null)
 				{
+					Manager_Audio.PlaySound(Manager_Audio.leaderDeath, this.gameObject);
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
 					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
 				}
 				animator.SetTrigger("Die");
-				//GetComponent<RagdollControl>().EnableRagDoll();
 			}
 
 			isInCombat = false;
@@ -180,16 +186,17 @@ public class Character : MonoBehaviour
 		StartCoroutine("GetWeapon");
 		if (gameObject.tag == "Player")
 		{
-			agent.avoidancePriority = 99;
+			agent.avoidancePriority = 1;
 		} else
 		{
-			agent.avoidancePriority = UnityEngine.Random.Range(25, 98);
+			agent.avoidancePriority = UnityEngine.Random.Range(2, 99);
 		}
 		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
+		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState); 
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -208,6 +215,20 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
+		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
+	}
+
+	private void BeginCombatState(EnemyAttackedByLeaderEvent e)
+	{
+		if (!isInCombat)
+		{
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
+			{
+				targetParent = e.parent;
+				TargetOpponent();
+				isInCombat = true;
+			}
+		}
 	}
 
 	IEnumerator GetWeapon()
@@ -469,7 +490,7 @@ public class Character : MonoBehaviour
 	{
 		if (e.target == gameObject)
 		{
-			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("LocoV2"))
 			{
 				animator.SetTrigger("TakeDamage");
 			}

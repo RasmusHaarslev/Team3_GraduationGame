@@ -283,6 +283,7 @@ public class DataService : MonoBehaviour
               id = 5,
               name = "Easy mellee tribesman",
               Type = CharacterValues.type.Tribesman,
+              isMale = true,
               tier = 1,
               damage = 2,
               health = 45,
@@ -295,6 +296,7 @@ public class DataService : MonoBehaviour
           {
               id = 6,
               name = "Easy rifle tribesman",
+              isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 2,
               damage = 2,
@@ -404,20 +406,7 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         { //WEAPONS
             leaderWeapon,
-            /*
-             new EquippableitemValues
-         {
-             id = 1,
-             name = "Toothpick",
-             Type = EquippableitemValues.type.polearm,
-             Slot = EquippableitemValues.slot.rightHand,
-             health = 20,
-             damage = 10,
-             damageSpeed = 2f,
-             range = 2,
-             characterId = 1,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },
+            
              new EquippableitemValues
          {
              id = 2,
@@ -479,10 +468,10 @@ public class DataService : MonoBehaviour
              damageSpeed = 1.5f,
              range = 2,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },*/
+         },/**/
              new EquippableitemValues
          {
-             //id = 6,
+             id = 7,
              name = "Easy Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -490,11 +479,11 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 2,
-             characterId = 4,
+             characterId = 5,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             //id = 4,
+             id = 8,
              name = "Easy Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -502,12 +491,12 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 9,
-             characterId = 5,
+             characterId = 6,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          },
              new EquippableitemValues
          {
-             //id = 6,
+             id = 9,
              name = "Medium Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -515,11 +504,11 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 2,
-             characterId = 6,
+             characterId = 7,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             //id = 4,
+             id = 10,
              name = "Medium Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -527,12 +516,12 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 9,
-             characterId = 7,
+             characterId = 8,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          },
              new EquippableitemValues
          {
-             //id = 6,
+             id = 11,
              name = "Hard Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -540,11 +529,11 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 2,
-             characterId = 8,
+             characterId = 9,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             //id = 4,
+             id = 12,
              name = "Hard Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -552,7 +541,7 @@ public class DataService : MonoBehaviour
              damage = 0,
              damageSpeed = 2f,
              range = 9,
-             characterId = 9,
+             characterId = 10,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          }
         });
@@ -655,14 +644,14 @@ public class DataService : MonoBehaviour
     /// 
     public async void UpdateCharacterValuesInDb(CharacterValues charValToUpdate)
     {
-        await _asyncConnection.UpdateAsync(charValToUpdate);
+        await _asyncConnection.InsertOrReplaceAsync(charValToUpdate);
     }
-    public void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
+    public async void DeleteCharactersValuesFromDb(CharacterValues charValuesToDelete)
     {
 
-        _connection.Delete(charValuesToDelete);
+        await _asyncConnection.DeleteAsync(charValuesToDelete);
         //delete all the equipped items associated to that character
-        _connection.Query<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
+        await _asyncConnection.QueryAsync<InventoryItem>("DELETE FROM EquippableitemValues WHERE characterId = " + charValuesToDelete.id);
 
     }
 

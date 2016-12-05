@@ -40,7 +40,7 @@ namespace Assets.ModuleDesigner.Scripts
         {
             print("Enter!");
             Camera.main.GetComponent<CameraController>().OverridePosition = OverridePosition;
-            Camera.main.GetComponent<CameraController>().OverriddenPosition = this.transform.position;
+            Camera.main.GetComponent<CameraController>().OverriddenPosition = Camera.main.transform.position;
 
             Camera.main.GetComponent<CameraController>().OverrideDistance = OverrideDistance;
             Camera.main.GetComponent<CameraController>().OverriddenDistance = Distance;
