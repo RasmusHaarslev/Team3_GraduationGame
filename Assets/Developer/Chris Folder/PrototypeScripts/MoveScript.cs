@@ -178,9 +178,8 @@ public class MoveScript : MonoBehaviour
 				{
 					if (!currentTarget.isDead)
 					{
-						Debug.Log(currentTarget.gameObject.transform.parent.parent.parent.gameObject.name);
 						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject.transform.parent.parent.parent.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
 					}
 				}
 			}

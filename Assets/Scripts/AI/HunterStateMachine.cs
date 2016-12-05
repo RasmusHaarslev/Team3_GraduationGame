@@ -181,7 +181,6 @@ public class HunterStateMachine : CoroutineMachine
 							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
-							Debug.Log("leader not attacking");
 							yield return new TransitionTo(FollowState, DefaultTransition);
 						}
 						break;
