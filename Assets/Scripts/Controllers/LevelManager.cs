@@ -184,7 +184,12 @@ public class LevelManager : MonoBehaviour
 
 	void PlayerDeath(PlayerDeathEvent e)
 	{
-		LoseGame("CampManagement");
+        if (!IsTutorial) { 
+		    LoseGame("CampManagement");
+        } else
+        {
+            LoseGame(SceneManager.GetActiveScene().name);
+        }
 	}
 
 	void LootReceived(EnemyDeathEvent e)
@@ -209,8 +214,15 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
 		{
-			LoseGame("CampManagement");
-		}
+            if (!IsTutorial)
+            {
+                LoseGame("CampManagement");
+            }
+            else
+            {
+                LoseGame(SceneManager.GetActiveScene().name);
+            }
+        }
 		else if (AlliesAlive <= 0)
 		{
 			LoseLevel();
@@ -221,7 +233,7 @@ public class LevelManager : MonoBehaviour
 	{
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
         Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
-        StartCoroutine(LoseGameCoroutine());
+        StartCoroutine(LoseGameCoroutine(scene));
 	}
 
     IEnumerator LoseGameCoroutine(string scene = "CampManagement")
@@ -233,7 +245,9 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        GameController.Instance.LoseGame();
+        if (!IsTutorial)
+            GameController.Instance.LoseGame();
+
         GameController.Instance.LoadScene(scene);
 
         Time.timeScale = 1f;
