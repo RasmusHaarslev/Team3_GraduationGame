@@ -131,9 +131,7 @@ public class GameController : MonoBehaviour
         if (SceneTransistion.instance != null)
         {
             SceneTransistion.instance.LoadScene(scene);
-        }
-        else
-        {
+        } else {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
     }
@@ -172,6 +170,8 @@ public class GameController : MonoBehaviour
         ResetResources();
         DataService dataService = new DataService(StringResources.databaseName);
         dataService.ResetDatabase();
+
+        LoadScene("CampManagement");
     }
 
     public void ResetResources()
@@ -187,5 +187,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("Scraps", InitialScrap);
         PlayerPrefs.SetInt("Premium", InitialPremium);
         PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
+
+        EventManager.Instance.TriggerEvent(new ChangeResources(food: 8));
     }
 }
