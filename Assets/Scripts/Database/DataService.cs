@@ -116,7 +116,7 @@ public class DataService : MonoBehaviour
           new CharacterValues
             {
                 id = 2,
-                name = "John",
+                name = "Aleksy",
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
                 damage = 4,
@@ -131,8 +131,8 @@ public class DataService : MonoBehaviour
          new CharacterValues
             {
                 id = 3,
-                name = "Nicolai",
-                isMale = true,
+                name = "Yazmin",
+                isMale = false,
                 Type = CharacterValues.type.Hunter,
                 damage = 6,
                 health = 94,
@@ -141,12 +141,12 @@ public class DataService : MonoBehaviour
                 combatTrait = CharacterValues.CombatTrait.Clingy,
                 targetTrait = CharacterValues.TargetTrait.Loyal,
                 prefabName = StringResources.follower1PrefabName,
-                materialName = StringResources.maleHuntersMaterials[4]
+                materialName = StringResources.femaleHuntersMaterials[4]
             },
          new CharacterValues
             {
                 id = 4,
-                name = "Peter",
+                name = "Zeheb",
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
                 damage = 8,
