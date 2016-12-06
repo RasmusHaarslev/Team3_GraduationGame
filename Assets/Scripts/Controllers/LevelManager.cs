@@ -132,6 +132,7 @@ public class LevelManager : MonoBehaviour
 	private void EnemySpawn(EnemySpawned e)
 	{
 		EnemiesAlive++;
+        Debug.Log("Spawned " + EnemiesAlive);
 	}
 
 	private void ItemSpawn(ItemSpawned e)
@@ -153,7 +154,8 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-		CheckConditions();
+        Debug.Log("Killed " + EnemiesAlive);
+        CheckConditions();
 	}
 
 	void PlayerDeath(PlayerDeathEvent e)
@@ -207,7 +209,8 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseGame(string scene = "CampManagement")
 	{
-		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
 		StartCoroutine(LoseGameCoroutine(scene));
 	}
@@ -233,7 +236,8 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseLevel()
 	{
-		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		EventManager.Instance.TriggerEvent(new LevelLost());
 		PlayerPrefs.SetInt("LevelResult", 0);
 
@@ -242,7 +246,8 @@ public class LevelManager : MonoBehaviour
 
 	public void WinLevel()
 	{
-		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
 		StartCoroutine(WinGameCoroutine());
 	}
 
