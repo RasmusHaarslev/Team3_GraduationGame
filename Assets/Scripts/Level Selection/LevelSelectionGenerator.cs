@@ -90,6 +90,8 @@ public class LevelSelectionGenerator : MonoBehaviour
         }
         else
         {
+            EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+
             // Need to read from an external file for this to work.
             nodesInRows = SaveLoadLevels.LoadLevels();
 
