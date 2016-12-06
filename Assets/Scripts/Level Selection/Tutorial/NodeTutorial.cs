@@ -91,6 +91,7 @@ public class NodeTutorial : MonoBehaviour {
 
     public void ClickNode()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_openMap, gameObject);
         InitialisePopUP(gameObject);
     }
 

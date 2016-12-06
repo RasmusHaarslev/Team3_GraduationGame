@@ -176,7 +176,7 @@ public class DataService : MonoBehaviour
           new CharacterValues
           {
               id = 5,
-              name = "Easy mellee tribesman",
+              name = "Easy melee tribesman",
               Type = CharacterValues.type.Tribesman,
               isMale = true,
               tier = 1,
@@ -204,7 +204,7 @@ public class DataService : MonoBehaviour
           new CharacterValues
           {
               id = 7,
-              name = "Medium mellee tribesman",
+              name = "Medium melee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 3,
@@ -232,7 +232,7 @@ public class DataService : MonoBehaviour
             new CharacterValues
           {
                 id = 9,
-              name = "Hard mellee tribesman",
+              name = "Hard melee tribesman",
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
@@ -262,48 +262,48 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         { //WEAPONS
             leaderWeapon,
-             new EquippableitemValues
-         {
-             id = 2,
-             name = "Plastic Shield",
-             Type = EquippableitemValues.type.shield,
-             Slot = EquippableitemValues.slot.leftHand,
-             level = 1,
-             health = 20,
-             damage = 10,
-             damageSpeed = 2f,
-             range = 2,
-             characterId = 2,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][1]
-         },
-             new EquippableitemValues
-         {
-             id = 3,
-             name = "Initiate Spear",
-             Type = EquippableitemValues.type.polearm,
-             Slot = EquippableitemValues.slot.rightHand,
-             level = 1,
-             health = 20,
-             damage = 10,
-             damageSpeed = 2.5f,
-             range = 20,
-             characterId = 3,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },
-             new EquippableitemValues
-         {
-             id = 4,
-             name = "Rifle of the Git Master Rasmus",
-             Type = EquippableitemValues.type.rifle,
-             Slot = EquippableitemValues.slot.rightHand,
-             level = 1,
-             health = 25,
-             damage = 15,
-             damageSpeed = 1.5f,
-             range = 15,
-             characterId = 4,
-             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
-         },
+         //    new EquippableitemValues
+         //{
+         //    id = 2,
+         //    name = "Plastic Shield",
+         //    Type = EquippableitemValues.type.shield,
+         //    Slot = EquippableitemValues.slot.leftHand,
+         //    level = 1,
+         //    health = 20,
+         //    damage = 10,
+         //    damageSpeed = 2f,
+         //    range = 2,
+         //    characterId = 2,
+         //    prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][1]
+         //},
+         //    new EquippableitemValues
+         //{
+         //    id = 3,
+         //    name = "Initiate Spear",
+         //    Type = EquippableitemValues.type.polearm,
+         //    Slot = EquippableitemValues.slot.rightHand,
+         //    level = 1,
+         //    health = 20,
+         //    damage = 10,
+         //    damageSpeed = 2.5f,
+         //    range = 2,
+         //    characterId = 3,
+         //    prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
+         //},
+         //    new EquippableitemValues
+         //{
+         //    id = 4,
+         //    name = "Rifle of the Git Master Rasmus",
+         //    Type = EquippableitemValues.type.rifle,
+         //    Slot = EquippableitemValues.slot.rightHand,
+         //    level = 1,
+         //    health = 25,
+         //    damage = 15,
+         //    damageSpeed = 1.5f,
+         //    range = 15,
+         //    characterId = 4,
+         //    prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
+         //},
              new EquippableitemValues
          {
              id = 7,
