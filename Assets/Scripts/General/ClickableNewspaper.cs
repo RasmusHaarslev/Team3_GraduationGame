@@ -8,12 +8,12 @@ public class ClickableNewspaper : ClickableItem
 
     void OnEnable()
     {
-        EventManager.Instance.StartListening<ItemClicked>(Click);
+        //EventManager.Instance.StartListening<ItemClicked>(Click);
     }
 
     void OnDisable()
     {
-        EventManager.Instance.StopListening<ItemClicked>(Click);
+        //EventManager.Instance.StopListening<ItemClicked>(Click);
     }
 
     void OnApplicationQuit()
@@ -21,7 +21,7 @@ public class ClickableNewspaper : ClickableItem
         this.enabled = false;
     }
 
-    public void Click(ItemClicked e)
+    public void Click()
     {
         if (TranslationManager.Instance.English)
         {

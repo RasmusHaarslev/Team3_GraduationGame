@@ -170,7 +170,7 @@ public class MoveScript : MonoBehaviour
 				}
 				else if (hit.transform.gameObject.tag == "Item")
 				{
-					EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
+					hit.transform.GetComponent<ClickableNewspaper>().Click();
 				}
 			}
 
@@ -201,11 +201,7 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-			else if (hits[0].transform.gameObject.tag == "Item")
-			{
-				EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
-			}
-			else
+            else
 			{
 				EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
 				agent.stoppingDistance = 1.2f;
