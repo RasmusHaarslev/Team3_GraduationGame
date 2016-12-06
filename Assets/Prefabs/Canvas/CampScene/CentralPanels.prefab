@@ -195,7 +195,6 @@ GameObject:
   - 224: {fileID: 224000010408242932}
   - 222: {fileID: 222000010931657326}
   - 114: {fileID: 114000013205656052}
-  - 114: {fileID: 114000013470666814}
   m_Layer: 5
   m_Name: TTrait
   m_TagString: Untagged
@@ -352,7 +351,6 @@ GameObject:
   - 224: {fileID: 224000013376414588}
   - 222: {fileID: 222000010620671676}
   - 114: {fileID: 114000014239719862}
-  - 114: {fileID: 114000011796264058}
   m_Layer: 5
   m_Name: CTrait
   m_TagString: Untagged
@@ -424,7 +422,6 @@ GameObject:
   - 224: {fileID: 224000012537517356}
   - 222: {fileID: 222000013891458872}
   - 114: {fileID: 114000013726318376}
-  - 114: {fileID: 114000012452672240}
   m_Layer: 5
   m_Name: TTrait
   m_TagString: Untagged
@@ -692,7 +689,6 @@ GameObject:
   - 224: {fileID: 224000013889782798}
   - 222: {fileID: 222000013566254010}
   - 114: {fileID: 114000010806410758}
-  - 114: {fileID: 114000011013164808}
   m_Layer: 5
   m_Name: TTrait
   m_TagString: Untagged
@@ -710,7 +706,6 @@ GameObject:
   - 224: {fileID: 224000013426129164}
   - 222: {fileID: 222000010933374886}
   - 114: {fileID: 114000010487016532}
-  - 114: {fileID: 114000014038098144}
   m_Layer: 5
   m_Name: CTrait
   m_TagString: Untagged
@@ -1014,7 +1009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012268676982
 GameObject:
   m_ObjectHideFlags: 1
@@ -1206,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012728147998
 GameObject:
   m_ObjectHideFlags: 1
@@ -1287,7 +1282,6 @@ GameObject:
   - 224: {fileID: 224000011022782426}
   - 222: {fileID: 222000012780265122}
   - 114: {fileID: 114000012687846728}
-  - 114: {fileID: 114000013823585354}
   m_Layer: 5
   m_Name: CTrait
   m_TagString: Untagged
@@ -1358,6 +1352,7 @@ GameObject:
   - 224: {fileID: 224000011395252884}
   - 222: {fileID: 222000012372383038}
   - 114: {fileID: 114000010840361612}
+  - 114: {fileID: 114000010978989096}
   m_Layer: 5
   m_Name: Text (3)
   m_TagString: Untagged
@@ -1742,6 +1737,7 @@ GameObject:
   - 224: {fileID: 224000014027501500}
   - 222: {fileID: 222000013136734582}
   - 114: {fileID: 114000013576880188}
+  - 114: {fileID: 114000010575381676}
   m_Layer: 5
   m_Name: Text (1)
   m_TagString: Untagged
@@ -1759,6 +1755,7 @@ GameObject:
   - 224: {fileID: 224000011382613872}
   - 222: {fileID: 222000010227489514}
   - 114: {fileID: 114000011924531828}
+  - 114: {fileID: 114000011274321890}
   m_Layer: 5
   m_Name: Text (2)
   m_TagString: Untagged
@@ -1776,6 +1773,7 @@ GameObject:
   - 224: {fileID: 224000014179344550}
   - 222: {fileID: 222000013389676374}
   - 114: {fileID: 114000012587601484}
+  - 114: {fileID: 114000010483774606}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2399,6 +2397,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000010483774606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013748044874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: FighterCombat
 --- !u!114 &114000010487016532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2504,6 +2514,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000010575381676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013567515854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: FighterTarget
 --- !u!114 &114000010591243108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2660,6 +2682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ContentPanel: {fileID: 1000011440337058}
+  ListItemPrefab: {fileID: 1000011303081650, guid: d9b2d219c44a8554aa49205f908423bb,
+    type: 2}
 --- !u!114 &114000010748409058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3110,6 +3134,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: How the soldier fights
+--- !u!114 &114000010978989096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012820862212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: AssignWeapon
 --- !u!114 &114000010989296332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3184,18 +3220,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Damage
---- !u!114 &114000011013164808
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011646361472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: TargetTrait
 --- !u!114 &114000011061121102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3481,6 +3505,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: 
+--- !u!114 &114000011274321890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013587824656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: StatsFighter
 --- !u!114 &114000011277767596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3908,18 +3944,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000011796264058
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010868813328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: CombatTrait
 --- !u!114 &114000011840833104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4097,7 +4121,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_Spacing: 20
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandHeight: 1
 --- !u!114 &114000011977464220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4668,18 +4692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: Weapon
---- !u!114 &114000012452672240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011110725020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: TargetTrait
 --- !u!114 &114000012504468272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5599,18 +5611,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 0.75
   m_Text: target trait
---- !u!114 &114000013470666814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010620487438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: TargetTrait
 --- !u!114 &114000013529838508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6045,18 +6045,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Weapon: '
---- !u!114 &114000013823585354
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012797764216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: CombatTrait
 --- !u!114 &114000013824791734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6338,18 +6326,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000014038098144
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011689449004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: CombatTrait
 --- !u!114 &114000014040296622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7603,7 +7579,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1254, y: -539}
+  m_AnchoredPosition: {x: 1276, y: -539}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000010621715566
@@ -7785,7 +7761,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1254, y: -438}
+  m_AnchoredPosition: {x: 1276, y: -438}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000011022782426
@@ -8695,7 +8671,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1254, y: -334}
+  m_AnchoredPosition: {x: 1276, y: -334}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000012677281296
@@ -8942,7 +8918,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 880, y: -231}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 380, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000013012357000
 RectTransform:
@@ -9063,7 +9039,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 880, y: -334}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 380, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000013259976016
 RectTransform:
@@ -9261,7 +9237,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1254, y: -231}
+  m_AnchoredPosition: {x: 1276, y: -231}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000013688858900
@@ -9338,7 +9314,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 880, y: -438}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 380, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000013916616130
 RectTransform:
@@ -9428,7 +9404,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 880, y: -539}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 380, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000014055519434
 RectTransform:
