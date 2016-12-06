@@ -19,7 +19,7 @@ public class UI_LevelDone : MonoBehaviour {
 
     public void LevelDone(TutorialDone e)
     {
-        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
         endingPanel.SetActive(true);

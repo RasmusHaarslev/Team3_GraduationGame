@@ -16,7 +16,7 @@ public class NewspaperPanelScript : MonoBehaviour {
 
             if (!GameObject.Find("NewspaperPanel").transform.FindChild("NewspaperPanelContent").gameObject.activeSelf)
             {
-                EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+                EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
             }
             NewspaperImage.sprite = newspaper;
             ContentPanel.SetActive(true);
@@ -26,6 +26,6 @@ public class NewspaperPanelScript : MonoBehaviour {
 	public void ClosePanel()
 	{
         Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
-        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
 	}
 }

@@ -16,7 +16,7 @@ public class OptionsPanel : MonoBehaviour {
         }
 
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
         BackgroundPanel.SetActive(true);
         OptionPanel.SetActive(true);
     }

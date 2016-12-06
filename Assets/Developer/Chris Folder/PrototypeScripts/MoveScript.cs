@@ -44,6 +44,7 @@ public class MoveScript : MonoBehaviour
 
 	private void StopFlee(StopFleeEvent e)
 	{
+		character.isFleeing = false;
 		isFleeing = false;
 		agent.speed = 2.75f;
 		agent.Stop();
@@ -92,6 +93,7 @@ public class MoveScript : MonoBehaviour
 			if (character.currentHealth <= 0 && isDead == false)
 			{
 				EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
+				EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
 				isDead = true;
 			}
 			if (movement)

@@ -48,7 +48,7 @@ public class LevelCanvasManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		fleePopUp.SetActive(true);
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
 		if (fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>() != null)
 		{
 			fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>().SetupText(null, "flee");
@@ -58,7 +58,7 @@ public class LevelCanvasManager : MonoBehaviour
 
 	public void StopFlee()
 	{
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
 		EventManager.Instance.TriggerEvent(new StopFleeEvent());
 	}
 }
