@@ -20,7 +20,7 @@ public class MoveScript : MonoBehaviour
 	List<GameObject> hunters = new List<GameObject>();
 	bool hasShot = false;
 	public float fleeSpeed = 4f;
-
+	LevelManager levelManager;
 	// Use this for initialization
 	void Start()
 	{
@@ -29,6 +29,7 @@ public class MoveScript : MonoBehaviour
 
 	void OnEnable()
 	{
+		levelManager = UnityEngine.Object.FindObjectOfType<LevelManager>();
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
 		EventManager.Instance.StartListening<StopFleeEvent>(StopFlee);
 		agent = GetComponent<NavMeshAgent>();
@@ -65,19 +66,26 @@ public class MoveScript : MonoBehaviour
 	{
 		if (hunters.Count == 0)
 		{
-			//hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
-		}
-		int counter = 0;
-		foreach (var hunter in hunters)
-		{
-			if (hunter.GetComponent<Character>().isInCombat)
+			if (!levelManager.IsTutorial)
 			{
-				character.isInCombat = true;
-				counter++;
+				hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
 			}
 		}
-		if (counter == 0)
-			character.isInCombat = false;
+		else
+		{
+			int counter = 0;
+			foreach (var hunter in hunters)
+			{
+				if (hunter.GetComponent<Character>().isInCombat)
+				{
+					character.isInCombat = true;
+					counter++;
+				}
+			}
+			if (counter == 0)
+				character.isInCombat = false;
+
+		}
 		if (!isFleeing)
 		{
 			attackSpeed = character.damageSpeed;
@@ -212,11 +220,15 @@ public class MoveScript : MonoBehaviour
 			character.RotateTowards(character.target.transform);
 			if (character.isInCombat)
 			{
-				character.animator.SetBool("isAware", true);
+				if (!character.animator.GetBool("isAware"))
+				{
+					character.animator.SetBool("isAware", true);
+				}
 			}
 			else
 			{
-				character.animator.SetBool("isAware", false);
+				if (character.animator.GetBool("isAware"))
+					character.animator.SetBool("isAware", false);
 			}
 
 			if (counter <= 0)
