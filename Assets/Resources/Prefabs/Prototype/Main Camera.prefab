@@ -93,11 +93,9 @@ GameObject:
   - 114: {fileID: 114000012132333340}
   - 114: {fileID: 114000011844469480}
   - 114: {fileID: 114000010883693278}
-  - 114: {fileID: 114000012002643146}
-  - 114: {fileID: 114000012193879424}
   - 114: {fileID: 114000012639463382}
   - 114: {fileID: 114000010946308684}
-  - 114: {fileID: 114000012064983110}
+  - 114: {fileID: 114000013347936036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -308,72 +306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomShader: {fileID: 4800000, guid: 043d96ab7407dec449f1d706dee8db14, type: 3}
   amount: 0
---- !u!114 &114000012002643146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dec3c34d2798d347a642ff4578529e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceFog: 1
-  excludeFarPixels: 0
-  useRadialDistance: 0
-  heightFog: 1
-  height: 24.99
-  heightDensity: 0.2
-  startDistance: 0
-  Advanced:
-    UseScattering: 0
-    sun: {fileID: 0}
-    Turbidity: 20
-    WorldScale: 500
-    Rayleigh: 1
-    ScatteringSize: 0.867
-    ScatteringIntensity: 20
-    Bias: 0.4
-    contrast: 4.5
-    luminance: 0.05
-    lumaAmount: 1
-    Falloff: 0
-    BoostColor: 1
-  fogShaderExtended: {fileID: 4800000, guid: 750359e6d24c2984e818fad83f5577f6, type: 3}
---- !u!114 &114000012064983110
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dec3c34d2798d347a642ff4578529e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceFog: 0
-  excludeFarPixels: 0
-  useRadialDistance: 0
-  heightFog: 1
-  height: 26.92
-  heightDensity: 0.15
-  startDistance: 0
-  Advanced:
-    UseScattering: 0
-    sun: {fileID: 0}
-    Turbidity: 0
-    WorldScale: 501.31
-    Rayleigh: -0.01
-    ScatteringSize: 0.0001
-    ScatteringIntensity: 19.47
-    Bias: 2
-    contrast: 4.76
-    luminance: 2.99
-    lumaAmount: 0.66
-    Falloff: 0
-    BoostColor: 1
-  fogShaderExtended: {fileID: 4800000, guid: 750359e6d24c2984e818fad83f5577f6, type: 3}
 --- !u!114 &114000012132333340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -420,18 +352,6 @@ MonoBehaviour:
   EffectFlags:
     components: []
   sharedInstanceID: 354c5a38-f992-4dc6-a0ae-820782790cba
---- !u!114 &114000012193879424
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bfa195b3c3f17941a8dbe1396e728dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fog: {fileID: 114000012002643146}
 --- !u!114 &114000012639463382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +374,25 @@ MonoBehaviour:
   frequency: 0.5
   nbDecimal: 1
   fontSize: 50
+--- !u!114 &114000013347936036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 0
+  excludeFarPixels: 0
+  useRadialDistance: 0
+  heightFog: 1
+  height: 30
+  heightDensity: 0.2
+  startDistance: 25
+  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!124 &124000010111313504
 Behaviour:
   m_ObjectHideFlags: 1
