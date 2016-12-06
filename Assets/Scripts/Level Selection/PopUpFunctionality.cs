@@ -204,12 +204,10 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, node.GetComponent<Node>().foodAmount);
         PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
+        PlayerPrefs.SetInt(StringResources.PremiumDropAmountPrefsName, node.GetComponent<Node>().goldTeethAmount);
 
         EventManager.Instance.TriggerEvent(new LevelStarted());
-
-        // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
-        // PlayerPrefs.SetInt("ChoiceCamps", node.GetComponent<Node>().choiceCamps);
-
+        
         GameController.Instance.LoadScene("LevelEnterCutscene");
     }
 
