@@ -68,9 +68,6 @@ public class NodeTutorial : MonoBehaviour {
             case "TutorialLevel04":
                 SetScrollPosition(3);
                 break;
-            case "TutorialLevel05":
-                SetScrollPosition(4);
-                break;
         }
         DoneLevel();
     }
@@ -104,11 +101,11 @@ public class NodeTutorial : MonoBehaviour {
         int tutLevel = (int)Char.GetNumericValue(scene[scene.Length - 1]);
         string compare = "Tut" + tutLevel;
 
-        if (compare == gameObject.name && compare != "Tut5")
+        if (compare == gameObject.name && compare != "Tut4")
         {
             StartCoroutine(initWin(gameObject));
             EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
-        } else if (gameObject.name == "Tut5" && compare == "Tut5")
+        } else if (gameObject.name == "Tut4" && compare == "Tut4")
         {
             EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
             GameController.Instance.LoadScene("CampManagement");
@@ -281,9 +278,6 @@ public class NodeTutorial : MonoBehaviour {
                   GameController.Instance.LoadScene("TutorialLevel03");
                   break;
               case "Tut4":
-                  GameController.Instance.LoadScene("TutorialLevel04");
-                  break;
-              case "Tut5":
                   GameController.Instance.LoadScene("CampManagement");
                   break;
           }

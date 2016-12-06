@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
 	Camera camera;
 	Vector3 screenPos;
 	GUIStyle currentStyle = null;
-	bool active = true;
+	public bool active = true;
 
 	// Use this for initialization
 	void Start()
@@ -39,28 +39,22 @@ public class HealthBar : MonoBehaviour
 	void OnEnable()
 	{
 		EventManager.Instance.StartListening<UIPanelActiveEvent>(ActivateHealthPanel);
-		EventManager.Instance.StartListening<PlayerDeathEvent>(DisableBar);
 	}
 
 	void OnDisable()
 	{
 		EventManager.Instance.StopListening<UIPanelActiveEvent>(ActivateHealthPanel);
-		EventManager.Instance.StopListening<PlayerDeathEvent>(DisableBar);
 	}
 
-	private void DisableBar(PlayerDeathEvent e)
+
+	void OnApplicationQuit()
 	{
-		active = false;
+		this.enabled = false;
 	}
 
-void OnApplicationQuit()
-    {
-        this.enabled = false;
-    }
-
-    private void ActivateHealthPanel(UIPanelActiveEvent e)
+	private void ActivateHealthPanel(UIPanelActiveEvent e)
 	{
-		active = !active;
+		active = e.panelActive;
 	}
 
 	// Update is called once per frame
@@ -80,7 +74,7 @@ void OnApplicationQuit()
 		if (active)
 		{
 			// draw the background:
-			if (!character.isDead && SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing)
+			if (SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing && !character.isDead)
 			{
 				if (transform.parent.gameObject.tag == "Friendly" || transform.parent.gameObject.tag == "Player")
 				{
