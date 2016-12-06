@@ -89,7 +89,7 @@ public class StringResources
                 EquippableitemValues.type.rifle, new[]
                 {
                     new[] { "Hunting Rifle", "Rifle1", "Rifle1AMaterial" },
-                    new[] { "Carabine", "Rifle1", "Rifle1BMaterial" },
+                    new[] { "Carbine", "Rifle1", "Rifle1BMaterial" },
                     new[] { "Old Musket", "Rifle1", "Rifle1CMaterial" }
                 }
             }
