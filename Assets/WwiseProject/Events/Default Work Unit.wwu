@@ -66,6 +66,16 @@
 						</Event>
 						<Event Name="Stop_GroundAmbience" ID="{63617761-5C01-4EC1-A0BA-655ED12C3DF5}">
 							<ChildrenList>
+								<Action Name="Stop" ID="{841D59BF-EFFB-4346-B87B-F50E7246125F}" ShortID="773082448" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="2"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{E8F57E79-7BAB-4788-9235-58ADB15B2BB0}" Global="true">
+											<ObjectRef Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
 								<Action Name="Stop" ID="{0526C95A-C4B2-486A-B3DA-8BB585748DEA}" ShortID="336222538" Type="Stop" Scope="One" Global="true">
 									<PropertyList>
 										<Property Name="FadeTime" Type="Real64" Value="1"/>
