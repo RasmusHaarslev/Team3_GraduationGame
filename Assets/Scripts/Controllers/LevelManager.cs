@@ -294,7 +294,8 @@ public class LevelManager : MonoBehaviour
         EventManager.Instance.TriggerEvent(
             new ChangeResources(
                 food: PlayerPrefs.GetInt("FoodAmount"),
-                scraps: PlayerPrefs.GetInt("ScrapAmount")
+                scraps: PlayerPrefs.GetInt("ScrapAmount"),
+                premium: PlayerPrefs.GetInt(StringResources.PremiumDropAmountPrefsName)
             )
         );
 
@@ -336,7 +337,7 @@ public class LevelManager : MonoBehaviour
     {
         int difficultyLevel = GetComponent<LevelGenerator>().difficultyLevel;
         WeaponGenerator weaponsGenerator = GetComponent<WeaponGenerator>();
-
+        
         //fill a list with the new items values
         EquippableitemValues[] newItemsValues = weaponsGenerator.GetNewItemsValues(difficultyLevel);
 

@@ -226,8 +226,8 @@ GameObject:
   - 222: {fileID: 222000010299248678}
   - 114: {fileID: 114000010272900464}
   - 114: {fileID: 114000014028420502}
-  - 114: {fileID: 114000013342906616}
   - 114: {fileID: 114000013683551658}
+  - 114: {fileID: 114000010545883764}
   m_Layer: 5
   m_Name: EquippableItemUIScrollElementReward
   m_TagString: Untagged
@@ -379,6 +379,29 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000010545883764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012797339004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171c5b375904bf14fb7a0662f1e657fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 114000013666967520}
+  name: {fileID: 114000012353454432}
+  damage: {fileID: 114000010112054868}
+  damageSpeed: {fileID: 114000013444881874}
+  range: {fileID: 114000012691661858}
+  health: {fileID: 114000013432893318}
+  type: {fileID: 114000012677563338}
+  level: {fileID: 114000012377378978}
+  weaponCams: {fileID: 1000012580963976, guid: 5437db8b0ead0834880efa60ab8356d5, type: 2}
+  selectedColor:
+    serializedVersion: 2
+    rgba: 4279676090
 --- !u!114 &114000011635580288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -612,29 +635,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Type:'
---- !u!114 &114000013342906616
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012797339004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 171c5b375904bf14fb7a0662f1e657fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Icon: {fileID: 114000013666967520}
-  name: {fileID: 114000012353454432}
-  damage: {fileID: 114000010112054868}
-  damageSpeed: {fileID: 114000013444881874}
-  range: {fileID: 114000012691661858}
-  health: {fileID: 114000013432893318}
-  type: {fileID: 114000012677563338}
-  level: {fileID: 114000012377378978}
-  weaponCams: {fileID: 1000012580963976, guid: 5437db8b0ead0834880efa60ab8356d5, type: 2}
-  selectedColor:
-    serializedVersion: 2
-    rgba: 4279676090
 --- !u!114 &114000013432893318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: -1
   m_PreferredWidth: -1
-  m_PreferredHeight: 400
+  m_PreferredHeight: 300
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
 --- !u!222 &222000010299248678
@@ -1025,7 +1025,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 118, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224000011853388556
 RectTransform:
