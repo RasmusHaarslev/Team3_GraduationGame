@@ -11,6 +11,12 @@ public class ResourceTextController : MonoBehaviour
 	{
 	    int resourceQuantity = PlayerPrefs.GetInt(resourceName, 0);
 
-        GetComponent<Text>().text = resourceQuantity.ToString();
+        if(resourceQuantity != 0) { 
+            GetComponent<Text>().text = resourceQuantity.ToString();
+        }
+        else
+        {
+            //transform.parent.gameObject.SetActive(false);
+        }
 	}	
 }

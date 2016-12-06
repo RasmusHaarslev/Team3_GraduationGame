@@ -25,19 +25,12 @@ public class EquippableItemUIListController : MonoBehaviour
             
             GameObject newItem = Instantiate(ListItemPrefab) as GameObject;
             UIListEquippableItemController controller = newItem.GetComponent<UIListEquippableItemController>();
-           /* if (!firstDrawn)
+            if (!firstDrawn)
             {
                 newItem.GetComponent<Image>().color = controller.selectedColor;
                 firstDrawn = true;
             }
-            else
-            {
-                if (previousWeaponLevel > values.level)
-                {
-
-                }
-            }
-            */
+            
             
             //controller.Icon.sprite = animal.Icon;
             controller.type.text = values.Type.ToString();
