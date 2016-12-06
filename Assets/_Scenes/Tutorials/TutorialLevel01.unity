@@ -3378,23 +3378,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6616eac98ae132a40bbef9dc612dfdce, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &168144794 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000014173923650, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1730745004}
---- !u!114 &168144795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 168144794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenerId: 0
 --- !u!4 &179995850 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013377824308, guid: c3151d7366b92fd4ab7902953b236f98,
@@ -4528,6 +4511,15 @@ Prefab:
     - target: {fileID: 4000011062666498, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
       propertyPath: m_RootOrder
       value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011566851630, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014216384116, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
@@ -10185,7 +10177,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000013580828398, guid: 54346278423a1134ab99a4a297e0f2d8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -44.36
+      value: -45.99
       objectReference: {fileID: 0}
     - target: {fileID: 4000013580828398, guid: 54346278423a1134ab99a4a297e0f2d8, type: 2}
       propertyPath: m_LocalPosition.y
@@ -10193,7 +10185,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013580828398, guid: 54346278423a1134ab99a4a297e0f2d8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20.5
+      value: 21.83
       objectReference: {fileID: 0}
     - target: {fileID: 4000013580828398, guid: 54346278423a1134ab99a4a297e0f2d8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -14134,6 +14126,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 1000012028013860, guid: c1b2088177f29ba48b3ed5d56e6c8844, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1b2088177f29ba48b3ed5d56e6c8844, type: 2}
   m_IsPrefabParent: 0
@@ -16112,6 +16108,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 1000011453435848, guid: 2386e908843867e4b981636ebf6f99ac, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2386e908843867e4b981636ebf6f99ac, type: 2}
   m_IsPrefabParent: 0
@@ -18445,7 +18445,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013452602748, guid: deaabcb3da648de41b4f80430e576123, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.06
+      value: -2.044
       objectReference: {fileID: 0}
     - target: {fileID: 4000013452602748, guid: deaabcb3da648de41b4f80430e576123, type: 2}
       propertyPath: m_LocalPosition.z
@@ -20593,9 +20593,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -22861,7 +22861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier: 6
+  tier: 1
 --- !u!1 &2116815900
 GameObject:
   m_ObjectHideFlags: 0
