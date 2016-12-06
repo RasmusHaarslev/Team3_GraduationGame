@@ -55,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011393729076}
-  m_LocalRotation: {x: 0.15086423, y: -0, z: -0, w: 0.9885545}
-  m_LocalPosition: {x: 0.55797577, y: 24.5, z: -65.02418}
+  m_LocalRotation: {x: 0.16920123, y: -0.0084774615, z: 0.0014554363, w: 0.985544}
+  m_LocalPosition: {x: 0.12960052, y: 29.714455, z: -66.766464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -68,8 +68,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014217012784}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.65899, y: 35.907326, z: -13.40791}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -44.8248, y: 12.032774, z: 24.06323}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -177,11 +177,11 @@ MonoBehaviour:
   SlerpAmount: 1
   CameraOffset: 1
   OverridePosition: 0
-  OverriddenPosition: {x: -56.65899, y: 35.907326, z: -13.40791}
+  OverriddenPosition: {x: -44.8248, y: 12.032774, z: 24.06323}
   OverrideDistance: 1
   OverriddenDistance: 16
   OverrideHeight: 1
-  OverriddenHeight: 10
+  OverriddenHeight: 6
 --- !u!114 &114000014192580730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,9 +195,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KeepGizmo: 1
   gizmoMesh: {fileID: 4300014, guid: 4a9035eebec08a247b268ea94c995ad6, type: 3}
+  LockCameraPosition: 0
   OverridePosition: 0
   OverrideHeight: 1
-  Height: 10
+  Height: 6
   OverrideDistance: 1
   Distance: 16
   OverrideSlerp: 1
@@ -205,7 +206,13 @@ MonoBehaviour:
   OverrideRotationSlerp: 1
   RotationSlerp: 1
   SlerpBack: 1
-  XRotationOffset: 5
+  OverrideFogHeight: 1
+  OverriddenFogHeight: 50
+  OverrideFogHeightDensity: 1
+  OverriddenFogHeightDensity: 0.005
+  OverrideFogStartDistance: 1
+  OverriddenFogStartDistance: 0
+  XRotationOffset: 4.5
 --- !u!124 &124000010850431298
 Behaviour:
   m_ObjectHideFlags: 1
