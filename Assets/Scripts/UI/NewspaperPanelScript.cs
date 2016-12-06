@@ -16,8 +16,12 @@ public class NewspaperPanelScript : MonoBehaviour {
 
             if (!GameObject.Find("NewspaperPanel").transform.FindChild("NewspaperPanelContent").gameObject.activeSelf)
             {
-                EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
-            }
+				if (GameController.Instance.numberOfActiveUIs == 0)
+				{
+					EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+				}
+				GameController.Instance.numberOfActiveUIs++;
+			}
             NewspaperImage.sprite = newspaper;
             ContentPanel.SetActive(true);
         }
@@ -26,6 +30,10 @@ public class NewspaperPanelScript : MonoBehaviour {
 	public void ClosePanel()
 	{
         Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
-        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		if (GameController.Instance.numberOfActiveUIs == 1)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
+		}
+		GameController.Instance.numberOfActiveUIs--;
 	}
 }

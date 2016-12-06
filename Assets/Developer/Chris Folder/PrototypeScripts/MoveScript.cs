@@ -56,7 +56,6 @@ public class MoveScript : MonoBehaviour
 		agent.speed = fleeSpeed;
 	}
 
-
 	void OnApplicationQuit()
 	{
 		this.enabled = false;
@@ -93,7 +92,11 @@ public class MoveScript : MonoBehaviour
 			if (character.currentHealth <= 0 && isDead == false)
 			{
 				EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
-				EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
+				if (GameController.Instance.numberOfActiveUIs == 0)
+				{
+					EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+				}
+				GameController.Instance.numberOfActiveUIs++;
 				isDead = true;
 			}
 			if (movement)

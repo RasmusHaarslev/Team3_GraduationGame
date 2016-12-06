@@ -102,6 +102,7 @@ public class LevelManager : MonoBehaviour
 
 	void OnDisable()
 	{
+		GameController.Instance.numberOfActiveUIs = 0;
 		//Enemy spawn for counting
 		EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
 		EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
@@ -266,7 +267,11 @@ public class LevelManager : MonoBehaviour
 			yield break;
 		}
 
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
+		if (GameController.Instance.numberOfActiveUIs == 0)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		}
+		GameController.Instance.numberOfActiveUIs++;
 		EventManager.Instance.TriggerEvent(
 			new ChangeResources(
 				food: PlayerPrefs.GetInt("FoodAmount"),

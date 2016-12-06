@@ -54,7 +54,7 @@ public class HealthBar : MonoBehaviour
 
 	private void ActivateHealthPanel(UIPanelActiveEvent e)
 	{
-		active = !e.panelActive;
+		active = e.panelActive;
 	}
 
 	// Update is called once per frame
@@ -74,7 +74,7 @@ public class HealthBar : MonoBehaviour
 		if (active)
 		{
 			// draw the background:
-			if (SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing)
+			if (SceneManager.GetActiveScene().name != "CampManagement" && !character.isFleeing && !character.isDead)
 			{
 				if (transform.parent.gameObject.tag == "Friendly" || transform.parent.gameObject.tag == "Player")
 				{

@@ -5,7 +5,7 @@ public class LevelCanvasManager : MonoBehaviour
 {
 
 	public GameObject fleePopUp;
-    public bool isTutorial = false;
+	public bool isTutorial = false;
 
 	void OnEnable()
 	{
@@ -17,27 +17,28 @@ public class LevelCanvasManager : MonoBehaviour
 		EventManager.Instance.StopListening<FleeStateEvent>(ShowPopUp);
 	}
 
-    void OnApplicationQuit()
-    {
-        this.enabled = false;
-    }
+	void OnApplicationQuit()
+	{
+		this.enabled = false;
+	}
 
-    public void ShowPopUp(FleeStateEvent e)
+	public void ShowPopUp(FleeStateEvent e)
 	{
 		StartCoroutine(Flee());
 	}
 
 	public void DisplayEndLootItems(EquippableitemValues[] newItemsValues)
 	{
-        if(!isTutorial) { 
-            print("executing loot items!");
-		    //display them on the panel
-		    EquippableItemUIListController listController = GetComponentInChildren<EquippableItemUIListController>(true);
-		    listController.GenerateItemsList(newItemsValues);
-		    //activate new items panel
-		    listController.transform.parent.parent.gameObject.SetActive(true);
-        }
-    }
+		if (!isTutorial)
+		{
+			print("executing loot items!");
+			//display them on the panel
+			EquippableItemUIListController listController = GetComponentInChildren<EquippableItemUIListController>(true);
+			listController.GenerateItemsList(newItemsValues);
+			//activate new items panel
+			listController.transform.parent.parent.gameObject.SetActive(true);
+		}
+	}
 
 	public void LoadFleeCutScene()
 	{
@@ -48,7 +49,11 @@ public class LevelCanvasManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		fleePopUp.SetActive(true);
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
+		if (GameController.Instance.numberOfActiveUIs == 0)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		}
+		GameController.Instance.numberOfActiveUIs++;
 		if (fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>() != null)
 		{
 			fleePopUp.transform.GetChild(0).GetComponent<ConfirmPanel>().SetupText(null, "flee");
@@ -58,7 +63,11 @@ public class LevelCanvasManager : MonoBehaviour
 
 	public void StopFlee()
 	{
-		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		if (GameController.Instance.numberOfActiveUIs == 1)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
+		}
+		GameController.Instance.numberOfActiveUIs--;
 		EventManager.Instance.TriggerEvent(new StopFleeEvent());
 	}
 }
