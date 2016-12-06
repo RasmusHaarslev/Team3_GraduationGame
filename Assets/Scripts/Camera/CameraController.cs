@@ -109,19 +109,19 @@ public class CameraController : MonoBehaviour
     private void SlerpTheFog()
     {
         if (OverrideFogHeight)
-            globalFogScript.height = Mathf.Lerp(globalFogScript.height, OverriddenFogHeight, Time.deltaTime);
+            globalFogScript.height = Mathf.Lerp(globalFogScript.height, OverriddenFogHeight, Time.deltaTime * 0.4f);
         else
-            globalFogScript.height = Mathf.Lerp(globalFogScript.height, originalFogHeight, Time.deltaTime);
+            globalFogScript.height = Mathf.Lerp(globalFogScript.height, originalFogHeight, Time.deltaTime * 0.08f);
 
         if (OverrideFogHeightDensity)
-            globalFogScript.heightDensity = Mathf.Lerp(globalFogScript.heightDensity, OverriddenFogHeightDensity, Time.deltaTime);
+            globalFogScript.heightDensity = Mathf.Lerp(globalFogScript.heightDensity, OverriddenFogHeightDensity, Time.deltaTime * 0.5f);
         else
-            globalFogScript.heightDensity = Mathf.Lerp(globalFogScript.heightDensity, originalFogHeightDensity, Time.deltaTime);
+            globalFogScript.heightDensity = Mathf.Lerp(globalFogScript.heightDensity, originalFogHeightDensity, Time.deltaTime * 0.1f);
 
         if (OverrideFogStartDistance)
-            globalFogScript.startDistance = Mathf.Lerp(globalFogScript.startDistance, OverriddenFogStartDistance, Time.deltaTime);
+            globalFogScript.startDistance = Mathf.Lerp(globalFogScript.startDistance, OverriddenFogStartDistance, Time.deltaTime * 0.5f);
         else
-            globalFogScript.startDistance = Mathf.Lerp(globalFogScript.startDistance, originalFogHeight, Time.deltaTime);
+            globalFogScript.startDistance = Mathf.Lerp(globalFogScript.startDistance, originalFogHeight, Time.deltaTime * 0.1f);
     }
 
     void TransformPosition()
