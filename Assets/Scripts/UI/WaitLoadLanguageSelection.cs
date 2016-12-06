@@ -4,19 +4,22 @@ using System.Collections;
 
 public class WaitLoadLanguageSelection : MonoBehaviour {
 
-    public GameObject languagePanel;
-
     [Range(0,5)]
     public float fadingDuration = 2;
+
+    public float fadeDelay = 3.0f;
+
+    public GameObject nextPanel;
 
     void Start()
     {
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, 4);
-        Invoke("StartCutscene", 3.0f);
+        Invoke("StartCutscene", fadeDelay);
     }
    
     private void StartCutscene()
     {
+        nextPanel.SetActive(true);
         StartCoroutine(FadeOut(fadingDuration));
     }
 
@@ -32,5 +35,12 @@ public class WaitLoadLanguageSelection : MonoBehaviour {
             yield return null;
         }
         gameObject.SetActive(false);
+    }
+
+    public void Skip()
+    {
+        CancelInvoke();
+        nextPanel.SetActive(true);
+        StartCoroutine(FadeOut(fadingDuration));
     }
 }
