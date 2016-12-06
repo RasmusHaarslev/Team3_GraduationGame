@@ -4,13 +4,6 @@
 		<WorkUnit Name="Default Work Unit" ID="{AA8D190D-B159-4D3A-8348-121D2CA50747}" PersistMode="Standalone">
 			<ChildrenList>
 				<Bus Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
-					<PropertyList>
-						<Property Name="BusVolume" Type="Real64">
-							<ValueList>
-								<Value>-1</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Effect0" PluginName="Wwise Peak Limiter" CompanyID="0" PluginID="110" PluginType="3">
 							<ObjectRef Name="masterLimit" ID="{16E07E33-9D5A-4DEB-A28B-D46A7180E18C}" WorkUnitID="{75BCCEEF-CC0F-4E09-8F05-3CD4EEEAFC93}"/>
@@ -125,7 +118,7 @@
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>2</Value>
+												<Value>-2</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -134,7 +127,7 @@
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>-2</Value>
+												<Value>-3</Value>
 											</ValueList>
 										</Property>
 										<Property Name="HdrEnable" Type="bool">
@@ -230,7 +223,7 @@
 									<PropertyList>
 										<Property Name="BusVolume" Type="Real64">
 											<ValueList>
-												<Value>2</Value>
+												<Value>3</Value>
 											</ValueList>
 										</Property>
 										<Property Name="HdrRatio" Type="Real64">
@@ -251,7 +244,7 @@
 							<PropertyList>
 								<Property Name="BusVolume" Type="Real64">
 									<ValueList>
-										<Value>2</Value>
+										<Value>1</Value>
 									</ValueList>
 									<RTPCList>
 										<RTPC Name="" ID="{66DF2163-E0BE-4136-84B6-31E45EE9A15C}" ShortID="676713949">
