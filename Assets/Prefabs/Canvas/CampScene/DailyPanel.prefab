@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000011825553934
 GameObject:
   m_ObjectHideFlags: 1
@@ -123,6 +123,7 @@ GameObject:
   - 224: {fileID: 224000011265415462}
   - 222: {fileID: 222000010040644790}
   - 114: {fileID: 114000011518003596}
+  - 114: {fileID: 114000012254423414}
   m_Layer: 5
   m_Name: Info
   m_TagString: Untagged
@@ -140,6 +141,7 @@ GameObject:
   - 224: {fileID: 224000011535381658}
   - 222: {fileID: 222000011998405016}
   - 114: {fileID: 114000012859321516}
+  - 114: {fileID: 114000010601960200}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -207,6 +209,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114000010601960200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013181583310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: WelcomeBack
 --- !u!114 &114000010887523362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,6 +335,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114000012254423414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013046502970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: WelcomeFirstTime
 --- !u!114 &114000012647058226
 MonoBehaviour:
   m_ObjectHideFlags: 1
