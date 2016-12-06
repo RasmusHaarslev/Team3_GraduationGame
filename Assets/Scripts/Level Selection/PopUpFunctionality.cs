@@ -131,7 +131,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        int value = GameController.Instance._FOOD - node.GetComponent<Node>().TravelCost;
+        int value = node.GetComponent<Node>().TravelCost;
 
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
 
@@ -148,7 +148,9 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanelScout.SetActive(true);
 
-        confirmPanelScout.GetComponent<ConfirmPanel>().SetupText(node, "scout");
+        int value = node.GetComponent<Node>().scoutCost;
+
+        confirmPanelScout.GetComponent<ConfirmPanel>().SetupText(node, "scout", value);
 
         confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
         confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
