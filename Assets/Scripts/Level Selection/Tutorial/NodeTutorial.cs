@@ -278,7 +278,7 @@ public class NodeTutorial : MonoBehaviour {
                   GameController.Instance.LoadScene("TutorialLevel03");
                   break;
               case "Tut4":
-                  GameController.Instance.LoadScene("CampManagement");
+                  GameController.Instance.LoadScene("TutorialLevel04");
                   break;
           }
     }

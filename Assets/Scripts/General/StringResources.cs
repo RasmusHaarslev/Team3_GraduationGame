@@ -104,8 +104,6 @@ public class StringResources
 
     #endregion
 
-
-
     #region ANIMATIONS
 
     public static string animControllerShieldName = "Humanoid_ShieldController";
