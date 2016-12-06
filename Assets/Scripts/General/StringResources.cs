@@ -19,7 +19,6 @@ public class StringResources
         public static string FoodAmountPrefsName = "FoodAmount";
         public static string ScrapAmountPrefsName = "ScrapAmount";
         public static string ItemDropAmountPrefsName = "ItemDropAmount";
-        public static string PremiumDropAmountPrefsName = "PremiumDropAmount";
         public static string DaysSurvived = "DaysSurvived";
 
     #endregion

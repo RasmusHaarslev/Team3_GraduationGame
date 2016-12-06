@@ -12,7 +12,6 @@ public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandle
     public GameObject weaponCams;
     public Color32 selectedColor = new Color32(186, 172, 22, 255);
     Color32 defaultColor = new Color32(154, 154, 154, 116);
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (GetComponent<Image>().color != selectedColor)
@@ -24,7 +23,7 @@ public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandle
                     child.GetComponent<Image>().color = defaultColor;
                 }
             }
-            
+
             GetComponent<Image>().color = selectedColor;
 
             if (itemValues.Type == EquippableitemValues.type.rifle)
@@ -40,8 +39,7 @@ public class UIListEquippableItemController : MonoBehaviour, IPointerClickHandle
                 Manager_Audio.PlaySound(Manager_Audio.play_pickShield, gameObject);
             }
 
-            if (Object.FindObjectOfType<PanelScript>() != null)
-                Object.FindObjectOfType<PanelScript>().AssignWeaponToSoldier(itemValues);
+            Object.FindObjectOfType<PanelScript>().AssignWeaponToSoldier(itemValues);
         }
     }
 
