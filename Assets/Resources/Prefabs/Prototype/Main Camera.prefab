@@ -97,6 +97,7 @@ GameObject:
   - 114: {fileID: 114000012193879424}
   - 114: {fileID: 114000012639463382}
   - 114: {fileID: 114000010946308684}
+  - 114: {fileID: 114000012064983110}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -337,6 +338,39 @@ MonoBehaviour:
     contrast: 4.5
     luminance: 0.05
     lumaAmount: 1
+    Falloff: 0
+    BoostColor: 1
+  fogShaderExtended: {fileID: 4800000, guid: 750359e6d24c2984e818fad83f5577f6, type: 3}
+--- !u!114 &114000012064983110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dec3c34d2798d347a642ff4578529e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 0
+  excludeFarPixels: 0
+  useRadialDistance: 0
+  heightFog: 1
+  height: 26.92
+  heightDensity: 0.15
+  startDistance: 0
+  Advanced:
+    UseScattering: 0
+    sun: {fileID: 0}
+    Turbidity: 0
+    WorldScale: 501.31
+    Rayleigh: -0.01
+    ScatteringSize: 0.0001
+    ScatteringIntensity: 19.47
+    Bias: 2
+    contrast: 4.76
+    luminance: 2.99
+    lumaAmount: 0.66
     Falloff: 0
     BoostColor: 1
   fogShaderExtended: {fileID: 4800000, guid: 750359e6d24c2984e818fad83f5577f6, type: 3}
