@@ -84,6 +84,7 @@ public class HunterStateMachine : CoroutineMachine
 		ProjectCommand();
 		if (combatTrait != CharacterValues.CombatTrait.BraveFool)
 		{
+			character.animator.SetBool("isFleeing", true);
 			combatCommandState = CombatCommandState.Flee;
 		}
 		else
@@ -332,10 +333,9 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
-		character.animator.SetBool("isFleeing", true);
+		character.animator.SetBool("isAware", false);
 		agent.SetDestination(fleePosition);
 		agent.speed = fleeSpeed;
-		character.animator.SetBool("isAware", false);
 		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
