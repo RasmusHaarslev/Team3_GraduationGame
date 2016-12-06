@@ -737,33 +737,33 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-                    stat.GetComponent<Text>().text =  newCharacterSoldierList[i].damage.ToString();
+                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].damage.ToString(); 
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].name;
+                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].name); 
                 }
                 if (stat.name == "Health")
                 {
-                    stat.GetComponent<Text>().text =  newCharacterSoldierList[i].health.ToString();
+                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].health.ToString();
                 }               
                 if (stat.name == "Combat Trait")
                 {
-                    stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseCombatTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].combatTrait.ToString() + "Description");
                 }
                 if (stat.name == "Target Trait")
                 {
-                    stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseTargetTraitDescription(newCharacterSoldierList[i]);
+                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].targetTrait.ToString() + "Description");
                 }
                 if (stat.name == "CTrait")
                 {
-                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n";
+                    stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].combatTrait.ToString()) + ":\n";
                 }
                 if (stat.name == "TTrait")
                 {
-                    stat.GetComponent<Text>().text = " " + Regex.Replace(newCharacterSoldierList[i].targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n" ;
+                    stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].targetTrait.ToString()) + ":\n";
                 }
-                print(newWeaponsSoldierList.Count());
+            
                 if (stat.name == "Weapon Description")
                 {
                     stat.GetComponent<Text>().text = newWeaponsSoldierList[i].name;
@@ -805,19 +805,19 @@ public class PanelScript : MonoBehaviour
             }          
             if (stat.name == "Combat Trait")
             {
-                stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseCombatTraitDescription(currentSoldier.characterBaseValues);
+                stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString() + "Description");
             }
             if (stat.name == "Target Trait")
             {
-                stat.GetComponent<Text>().text = GetComponent<TraitDescription>().chooseTargetTraitDescription(currentSoldier.characterBaseValues);
+                stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString() + "Description");
             }
             if (stat.name == "CTrait")
             {
-                stat.GetComponent<Text>().text = " " + Regex.Replace(currentSoldier.characterBaseValues.combatTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n";
+                stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString()) + ":\n";
             }
             if (stat.name == "TTrait")
             {
-                stat.GetComponent<Text>().text = " " + Regex.Replace(currentSoldier.characterBaseValues.targetTrait.ToString(), "([a-z])_?([A-Z])", "$1 $2") + ":\n";
+                stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString()) + ":\n";
             }
             if (stat.name == "Weapon Description")
             {
