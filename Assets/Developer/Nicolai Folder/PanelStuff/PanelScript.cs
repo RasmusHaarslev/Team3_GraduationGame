@@ -33,6 +33,7 @@ public class PanelScript : MonoBehaviour
     public GameObject silhouetteGO;
     public List<Transform> silhouettePosList = new List<Transform>();
     bool reroll = false;
+    List<int> soldierTierList = new List<int>();
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -242,12 +243,13 @@ public class PanelScript : MonoBehaviour
                         /* newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                          newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;*/
                         newSoldiersList[i].AddComponent<PanelController>();
+                        newSoldiersList[i].AddComponent<shaderGlow>();
                         SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
-                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter1");
+                            //newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter1");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -255,7 +257,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
-                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter2");
+                            //newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter2");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -263,7 +265,7 @@ public class PanelScript : MonoBehaviour
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
                             //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
-                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter3");
+                            //newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter3");
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
                             //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
@@ -506,7 +508,7 @@ public class PanelScript : MonoBehaviour
         {
             soldiersList.Add(charactersFellowship.transform.GetChild(i).gameObject);
         }
-
+        print(soldiersList.Count());
         for (int i = 0; i < soldiersList.Count; i++)
         {
 
@@ -531,20 +533,43 @@ public class PanelScript : MonoBehaviour
             }
 
             soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-            //soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
+            soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
             
 
             // Switches the animator out with the camp animator.
             SetCampAnimation(soldiersList[i].GetComponent<Character>());
         }
-
+        
         if (solidersSpawnPosition.childCount != soldiersList.Count)
         {
-            for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
+            //for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
+            //{
+            //    Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
+            //    //silhouetteList.Add(silhouette);
+            //}
+
+            
+            foreach (GameObject soldier in soldiersList)
             {
-                Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
-                //silhouetteList.Add(silhouette);
+                soldierTierList.Add(soldier.GetComponent<Character>().characterBaseValues.id);
+
             }
+            print(soldierTierList.Count());
+            foreach (var v in soldierTierList)
+            {
+                print(v);
+            }
+            //print(solidersSpawnPosition.childCount);
+            for (int i = 1; i < solidersSpawnPosition.childCount + 1; i++)
+            {
+                if (!soldierTierList.Contains(i))
+                {
+                    print(i);
+                    Instantiate(silhouette, solidersSpawnPosition.GetChild(i - 1).position + Vector3.up, Quaternion.identity);
+                }
+            }
+
+
         }
 
     }
@@ -823,13 +848,13 @@ public class PanelScript : MonoBehaviour
     {
         IEnumerable<GameObject> weapon = dataService.GenerateEquippableItemsFromValues(new[] { weaponValues });
         dataService.equipItemsToCharacter(weapon, currentSoldier);
-        print(currentSoldier.gameObject.layer);
-        print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
+        //print(currentSoldier.gameObject.layer);
+        //print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
         
         UpdateSoldierStats(currentSoldier.gameObject);
         SetCampAnimation(currentSoldier);
-        currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = currentSoldier.gameObject.layer;
-        print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
+        //currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = currentSoldier.gameObject.layer;
+        //print(currentSoldier.GetComponentsInChildren<EquippableItem>()[0].gameObject.layer);
 
 
 
