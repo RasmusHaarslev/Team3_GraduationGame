@@ -48,7 +48,9 @@ public class StringResources
     public static string shield1PrefabName = "Shield";
     #endregion
 
-
+    #region LANGUAGE
+        public static string Language = "Language";
+    #endregion
 
     #region MATERIALS
 
