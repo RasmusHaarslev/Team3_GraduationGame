@@ -8010,7 +8010,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 312326342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.3, y: 2.04, z: 12.26}
+  m_LocalPosition: {x: -3.47, y: 1.97, z: 15.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -9230,6 +9230,50 @@ Transform:
   - {fileID: 339726993}
   m_Father: {fileID: 1656342203}
   m_RootOrder: 0
+--- !u!1 &354981285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000011958139044, guid: 986b327735561964ea963c9a80aa18f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 354981286}
+  - 114: {fileID: 354981287}
+  m_Layer: 0
+  m_Name: Hunter1 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &354981286
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000011595211170, guid: 986b327735561964ea963c9a80aa18f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354981285}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.2800026, y: 2.9499993, z: 21.030016}
+  m_LocalScale: {x: 1.0000011, y: 1, z: 1.0000011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1451429044}
+  m_RootOrder: 4
+--- !u!114 &354981287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011624638256, guid: 986b327735561964ea963c9a80aa18f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354981285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 4
 --- !u!1 &355229220
 GameObject:
   m_ObjectHideFlags: 0
@@ -10494,19 +10538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf53a2184d4df1543b0dd38a427b8c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.05
-  fearfulHealthLimit: 25
-  maxLowAttentionSpanCounter: 1
-  traitProjection: {fileID: 0}
-  commandVisualisation: {fileID: 0}
-  attacked: 0
-  combatCommandState: 0
-  targetTrait: 0
-  combatTrait: 0
-  outOfCombatCommandState: 0
-  fleePosition: {x: 0, y: 0, z: 0}
-  distanceToTarget: 3.4028235e+38
-  partyID: 0
 --- !u!114 &406998010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10519,28 +10550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3c3ef530f7dac46b9b94edc14882b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  damage: 5
-  range: 0
-  damageSpeed: 0
-  currentHealth: 20
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  currentOpponents: []
-  isCurrentTargetAlive: 0
-  rotationSpeed: 2
-  isInCombat: 0
-  isDead: 0
-  isFleeing: 0
-  randomTargetProbability: 25
-  rightHandSlot: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  headSlot: {fileID: 0}
-  torsoSlot: {fileID: 0}
-  legsSlot: {fileID: 0}
-  equippedWeaponType: 0
-  characterType: 0
-  isMale: 1
 --- !u!195 &406998011
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -23384,28 +23393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5703541ddc01cbc4db2f1a308321a7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  damage: 2
-  range: 0
-  damageSpeed: 0
-  currentHealth: 20
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  currentOpponents: []
-  isCurrentTargetAlive: 0
-  rotationSpeed: 2
-  isInCombat: 0
-  isDead: 0
-  isFleeing: 0
-  rightHandSlot: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  headSlot: {fileID: 0}
-  torsoSlot: {fileID: 0}
-  legsSlot: {fileID: 0}
-  equippedWeaponType: 0
-  characterType: 0
-  isMale: 1
-  randomTargetProbability: 25
 --- !u!195 &895461639
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -24014,7 +24001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece411ea3165ec241882a3ad4444fd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalTriggerOffset: 1.5
 --- !u!23 &924323502
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30176,28 +30162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5703541ddc01cbc4db2f1a308321a7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  damage: 2
-  range: 0
-  damageSpeed: 0
-  currentHealth: 20
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  currentOpponents: []
-  isCurrentTargetAlive: 0
-  rotationSpeed: 2
-  isInCombat: 0
-  isDead: 0
-  isFleeing: 0
-  rightHandSlot: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  headSlot: {fileID: 0}
-  torsoSlot: {fileID: 0}
-  legsSlot: {fileID: 0}
-  equippedWeaponType: 0
-  characterType: 0
-  isMale: 1
-  randomTargetProbability: 25
 --- !u!195 &1161222052
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -38157,6 +38121,8 @@ Transform:
   - {fileID: 1913129406}
   - {fileID: 312326343}
   - {fileID: 1900160767}
+  - {fileID: 2145354295}
+  - {fileID: 354981286}
   m_Father: {fileID: 1725278666}
   m_RootOrder: 1
 --- !u!114 &1451429045
@@ -45814,8 +45780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e757a1fe497b64e488951a06f81c0f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barDisplay: 0
-  size: {x: 120, y: 15}
 --- !u!1 &1772858424
 GameObject:
   m_ObjectHideFlags: 0
@@ -45981,9 +45945,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -46516,28 +46480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5703541ddc01cbc4db2f1a308321a7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  damage: 2
-  range: 0
-  damageSpeed: 0
-  currentHealth: 20
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  currentOpponents: []
-  isCurrentTargetAlive: 0
-  rotationSpeed: 2
-  isInCombat: 0
-  isDead: 0
-  isFleeing: 0
-  rightHandSlot: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  headSlot: {fileID: 0}
-  torsoSlot: {fileID: 0}
-  legsSlot: {fileID: 0}
-  equippedWeaponType: 0
-  characterType: 0
-  isMale: 1
-  randomTargetProbability: 25
 --- !u!195 &1800444845
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -53218,7 +53160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier: 4
+  tier: 3
 --- !u!1 &1910066828
 GameObject:
   m_ObjectHideFlags: 0
@@ -53889,19 +53831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf53a2184d4df1543b0dd38a427b8c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 0.05
-  fearfulHealthLimit: 25
-  maxLowAttentionSpanCounter: 1
-  traitProjection: {fileID: 0}
-  commandVisualisation: {fileID: 0}
-  attacked: 0
-  combatCommandState: 0
-  targetTrait: 0
-  combatTrait: 0
-  outOfCombatCommandState: 0
-  fleePosition: {x: 0, y: 0, z: 0}
-  distanceToTarget: 3.4028235e+38
-  partyID: 0
 --- !u!114 &1936438606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53914,28 +53843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3c3ef530f7dac46b9b94edc14882b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
-  damage: 5
-  range: 2
-  damageSpeed: 2
-  currentHealth: 5
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  currentOpponents: []
-  isCurrentTargetAlive: 0
-  rotationSpeed: 2
-  isInCombat: 0
-  isDead: 0
-  isFleeing: 0
-  randomTargetProbability: 25
-  rightHandSlot: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  headSlot: {fileID: 0}
-  torsoSlot: {fileID: 0}
-  legsSlot: {fileID: 0}
-  equippedWeaponType: 0
-  characterType: 0
-  isMale: 1
 --- !u!195 &1936438607
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -58669,6 +58576,50 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2145354294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000011958139044, guid: 986b327735561964ea963c9a80aa18f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2145354295}
+  - 114: {fileID: 2145354296}
+  m_Layer: 0
+  m_Name: Hunter1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2145354295
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000011595211170, guid: 986b327735561964ea963c9a80aa18f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2145354294}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.2800007, y: 2.9499993, z: 21.030008}
+  m_LocalScale: {x: 1.0000006, y: 1, z: 1.0000006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1451429044}
+  m_RootOrder: 3
+--- !u!114 &2145354296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011624638256, guid: 986b327735561964ea963c9a80aa18f2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2145354294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69238ed7c73b6046bb82a7f3cc017b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 3
 --- !u!1 &2147353570
 GameObject:
   m_ObjectHideFlags: 0

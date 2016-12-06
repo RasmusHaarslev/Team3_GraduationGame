@@ -92,9 +92,7 @@ GameObject:
   - 114: {fileID: 114000010523345100}
   - 114: {fileID: 114000012132333340}
   - 114: {fileID: 114000011844469480}
-  - 114: {fileID: 114000010883693278}
   - 114: {fileID: 114000012639463382}
-  - 114: {fileID: 114000010946308684}
   - 114: {fileID: 114000013347936036}
   m_Layer: 0
   m_Name: Main Camera
@@ -257,6 +255,7 @@ MonoBehaviour:
   MoveSlerpAmount: 10
   RotationSlerpAmount: 2
   CameraOffset: 0
+  LockCameraPosition: 0
   OverridePosition: 0
   OverriddenPosition: {x: 0, y: 0, z: 0}
   OverrideDistance: 0
@@ -269,30 +268,12 @@ MonoBehaviour:
   OverriddenRotationSlerp: 0
   XRotationOffset: 0
   SlerpBack: 0
---- !u!114 &114000010883693278
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenerId: 0
---- !u!114 &114000010946308684
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenerId: 0
+  OverrideFogHeight: 0
+  OverriddenFogHeight: 0
+  OverrideFogHeightDensity: 0
+  OverriddenFogHeightDensity: 0
+  OverrideFogStartDistance: 0
+  OverriddenFogStartDistance: 0
 --- !u!114 &114000011844469480
 MonoBehaviour:
   m_ObjectHideFlags: 1
