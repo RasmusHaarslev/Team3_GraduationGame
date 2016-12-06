@@ -199,7 +199,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void AcceptPlay(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));        
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
 
         PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, node.GetComponent<Node>().Level);
