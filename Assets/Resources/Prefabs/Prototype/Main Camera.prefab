@@ -95,8 +95,7 @@ GameObject:
   - 114: {fileID: 114000010883693278}
   - 114: {fileID: 114000012002643146}
   - 114: {fileID: 114000012193879424}
-  - 132: {fileID: 132000011185766436}
-  - 114: {fileID: 114000011921570932}
+  - 114: {fileID: 114000012639463382}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -295,18 +294,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomShader: {fileID: 4800000, guid: 043d96ab7407dec449f1d706dee8db14, type: 3}
   amount: 0
---- !u!114 &114000011921570932
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67d327b6132ff1e4f9f1f852b56f661b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frequency: 0.5
 --- !u!114 &114000012002643146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -398,6 +385,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fog: {fileID: 114000012002643146}
+--- !u!114 &114000012639463382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e600f971b2d827a409db5babe9f5bf31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRect:
+    serializedVersion: 2
+    x: 100
+    y: 1200
+    width: 245
+    height: 125
+  updateColor: 0
+  allowDrag: 1
+  frequency: 0.5
+  nbDecimal: 1
+  fontSize: 50
 --- !u!124 &124000010111313504
 Behaviour:
   m_ObjectHideFlags: 1
@@ -405,29 +414,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014173923650}
   m_Enabled: 1
---- !u!132 &132000011185766436
-GUIText:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Text: 
-  m_Anchor: 0
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 0}
-  m_Material: {fileID: 0}
-  m_FontSize: 0
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
 --- !u!182 &182000010040586558
 WindZone:
   m_ObjectHideFlags: 1
