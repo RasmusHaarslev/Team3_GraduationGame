@@ -18,10 +18,9 @@ public class GetFreeGold : MonoBehaviour
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { BuyCurrency(amount); });
     }
 
-    public void BuyCurrency(int teeths)
+    public void BuyCurrency(int teeth)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_buyGold, gameObject);
-        confirmPanel.SetActive(false);
-        EventManager.Instance.TriggerEvent(new ChangeResources(premium: teeths));
+        EventManager.Instance.TriggerEvent(new ChangeResources(premium: teeth));
     }
 }
