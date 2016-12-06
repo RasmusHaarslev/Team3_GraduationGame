@@ -2,8 +2,6 @@
 using System.Collections;
 using System;
 
-
-
 public delegate IEnumerator StateRoutine();
 public delegate IEnumerator TransitionRoutine(StateRoutine from, StateRoutine to);
 
@@ -24,7 +22,6 @@ public class TransitionTo
 		Transition = transition;
 	}
 }
-
 
 public abstract class CoroutineMachine : MonoBehaviour
 {

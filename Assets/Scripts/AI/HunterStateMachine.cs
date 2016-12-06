@@ -97,7 +97,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	#endregion
 
-	public float transitionTime = 0.05f;
+	public float transitionTime = 0.1f;
 	float fearfulHealthLimit = 0.25f;
 	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
@@ -135,7 +135,7 @@ public class HunterStateMachine : CoroutineMachine
 	public CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait;
 	public CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait;
 	public OutOfCombatCommandState outOfCombatCommandState = OutOfCombatCommandState.Follow;
-
+	WaitForSeconds transition;
 	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
@@ -154,13 +154,14 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			combatTrait = character.characterBaseValues.combatTrait;
 			targetTrait = character.characterBaseValues.targetTrait;
+			transition = new WaitForSeconds(transitionTime);
 			return StartState;
 		}
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
-		yield return new WaitForSeconds(transitionTime);
+		yield return transition;
 	}
 
 	//This state will make all checks and transition according to them

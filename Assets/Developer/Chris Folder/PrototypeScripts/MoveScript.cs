@@ -65,7 +65,7 @@ public class MoveScript : MonoBehaviour
 	{
 		if (hunters.Count == 0)
 		{
-			hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
+			//hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
 		}
 		int counter = 0;
 		foreach (var hunter in hunters)
@@ -97,7 +97,6 @@ public class MoveScript : MonoBehaviour
 					if (Input.GetKey(KeyCode.Mouse0))
 					{
 						agent.Resume();
-						//attacking = false;
 						MoveToClickPosition();
 					}
 				}
