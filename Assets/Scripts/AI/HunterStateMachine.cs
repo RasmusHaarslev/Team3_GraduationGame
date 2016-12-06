@@ -352,6 +352,7 @@ public class HunterStateMachine : CoroutineMachine
 		}
 		if (stopFleeing)
 		{
+			agent.speed = 2.8f;
 			character.isFleeing = false;
 			yield return new TransitionTo(StartState, DefaultTransition);
 		}

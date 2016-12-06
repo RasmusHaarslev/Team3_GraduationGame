@@ -113,66 +113,51 @@ public class DataService : MonoBehaviour
         _connection.InsertAll(new[]
         {
             leaderValues,
-         // new CharacterValues
-         //   {
-         //       id = 2,
-         //       name = "John",
-         //       isMale = true,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 8,
-         //       health = 75,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.BraveFool,
-         //       targetTrait = CharacterValues.TargetTrait.NoTrait,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.maleHuntersMaterials[1]
-         //   },
-         //new CharacterValues
-         //   {
-         //       id = 3,
-         //       name = "Nicolai",
-         //       isMale = true,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 8,
-         //       health = 75,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Clingy,
-         //       targetTrait = CharacterValues.TargetTrait.Loyal,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.maleHuntersMaterials[4]
-         //   },
-         //new CharacterValues
-         //   {
-         //       id = 3,
-         //       name = "Peter",
-         //       isMale = true,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 8,
-         //       health = 75,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Fearful,
-         //       targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.maleHuntersMaterials[8]
-         //   },
-         //new CharacterValues
-         //   {
-         //       id = 4,
-         //       name = "Christian",
-         //       isMale = true,
-         //       Type = CharacterValues.type.Wolf,
-         //       damage = 8,
-         //       health = 75,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Clingy,
-         //       targetTrait = CharacterValues.TargetTrait.Loyal,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.follower1MaterialName
-         //   }, 
+          new CharacterValues
+            {
+                id = 2,
+                name = "John",
+                isMale = true,
+                Type = CharacterValues.type.Wolf,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.BraveFool,
+                targetTrait = CharacterValues.TargetTrait.NoTrait,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.maleHuntersMaterials[1]
+            },
+         new CharacterValues
+            {
+                id = 3,
+                name = "Nicolai",
+                isMale = true,
+                Type = CharacterValues.type.Wolf,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.Clingy,
+                targetTrait = CharacterValues.TargetTrait.Loyal,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.maleHuntersMaterials[4]
+            },
+         new CharacterValues
+            {
+                id = 4,
+                name = "Peter",
+                isMale = true,
+                Type = CharacterValues.type.Wolf,
+                damage = 8,
+                health = 75,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.Fearful,
+                targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.maleHuntersMaterials[8]
+            },
           new CharacterValues
           {
               id = 5,
@@ -261,52 +246,53 @@ public class DataService : MonoBehaviour
 
         _connection.InsertAll(new[]
         { //WEAPONS
+
             leaderWeapon,
-         //    new EquippableitemValues
-         //{
-         //    id = 2,
-         //    name = "Plastic Shield",
-         //    Type = EquippableitemValues.type.shield,
-         //    Slot = EquippableitemValues.slot.leftHand,
-         //    level = 1,
-         //    health = 20,
-         //    damage = 10,
-         //    damageSpeed = 2f,
-         //    range = 2,
-         //    characterId = 2,
-         //    prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][1]
-         //},
-         //    new EquippableitemValues
-         //{
-         //    id = 3,
-         //    name = "Initiate Spear",
-         //    Type = EquippableitemValues.type.polearm,
-         //    Slot = EquippableitemValues.slot.rightHand,
-         //    level = 1,
-         //    health = 20,
-         //    damage = 10,
-         //    damageSpeed = 2.5f,
-         //    range = 2,
-         //    characterId = 3,
-         //    prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         //},
-         //    new EquippableitemValues
-         //{
-         //    id = 4,
-         //    name = "Rifle of the Git Master Rasmus",
-         //    Type = EquippableitemValues.type.rifle,
-         //    Slot = EquippableitemValues.slot.rightHand,
-         //    level = 1,
-         //    health = 25,
-         //    damage = 15,
-         //    damageSpeed = 1.5f,
-         //    range = 15,
-         //    characterId = 4,
-         //    prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
-         //},
              new EquippableitemValues
          {
-             id = 7,
+             id = 2,
+             name = "Plastic Shield",
+             Type = EquippableitemValues.type.shield,
+             Slot = EquippableitemValues.slot.leftHand,
+             level = 1,
+             health = 20,
+             damage = 10,
+             damageSpeed = 2f,
+             range = 2,
+             characterId = 2,
+             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][1]
+         },
+             new EquippableitemValues
+         {
+             id = 3,
+             name = "Initiate Spear",
+             Type = EquippableitemValues.type.polearm,
+             Slot = EquippableitemValues.slot.rightHand,
+             level = 1,
+             health = 20,
+             damage = 10,
+             damageSpeed = 2.5f,
+             range = 2,
+             characterId = 3,
+             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
+         },
+             new EquippableitemValues
+         {
+             id = 4,
+             name = "Rifle of the Git Master Rasmus",
+             Type = EquippableitemValues.type.rifle,
+             Slot = EquippableitemValues.slot.rightHand,
+             level = 1,
+             health = 25,
+             damage = 15,
+             damageSpeed = 1.5f,
+             range = 15,
+             characterId = 4,
+             prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
+         },
+             new EquippableitemValues
+         {
+             id = 5,
              name = "Easy Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -318,7 +304,7 @@ public class DataService : MonoBehaviour
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             id = 8,
+             id = 6,
              name = "Easy Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -331,7 +317,7 @@ public class DataService : MonoBehaviour
          },
              new EquippableitemValues
          {
-             id = 9,
+             id = 7,
              name = "Medium Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
@@ -343,7 +329,7 @@ public class DataService : MonoBehaviour
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             id = 10,
+             id = 8,
              name = "Medium Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
@@ -356,7 +342,7 @@ public class DataService : MonoBehaviour
          },
              new EquippableitemValues
          {
-             id = 11,
+             id = 9,
              name = "Hard Steel Bar",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
