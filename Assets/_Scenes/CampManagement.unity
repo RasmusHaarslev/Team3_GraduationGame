@@ -619,7 +619,7 @@ MonoBehaviour:
 GameObject:
   m_PrefabParentObject: {fileID: 1000010923803972, guid: 7b462387523423547a5515644c563fa1,
     type: 2}
-  m_PrefabInternal: {fileID: 847841896}
+  m_PrefabInternal: {fileID: 844001289}
 --- !u!1001 &456645545
 Prefab:
   m_ObjectHideFlags: 0
@@ -1244,12 +1244,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b56d4e8c1874dc419a91b31457e9e5a, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &803968083 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010135006222, guid: baaba8dba41717c48a5d8891cac1a28f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1219609866}
-  m_Script: {fileID: 11500000, guid: 2a4fe435f321b9f4a9fe18899fd03bc2, type: 3}
 --- !u!1001 &805775917
 Prefab:
   m_ObjectHideFlags: 0
@@ -1365,7 +1359,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000010995724404, guid: 6b171d5fa437ff84aa668e96bd13e3ff,
     type: 2}
   m_PrefabInternal: {fileID: 738160815}
---- !u!1001 &847841896
+--- !u!1001 &844001289
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1462,18 +1456,9 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010840284292, guid: 7b462387523423547a5515644c563fa1,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 803968083}
     - target: {fileID: 1000010923803972, guid: 7b462387523423547a5515644c563fa1, type: 2}
       propertyPath: m_Name
       value: StoreFrontPanelBackground
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010923803972, guid: 7b462387523423547a5515644c563fa1, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b462387523423547a5515644c563fa1, type: 2}
@@ -1482,7 +1467,7 @@ Prefab:
 RectTransform:
   m_PrefabParentObject: {fileID: 224000011953679992, guid: 7b462387523423547a5515644c563fa1,
     type: 2}
-  m_PrefabInternal: {fileID: 847841896}
+  m_PrefabInternal: {fileID: 844001289}
 --- !u!1 &859014723 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000010733650998, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
@@ -1806,16 +1791,13 @@ MonoBehaviour:
   increasePointsMultiplier: 2
   increasePointsAdder: 10
   damagePercentageShield: 0.25
-  healthPercentageShield: 0.65
-  damageSpeedPercentageShield: 0.03
+  damageSpeedShield: 2.5
   shieldRange: 2
   damagePercentagePolearm: 0.46999997
-  healthPercentagePolearm: 0.29999995
-  damageSpeedPercentagePolearm: 0.01
+  damageSpeedPolearm: 1.5
   polearmRange: 2
   damagePercentageRifle: 0.59000003
-  healthPercentageRifle: 0.31
-  damageSpeedPercentageRifle: 0.02
+  damageSpeedRifle: 1.5
   rifleRange: 9
 --- !u!114 &999091586
 MonoBehaviour:
