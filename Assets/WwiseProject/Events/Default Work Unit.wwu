@@ -66,13 +66,43 @@
 						</Event>
 						<Event Name="Stop_GroundAmbience" ID="{63617761-5C01-4EC1-A0BA-655ED12C3DF5}">
 							<ChildrenList>
-								<Action Name="Stop" ID="{A5495522-8523-4835-BEFD-BEE5CAB892CA}" ShortID="844698797" Type="Stop" Scope="One" Global="true">
+								<Action Name="Stop" ID="{0526C95A-C4B2-486A-B3DA-8BB585748DEA}" ShortID="336222538" Type="Stop" Scope="One" Global="true">
 									<PropertyList>
 										<Property Name="FadeTime" Type="Real64" Value="1"/>
 									</PropertyList>
 									<ElementList>
-										<Element ID="{C99F1CBF-CCDE-488E-8F69-B30FE9AA19A3}" Global="true">
-											<ObjectRef Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										<Element ID="{F809B61B-BFAE-4B69-8795-C58C685AF008}" Global="true">
+											<ObjectRef Name="BridgeCreak" ID="{B13A0795-A4E1-428B-AF27-472E188FD350}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{C3F14C04-0765-451C-BDEA-4DD09763B8AC}" ShortID="21816159" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{EE008460-FA5A-4CCC-B430-9009F9583777}" Global="true">
+											<ObjectRef Name="PowerPole" ID="{43847AEE-7093-447E-A36C-645989E52C40}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{608E6D0C-BA9E-468E-A8EC-B492C66BB9F8}" ShortID="496453158" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{6C6E5D1E-61C5-4036-9FBE-749F4C6620B6}" Global="true">
+											<ObjectRef Name="Pipe" ID="{5CDD5911-F9D9-4F16-8654-FF4AAAC7586F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{88964D18-D4A1-4438-99FA-F336C0BCA78E}" ShortID="168310836" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{E0A0C974-4CC4-41C0-BF6D-F77EB58B8D96}" Global="true">
+											<ObjectRef Name="Tents" ID="{C17F0ECD-BBBA-415C-893F-4615196F7676}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
@@ -712,6 +742,16 @@
 				</Event>
 				<Event Name="Play_MenuAmbience" ID="{6879E80F-BF50-4155-9A6A-A13360C6A201}">
 					<ChildrenList>
+						<Action Name="Stop" ID="{1E8CA023-882B-4A13-BE38-3140FE128725}" ShortID="478083060" Type="Stop" Scope="One" Global="true">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ElementList>
+								<Element ID="{57913C29-61B4-4672-9D61-85EBF203F34D}" Global="true">
+									<ObjectRef Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+								</Element>
+							</ElementList>
+						</Action>
 						<Action Name="Play" ID="{B6ED5A91-32DE-42BF-95B5-0CC36DE84612}" ShortID="688698966" Type="Play" Scope="One" Global="false">
 							<PropertyList>
 								<Property Name="FadeTime" Type="Real64" Value="1"/>
@@ -794,6 +834,9 @@
 				<Event Name="Stop_ExploreMusic" ID="{633EC376-A5A2-4714-9FB7-65A32E982B0A}">
 					<ChildrenList>
 						<Action Name="Stop" ID="{E7CF3010-FCED-44D4-B3B1-D7C55289EDCA}" ShortID="863797085" Type="Stop" Scope="One" Global="true">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
 							<ElementList>
 								<Element ID="{73221EBD-4A4F-4057-AA94-E0BB1BD6C917}" Global="true">
 									<ObjectRef Name="Music" ID="{F3048897-F238-4CDD-A9F7-D755D268F4B9}" WorkUnitID="{E8E9743D-778F-430B-9891-4949771803CB}"/>
