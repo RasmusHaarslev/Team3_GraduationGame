@@ -83,13 +83,15 @@ public class LevelSelectionGenerator : MonoBehaviour
     {
         database = Resources.Load("ScriptableObjects/LevelsDatabase") as LevelsDatabase;
 
-        if (database.Rows.Count() == 0)
+        if (database.Rows.Count() == 0 || PlayerPrefs.GetInt("LevelsInstantiated") != 1)
         {
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
         }
         else
         {
+            EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+
             // Need to read from an external file for this to work.
             nodesInRows = SaveLoadLevels.LoadLevels();
 
