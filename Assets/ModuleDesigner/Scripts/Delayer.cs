@@ -9,7 +9,7 @@ namespace Assets.ModuleDesigner.Scripts
     public class Delayer : TriggerReceiver
     {
         [Header("Delay options")]
-        public int DelayInSeconds = 0;
+        public float DelayInSeconds = 0f;
 
         [Header("Output objects")]
         public List<TriggerReceiver> Targets;
