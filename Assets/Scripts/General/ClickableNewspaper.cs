@@ -6,16 +6,6 @@ public class ClickableNewspaper : ClickableItem
     public Sprite pageImage_Danish;
     public Sprite pageImage_English;
 
-    void OnEnable()
-    {
-        //EventManager.Instance.StartListening<ItemClicked>(Click);
-    }
-
-    void OnDisable()
-    {
-        //EventManager.Instance.StopListening<ItemClicked>(Click);
-    }
-
     void OnApplicationQuit()
     {
         this.enabled = false;
