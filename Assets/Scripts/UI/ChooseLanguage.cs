@@ -6,7 +6,7 @@ public class ChooseLanguage : MonoBehaviour {
     public string danishCutScene;
     public string englishCutScene;
 
-    public void ChoseLanguage(int languageID)
+    public void SetLanguage(int languageID)
     {        
         if (languageID == 0) { 
             PlayMedia(danishCutScene);
