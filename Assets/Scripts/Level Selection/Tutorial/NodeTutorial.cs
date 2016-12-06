@@ -269,7 +269,7 @@ public class NodeTutorial : MonoBehaviour {
 
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, PaletteNumber);
 
-        /*  switch (gameObject.name)
+          switch (gameObject.name)
           {
               case "Tut1":
                   GameController.Instance.LoadScene("TutorialLevel01");
@@ -286,9 +286,7 @@ public class NodeTutorial : MonoBehaviour {
               case "Tut5":
                   GameController.Instance.LoadScene("CampManagement");
                   break;
-          } */
-
-        Debug.Log("NODES PALLET : " + PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName));
+          }
     }
 
     public void Deny()
