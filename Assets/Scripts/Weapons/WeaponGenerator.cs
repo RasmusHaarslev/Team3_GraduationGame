@@ -79,7 +79,7 @@ public class WeaponGenerator : MonoBehaviour
         //calculate weapons parameters
 
         //....
-
+        Debug.Log("How many weapons to spawn in the end : " + newWeaponsNumber);
     }
 
 
