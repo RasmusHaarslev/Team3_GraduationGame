@@ -158,7 +158,7 @@ public class LevelGenerator : MonoBehaviour
     public void ScalePOIs(ref List<PointOfInterestManager> currentPOIs)
     {
         int minPOIEnemiesNumber = levelStep + 1;
-        if(minPOIEnemiesNumber < 2)
+        if (minPOIEnemiesNumber < 2)
             minPOIEnemiesNumber = 2;
         int maxPOIEnemiesNumber = Mathf.Clamp(levelStep + 2, 0, 5);
 
@@ -189,7 +189,7 @@ public class LevelGenerator : MonoBehaviour
             }
             if (currentCharSpawners.Length >= 5)
             {
-                enemyToDisableQuantity = Random.Range(5 - maxPOIEnemiesNumber, 5 - minPOIEnemiesNumber + 1);
+                enemyToDisableQuantity = Random.Range(0, 5 - minPOIEnemiesNumber + 1);
                 //print("between "+ (5 - minPOIEnemiesNumber)+" and "+ maxPOIEnemiesNumber + "disabling " + enemyToDisableQuantity + " in a POI");
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
                 currentCharSpawnersMaxIndex = currentCharSpawners.Length - 1;
