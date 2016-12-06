@@ -21,7 +21,7 @@ public class WeaponGenerator : MonoBehaviour
     //[Range(0, 1)]
     //public float damageSpeedPercentageShield = .1f;
     public float shieldDamageSpeed = 2.5f;
-    public int shieldRange = 1;
+    public int shieldRange = 2;
 
     [Header("Polearm Settings")]
     [Range(0, 1)]
@@ -31,7 +31,7 @@ public class WeaponGenerator : MonoBehaviour
     //[Range(0, 1)]
     //public float damageSpeedPercentagePolearm = .2f;
     public float polearmDamageSpeed = 1.5f;
-    public int polearmRange = 3;
+    public int polearmRange = 2;
 
     [Header("Rifle Settings")]
     [Range(0, 1)]
