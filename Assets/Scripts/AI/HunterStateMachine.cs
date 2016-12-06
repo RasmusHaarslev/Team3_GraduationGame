@@ -84,13 +84,14 @@ public class HunterStateMachine : CoroutineMachine
 		ProjectCommand();
 		if (combatTrait != CharacterValues.CombatTrait.BraveFool)
 		{
-			character.animator.SetBool("isFleeing", true);
 			combatCommandState = CombatCommandState.Flee;
 		}
 		else
 		{
 			ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 		}
+
+	
 	}
 
 	#endregion
@@ -331,6 +332,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		character.animator.SetBool("isFleeing", true);
 		agent.SetDestination(fleePosition);
 		agent.speed = fleeSpeed;
 		character.animator.SetBool("isAware", false);
@@ -339,9 +341,10 @@ public class HunterStateMachine : CoroutineMachine
 		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
+		yield return new WaitForSeconds(1);
 		if (agent.remainingDistance < agent.stoppingDistance)
 		{
-			if (agent.destination == fleePosition)
+			if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z))
 			{
 				gameObject.SetActive(false);
 			}
