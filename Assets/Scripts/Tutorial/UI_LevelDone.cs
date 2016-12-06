@@ -23,13 +23,17 @@ public class UI_LevelDone : MonoBehaviour {
 		{
 			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
 		}
-		GameController.Instance.numberOfActiveUIs++;
+
+        GameController.Instance.numberOfActiveUIs++;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
+
         endingPanel.SetActive(true);
 
         foreach (Transform child in endingPanel.transform.GetChild(0).GetChild(1).transform)
         {
             child.gameObject.SetActive(true);
         }
+
+        txtResourcesFound.text = PlayerPrefs.GetInt(StringResources.FoodAmountPrefsName).ToString();
     }
 }

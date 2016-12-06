@@ -35,10 +35,7 @@ public class LevelManager : MonoBehaviour
 	}
 
 	void Update()
-	{ /*
-        if (Input.GetKeyDown(KeyCode.A))
-            GenerateNewItems();
-        */
+	{ 
 		if (huntersAndPlayer.Count == 0)
 		{
 			huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
@@ -132,6 +129,7 @@ public class LevelManager : MonoBehaviour
 	private void EnemySpawn(EnemySpawned e)
 	{
 		EnemiesAlive++;
+        Debug.Log("Spawned " + EnemiesAlive);
 	}
 
 	private void ItemSpawn(ItemSpawned e)
@@ -153,7 +151,8 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-		CheckConditions();
+        Debug.Log("Killed " + EnemiesAlive);
+        CheckConditions();
 	}
 
 	void PlayerDeath(PlayerDeathEvent e)
@@ -207,7 +206,8 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseGame(string scene = "CampManagement")
 	{
-		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
 		StartCoroutine(LoseGameCoroutine(scene));
 	}
@@ -221,10 +221,12 @@ public class LevelManager : MonoBehaviour
 			yield return new WaitForSeconds(0.25f);
 		}
 
-		if (!IsTutorial)
+		if (!IsTutorial) { 
 			GameController.Instance.LoseGame();
+            yield break;
+        }
 
-		GameController.Instance.LoadScene(scene);
+        GameController.Instance.LoadScene(scene);
 
 		Time.timeScale = 1f;
 
@@ -233,7 +235,8 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseLevel()
 	{
-		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		EventManager.Instance.TriggerEvent(new LevelLost());
 		PlayerPrefs.SetInt("LevelResult", 0);
 
@@ -242,7 +245,8 @@ public class LevelManager : MonoBehaviour
 
 	public void WinLevel()
 	{
-		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
 		StartCoroutine(WinGameCoroutine());
 	}
 
@@ -261,7 +265,7 @@ public class LevelManager : MonoBehaviour
 
 		Time.timeScale = 1f;
 
-		if (IsTutorial)
+        if (IsTutorial)
 		{
 			EventManager.Instance.TriggerEvent(new TutorialDone());
 			yield break;
@@ -272,14 +276,15 @@ public class LevelManager : MonoBehaviour
 			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
 		}
 		GameController.Instance.numberOfActiveUIs++;
-		EventManager.Instance.TriggerEvent(
-			new ChangeResources(
-				food: PlayerPrefs.GetInt("FoodAmount"),
-				scraps: PlayerPrefs.GetInt("ScrapAmount")
-			)
-		);
+        EventManager.Instance.TriggerEvent(
+            new ChangeResources(
+                food: PlayerPrefs.GetInt("FoodAmount"),
+                scraps: PlayerPrefs.GetInt("ScrapAmount"),
+                premium: PlayerPrefs.GetInt(StringResources.PremiumDropAmountPrefsName)
+            )
+        );
 
-		PlayerPrefs.SetInt("LevelResult", 1);
+        PlayerPrefs.SetInt("LevelResult", 1);
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 		//generate and display the new items
 		GenerateNewItems();

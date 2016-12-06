@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _dataService = new DataService(StringResources.databaseName);
+        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, 3);
 
         if (PlayerPrefs.HasKey("Food"))
         {
