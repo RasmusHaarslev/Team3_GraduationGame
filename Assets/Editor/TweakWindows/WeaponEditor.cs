@@ -48,20 +48,20 @@ namespace Assets.Editor
 
                     GUILayout.Label("Shield settings", EditorStyles.boldLabel);
                     prefabScript.damagePercentageShield = EditorGUILayout.Slider("Damage percentage", prefabScript.damagePercentageShield, 0.0f, 1.0f);
-                    prefabScript.damageSpeedPercentageShield = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentageShield, 0.0f, 1.0f);
-                    prefabScript.healthPercentageShield = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentageShield, 0.0f, 1.0f);
+                    //prefabScript.damageSpeedPercentageShield = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentageShield, 0.0f, 1.0f);
+                    //prefabScript.healthPercentageShield = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentageShield, 0.0f, 1.0f);
                     prefabScript.shieldRange = EditorGUILayout.IntField("Range", prefabScript.shieldRange);
 
                     GUILayout.Label("Polearm settings", EditorStyles.boldLabel);
                     prefabScript.damagePercentagePolearm = EditorGUILayout.Slider("Damage percentage", prefabScript.damagePercentagePolearm, 0.0f, 1.0f);
-                    prefabScript.damageSpeedPercentagePolearm = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentagePolearm, 0.0f, 1.0f);
-                    prefabScript.healthPercentagePolearm = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentagePolearm, 0.0f, 1.0f);
+                    //prefabScript.damageSpeedPercentagePolearm = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentagePolearm, 0.0f, 1.0f);
+                    //prefabScript.healthPercentagePolearm = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentagePolearm, 0.0f, 1.0f);
                     prefabScript.polearmRange = EditorGUILayout.IntField("Range", prefabScript.polearmRange);
 
                     GUILayout.Label("Rifle settings", EditorStyles.boldLabel);
                     prefabScript.damagePercentageRifle = EditorGUILayout.Slider("Damage percentage", prefabScript.damagePercentageRifle, 0.0f, 1.0f);
-                    prefabScript.damageSpeedPercentageRifle = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentageRifle, 0.0f, 1.0f);
-                    prefabScript.healthPercentageRifle = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentageRifle, 0.0f, 1.0f);
+                    //prefabScript.damageSpeedPercentageRifle = EditorGUILayout.Slider("Speed percentage", prefabScript.damageSpeedPercentageRifle, 0.0f, 1.0f);
+                    //prefabScript.healthPercentageRifle = EditorGUILayout.Slider("Health percentage", prefabScript.healthPercentageRifle, 0.0f, 1.0f);
                     prefabScript.rifleRange = EditorGUILayout.IntField("Range", prefabScript.rifleRange);
 
                     if (GUILayout.Button("Save"))
