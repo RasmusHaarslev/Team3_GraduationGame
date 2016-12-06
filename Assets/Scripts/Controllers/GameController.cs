@@ -9,6 +9,9 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour
 {
 
+	public bool isUIActive = false;
+	public int numberOfActiveUIs = 0;
+
     public int InitialFood = 8;
     public int InitialVillages = 10;
     public int InitialScrap = 0;
@@ -43,12 +46,19 @@ public class GameController : MonoBehaviour
 
     void OnEnable()
     {
-        EventManager.Instance.StartListening<ChangeResources>(UpdateResources);
+		EventManager.Instance.StartListening<UIPanelActiveEvent>(ChangeUIState);
+		EventManager.Instance.StartListening<ChangeResources>(UpdateResources);
     }
 
-    void OnDisable()
+	private void ChangeUIState(UIPanelActiveEvent e)
+	{
+		isUIActive = !e.panelActive;
+	}
+
+	void OnDisable()
     {
-        EventManager.Instance.StopListening<ChangeResources>(UpdateResources);
+		EventManager.Instance.StopListening<UIPanelActiveEvent>(ChangeUIState);
+		EventManager.Instance.StopListening<ChangeResources>(UpdateResources);
     }
 
 	void OnApplicationQuit()
@@ -116,6 +126,7 @@ public class GameController : MonoBehaviour
 
     public void LoadScene(string scene)
     {
+		numberOfActiveUIs = 0;
         if (SceneTransistion.instance != null)
         {
             SceneTransistion.instance.LoadScene(scene);
@@ -138,6 +149,7 @@ public class GameController : MonoBehaviour
 
     public void LoadLevel()
     {
+
         var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
 
         System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);

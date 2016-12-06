@@ -92,7 +92,7 @@ public class HunterStateMachine : CoroutineMachine
 			ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 		}
 
-	
+
 	}
 
 	#endregion
@@ -258,16 +258,7 @@ public class HunterStateMachine : CoroutineMachine
 						}
 						else if (combatCommandState == CombatCommandState.Defense)
 						{
-							if (character.target.GetComponent<TutorialCharacter>() != null)
-							{
-								if (character.target.GetComponent<TutorialCharacter>().isDead)
-								{
-									character.currentOpponents.Remove(character.target);
-									character.target = character.FindNearestEnemy();
-								}
-								yield return new TransitionTo(DefenseState, DefaultTransition);
-							}
-							else if (character.target.GetComponent<Character>() != null)
+							if (character.target.GetComponent<Character>() != null)
 							{
 								if (character.target.GetComponent<Character>().isDead)
 								{
