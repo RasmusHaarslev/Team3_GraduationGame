@@ -3527,7 +3527,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 85
+  m_RootOrder: 87
 --- !u!1 &453998220
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,7 +5306,7 @@ Transform:
   - {fileID: 625815757}
   - {fileID: 868882473}
   m_Father: {fileID: 0}
-  m_RootOrder: 83
+  m_RootOrder: 84
 --- !u!1 &696048612
 GameObject:
   m_ObjectHideFlags: 0
@@ -10750,6 +10750,7 @@ MonoBehaviour:
   txtBtnYes: {fileID: 1742633493}
   txtBtnNo: {fileID: 1213433982}
   txtHeader: {fileID: 293878016}
+  Amoumt: {fileID: 0}
 --- !u!114 &1346556441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14760,6 +14761,7 @@ MonoBehaviour:
   btnPlay: {fileID: 273705945}
   invisPanel: {fileID: 1540082503}
   confirmPanel: {fileID: 1884137304}
+  confirmPanelScout: {fileID: 0}
   ScoutedPanel: {fileID: 0}
   tribeText: {fileID: 0}
   foodText: {fileID: 0}
@@ -15021,7 +15023,7 @@ Transform:
   - {fileID: 1083474160}
   - {fileID: 1571993894}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 22
 --- !u!1001 &1764655842
 Prefab:
   m_ObjectHideFlags: 0
@@ -15144,7 +15146,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 81
+  m_RootOrder: 82
 --- !u!114 &1776809313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15886,6 +15888,7 @@ MonoBehaviour:
   txtBtnYes: {fileID: 1597341993}
   txtBtnNo: {fileID: 884247784}
   txtHeader: {fileID: 910128683}
+  Amoumt: {fileID: 0}
 --- !u!114 &1884137307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18447,16 +18450,13 @@ MonoBehaviour:
   increasePointsMultiplier: 2
   increasePointsAdder: 10
   damagePercentageShield: 0.28
-  healthPercentageShield: 0.58000004
-  damageSpeedPercentageShield: 0.08
+  shieldDamageSpeed: 2.5
   shieldRange: 1
   damagePercentagePolearm: 0.28
-  healthPercentagePolearm: 0.08
-  damageSpeedPercentagePolearm: 0.58000004
+  polearmDamageSpeed: 1.5
   polearmRange: 3
   damagePercentageRifle: 0.3
-  healthPercentageRifle: 0.4
-  damageSpeedPercentageRifle: 0.1
+  rifleDamageSpeed: 1.5
   rifleRange: 9
 --- !u!114 &1985765573
 MonoBehaviour:
@@ -18519,10 +18519,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStatsMultiplier: 0.25
   worldLength: 4
-  difficultyLevel: 5
+  difficultyLevel: 1
   campsNumber: 4
-  downScaleThreshold: 0.3
-  upScaleThreshold: 0.7
+  downScaleThreshold: 0
+  upScaleThreshold: 0
   isTutorial: 0
   worldIndex: 0
 --- !u!4 &1985765577
