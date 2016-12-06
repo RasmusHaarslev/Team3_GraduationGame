@@ -120,6 +120,7 @@ public class MoveScript : MonoBehaviour
 		}
 		else
 		{
+			character.isFleeing = true;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		}
 	}
