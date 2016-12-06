@@ -17,10 +17,7 @@ class InitializeScriptableDB
         UpgradesDatabase upgradesDatabase = ScriptableObject.CreateInstance<UpgradesDatabase>();
         AssetDatabase.CreateAsset(upgradesDatabase, "Assets/Resources/ScriptableObjects/UpgradesDatabase.asset");
         AssetDatabase.SaveAssets();
-
-       
     }
-
 
     [MenuItem("Assets/Scriptable Objects/Create TranslationDB")]
     static void TranslationDB()
