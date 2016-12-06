@@ -8,12 +8,12 @@ public class ChooseLanguage : MonoBehaviour {
 
     public void ChoseLanguage(int languageID)
     {        
-        PlayerPrefs.SetInt(StringResources.Language, languageID);
-
         if (languageID == 0) { 
             PlayMedia(danishCutScene);
+            TranslationManager.Instance.LoadLanguage(false);
         } else {
             PlayMedia(englishCutScene);
+            TranslationManager.Instance.LoadLanguage(true);
         }
     }
 
