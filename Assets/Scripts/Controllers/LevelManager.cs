@@ -35,10 +35,7 @@ public class LevelManager : MonoBehaviour
 	}
 
 	void Update()
-	{ /*
-        if (Input.GetKeyDown(KeyCode.A))
-            GenerateNewItems();
-        */
+	{ 
 		if (huntersAndPlayer.Count == 0)
 		{
 			huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
@@ -221,10 +218,12 @@ public class LevelManager : MonoBehaviour
 			yield return new WaitForSeconds(0.25f);
 		}
 
-		if (!IsTutorial)
+		if (!IsTutorial) { 
 			GameController.Instance.LoseGame();
+            yield break;
+        }
 
-		GameController.Instance.LoadScene(scene);
+        GameController.Instance.LoadScene(scene);
 
 		Time.timeScale = 1f;
 
@@ -261,7 +260,7 @@ public class LevelManager : MonoBehaviour
 
 		Time.timeScale = 1f;
 
-		if (IsTutorial)
+        if (IsTutorial)
 		{
 			EventManager.Instance.TriggerEvent(new TutorialDone());
 			yield break;
@@ -272,14 +271,15 @@ public class LevelManager : MonoBehaviour
 			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
 		}
 		GameController.Instance.numberOfActiveUIs++;
-		EventManager.Instance.TriggerEvent(
-			new ChangeResources(
-				food: PlayerPrefs.GetInt("FoodAmount"),
-				scraps: PlayerPrefs.GetInt("ScrapAmount")
-			)
-		);
+        EventManager.Instance.TriggerEvent(
+            new ChangeResources(
+                food: PlayerPrefs.GetInt("FoodAmount"),
+                scraps: PlayerPrefs.GetInt("ScrapAmount"),
+                premium: PlayerPrefs.GetInt(StringResources.PremiumDropAmountPrefsName)
+            )
+        );
 
-		PlayerPrefs.SetInt("LevelResult", 1);
+        PlayerPrefs.SetInt("LevelResult", 1);
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 		//generate and display the new items
 		GenerateNewItems();

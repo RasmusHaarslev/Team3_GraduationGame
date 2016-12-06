@@ -26,6 +26,7 @@ public class UI_LevelDone : MonoBehaviour {
 
         GameController.Instance.numberOfActiveUIs++;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
+
         endingPanel.SetActive(true);
 
         foreach (Transform child in endingPanel.transform.GetChild(0).GetChild(1).transform)

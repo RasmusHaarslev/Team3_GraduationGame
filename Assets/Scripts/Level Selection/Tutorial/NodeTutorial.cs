@@ -100,6 +100,7 @@ public class NodeTutorial : MonoBehaviour {
                 break;
             case "TutorialLevel04":
                 SetScrollPosition(3);
+
                 break;
         }
     }
@@ -117,16 +118,11 @@ public class NodeTutorial : MonoBehaviour {
         int tutLevel = (int)Char.GetNumericValue(scene[scene.Length - 1]);
         string compare = "Tut" + tutLevel;
 
-        if (compare == gameObject.name && compare != "Tut4")
+        if (compare == gameObject.name && compare != "Tut5")
         {
             StartCoroutine(initWin(gameObject));
             EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
-        } else if (gameObject.name == "Tut4" && compare == "Tut4")
-        {
-            EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
-            GameController.Instance.LoadScene("CampManagement");
         }
-
     }
 
     #region WIN ANIMATION
@@ -265,7 +261,7 @@ public class NodeTutorial : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        int value = GameController.Instance._FOOD - GetComponent<NodeTutorial>().TravelCost;
+        int value = GetComponent<NodeTutorial>().TravelCost;
 
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(gameObject, "play", value);
 
