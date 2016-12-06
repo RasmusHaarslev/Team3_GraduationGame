@@ -45,13 +45,15 @@ namespace Assets.ModuleDesigner.Scripts
         public bool OverrideFogStartDistance;
         public float OverriddenFogStartDistance;
 
+        private CameraController cameraController;
+
         [Space]
         [Tooltip("The amount of angle added to the camera rotation compared to the player"), Range(-10.0f,10.0f)]
         public float XRotationOffset;
 
         public override void TriggerEnter()
         {
-            CameraController cameraController = Camera.main.GetComponent<CameraController>();
+            cameraController = Camera.main.GetComponent<CameraController>();
 
             cameraController.LockCameraPosition = LockCameraPosition;
 
@@ -86,13 +88,18 @@ namespace Assets.ModuleDesigner.Scripts
 
         public override void TriggerExit()
         {
-            Camera.main.GetComponent<CameraController>().OverridePosition = false;
-            Camera.main.GetComponent<CameraController>().OverrideDistance = false;
-            Camera.main.GetComponent<CameraController>().OverrideHeight = false;
-            Camera.main.GetComponent<CameraController>().OverrideSlerp = false;
-            Camera.main.GetComponent<CameraController>().OverrideRotationSlerp = false;
-            Camera.main.GetComponent<CameraController>().XRotationOffset = 0f;
-            Camera.main.GetComponent<CameraController>().SlerpBack = SlerpBack;
+            cameraController = Camera.main.GetComponent<CameraController>();
+            cameraController.OverridePosition = false;
+            cameraController.OverrideDistance = false;
+            cameraController.OverrideHeight = false;
+            cameraController.OverrideSlerp = false;
+            cameraController.OverrideRotationSlerp = false;
+            cameraController.OverrideFogHeight = false;
+            cameraController.OverrideFogHeightDensity = false;
+            cameraController.OverrideFogStartDistance = false;
+            cameraController.LockCameraPosition = false;
+            cameraController.XRotationOffset = 0f;
+            cameraController.SlerpBack = SlerpBack;
         }
 
         public override void Expose(GameObject go)
@@ -132,6 +139,8 @@ namespace Assets.ModuleDesigner.Scripts
             helper.OverriddenHeight = Height;
 
             helper.Update();
+
+            //TriggerEnter();
         }
 
     }
