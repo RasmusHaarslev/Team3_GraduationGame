@@ -31,11 +31,11 @@ namespace Assets.ModuleDesigner.Scripts
         {
             foreach (var obj in ObjectsToAffect)
             {
-                obj.GetComponent<TutorialCharacter>().health = Health;
-                obj.GetComponent<TutorialCharacter>().damage = Damage;
-                obj.GetComponent<TutorialCharacter>().damageSpeed = DamageSpeed;
-                obj.GetComponent<TutorialCharacter>().range = Range;
-                obj.GetComponent<TutorialCharacter>().currentHealth = CurrentHealth;
+                obj.GetComponent<Character>().health = Health;
+                obj.GetComponent<Character>().damage = Damage;
+                obj.GetComponent<Character>().damageSpeed = DamageSpeed;
+                obj.GetComponent<Character>().range = Range;
+                obj.GetComponent<Character>().currentHealth = CurrentHealth;
             }
         }
 

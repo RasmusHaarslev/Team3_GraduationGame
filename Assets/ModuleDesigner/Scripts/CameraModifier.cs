@@ -7,6 +7,8 @@ namespace Assets.ModuleDesigner.Scripts
     public class CameraModifier : TriggerReceiver
     {
         [Header("Camera options")]
+        [Tooltip("Lock the cameras movement")]
+        public bool LockCameraPosition;
         [Tooltip("Moves the camera to the gizmo position")]
         public bool OverridePosition;
         [Space]
@@ -33,41 +35,71 @@ namespace Assets.ModuleDesigner.Scripts
         public bool SlerpBack;
 
         [Space]
+        [Tooltip("Check to override slerp")]
+        public bool OverrideFogHeight;
+        public float OverriddenFogHeight;
+        [Tooltip("Check to override slerp")]
+        public bool OverrideFogHeightDensity;
+        public float OverriddenFogHeightDensity;
+        [Tooltip("Check to override slerp")]
+        public bool OverrideFogStartDistance;
+        public float OverriddenFogStartDistance;
+
+        private CameraController cameraController;
+
+        [Space]
         [Tooltip("The amount of angle added to the camera rotation compared to the player"), Range(-10.0f,10.0f)]
         public float XRotationOffset;
 
         public override void TriggerEnter()
         {
-            print("Enter!");
-            Camera.main.GetComponent<CameraController>().OverridePosition = OverridePosition;
-            Camera.main.GetComponent<CameraController>().OverriddenPosition = Camera.main.transform.position;
+            cameraController = Camera.main.GetComponent<CameraController>();
 
-            Camera.main.GetComponent<CameraController>().OverrideDistance = OverrideDistance;
-            Camera.main.GetComponent<CameraController>().OverriddenDistance = Distance;
+            cameraController.LockCameraPosition = LockCameraPosition;
 
-            Camera.main.GetComponent<CameraController>().XRotationOffset = XRotationOffset;
+            cameraController.OverridePosition = OverridePosition;
+            cameraController.OverriddenPosition = this.gameObject.transform.position;
 
-            Camera.main.GetComponent<CameraController>().OverrideHeight = OverrideHeight;
-            Camera.main.GetComponent<CameraController>().OverriddenHeight = Height;
+            cameraController.OverrideDistance = OverrideDistance;
+            cameraController.OverriddenDistance = Distance;
 
-            Camera.main.GetComponent<CameraController>().OverrideSlerp = OverrideSlerp;
-            Camera.main.GetComponent<CameraController>().OverriddenSlerp = Slerp;
+            cameraController.XRotationOffset = XRotationOffset;
 
-            Camera.main.GetComponent<CameraController>().OverrideRotationSlerp = OverrideRotationSlerp;
-            Camera.main.GetComponent<CameraController>().OverriddenRotationSlerp = RotationSlerp;
+            cameraController.OverrideHeight = OverrideHeight;
+            cameraController.OverriddenHeight = Height;
 
-            Camera.main.GetComponent<CameraController>().SlerpBack = false;
+            cameraController.OverrideSlerp = OverrideSlerp;
+            cameraController.OverriddenSlerp = Slerp;
+
+            cameraController.OverrideRotationSlerp = OverrideRotationSlerp;
+            cameraController.OverriddenRotationSlerp = RotationSlerp;
+
+            cameraController.SlerpBack = false;
+
+            cameraController.OverriddenFogHeight = OverriddenFogHeight;
+            cameraController.OverrideFogHeight = OverrideFogHeight;
+
+            cameraController.OverriddenFogHeightDensity = OverriddenFogHeightDensity;
+            cameraController.OverrideFogHeightDensity = OverrideFogHeightDensity;
+
+            cameraController.OverrideFogStartDistance = OverrideFogStartDistance;
+            cameraController.OverriddenFogStartDistance = OverriddenFogStartDistance;
         }
 
         public override void TriggerExit()
         {
-            Camera.main.GetComponent<CameraController>().OverridePosition = false;
-            Camera.main.GetComponent<CameraController>().OverrideDistance = false;
-            Camera.main.GetComponent<CameraController>().OverrideHeight = false;
-            Camera.main.GetComponent<CameraController>().OverrideSlerp = false;
-            Camera.main.GetComponent<CameraController>().OverrideRotationSlerp = false;
-            Camera.main.GetComponent<CameraController>().XRotationOffset = 0f;
-            Camera.main.GetComponent<CameraController>().SlerpBack = SlerpBack;
+            cameraController = Camera.main.GetComponent<CameraController>();
+            cameraController.OverridePosition = false;
+            cameraController.OverrideDistance = false;
+            cameraController.OverrideHeight = false;
+            cameraController.OverrideSlerp = false;
+            cameraController.OverrideRotationSlerp = false;
+            cameraController.OverrideFogHeight = false;
+            cameraController.OverrideFogHeightDensity = false;
+            cameraController.OverrideFogStartDistance = false;
+            cameraController.LockCameraPosition = false;
+            cameraController.XRotationOffset = 0f;
+            cameraController.SlerpBack = SlerpBack;
         }
 
         public override void Expose(GameObject go)
@@ -107,6 +139,8 @@ namespace Assets.ModuleDesigner.Scripts
             helper.OverriddenHeight = Height;
 
             helper.Update();
+
+            //TriggerEnter();
         }
 
     }

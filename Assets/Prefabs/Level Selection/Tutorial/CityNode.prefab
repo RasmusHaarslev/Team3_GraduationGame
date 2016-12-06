@@ -324,7 +324,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6099cd75a91d46b46a4449244dfe33bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0317fbc31030dd4999fcc4191a98b4f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -417,12 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0366369b584ccce469cbee394c86710a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoPanel: {fileID: 1000013766966950}
-  notScoutPanel: {fileID: 1000011283486990}
+  scrollingGrid: {fileID: 0}
   circularProgress: {fileID: 1000014028975162}
   txtIntPoints: {fileID: 114000013158113770}
+  showInfoPanel: 1
+  showScoutPanel: 1
+  PaletteNumber: 0
   TravelCost: 0
-  scoutCost: 0
   CampsInNode: 0
   foodAmount: 0
   scrapAmount: 0
@@ -432,10 +433,13 @@ MonoBehaviour:
   isScouted: 0
   canPlay: 0
   isOpen: 0
-  activationImages:
-  - {fileID: 21300000, guid: 2b75c63025334b64983fa81064aca1d3, type: 3}
-  - {fileID: 21300000, guid: a2c9f8b3e63d29546bd263d13874b3d0, type: 3}
-  - {fileID: 21300000, guid: a4f23f1103479624f87e8f0eb4e824c4, type: 3}
+  PopUpPanel: {fileID: 0}
+  btnPlay: {fileID: 0}
+  invisPanel: {fileID: 0}
+  confirmPanel: {fileID: 0}
+  foodText: {fileID: 0}
+  NotScoutedPanel: {fileID: 0}
+  interestPointsText: {fileID: 0}
   Links: []
 --- !u!114 &114000011693836324
 MonoBehaviour:
@@ -554,7 +558,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c430aaab13b296643b13625c8d20d822, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c70dd8632926344ba17631a334317b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -647,7 +651,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 351473697b8dd004eaa04c2c03b24f72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08dd9b61406c4884a94a25a5ab6aec01, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

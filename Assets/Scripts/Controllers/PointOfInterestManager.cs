@@ -100,45 +100,23 @@ public class PointOfInterestManager : MonoBehaviour
 			levelGenerator = UnityEngine.Object.FindObjectOfType<LevelGenerator>();
 		}
 		float averageHealth = 0;
-		if (levelGenerator.isTutorial)
-		{
-			List<TutorialCharacter> characterList = transform.GetComponentsInChildren<TutorialCharacter>().ToList();
-			float s = 0;
-			foreach (var character in characterList)
-			{
-				var characterCurrentHealth = character.currentHealth;
-				if (characterCurrentHealth < 0)
-				{
-					character.currentHealth = 0;
-				}
-				s += character.currentHealth;
-			}
-			averageHealth = s / characterList.Count;
-			if (originalAverageHealth == 0)
-			{
-				originalAverageHealth = averageHealth;
-			}
-		}
-		else
-		{
-			List<Character> characterList = transform.GetComponentsInChildren<Character>().ToList();
-			float s = 0;
-			foreach (var character in characterList)
-			{
-				var characterCurrentHealth = character.currentHealth;
-				if (characterCurrentHealth < 0)
-				{
-					character.currentHealth = 0;
-				}
-				s += character.currentHealth;
-			}
-			averageHealth = s / characterList.Count;
-			if (originalAverageHealth == 0)
-			{
-				originalAverageHealth = averageHealth;
-			}
-		}
 
+		List<Character> characterList = transform.GetComponentsInChildren<Character>().ToList();
+		float s = 0;
+		foreach (var character in characterList)
+		{
+			var characterCurrentHealth = character.currentHealth;
+			if (characterCurrentHealth < 0)
+			{
+				character.currentHealth = 0;
+			}
+			s += character.currentHealth;
+		}
+		averageHealth = s / characterList.Count;
+		if (originalAverageHealth == 0)
+		{
+			originalAverageHealth = averageHealth;
+		}
 		return averageHealth;
 	}
 }
