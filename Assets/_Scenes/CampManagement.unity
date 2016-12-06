@@ -1649,6 +1649,26 @@ Prefab:
       propertyPath: m_Name
       value: Camp Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 20000013878394960, guid: cc0e44a9d98cb5244a054b6072d879bb,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 36864
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011702967012, guid: cc0e44a9d98cb5244a054b6072d879bb,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 34816
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000014250554884, guid: cc0e44a9d98cb5244a054b6072d879bb,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 99328
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011803535202, guid: cc0e44a9d98cb5244a054b6072d879bb,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 33280
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc0e44a9d98cb5244a054b6072d879bb, type: 2}
   m_IsPrefabParent: 0
@@ -2994,7 +3014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &870346549
 GameObject:
   m_ObjectHideFlags: 0
@@ -4841,9 +4861,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 131072
+  lowerPoolSize: 65536
+  streamingPoolSize: 32768
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
