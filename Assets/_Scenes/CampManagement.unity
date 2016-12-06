@@ -1870,6 +1870,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011497964764, guid: 1007fecbc4da3d34e88b152b89be16a9,
+        type: 2}
+      propertyPath: levelSelectionPanel
+      value: 
+      objectReference: {fileID: 671039312}
     - target: {fileID: 114000012494612262, guid: 1007fecbc4da3d34e88b152b89be16a9,
         type: 2}
       propertyPath: scrollRect
@@ -1880,20 +1885,6 @@ Prefab:
       propertyPath: scrollingGrid
       value: 
       objectReference: {fileID: 399953478}
-    - target: {fileID: 114000012494612262, guid: 1007fecbc4da3d34e88b152b89be16a9,
-        type: 2}
-      propertyPath: dropDown
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010353255526, guid: 1007fecbc4da3d34e88b152b89be16a9, type: 2}
-      propertyPath: m_Name
-      value: LevelSelectionGenerator
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011497964764, guid: 1007fecbc4da3d34e88b152b89be16a9,
-        type: 2}
-      propertyPath: levelSelectionPanel
-      value: 
-      objectReference: {fileID: 671039312}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1007fecbc4da3d34e88b152b89be16a9, type: 2}
   m_IsPrefabParent: 0
@@ -2579,9 +2570,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 131072
-  lowerPoolSize: 65536
-  streamingPoolSize: 32768
+  defaultPoolSize: 65536
+  lowerPoolSize: 32768
+  streamingPoolSize: 16384
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
