@@ -105,9 +105,10 @@ public class Character : MonoBehaviour
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
 					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
 					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
-					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+					rigid.AddForce(Vector3.one * forceThrowWeapon + Vector3.up * forceThrowWeapon * 0.5f, ForceMode.Impulse);
 				}
 
 				GetComponent<RagdollControl>().EnableRagDoll();
@@ -137,9 +138,10 @@ public class Character : MonoBehaviour
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
 					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
 					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
-					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+					rigid.AddForce(Vector3.one * forceThrowWeapon + Vector3.up * forceThrowWeapon * 0.5f, ForceMode.Impulse);
 				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
@@ -159,14 +161,15 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Player))
 			{
+				Manager_Audio.PlaySound(Manager_Audio.leaderDeath, this.gameObject);
 				if (currentWeapon != null)
 				{
-					Manager_Audio.PlaySound(Manager_Audio.leaderDeath, this.gameObject);
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
 					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
 					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
-					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+					rigid.AddForce(Vector3.one * forceThrowWeapon + Vector3.up * forceThrowWeapon * 0.5f, ForceMode.Impulse);
 				}
 				animator.SetTrigger("Die");
 			}
