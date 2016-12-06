@@ -54,26 +54,26 @@ public class PaletteApplier : MonoBehaviour
         switch (paletteNumber)
         {
             default:
-            case 0: //Yellow palette
+            case 0: //Blueish palette | visible in regular levels as 1st "world"
                 {
-                    parseColors("#D7D1B4", "#A5A08A", "#647388", "#5F4B03", "#472A00");
+                    parseColors("#87CFFFFF", "#385C5FFF", "#FFFFFF", "#BDCDFF", "#0007FF");
                 }
                 Debug.Log("Color palette 1");
-                Manager_Audio.ChangeState("Palette", "Color1");
+                Manager_Audio.ChangeState("Palette", "Color3");
                 break;
-            case 1: //Red/purple palette
+            case 1: //Yellow palette | visible in tutorial 1-3 and in regular levels as 2nd "world"
                 {
-                    parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
+                    parseColors("#E9C57EFF", "#7D8852FF", "#F6FFD0", "#F4FF52", "#FF4B4B");
                 }
                 Debug.Log("Color palette 2");
-                Manager_Audio.ChangeState("Palette", "Color2");
+                Manager_Audio.ChangeState("Palette", "Color1");
                 break;
-            case 2:
+            case 2: //Red/purple palette | visible in tutorial 4-5 and in regular levels as 3rd "world"
                 {
-                    parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
+                    parseColors("#CBB7FFFF", "#5B685FFF", "#FFFFFF", "#FFAEAE", "#FFCA00");
                 }
                 Debug.Log("Color palette 3");
-                Manager_Audio.ChangeState("Palette", "Color3");
+                Manager_Audio.ChangeState("Palette", "Color2");
                 break;
         }
 

@@ -84,6 +84,7 @@ public class HunterStateMachine : CoroutineMachine
 		ProjectCommand();
 		if (combatTrait != CharacterValues.CombatTrait.BraveFool)
 		{
+			character.animator.SetBool("isFleeing", true);
 			combatCommandState = CombatCommandState.Flee;
 		}
 		else
@@ -96,7 +97,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	#endregion
 
-	public float transitionTime = 0.05f;
+	public float transitionTime = 0.1f;
 	float fearfulHealthLimit = 0.25f;
 	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
@@ -134,7 +135,7 @@ public class HunterStateMachine : CoroutineMachine
 	public CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait;
 	public CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait;
 	public OutOfCombatCommandState outOfCombatCommandState = OutOfCombatCommandState.Follow;
-
+	WaitForSeconds transition;
 	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
@@ -153,13 +154,14 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			combatTrait = character.characterBaseValues.combatTrait;
 			targetTrait = character.characterBaseValues.targetTrait;
+			transition = new WaitForSeconds(transitionTime);
 			return StartState;
 		}
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
-		yield return new WaitForSeconds(transitionTime);
+		yield return transition;
 	}
 
 	//This state will make all checks and transition according to them
@@ -332,10 +334,9 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
-		character.animator.SetBool("isFleeing", true);
+		character.animator.SetBool("isAware", false);
 		agent.SetDestination(fleePosition);
 		agent.speed = fleeSpeed;
-		character.animator.SetBool("isAware", false);
 		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
@@ -351,6 +352,7 @@ public class HunterStateMachine : CoroutineMachine
 		}
 		if (stopFleeing)
 		{
+			agent.speed = 2.8f;
 			character.isFleeing = false;
 			yield return new TransitionTo(StartState, DefaultTransition);
 		}

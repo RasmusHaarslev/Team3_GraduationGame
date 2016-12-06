@@ -87,6 +87,7 @@ GameObject:
   - 224: {fileID: 224000010963058202}
   - 222: {fileID: 222000010170371824}
   - 114: {fileID: 114000013501725954}
+  - 114: {fileID: 114000010795400442}
   m_Layer: 5
   m_Name: Text (2)
   m_TagString: Untagged
@@ -104,6 +105,7 @@ GameObject:
   - 224: {fileID: 224000014267124772}
   - 222: {fileID: 222000010154476588}
   - 114: {fileID: 114000010904593974}
+  - 114: {fileID: 114000011451729826}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -138,6 +140,7 @@ GameObject:
   - 224: {fileID: 224000013733596796}
   - 222: {fileID: 222000013053838692}
   - 114: {fileID: 114000011158027622}
+  - 114: {fileID: 114000010827580980}
   m_Layer: 5
   m_Name: Text (1)
   m_TagString: Untagged
@@ -224,6 +227,7 @@ GameObject:
   - 224: {fileID: 224000012315711022}
   - 222: {fileID: 222000011889385284}
   - 114: {fileID: 114000014219152182}
+  - 114: {fileID: 114000014255381798}
   m_Layer: 5
   m_Name: Text (5)
   m_TagString: Untagged
@@ -241,6 +245,7 @@ GameObject:
   - 224: {fileID: 224000011933679992}
   - 222: {fileID: 222000012163234552}
   - 114: {fileID: 114000013981598254}
+  - 114: {fileID: 114000011098937652}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -258,6 +263,7 @@ GameObject:
   - 224: {fileID: 224000013094333114}
   - 222: {fileID: 222000012933792798}
   - 114: {fileID: 114000012294090738}
+  - 114: {fileID: 114000013456345972}
   m_Layer: 5
   m_Name: Text (6)
   m_TagString: Untagged
@@ -281,7 +287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000011675464078
 GameObject:
   m_ObjectHideFlags: 1
@@ -343,6 +349,7 @@ GameObject:
   - 224: {fileID: 224000010370437802}
   - 222: {fileID: 222000012273343726}
   - 114: {fileID: 114000012417913982}
+  - 114: {fileID: 114000013643334896}
   m_Layer: 5
   m_Name: Text (4)
   m_TagString: Untagged
@@ -478,6 +485,7 @@ GameObject:
   - 224: {fileID: 224000013310558620}
   - 222: {fileID: 222000010795716318}
   - 114: {fileID: 114000011129450792}
+  - 114: {fileID: 114000013000331398}
   m_Layer: 5
   m_Name: Text (3)
   m_TagString: Untagged
@@ -663,6 +671,7 @@ GameObject:
   - 224: {fileID: 224000013477625486}
   - 222: {fileID: 222000010785960228}
   - 114: {fileID: 114000010222158568}
+  - 114: {fileID: 114000011895368890}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -732,6 +741,7 @@ GameObject:
   - 224: {fileID: 224000013438970602}
   - 222: {fileID: 222000012933091150}
   - 114: {fileID: 114000011256620920}
+  - 114: {fileID: 114000013369408964}
   m_Layer: 5
   m_Name: Text (3)
   m_TagString: Untagged
@@ -789,7 +799,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1548f71376402854a8835bdf62a5f6de, type: 3}
+    m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 1
@@ -801,7 +811,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 15135
+  m_Text: '10
+
+'
 --- !u!114 &114000010193936096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -914,6 +926,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000010795400442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010419577734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: RecruitInfo
+--- !u!114 &114000010827580980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010764048098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: SelectingLevels
 --- !u!114 &114000010873719418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1055,6 +1091,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011098937652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011449976140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: YourLeader
 --- !u!114 &114000011129450792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1110,10 +1158,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 5
     m_MaxSize: 82
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -1206,10 +1254,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 5
     m_MaxSize: 82
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -1238,7 +1286,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1548f71376402854a8835bdf62a5f6de, type: 3}
+    m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 1
@@ -1250,7 +1298,21 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 15135
+  m_Text: '10
+
+'
+--- !u!114 &114000011451729826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010504930416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: ResourcesInfo
 --- !u!114 &114000011567753160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1359,6 +1421,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011895368890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013831521986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: CampInfo
 --- !u!114 &114000011916389676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1681,7 +1755,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1548f71376402854a8835bdf62a5f6de, type: 3}
+    m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 1
@@ -1693,7 +1767,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 15135
+  m_Text: '10
+
+'
 --- !u!114 &114000012959766514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1721,6 +1797,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013000331398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012742947784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: VillagesInfo
 --- !u!114 &114000013141008022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1768,7 +1856,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1548f71376402854a8835bdf62a5f6de, type: 3}
+    m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 1
@@ -1780,7 +1868,21 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 15135
+  m_Text: '10
+
+'
+--- !u!114 &114000013369408964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014166482040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: UpgradesInfo
 --- !u!114 &114000013455933404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1808,6 +1910,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013456345972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011545702752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: GemsInfo
 --- !u!114 &114000013501725954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1829,10 +1943,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 5
     m_MaxSize: 82
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -1895,6 +2009,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013643334896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012036619874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: FoodInfo
 --- !u!114 &114000013664285124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1915,7 +2041,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -1976,10 +2102,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 77fe831f1a7893444aafaafa2dcbc846, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 5
     m_MaxSize: 82
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -2102,6 +2228,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000014255381798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011397891154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: ScrapInfo
 --- !u!222 &222000010154476588
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2490,8 +2628,8 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 641, y: 336}
-  m_SizeDelta: {x: 700, y: 100}
+  m_AnchoredPosition: {x: 641, y: 361}
+  m_SizeDelta: {x: 700, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011015459306
 RectTransform:
@@ -2686,7 +2824,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -352, y: 321}
+  m_AnchoredPosition: {x: -352, y: 305}
   m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011981705678
@@ -2928,8 +3066,8 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -557.5, y: -327}
-  m_SizeDelta: {x: 700, y: 100}
+  m_AnchoredPosition: {x: -557.5, y: -369}
+  m_SizeDelta: {x: 700, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013451042340
 RectTransform:
@@ -3018,8 +3156,8 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 384.5, y: -559}
-  m_SizeDelta: {x: 600, y: 100}
+  m_AnchoredPosition: {x: 384.5, y: -601}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013810698938
 RectTransform:

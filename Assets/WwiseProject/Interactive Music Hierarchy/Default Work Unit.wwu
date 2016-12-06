@@ -323,11 +323,23 @@
 											<StateGroupInfo>
 												<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 											</StateGroupInfo>
+											<StateGroupInfo>
+												<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+											</StateGroupInfo>
 										</StateGroupList>
 										<CustomStateList>
 											<CustomState>
 												<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 												<State Name="Custom State" ID="{06E9B1F7-95D7-4939-B194-389E3EFEF3DC}" ShortID="758750828">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+														<Property Name="Volume" Type="Real64" Value="-12"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+												<State Name="Custom State" ID="{51E23A0B-D259-4AD9-9215-302AB86BA68D}" ShortID="908648960">
 													<PropertyList>
 														<Property Name="Lowpass" Type="int16" Value="40"/>
 														<Property Name="Volume" Type="Real64" Value="-12"/>
@@ -828,7 +840,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-10</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1779,21 +1791,8 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
 									</StateGroupInfo>
-									<StateGroupInfo>
-										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
-									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
-									<CustomState>
-										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
-										<State Name="Custom State" ID="{7BC06393-DA7F-46AC-AB02-67700A5E8028}" ShortID="1041713942">
-											<PropertyList>
-												<Property Name="Highpass" Type="int16" Value="40"/>
-												<Property Name="Lowpass" Type="int16" Value="35"/>
-												<Property Name="Volume" Type="Real64" Value="-10"/>
-											</PropertyList>
-										</State>
-									</CustomState>
 									<CustomState>
 										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
 										<State Name="Custom State" ID="{79036817-AF17-444F-B2B8-D53DB9A52DD7}" ShortID="380717595">
@@ -2230,11 +2229,23 @@
 											<StateGroupInfo>
 												<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 											</StateGroupInfo>
+											<StateGroupInfo>
+												<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+											</StateGroupInfo>
 										</StateGroupList>
 										<CustomStateList>
 											<CustomState>
 												<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 												<State Name="Custom State" ID="{F2939F44-CF71-4A72-A0A1-E3FC56847319}" ShortID="905314723">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+														<Property Name="Volume" Type="Real64" Value="-12"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+												<State Name="Custom State" ID="{9E56F82F-E95D-4712-8ABB-8995F7889F68}" ShortID="32050616">
 													<PropertyList>
 														<Property Name="Lowpass" Type="int16" Value="40"/>
 														<Property Name="Volume" Type="Real64" Value="-12"/>
@@ -2745,7 +2756,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-10</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -4189,11 +4200,23 @@
 											<StateGroupInfo>
 												<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 											</StateGroupInfo>
+											<StateGroupInfo>
+												<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+											</StateGroupInfo>
 										</StateGroupList>
 										<CustomStateList>
 											<CustomState>
 												<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 												<State Name="Custom State" ID="{77F8E5A4-8A29-4793-BA6F-60448221F577}" ShortID="831179970">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+														<Property Name="Volume" Type="Real64" Value="-12"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+												<State Name="Custom State" ID="{9CA85DAA-8200-40AD-B2A3-D3F18EE60C68}" ShortID="83419455">
 													<PropertyList>
 														<Property Name="Lowpass" Type="int16" Value="40"/>
 														<Property Name="Volume" Type="Real64" Value="-12"/>
@@ -4703,7 +4726,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-11</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -5675,21 +5698,8 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
 									</StateGroupInfo>
-									<StateGroupInfo>
-										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
-									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
-									<CustomState>
-										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
-										<State Name="Custom State" ID="{9BAD6285-9179-4051-80B6-6D59CBC9E4DA}" ShortID="165176235">
-											<PropertyList>
-												<Property Name="Highpass" Type="int16" Value="44"/>
-												<Property Name="Lowpass" Type="int16" Value="20"/>
-												<Property Name="Volume" Type="Real64" Value="-10"/>
-											</PropertyList>
-										</State>
-									</CustomState>
 									<CustomState>
 										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
 										<State Name="Custom State" ID="{F865FD2C-5311-4B5B-AAEC-C5CB5153DA9A}" ShortID="581881222">

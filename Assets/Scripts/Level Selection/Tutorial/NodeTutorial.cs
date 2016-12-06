@@ -19,6 +19,8 @@ public class NodeTutorial : MonoBehaviour {
     [Tooltip("Removes the scouting functionality")]
     public bool showScoutPanel = true;
 
+    public int PaletteNumber = 0;
+
     public int TravelCost;
     public int CampsInNode;
 
@@ -261,29 +263,32 @@ public class NodeTutorial : MonoBehaviour {
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(AcceptPlay);
     }
 
-    public void AcceptPlay()
-    {
+    public void AcceptPlay() {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));            
+        EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));
 
-        switch (gameObject.name)
-        {
-            case "Tut1":
-                GameController.Instance.LoadScene("TutorialLevel01");
-                break;
-            case "Tut2":
-                GameController.Instance.LoadScene("TutorialLevel02");
-                break;
-            case "Tut3":
-                GameController.Instance.LoadScene("TutorialLevel03");
-                break;
-            case "Tut4":
-                GameController.Instance.LoadScene("TutorialLevel04");
-                break;
-            case "Tut5":
-                GameController.Instance.LoadScene("CampManagement");
-                break;
-        }        
+        PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, PaletteNumber);
+
+        /*  switch (gameObject.name)
+          {
+              case "Tut1":
+                  GameController.Instance.LoadScene("TutorialLevel01");
+                  break;
+              case "Tut2":
+                  GameController.Instance.LoadScene("TutorialLevel02");
+                  break;
+              case "Tut3":
+                  GameController.Instance.LoadScene("TutorialLevel03");
+                  break;
+              case "Tut4":
+                  GameController.Instance.LoadScene("TutorialLevel04");
+                  break;
+              case "Tut5":
+                  GameController.Instance.LoadScene("CampManagement");
+                  break;
+          } */
+
+        Debug.Log("NODES PALLET : " + PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName));
     }
 
     public void Deny()
