@@ -138,6 +138,8 @@ namespace Assets.ModuleDesigner.Scripts
             helper.OverriddenHeight = Height;
 
             helper.Update();
+
+            TriggerEnter();
         }
 
     }
