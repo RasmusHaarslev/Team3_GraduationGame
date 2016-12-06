@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class RivalStateMachine : CoroutineMachine
 {
-	public float transitionTime = 0.05f;
+	public float transitionTime = 0.1f;
 	public float fleeSpeed = 4f;
 	NavMeshAgent agent;
 	Character character;
@@ -14,6 +14,7 @@ public class RivalStateMachine : CoroutineMachine
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
 	Vector3 fleePosition;
+	WaitForSeconds transition;
 
 	void OnEnable()
 	{
@@ -40,6 +41,7 @@ public class RivalStateMachine : CoroutineMachine
 		get
 		{
 			poimanager = transform.parent.parent.GetComponent<PointOfInterestManager>();
+			transition = new WaitForSeconds(transitionTime);
 			return StartState;
 		}
 	}
@@ -185,7 +187,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
-		yield return new WaitForSeconds(transitionTime);
+		yield return transition;
 	}
 
 	private void OpponentsFleeing(FleeStateEvent e)
