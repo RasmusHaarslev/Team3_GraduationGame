@@ -10,7 +10,7 @@ public class CutsceneController : MonoBehaviour
     public Boolean randomLevel;
 
     void Start()
-    {
+    {       
         Invoke("StartCutscene", 3.0f);
     }
 

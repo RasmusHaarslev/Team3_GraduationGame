@@ -103,13 +103,15 @@ public class GameController : MonoBehaviour
             _DAYS_SURVIVED = PlayerPrefs.GetInt("DaysSurvived");
         }
         else
-        {
+        {            
             PlayerPrefs.SetInt("Food", InitialFood);
             PlayerPrefs.SetInt("Villagers", InitialVillages);
             PlayerPrefs.SetInt("Scraps", InitialScrap);
             PlayerPrefs.SetInt("Premium", InitialPremium);
             PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
         }
+
+        Debug.Log(PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName));
     }
 
     public void LoadScene(string scene)

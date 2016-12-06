@@ -10,12 +10,12 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>19</Value>
+										<Value>16</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
-										<Value>41</Value>
+										<Value>38</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
@@ -44,7 +44,7 @@
 								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-6</Value>
+										<Value>-8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -192,7 +192,7 @@
 								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>1</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -317,7 +317,7 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>28</Value>
+										<Value>24</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OutputBusVolume" Type="Real64">
@@ -328,7 +328,7 @@
 								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>-300</Value>
+										<Value>-50</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -350,7 +350,7 @@
 								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -539,7 +539,7 @@
 								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="27"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-4</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -573,8 +573,8 @@
 													<Modifier Name="" ID="{FE54B259-40D4-4718-A431-2173B3082482}">
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="400"/>
-															<Property Name="Min" Type="Real64" Value="-400"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -1340,7 +1340,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1523,7 +1523,12 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>26</Value>
+										<Value>13</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>100</Value>
 									</ValueList>
 								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
@@ -1532,7 +1537,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>2</Value>
+										<Value>-12</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1625,7 +1630,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>5</Value>
+										<Value>10</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
