@@ -664,11 +664,6 @@ Prefab:
       propertyPath: m_Name
       value: Camp Environment
       objectReference: {fileID: 0}
-    - target: {fileID: 23000012904732274, guid: cc0e44a9d98cb5244a054b6072d879bb,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7e6325c193ce5014db75ef522c0c8ba3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc0e44a9d98cb5244a054b6072d879bb, type: 2}
   m_IsPrefabParent: 0
@@ -1337,11 +1332,6 @@ Prefab:
 --- !u!224 &847841897 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000011953679992, guid: 7b462387523423547a5515644c563fa1,
-    type: 2}
-  m_PrefabInternal: {fileID: 847841896}
---- !u!1 &847841898 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000010923803972, guid: 7b462387523423547a5515644c563fa1,
     type: 2}
   m_PrefabInternal: {fileID: 847841896}
 --- !u!1 &859014723 stripped
@@ -2023,11 +2013,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000013430313072, guid: baaba8dba41717c48a5d8891cac1a28f,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 847841898}
     - target: {fileID: 1000013001162744, guid: baaba8dba41717c48a5d8891cac1a28f, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -2215,9 +2200,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 131072
-  lowerPoolSize: 65536
-  streamingPoolSize: 32768
+  defaultPoolSize: 65536
+  lowerPoolSize: 32768
+  streamingPoolSize: 16384
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
