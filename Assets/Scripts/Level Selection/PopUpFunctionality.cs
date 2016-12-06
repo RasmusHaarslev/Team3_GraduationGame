@@ -205,7 +205,6 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
 
-        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         EventManager.Instance.TriggerEvent(new LevelStarted());
 
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);
