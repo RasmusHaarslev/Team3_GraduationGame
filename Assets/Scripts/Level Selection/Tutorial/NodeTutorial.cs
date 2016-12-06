@@ -86,6 +86,22 @@ public class NodeTutorial : MonoBehaviour {
     {
         GetComponent<Button>().onClick.RemoveAllListeners();
         GetComponent<Button>().onClick.AddListener(ClickNode);
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "TutorialLevel01":
+                SetScrollPosition(0);
+                break;
+            case "TutorialLevel02":
+                SetScrollPosition(1);
+                break;
+            case "TutorialLevel03":
+                SetScrollPosition(2);
+                break;
+            case "TutorialLevel04":
+                SetScrollPosition(3);
+                break;
+        }
     }
 
     public void ClickNode()
@@ -265,8 +281,9 @@ public class NodeTutorial : MonoBehaviour {
         EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));
 
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, PaletteNumber);
+        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, foodAmount);
 
-          switch (gameObject.name)
+        switch (gameObject.name)
           {
               case "Tut1":
                   GameController.Instance.LoadScene("TutorialLevel01");

@@ -23,7 +23,8 @@ public class UI_LevelDone : MonoBehaviour {
 		{
 			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
 		}
-		GameController.Instance.numberOfActiveUIs++;
+
+        GameController.Instance.numberOfActiveUIs++;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
         endingPanel.SetActive(true);
 
@@ -31,5 +32,7 @@ public class UI_LevelDone : MonoBehaviour {
         {
             child.gameObject.SetActive(true);
         }
+
+        txtResourcesFound.text = PlayerPrefs.GetInt(StringResources.FoodAmountPrefsName).ToString();
     }
 }
