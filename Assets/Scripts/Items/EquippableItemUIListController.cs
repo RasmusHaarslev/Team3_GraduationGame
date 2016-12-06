@@ -8,12 +8,12 @@ public class EquippableItemUIListController : MonoBehaviour
 {
     
     public GameObject ContentPanel;
-    private GameObject ListItemPrefab;
+    public GameObject ListItemPrefab;
     int previousWeaponLevel;
     bool firstDrawn = false;
    public void GenerateItemsList(IEnumerable<EquippableitemValues> itemsValues)
     {
-        ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
+        //ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
         //removing previous list if present
         foreach (Transform child in ContentPanel.transform)
         {
@@ -25,7 +25,7 @@ public class EquippableItemUIListController : MonoBehaviour
             
             GameObject newItem = Instantiate(ListItemPrefab) as GameObject;
             UIListEquippableItemController controller = newItem.GetComponent<UIListEquippableItemController>();
-            if (!firstDrawn)
+           /* if (!firstDrawn)
             {
                 newItem.GetComponent<Image>().color = controller.selectedColor;
                 firstDrawn = true;
@@ -37,7 +37,7 @@ public class EquippableItemUIListController : MonoBehaviour
 
                 }
             }
-
+            */
             
             //controller.Icon.sprite = animal.Icon;
             controller.type.text = values.Type.ToString();
