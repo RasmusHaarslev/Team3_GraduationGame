@@ -1687,17 +1687,17 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>32</Value>
+										<Value>30</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
-										<Value>4</Value>
+										<Value>7</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>150</Value>
+										<Value>50</Value>
 									</ValueList>
 								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
@@ -1751,12 +1751,34 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="Campfire" ID="{D0C4E54E-ED7B-4522-BE0C-074298B0DFB6}" ShortID="763776498">
+											<PropertyList>
+												<Property Name="TrimEnd" Type="Real64" Value="5.53172866520788"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>Campfire.wav</AudioFile>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="Campfire" ID="{D0C4E54E-ED7B-4522-BE0C-074298B0DFB6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Campfire2" ID="{E9C1BCAA-30E3-46B5-968E-2C07D2CE4E9A}" ShortID="466457153" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Campfire2" ID="{3B5880F9-61BD-4B55-BD3D-A7BE8EEC46C3}" ShortID="306522968">
+											<Language>SFX</Language>
+											<AudioFile>Campfire2.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Campfire2" ID="{3B5880F9-61BD-4B55-BD3D-A7BE8EEC46C3}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -7258,12 +7280,12 @@
 							<PropertyList>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>-250</Value>
+										<Value>-380</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>6</Value>
+										<Value>5</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
