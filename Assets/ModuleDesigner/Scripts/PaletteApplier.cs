@@ -35,9 +35,9 @@ public class PaletteApplier : MonoBehaviour
         EventManager.Instance.StopListening<LevelStarted>(ChangePalette);
     }
 
-    void OnApplicationExit()
+    void OnApplicationQuit()
     {
-        this.gameObject.SetActive(false);
+        this.enabled = false;
     }
 
     public void ChangePalette(LevelStarted e)
