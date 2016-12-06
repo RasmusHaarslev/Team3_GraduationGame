@@ -97,7 +97,6 @@ public class Node : MonoBehaviour {
         if (isCleared)
         {
             GetComponent<Image>().sprite = activationImages[2];
-            GetComponent<Image>().color = Color.green;
         }
         else if (!isCleared && canPlay)
         {

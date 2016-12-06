@@ -143,6 +143,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_Campfire" ID="{0E0F55C3-D398-49E8-89E5-922972E26D61}">
+							<ChildrenList>
+								<Action Name="Play" ID="{CD96CD0E-19C2-4BE3-8469-FB2E319E270B}" ShortID="247053119" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{D5DDD109-3FFC-4CFF-8C78-8CFC6BE21D6C}" Global="false">
+											<ObjectRef Name="Campfire" ID="{F4C6B6DB-642C-4EB9-93F6-8C441E9F360C}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="test" ID="{2D8BB1E7-F912-4398-BE1B-14271DC78BC3}" ShortID="141014388">
@@ -755,6 +766,12 @@
 								<GroupItem Name="Stop" ID="{92EACDE8-7FD5-47A9-B1FB-AA707EC2358B}"/>
 							</SetItemParam>
 						</Action>
+						<Action Name="Set State" ID="{2FD1AF9F-A69E-47F5-A1DD-5E2391EDE6D6}" ShortID="128110553" Type="SetState" Scope="All" Global="true">
+							<SetItemParam>
+								<Group Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
+								<GroupItem Name="Off" ID="{43EDE367-0788-4613-853B-80CFC6744A9C}"/>
+							</SetItemParam>
+						</Action>
 						<Action Name="Set State" ID="{4FAD9667-8061-4CB8-B64F-7F353532903F}" ShortID="49037251" Type="SetState" Scope="All" Global="true">
 							<SetItemParam>
 								<Group Name="ExploreState" ID="{724B867E-375F-4A3B-B29B-6184D55DDB87}"/>
@@ -846,6 +863,26 @@
 											<ObjectRef Name="DiscoverFriendly" ID="{BB4CDBF5-5633-441F-963B-EF4830AD2CF4}" WorkUnitID="{E986D51B-7E25-444D-B7B1-B3DE74108923}"/>
 										</Element>
 									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="PanUpEnter" ID="{2471B94D-CD59-49A1-9769-FC0A578F2347}">
+							<ChildrenList>
+								<Action Name="Set State" ID="{5DFD67BD-6A09-4CF8-AAA5-A65BA11EFE0B}" ShortID="700956495" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
+										<GroupItem Name="On" ID="{993E0C17-0E99-401D-8CC3-F23E2E56BEE9}"/>
+									</SetItemParam>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="PanUpExit" ID="{68F0B444-456B-44CC-B714-AE97F2D6FDC6}">
+							<ChildrenList>
+								<Action Name="Set State" ID="{E0AC3A19-8F0D-4B92-8E2C-7B7C67BBC844}" ShortID="919813494" Type="SetState" Scope="All" Global="true">
+									<SetItemParam>
+										<Group Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
+										<GroupItem Name="Off" ID="{43EDE367-0788-4613-853B-80CFC6744A9C}"/>
+									</SetItemParam>
 								</Action>
 							</ChildrenList>
 						</Event>
