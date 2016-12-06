@@ -26,6 +26,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	void OnDisable()
 	{
+		StopAllCoroutines();
 		EventManager.Instance.StopListening<FleeStateEvent>(OpponentsFleeing);
 	}
 
@@ -132,6 +133,7 @@ public class RivalStateMachine : CoroutineMachine
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
 			agent.SetDestination(fleePosition);
+			yield return new WaitForSeconds(1);
 			if (agent.remainingDistance < agent.stoppingDistance)
 			{
 				if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z)) 
