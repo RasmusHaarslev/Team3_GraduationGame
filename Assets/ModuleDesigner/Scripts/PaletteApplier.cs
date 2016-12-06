@@ -56,14 +56,14 @@ public class PaletteApplier : MonoBehaviour
             default:
             case 0: //Yellow palette
                 {
-                    parseColors("#D7D1B4", "#A5A08A", "#647388", "#5F4B03", "#472A00");
+                    parseColors("#E9C57EFF", "#7D8852FF", "#F6FFD0", "#F4FF52", "#FF4B4B");
                 }
                 Debug.Log("Color palette 1");
                 Manager_Audio.ChangeState("Palette", "Color1");
                 break;
             case 1: //Red/purple palette
                 {
-                    parseColors("#AE9393", "#867171", "#848AA1", "#434E88", "#3F3D4C");
+                    parseColors("#CBB7FFFF", "#5B685FFF", "#FFFFFF", "#FFAEAE", "#FFCA00");
                 }
                 Debug.Log("Color palette 2");
                 Manager_Audio.ChangeState("Palette", "Color2");
