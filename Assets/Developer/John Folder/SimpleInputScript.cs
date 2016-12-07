@@ -20,10 +20,11 @@ public class SimpleInputScript : MonoBehaviour
 	bool front1 = true;
 	bool front2 = true;
 	bool front3 = true;
+    bool setButtons = false;
 
-	public List<GameObject> buttons;
-
-	void Start()
+    public List<GameObject> buttons;
+    List<GameObject> activeButtons = new List<GameObject>();
+    void Start()
 	{
 		Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
 		levelManager = UnityEngine.Object.FindObjectOfType<LevelManager>();
@@ -34,6 +35,7 @@ public class SimpleInputScript : MonoBehaviour
 	{
 		buttonClicked = true;
 		countdown = timeMax;
+        PlaceHunterButtons();
 	}
 
 	public void ButtonUp()
@@ -50,8 +52,63 @@ public class SimpleInputScript : MonoBehaviour
 
 		}
 	}
+    
+    private void PlaceHunterButtons()
+    {
+        int soldiersCount = levelManager.huntersAndPlayer.Count();
+        
+        if (!setButtons)
+        {
+            if (soldiersCount < 5)
+            {
+                activeButtons.Add(buttons[6]);
+                activeButtons.Add(buttons[5]);
+                activeButtons.Add(buttons[7]);
+            }
+            if (soldiersCount < 4)
+            {
+                buttons[7].SetActive(false);
+                buttons[6].transform.localPosition = new Vector3(-300, -300, 0);
+                buttons[5].transform.localPosition = new Vector3(300, -300, 0);
+                activeButtons.Add(buttons[6]);
+                activeButtons.Add(buttons[5]);
+            }
+            if (soldiersCount < 3)
+            {
+                buttons[7].SetActive(false);
+                buttons[6].SetActive(false);
+                buttons[5].transform.localPosition = new Vector3(0, -325, 0);
+                activeButtons.Add(buttons[5]);
+            }
+            if (soldiersCount < 2)
+            {
+                buttons[7].SetActive(false);
+                buttons[6].SetActive(false);
+                buttons[5].SetActive(false);
+            }
+            setButtons = true;
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            if (levelManager.huntersAndPlayer[i].GetComponent<Character>().isDead && buttons[i + 5].activeSelf == true)
+            {
+                buttons[i + 5].SetActive(false);
+                activeButtons.Remove(buttons[i + 5]);
+            }
+        }
 
-	private void checkForCommand()
+        if(activeButtons.Count() == 2)
+        {
+            activeButtons[0].transform.localPosition = new Vector3(-300, -300, 0);
+            activeButtons[1].transform.localPosition = new Vector3(300, -300, 0);
+        }
+        if (activeButtons.Count() == 1)
+        {
+            activeButtons[0].transform.localPosition = new Vector3(0, -325, 0);       
+        }
+    }
+
+    private void checkForCommand()
 	{
 		foreach (var command in simpleCommandsManager.commandsList)
 		{

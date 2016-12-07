@@ -251,7 +251,12 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator WinGameCoroutine(string scene = "CampManagement")
 	{
-        Time.timeScale -= 0.1f;
+		if (GameController.Instance.numberOfActiveUIs == 0)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		}
+		GameController.Instance.numberOfActiveUIs++;
+		Time.timeScale -= 0.1f;
         Camera.main.GetComponent<CameraController>().TriggerWinZoom();
         while (Time.timeScale > 0.2f)
 		{
@@ -273,11 +278,6 @@ public class LevelManager : MonoBehaviour
 			yield break;
 		}
 
-		if (GameController.Instance.numberOfActiveUIs == 0)
-		{
-			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
-		}
-		GameController.Instance.numberOfActiveUIs++;
         EventManager.Instance.TriggerEvent(
             new ChangeResources(
                 food: PlayerPrefs.GetInt("FoodAmount"),
