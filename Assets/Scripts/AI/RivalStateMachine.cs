@@ -140,6 +140,12 @@ public class RivalStateMachine : CoroutineMachine
 				}
 			}
 		}
+		var aggroSphere = GetComponentInChildren<AggroRange>();
+		if (aggroSphere.enabled == true)
+		{
+
+		}
+			aggroSphere.enabled = false;
 		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
