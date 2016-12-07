@@ -218,7 +218,7 @@ public class LevelManager : MonoBehaviour
 		{
 			Time.timeScale -= 0.1f;
 
-			yield return new WaitForSeconds(0.25f);
+			yield return new WaitForSeconds(0.20f);
 		}
 
 		if (!IsTutorial) { 
@@ -256,7 +256,7 @@ public class LevelManager : MonoBehaviour
 		{
 			Time.timeScale -= 0.1f;
 
-			yield return new WaitForSeconds(0.25f);
+			yield return new WaitForSeconds(0.15f);
 		}
 
 		yield return new WaitForSeconds(0.5f);
