@@ -277,8 +277,21 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
 									</StateGroupInfo>
+									<StateGroupInfo>
+										<StateGroupRef Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
+									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
+									<CustomState>
+										<StateRef Name="On" ID="{993E0C17-0E99-401D-8CC3-F23E2E56BEE9}"/>
+										<State Name="Custom State" ID="{BD0EFC62-B4DA-4A67-822A-874D6287E89B}" ShortID="585558302">
+											<PropertyList>
+												<Property Name="Highpass" Type="int16" Value="40"/>
+												<Property Name="Pitch" Type="int32" Value="450"/>
+												<Property Name="Volume" Type="Real64" Value="-2"/>
+											</PropertyList>
+										</State>
+									</CustomState>
 									<CustomState>
 										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
 										<State Name="Custom State" ID="{FC8F77E6-BDC2-4480-A7BA-9F5560FB0777}" ShortID="335885672">
@@ -920,8 +933,8 @@
 										<StateRef Name="On" ID="{993E0C17-0E99-401D-8CC3-F23E2E56BEE9}"/>
 										<State Name="Custom State" ID="{40CA5561-B111-49A1-BC5A-7242555B06B9}" ShortID="391246454">
 											<PropertyList>
-												<Property Name="Highpass" Type="int16" Value="30"/>
-												<Property Name="Volume" Type="Real64" Value="4"/>
+												<Property Name="Highpass" Type="int16" Value="38"/>
+												<Property Name="Pitch" Type="int32" Value="400"/>
 											</PropertyList>
 										</State>
 									</CustomState>

@@ -22,6 +22,8 @@ public class SimpleInputScript : MonoBehaviour
 	bool front3 = true;
     bool setButtons = false;
 
+    public bool isTutorial = false;
+
     public List<GameObject> buttons;
     List<GameObject> activeButtons = new List<GameObject>();
     void Start()
@@ -217,7 +219,7 @@ public class SimpleInputScript : MonoBehaviour
 	{
 		Text btnText = buttons[index].transform.GetChild(0).GetComponent<Text>();
 
-		if (btnText.text == "Rear")
+		if (btnText.text == "Rear" || btnText.text == "Bagved")
 			buttons[index].transform.GetChild(0).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Front");
 		else
 			buttons[index].transform.GetChild(0).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Rear");
