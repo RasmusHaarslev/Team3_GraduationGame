@@ -96,7 +96,7 @@ public class DataService : MonoBehaviour
 
         //GENERATE RANDOM LEADER
         CharacterGenerator charGenerator = new CharacterGenerator();
-        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null, 145, 0.15f); //pass attributes points as parameter
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null, 125, 0.135f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
         leaderValues.isMale = true; //Leader can only be male!
@@ -119,8 +119,8 @@ public class DataService : MonoBehaviour
                 name = "Aleksy",
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
-                damage = 4,
-                health = 96,
+                damage = 5,
+                health = 95,
                 damageSpeed = 1f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.BraveFool,
@@ -134,8 +134,8 @@ public class DataService : MonoBehaviour
                 name = "Yazmin",
                 isMale = false,
                 Type = CharacterValues.type.Hunter,
-                damage = 6,
-                health = 94,
+                damage = 7,
+                health = 93,
                 damageSpeed = 1f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.Clingy,
@@ -149,8 +149,8 @@ public class DataService : MonoBehaviour
                 name = "Zeheb",
                 isMale = true,
                 Type = CharacterValues.type.Hunter,
-                damage = 8,
-                health = 92,
+                damage = 3,
+                health = 97,
                 damageSpeed = 1f,
                 range = 2,
                 combatTrait = CharacterValues.CombatTrait.Fearful,
@@ -166,7 +166,7 @@ public class DataService : MonoBehaviour
               isMale = true,
               tier = 1,
               damage = 3,
-              health = 60,
+              health = 45,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -180,7 +180,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 2,
               damage = 3,
-              health = 60,
+              health = 45,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -194,7 +194,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 3,
               damage = 6,
-              health = 70,
+              health = 60,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -208,7 +208,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 4,
               damage = 6,
-              health = 70,
+              health = 60,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -221,8 +221,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
-              damage = 10,
-              health = 80,
+              damage = 8,
+              health = 70,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -235,8 +235,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 6,
-              damage = 10,
-              health = 80,
+              damage = 8,
+              health = 70,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -257,7 +257,7 @@ public class DataService : MonoBehaviour
              level = 1,
              health = 4,
              damage = 6,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 9,
              characterId = 2,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
@@ -271,7 +271,7 @@ public class DataService : MonoBehaviour
              level = 1,
              health = 5,
              damage = 5,
-             damageSpeed = 2.5f,
+             damageSpeed = 1.5f,
              range = 2,
              characterId = 3,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
@@ -285,7 +285,7 @@ public class DataService : MonoBehaviour
              level = 1,
              health = 8,
              damage = 2,
-             damageSpeed = 1.5f,
+             damageSpeed = 2.5f,
              range = 2,
              characterId = 4,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][1]
@@ -293,16 +293,17 @@ public class DataService : MonoBehaviour
              new EquippableitemValues
          {
              id = 5,
-             name = "Easy Steel Bar",
+             name = "Easy Spear",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 2,
              characterId = 5,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },new EquippableitemValues
+         },
+            new EquippableitemValues
          {
              id = 6,
              name = "Easy Rifle",
@@ -310,7 +311,7 @@ public class DataService : MonoBehaviour
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 9,
              characterId = 6,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
@@ -318,16 +319,17 @@ public class DataService : MonoBehaviour
              new EquippableitemValues
          {
              id = 7,
-             name = "Medium Steel Bar",
+             name = "Medium Spear",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 2,
              characterId = 7,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },new EquippableitemValues
+         },
+            new EquippableitemValues
          {
              id = 8,
              name = "Medium Rifle",
@@ -335,7 +337,7 @@ public class DataService : MonoBehaviour
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 9,
              characterId = 8,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
@@ -343,16 +345,17 @@ public class DataService : MonoBehaviour
              new EquippableitemValues
          {
              id = 9,
-             name = "Hard Steel Bar",
+             name = "Hard Spear",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 2,
              characterId = 9,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
-         },new EquippableitemValues
+         },
+            new EquippableitemValues
          {
              id = 10,
              name = "Hard Rifle",
@@ -360,7 +363,7 @@ public class DataService : MonoBehaviour
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 2f,
+             damageSpeed = 1.5f,
              range = 9,
              characterId = 10,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
