@@ -183,7 +183,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.536
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.536}
+  m_IndirectSpecularColor: {r: 0.2111314, g: 0.24979478, b: 0.30796182, a: 0.536}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ LightmapSettings:
     m_AlbedoBoost: 2.52
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 4
@@ -5438,15 +5438,6 @@ Prefab:
     - target: {fileID: 4000011062666498, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
       propertyPath: m_RootOrder
       value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011566851630, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000014216384116, guid: 990b2d56035dd044db83c6e5a6ae76b7,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
@@ -15673,7 +15664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1092013457
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16683,6 +16674,7 @@ GameObject:
   - 224: {fileID: 1173197012}
   - 222: {fileID: 1173197014}
   - 114: {fileID: 1173197013}
+  - 114: {fileID: 1173197015}
   m_Layer: 5
   m_Name: Header Credits
   m_TagString: Untagged
@@ -16707,7 +16699,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 555}
-  m_SizeDelta: {x: 0, y: 200}
+  m_SizeDelta: {x: 0, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173197013
 MonoBehaviour:
@@ -16750,6 +16742,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1173197011}
+--- !u!114 &1173197015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1173197011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Credits
 --- !u!1 &1173671916
 GameObject:
   m_ObjectHideFlags: 0
@@ -17715,8 +17719,6 @@ MonoBehaviour:
   MenuHeader: {fileID: 492633235}
   Music: {fileID: 867163807}
   FX: {fileID: 42989938}
-  LanguageHeader: {fileID: 0}
-  ToggleDanish: {fileID: 0}
   txtResourcesFoundHeader: {fileID: 562005222}
   txtResourcesFound: {fileID: 1146557027}
 --- !u!114 &1257783070
