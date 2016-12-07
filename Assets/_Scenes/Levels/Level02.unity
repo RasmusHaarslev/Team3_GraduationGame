@@ -9956,7 +9956,6 @@ GameObject:
   - 224: {fileID: 462505576}
   - 222: {fileID: 462505579}
   - 114: {fileID: 462505578}
-  - 114: {fileID: 462505577}
   m_Layer: 5
   m_Name: FleePanel
   m_TagString: Untagged
@@ -9984,24 +9983,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2048, y: 1536}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &462505577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010547412468, guid: 41dd1e871be0b334b80a6ecf1687c55f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 462505575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc374a550961c044db20ca9e1f66a070, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnYes: {fileID: 60376518}
-  btnNo: {fileID: 1866406213}
-  txtBtnYes: {fileID: 626715874}
-  txtBtnNo: {fileID: 1027083276}
-  txtHeader: {fileID: 2117882341}
-  Amoumt: {fileID: 0}
 --- !u!114 &462505578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11536,6 +11517,7 @@ GameObject:
   - 224: {fileID: 626715873}
   - 222: {fileID: 626715875}
   - 114: {fileID: 626715874}
+  - 114: {fileID: 626715876}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -11603,6 +11585,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 626715872}
+--- !u!114 &626715876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 626715872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Yes
 --- !u!1 &634497731
 GameObject:
   m_ObjectHideFlags: 0
@@ -16616,6 +16610,7 @@ GameObject:
   - 224: {fileID: 1027083275}
   - 222: {fileID: 1027083277}
   - 114: {fileID: 1027083276}
+  - 114: {fileID: 1027083278}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -16683,6 +16678,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1027083274}
+--- !u!114 &1027083278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1027083274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: No
 --- !u!1 &1028795545
 GameObject:
   m_ObjectHideFlags: 0
@@ -37938,6 +37945,7 @@ GameObject:
   - 224: {fileID: 2117882340}
   - 222: {fileID: 2117882342}
   - 114: {fileID: 2117882341}
+  - 114: {fileID: 2117882343}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -38005,6 +38013,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2117882339}
+--- !u!114 &2117882343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2117882339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: ConfirmFlee
 --- !u!1 &2126314670
 GameObject:
   m_ObjectHideFlags: 0
