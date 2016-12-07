@@ -23,6 +23,9 @@ public class CameraController : MonoBehaviour
 
     #region Hidden public fields
     [HideInInspector]
+    public Boolean LockCamera = false;
+
+    [HideInInspector]
     public Boolean LockCameraPosition = false;
 
     [HideInInspector]
@@ -49,7 +52,7 @@ public class CameraController : MonoBehaviour
     [HideInInspector]
     public float OverriddenRotationSlerp = 0f;
 
-    [HideInInspector]
+    //[HideInInspector]
 	public float XRotationOffset = 0f;
     [HideInInspector]
 	public bool SlerpBack;
@@ -93,7 +96,7 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (player != null)
+		if (player != null && !LockCamera)
 		{
 			TransformPosition();
 			TransformLook();
@@ -190,6 +193,23 @@ public class CameraController : MonoBehaviour
             rotationSlerp = RotationSlerpAmount;
         }
 	}
+
+    public void TriggerWinZoom()
+    {
+        OverridePosition = false;
+        OverrideHeight = false;
+        OverrideDistance = false;
+        OverrideSlerp = false;
+
+        height = 2f;
+        distance = 3f;
+        slerp = 1f;
+
+        Height = 2f;
+        Distance = 3f;
+        MoveSlerpAmount = 1f;
+        XRotationOffset = 1f;
+    }
 
 	void TransformLook()
 	{

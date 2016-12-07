@@ -218,7 +218,7 @@ public class LevelManager : MonoBehaviour
 		{
 			Time.timeScale -= 0.1f;
 
-			yield return new WaitForSeconds(0.25f);
+			yield return new WaitForSeconds(0.20f);
 		}
 
 		if (!IsTutorial) { 
@@ -226,9 +226,8 @@ public class LevelManager : MonoBehaviour
             yield break;
         }
 
+        Time.timeScale = 1f;
         GameController.Instance.LoadScene(scene);
-
-		Time.timeScale = 1f;
 
 		yield return new WaitForSeconds(0f);
 	}
@@ -252,29 +251,33 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator WinGameCoroutine(string scene = "CampManagement")
 	{
-		if (GameController.Instance.numberOfActiveUIs == 0)
-		{
-			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
-		}
-		GameController.Instance.numberOfActiveUIs++;
-		while (Time.timeScale > 0.2f)
+        Time.timeScale -= 0.1f;
+        Camera.main.GetComponent<CameraController>().TriggerWinZoom();
+        while (Time.timeScale > 0.2f)
 		{
 			Time.timeScale -= 0.1f;
 
-			yield return new WaitForSeconds(0.25f);
+			yield return new WaitForSeconds(0.15f);
 		}
 
 		yield return new WaitForSeconds(0.5f);
 
 		EventManager.Instance.TriggerEvent(new LevelWon());
 
-		Time.timeScale = 1f;
+        Camera.main.GetComponent<CameraController>().LockCamera = true;
+        Time.timeScale = 1f;
 
         if (IsTutorial)
 		{
 			EventManager.Instance.TriggerEvent(new TutorialDone());
 			yield break;
 		}
+
+		if (GameController.Instance.numberOfActiveUIs == 0)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		}
+		GameController.Instance.numberOfActiveUIs++;
         EventManager.Instance.TriggerEvent(
             new ChangeResources(
                 food: PlayerPrefs.GetInt("FoodAmount"),
@@ -287,7 +290,8 @@ public class LevelManager : MonoBehaviour
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 		//generate and display the new items
 		GenerateNewItems();
-		Time.timeScale = 1f;
+		
+
 		yield return new WaitForSeconds(0f);
 	}
 
