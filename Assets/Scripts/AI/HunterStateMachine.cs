@@ -468,11 +468,11 @@ public class HunterStateMachine : CoroutineMachine
 		GameObject proj = Instantiate(traitProjection);
 		if (combatTrait != CharacterValues.CombatTrait.NoTrait)
 		{
-			proj.GetComponent<traitText>().trait = combatTrait.ToString();
+			proj.GetComponent<traitText>().trait = TranslationManager.Instance.GetTranslation(combatTrait.ToString());
 		}
 		else
 		{
-			proj.GetComponent<traitText>().trait = targetTrait.ToString();
+			proj.GetComponent<traitText>().trait = TranslationManager.Instance.GetTranslation(targetTrait.ToString());
 		}
 		proj.transform.SetParent(gameObject.transform, false);
 		proj.transform.eulerAngles = new Vector3(90, 0, 0);
