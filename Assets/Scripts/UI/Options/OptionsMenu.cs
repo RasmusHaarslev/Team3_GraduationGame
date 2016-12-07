@@ -10,9 +10,6 @@ public class OptionsMenu : MonoBehaviour {
     public Text MenuHeader;
     public GameObject Music;
     public GameObject FX;
-    public GameObject LanguageHeader;
-
-    public GameObject ToggleDanish;
 
     public Text txtResourcesFoundHeader;
     public Text txtResourcesFound;
@@ -34,20 +31,9 @@ public class OptionsMenu : MonoBehaviour {
         MenuHeader.text = TranslationManager.Instance.GetTranslation("Menu");
         Music.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Music");
         FX.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("FX");
-        LanguageHeader.transform.GetChild(0).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("LanguageHeader");
-        LanguageHeader.transform.GetChild(1).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("English");
-        LanguageHeader.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Danish");
 
         Music.transform.GetChild(0).GetComponent<Toggle>().isOn = Manager_Audio.musicToggle;
         FX.transform.GetChild(0).GetComponent<Toggle>().isOn = Manager_Audio.fxToggle;
-
-        if (TranslationManager.Instance.GetCurrentLanguage() == "English") {
-            LanguageHeader.transform.GetChild(1).GetChild(0).GetComponent<Toggle>().isOn = true;
-            LanguageHeader.transform.GetChild(2).GetChild(0).GetComponent<Toggle>().isOn = false;
-        } else {
-            LanguageHeader.transform.GetChild(1).GetChild(0).GetComponent<Toggle>().isOn = false;
-            LanguageHeader.transform.GetChild(2).GetChild(0).GetComponent<Toggle>().isOn = true;
-        }
 
         if(txtResourcesFound != null)
         {
@@ -101,19 +87,4 @@ public class OptionsMenu : MonoBehaviour {
         Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
     }
     #endregion
-
-    public void ChangeLanguage()
-    {
-        Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
-        if (ToggleDanish.GetComponent<Toggle>().isOn)
-        {
-            TranslationManager.Instance.LoadLanguage(false);
-        } else
-        {
-            TranslationManager.Instance.LoadLanguage(true);
-        }
-
-        UpdateText();
-        EventManager.Instance.TriggerEvent(new LanguageChanged());
-    }
 }

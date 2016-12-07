@@ -11323,8 +11323,6 @@ MonoBehaviour:
   MenuHeader: {fileID: 939454985}
   Music: {fileID: 1119767856}
   FX: {fileID: 1391207858}
-  LanguageHeader: {fileID: 0}
-  ToggleDanish: {fileID: 0}
   txtResourcesFoundHeader: {fileID: 15934011}
   txtResourcesFound: {fileID: 544716172}
 --- !u!114 &1301696851
@@ -12313,6 +12311,7 @@ GameObject:
   - 224: {fileID: 1400243043}
   - 222: {fileID: 1400243045}
   - 114: {fileID: 1400243044}
+  - 114: {fileID: 1400243046}
   m_Layer: 5
   m_Name: Header Credits
   m_TagString: Untagged
@@ -12337,7 +12336,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 555}
-  m_SizeDelta: {x: 0, y: 200}
+  m_SizeDelta: {x: 0, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1400243044
 MonoBehaviour:
@@ -12380,6 +12379,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1400243042}
+--- !u!114 &1400243046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400243042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Credits
 --- !u!1001 &1412539406
 Prefab:
   m_ObjectHideFlags: 0
@@ -12475,7 +12486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1420146086
 RectTransform:
   m_ObjectHideFlags: 0
