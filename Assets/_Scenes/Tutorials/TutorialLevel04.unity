@@ -4588,6 +4588,7 @@ GameObject:
   - 114: {fileID: 749225843}
   - 114: {fileID: 749225842}
   - 114: {fileID: 749225845}
+  - 114: {fileID: 749225846}
   m_Layer: 5
   m_Name: GoToCampButton
   m_TagString: Untagged
@@ -4655,6 +4656,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 749225846}
+        m_MethodName: SetTimeScaleToOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 749225845}
         m_MethodName: LoadCampManagement
         m_Mode: 1
@@ -4712,6 +4724,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce254b0de138d4469bc112fa4b1b620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &749225846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 749225840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350210694cbacab48bfb84693ca44fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &752391347
@@ -12933,9 +12956,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 131072
-  lowerPoolSize: 65536
-  streamingPoolSize: 32768
+  defaultPoolSize: 65536
+  lowerPoolSize: 32768
+  streamingPoolSize: 16384
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -15835,6 +15858,7 @@ MonoBehaviour:
   upScaleThreshold: 0
   isTutorial: 0
   worldIndex: 0
+  dontUseDifficultyLevel: 1
 --- !u!4 &1985765577
 Transform:
   m_ObjectHideFlags: 0
