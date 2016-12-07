@@ -8211,6 +8211,7 @@ GameObject:
   - 224: {fileID: 469507479}
   - 222: {fileID: 469507481}
   - 114: {fileID: 469507480}
+  - 114: {fileID: 469507482}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -8278,6 +8279,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 469507478}
+--- !u!114 &469507482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 469507478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Yes
 --- !u!1001 &490481959
 Prefab:
   m_ObjectHideFlags: 0
@@ -8690,6 +8703,7 @@ GameObject:
   - 224: {fileID: 512028448}
   - 222: {fileID: 512028450}
   - 114: {fileID: 512028449}
+  - 114: {fileID: 512028451}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -8757,6 +8771,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 512028447}
+--- !u!114 &512028451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 512028447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: ConfirmFlee
 --- !u!1 &515262308
 GameObject:
   m_ObjectHideFlags: 0
@@ -11013,6 +11039,7 @@ GameObject:
   - 224: {fileID: 566216752}
   - 222: {fileID: 566216754}
   - 114: {fileID: 566216753}
+  - 114: {fileID: 566216755}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -11080,6 +11107,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 566216751}
+--- !u!114 &566216755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 566216751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: No
 --- !u!1001 &568097144
 Prefab:
   m_ObjectHideFlags: 0
@@ -15708,7 +15747,6 @@ GameObject:
   - 224: {fileID: 821613960}
   - 222: {fileID: 821613963}
   - 114: {fileID: 821613962}
-  - 114: {fileID: 821613961}
   m_Layer: 5
   m_Name: FleePanel
   m_TagString: Untagged
@@ -15736,24 +15774,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2048, y: 1536}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &821613961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010547412468, guid: 41dd1e871be0b334b80a6ecf1687c55f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 821613959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc374a550961c044db20ca9e1f66a070, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnYes: {fileID: 1101380020}
-  btnNo: {fileID: 809283534}
-  txtBtnYes: {fileID: 469507480}
-  txtBtnNo: {fileID: 566216753}
-  txtHeader: {fileID: 512028449}
-  Amoumt: {fileID: 0}
 --- !u!114 &821613962
 MonoBehaviour:
   m_ObjectHideFlags: 0
