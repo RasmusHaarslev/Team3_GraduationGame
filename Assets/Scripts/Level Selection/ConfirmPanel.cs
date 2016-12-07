@@ -24,8 +24,13 @@ public class ConfirmPanel : MonoBehaviour
         txtBtnYes.text = TranslationManager.Instance.GetTranslation("Yes");
         txtBtnNo.text = TranslationManager.Instance.GetTranslation("No");
 
-        txtBtnYesVillage.text = TranslationManager.Instance.GetTranslation("Yes");
-        txtBtnNoVillage.text = TranslationManager.Instance.GetTranslation("No");
+        if (txtBtnYesVillage != null) { 
+            txtBtnYesVillage.text = TranslationManager.Instance.GetTranslation("Yes");
+        }
+
+        if (txtBtnNoVillage != null ) { 
+            txtBtnNoVillage.text = TranslationManager.Instance.GetTranslation("No");
+        }
 
     }
 }
