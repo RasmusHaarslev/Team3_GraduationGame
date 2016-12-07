@@ -17,7 +17,7 @@ public class MoveScript : MonoBehaviour
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
-	List<GameObject> hunters = new List<GameObject>();
+	public List<GameObject> hunters = new List<GameObject>();
 	bool hasShot = false;
 	public float fleeSpeed = 4f;
 	LevelManager levelManager;
@@ -66,7 +66,7 @@ public class MoveScript : MonoBehaviour
 	{
 		if (hunters.Count == 0)
 		{
-			if (!levelManager.IsTutorial)
+			if (!levelManager.IsTutorial || SceneManager.GetActiveScene().name == "TutorialLevel03")
 			{
 				hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
 			}
