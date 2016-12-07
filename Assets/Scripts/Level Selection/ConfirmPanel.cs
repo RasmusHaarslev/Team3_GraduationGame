@@ -13,11 +13,16 @@ public class ConfirmPanel : MonoBehaviour
 
     public Text Amoumt;
 
+	void OnEnable()
+	{
+		txtBtnYes.text = TranslationManager.Instance.GetTranslation("Yes");
+		txtBtnNo.text = TranslationManager.Instance.GetTranslation("No");
+		txtHeader.text = TranslationManager.Instance.GetTranslation("ConfirmFlee");
+	}
+
     public void SetupText(GameObject node, string mode, int amount = 0)
     {
         Amoumt.text = amount+"";
-        txtBtnYes.text = TranslationManager.Instance.GetTranslation("Yes");
-        txtBtnNo.text = TranslationManager.Instance.GetTranslation("No");
         //if (mode == "play")
         //{
         //    if (amount > -1)
