@@ -194,31 +194,31 @@ public class CampManager : MonoBehaviour
     private int GetTimeForUpgrade(int level) {
         switch (level)
         {
-            case 0:
+            case 2:
                 return Level1_Time;
 
-            case 1:
+            case 3:
                 return Level2_Time;
 
-            case 2:
+            case 4:
                 return Level3_Time;
 
-            case 3:
+            case 5:
                 return Level4_Time;
 
-            case 4:
+            case 6:
                 return Level5_Time;
 
-            case 5:
+            case 7:
                 return Level6_Time;
 
-            case 6:
+            case 8:
                 return Level7_Time;
 
-            case 7:
+            case 9:
                 return Level8_Time;
 
-            case 8:
+            case 10:
                 return Level9_Above_Time;
 
             default:

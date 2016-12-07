@@ -17,6 +17,57 @@ public class TutorialController: MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        switch (Type)
+        {
+            case TutorialType.GameplayTutorial:
+                if (database.GameplayTutorialCompleted)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                break;
+
+            case TutorialType.CampTutorial:
+                if (database.CampTutorialCompleted)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                break;
+
+            case TutorialType.LevelSelectionTutorial:
+                if (database.LevelSelectionTutorialCompleted)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                break;
+
+            case TutorialType.SoldierTutorial:
+                if (database.SoldierTutorialCompleted)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                break;
+
+            case TutorialType.UpgradesTutorial:
+                if (database.UpgradesTutorialCompleted)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                break;
+
+            case TutorialType.RecruitTutorial:
+                if (database.RecruitTutorialCompleted)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public void TutorialSeen()
     {
         switch (Type)
