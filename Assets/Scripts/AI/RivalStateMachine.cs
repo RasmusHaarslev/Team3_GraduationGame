@@ -112,10 +112,13 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator RoamState()
 	{
-		agent.Resume();
-		character.animator.SetBool("isAware", false);
-		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
+		if (!character.isDead)
+		{
+			agent.Resume();
+			character.animator.SetBool("isAware", false);
+			agent.stoppingDistance = 1.2f;
+			agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -138,7 +141,7 @@ public class RivalStateMachine : CoroutineMachine
 			yield return new WaitForSeconds(1);
 			if (agent.remainingDistance < agent.stoppingDistance)
 			{
-				if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z)) 
+				if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z))
 				{
 					gameObject.SetActive(false);
 				}
