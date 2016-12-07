@@ -277,6 +277,7 @@ public class CampUpgrades
     public int Gold = 0;
     public int Scrap = 0;
     public int Food = 0;
+    public int Villages = 0;
 
     #endregion
 
@@ -287,5 +288,6 @@ public class CampUpgrades
         Gold = PlayerPrefs.GetInt("Premium");
         Food = PlayerPrefs.GetInt("Food");
         Scrap = PlayerPrefs.GetInt("Scrap");
+        Villages = PlayerPrefs.GetInt("Villages");
     }
 }

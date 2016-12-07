@@ -55,8 +55,8 @@ public class SaveLoadLevels
                 {
                     var li = new LinkXML();
 
-                    li.FromID = link.From.GetComponent<Node>().NodeId;
-                    li.ToID = link.To.GetComponent<Node>().NodeId;
+                    li.FromID = link.From.GetComponent<NodeXML>().NodeId;
+                    li.ToID = link.To.GetComponent<NodeXML>().NodeId;
                     li.Hierarchy = link.Hierarchy ? 1 : 0;
 
                     xmlNode.Links.Add(li);
