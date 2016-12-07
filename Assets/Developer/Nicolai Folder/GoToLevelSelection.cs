@@ -48,12 +48,14 @@ public class GoToLevelSelection : MonoBehaviour {
         gameObject.GetComponent<LevelSelectionGenerator>().SetScrollPosition(SaveLoadLevels.maxRowsCleared);
 
         if (winAnimation && nodeCleared) {
+            levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
             WinAnimateMap();
             winAnimation = !winAnimation;
         }
 
         if (loseAnimation && !nodeCleared)
         {
+            levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
             LoseAnimateMap();
             loseAnimation = !loseAnimation;
         }
@@ -61,7 +63,6 @@ public class GoToLevelSelection : MonoBehaviour {
         if (SaveLoadLevels.lastNodeCleared != null) { 
             SaveLoadLevels.lastNodeCleared.transform.GetChild(2).gameObject.SetActive(true);
         }
-
     }
 
     #region WIN ANIMATION
@@ -95,9 +96,13 @@ public class GoToLevelSelection : MonoBehaviour {
                 Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
                 childNode.GetComponent<Animator>().SetTrigger("IsUnlocked");
                 yield return new WaitForSeconds(1f);
+            } else
+            {
+                childNode.transform.GetChild(2).gameObject.SetActive(false);
             }
         }
 
+        levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = true;
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
     }
     #endregion
@@ -115,6 +120,7 @@ public class GoToLevelSelection : MonoBehaviour {
         Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
         node.GetComponent<Animator>().SetTrigger("IsLost");
         yield return new WaitForSeconds(1f);
+        levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = true;
     }
     #endregion
 }

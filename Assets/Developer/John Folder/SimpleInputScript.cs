@@ -15,7 +15,6 @@ public class SimpleInputScript : MonoBehaviour
 	public GameObject commandPanel;
 	SimpleCommandsManager simpleCommandsManager;
 	MoveScript moveScript;
-	TutorialMoveScript tutorialMoveScript;
 	LevelManager levelManager;
 	LevelGenerator levelGenerator;
 	bool front1 = true;
@@ -64,8 +63,8 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new DefendStateEvent());
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					simpleCommandsManager.inDefenseState = true;
-                    simpleCommandsManager.currentCommandBtnText.text = "Offensive";
-                    ChangeColor(0);
+					simpleCommandsManager.currentCommandBtnText.text = "Offensive";
+					ChangeColor(0);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[0] && simpleCommandsManager.inDefenseState)
@@ -74,8 +73,8 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					//Debug.Log("offensive");
 					simpleCommandsManager.inDefenseState = false;
-                    simpleCommandsManager.currentCommandBtnText.text = "Defensive";
-                    ChangeColor(0);
+					simpleCommandsManager.currentCommandBtnText.text = "Defensive";
+					ChangeColor(0);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[2])
@@ -92,9 +91,9 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new FollowStateEvent());
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					Debug.Log("follow");
-                    simpleCommandsManager.inFollowState = true;
-                    simpleCommandsManager.currentCommandBtnText.text = "Stay";
-                    ChangeColor(4);
+					simpleCommandsManager.inFollowState = true;
+					simpleCommandsManager.currentCommandBtnText.text = "Stay";
+					ChangeColor(4);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[4] && simpleCommandsManager.inFollowState)
@@ -102,9 +101,9 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new StayStateEvent());
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					Debug.Log("stay");
-                    simpleCommandsManager.inFollowState = false;
-                    simpleCommandsManager.currentCommandBtnText.text = "Follow";
-                    ChangeColor(4);
+					simpleCommandsManager.inFollowState = false;
+					simpleCommandsManager.currentCommandBtnText.text = "Follow";
+					ChangeColor(4);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[5])
@@ -112,14 +111,7 @@ public class SimpleInputScript : MonoBehaviour
 					if (levelManager.huntersAndPlayer.Count >= 2)
 					{
 						EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[0]));
-						if (levelGenerator.isTutorial)
-						{
-							levelManager.huntersAndPlayer[0].GetComponent<TutorialHunterStateMachine>().ProjectCommand();
-						}
-						else
-						{
-							levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
-						}
+						levelManager.huntersAndPlayer[0].GetComponent<HunterStateMachine>().ProjectCommand();
 					}
 					Debug.Log("hunter1 front/back");
 					ChangeButtonText(5);
@@ -132,14 +124,7 @@ public class SimpleInputScript : MonoBehaviour
 					if (levelManager.huntersAndPlayer.Count >= 3)
 					{
 						EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[1]));
-						if (levelGenerator.isTutorial)
-						{
-							levelManager.huntersAndPlayer[1].GetComponent<TutorialHunterStateMachine>().ProjectCommand();
-						}
-						else
-						{
-							levelManager.huntersAndPlayer[1].GetComponent<HunterStateMachine>().ProjectCommand();
-						}
+						levelManager.huntersAndPlayer[1].GetComponent<HunterStateMachine>().ProjectCommand();
 					}
 					Debug.Log("hunter2 front/back");
 					ChangeButtonText(6);
@@ -151,14 +136,7 @@ public class SimpleInputScript : MonoBehaviour
 					if (levelManager.huntersAndPlayer.Count >= 4)
 					{
 						EventManager.Instance.TriggerEvent(new ChangeFormationEvent(levelManager.huntersAndPlayer[2]));
-						if (levelGenerator.isTutorial)
-						{
-							levelManager.huntersAndPlayer[2].GetComponent<TutorialHunterStateMachine>().ProjectCommand();
-						}
-						else
-						{
-							levelManager.huntersAndPlayer[2].GetComponent<HunterStateMachine>().ProjectCommand();
-						}
+						levelManager.huntersAndPlayer[2].GetComponent<HunterStateMachine>().ProjectCommand();
 					}
 					Debug.Log("hunter3 front/back");
 					ChangeButtonText(7);
@@ -203,22 +181,6 @@ public class SimpleInputScript : MonoBehaviour
 				moveScript.movement = true;
 			}
 		}
-		else
-		{
-			if (tutorialMoveScript == null)
-			{
-				tutorialMoveScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TutorialMoveScript>();
-			}
-			if (commandPanel.activeSelf == true)
-			{
-				tutorialMoveScript.movement = false;
-			}
-			else
-			{
-				tutorialMoveScript.movement = true;
-			}
-		}
-
 
 		if (buttonClicked && commandPanel.activeSelf == false)
 		{

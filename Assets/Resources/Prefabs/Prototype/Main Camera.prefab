@@ -89,15 +89,12 @@ GameObject:
   - 92: {fileID: 92000011224962570}
   - 124: {fileID: 124000010111313504}
   - 114: {fileID: 114000010672473128}
-  - 114: {fileID: 114000013351673726}
-  - 45: {fileID: 45000012599563724}
   - 114: {fileID: 114000010523345100}
   - 114: {fileID: 114000012132333340}
-  - 114: {fileID: 114000014234263752}
   - 114: {fileID: 114000011844469480}
-  - 114: {fileID: 114000010883693278}
-  - 114: {fileID: 114000012002643146}
-  - 114: {fileID: 114000012193879424}
+  - 114: {fileID: 114000012639463382}
+  - 114: {fileID: 114000013347936036}
+  - 114: {fileID: 114000013741070806}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -111,10 +108,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014173923650}
-  m_LocalRotation: {x: 0.33860362, y: 0.38695306, z: -0.15533563, w: 0.8434962}
-  m_LocalPosition: {x: -29.85911, y: 46.30117, z: -54.539185}
+  m_LocalRotation: {x: 0.44776776, y: -0.00009848036, z: 0.0000520003, w: 0.8941499}
+  m_LocalPosition: {x: -1.1282322, y: 23.209505, z: -57.552505}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 43.741, y: 49.065002, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -193.61299, z: 0}
   m_Children:
   - {fileID: 4000013939550940}
   m_Father: {fileID: 0}
@@ -208,14 +205,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!45 &45000012599563724
-Skybox:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 0}
 --- !u!92 &92000011224962570
 Behaviour:
   m_ObjectHideFlags: 1
@@ -267,6 +256,7 @@ MonoBehaviour:
   MoveSlerpAmount: 10
   RotationSlerpAmount: 2
   CameraOffset: 0
+  LockCameraPosition: 0
   OverridePosition: 0
   OverriddenPosition: {x: 0, y: 0, z: 0}
   OverrideDistance: 0
@@ -279,18 +269,12 @@ MonoBehaviour:
   OverriddenRotationSlerp: 0
   XRotationOffset: 0
   SlerpBack: 0
---- !u!114 &114000010883693278
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenerId: 0
+  OverrideFogHeight: 0
+  OverriddenFogHeight: 0
+  OverrideFogHeightDensity: 0
+  OverriddenFogHeightDensity: 0
+  OverrideFogStartDistance: 0
+  OverriddenFogStartDistance: 0
 --- !u!114 &114000011844469480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,46 +288,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomShader: {fileID: 4800000, guid: 043d96ab7407dec449f1d706dee8db14, type: 3}
   amount: 0
---- !u!114 &114000012002643146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dec3c34d2798d347a642ff4578529e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceFog: 1
-  excludeFarPixels: 0
-  useRadialDistance: 0
-  heightFog: 1
-  height: 15
-  heightDensity: 3.64
-  startDistance: 0
-  Advanced:
-    UseScattering: 0
-    sun: {fileID: 0}
-    Turbidity: 20
-    WorldScale: 500
-    Rayleigh: 1
-    ScatteringSize: 0.867
-    ScatteringIntensity: 20
-    Bias: 0.4
-    contrast: 4.5
-    luminance: 0.05
-    lumaAmount: 1
-    Falloff: 0
-    BoostColor: 1
-  fogShaderExtended: {fileID: 4800000, guid: 750359e6d24c2984e818fad83f5577f6, type: 3}
 --- !u!114 &114000012132333340
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b9e31fdf962e3e4ca3b62ec3ecc2f4e, type: 3}
   m_Name: 
@@ -383,19 +334,7 @@ MonoBehaviour:
   EffectFlags:
     components: []
   sharedInstanceID: 354c5a38-f992-4dc6-a0ae-820782790cba
---- !u!114 &114000012193879424
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014173923650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bfa195b3c3f17941a8dbe1396e728dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fog: {fileID: 114000012002643146}
---- !u!114 &114000013351673726
+--- !u!114 &114000012639463382
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -403,18 +342,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000014173923650}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Script: {fileID: 11500000, guid: e600f971b2d827a409db5babe9f5bf31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceFog: 1
-  excludeFarPixels: 1
-  useRadialDistance: 1
-  heightFog: 1
-  height: 17.69
-  heightDensity: 2.8
-  startDistance: 44.33
-  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
---- !u!114 &114000014234263752
+  startRect:
+    serializedVersion: 2
+    x: 100
+    y: 1200
+    width: 245
+    height: 125
+  updateColor: 0
+  allowDrag: 1
+  frequency: 0.5
+  nbDecimal: 1
+  fontSize: 50
+--- !u!114 &114000013347936036
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -422,13 +364,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000014173923650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5b1c9d0d5c4fa4f85a80a798f0618c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pallete1: {fileID: 0}
-  pallete2: {fileID: 0}
-  pallete3: {fileID: 0}
-  palleteSettings: []
+  distanceFog: 0
+  excludeFarPixels: 0
+  useRadialDistance: 0
+  heightFog: 1
+  height: 30
+  heightDensity: 0.2
+  startDistance: 25
+  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
+--- !u!114 &114000013741070806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014173923650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e2b6955f246949bdc8926e444f7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenerId: 0
 --- !u!124 &124000010111313504
 Behaviour:
   m_ObjectHideFlags: 1

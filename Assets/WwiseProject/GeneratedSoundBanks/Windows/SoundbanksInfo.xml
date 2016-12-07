@@ -17,18 +17,23 @@
 			<Path>ExploreTestSB.bnk</Path>
 			<IncludedEvents>
 				<Event Id="1629463520" Name="DiscoverEnemy" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverEnemy" MaxAttenuation="0.000000"/>
-				<Event Id="604685473" Name="DiscoverFriendly" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendly" MaxAttenuation="0.000000"/>
 				<Event Id="3062004145" Name="DiscoverFriendlyExit" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendlyExit" MaxAttenuation="0.000000"/>
+				<Event Id="1552049343" Name="DiscoverFriendlyInit" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendlyInit" MaxAttenuation="0.000000"/>
+				<Event Id="1781089225" Name="DiscoverFriendlyStinger" ObjectPath="\Events\Default Work Unit\TriggerEvents\DiscoverFriendlyStinger" MaxAttenuation="0.000000"/>
 				<Event Id="1392836774" Name="FriendlyDie" ObjectPath="\Events\Default Work Unit\TriggerEvents\FriendlyDie" MaxAttenuation="0.000000"/>
+				<Event Id="2240399629" Name="PanUpEnter" ObjectPath="\Events\Default Work Unit\TriggerEvents\PanUpEnter" MaxAttenuation="0.000000"/>
+				<Event Id="2838192801" Name="PanUpExit" ObjectPath="\Events\Default Work Unit\TriggerEvents\PanUpExit" MaxAttenuation="0.000000"/>
 				<Event Id="255852841" Name="Play_BoxPickup" ObjectPath="\Events\Default Work Unit\UI\Play_BoxPickup"/>
 				<Event Id="1594392727" Name="Play_BridgeCreak" ObjectPath="\Events\Default Work Unit\Ambience\Play_BridgeCreak" MaxAttenuation="15.000000"/>
 				<Event Id="3243499004" Name="Play_BuyGold" ObjectPath="\Events\Default Work Unit\UI\Play_BuyGold"/>
+				<Event Id="4000411161" Name="Play_Campfire" ObjectPath="\Events\Default Work Unit\Ambience\Play_Campfire" MaxAttenuation="7.000000"/>
 				<Event Id="2290791599" Name="Play_CampUpgrade" ObjectPath="\Events\Default Work Unit\UI\Play_CampUpgrade"/>
 				<Event Id="1292318918" Name="Play_CharSel" ObjectPath="\Events\Default Work Unit\UI\Play_CharSel"/>
 				<Event Id="1757332637" Name="Play_ClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap"/>
 				<Event Id="2441431792" Name="Play_ClickClearedMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClickClearedMap"/>
 				<Event Id="1164893191" Name="Play_CommandSel" ObjectPath="\Events\Default Work Unit\UI\Play_CommandSel"/>
 				<Event Id="4074757615" Name="Play_CommandUI" ObjectPath="\Events\Default Work Unit\UI\Play_CommandUI"/>
+				<Event Id="2481509017" Name="Play_Disc" ObjectPath="\Events\Default Work Unit\Ambience\Play_Disc" MaxAttenuation="15.000000"/>
 				<Event Id="3643034395" Name="Play_EvilFemaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Attack"/>
 				<Event Id="2491028491" Name="Play_EvilFemaleWarrior1Death" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilFemaleWarrior1Death"/>
 				<Event Id="3296022196" Name="Play_EvilMaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_EvilMaleWarrior1Attack"/>
@@ -40,6 +45,7 @@
 				<Event Id="3254793675" Name="Play_GroundAmbience" ObjectPath="\Events\Default Work Unit\Ambience\Play_GroundAmbience"/>
 				<Event Id="939012970" Name="Play_IntoLevel" ObjectPath="\Events\Default Work Unit\UI\Play_IntoLevel"/>
 				<Event Id="2412941441" Name="Play_LeaderAttack" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderAttack" MaxAttenuation="0.000000"/>
+				<Event Id="4007042469" Name="Play_LeaderDeath" ObjectPath="\Events\Default Work Unit\Play_LeaderDeath"/>
 				<Event Id="441061787" Name="Play_LeaderFootStep" ObjectPath="\Events\Default Work Unit\test\Play_LeaderFootStep" MaxAttenuation="15.000000"/>
 				<Event Id="2785405380" Name="Play_LeaderHit" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderHit" MaxAttenuation="0.000000"/>
 				<Event Id="374946458" Name="Play_MaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_MaleWarrior1Attack"/>
@@ -54,6 +60,7 @@
 				<Event Id="2149966355" Name="Play_PickRiffle" ObjectPath="\Events\Default Work Unit\UI\Play_PickRiffle"/>
 				<Event Id="3454913730" Name="Play_PickShield" ObjectPath="\Events\Default Work Unit\UI\Play_PickShield"/>
 				<Event Id="3974976660" Name="Play_PickSpear" ObjectPath="\Events\Default Work Unit\UI\Play_PickSpear"/>
+				<Event Id="1601844230" Name="Play_Pipe" ObjectPath="\Events\Default Work Unit\Ambience\Play_Pipe" MaxAttenuation="15.000000"/>
 				<Event Id="69304867" Name="Play_PowerPole" ObjectPath="\Events\Default Work Unit\Ambience\Play_PowerPole" MaxAttenuation="15.000000"/>
 				<Event Id="3256827112" Name="Play_Scout" ObjectPath="\Events\Default Work Unit\UI\Play_Scout"/>
 				<Event Id="3142926109" Name="Play_ScrollMap" ObjectPath="\Events\Default Work Unit\UI\Play_ScrollMap"/>
@@ -65,9 +72,9 @@
 				<Event Id="2143972174" Name="Play_UseSpear" ObjectPath="\Events\Default Work Unit\Combat\Play_UseSpear" MaxAttenuation="15.000000"/>
 				<Event Id="1488691910" Name="Play_WalkTapUI" ObjectPath="\Events\Default Work Unit\UI\Play_WalkTapUI"/>
 				<Event Id="1465786192" Name="Play_WindDeep2" ObjectPath="\Events\Default Work Unit\Ambience\Play_WindDeep2" MaxAttenuation="15.000000"/>
-				<Event Id="1661144613" Name="Play_windFlags" ObjectPath="\Events\Default Work Unit\Ambience\Play_windFlags" MaxAttenuation="20.000000"/>
-				<Event Id="3104904358" Name="Play_windhowl" ObjectPath="\Events\Default Work Unit\Ambience\Play_windhowl"/>
-				<Event Id="1938796326" Name="Play_windNoiseQuiet" ObjectPath="\Events\Default Work Unit\Ambience\Play_windNoiseQuiet" MaxAttenuation="20.000000"/>
+				<Event Id="1661144613" Name="Play_windFlags" ObjectPath="\Events\Default Work Unit\Ambience\Play_windFlags" MaxAttenuation="15.000000"/>
+				<Event Id="3104904358" Name="Play_windhowl" ObjectPath="\Events\Default Work Unit\Ambience\Play_windhowl" MaxAttenuation="15.000000"/>
+				<Event Id="1938796326" Name="Play_windNoiseQuiet" ObjectPath="\Events\Default Work Unit\Ambience\Play_windNoiseQuiet" MaxAttenuation="15.000000"/>
 				<Event Id="3484799022" Name="Stop_ExploreMusic" ObjectPath="\Events\Default Work Unit\Stop_ExploreMusic" MaxAttenuation="0.000000"/>
 				<Event Id="3125842213" Name="Stop_GroundAmbience" ObjectPath="\Events\Default Work Unit\Ambience\Stop_GroundAmbience" MaxAttenuation="0.000000"/>
 				<Event Id="484731529" Name="Stop_MenuAmbience" ObjectPath="\Events\Default Work Unit\Stop_MenuAmbience" MaxAttenuation="0.000000"/>
@@ -158,11 +165,11 @@
 				</File>
 				<File Id="176466473" Language="SFX">
 					<ShortName>Tents1.wav</ShortName>
-					<Path>SFX/Tents1_52BD694B.wem</Path>
+					<Path>SFX/Tents1_76A9233F.wem</Path>
 				</File>
 				<File Id="178962418" Language="SFX">
 					<ShortName>PowerPole3.wav</ShortName>
-					<Path>SFX/PowerPole3_185AF7EB.wem</Path>
+					<Path>SFX/PowerPole3_821DB5EF.wem</Path>
 				</File>
 				<File Id="194854662" Language="SFX">
 					<ShortName>EvilFemaleWarrior2Death1.wav</ShortName>
@@ -198,7 +205,7 @@
 				</File>
 				<File Id="242360598" Language="SFX">
 					<ShortName>PowerPole1.wav</ShortName>
-					<Path>SFX/PowerPole1_464F2AB7.wem</Path>
+					<Path>SFX/PowerPole1_9FE1A03B.wem</Path>
 				</File>
 				<File Id="243269753" Language="SFX">
 					<ShortName>EvilMaleWarrior2Death1.wav</ShortName>
@@ -224,6 +231,10 @@
 					<ShortName>FootstepsConc4.wav</ShortName>
 					<Path>SFX/FootstepsConc4_76A9233F.wem</Path>
 				</File>
+				<File Id="264489792" Language="SFX">
+					<ShortName>11 Low-pitched wind.5.wav</ShortName>
+					<Path>SFX/11 Low-pitched wind.5_52BD694B.wem</Path>
+				</File>
 				<File Id="271916395" Language="SFX">
 					<ShortName>FemaleWarrior1Death2.wav</ShortName>
 					<Path>SFX/FemaleWarrior1Death2_52BD694B.wem</Path>
@@ -231,6 +242,10 @@
 				<File Id="274771103" Language="SFX">
 					<ShortName>UnlockNewMaps.wav</ShortName>
 					<Path>SFX/UnlockNewMaps_35B854C8.wem</Path>
+				</File>
+				<File Id="276837321" Language="SFX">
+					<ShortName>11 Low-pitched wind.3.wav</ShortName>
+					<Path>SFX/11 Low-pitched wind.3_52BD694B.wem</Path>
 				</File>
 				<File Id="283084582" Language="SFX">
 					<ShortName>MaleWarrior2Attack6.wav</ShortName>
@@ -248,6 +263,10 @@
 					<ShortName>FootStepsSneak5.wav</ShortName>
 					<Path>SFX/FootStepsSneak5_76A9233F.wem</Path>
 				</File>
+				<File Id="298326409" Language="SFX">
+					<ShortName>StingerExplore_2.wav</ShortName>
+					<Path>SFX/StingerExplore_2_617C1CCC.wem</Path>
+				</File>
 				<File Id="302328586" Language="SFX">
 					<ShortName>ClickClearedMap.wav</ShortName>
 					<Path>SFX/ClickClearedMap_A3CB6876.wem</Path>
@@ -263,6 +282,10 @@
 				<File Id="306161913" Language="SFX">
 					<ShortName>FootstepsConc1.wav</ShortName>
 					<Path>SFX/FootstepsConc1_76A9233F.wem</Path>
+				</File>
+				<File Id="306522968" Language="SFX">
+					<ShortName>Campfire2.wav</ShortName>
+					<Path>SFX/Campfire2_76A9233F.wem</Path>
 				</File>
 				<File Id="315478133" Language="SFX">
 					<ShortName>GenericHit3.wav</ShortName>
@@ -334,7 +357,7 @@
 				</File>
 				<File Id="389926675" Language="SFX">
 					<ShortName>PowerPole2.wav</ShortName>
-					<Path>SFX/PowerPole2_C40959EF.wem</Path>
+					<Path>SFX/PowerPole2_9E780CC3.wem</Path>
 				</File>
 				<File Id="404528175" Language="SFX">
 					<ShortName>EvilMaleWarrior2Attack1.wav</ShortName>
@@ -347,6 +370,10 @@
 				<File Id="419983902" Language="SFX">
 					<ShortName>Whoosh2_13.1.wav</ShortName>
 					<Path>SFX/Whoosh2_13.1_63DB481E.wem</Path>
+				</File>
+				<File Id="420726304" Language="SFX">
+					<ShortName>disc1.wav</ShortName>
+					<Path>SFX/disc1_52BD694B.wem</Path>
 				</File>
 				<File Id="423910249" Language="SFX">
 					<ShortName>WindPal3_2.wav</ShortName>
@@ -374,7 +401,7 @@
 				</File>
 				<File Id="448841773" Language="SFX">
 					<ShortName>PowerPole4.wav</ShortName>
-					<Path>SFX/PowerPole4_D4C4F805.wem</Path>
+					<Path>SFX/PowerPole4_E9147B11.wem</Path>
 				</File>
 				<File Id="453473293" Language="SFX">
 					<ShortName>EvilMaleWarrior2Attack2.wav</ShortName>
@@ -394,7 +421,7 @@
 				</File>
 				<File Id="476244239" Language="SFX">
 					<ShortName>Tents2.wav</ShortName>
-					<Path>SFX/Tents2_52BD694B.wem</Path>
+					<Path>SFX/Tents2_76A9233F.wem</Path>
 				</File>
 				<File Id="478117380" Language="SFX">
 					<ShortName>ExploreToCombat.wav</ShortName>
@@ -478,7 +505,7 @@
 				</File>
 				<File Id="613821194" Language="SFX">
 					<ShortName>Tents3.wav</ShortName>
-					<Path>SFX/Tents3_52BD694B.wem</Path>
+					<Path>SFX/Tents3_76A9233F.wem</Path>
 				</File>
 				<File Id="615639292" Language="SFX">
 					<ShortName>FemaleWarrior1Attack4.wav</ShortName>
@@ -556,9 +583,17 @@
 					<ShortName>EvilFemaleWarrior1Death1.wav</ShortName>
 					<Path>SFX/EvilFemaleWarrior1Death1_06BB1F3D.wem</Path>
 				</File>
+				<File Id="699284997" Language="SFX">
+					<ShortName>disc2.wav</ShortName>
+					<Path>SFX/disc2_52BD694B.wem</Path>
+				</File>
 				<File Id="700338299" Language="SFX">
 					<ShortName>Whoosh1_10.1.wav</ShortName>
 					<Path>SFX/Whoosh1_10.1_63DB481E.wem</Path>
+				</File>
+				<File Id="703024586" Language="SFX">
+					<ShortName>LeaderDeath.wav</ShortName>
+					<Path>SFX/LeaderDeath_52BD694B.wem</Path>
 				</File>
 				<File Id="709964075" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack1.wav</ShortName>
@@ -596,9 +631,17 @@
 					<ShortName>WinCombat.wav</ShortName>
 					<Path>SFX/WinCombat_617C1CCC.wem</Path>
 				</File>
+				<File Id="757001917" Language="SFX">
+					<ShortName>OilPipe2.wav</ShortName>
+					<Path>SFX/OilPipe2_52BD694B.wem</Path>
+				</File>
 				<File Id="758504064" Language="SFX">
 					<ShortName>MaleWarrior2Death3.wav</ShortName>
 					<Path>SFX/MaleWarrior2Death3_52BD694B.wem</Path>
+				</File>
+				<File Id="763776498" Language="SFX">
+					<ShortName>Campfire.wav</ShortName>
+					<Path>SFX/Campfire_7E666D90.wem</Path>
 				</File>
 				<File Id="770749179" Language="SFX">
 					<ShortName>Whoosh1_12.1.wav</ShortName>
@@ -668,6 +711,10 @@
 					<ShortName>PaperPickup.wav</ShortName>
 					<Path>SFX/PaperPickup_76A9233F.wem</Path>
 				</File>
+				<File Id="876390288" Language="SFX">
+					<ShortName>11 Low-pitched wind.7.wav</ShortName>
+					<Path>SFX/11 Low-pitched wind.7_52BD694B.wem</Path>
+				</File>
 				<File Id="878074695" Language="SFX">
 					<ShortName>MaleWarrior2Attack5.wav</ShortName>
 					<Path>SFX/MaleWarrior2Attack5_52BD694B.wem</Path>
@@ -732,9 +779,17 @@
 					<ShortName>CharSelBreath.wav</ShortName>
 					<Path>SFX/CharSelBreath_30BACD77.wem</Path>
 				</File>
+				<File Id="982507717" Language="SFX">
+					<ShortName>StingerExplore3.wav</ShortName>
+					<Path>SFX/StingerExplore3_617C1CCC.wem</Path>
+				</File>
 				<File Id="985656569" Language="SFX">
 					<ShortName>Whoosh2_15.1.wav</ShortName>
 					<Path>SFX/Whoosh2_15.1_63DB481E.wem</Path>
+				</File>
+				<File Id="987725391" Language="SFX">
+					<ShortName>OilPipe1.wav</ShortName>
+					<Path>SFX/OilPipe1_52BD694B.wem</Path>
 				</File>
 				<File Id="988992703" Language="SFX">
 					<ShortName>WeaponWhoosh4.wav</ShortName>
@@ -743,10 +798,6 @@
 				<File Id="994790039" Language="SFX">
 					<ShortName>IntoLevel.wav</ShortName>
 					<Path>SFX/IntoLevel_8C998047.wem</Path>
-				</File>
-				<File Id="998786905" Language="SFX">
-					<ShortName>DiscoverStingerMusic1.wav</ShortName>
-					<Path>SFX/DiscoverStingerMusic1_617C1CCC.wem</Path>
 				</File>
 				<File Id="1003963535" Language="SFX">
 					<ShortName>EvilMaleWarrior1Death2.wav</ShortName>
@@ -796,10 +847,6 @@
 					<ShortName>WeaponWhoosh1.wav</ShortName>
 					<Path>SFX/WeaponWhoosh1_63DB481E.wem</Path>
 				</File>
-				<File Id="1046654003" Language="SFX">
-					<ShortName>WindHowl.wav</ShortName>
-					<Path>SFX/WindHowl_A2302EE3.wem</Path>
-				</File>
 				<File Id="1048173959" Language="SFX">
 					<ShortName>MaleWarrior2Attack1.wav</ShortName>
 					<Path>SFX/MaleWarrior2Attack1_52BD694B.wem</Path>
@@ -807,10 +854,6 @@
 				<File Id="1060629324" Language="SFX">
 					<ShortName>HItSweet3.wav</ShortName>
 					<Path>SFX/HItSweet3_C5B73D32.wem</Path>
-				</File>
-				<File Id="1066127313" Language="SFX">
-					<ShortName>DiscoverStingerMusic2.wav</ShortName>
-					<Path>SFX/DiscoverStingerMusic2_617C1CCC.wem</Path>
 				</File>
 				<File Id="1068821334" Language="SFX">
 					<ShortName>FootStepsSneak2.wav</ShortName>

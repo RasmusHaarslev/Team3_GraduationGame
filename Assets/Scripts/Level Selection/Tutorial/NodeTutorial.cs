@@ -19,6 +19,8 @@ public class NodeTutorial : MonoBehaviour {
     [Tooltip("Removes the scouting functionality")]
     public bool showScoutPanel = true;
 
+    public int PaletteNumber = 0;
+
     public int TravelCost;
     public int CampsInNode;
 
@@ -66,9 +68,6 @@ public class NodeTutorial : MonoBehaviour {
             case "TutorialLevel04":
                 SetScrollPosition(3);
                 break;
-            case "TutorialLevel05":
-                SetScrollPosition(4);
-                break;
         }
         DoneLevel();
     }
@@ -87,10 +86,28 @@ public class NodeTutorial : MonoBehaviour {
     {
         GetComponent<Button>().onClick.RemoveAllListeners();
         GetComponent<Button>().onClick.AddListener(ClickNode);
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "TutorialLevel01":
+                SetScrollPosition(0);
+                break;
+            case "TutorialLevel02":
+                SetScrollPosition(1);
+                break;
+            case "TutorialLevel03":
+                SetScrollPosition(2);
+                break;
+            case "TutorialLevel04":
+                SetScrollPosition(3);
+
+                break;
+        }
     }
 
     public void ClickNode()
     {
+        Manager_Audio.PlaySound(Manager_Audio.play_openMap, gameObject);
         InitialisePopUP(gameObject);
     }
 
@@ -105,12 +122,7 @@ public class NodeTutorial : MonoBehaviour {
         {
             StartCoroutine(initWin(gameObject));
             EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
-        } else if (gameObject.name == "Tut5" && compare == "Tut5")
-        {
-            EventManager.Instance.TriggerEvent(new ChangeResources(food: gameObject.GetComponent<NodeTutorial>().foodAmount));
-            GameController.Instance.LoadScene("CampManagement");
         }
-
     }
 
     #region WIN ANIMATION
@@ -249,7 +261,7 @@ public class NodeTutorial : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        int value = GameController.Instance._FOOD - GetComponent<NodeTutorial>().TravelCost;
+        int value = GetComponent<NodeTutorial>().TravelCost;
 
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(gameObject, "play", value);
 
@@ -260,29 +272,30 @@ public class NodeTutorial : MonoBehaviour {
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(AcceptPlay);
     }
 
-    public void AcceptPlay()
-    {
+    public void AcceptPlay() {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));            
+        EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));
+        
+        PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, PaletteNumber);
+        PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, foodAmount);
+
+        EventManager.Instance.TriggerEvent(new LevelStarted());
 
         switch (gameObject.name)
-        {
-            case "Tut1":
-                GameController.Instance.LoadScene("TutorialLevel01");
-                break;
-            case "Tut2":
-                GameController.Instance.LoadScene("TutorialLevel02");
-                break;
-            case "Tut3":
-                GameController.Instance.LoadScene("TutorialLevel03");
-                break;
-            case "Tut4":
-                GameController.Instance.LoadScene("TutorialLevel04");
-                break;
-            case "Tut5":
-                GameController.Instance.LoadScene("CampManagement");
-                break;
-        }        
+          {
+              case "Tut1":
+                  GameController.Instance.LoadScene("TutorialLevel01");
+                  break;
+              case "Tut2":
+                  GameController.Instance.LoadScene("TutorialLevel02");
+                  break;
+              case "Tut3":
+                  GameController.Instance.LoadScene("TutorialLevel03");
+                  break;
+              case "Tut4":
+                  GameController.Instance.LoadScene("TutorialLevel04");
+                  break;
+          }
     }
 
     public void Deny()

@@ -386,7 +386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000010576418516
 GameObject:
   m_ObjectHideFlags: 1
@@ -6240,7 +6240,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!54 &54000014031826128
 Rigidbody:
@@ -6324,6 +6324,7 @@ MonoBehaviour:
   rigidbody: {fileID: 54000013852121386}
   playerCapsuleCollider: {fileID: 136000010628322942}
   playerSphereCollider: {fileID: 135000011475029890}
+  tapCollider: {fileID: 65000013956300760}
   pushForceOnDeath: 100
   forceModePush: 1
 --- !u!114 &114000010397392406
@@ -6347,6 +6348,7 @@ MonoBehaviour:
   currentOpponents: []
   isCurrentTargetAlive: 0
   rotationSpeed: 2
+  forceThrowWeapon: 2
   isInCombat: 0
   isDead: 0
   isFleeing: 0
@@ -6373,7 +6375,7 @@ MonoBehaviour:
   transitionTime: 0.05
   fleeSpeed: 4
   distanceToTarget: 3.4028235e+38
-  fleeHealthLimit: 0.5
+  fleeHealthLimit: 0.3
   averageHealth: 0
 --- !u!114 &114000010738752216
 MonoBehaviour:
@@ -6443,6 +6445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barDisplay: 0
   size: {x: 120, y: 15}
+  active: 1
 --- !u!135 &135000011475029890
 SphereCollider:
   m_ObjectHideFlags: 1

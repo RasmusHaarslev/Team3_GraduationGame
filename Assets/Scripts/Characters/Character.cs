@@ -72,7 +72,10 @@ public class Character : MonoBehaviour
 		if (!isWounded && currentHealth < 0.4f * health)
 		{
 			isWounded = true;
-			animator.SetFloat("isWounded", 1);
+			if (characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Hunter)
+			{
+				animator.SetFloat("isWounded", 1);
+			}
 		}
 
 		if (!isInCombat)
@@ -104,8 +107,11 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
-					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+					rigid.AddForce(Vector3.one * forceThrowWeapon + Vector3.up * forceThrowWeapon * 0.5f, ForceMode.Impulse);
 				}
 
 				GetComponent<RagdollControl>().EnableRagDoll();
@@ -134,8 +140,11 @@ public class Character : MonoBehaviour
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
-					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+					rigid.AddForce(Vector3.one * forceThrowWeapon + Vector3.up * forceThrowWeapon * 0.5f, ForceMode.Impulse);
 				}
 				GetComponent<Collider>().enabled = false;
 				agent.enabled = false;
@@ -155,14 +164,17 @@ public class Character : MonoBehaviour
 			}
 			else if (isDead == false && (characterBaseValues.Type == CharacterValues.type.Player))
 			{
+				Manager_Audio.PlaySound(Manager_Audio.leaderDeath, this.gameObject);
 				if (currentWeapon != null)
 				{
 					Rigidbody rigid = currentWeapon.AddComponent<Rigidbody>();
+					currentWeapon.AddComponent<MeshCollider>();
+					currentWeapon.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+					currentWeapon.GetComponent<MeshCollider>().convex = true;
 					currentWeapon.transform.parent = null;
-					rigid.AddForce(Vector3.one * forceThrowWeapon, ForceMode.Impulse);
+					rigid.AddForce(Vector3.one * forceThrowWeapon + Vector3.up * forceThrowWeapon * 0.5f, ForceMode.Impulse);
 				}
 				animator.SetTrigger("Die");
-				//GetComponent<RagdollControl>().EnableRagDoll();
 			}
 
 			isInCombat = false;
@@ -180,16 +192,18 @@ public class Character : MonoBehaviour
 		StartCoroutine("GetWeapon");
 		if (gameObject.tag == "Player")
 		{
-			agent.avoidancePriority = 99;
-		} else
+			agent.avoidancePriority = 1;
+		}
+		else
 		{
-			agent.avoidancePriority = UnityEngine.Random.Range(25, 98);
+			agent.avoidancePriority = UnityEngine.Random.Range(2, 99);
 		}
 		animator = GetComponent<Animator>();
 		EventManager.Instance.StartListening<EnemySpottedEvent>(StartCombatState);
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
+		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -208,6 +222,20 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
+		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
+	}
+
+	private void BeginCombatState(EnemyAttackedByLeaderEvent e)
+	{
+		if (!isInCombat)
+		{
+			if (characterBaseValues.Type == CharacterValues.type.Hunter || ((characterBaseValues.Type == CharacterValues.type.Wolf || characterBaseValues.Type == CharacterValues.type.Tribesman) && e.parent == gameObject.transform.parent.parent.gameObject))
+			{
+				targetParent = e.parent;
+				TargetOpponent();
+				isInCombat = true;
+			}
+		}
 	}
 
 	IEnumerator GetWeapon()
@@ -253,6 +281,7 @@ public class Character : MonoBehaviour
 		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
 		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
 		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
+
 		range = initValues.range;
 		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
@@ -468,7 +497,7 @@ public class Character : MonoBehaviour
 	{
 		if (e.target == gameObject)
 		{
-			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("LocoV2"))
 			{
 				animator.SetTrigger("TakeDamage");
 			}

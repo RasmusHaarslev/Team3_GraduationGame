@@ -180,7 +180,7 @@
 						<Property Name="HdrEnableEnvelope" Type="bool" Value="True"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>-1</Value>
+								<Value>1</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -323,11 +323,23 @@
 											<StateGroupInfo>
 												<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 											</StateGroupInfo>
+											<StateGroupInfo>
+												<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+											</StateGroupInfo>
 										</StateGroupList>
 										<CustomStateList>
 											<CustomState>
 												<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 												<State Name="Custom State" ID="{06E9B1F7-95D7-4939-B194-389E3EFEF3DC}" ShortID="758750828">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+														<Property Name="Volume" Type="Real64" Value="-12"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+												<State Name="Custom State" ID="{51E23A0B-D259-4AD9-9215-302AB86BA68D}" ShortID="908648960">
 													<PropertyList>
 														<Property Name="Lowpass" Type="int16" Value="40"/>
 														<Property Name="Volume" Type="Real64" Value="-12"/>
@@ -379,7 +391,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-9</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -675,7 +687,7 @@
 										<Property Name="Tempo" Type="Real64" Value="106"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -828,7 +840,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-2</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -841,20 +853,20 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<MusicTrack Name="DiscoverStingerMusic1" ID="{FE71FFAD-CC6F-4033-A5C8-35EAE09C9ABB}" ShortID="708523393">
+										<MusicTrack Name="StingerExplore_2" ID="{E5AE4B08-873D-4108-992F-988F12816035}" ShortID="518573568">
 											<ReferenceList>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="DiscoverStingerMusic1" ID="{63009BAB-A941-46B7-8908-3878E7064D82}" ShortID="998786905">
+												<AudioFileSource Name="StingerExplore_2" ID="{ECADEF82-9393-4F0D-BE1E-14309ADA08F4}" ShortID="298326409">
 													<Language>SFX</Language>
-													<AudioFile>DiscoverStingerMusic1.wav</AudioFile>
+													<AudioFile>StingerExplore_2.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<TransitionList>
-												<MusicTransition Name="Root" ID="{595283C6-8262-432B-A4D9-CD797805726C}">
+												<MusicTransition Name="Root" ID="{AF43F2D4-622C-49F6-ACDB-157AF369BB95}">
 													<PropertyList>
 														<Property Name="IsFolder" Type="bool" Value="True"/>
 													</PropertyList>
@@ -862,15 +874,15 @@
 												</MusicTransition>
 											</TransitionList>
 											<SequenceList>
-												<MusicTrackSequence Name="" ID="{859A8500-C938-4543-83D8-6FB52B6D1DB1}">
+												<MusicTrackSequence Name="" ID="{6A3090B5-0744-4F23-A749-D8A79A1C037E}">
 													<ClipList>
-														<MusicClip Name="DiscoverStingerMusic1" ID="{4CC532A2-56AC-4398-A29B-7E79092F6EBA}">
+														<MusicClip Name="StingerExplore_2" ID="{9175B71A-31F0-4170-A95F-9F11956DD943}">
 															<PropertyList>
-																<Property Name="EndTrimOffset" Type="Real64" Value="7297.30158730159"/>
-																<Property Name="FadeInMode" Type="int16" Value="0"/>
+																<Property Name="EndTrimOffset" Type="Real64" Value="10140.8390022676"/>
+																<Property Name="FadeInDuration" Type="Real64" Value="1107.69230769231"/>
 																<Property Name="FadeOutMode" Type="int16" Value="0"/>
 															</PropertyList>
-															<AudioSourceRef Name="DiscoverStingerMusic1" ID="{63009BAB-A941-46B7-8908-3878E7064D82}"/>
+															<AudioSourceRef Name="StingerExplore_2" ID="{ECADEF82-9393-4F0D-BE1E-14309ADA08F4}"/>
 														</MusicClip>
 													</ClipList>
 												</MusicTrackSequence>
@@ -1779,21 +1791,8 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
 									</StateGroupInfo>
-									<StateGroupInfo>
-										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
-									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
-									<CustomState>
-										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
-										<State Name="Custom State" ID="{7BC06393-DA7F-46AC-AB02-67700A5E8028}" ShortID="1041713942">
-											<PropertyList>
-												<Property Name="Highpass" Type="int16" Value="40"/>
-												<Property Name="Lowpass" Type="int16" Value="35"/>
-												<Property Name="Volume" Type="Real64" Value="-10"/>
-											</PropertyList>
-										</State>
-									</CustomState>
 									<CustomState>
 										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
 										<State Name="Custom State" ID="{79036817-AF17-444F-B2B8-D53DB9A52DD7}" ShortID="380717595">
@@ -2008,7 +2007,7 @@
 											<PropertyList>
 												<Property Name="DestinationContextType" Type="int16" Value="2"/>
 												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
-												<Property Name="ExitSourceAt" Type="int16" Value="2"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="0"/>
 												<Property Name="PlayDestinationPreEntry" Type="bool" Value="False"/>
 												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
 												<Property Name="SourceContextType" Type="int16" Value="2"/>
@@ -2230,11 +2229,23 @@
 											<StateGroupInfo>
 												<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 											</StateGroupInfo>
+											<StateGroupInfo>
+												<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+											</StateGroupInfo>
 										</StateGroupList>
 										<CustomStateList>
 											<CustomState>
 												<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 												<State Name="Custom State" ID="{F2939F44-CF71-4A72-A0A1-E3FC56847319}" ShortID="905314723">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+														<Property Name="Volume" Type="Real64" Value="-12"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+												<State Name="Custom State" ID="{9E56F82F-E95D-4712-8ABB-8995F7889F68}" ShortID="32050616">
 													<PropertyList>
 														<Property Name="Lowpass" Type="int16" Value="40"/>
 														<Property Name="Volume" Type="Real64" Value="-12"/>
@@ -2286,7 +2297,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-11</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -2588,7 +2599,7 @@
 										<Property Name="Tempo" Type="Real64" Value="106"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-3</Value>
+												<Value>-8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -2745,7 +2756,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>5</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -2758,20 +2769,20 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<MusicTrack Name="DiscoverStingerMusic2" ID="{9316EC3A-450F-45EF-A2C0-B7CD363429F9}" ShortID="144748274">
+										<MusicTrack Name="StingerExplore3" ID="{C87C33AC-AD5B-467B-A521-9ED05C920E73}" ShortID="126971504">
 											<ReferenceList>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="DiscoverStingerMusic2" ID="{4EDD0E22-C113-4783-852D-A81B097203C8}" ShortID="1066127313">
+												<AudioFileSource Name="StingerExplore3" ID="{19BB9F06-14BB-4D00-B761-0B64201EAFFC}" ShortID="982507717">
 													<Language>SFX</Language>
-													<AudioFile>DiscoverStingerMusic2.wav</AudioFile>
+													<AudioFile>StingerExplore3.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<TransitionList>
-												<MusicTransition Name="Root" ID="{9A784904-4B3B-478D-AB57-D142E3D69826}">
+												<MusicTransition Name="Root" ID="{AD0499CA-EEE1-488F-BC0A-DC8D92E74D1A}">
 													<PropertyList>
 														<Property Name="IsFolder" Type="bool" Value="True"/>
 													</PropertyList>
@@ -2779,15 +2790,15 @@
 												</MusicTransition>
 											</TransitionList>
 											<SequenceList>
-												<MusicTrackSequence Name="" ID="{6DFD00E7-5BA2-471A-8B84-8121B19D5AB4}">
+												<MusicTrackSequence Name="" ID="{7F0D02BA-16A0-4250-8EE5-F5594BC29464}">
 													<ClipList>
-														<MusicClip Name="DiscoverStingerMusic2" ID="{8278882F-4197-473E-A257-2FB7D0047D01}">
+														<MusicClip Name="StingerExplore3" ID="{00001915-A4BC-4D3B-95A8-0F415F650C09}">
 															<PropertyList>
-																<Property Name="EndTrimOffset" Type="Real64" Value="7400.06802721088"/>
-																<Property Name="FadeInMode" Type="int16" Value="0"/>
+																<Property Name="EndTrimOffset" Type="Real64" Value="10140.4081632653"/>
+																<Property Name="FadeInDuration" Type="Real64" Value="868.305808959686"/>
 																<Property Name="FadeOutMode" Type="int16" Value="0"/>
 															</PropertyList>
-															<AudioSourceRef Name="DiscoverStingerMusic2" ID="{4EDD0E22-C113-4783-852D-A81B097203C8}"/>
+															<AudioSourceRef Name="StingerExplore3" ID="{19BB9F06-14BB-4D00-B761-0B64201EAFFC}"/>
 														</MusicClip>
 													</ClipList>
 												</MusicTrackSequence>
@@ -3943,7 +3954,7 @@
 											<PropertyList>
 												<Property Name="DestinationContextType" Type="int16" Value="2"/>
 												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
-												<Property Name="ExitSourceAt" Type="int16" Value="3"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="0"/>
 												<Property Name="PlayDestinationPreEntry" Type="bool" Value="False"/>
 												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
 												<Property Name="SourceContextType" Type="int16" Value="2"/>
@@ -4189,11 +4200,23 @@
 											<StateGroupInfo>
 												<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 											</StateGroupInfo>
+											<StateGroupInfo>
+												<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
+											</StateGroupInfo>
 										</StateGroupList>
 										<CustomStateList>
 											<CustomState>
 												<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 												<State Name="Custom State" ID="{77F8E5A4-8A29-4793-BA6F-60448221F577}" ShortID="831179970">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16" Value="40"/>
+														<Property Name="Volume" Type="Real64" Value="-12"/>
+													</PropertyList>
+												</State>
+											</CustomState>
+											<CustomState>
+												<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
+												<State Name="Custom State" ID="{9CA85DAA-8200-40AD-B2A3-D3F18EE60C68}" ShortID="83419455">
 													<PropertyList>
 														<Property Name="Lowpass" Type="int16" Value="40"/>
 														<Property Name="Volume" Type="Real64" Value="-12"/>
@@ -4245,7 +4268,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-9</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -4547,7 +4570,7 @@
 										<Property Name="Tempo" Type="Real64" Value="106"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-9</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -4703,7 +4726,7 @@
 										<Property Name="Tempo" Type="Real64" Value="75"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-4</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -4716,20 +4739,20 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<MusicTrack Name="DiscoverStingerMusic3" ID="{E42E6176-39DA-4730-B13F-12A6E24686E3}" ShortID="482981003">
+										<MusicTrack Name="StingerExplore_1" ID="{21F23EF0-D7A2-4238-ACA6-F648F61285F9}" ShortID="905318655">
 											<ReferenceList>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="DiscoverStingerMusic3" ID="{9A1F2709-D522-4FE2-ADDF-3057F0BE7A37}" ShortID="903565272">
+												<AudioFileSource Name="StingerExplore_1" ID="{5DE33061-AC03-4EF7-AF1C-A5EF2C5F1400}" ShortID="911395164">
 													<Language>SFX</Language>
-													<AudioFile>DiscoverStingerMusic3.wav</AudioFile>
+													<AudioFile>StingerExplore_1.wav</AudioFile>
 												</AudioFileSource>
 											</ChildrenList>
 											<TransitionList>
-												<MusicTransition Name="Root" ID="{DE115DC0-922F-4087-85BA-EF7280F1175E}">
+												<MusicTransition Name="Root" ID="{C50CE73C-91EC-4F0A-B118-17D8F9A2A105}">
 													<PropertyList>
 														<Property Name="IsFolder" Type="bool" Value="True"/>
 													</PropertyList>
@@ -4737,15 +4760,15 @@
 												</MusicTransition>
 											</TransitionList>
 											<SequenceList>
-												<MusicTrackSequence Name="" ID="{D2908DAE-2C12-4DA6-91CA-946F5B747EE2}">
+												<MusicTrackSequence Name="" ID="{CB47DCFC-E629-4979-B10C-68E87D6D27AD}">
 													<ClipList>
-														<MusicClip Name="DiscoverStingerMusic3" ID="{CE12DC4D-1150-4324-B682-73E538D844E0}">
+														<MusicClip Name="StingerExplore_1" ID="{7CFA6772-682F-4005-85D1-19E7DE177C8B}">
 															<PropertyList>
-																<Property Name="EndTrimOffset" Type="Real64" Value="5284.12698412698"/>
-																<Property Name="FadeInMode" Type="int16" Value="0"/>
+																<Property Name="EndTrimOffset" Type="Real64" Value="10140.8390022676"/>
+																<Property Name="FadeInDuration" Type="Real64" Value="834.158951303968"/>
 																<Property Name="FadeOutMode" Type="int16" Value="0"/>
 															</PropertyList>
-															<AudioSourceRef Name="DiscoverStingerMusic3" ID="{9A1F2709-D522-4FE2-ADDF-3057F0BE7A37}"/>
+															<AudioSourceRef Name="StingerExplore_1" ID="{5DE33061-AC03-4EF7-AF1C-A5EF2C5F1400}"/>
 														</MusicClip>
 													</ClipList>
 												</MusicTrackSequence>
@@ -5675,21 +5698,8 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="CommandWheel" ID="{7E613FE7-CE4D-4D2D-B8EA-26E48491686E}"/>
 									</StateGroupInfo>
-									<StateGroupInfo>
-										<StateGroupRef Name="Bridge" ID="{A437CDBB-583C-439B-9A7B-48E858FB9F2C}"/>
-									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
-									<CustomState>
-										<StateRef Name="OnBridge" ID="{2CF8C25B-072B-45F4-9253-15D788FCA805}"/>
-										<State Name="Custom State" ID="{9BAD6285-9179-4051-80B6-6D59CBC9E4DA}" ShortID="165176235">
-											<PropertyList>
-												<Property Name="Highpass" Type="int16" Value="44"/>
-												<Property Name="Lowpass" Type="int16" Value="20"/>
-												<Property Name="Volume" Type="Real64" Value="-10"/>
-											</PropertyList>
-										</State>
-									</CustomState>
 									<CustomState>
 										<StateRef Name="On" ID="{64965537-6DEF-4B85-8B35-0F3322C539CA}"/>
 										<State Name="Custom State" ID="{F865FD2C-5311-4B5B-AAEC-C5CB5153DA9A}" ShortID="581881222">
@@ -5904,7 +5914,7 @@
 											<PropertyList>
 												<Property Name="DestinationContextType" Type="int16" Value="2"/>
 												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
-												<Property Name="ExitSourceAt" Type="int16" Value="2"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="3"/>
 												<Property Name="PlayDestinationPreEntry" Type="bool" Value="False"/>
 												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
 												<Property Name="SourceContextType" Type="int16" Value="2"/>
@@ -5933,7 +5943,7 @@
 											<PropertyList>
 												<Property Name="DestinationContextType" Type="int16" Value="2"/>
 												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
-												<Property Name="ExitSourceAt" Type="int16" Value="2"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="3"/>
 												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
 												<Property Name="SourceContextType" Type="int16" Value="2"/>
 											</PropertyList>
@@ -6028,7 +6038,22 @@
 							<StateGroupInfo>
 								<StateGroupRef Name="Palette" ID="{A0B1C30E-3D0D-4A0D-9D91-5E2363635721}"/>
 							</StateGroupInfo>
+							<StateGroupInfo>
+								<StateGroupRef Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
+							</StateGroupInfo>
 						</StateGroupList>
+						<CustomStateList>
+							<CustomState>
+								<StateRef Name="On" ID="{993E0C17-0E99-401D-8CC3-F23E2E56BEE9}"/>
+								<State Name="Custom State" ID="{8632768A-01FA-4169-BCDB-0B5D221791CA}" ShortID="567989895">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16" Value="40"/>
+										<Property Name="Lowpass" Type="int16" Value="20"/>
+										<Property Name="Volume" Type="Real64" Value="-3"/>
+									</PropertyList>
+								</State>
+							</CustomState>
+						</CustomStateList>
 					</StateInfo>
 					<TransitionList>
 						<MusicTransition Name="Root" ID="{AB95FC15-72E2-402D-A69C-347CBC3DB516}">

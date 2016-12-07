@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class CameraController : MonoBehaviour
 {
@@ -18,10 +19,16 @@ public class CameraController : MonoBehaviour
 	public float RotationSlerpAmount = 1f;
 	[HideInInspector,Tooltip("Sets offset for the camera look direction, relative to the players direction")]
 	public float CameraOffset = 1f;
-	#endregion
+    #endregion
 
-	#region Hidden public fields
-	[HideInInspector]
+    #region Hidden public fields
+    [HideInInspector]
+    public Boolean LockCamera = false;
+
+    [HideInInspector]
+    public Boolean LockCameraPosition = false;
+
+    [HideInInspector]
 	public Boolean OverridePosition = false;
 	[HideInInspector]
 	public Vector3 OverriddenPosition = new Vector3();
@@ -45,14 +52,30 @@ public class CameraController : MonoBehaviour
     [HideInInspector]
     public float OverriddenRotationSlerp = 0f;
 
-    [HideInInspector]
+    //[HideInInspector]
 	public float XRotationOffset = 0f;
     [HideInInspector]
 	public bool SlerpBack;
-	#endregion
 
-	#region Hidden private fields
-	float height;
+    [HideInInspector]
+    public bool OverrideFogHeight;
+    public float OverriddenFogHeight;
+    [HideInInspector]
+    public bool OverrideFogHeightDensity;
+    public float OverriddenFogHeightDensity;
+    [HideInInspector]
+    public bool OverrideFogStartDistance;
+    public float OverriddenFogStartDistance;
+
+    private float originalFogHeight;
+    private float originalFogHeightDensity;
+    private float originalFogHeightStart;
+
+    private GlobalFog globalFogScript;
+    #endregion
+
+    #region Hidden private fields
+    float height;
 	float distance;
 	float slerp;
     float rotationSlerp;
@@ -63,15 +86,21 @@ public class CameraController : MonoBehaviour
     void Start()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
-	}
+        globalFogScript = this.GetComponent<GlobalFog>();
+
+        originalFogHeight = globalFogScript.height;
+        originalFogHeightDensity = globalFogScript.heightDensity;
+        originalFogHeightStart = globalFogScript.startDistance;
+    }
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (player != null)
+		if (player != null && !LockCamera)
 		{
 			TransformPosition();
 			TransformLook();
+            SlerpTheFog();
 		}
 		else
 		{
@@ -80,7 +109,25 @@ public class CameraController : MonoBehaviour
         }
 	}
 
-	void TransformPosition()
+    private void SlerpTheFog()
+    {
+        if (OverrideFogHeight)
+            globalFogScript.height = Mathf.Lerp(globalFogScript.height, OverriddenFogHeight, Time.deltaTime * 0.4f);
+        else
+            globalFogScript.height = Mathf.Lerp(globalFogScript.height, originalFogHeight, Time.deltaTime * 0.08f);
+
+        if (OverrideFogHeightDensity)
+            globalFogScript.heightDensity = Mathf.Lerp(globalFogScript.heightDensity, OverriddenFogHeightDensity, Time.deltaTime * 0.5f);
+        else
+            globalFogScript.heightDensity = Mathf.Lerp(globalFogScript.heightDensity, originalFogHeightDensity, Time.deltaTime * 0.1f);
+
+        if (OverrideFogStartDistance)
+            globalFogScript.startDistance = Mathf.Lerp(globalFogScript.startDistance, OverriddenFogStartDistance, Time.deltaTime * 0.5f);
+        else
+            globalFogScript.startDistance = Mathf.Lerp(globalFogScript.startDistance, originalFogHeight, Time.deltaTime * 0.1f);
+    }
+
+    void TransformPosition()
 	{
         if (Math.Abs(distance - Distance) < 0.01f && Math.Abs(height - Height) < 0.01f)
             SlerpBack = false;
@@ -94,7 +141,8 @@ public class CameraController : MonoBehaviour
 
 		Vector3 positionTarget = OverridePosition ? OverriddenPosition : player.transform.position + new Vector3(0, height, -distance);
 
-		transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * slerp);
+        if(!LockCameraPosition)
+		    transform.position = Vector3.Lerp(transform.position, positionTarget, Time.deltaTime * slerp);
     }
 
 	private void SetHeight()
@@ -145,6 +193,23 @@ public class CameraController : MonoBehaviour
             rotationSlerp = RotationSlerpAmount;
         }
 	}
+
+    public void TriggerWinZoom()
+    {
+        OverridePosition = false;
+        OverrideHeight = false;
+        OverrideDistance = false;
+        OverrideSlerp = false;
+
+        height = 2f;
+        distance = 3f;
+        slerp = 1f;
+
+        Height = 2f;
+        Distance = 3f;
+        MoveSlerpAmount = 1f;
+        XRotationOffset = 1f;
+    }
 
 	void TransformLook()
 	{

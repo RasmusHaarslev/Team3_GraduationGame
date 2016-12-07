@@ -16,10 +16,10 @@ public class LevelManager : MonoBehaviour
 	private int ItemsLeft = 0;
 	public bool inCombat = false;
 
-    public string NextLevel = "";
-    public bool IsTutorial = false;
+	public string NextLevel = "";
+	public bool IsTutorial = false;
 
-    private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
+	private List<EquippableItem> gainedWeapons = new List<EquippableItem>();
 	public List<GameObject> huntersAndPlayer = new List<GameObject>();
 	LevelGenerator levelGenerator;
 
@@ -32,73 +32,43 @@ public class LevelManager : MonoBehaviour
 		{
 			EnemiesAlive = GameObject.FindGameObjectsWithTag("Unfriendly").Length / 2;
 		}
-		//GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = true;
 	}
 
 	void Update()
-	{ /*
-        if (Input.GetKeyDown(KeyCode.A))
-            GenerateNewItems();
-        */
+	{ 
 		if (huntersAndPlayer.Count == 0)
 		{
 			huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
 			huntersAndPlayer.Add(GameObject.FindGameObjectWithTag("Player"));
 		}
-        UpdateState();
+		UpdateState();
 	}
 
-    private void SetGameState(bool inCombat)
-    {
-        if (this.inCombat == false && inCombat)
-        {
-            Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.fightSnapshot);
-        }
-        else if (this.inCombat == true && !inCombat && !huntersAndPlayer[huntersAndPlayer.Count-1].GetComponent<Character>().isDead)
-        {
-            Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.exploreSnapshot);
-        }
+	private void SetGameState(bool inCombat)
+	{
+		if (this.inCombat == false && inCombat)
+		{
+			Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.fightSnapshot);
+		}
+		else if (this.inCombat == true && !inCombat && !huntersAndPlayer[huntersAndPlayer.Count - 1].GetComponent<Character>().isDead)
+		{
+			Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.exploreSnapshot);
+		}
 
-        this.inCombat = inCombat;
-    }
+		this.inCombat = inCombat;
+	}
 
 	void UpdateState()
 	{
-		if (!levelGenerator.isTutorial)
+		foreach (var friendly in huntersAndPlayer)
 		{
-			foreach (var friendly in huntersAndPlayer)
+			if (friendly.GetComponent<Character>().isInCombat)
 			{
-				if (friendly.GetComponent<Character>().isInCombat)
-				{
-                    SetGameState(true);
-					return;
-				}
+				SetGameState(true);
+				return;
 			}
-
-            SetGameState(false); 
 		}
-		else
-		{
-			foreach (var friendly in huntersAndPlayer)
-			{
-				if (friendly.tag == "Player")
-				{
-					if (friendly.GetComponent<TutorialPlayerCharacter>().isInCombat)
-					{
-						SetGameState(true);
-						
-						return;
-					}
-				}
-				else
-				if (friendly.GetComponent<TutorialHunterCharacter>().isInCombat)
-				{
-                    SetGameState(true);
-					return;
-				}
-			}
-            SetGameState(false);
-		}
+		SetGameState(false);
 	}
 
 	#region Listeners
@@ -129,6 +99,7 @@ public class LevelManager : MonoBehaviour
 
 	void OnDisable()
 	{
+		GameController.Instance.numberOfActiveUIs = 0;
 		//Enemy spawn for counting
 		EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
 		EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
@@ -158,6 +129,7 @@ public class LevelManager : MonoBehaviour
 	private void EnemySpawn(EnemySpawned e)
 	{
 		EnemiesAlive++;
+        Debug.Log("Spawned " + EnemiesAlive);
 	}
 
 	private void ItemSpawn(ItemSpawned e)
@@ -179,17 +151,20 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-		CheckConditions();
+        Debug.Log("Killed " + EnemiesAlive);
+        CheckConditions();
 	}
 
 	void PlayerDeath(PlayerDeathEvent e)
 	{
-        if (!IsTutorial) { 
-		    LoseGame("CampManagement");
-        } else
-        {
-            LoseGame(SceneManager.GetActiveScene().name);
-        }
+		if (!IsTutorial)
+		{
+			LoseGame("CampManagement");
+		}
+		else
+		{
+			LoseGame(SceneManager.GetActiveScene().name);
+		}
 	}
 
 	void LootReceived(EnemyDeathEvent e)
@@ -214,15 +189,15 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
 		{
-            if (!IsTutorial)
-            {
-                LoseGame("CampManagement");
-            }
-            else
-            {
-                LoseGame(SceneManager.GetActiveScene().name);
-            }
-        }
+			if (!IsTutorial)
+			{
+				LoseGame("CampManagement");
+			}
+			else
+			{
+				LoseGame(SceneManager.GetActiveScene().name);
+			}
+		}
 		else if (AlliesAlive <= 0)
 		{
 			LoseLevel();
@@ -231,34 +206,37 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseGame(string scene = "CampManagement")
 	{
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
-        Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
-        StartCoroutine(LoseGameCoroutine(scene));
+		Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
+		StartCoroutine(LoseGameCoroutine(scene));
 	}
 
-    IEnumerator LoseGameCoroutine(string scene = "CampManagement")
-    {
-        while (Time.timeScale > 0.2f)
-        {
-            Time.timeScale -= 0.1f;
+	IEnumerator LoseGameCoroutine(string scene = "CampManagement")
+	{
+		while (Time.timeScale > 0.2f)
+		{
+			Time.timeScale -= 0.1f;
 
-            yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.20f);
+		}
+
+		if (!IsTutorial) { 
+			GameController.Instance.LoseGame();
+            yield break;
         }
 
-        if (!IsTutorial)
-            GameController.Instance.LoseGame();
-
+        Time.timeScale = 1f;
         GameController.Instance.LoadScene(scene);
 
-        Time.timeScale = 1f;
-
-        yield return new WaitForSeconds(0f);
-    }
+		yield return new WaitForSeconds(0f);
+	}
 
 	public void LoseLevel()
 	{
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
-        EventManager.Instance.TriggerEvent(new LevelLost());
+		EventManager.Instance.TriggerEvent(new LevelLost());
 		PlayerPrefs.SetInt("LevelResult", 0);
 
 		GameController.Instance.LoadScene("LevelFleeCutscene");
@@ -266,47 +244,59 @@ public class LevelManager : MonoBehaviour
 
 	public void WinLevel()
 	{
+        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
-        StartCoroutine(WinGameCoroutine());
+		StartCoroutine(WinGameCoroutine());
 	}
 
-    IEnumerator WinGameCoroutine(string scene = "CampManagement")
-    {
-        //while (Time.timeScale > 0.2f)
-        //{
-        //    Time.timeScale -= 0.1f;
+	IEnumerator WinGameCoroutine(string scene = "CampManagement")
+	{
+        Time.timeScale -= 0.1f;
+        Camera.main.GetComponent<CameraController>().TriggerWinZoom();
+        while (Time.timeScale > 0.2f)
+		{
+			Time.timeScale -= 0.1f;
 
-        //    yield return new WaitForSeconds(0.5f);
-        //}
+			yield return new WaitForSeconds(0.15f);
+		}
 
-        yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.5f);
 
-        EventManager.Instance.TriggerEvent(new LevelWon());
+		EventManager.Instance.TriggerEvent(new LevelWon());
+
+        Camera.main.GetComponent<CameraController>().LockCamera = true;
+        Time.timeScale = 1f;
 
         if (IsTutorial)
-        {
-            EventManager.Instance.TriggerEvent(new TutorialDone());
-            yield return null;
-        }
+		{
+			EventManager.Instance.TriggerEvent(new TutorialDone());
+			yield break;
+		}
 
-        EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+		if (GameController.Instance.numberOfActiveUIs == 0)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		}
+		GameController.Instance.numberOfActiveUIs++;
         EventManager.Instance.TriggerEvent(
             new ChangeResources(
                 food: PlayerPrefs.GetInt("FoodAmount"),
-                scraps: PlayerPrefs.GetInt("ScrapAmount")
+                scraps: PlayerPrefs.GetInt("ScrapAmount"),
+                premium: PlayerPrefs.GetInt(StringResources.PremiumDropAmountPrefsName)
             )
         );
 
         PlayerPrefs.SetInt("LevelResult", 1);
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
-        //generate and display the new items
-        GenerateNewItems();
-        Time.timeScale = 1f;
-        yield return new WaitForSeconds(0f);
-    }
+		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
+		//generate and display the new items
+		GenerateNewItems();
+		
 
-    //called on the canvas button of the new generated items
-    public void levelWonEnding()
+		yield return new WaitForSeconds(0f);
+	}
+
+	//called on the canvas button of the new generated items
+	public void levelWonEnding()
 	{
 		GameController.Instance.LoadScene("LevelWinCutscene");
 	}

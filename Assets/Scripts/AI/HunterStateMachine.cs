@@ -95,7 +95,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	#endregion
 
-	public float transitionTime = 0.05f;
+	public float transitionTime = 0.1f;
 	float fearfulHealthLimit = 0.25f;
 	public int maxLowAttentionSpanCounter = 1;
 	int lowAttentionSpanCounter = 3;
@@ -133,7 +133,7 @@ public class HunterStateMachine : CoroutineMachine
 	public CharacterValues.TargetTrait targetTrait = CharacterValues.TargetTrait.NoTrait;
 	public CharacterValues.CombatTrait combatTrait = CharacterValues.CombatTrait.NoTrait;
 	public OutOfCombatCommandState outOfCombatCommandState = OutOfCombatCommandState.Follow;
-
+	WaitForSeconds transition;
 	public Vector3 fleePosition;
 	public float distanceToTarget = float.MaxValue;
 	public int partyID = 0;
@@ -152,18 +152,23 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			combatTrait = character.characterBaseValues.combatTrait;
 			targetTrait = character.characterBaseValues.targetTrait;
+			transition = new WaitForSeconds(transitionTime);
 			return StartState;
 		}
 	}
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
-		yield return new WaitForSeconds(transitionTime);
+		yield return transition;
 	}
 
 	//This state will make all checks and transition according to them
 	IEnumerator StartState()
 	{
+		if (character.target != null)
+		{
+			distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+		}
 		if (character.isDead)
 		{
 			yield return new TransitionTo(DeadState, DefaultTransition);
@@ -177,7 +182,7 @@ public class HunterStateMachine : CoroutineMachine
 					case CharacterValues.TargetTrait.Codependant:
 						character.target = CodependantTarget();
 
-						if(!isTraitProjected)
+						if (!isTraitProjected)
 							ProjectTrait(CharacterValues.CombatTrait.NoTrait, targetTrait);
 						if (!leader.GetComponent<MoveScript>().attacking)
 						{
@@ -198,7 +203,7 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					yield return new TransitionTo(StayState, DefaultTransition);
 				}
-
+				agent.Resume();
 				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < (character.health * fearfulHealthLimit)))
 				{
 					if (combatTrait == CharacterValues.CombatTrait.Fearful)
@@ -236,7 +241,6 @@ public class HunterStateMachine : CoroutineMachine
 											}
 										}
 									}
-									distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
 									if (distanceToTarget < agent.stoppingDistance)
 									{
 										yield return new TransitionTo(CombatState, DefaultTransition);
@@ -255,16 +259,7 @@ public class HunterStateMachine : CoroutineMachine
 						}
 						else if (combatCommandState == CombatCommandState.Defense)
 						{
-							if (character.target.GetComponent<TutorialCharacter>() != null)
-							{
-								if (character.target.GetComponent<TutorialCharacter>().isDead)
-								{
-									character.currentOpponents.Remove(character.target);
-									character.target = character.FindNearestEnemy();
-								}
-								yield return new TransitionTo(DefenseState, DefaultTransition);
-							}
-							else if (character.target.GetComponent<Character>() != null)
+							if (character.target.GetComponent<Character>() != null)
 							{
 								if (character.target.GetComponent<Character>().isDead)
 								{
@@ -331,23 +326,25 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FleeState()
 	{
+		character.animator.SetBool("isAware", false);
 		agent.SetDestination(fleePosition);
 		agent.speed = fleeSpeed;
-		character.animator.SetBool("isAware", false);
 		character.isFleeing = true;
 		character.target = null;
 		character.isInCombat = false;
 		agent.Resume();
 		agent.stoppingDistance = 1.2f;
+		yield return new WaitForSeconds(1);
 		if (agent.remainingDistance < agent.stoppingDistance)
 		{
-			if (agent.destination == fleePosition)
+			if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z))
 			{
 				gameObject.SetActive(false);
 			}
 		}
 		if (stopFleeing)
 		{
+			agent.speed = 2.8f;
 			character.isFleeing = false;
 			yield return new TransitionTo(StartState, DefaultTransition);
 		}
@@ -441,14 +438,6 @@ public class HunterStateMachine : CoroutineMachine
 		GameObject target = null;
 		foreach (GameObject enemy in character.currentOpponents)
 		{
-			if (enemy.GetComponent<TutorialCharacter>() != null)
-			{
-				if (enemy.GetComponent<TutorialCharacter>().target == leader)
-				{
-					target = enemy;
-					break;
-				}
-			}
 			if (enemy.GetComponent<Character>() != null)
 			{
 				if (enemy.GetComponent<Character>().target == leader)
@@ -456,6 +445,13 @@ public class HunterStateMachine : CoroutineMachine
 					target = enemy;
 					break;
 				}
+			}
+		}
+		if (target == null)
+		{
+			if (character.currentOpponents.Count != 0)
+			{
+				target = character.FindRandomEnemy();
 			}
 		}
 		return target;
@@ -472,11 +468,11 @@ public class HunterStateMachine : CoroutineMachine
 		GameObject proj = Instantiate(traitProjection);
 		if (combatTrait != CharacterValues.CombatTrait.NoTrait)
 		{
-			proj.GetComponent<traitText>().trait = combatTrait.ToString();
+			proj.GetComponent<traitText>().trait = TranslationManager.Instance.GetTranslation(combatTrait.ToString());
 		}
 		else
 		{
-			proj.GetComponent<traitText>().trait = targetTrait.ToString();
+			proj.GetComponent<traitText>().trait = TranslationManager.Instance.GetTranslation(targetTrait.ToString());
 		}
 		proj.transform.SetParent(gameObject.transform, false);
 		proj.transform.eulerAngles = new Vector3(90, 0, 0);

@@ -16,7 +16,11 @@ public class BackgroundOptionPanelScript : MonoBehaviour, IPointerClickHandler
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         if (panelClickedScript.isClicked)
         {
-			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent());
+			if (GameController.Instance.numberOfActiveUIs == 1)
+			{
+				EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
+			}
+			GameController.Instance.numberOfActiveUIs--;
 			foreach (Transform child in gameObject.transform)
             {
                 if (child.gameObject.activeSelf == true)
@@ -24,10 +28,10 @@ public class BackgroundOptionPanelScript : MonoBehaviour, IPointerClickHandler
                     child.gameObject.SetActive(false);
                 }
             }
-            Debug.Log("Clicking : " + gameObject);
+            //Debug.Log("Clicking : " + gameObject);
             gameObject.SetActive(false);
             Time.timeScale = 1;
-        }
+        } 
 
     }
 

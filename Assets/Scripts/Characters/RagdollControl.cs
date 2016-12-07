@@ -19,6 +19,8 @@ public class RagdollControl : MonoBehaviour
 	[SerializeField]
 	private SphereCollider playerSphereCollider;
 	[SerializeField]
+	private Collider tapCollider;
+	[SerializeField]
 	private float pushForceOnDeath=10;
 	public ForceMode forceModePush = ForceMode.Impulse;
 	#region System
@@ -82,7 +84,7 @@ public class RagdollControl : MonoBehaviour
 		{
 			foreach (var collider in GetComponentsInChildren<Collider>())
 			{
-				if (collider != playerCapsuleCollider && collider != playerSphereCollider)
+				if (collider != playerCapsuleCollider && collider != playerSphereCollider && collider != tapCollider)
 				{
 					collidersRagdoll.Add(collider);
 				}
@@ -115,7 +117,6 @@ public class RagdollControl : MonoBehaviour
 	{
 		for (int i = 0; i < collidersRagdoll.Count; i++)
 		{
-            if(collidersRagdoll[i].gameObject.name != "TapCollider")
 			    collidersRagdoll[i].enabled = isEnabled;
 		}
 	}

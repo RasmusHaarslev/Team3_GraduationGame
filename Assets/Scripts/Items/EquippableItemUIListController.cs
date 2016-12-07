@@ -8,12 +8,12 @@ public class EquippableItemUIListController : MonoBehaviour
 {
     
     public GameObject ContentPanel;
-    private GameObject ListItemPrefab;
+    public GameObject ListItemPrefab;
     int previousWeaponLevel;
     bool firstDrawn = false;
    public void GenerateItemsList(IEnumerable<EquippableitemValues> itemsValues)
     {
-        ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
+        //ListItemPrefab = Resources.Load(StringResources.uiPrefabsPath + "EquippableItemUIScrollElement") as GameObject;
         //removing previous list if present
         foreach (Transform child in ContentPanel.transform)
         {
@@ -30,23 +30,16 @@ public class EquippableItemUIListController : MonoBehaviour
                 newItem.GetComponent<Image>().color = controller.selectedColor;
                 firstDrawn = true;
             }
-            else
-            {
-                if (previousWeaponLevel > values.level)
-                {
-
-                }
-            }
-
+            
             
             //controller.Icon.sprite = animal.Icon;
-            controller.type.text = "Type: " + values.Type.ToString();
-            controller.level.text = "Level: " + values.level.ToString();
+            controller.type.text = values.Type.ToString();
+            controller.level.text = values.level.ToString();
             controller.name.text = values.name;
-            controller.damage.text = "Damage: " + values.damage;
-            controller.damageSpeed.text = "Atk Speed: " + values.damageSpeed;
-            controller.health.text = "Health: " + values.health;
-            controller.range.text = "Range: " + values.range;
+            controller.damage.text =  values.damage.ToString();
+            controller.damageSpeed.text = values.damageSpeed.ToString();
+            controller.health.text = values.health.ToString();
+            controller.range.text = values.range.ToString();
             controller.itemValues = values;
             
            

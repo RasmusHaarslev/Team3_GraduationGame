@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class RivalStateMachine : CoroutineMachine
 {
-	public float transitionTime = 0.05f;
+	public float transitionTime = 0.1f;
 	public float fleeSpeed = 4f;
 	NavMeshAgent agent;
 	Character character;
@@ -14,6 +14,7 @@ public class RivalStateMachine : CoroutineMachine
 	public float averageHealth;
 	private PointOfInterestManager poimanager;
 	Vector3 fleePosition;
+	WaitForSeconds transition;
 
 	void OnEnable()
 	{
@@ -26,6 +27,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	void OnDisable()
 	{
+		StopAllCoroutines();
 		EventManager.Instance.StopListening<FleeStateEvent>(OpponentsFleeing);
 	}
 
@@ -39,6 +41,7 @@ public class RivalStateMachine : CoroutineMachine
 		get
 		{
 			poimanager = transform.parent.parent.GetComponent<PointOfInterestManager>();
+			transition = new WaitForSeconds(transitionTime);
 			return StartState;
 		}
 	}
@@ -109,10 +112,13 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator RoamState()
 	{
-		agent.Resume();
-		character.animator.SetBool("isAware", false);
-		agent.stoppingDistance = 1.2f;
-		agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
+		if (!character.isDead)
+		{
+			agent.Resume();
+			character.animator.SetBool("isAware", false);
+			agent.stoppingDistance = 1.2f;
+			agent.SetDestination(originalPosition + new Vector3(0, 0, 0.5f));
+		}
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
@@ -132,10 +138,10 @@ public class RivalStateMachine : CoroutineMachine
 			agent.stoppingDistance = 1.2f;
 			character.isInCombat = false;
 			agent.SetDestination(fleePosition);
-
+			yield return new WaitForSeconds(1);
 			if (agent.remainingDistance < agent.stoppingDistance)
 			{
-				if (agent.destination == fleePosition)
+				if (new Vector3(agent.destination.x, 0, agent.destination.z) == new Vector3(fleePosition.x, 0, fleePosition.z))
 				{
 					gameObject.SetActive(false);
 				}
@@ -184,7 +190,7 @@ public class RivalStateMachine : CoroutineMachine
 
 	IEnumerator DefaultTransition(StateRoutine from, StateRoutine to)
 	{
-		yield return new WaitForSeconds(transitionTime);
+		yield return transition;
 	}
 
 	private void OpponentsFleeing(FleeStateEvent e)

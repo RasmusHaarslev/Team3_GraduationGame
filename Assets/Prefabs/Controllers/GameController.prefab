@@ -25,6 +25,7 @@ GameObject:
   - 114: {fileID: 114000011974331336}
   - 114: {fileID: 114000010681911106}
   - 114: {fileID: 114000011936170768}
+  - 114: {fileID: 114000013998139632}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -133,6 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250c2de6546b6534c8814ffc8fbc1cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUIActive: 0
+  numberOfActiveUIs: 0
   InitialFood: 0
   InitialVillages: 10
   InitialScrap: 0
@@ -144,3 +147,23 @@ MonoBehaviour:
   _PREMIUM: 10
   _DAYS_SURVIVED: 0
   _dataService: {fileID: 0}
+--- !u!114 &114000013998139632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010129510254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954ef251997be9040890a43f36b67c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PaletteInterval: 4
+  OverridePalette: 0
+  CustomPalette: 2
+  walkableGroundMaterial: {fileID: 2100000, guid: 1545179980c884c4aa431cc4da6d4674,
+    type: 2}
+  nonWalkableOnTopGroundMaterial: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3,
+    type: 2}
+  nonWalkableBelowGroundMaterial: {fileID: 2100000, guid: a868a8cb92890ea4db13802e4a06d522,
+    type: 2}

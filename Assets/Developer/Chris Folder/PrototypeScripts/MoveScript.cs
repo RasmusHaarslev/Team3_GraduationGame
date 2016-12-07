@@ -17,10 +17,10 @@ public class MoveScript : MonoBehaviour
 	bool attack = false;
 	bool isDead = false;
 	bool isFleeing = false;
-	List<GameObject> hunters = new List<GameObject>();
+	public List<GameObject> hunters = new List<GameObject>();
 	bool hasShot = false;
 	public float fleeSpeed = 4f;
-
+	LevelManager levelManager;
 	// Use this for initialization
 	void Start()
 	{
@@ -29,6 +29,7 @@ public class MoveScript : MonoBehaviour
 
 	void OnEnable()
 	{
+		levelManager = UnityEngine.Object.FindObjectOfType<LevelManager>();
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
 		EventManager.Instance.StartListening<StopFleeEvent>(StopFlee);
 		agent = GetComponent<NavMeshAgent>();
@@ -43,6 +44,7 @@ public class MoveScript : MonoBehaviour
 
 	private void StopFlee(StopFleeEvent e)
 	{
+		character.isFleeing = false;
 		isFleeing = false;
 		agent.speed = 2.75f;
 		agent.Stop();
@@ -54,7 +56,6 @@ public class MoveScript : MonoBehaviour
 		agent.speed = fleeSpeed;
 	}
 
-
 	void OnApplicationQuit()
 	{
 		this.enabled = false;
@@ -65,25 +66,37 @@ public class MoveScript : MonoBehaviour
 	{
 		if (hunters.Count == 0)
 		{
-			hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
-		}
-		int counter = 0;
-		foreach (var hunter in hunters)
-		{
-			if (hunter.GetComponent<Character>().isInCombat)
+			if (!levelManager.IsTutorial || SceneManager.GetActiveScene().name == "TutorialLevel03")
 			{
-				character.isInCombat = true;
-				counter++;
+				hunters.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
 			}
 		}
-		if (counter == 0)
-			character.isInCombat = false;
+		else
+		{
+			int counter = 0;
+			foreach (var hunter in hunters)
+			{
+				if (hunter.GetComponent<Character>().isInCombat)
+				{
+					character.isInCombat = true;
+					counter++;
+				}
+			}
+			if (counter == 0)
+				character.isInCombat = false;
+
+		}
 		if (!isFleeing)
 		{
 			attackSpeed = character.damageSpeed;
 			if (character.currentHealth <= 0 && isDead == false)
 			{
 				EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
+				if (GameController.Instance.numberOfActiveUIs == 0)
+				{
+					EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+				}
+				GameController.Instance.numberOfActiveUIs++;
 				isDead = true;
 			}
 			if (movement)
@@ -97,7 +110,6 @@ public class MoveScript : MonoBehaviour
 					if (Input.GetKey(KeyCode.Mouse0))
 					{
 						agent.Resume();
-						//attacking = false;
 						MoveToClickPosition();
 					}
 				}
@@ -120,6 +132,7 @@ public class MoveScript : MonoBehaviour
 		}
 		else
 		{
+			character.isFleeing = true;
 			agent.SetDestination(GameObject.FindGameObjectWithTag("FleePoint").transform.position);
 		}
 	}
@@ -157,7 +170,7 @@ public class MoveScript : MonoBehaviour
 				}
 				else if (hit.transform.gameObject.tag == "Item")
 				{
-					EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
+					hit.transform.GetComponent<ClickableNewspaper>().Click();
 				}
 			}
 
@@ -179,7 +192,7 @@ public class MoveScript : MonoBehaviour
 					if (!currentTarget.isDead)
 					{
 						EventManager.Instance.TriggerEvent(new EnemyClicked(currentTarget.gameObject));
-						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject));
+						EventManager.Instance.TriggerEvent(new EnemyAttackedByLeaderEvent(currentTarget.gameObject.transform.parent.parent.gameObject));
 					}
 				}
 			}
@@ -188,11 +201,7 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-			else if (hits[0].transform.gameObject.tag == "Item")
-			{
-				EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
-			}
-			else
+            else
 			{
 				EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
 				agent.stoppingDistance = 1.2f;
@@ -212,11 +221,15 @@ public class MoveScript : MonoBehaviour
 			character.RotateTowards(character.target.transform);
 			if (character.isInCombat)
 			{
-				character.animator.SetBool("isAware", true);
+				if (!character.animator.GetBool("isAware"))
+				{
+					character.animator.SetBool("isAware", true);
+				}
 			}
 			else
 			{
-				character.animator.SetBool("isAware", false);
+				if (character.animator.GetBool("isAware"))
+					character.animator.SetBool("isAware", false);
 			}
 
 			if (counter <= 0)
@@ -232,9 +245,8 @@ public class MoveScript : MonoBehaviour
 				{
 					if (character.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
 					{
-					Debug.Log("Player damages");
-					character.DealDamage();
-					hasShot = true;
+						character.DealDamage();
+						hasShot = true;
 					}
 				}
 				counter -= Time.deltaTime;

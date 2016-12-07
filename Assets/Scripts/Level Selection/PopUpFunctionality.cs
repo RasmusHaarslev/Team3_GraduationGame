@@ -10,6 +10,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public GameObject invisPanel;
 
     public GameObject confirmPanel;
+    public GameObject confirmPanelScout;
 
     // Left side shown when you have scouted
     public GameObject ScoutedPanel;
@@ -130,7 +131,7 @@ public class PopUpFunctionality : MonoBehaviour {
 
         confirmPanel.SetActive(true);
 
-        int value = GameController.Instance._FOOD - node.GetComponent<Node>().TravelCost;
+        int value = node.GetComponent<Node>().TravelCost;
 
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
 
@@ -145,15 +146,17 @@ public class PopUpFunctionality : MonoBehaviour {
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
 
-        confirmPanel.SetActive(true);
+        confirmPanelScout.SetActive(true);
 
-        confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "scout");
+        int value = node.GetComponent<Node>().scoutCost;
 
-        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
-        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
+        confirmPanelScout.GetComponent<ConfirmPanel>().SetupText(node, "scout", value);
 
-        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
-        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptScout(node); });
+        confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
+        confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
+
+        confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
+        confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptScout(node); });
     }
 
     public void AcceptScout(GameObject node)
@@ -196,7 +199,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void AcceptPlay(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
-        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));        
+        EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
 
         PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, node.GetComponent<Node>().Level);
@@ -205,7 +208,6 @@ public class PopUpFunctionality : MonoBehaviour {
         PlayerPrefs.SetInt(StringResources.ScrapAmountPrefsName, node.GetComponent<Node>().scrapAmount);
         PlayerPrefs.SetInt(StringResources.ItemDropAmountPrefsName, node.GetComponent<Node>().itemDropAmount);
 
-        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         EventManager.Instance.TriggerEvent(new LevelStarted());
 
         // PlayerPrefs.SetInt("WolveCamps", node.GetComponent<Node>().wolveCamps);

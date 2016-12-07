@@ -10,19 +10,30 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>24</Value>
+										<Value>16</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
-										<Value>53</Value>
+										<Value>38</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>-450</Value>
+										<Value>-330</Value>
 									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{E30C80C9-99A8-4379-B174-3959B6CA878B}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="300"/>
+													<Property Name="Min" Type="Real64" Value="-300"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
 								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
@@ -33,7 +44,7 @@
 								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -104,7 +115,7 @@
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
-								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
+								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="0"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
 										<Value>1</Value>
@@ -113,7 +124,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="flag" ID="{4DA98105-B8A0-4675-A16E-F2AFFB07C4D0}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
+									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -159,9 +170,10 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="windhowl" ID="{436AA435-E321-4EFD-9DDF-74B3FABB707B}" ShortID="521212223">
 							<PropertyList>
-								<Property Name="Lowpass" Type="int16">
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>16</Value>
+										<Value>24</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
@@ -175,80 +187,18 @@
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="1.5"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Spatialization" Type="bool" Value="False"/>
-								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
+								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="0"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<Custom CreatedFrom="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}">
-										<Attenuation Name="AmbAtten (Custom)" ID="{DC3E3211-580E-44A2-90A4-3F3C12FFAAAB}" ShortID="896706766">
-											<PropertyList>
-												<Property Name="RadiusMax" Type="Real64" Value="20"/>
-											</PropertyList>
-											<CurveUsageInfoList>
-												<VolumeDryUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-														<Curve Name="VolumeDry" ID="{029B16EF-D99D-46AB-94F5-A148F413CE02}">
-															<PropertyList>
-																<Property Name="Flags" Type="int32" Value="3"/>
-															</PropertyList>
-															<PointList>
-																<Point>
-																	<XPos>0</XPos>
-																	<YPos>0</YPos>
-																	<Flags>5</Flags>
-																</Point>
-																<Point>
-																	<XPos>11.00313</XPos>
-																	<YPos>0</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>13</XPos>
-																	<YPos>-6</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>18</XPos>
-																	<YPos>-25</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>20</XPos>
-																	<YPos>-200</YPos>
-																	<Flags>37</Flags>
-																</Point>
-															</PointList>
-														</Curve>
-													</CurveUsageInfo>
-												</VolumeDryUsage>
-												<VolumeWetGameUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-												</VolumeWetGameUsage>
-												<VolumeWetUserUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-												</VolumeWetUserUsage>
-												<LowPassFilterUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</LowPassFilterUsage>
-												<HighPassFilterUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</HighPassFilterUsage>
-												<SpreadUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</SpreadUsage>
-												<FocusUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</FocusUsage>
-											</CurveUsageInfoList>
-										</Attenuation>
-									</Custom>
+									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -258,7 +208,7 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="WindHowl" ID="{43AD11B2-6561-47A0-9805-C4831CE8B848}" ShortID="433050078" Type="SoundFX">
+								<Sound Name="11 Low-pitched wind_3" ID="{812E0014-328B-4CFA-A132-415C3AA7D72E}" ShortID="665280195" Type="SoundFX">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -268,17 +218,51 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="WindHowl" ID="{BC5100CE-735D-4340-AAEB-35D1986B70C1}" ShortID="1046654003">
-											<PropertyList>
-												<Property Name="TrimBegin" Type="Real64" Value="2.60969209127852"/>
-												<Property Name="TrimEnd" Type="Real64" Value="28.499494584121"/>
-											</PropertyList>
+										<AudioFileSource Name="11 Low-pitched wind_3" ID="{9FE6F7AB-038E-4C95-A4F3-D19BC59CF7E0}" ShortID="276837321">
 											<Language>SFX</Language>
-											<AudioFile>WindHowl.wav</AudioFile>
+											<AudioFile>11 Low-pitched wind.3.wav</AudioFile>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="WindHowl" ID="{BC5100CE-735D-4340-AAEB-35D1986B70C1}" Platform="Linked"/>
+										<ActiveSource Name="11 Low-pitched wind_3" ID="{9FE6F7AB-038E-4C95-A4F3-D19BC59CF7E0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="11 Low-pitched wind_5" ID="{CC78ED8F-25A3-4636-80BE-C87D5C51865C}" ShortID="281515178" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="11 Low-pitched wind_5" ID="{8307D0D3-0089-4E13-A3C3-FEAECBA60D4B}" ShortID="264489792">
+											<Language>SFX</Language>
+											<AudioFile>11 Low-pitched wind.5.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="11 Low-pitched wind_5" ID="{8307D0D3-0089-4E13-A3C3-FEAECBA60D4B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="11 Low-pitched wind_7" ID="{6C9CA3B4-B934-47E8-B7A0-5B4585721439}" ShortID="1723927" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="11 Low-pitched wind_7" ID="{5F16290B-49D6-4FD0-A994-2129DB44FD97}" ShortID="876390288">
+											<Language>SFX</Language>
+											<AudioFile>11 Low-pitched wind.7.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="11 Low-pitched wind_7" ID="{5F16290B-49D6-4FD0-A994-2129DB44FD97}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -327,97 +311,52 @@
 									</CustomState>
 								</CustomStateList>
 							</StateInfo>
-							<Playlist>
-								<ItemRef Name="WindHowl" ID="{43AD11B2-6561-47A0-9805-C4831CE8B848}"/>
-							</Playlist>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="WindHowlDrone" ID="{C0571A55-F9A3-4084-9DB9-18E87E7E0F49}" ShortID="534089476">
 							<PropertyList>
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>24</Value>
+									</ValueList>
+								</Property>
 								<Property Name="OutputBusVolume" Type="Real64">
 									<ValueList>
 										<Value>-1</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-50</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{FB93D30A-83EB-4ADF-862E-5BED805BEAEA}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="300"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="PositioningType" Type="int16" Value="1"/>
-								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 								<Property Name="Spatialization" Type="bool" Value="False"/>
-								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
+								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="0"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>4</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<Custom CreatedFrom="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}">
-										<Attenuation Name="AmbAtten (Custom)" ID="{CA3091D5-2739-4B31-9F49-58447D13B1EC}" ShortID="1010219170">
-											<PropertyList>
-												<Property Name="RadiusMax" Type="Real64" Value="20"/>
-											</PropertyList>
-											<CurveUsageInfoList>
-												<VolumeDryUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-														<Curve Name="VolumeDry" ID="{B6C42538-4CB5-4743-AEB6-57107F88C4BB}">
-															<PropertyList>
-																<Property Name="Flags" Type="int32" Value="3"/>
-															</PropertyList>
-															<PointList>
-																<Point>
-																	<XPos>0</XPos>
-																	<YPos>0</YPos>
-																	<Flags>5</Flags>
-																</Point>
-																<Point>
-																	<XPos>11.00313</XPos>
-																	<YPos>0</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>13</XPos>
-																	<YPos>-6</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>18</XPos>
-																	<YPos>-25</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>20</XPos>
-																	<YPos>-200</YPos>
-																	<Flags>37</Flags>
-																</Point>
-															</PointList>
-														</Curve>
-													</CurveUsageInfo>
-												</VolumeDryUsage>
-												<VolumeWetGameUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-												</VolumeWetGameUsage>
-												<VolumeWetUserUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-												</VolumeWetUserUsage>
-												<LowPassFilterUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</LowPassFilterUsage>
-												<HighPassFilterUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</HighPassFilterUsage>
-												<SpreadUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</SpreadUsage>
-												<FocusUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</FocusUsage>
-											</CurveUsageInfoList>
-										</Attenuation>
-									</Custom>
+									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -427,14 +366,7 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="WindHowlDrone" ID="{4B442694-B9EF-4C84-AC35-CD656A9A7205}" ShortID="763804206" Type="SoundFX">
-									<PropertyList>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-3</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
+								<Sound Name="13 High-pitched wind_5" ID="{6FE6365D-31DA-468D-A3BC-F0DFE9C9A173}" ShortID="890311506" Type="SoundFX">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -444,13 +376,51 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="WindHowlDrone" ID="{D7DE32A1-A602-4E80-8976-089A58A80EE3}" ShortID="325070793">
+										<AudioFileSource Name="13 High-pitched wind_5" ID="{DC79995C-9E5C-405E-BD2E-476DC41BAEF0}" ShortID="419612231">
 											<Language>SFX</Language>
-											<AudioFile>WindHowlDrone.wav</AudioFile>
+											<AudioFile>13 High-pitched wind.5.wav</AudioFile>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="WindHowlDrone" ID="{D7DE32A1-A602-4E80-8976-089A58A80EE3}" Platform="Linked"/>
+										<ActiveSource Name="13 High-pitched wind_5" ID="{DC79995C-9E5C-405E-BD2E-476DC41BAEF0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="13 High-pitched wind_13" ID="{BE278BA9-D8BF-47DC-A683-C183B439F41D}" ShortID="349001113" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="13 High-pitched wind_13" ID="{E9030A81-82AB-4BF6-8EE4-5199CE37FB21}" ShortID="1056485594">
+											<Language>SFX</Language>
+											<AudioFile>13 High-pitched wind.13.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="13 High-pitched wind_13" ID="{E9030A81-82AB-4BF6-8EE4-5199CE37FB21}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="13 High-pitched wind_17" ID="{982A09B3-46BD-4198-952A-ADD257928FEC}" ShortID="198172857" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="13 High-pitched wind_17" ID="{FE6B5572-676A-44CA-BEC1-A06C039654A2}" ShortID="489003857">
+											<Language>SFX</Language>
+											<AudioFile>13 High-pitched wind.17.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="13 High-pitched wind_17" ID="{FE6B5572-676A-44CA-BEC1-A06C039654A2}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -486,87 +456,50 @@
 									</CustomState>
 								</CustomStateList>
 							</StateInfo>
-							<Playlist>
-								<ItemRef Name="WindHowlDrone" ID="{4B442694-B9EF-4C84-AC35-CD656A9A7205}"/>
-							</Playlist>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="windNoiseQuiet" ID="{ECE50A9A-8087-4BC4-915D-241F1288F1D1}" ShortID="903607515">
 							<PropertyList>
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>16</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>33</Value>
+									</ValueList>
+								</Property>
 								<Property Name="OverLimitBehavior" Type="int16" Value="1"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{71397029-2AF3-4A62-BAB4-D65A59A96738}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="200"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
 								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 								<Property Name="Spatialization" Type="bool" Value="False"/>
-								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="2"/>
+								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-1</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<Custom CreatedFrom="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}">
-										<Attenuation Name="AmbAtten (Custom)" ID="{F8E7062E-304D-45EE-BC73-7B76578F77DA}" ShortID="287742067">
-											<PropertyList>
-												<Property Name="RadiusMax" Type="Real64" Value="20"/>
-											</PropertyList>
-											<CurveUsageInfoList>
-												<VolumeDryUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
-														<Curve Name="VolumeDry" ID="{82A76EB7-80EA-4106-A6E0-A93EB9BB0250}">
-															<PropertyList>
-																<Property Name="Flags" Type="int32" Value="3"/>
-															</PropertyList>
-															<PointList>
-																<Point>
-																	<XPos>0</XPos>
-																	<YPos>0</YPos>
-																	<Flags>5</Flags>
-																</Point>
-																<Point>
-																	<XPos>11.00313</XPos>
-																	<YPos>0</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>13</XPos>
-																	<YPos>-6</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>18</XPos>
-																	<YPos>-25</YPos>
-																	<Flags>0</Flags>
-																</Point>
-																<Point>
-																	<XPos>20</XPos>
-																	<YPos>-200</YPos>
-																	<Flags>37</Flags>
-																</Point>
-															</PointList>
-														</Curve>
-													</CurveUsageInfo>
-												</VolumeDryUsage>
-												<VolumeWetGameUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-												</VolumeWetGameUsage>
-												<VolumeWetUserUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
-												</VolumeWetUserUsage>
-												<LowPassFilterUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</LowPassFilterUsage>
-												<HighPassFilterUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</HighPassFilterUsage>
-												<SpreadUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</SpreadUsage>
-												<FocusUsage>
-													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
-												</FocusUsage>
-											</CurveUsageInfoList>
-										</Attenuation>
-									</Custom>
+									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
@@ -606,7 +539,7 @@
 								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="27"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-3</Value>
+										<Value>-2</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -640,8 +573,8 @@
 													<Modifier Name="" ID="{FE54B259-40D4-4718-A431-2173B3082482}">
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="400"/>
-															<Property Name="Min" Type="Real64" Value="-400"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -658,7 +591,7 @@
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="1"/>
-															<Property Name="Min" Type="Real64" Value="-5"/>
+															<Property Name="Min" Type="Real64" Value="-6"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -794,7 +727,7 @@
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="1"/>
-															<Property Name="Min" Type="Real64" Value="-5"/>
+															<Property Name="Min" Type="Real64" Value="-6"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -978,14 +911,25 @@
 									<StateGroupInfo>
 										<StateGroupRef Name="ViewPointEvent" ID="{98CC0787-A356-4A92-ADB0-4498CE5756EE}"/>
 									</StateGroupInfo>
+									<StateGroupInfo>
+										<StateGroupRef Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
+									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
+									<CustomState>
+										<StateRef Name="On" ID="{993E0C17-0E99-401D-8CC3-F23E2E56BEE9}"/>
+										<State Name="Custom State" ID="{40CA5561-B111-49A1-BC5A-7242555B06B9}" ShortID="391246454">
+											<PropertyList>
+												<Property Name="Highpass" Type="int16" Value="30"/>
+												<Property Name="Volume" Type="Real64" Value="4"/>
+											</PropertyList>
+										</State>
+									</CustomState>
 									<CustomState>
 										<StateRef Name="Start" ID="{B17CB0CE-0D94-4330-BD8C-FFE8F406ABB2}"/>
 										<State Name="Custom State" ID="{5CE99AAC-2CC9-47D5-A2BA-40C86B7F33BC}" ShortID="188462326">
 											<PropertyList>
-												<Property Name="Lowpass" Type="int16" Value="30"/>
-												<Property Name="Volume" Type="Real64" Value="-8"/>
+												<Property Name="Lowpass" Type="int16" Value="20"/>
 											</PropertyList>
 										</State>
 									</CustomState>
@@ -993,7 +937,7 @@
 										<StateRef Name="Lose" ID="{EE432795-624A-4375-BBBB-F183D28CD04E}"/>
 										<State Name="Custom State" ID="{6053FB0C-D79D-4732-9ED1-F4FE9821BA4C}" ShortID="8558331">
 											<PropertyList>
-												<Property Name="Lowpass" Type="int16" Value="40"/>
+												<Property Name="Lowpass" Type="int16" Value="15"/>
 												<Property Name="Volume" Type="Real64" Value="2"/>
 											</PropertyList>
 										</State>
@@ -1014,7 +958,7 @@
 										<State Name="Custom State" ID="{C6CE1D0C-634A-4ACD-9F35-41B5D0BD0B03}" ShortID="948477353">
 											<PropertyList>
 												<Property Name="Highpass" Type="int16" Value="26"/>
-												<Property Name="Lowpass" Type="int16" Value="60"/>
+												<Property Name="Lowpass" Type="int16" Value="37"/>
 												<Property Name="Volume" Type="Real64" Value="-7"/>
 											</PropertyList>
 										</State>
@@ -1025,6 +969,14 @@
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="60"/>
 												<Property Name="Volume" Type="Real64" Value="-3"/>
+											</PropertyList>
+										</State>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="Win" ID="{09534D19-5ECF-4CAB-8563-C40F93CDA1D6}"/>
+										<State Name="Custom State" ID="{792F08BE-764C-471B-A350-992CB059FAD7}" ShortID="583986057">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="20"/>
 											</PropertyList>
 										</State>
 									</CustomState>
@@ -1071,7 +1023,7 @@
 								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
 								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>33</Value>
+										<Value>35</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Lowpass" Type="int16">
@@ -1107,7 +1059,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-7</Value>
+										<Value>-6</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1116,7 +1068,7 @@
 									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
@@ -1219,7 +1171,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-7</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1384,7 +1336,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1393,7 +1345,7 @@
 									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
 								</Reference>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
@@ -1562,6 +1514,275 @@
 								</Sound>
 							</ChildrenList>
 						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Pipe" ID="{5CDD5911-F9D9-4F16-8654-FF4AAAC7586F}" ShortID="91758423">
+							<PropertyList>
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>13</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>30</Value>
+									</ValueList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="PositioningType" Type="int16" Value="1"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-17</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="OilPipe1" ID="{EE879555-BC68-4286-979C-9E7AA40FD2DD}" ShortID="802463804" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="OilPipe1" ID="{2F93FE8C-B473-4E75-A462-5A424CF84A74}" ShortID="987725391">
+											<Language>SFX</Language>
+											<AudioFile>OilPipe1.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="OilPipe1" ID="{2F93FE8C-B473-4E75-A462-5A424CF84A74}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="OilPipe2" ID="{AF125B20-CF90-41E2-B29A-2D9744E390B8}" ShortID="692422707" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="OilPipe2" ID="{DB142120-573D-4B5B-9665-5613FC4BA0B6}" ShortID="757001917">
+											<Language>SFX</Language>
+											<AudioFile>OilPipe2.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="OilPipe2" ID="{DB142120-573D-4B5B-9665-5613FC4BA0B6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Disc" ID="{67E674F5-33D7-441F-908F-C2FC66896AF4}" ShortID="806710425">
+							<PropertyList>
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>15</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>32</Value>
+									</ValueList>
+								</Property>
+								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-300</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{BF6FD460-C3F5-4407-BCA6-2E91D40D5986}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="1.5"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="PositioningType" Type="int16" Value="1"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="AmbAtten" ID="{B3991A4B-8071-4339-9C2D-37F27B11E7C7}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="disc1" ID="{BE498C40-C991-46D3-99F1-FC01F160B080}" ShortID="758189436" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="disc1" ID="{AA5B7E19-2F89-486D-9449-9A993684CD6A}" ShortID="420726304">
+											<Language>SFX</Language>
+											<AudioFile>disc1.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="disc1" ID="{AA5B7E19-2F89-486D-9449-9A993684CD6A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="disc2" ID="{73A1458B-1541-4225-8E80-287A611D787E}" ShortID="423007957" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="disc2" ID="{1CCD687F-ED53-48D4-88A4-FD46BCD852C5}" ShortID="699284997">
+											<Language>SFX</Language>
+											<AudioFile>disc2.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="disc2" ID="{1CCD687F-ED53-48D4-88A4-FD46BCD852C5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="Campfire" ID="{F4C6B6DB-642C-4EB9-93F6-8C441E9F360C}" ShortID="441584137">
+							<PropertyList>
+								<Property Name="BelowThresholdBehavior" Type="int16" Value="2"/>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>30</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>7</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>50</Value>
+									</ValueList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="1.5"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="PositioningType" Type="int16" Value="1"/>
+								<Property Name="VirtualVoiceQueueBehavior" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-4</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="New Attenuation" ID="{6FC89645-A130-4E7E-BCF2-CEC5DC1EA172}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Ambience" ID="{A19815CB-F67A-47FC-A4E4-21C22707BA95}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Campfire" ID="{66ADEAAB-2F7D-45AB-B3FC-DB45B0C6947E}" ShortID="712092028" Type="SoundFX">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>50</Value>
+											</ValueList>
+										</Property>
+										<Property Name="PositioningType" Type="int16" Value="1"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="New Attenuation" ID="{6FC89645-A130-4E7E-BCF2-CEC5DC1EA172}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Campfire" ID="{D0C4E54E-ED7B-4522-BE0C-074298B0DFB6}" ShortID="763776498">
+											<PropertyList>
+												<Property Name="TrimEnd" Type="Real64" Value="5.53172866520788"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Campfire.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Campfire" ID="{D0C4E54E-ED7B-4522-BE0C-074298B0DFB6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Campfire2" ID="{E9C1BCAA-30E3-46B5-968E-2C07D2CE4E9A}" ShortID="466457153" Type="SoundFX">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Campfire2" ID="{3B5880F9-61BD-4B55-BD3D-A7BE8EEC46C3}" ShortID="306522968">
+											<Language>SFX</Language>
+											<AudioFile>Campfire2.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Campfire2" ID="{3B5880F9-61BD-4B55-BD3D-A7BE8EEC46C3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Weapons" ID="{A0920B0C-261E-4A38-881F-707EFA5EF507}" ShortID="658874926">
@@ -1713,7 +1934,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-5</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -2976,7 +3197,7 @@
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 								<Property Name="Pitch" Type="int32">
 									<ValueList>
-										<Value>-130</Value>
+										<Value>-230</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -2993,7 +3214,7 @@
 								<Property Name="PositioningType" Type="int16" Value="1"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-1</Value>
+										<Value>-3</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -3154,7 +3375,7 @@
 								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-10</Value>
+										<Value>-7</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
@@ -4128,201 +4349,6 @@
 									<ObjectRef Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
 								</Reference>
 							</ReferenceList>
-							<ChildrenList>
-								<RandomSequenceContainer Name="EvilFemaleWarrior1Death" ID="{D505D1F4-EF90-43B8-A038-2575CCD4A47E}" ShortID="700447241">
-									<PropertyList>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>93</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OutputBusHighpass" Type="int16">
-											<ValueList>
-												<Value>6</Value>
-											</ValueList>
-										</Property>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{B217C1CF-B1D7-4AFB-8850-7D4DC9A25FAE}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="50"/>
-															<Property Name="Min" Type="Real64" Value="-50"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PositioningType" Type="int16" Value="1"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="WEAPONS" ID="{7AB21706-2DAE-4F6C-9BC7-16575A5C45C9}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="EvilFemaleWarrior1Death1" ID="{9345DD3E-1933-4E05-B6D8-EB3C96692442}" ShortID="133827714" Type="SoundFX">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="EvilFemaleWarrior1Death1" ID="{F28AE783-BCE6-409F-BDE3-4E067B58CEDB}" ShortID="697623040">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0440593042468629"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.225191999483966"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.0195819129986057"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>EvilFemaleWarrior1Death1.wav</AudioFile>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="EvilFemaleWarrior1Death1" ID="{F28AE783-BCE6-409F-BDE3-4E067B58CEDB}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="EvilFemaleWarrior1Death2" ID="{041191CF-9566-4E6B-8889-15D071CA14A5}" ShortID="26417548" Type="SoundFX">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="EvilFemaleWarrior1Death2" ID="{1A1DD574-17FB-408B-8BD2-2EE051E8D6A1}" ShortID="356655512">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0489547824965143"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.0195819129986057"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>EvilFemaleWarrior1Death2.wav</AudioFile>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="EvilFemaleWarrior1Death2" ID="{1A1DD574-17FB-408B-8BD2-2EE051E8D6A1}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="EvilFemaleWarrior1Death3" ID="{3052A4B6-BCB4-4191-8202-357B73012C91}" ShortID="687946382" Type="SoundFX">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="EvilFemaleWarrior1Death3" ID="{F5B152BC-CE8A-4019-A960-8C1B6EA65776}" ShortID="613587420">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.0366627964095923"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>EvilFemaleWarrior1Death3.wav</AudioFile>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="EvilFemaleWarrior1Death3" ID="{F5B152BC-CE8A-4019-A960-8C1B6EA65776}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="EvilFemaleWarrior2Death" ID="{2A3C0171-B9C9-4F5C-9B1F-0106EF486A0D}" ShortID="708055958">
-									<PropertyList>
-										<Property Name="MaxSoundPerInstance" Type="int16">
-											<ValueList>
-												<Value>93</Value>
-											</ValueList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OutputBusHighpass" Type="int16">
-											<ValueList>
-												<Value>6</Value>
-											</ValueList>
-										</Property>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{8659F14F-ACF8-4743-A271-A443862ED2B1}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="50"/>
-															<Property Name="Min" Type="Real64" Value="-50"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PositioningType" Type="int16" Value="1"/>
-										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="WEAPONS" ID="{7AB21706-2DAE-4F6C-9BC7-16575A5C45C9}" WorkUnitID="{69FDE67B-7E14-4B92-BB69-A6DFB3EEF40E}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="MonoHeavy" ID="{53A95D92-BAEF-4C67-B216-5F1805C2DC55}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="EvilFemaleWarrior2Death1" ID="{A87A727C-2B55-4E6D-BF90-7F1B876E88E6}" ShortID="356883798" Type="SoundFX">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="EvilFemaleWarrior2Death1" ID="{CBDDC86F-4880-4D8C-A258-8148D5F4B6EF}" ShortID="194854662">
-													<Language>SFX</Language>
-													<AudioFile>EvilFemaleWarrior2Death1.wav</AudioFile>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="EvilFemaleWarrior2Death1" ID="{CBDDC86F-4880-4D8C-A258-8148D5F4B6EF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="EvilFemaleWarrior2Death2" ID="{02533164-EA73-474F-AFB3-7DFC7B6C3D47}" ShortID="936951296" Type="SoundFX">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="EvilFemaleWarrior2Death2" ID="{79AB0C77-C4DE-4E76-9048-87FE1A606D9C}" ShortID="800645584">
-													<Language>SFX</Language>
-													<AudioFile>EvilFemaleWarrior2Death2.wav</AudioFile>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="EvilFemaleWarrior2Death2" ID="{79AB0C77-C4DE-4E76-9048-87FE1A606D9C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-							</ChildrenList>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="EvilMaleAttack" ID="{A40D78CC-0D1A-4681-A1B9-BD01E00E73D2}" ShortID="693027108">
 							<PropertyList>
@@ -4616,6 +4642,7 @@
 								</Property>
 								<Property Name="HdrEnvelopeSensitivity" Type="Real64" Value="100"/>
 								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
 										<Value>-3</Value>
@@ -4808,6 +4835,184 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="EvilMaleWarrior2Death3" ID="{E33D859B-0F55-42FF-8BE5-FFA58E6D2451}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EvilFemaleWarrior1Death" ID="{D505D1F4-EF90-43B8-A038-2575CCD4A47E}" ShortID="700447241">
+									<PropertyList>
+										<Property Name="HdrActiveRange" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>180</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{B217C1CF-B1D7-4AFB-8850-7D4DC9A25FAE}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="50"/>
+															<Property Name="Min" Type="Real64" Value="-50"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="EvilFemaleWarrior1Death1" ID="{9345DD3E-1933-4E05-B6D8-EB3C96692442}" ShortID="133827714" Type="SoundFX">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="EvilFemaleWarrior1Death1" ID="{F28AE783-BCE6-409F-BDE3-4E067B58CEDB}" ShortID="697623040">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0440593042468629"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.225191999483966"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0195819129986057"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>EvilFemaleWarrior1Death1.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="EvilFemaleWarrior1Death1" ID="{F28AE783-BCE6-409F-BDE3-4E067B58CEDB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="EvilFemaleWarrior1Death2" ID="{041191CF-9566-4E6B-8889-15D071CA14A5}" ShortID="26417548" Type="SoundFX">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="EvilFemaleWarrior1Death2" ID="{1A1DD574-17FB-408B-8BD2-2EE051E8D6A1}" ShortID="356655512">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0489547824965143"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0195819129986057"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>EvilFemaleWarrior1Death2.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="EvilFemaleWarrior1Death2" ID="{1A1DD574-17FB-408B-8BD2-2EE051E8D6A1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="EvilFemaleWarrior1Death3" ID="{3052A4B6-BCB4-4191-8202-357B73012C91}" ShortID="687946382" Type="SoundFX">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="EvilFemaleWarrior1Death3" ID="{F5B152BC-CE8A-4019-A960-8C1B6EA65776}" ShortID="613587420">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0366627964095923"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>EvilFemaleWarrior1Death3.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="EvilFemaleWarrior1Death3" ID="{F5B152BC-CE8A-4019-A960-8C1B6EA65776}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="EvilFemaleWarrior2Death" ID="{2A3C0171-B9C9-4F5C-9B1F-0106EF486A0D}" ShortID="708055958">
+									<PropertyList>
+										<Property Name="HdrActiveRange" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8659F14F-ACF8-4743-A271-A443862ED2B1}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="50"/>
+															<Property Name="Min" Type="Real64" Value="-50"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="EvilFemaleWarrior2Death1" ID="{A87A727C-2B55-4E6D-BF90-7F1B876E88E6}" ShortID="356883798" Type="SoundFX">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="EvilFemaleWarrior2Death1" ID="{CBDDC86F-4880-4D8C-A258-8148D5F4B6EF}" ShortID="194854662">
+													<Language>SFX</Language>
+													<AudioFile>EvilFemaleWarrior2Death1.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="EvilFemaleWarrior2Death1" ID="{CBDDC86F-4880-4D8C-A258-8148D5F4B6EF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="EvilFemaleWarrior2Death2" ID="{02533164-EA73-474F-AFB3-7DFC7B6C3D47}" ShortID="936951296" Type="SoundFX">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="EvilFemaleWarrior2Death2" ID="{79AB0C77-C4DE-4E76-9048-87FE1A606D9C}" ShortID="800645584">
+													<Language>SFX</Language>
+													<AudioFile>EvilFemaleWarrior2Death2.wav</AudioFile>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="EvilFemaleWarrior2Death2" ID="{79AB0C77-C4DE-4E76-9048-87FE1A606D9C}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -7071,6 +7276,37 @@
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
+						<Sound Name="LeaderDeath" ID="{5468A6C7-A9CC-4EAE-8B3A-08D298722FDD}" ShortID="780756681" Type="SoundFX">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-380</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>5</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{81458C16-9090-4B4F-8723-684CB211D19B}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="VO" ID="{226ED567-A088-4EB7-9987-529DBBCEC279}" WorkUnitID="{AA8D190D-B159-4D3A-8348-121D2CA50747}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="LeaderDeath" ID="{2D006F39-E1AD-4864-9691-F7866CB4E75B}" ShortID="703024586">
+									<Language>SFX</Language>
+									<AudioFile>LeaderDeath.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="LeaderDeath" ID="{2D006F39-E1AD-4864-9691-F7866CB4E75B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="UI" ID="{B5195662-62A8-4671-91D2-DC70509BDEEC}" ShortID="1070095960">
@@ -7188,7 +7424,7 @@
 								</Property>
 								<Property Name="Lowpass" Type="int16">
 									<ValueList>
-										<Value>30</Value>
+										<Value>40</Value>
 									</ValueList>
 								</Property>
 								<Property Name="Pitch" Type="int32">
@@ -7209,7 +7445,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-2</Value>
+										<Value>-5</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>

@@ -128,7 +128,7 @@ public class Node : MonoBehaviour {
 
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
                     GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
-                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();                    
+                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();  
                 }
             }
 
@@ -145,34 +145,25 @@ public class Node : MonoBehaviour {
     /// </summary>
     void SetupCampsForThisNode()
     {
-        int noCamps = Random.Range(_MINCAMPS, _MAXCAMPS+1);
-        CampsInNode = noCamps;
+        int selectionNumber = Random.Range(0, 100);
+        int selector = 2;
+
+        if (selectionNumber < 37)
+        {
+            selector = 2;
+        }
+        else if (selectionNumber < 74)
+        {
+            selector = 3;
+        }
+        else
+        {
+            selector = 4;
+        }
+
+        CampsInNode = selector;
 
         tribeCamps += CampsInNode;
-
-        /*IEnumerable<int> rangeWolves = Enumerable.Range(0, probabilityWolves);
-        IEnumerable<int> rangeTribes = Enumerable.Range(probabilityWolves, probabilityTribes);
-        IEnumerable<int> rangeChoices = Enumerable.Range(probabilityWolves + probabilityTribes, probabilityChoice);
-
-        int totalRange = rangeWolves.Count() + rangeTribes.Count() + rangeChoices.Count();
-     
-        for (int i = 0; i < noCamps; i++)
-        {
-            int selectionNumber = Random.Range(0, totalRange);
-
-            if (rangeWolves.Contains(selectionNumber))
-            {
-                wolveCamps += 1;
-            }
-            else if (rangeTribes.Contains(selectionNumber))
-            {
-                tribeCamps += 1;
-            }
-            else
-            {
-                choiceCamps += 1;
-            }
-        } */
     }
 
     void SetupResourceForThisNode()
@@ -184,8 +175,7 @@ public class Node : MonoBehaviour {
             foodAmount = scoutCost * 2;
         }
 
-        // SCRAP COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 SCRAPS 
-        scrapAmount = Random.Range(0,6);
+        scrapAmount = Random.Range(0, 10);
     }
     #endregion
 
