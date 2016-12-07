@@ -37,7 +37,9 @@ public class SimpleInputScript : MonoBehaviour
 	{
 		buttonClicked = true;
 		countdown = timeMax;
-        PlaceHunterButtons();
+
+        if (!isTutorial)
+            PlaceHunterButtons();
 	}
 
 	public void ButtonUp()
@@ -122,7 +124,7 @@ public class SimpleInputScript : MonoBehaviour
 					EventManager.Instance.TriggerEvent(new DefendStateEvent());
 					EventManager.Instance.TriggerEvent(new CommandEvent());
 					simpleCommandsManager.inDefenseState = true;
-					simpleCommandsManager.currentCommandBtnText.text = TranslationManager.Instance.GetTranslation("Offensive");
+					simpleCommandsManager.currentCommandBtnText.text = TranslationManager.Instance.GetTranslation("Defensive");
 
                     ChangeColor(0);
 					break;
@@ -131,10 +133,11 @@ public class SimpleInputScript : MonoBehaviour
 				{
 					EventManager.Instance.TriggerEvent(new OffensiveStateEvent());
 					EventManager.Instance.TriggerEvent(new CommandEvent());
-					//Debug.Log("offensive");
+
 					simpleCommandsManager.inDefenseState = false;
-					simpleCommandsManager.currentCommandBtnText.text = TranslationManager.Instance.GetTranslation("Defensive"); 
-					ChangeColor(0);
+					simpleCommandsManager.currentCommandBtnText.text = TranslationManager.Instance.GetTranslation("Offensive"); 
+
+                    ChangeColor(0);
 					break;
 				}
 				if (command == simpleCommandsManager.commandsList[2])
