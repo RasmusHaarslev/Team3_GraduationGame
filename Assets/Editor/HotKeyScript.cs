@@ -67,5 +67,12 @@ namespace Assets.Editor
         {
             PrefabUtility.DisconnectPrefabInstance(Selection.activeGameObject);
         }
+
+        [MenuItem("Tools/Reset DB")]
+        static void ResetDatabase() {
+            PlayerPrefs.DeleteAll();
+            DataService dataService = new DataService(StringResources.databaseName);
+            dataService.ResetDatabase();
+        }
     }
 }

@@ -6,6 +6,11 @@ public class ChooseLanguage : MonoBehaviour {
     public string danishCutScene;
     public string englishCutScene;
 
+    void Awake()
+    {
+        
+    }
+
     public void SetLanguage(int languageID)
     {        
         if (languageID == 0) { 
@@ -19,8 +24,24 @@ public class ChooseLanguage : MonoBehaviour {
 
     public void PlayMedia(string cutscene)
     {
-        Handheld.PlayFullScreenMovie(cutscene + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
+        if (!(PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1)) { 
+            Handheld.PlayFullScreenMovie(cutscene + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
 
-        GameController.Instance.LoadScene("TutorialLevel01");
+            PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
+            PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, 4);
+            
+            //ClearAllScriptableObject();
+            GameController.Instance.LoadScene("TutorialLevel01");
+        }
+        else
+        {
+            GameController.Instance.LoadScene("CampManagement");
+        }
+    }
+
+    public void ClearAllScriptableObject()
+    {
+        DataService dataService = new DataService(StringResources.databaseName);
+        dataService.ResetDatabase();
     }
 }
