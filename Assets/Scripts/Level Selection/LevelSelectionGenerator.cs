@@ -82,7 +82,7 @@ public class LevelSelectionGenerator : MonoBehaviour
     void Awake()
     {
 
-        if (SaveLoadLevels.AllLevelsLoaded.Count() == 0 || PlayerPrefs.GetInt("LevelsInstantiated") != 1)
+        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
         {
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
