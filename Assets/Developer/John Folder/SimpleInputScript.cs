@@ -22,6 +22,8 @@ public class SimpleInputScript : MonoBehaviour
 	bool front3 = true;
     bool setButtons = false;
 
+    public bool isTutorial = false;
+
     public List<GameObject> buttons;
     List<GameObject> activeButtons = new List<GameObject>();
     void Start()
