@@ -135,19 +135,27 @@ public class PopUpFunctionality : MonoBehaviour {
         if (GameController.Instance._FOOD - value < 0)
         {
             confirmPanel.transform.GetChild(1).gameObject.SetActive(true);
+
+            confirmPanel.GetComponent<ConfirmPanel>().btnNoVillage.GetComponent<Button>().onClick.RemoveAllListeners();
+            confirmPanel.GetComponent<ConfirmPanel>().btnYesVillage.GetComponent<Button>().onClick.RemoveAllListeners();
+
+            confirmPanel.GetComponent<ConfirmPanel>().btnNoVillage.GetComponent<Button>().onClick.AddListener(Deny);
+            confirmPanel.GetComponent<ConfirmPanel>().btnYesVillage.GetComponent<Button>().onClick.AddListener(delegate { AcceptPlay(node); });
         }
         else
         {
             confirmPanel.transform.GetChild(0).gameObject.SetActive(true);
+
+            confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
+            confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
+
+            confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
+            confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptPlay(node); });
         }
 
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
 
-        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
-        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
 
-        confirmPanel.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
-        confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptPlay(node); });
     }
 
     public void Scout(GameObject node)
@@ -160,18 +168,24 @@ public class PopUpFunctionality : MonoBehaviour {
         if (GameController.Instance._FOOD - value < 0)
         {
             confirmPanelScout.transform.GetChild(1).gameObject.SetActive(true);
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnNoVillage.GetComponent<Button>().onClick.RemoveAllListeners();
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnYesVillage.GetComponent<Button>().onClick.RemoveAllListeners();
+
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnNoVillage.GetComponent<Button>().onClick.AddListener(Deny);
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnYesVillage.GetComponent<Button>().onClick.AddListener(delegate { AcceptScout(node); });
         } else
         {
             confirmPanelScout.transform.GetChild(0).gameObject.SetActive(true);
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
+
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
+            confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptScout(node); });
         }
 
         confirmPanelScout.GetComponent<ConfirmPanel>().SetupText(node, "scout", value);
 
-        confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.RemoveAllListeners();
-        confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.RemoveAllListeners();
 
-        confirmPanelScout.GetComponent<ConfirmPanel>().btnNo.GetComponent<Button>().onClick.AddListener(Deny);
-        confirmPanelScout.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(delegate { AcceptScout(node); });
     }
 
     public void AcceptScout(GameObject node)
