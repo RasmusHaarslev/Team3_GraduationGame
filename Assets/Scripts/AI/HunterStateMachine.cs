@@ -91,8 +91,6 @@ public class HunterStateMachine : CoroutineMachine
 		{
 			ProjectTrait(combatTrait, CharacterValues.TargetTrait.NoTrait);
 		}
-
-
 	}
 
 	#endregion
@@ -167,6 +165,10 @@ public class HunterStateMachine : CoroutineMachine
 	//This state will make all checks and transition according to them
 	IEnumerator StartState()
 	{
+		if (character.target != null)
+		{
+			distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
+		}
 		if (character.isDead)
 		{
 			yield return new TransitionTo(DeadState, DefaultTransition);
@@ -201,7 +203,7 @@ public class HunterStateMachine : CoroutineMachine
 				{
 					yield return new TransitionTo(StayState, DefaultTransition);
 				}
-
+				agent.Resume();
 				if (combatCommandState == CombatCommandState.Flee || (combatTrait == CharacterValues.CombatTrait.Fearful && character.currentHealth < (character.health * fearfulHealthLimit)))
 				{
 					if (combatTrait == CharacterValues.CombatTrait.Fearful)
@@ -239,7 +241,6 @@ public class HunterStateMachine : CoroutineMachine
 											}
 										}
 									}
-									distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
 									if (distanceToTarget < agent.stoppingDistance)
 									{
 										yield return new TransitionTo(CombatState, DefaultTransition);
@@ -448,7 +449,10 @@ public class HunterStateMachine : CoroutineMachine
 		}
 		if (target == null)
 		{
-			target = character.FindRandomEnemy();
+			if (character.currentOpponents.Count != 0)
+			{
+				target = character.FindRandomEnemy();
+			}
 		}
 		return target;
 	}
