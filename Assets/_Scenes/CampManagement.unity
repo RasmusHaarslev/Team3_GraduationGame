@@ -6890,7 +6890,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 999091582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9263a3bff5f18146853cecc7a0b6bc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 510a517738393b748b8545999b27b031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &999091585
@@ -6908,16 +6908,13 @@ MonoBehaviour:
   increasePointsMultiplier: 2
   increasePointsAdder: 10
   damagePercentageShield: 0.25
-  healthPercentageShield: 0.6
-  damageSpeedPercentageShield: 0.1
+  shieldDamageSpeed: 2.5
   shieldRange: 2
-  damagePercentagePolearm: 0.46999997
-  healthPercentagePolearm: 0.1
-  damageSpeedPercentagePolearm: 0.2
+  damagePercentagePolearm: 0.4
+  polearmDamageSpeed: 1.5
   polearmRange: 2
-  damagePercentageRifle: 0.5500001
-  healthPercentageRifle: 0.35999998
-  damageSpeedPercentageRifle: 0.06
+  damagePercentageRifle: 0.7
+  rifleDamageSpeed: 1.5
   rifleRange: 9
 --- !u!114 &999091586
 MonoBehaviour:
@@ -6988,8 +6985,8 @@ MonoBehaviour:
     - {fileID: 1103889436}
     - {fileID: 1103889435}
     - {fileID: 1090557459}
-  newCharPoints: 85
-  damagePointsChance: 0.045
+  newCharPoints: 115
+  damagePointsChance: 0.042
   camsAndNewSoldiersPosition: {fileID: 698691673}
   silhouette: {fileID: 1000013866563540, guid: 2b54e38e37b215d4e9d763698a2a3ff9, type: 2}
   alreadyGeneratedNewSoldiers: 0
@@ -10590,9 +10587,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
