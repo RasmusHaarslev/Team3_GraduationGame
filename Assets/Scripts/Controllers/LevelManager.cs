@@ -252,6 +252,11 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator WinGameCoroutine(string scene = "CampManagement")
 	{
+		if (GameController.Instance.numberOfActiveUIs == 0)
+		{
+			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		}
+		GameController.Instance.numberOfActiveUIs++;
 		while (Time.timeScale > 0.2f)
 		{
 			Time.timeScale -= 0.1f;
@@ -270,12 +275,6 @@ public class LevelManager : MonoBehaviour
 			EventManager.Instance.TriggerEvent(new TutorialDone());
 			yield break;
 		}
-
-		if (GameController.Instance.numberOfActiveUIs == 0)
-		{
-			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
-		}
-		GameController.Instance.numberOfActiveUIs++;
         EventManager.Instance.TriggerEvent(
             new ChangeResources(
                 food: PlayerPrefs.GetInt("FoodAmount"),
