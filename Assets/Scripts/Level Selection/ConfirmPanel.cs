@@ -7,8 +7,13 @@ public class ConfirmPanel : MonoBehaviour
     public GameObject btnYes;
     public GameObject btnNo;
 
+    public GameObject btnYesVillage;
+    public GameObject btnNoVillage;
+
     public Text txtBtnYes;
     public Text txtBtnNo;
+    public Text txtBtnYesVillage;
+    public Text txtBtnNoVillage;
     public Text txtHeader;
 
     public Text Amoumt;
@@ -18,5 +23,9 @@ public class ConfirmPanel : MonoBehaviour
         Amoumt.text = amount+"";
         txtBtnYes.text = TranslationManager.Instance.GetTranslation("Yes");
         txtBtnNo.text = TranslationManager.Instance.GetTranslation("No");
+
+        txtBtnYesVillage.text = TranslationManager.Instance.GetTranslation("Yes");
+        txtBtnNoVillage.text = TranslationManager.Instance.GetTranslation("No");
+
     }
 }
