@@ -31,13 +31,21 @@ public class LevelGenerator : MonoBehaviour
     private int levelStep = 0; //the local level value inside a World
     public int worldIndex = 0;
 
+    public bool dontUseDifficultyLevel;
 
     private DataService dataService;
 
     // Use this for initialization
     void Start()
     {
-        difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel, difficultyLevel);
+        if (!dontUseDifficultyLevel) { 
+            difficultyLevel = PlayerPrefs.GetInt(StringResources.hardnessLevel, difficultyLevel);
+        } else {
+            difficultyLevel = 1;
+        }
+
+        Debug.Log("DIFF : " + difficultyLevel);
+
         campsNumber = PlayerPrefs.GetInt(StringResources.TribeCampsPrefsName, campsNumber);
 
         levelStep = difficultyLevel % worldLength;
