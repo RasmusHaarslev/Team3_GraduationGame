@@ -27,4 +27,11 @@ class InitializeScriptableDB
         AssetDatabase.SaveAssets();
     }
 
+    [MenuItem("Assets/Scriptable Objects/Create TutorialDB")]
+    static void TutorialDB()
+    {
+        TutorialDatabase tutorialDatabase = ScriptableObject.CreateInstance<TutorialDatabase>();
+        AssetDatabase.CreateAsset(tutorialDatabase, "Assets/Resources/ScriptableObjects/TutorialDatabase.asset");
+        AssetDatabase.SaveAssets();
+    }
 }
