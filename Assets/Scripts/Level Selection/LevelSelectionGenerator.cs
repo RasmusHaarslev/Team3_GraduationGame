@@ -67,6 +67,7 @@ public class LevelSelectionGenerator : MonoBehaviour
     void OnEnable()
     {
         EventManager.Instance.StartListening<SaveLevelsToXML>(SaveDict);
+        Time.timeScale = 1;
     }
 
     void OnDisable()
