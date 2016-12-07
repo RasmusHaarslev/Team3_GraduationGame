@@ -148,7 +148,6 @@ public class GameController : MonoBehaviour
 
     public void LoadLevel()
     {
-
         var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
 
         System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
