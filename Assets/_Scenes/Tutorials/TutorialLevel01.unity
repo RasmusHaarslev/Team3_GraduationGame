@@ -12244,6 +12244,7 @@ GameObject:
   - 222: {fileID: 951752315}
   - 114: {fileID: 951752314}
   - 114: {fileID: 951752313}
+  - 114: {fileID: 951752316}
   m_Layer: 5
   m_Name: GoToCampButton
   m_TagString: Untagged
@@ -12333,6 +12334,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 951752316}
+        m_MethodName: SetTimeScaleToOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &951752314
@@ -12370,6 +12382,17 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951752311}
+--- !u!114 &951752316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 951752311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350210694cbacab48bfb84693ca44fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &962833510
 Prefab:
   m_ObjectHideFlags: 0
@@ -16943,6 +16966,7 @@ MonoBehaviour:
   upScaleThreshold: 0
   isTutorial: 0
   worldIndex: 0
+  dontUseDifficultyLevel: 1
 --- !u!4 &1357543286
 Transform:
   m_ObjectHideFlags: 0
