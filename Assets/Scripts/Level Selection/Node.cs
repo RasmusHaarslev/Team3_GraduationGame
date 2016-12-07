@@ -145,34 +145,26 @@ public class Node : MonoBehaviour {
     /// </summary>
     void SetupCampsForThisNode()
     {
-        int noCamps = Random.Range(_MINCAMPS, _MAXCAMPS+1);
-        CampsInNode = noCamps;
+        int selectionNumber = Random.Range(0, 100);
+        int selector = 2;
+
+        if (selectionNumber < 37)
+        {
+            selector = 2;
+        }
+        else if (selectionNumber < 74)
+        {
+            selector = 3;
+        }
+        else
+        {
+            selector = 4;
+        }
+
+        //int noCamps = Random.Range(_MINCAMPS, _MAXCAMPS + 1);
+        CampsInNode = selector;
 
         tribeCamps += CampsInNode;
-
-        /*IEnumerable<int> rangeWolves = Enumerable.Range(0, probabilityWolves);
-        IEnumerable<int> rangeTribes = Enumerable.Range(probabilityWolves, probabilityTribes);
-        IEnumerable<int> rangeChoices = Enumerable.Range(probabilityWolves + probabilityTribes, probabilityChoice);
-
-        int totalRange = rangeWolves.Count() + rangeTribes.Count() + rangeChoices.Count();
-     
-        for (int i = 0; i < noCamps; i++)
-        {
-            int selectionNumber = Random.Range(0, totalRange);
-
-            if (rangeWolves.Contains(selectionNumber))
-            {
-                wolveCamps += 1;
-            }
-            else if (rangeTribes.Contains(selectionNumber))
-            {
-                tribeCamps += 1;
-            }
-            else
-            {
-                choiceCamps += 1;
-            }
-        } */
     }
 
     void SetupResourceForThisNode()
