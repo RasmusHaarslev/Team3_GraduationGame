@@ -128,7 +128,7 @@ public class Node : MonoBehaviour {
 
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
                     GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
-                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
+                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();  
                 }
             }
 
@@ -161,7 +161,6 @@ public class Node : MonoBehaviour {
             selector = 4;
         }
 
-        //int noCamps = Random.Range(_MINCAMPS, _MAXCAMPS + 1);
         CampsInNode = selector;
 
         tribeCamps += CampsInNode;
