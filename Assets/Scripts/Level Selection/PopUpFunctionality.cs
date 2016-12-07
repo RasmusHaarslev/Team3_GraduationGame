@@ -130,8 +130,16 @@ public class PopUpFunctionality : MonoBehaviour {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
 
         confirmPanel.SetActive(true);
-
         int value = node.GetComponent<Node>().TravelCost;
+
+        if (GameController.Instance._FOOD - value < 0)
+        {
+            confirmPanel.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            confirmPanel.transform.GetChild(0).gameObject.SetActive(true);
+        }
 
         confirmPanel.GetComponent<ConfirmPanel>().SetupText(node, "play", value); 
 
@@ -147,8 +155,15 @@ public class PopUpFunctionality : MonoBehaviour {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
 
         confirmPanelScout.SetActive(true);
-
         int value = node.GetComponent<Node>().scoutCost;
+
+        if (GameController.Instance._FOOD - value < 0)
+        {
+            confirmPanelScout.transform.GetChild(1).gameObject.SetActive(true);
+        } else
+        {
+            confirmPanelScout.transform.GetChild(0).gameObject.SetActive(true);
+        }
 
         confirmPanelScout.GetComponent<ConfirmPanel>().SetupText(node, "scout", value);
 
@@ -199,6 +214,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public void AcceptPlay(GameObject node)
     {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
+
         EventManager.Instance.TriggerEvent(new ChangeResources(-node.GetComponent<Node>().TravelCost));
 
         PlayerPrefs.SetInt(StringResources.NodeIdPrefsName, node.GetComponent<Node>().NodeId);
