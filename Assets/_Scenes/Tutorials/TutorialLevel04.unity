@@ -4588,6 +4588,7 @@ GameObject:
   - 114: {fileID: 749225843}
   - 114: {fileID: 749225842}
   - 114: {fileID: 749225845}
+  - 114: {fileID: 749225846}
   m_Layer: 5
   m_Name: GoToCampButton
   m_TagString: Untagged
@@ -4655,6 +4656,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 749225846}
+        m_MethodName: SetTimeScaleToOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 749225845}
         m_MethodName: LoadCampManagement
         m_Mode: 1
@@ -4712,6 +4724,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce254b0de138d4469bc112fa4b1b620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &749225846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 749225840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350210694cbacab48bfb84693ca44fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &752391347
@@ -16393,11 +16416,11 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 2048, y: 1536}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
