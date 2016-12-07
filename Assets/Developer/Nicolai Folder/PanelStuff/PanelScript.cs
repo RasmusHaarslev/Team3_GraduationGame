@@ -34,6 +34,7 @@ public class PanelScript : MonoBehaviour
     public List<Transform> silhouettePosList = new List<Transform>();
     bool reroll = false;
     List<int> soldierTierList = new List<int>();
+    Vector3 MoveText = new Vector3(0, 300, 0);
     [Serializable]
     public class NewSoldierList : IEnumerable<GameObject>
     {
@@ -192,9 +193,6 @@ public class PanelScript : MonoBehaviour
             }
         }
         newCharacterSoldierList = newHuntersValues.ToList();
-        print("new char soldier list "+newCharacterSoldierList.Count);
-        //print("Entire initialize new hunters "+(DateTime.Now-start1).TotalMilliseconds);
-        //FillInNewSoldierStats();
         reroll = false;
     }
 
@@ -243,7 +241,7 @@ public class PanelScript : MonoBehaviour
                         /* newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                          newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;*/
                         newSoldiersList[i].AddComponent<PanelController>();
-                        //newSoldiersList[i].AddComponent<shaderGlow>();
+                        newSoldiersList[i].AddComponent<shaderGlow>();
                         SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
@@ -509,12 +507,12 @@ public class PanelScript : MonoBehaviour
         {
             soldiersList.Add(charactersFellowship.transform.GetChild(i).gameObject);
         }
-        print(soldiersList.Count());
+       
         for (int i = 0; i < soldiersList.Count; i++)
         {
 
             soldiersList[i].AddComponent<PanelController>();
-            //soldiersList[i].AddComponent<shaderGlow>();
+            soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
@@ -562,11 +560,6 @@ public class PanelScript : MonoBehaviour
         
         if (solidersSpawnPosition.childCount != soldiersList.Count)
         {
-            //for (int i = solidersSpawnPosition.childCount - 1; i > soldiersList.Count - 1; i--)
-            //{
-            //    Instantiate(silhouette, solidersSpawnPosition.GetChild(i).position + Vector3.up, Quaternion.identity);
-            //    //silhouetteList.Add(silhouette);
-            //}
 
             
             foreach (GameObject soldier in soldiersList)
@@ -696,28 +689,24 @@ public class PanelScript : MonoBehaviour
 
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 9)
         {
-            print(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer);
             soldierCameraList[0].enabled = true;
             SpotLightList[0].enabled = true;
             DeactivateCamera(0);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 10)
         {
-            print(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer);
             soldierCameraList[1].enabled = true;
             SpotLightList[1].enabled = true;
             DeactivateCamera(1);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 11)
         {
-            print(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer);
             soldierCameraList[2].enabled = true;
             SpotLightList[2].enabled = true;
             DeactivateCamera(2);
         }
         if (soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer == 12)
         {
-            print(soldier.transform.GetChild(2).transform.GetChild(0).gameObject.layer);
             soldierCameraList[3].enabled = true;
             SpotLightList[3].enabled = true;
             DeactivateCamera(3);
@@ -730,10 +719,8 @@ public class PanelScript : MonoBehaviour
         {
             if (i != cameraIndex)
             {
-                print(charactersFellowship.transform.childCount);
-                print(i);
-                soldierCameraList[i].enabled = false;
 
+                soldierCameraList[i].enabled = false;
             }
         }
     }
@@ -801,7 +788,7 @@ public class PanelScript : MonoBehaviour
         newCharacterSoldierList.Clear();
         newWeaponsSoldierList.Clear();
     }
-
+  
     public void UpdateSoldierStats(GameObject soldier, EquippableitemValues wepValues = null)
     {
         currentSoldier = soldier.GetComponent<Character>();
@@ -815,48 +802,142 @@ public class PanelScript : MonoBehaviour
             else
                 characterWeaponValues = wepValues;
 
-            print(characterWeaponValues.name);
-            if (stat.name == "Damage")
+           
+            if (currentSoldier.characterBaseValues.Type.ToString() == "Hunter")
             {
-                stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage ;
-            }
-            if (stat.name == "Soldier Name")
-            {
-                stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
-            }
-            if (stat.name == "Health")
-            {
-                stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
-            }
-            if (stat.name == "Damage Speed")
-            {
-                stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
-            }
-            if (stat.name == "Range")
-            {
-                stat.GetComponent<Text>().text = currentSoldier.range.ToString();
-            }          
-            if (stat.name == "Combat Trait")
-            {
-                stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString() + "Description");
-            }
-            if (stat.name == "Target Trait")
-            {
-                stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString() + "Description");
-            }
-            if (stat.name == "CTrait")
-            {
-                stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString()) + ":\n";
-            }
-            if (stat.name == "TTrait")
-            {
-                stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString()) + ":\n";
-            }
-            if (stat.name == "Weapon Description")
-            {
-                stat.GetComponent<Text>().text = characterWeaponValues.Type.ToString();
+                if (stat.name == "Damage")
+                {
+                    if(stat.GetComponent<Text>().enabled == false)
+                    {
+                        stat.GetComponent<Text>().enabled = true;
+                    }
+                    
+                    stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
+                }
+                if (stat.name == "Soldier Name")
+                {
+
+                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
+                }
+                if (stat.name == "Health")
+                {
+                   
+                    stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
+                }
+                if (stat.name == "Damage Speed")
+                {
+                    
+                    stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
+                }
+                if (stat.name == "Range")
+                {
+                   
+                    stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                }
+                if (stat.name == "Combat Trait")
+                {
+                    if (stat.GetComponent<Text>().enabled == false)
+                    {
+                        stat.GetComponent<Text>().enabled = true;
+                    }
+                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString() + "Description");
+                }
+                if (stat.name == "Target Trait")
+                {
+                    if (stat.GetComponent<Text>().enabled == false)
+                    {
+                        stat.GetComponent<Text>().enabled = true;
+                    }
+                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString() + "Description");
+                }
+                if (stat.name == "CTrait")
+                {
+                    if (stat.GetComponent<Text>().enabled == false)
+                    {
+                        stat.GetComponent<Text>().enabled = true;
+                    }
+                    stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString()) + ":\n";
+                }
+                if (stat.name == "TTrait")
+                {
+                    if (stat.GetComponent<Text>().enabled == false)
+                    {
+                        stat.GetComponent<Text>().enabled = true;
+                    }
+                    stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString()) + ":\n";
+                }
+                if (stat.name == "Weapon Description")
+                {
+                   
+                    stat.GetComponent<Text>().text = characterWeaponValues.Type.ToString();
+                }
+                if (stat.name == "Type")
+                {
+                    stat.GetComponent<Text>().enabled = false;
+                }
+             
             }
 
+            if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
+            {            
+                if (stat.name == "Damage")
+                {
+                        
+                    stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
+                }
+                if (stat.name == "Soldier Name")
+                {
+                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
+                }
+                if (stat.name == "Health")
+                {
+                 
+                    stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
+                }
+                if (stat.name == "Damage Speed")
+                {
+                  
+                    stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
+                }
+                if (stat.name == "Range")
+                {
+                   
+                    stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                }
+                if (stat.name == "Combat Trait")
+                {
+                  
+                    stat.GetComponent<Text>().enabled = false;
+                }
+                if (stat.name == "Target Trait")
+                {
+                 
+                    stat.GetComponent<Text>().enabled = false;
+                }
+                if (stat.name == "CTrait")
+                {
+                  
+                    stat.GetComponent<Text>().enabled = false;
+                }
+                if (stat.name == "TTrait")
+                {
+                   
+                    stat.GetComponent<Text>().enabled = false;
+                }
+                if (stat.name == "Weapon Description")
+                {
+                   
+                    stat.GetComponent<Text>().text = characterWeaponValues.Type.ToString();
+                }
+                if (stat.name == "Type")
+                {
+                    if (stat.GetComponent<Text>().enabled == false)
+                    {
+                        stat.GetComponent<Text>().enabled = true;
+                    }               
+                }
+
+            }
         }
 
     }

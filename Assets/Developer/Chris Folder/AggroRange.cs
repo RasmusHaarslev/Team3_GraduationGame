@@ -5,6 +5,11 @@ public class AggroRange : MonoBehaviour
 {
 	public float verticalTriggerOffset = 1.0f;
 
+	void Update()
+	{
+
+	}
+
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player" || col.gameObject.tag == "Friendly")

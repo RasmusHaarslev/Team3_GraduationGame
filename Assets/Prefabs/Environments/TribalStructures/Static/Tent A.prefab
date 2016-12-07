@@ -22,6 +22,7 @@ GameObject:
   - 33: {fileID: 33000011455653956}
   - 23: {fileID: 23000011874119122}
   - 95: {fileID: 95000013726871354}
+  - 64: {fileID: 64000012663705194}
   m_Layer: 13
   m_Name: Tent A
   m_TagString: Untagged
@@ -51,8 +52,8 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 384d5d9efaf030c499685d7ea8e94cc0, type: 2}
@@ -77,6 +78,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014143231108}
+  m_Mesh: {fileID: 4300000, guid: f012025c48180f544b1bb06048bd8205, type: 3}
+--- !u!64 &64000012663705194
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014143231108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: f012025c48180f544b1bb06048bd8205, type: 3}
 --- !u!95 &95000013726871354
 Animator:

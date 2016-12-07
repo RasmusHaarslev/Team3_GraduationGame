@@ -72,7 +72,10 @@ public class Character : MonoBehaviour
 		if (!isWounded && currentHealth < 0.4f * health)
 		{
 			isWounded = true;
-			animator.SetFloat("isWounded", 1);
+			if (characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Hunter)
+			{
+				animator.SetFloat("isWounded", 1);
+			}
 		}
 
 		if (!isInCombat)
@@ -190,7 +193,8 @@ public class Character : MonoBehaviour
 		if (gameObject.tag == "Player")
 		{
 			agent.avoidancePriority = 1;
-		} else
+		}
+		else
 		{
 			agent.avoidancePriority = UnityEngine.Random.Range(2, 99);
 		}
@@ -199,7 +203,7 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
-		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState); 
+		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
 
 		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
@@ -274,12 +278,12 @@ public class Character : MonoBehaviour
 	public void init(CharacterValues initValues)
 	{
 		characterBaseValues = initValues;
-        //setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
-        //Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
-        health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
+		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
+		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
+		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
 
-        range = initValues.range;
-        damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
+		range = initValues.range;
+		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
 		currentHealth = health;
 		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
@@ -509,10 +513,9 @@ public class Character : MonoBehaviour
 
 	public void RotateTowards(Transform target)
 	{
-		agent.updateRotation = false;
 		Vector3 direction = (target.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
-		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+		transform.rotation = lookRotation;
 	}
 
 	private void EnemyDeath(EnemyDeathEvent e)
