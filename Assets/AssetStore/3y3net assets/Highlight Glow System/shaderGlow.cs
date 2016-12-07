@@ -286,8 +286,11 @@ public class shaderGlow : MonoBehaviour {
             }
             else
             {
-                if (noOcclusion)
+                if (noOcclusion) { 
                     newMat = new Material(highightShaderVisible);
+                    
+                    
+                }
                 else
                     newMat = new Material(highightShaderHidden);
             }
@@ -298,8 +301,14 @@ public class shaderGlow : MonoBehaviour {
             //Try to use scale trick
             if (scaleGlow && !useNormal)
                 newMat.SetColor("_ScaleTrick", scaleFactor(singleRenderer.bounds));
-            else
+            else 
                 newMat.SetColor("_ScaleTrick", new Color(1f, 1f, 1f, 1f));
+
+            if (gameObject.name == "SilhouetteGlow")      //if it is the silhouette TODO continue here
+            {
+                print(gameObject.name + " will change the scale!");
+                newMat.SetColor("_ScaleTrick", new Color(0.5451f, 0.161f, 0.2235f, 1f));
+            }
 
             List<Material> mats = new List<Material>(singleRenderer.sharedMaterials);
             mats.Add(newMat);

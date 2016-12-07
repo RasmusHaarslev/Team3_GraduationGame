@@ -96,6 +96,9 @@ public class GoToLevelSelection : MonoBehaviour {
                 Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
                 childNode.GetComponent<Animator>().SetTrigger("IsUnlocked");
                 yield return new WaitForSeconds(1f);
+            } else
+            {
+                childNode.transform.GetChild(2).gameObject.SetActive(false);
             }
         }
 

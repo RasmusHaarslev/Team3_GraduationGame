@@ -241,7 +241,7 @@ public class PanelScript : MonoBehaviour
                         /* newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
                          newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;*/
                         newSoldiersList[i].AddComponent<PanelController>();
-                        //newSoldiersList[i].AddComponent<shaderGlow>();
+                        newSoldiersList[i].AddComponent<shaderGlow>();
                         SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
@@ -512,7 +512,7 @@ public class PanelScript : MonoBehaviour
         {
 
             soldiersList[i].AddComponent<PanelController>();
-            //soldiersList[i].AddComponent<shaderGlow>();
+            soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)

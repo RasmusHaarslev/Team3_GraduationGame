@@ -513,10 +513,9 @@ public class Character : MonoBehaviour
 
 	public void RotateTowards(Transform target)
 	{
-		agent.updateRotation = false;
 		Vector3 direction = (target.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
-		transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+		transform.rotation = lookRotation;
 	}
 
 	private void EnemyDeath(EnemyDeathEvent e)
