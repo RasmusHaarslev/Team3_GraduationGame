@@ -226,9 +226,8 @@ public class LevelManager : MonoBehaviour
             yield break;
         }
 
+        Time.timeScale = 1f;
         GameController.Instance.LoadScene(scene);
-
-		Time.timeScale = 1f;
 
 		yield return new WaitForSeconds(0f);
 	}
@@ -252,7 +251,9 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator WinGameCoroutine(string scene = "CampManagement")
 	{
-		while (Time.timeScale > 0.2f)
+        Time.timeScale -= 0.1f;
+        Camera.main.GetComponent<CameraController>().TriggerWinZoom();
+        while (Time.timeScale > 0.2f)
 		{
 			Time.timeScale -= 0.1f;
 
@@ -263,7 +264,8 @@ public class LevelManager : MonoBehaviour
 
 		EventManager.Instance.TriggerEvent(new LevelWon());
 
-		Time.timeScale = 1f;
+        Camera.main.GetComponent<CameraController>().LockCamera = true;
+        Time.timeScale = 1f;
 
         if (IsTutorial)
 		{
@@ -288,7 +290,8 @@ public class LevelManager : MonoBehaviour
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 		//generate and display the new items
 		GenerateNewItems();
-		Time.timeScale = 1f;
+		
+
 		yield return new WaitForSeconds(0f);
 	}
 
