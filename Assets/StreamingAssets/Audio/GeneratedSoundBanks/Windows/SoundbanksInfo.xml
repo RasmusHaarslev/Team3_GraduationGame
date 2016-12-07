@@ -26,7 +26,7 @@
 				<Event Id="255852841" Name="Play_BoxPickup" ObjectPath="\Events\Default Work Unit\UI\Play_BoxPickup"/>
 				<Event Id="1594392727" Name="Play_BridgeCreak" ObjectPath="\Events\Default Work Unit\Ambience\Play_BridgeCreak" MaxAttenuation="15.000000"/>
 				<Event Id="3243499004" Name="Play_BuyGold" ObjectPath="\Events\Default Work Unit\UI\Play_BuyGold"/>
-				<Event Id="4000411161" Name="Play_Campfire" ObjectPath="\Events\Default Work Unit\Ambience\Play_Campfire"/>
+				<Event Id="4000411161" Name="Play_Campfire" ObjectPath="\Events\Default Work Unit\Ambience\Play_Campfire" MaxAttenuation="7.000000"/>
 				<Event Id="2290791599" Name="Play_CampUpgrade" ObjectPath="\Events\Default Work Unit\UI\Play_CampUpgrade"/>
 				<Event Id="1292318918" Name="Play_CharSel" ObjectPath="\Events\Default Work Unit\UI\Play_CharSel"/>
 				<Event Id="1757332637" Name="Play_ClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_ClearMap"/>
@@ -45,6 +45,7 @@
 				<Event Id="3254793675" Name="Play_GroundAmbience" ObjectPath="\Events\Default Work Unit\Ambience\Play_GroundAmbience"/>
 				<Event Id="939012970" Name="Play_IntoLevel" ObjectPath="\Events\Default Work Unit\UI\Play_IntoLevel"/>
 				<Event Id="2412941441" Name="Play_LeaderAttack" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderAttack" MaxAttenuation="0.000000"/>
+				<Event Id="4007042469" Name="Play_LeaderDeath" ObjectPath="\Events\Default Work Unit\Play_LeaderDeath"/>
 				<Event Id="441061787" Name="Play_LeaderFootStep" ObjectPath="\Events\Default Work Unit\test\Play_LeaderFootStep" MaxAttenuation="15.000000"/>
 				<Event Id="2785405380" Name="Play_LeaderHit" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderHit" MaxAttenuation="0.000000"/>
 				<Event Id="374946458" Name="Play_MaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_MaleWarrior1Attack"/>
@@ -164,11 +165,11 @@
 				</File>
 				<File Id="176466473" Language="SFX">
 					<ShortName>Tents1.wav</ShortName>
-					<Path>SFX/Tents1_52BD694B.wem</Path>
+					<Path>SFX/Tents1_76A9233F.wem</Path>
 				</File>
 				<File Id="178962418" Language="SFX">
 					<ShortName>PowerPole3.wav</ShortName>
-					<Path>SFX/PowerPole3_185AF7EB.wem</Path>
+					<Path>SFX/PowerPole3_821DB5EF.wem</Path>
 				</File>
 				<File Id="194854662" Language="SFX">
 					<ShortName>EvilFemaleWarrior2Death1.wav</ShortName>
@@ -204,7 +205,7 @@
 				</File>
 				<File Id="242360598" Language="SFX">
 					<ShortName>PowerPole1.wav</ShortName>
-					<Path>SFX/PowerPole1_464F2AB7.wem</Path>
+					<Path>SFX/PowerPole1_9FE1A03B.wem</Path>
 				</File>
 				<File Id="243269753" Language="SFX">
 					<ShortName>EvilMaleWarrior2Death1.wav</ShortName>
@@ -282,6 +283,10 @@
 					<ShortName>FootstepsConc1.wav</ShortName>
 					<Path>SFX/FootstepsConc1_76A9233F.wem</Path>
 				</File>
+				<File Id="306522968" Language="SFX">
+					<ShortName>Campfire2.wav</ShortName>
+					<Path>SFX/Campfire2_76A9233F.wem</Path>
+				</File>
 				<File Id="315478133" Language="SFX">
 					<ShortName>GenericHit3.wav</ShortName>
 					<Path>SFX/GenericHit3_9E07ECEA.wem</Path>
@@ -352,7 +357,7 @@
 				</File>
 				<File Id="389926675" Language="SFX">
 					<ShortName>PowerPole2.wav</ShortName>
-					<Path>SFX/PowerPole2_C40959EF.wem</Path>
+					<Path>SFX/PowerPole2_9E780CC3.wem</Path>
 				</File>
 				<File Id="404528175" Language="SFX">
 					<ShortName>EvilMaleWarrior2Attack1.wav</ShortName>
@@ -396,7 +401,7 @@
 				</File>
 				<File Id="448841773" Language="SFX">
 					<ShortName>PowerPole4.wav</ShortName>
-					<Path>SFX/PowerPole4_D4C4F805.wem</Path>
+					<Path>SFX/PowerPole4_E9147B11.wem</Path>
 				</File>
 				<File Id="453473293" Language="SFX">
 					<ShortName>EvilMaleWarrior2Attack2.wav</ShortName>
@@ -416,7 +421,7 @@
 				</File>
 				<File Id="476244239" Language="SFX">
 					<ShortName>Tents2.wav</ShortName>
-					<Path>SFX/Tents2_52BD694B.wem</Path>
+					<Path>SFX/Tents2_76A9233F.wem</Path>
 				</File>
 				<File Id="478117380" Language="SFX">
 					<ShortName>ExploreToCombat.wav</ShortName>
@@ -500,7 +505,7 @@
 				</File>
 				<File Id="613821194" Language="SFX">
 					<ShortName>Tents3.wav</ShortName>
-					<Path>SFX/Tents3_52BD694B.wem</Path>
+					<Path>SFX/Tents3_76A9233F.wem</Path>
 				</File>
 				<File Id="615639292" Language="SFX">
 					<ShortName>FemaleWarrior1Attack4.wav</ShortName>
@@ -586,6 +591,10 @@
 					<ShortName>Whoosh1_10.1.wav</ShortName>
 					<Path>SFX/Whoosh1_10.1_63DB481E.wem</Path>
 				</File>
+				<File Id="703024586" Language="SFX">
+					<ShortName>LeaderDeath.wav</ShortName>
+					<Path>SFX/LeaderDeath_52BD694B.wem</Path>
+				</File>
 				<File Id="709964075" Language="SFX">
 					<ShortName>EvilMaleWarrior1Attack1.wav</ShortName>
 					<Path>SFX/EvilMaleWarrior1Attack1_52BD694B.wem</Path>
@@ -632,7 +641,7 @@
 				</File>
 				<File Id="763776498" Language="SFX">
 					<ShortName>Campfire.wav</ShortName>
-					<Path>SFX/Campfire_52BD694B.wem</Path>
+					<Path>SFX/Campfire_437B942D.wem</Path>
 				</File>
 				<File Id="770749179" Language="SFX">
 					<ShortName>Whoosh1_12.1.wav</ShortName>

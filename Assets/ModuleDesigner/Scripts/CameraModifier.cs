@@ -97,6 +97,7 @@ namespace Assets.ModuleDesigner.Scripts
             cameraController.OverrideFogHeight = false;
             cameraController.OverrideFogHeightDensity = false;
             cameraController.OverrideFogStartDistance = false;
+            cameraController.LockCameraPosition = false;
             cameraController.XRotationOffset = 0f;
             cameraController.SlerpBack = SlerpBack;
         }
@@ -139,7 +140,7 @@ namespace Assets.ModuleDesigner.Scripts
 
             helper.Update();
 
-            TriggerEnter();
+            //TriggerEnter();
         }
 
     }

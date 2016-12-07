@@ -66,6 +66,16 @@
 						</Event>
 						<Event Name="Stop_GroundAmbience" ID="{63617761-5C01-4EC1-A0BA-655ED12C3DF5}">
 							<ChildrenList>
+								<Action Name="Stop" ID="{841D59BF-EFFB-4346-B87B-F50E7246125F}" ShortID="773082448" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="2"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{E8F57E79-7BAB-4788-9235-58ADB15B2BB0}" Global="true">
+											<ObjectRef Name="Ambience" ID="{4D90A525-527D-46C4-BACD-A895B3BADB0F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
 								<Action Name="Stop" ID="{0526C95A-C4B2-486A-B3DA-8BB585748DEA}" ShortID="336222538" Type="Stop" Scope="One" Global="true">
 									<PropertyList>
 										<Property Name="FadeTime" Type="Real64" Value="1"/>
@@ -934,6 +944,9 @@
 				<Event Name="Play_LeaderDeath" ID="{4ED4C3F9-13C1-4AD3-8B02-4F708B7A4183}">
 					<ChildrenList>
 						<Action Name="Play" ID="{D60E2194-588A-4E61-B481-077D4BE6FCAE}" ShortID="488476217" Type="Play" Scope="One" Global="false">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1.5"/>
+							</PropertyList>
 							<ElementList>
 								<Element ID="{99A6DA84-BE5B-46C3-885E-325D7169EC0C}" Global="false">
 									<ObjectRef Name="LeaderDeath" ID="{5468A6C7-A9CC-4EAE-8B3A-08D298722FDD}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>

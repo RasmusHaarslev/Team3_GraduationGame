@@ -23682,14 +23682,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingGrid: {fileID: 1000011970933828}
-  infoPanel: {fileID: 1000014063743262}
-  notScoutPanel: {fileID: 1000010973097962}
   circularProgress: {fileID: 1000011990069996}
   txtIntPoints: {fileID: 114000010381123324}
   showInfoPanel: 0
   showScoutPanel: 0
+  PaletteNumber: 0
   TravelCost: 0
-  scoutCost: 0
   CampsInNode: 1
   foodAmount: 0
   scrapAmount: 0
@@ -23700,25 +23698,12 @@ MonoBehaviour:
   canPlay: 0
   isOpen: 0
   PopUpPanel: {fileID: 1000012906481026}
-  btnScout: {fileID: 1000013727632442}
   btnPlay: {fileID: 1000012953201990}
   invisPanel: {fileID: 1000010873521926}
   confirmPanel: {fileID: 1000013536304624}
-  ScoutedPanel: {fileID: 1000013779937218}
-  tribeText: {fileID: 114000012647212956}
   foodText: {fileID: 114000011992362458}
-  scrapsText: {fileID: 114000011930150034}
-  goldTeethsText: {fileID: 114000010975417040}
-  itemText: {fileID: 114000010478507956}
-  txtFood: {fileID: 114000014076830736}
-  txtScraps: {fileID: 114000013428221420}
-  txtTribes: {fileID: 114000012304980168}
   NotScoutedPanel: {fileID: 1000012816984190}
   interestPointsText: {fileID: 114000010381123324}
-  activationImages:
-  - {fileID: 21300000, guid: 2b75c63025334b64983fa81064aca1d3, type: 3}
-  - {fileID: 21300000, guid: a2c9f8b3e63d29546bd263d13874b3d0, type: 3}
-  - {fileID: 21300000, guid: a4f23f1103479624f87e8f0eb4e824c4, type: 3}
   Links:
   - {fileID: 1000012497073360}
 --- !u!114 &114000010067717298
@@ -23733,14 +23718,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingGrid: {fileID: 1000011970933828}
-  infoPanel: {fileID: 1000014129391352}
-  notScoutPanel: {fileID: 1000010263945378}
   circularProgress: {fileID: 1000013493330584}
   txtIntPoints: {fileID: 114000012235719828}
   showInfoPanel: 0
   showScoutPanel: 0
+  PaletteNumber: 0
   TravelCost: 1
-  scoutCost: 0
   CampsInNode: 1
   foodAmount: 2
   scrapAmount: 0
@@ -23751,25 +23734,12 @@ MonoBehaviour:
   canPlay: 1
   isOpen: 1
   PopUpPanel: {fileID: 1000012906481026}
-  btnScout: {fileID: 1000013727632442}
   btnPlay: {fileID: 1000012953201990}
   invisPanel: {fileID: 1000010873521926}
   confirmPanel: {fileID: 1000013536304624}
-  ScoutedPanel: {fileID: 1000013779937218}
-  tribeText: {fileID: 114000012647212956}
   foodText: {fileID: 114000011992362458}
-  scrapsText: {fileID: 114000011930150034}
-  goldTeethsText: {fileID: 114000010975417040}
-  itemText: {fileID: 114000010478507956}
-  txtFood: {fileID: 114000010951946106}
-  txtScraps: {fileID: 114000013768387126}
-  txtTribes: {fileID: 114000013877387644}
   NotScoutedPanel: {fileID: 1000012816984190}
   interestPointsText: {fileID: 114000012235719828}
-  activationImages:
-  - {fileID: 21300000, guid: 2b75c63025334b64983fa81064aca1d3, type: 3}
-  - {fileID: 21300000, guid: a2c9f8b3e63d29546bd263d13874b3d0, type: 3}
-  - {fileID: 21300000, guid: a4f23f1103479624f87e8f0eb4e824c4, type: 3}
   Links: []
 --- !u!114 &114000010069958440
 MonoBehaviour:
@@ -24863,6 +24833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fleePopUp: {fileID: 1000010279922324}
+  isTutorial: 0
 --- !u!114 &114000010688299850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24920,6 +24891,7 @@ MonoBehaviour:
   txtBtnYes: {fileID: 114000012277342132}
   txtBtnNo: {fileID: 114000012378300554}
   txtHeader: {fileID: 114000010138760824}
+  Amoumt: {fileID: 0}
 --- !u!114 &114000010725384040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -25113,6 +25085,7 @@ MonoBehaviour:
   rigidbody: {fileID: 54000013079750984}
   playerCapsuleCollider: {fileID: 136000010096249342}
   playerSphereCollider: {fileID: 135000010407787186}
+  tapCollider: {fileID: 0}
   pushForceOnDeath: 10
   forceModePush: 1
 --- !u!114 &114000010839473084
@@ -25497,6 +25470,8 @@ MonoBehaviour:
   FX: {fileID: 1000012969880208}
   LanguageHeader: {fileID: 1000012960457744}
   ToggleDanish: {fileID: 1000012971138060}
+  txtResourcesFoundHeader: {fileID: 0}
+  txtResourcesFound: {fileID: 0}
 --- !u!114 &114000011038083218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -25691,14 +25666,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingGrid: {fileID: 1000011970933828}
-  infoPanel: {fileID: 1000011290505708}
-  notScoutPanel: {fileID: 1000010744048368}
   circularProgress: {fileID: 1000012547356328}
   txtIntPoints: {fileID: 114000011879336778}
   showInfoPanel: 0
   showScoutPanel: 0
+  PaletteNumber: 0
   TravelCost: 2
-  scoutCost: 0
   CampsInNode: 1
   foodAmount: 3
   scrapAmount: 0
@@ -25709,25 +25682,12 @@ MonoBehaviour:
   canPlay: 1
   isOpen: 1
   PopUpPanel: {fileID: 1000012906481026}
-  btnScout: {fileID: 1000013727632442}
   btnPlay: {fileID: 1000012953201990}
   invisPanel: {fileID: 1000010873521926}
   confirmPanel: {fileID: 1000013536304624}
-  ScoutedPanel: {fileID: 1000013779937218}
-  tribeText: {fileID: 114000012647212956}
   foodText: {fileID: 114000011992362458}
-  scrapsText: {fileID: 114000011930150034}
-  goldTeethsText: {fileID: 114000010975417040}
-  itemText: {fileID: 114000010478507956}
-  txtFood: {fileID: 114000011255952608}
-  txtScraps: {fileID: 114000012070055928}
-  txtTribes: {fileID: 114000012620232584}
   NotScoutedPanel: {fileID: 1000012816984190}
   interestPointsText: {fileID: 114000011879336778}
-  activationImages:
-  - {fileID: 21300000, guid: 2b75c63025334b64983fa81064aca1d3, type: 3}
-  - {fileID: 21300000, guid: a2c9f8b3e63d29546bd263d13874b3d0, type: 3}
-  - {fileID: 21300000, guid: a4f23f1103479624f87e8f0eb4e824c4, type: 3}
   Links:
   - {fileID: 1000013482517218}
 --- !u!114 &114000011149071978
@@ -26903,14 +26863,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingGrid: {fileID: 1000011970933828}
-  infoPanel: {fileID: 1000011471484624}
-  notScoutPanel: {fileID: 1000010299648596}
   circularProgress: {fileID: 1000011615120156}
   txtIntPoints: {fileID: 114000014031220888}
   showInfoPanel: 0
   showScoutPanel: 0
+  PaletteNumber: 0
   TravelCost: 0
-  scoutCost: 0
   CampsInNode: 1
   foodAmount: 0
   scrapAmount: 0
@@ -26921,25 +26879,12 @@ MonoBehaviour:
   canPlay: 0
   isOpen: 0
   PopUpPanel: {fileID: 1000012906481026}
-  btnScout: {fileID: 1000013727632442}
   btnPlay: {fileID: 1000012953201990}
   invisPanel: {fileID: 1000010873521926}
   confirmPanel: {fileID: 1000013536304624}
-  ScoutedPanel: {fileID: 1000013779937218}
-  tribeText: {fileID: 114000012647212956}
   foodText: {fileID: 114000011992362458}
-  scrapsText: {fileID: 114000011930150034}
-  goldTeethsText: {fileID: 114000010975417040}
-  itemText: {fileID: 114000010478507956}
-  txtFood: {fileID: 114000012768545894}
-  txtScraps: {fileID: 114000012896982272}
-  txtTribes: {fileID: 114000010277613882}
   NotScoutedPanel: {fileID: 1000012816984190}
   interestPointsText: {fileID: 114000014031220888}
-  activationImages:
-  - {fileID: 21300000, guid: 2b75c63025334b64983fa81064aca1d3, type: 3}
-  - {fileID: 21300000, guid: a2c9f8b3e63d29546bd263d13874b3d0, type: 3}
-  - {fileID: 21300000, guid: a4f23f1103479624f87e8f0eb4e824c4, type: 3}
   Links:
   - {fileID: 1000014103099156}
 --- !u!114 &114000011838989972
@@ -28205,6 +28150,7 @@ MonoBehaviour:
   rigidbody: {fileID: 54000011615809696}
   playerCapsuleCollider: {fileID: 136000012741405122}
   playerSphereCollider: {fileID: 135000014292188916}
+  tapCollider: {fileID: 0}
   pushForceOnDeath: 10
   forceModePush: 1
 --- !u!114 &114000012346724468
@@ -29742,6 +29688,7 @@ MonoBehaviour:
   btnPlay: {fileID: 1000012953201990}
   invisPanel: {fileID: 1000010873521926}
   confirmPanel: {fileID: 1000013536304624}
+  confirmPanelScout: {fileID: 0}
   ScoutedPanel: {fileID: 1000013779937218}
   tribeText: {fileID: 114000012647212956}
   foodText: {fileID: 114000011992362458}
@@ -29896,6 +29843,7 @@ MonoBehaviour:
   txtBtnYes: {fileID: 114000014292215332}
   txtBtnNo: {fileID: 114000011545759394}
   txtHeader: {fileID: 114000011068260966}
+  Amoumt: {fileID: 0}
 --- !u!114 &114000013453987222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -29968,14 +29916,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingGrid: {fileID: 1000011970933828}
-  infoPanel: {fileID: 1000012065958546}
-  notScoutPanel: {fileID: 1000013330534826}
   circularProgress: {fileID: 1000012224132266}
   txtIntPoints: {fileID: 114000011066270746}
   showInfoPanel: 0
   showScoutPanel: 0
+  PaletteNumber: 0
   TravelCost: 0
-  scoutCost: 0
   CampsInNode: 1
   foodAmount: 0
   scrapAmount: 0
@@ -29986,25 +29932,12 @@ MonoBehaviour:
   canPlay: 0
   isOpen: 0
   PopUpPanel: {fileID: 1000012906481026}
-  btnScout: {fileID: 1000013727632442}
   btnPlay: {fileID: 1000012953201990}
   invisPanel: {fileID: 1000010873521926}
   confirmPanel: {fileID: 1000013536304624}
-  ScoutedPanel: {fileID: 1000013779937218}
-  tribeText: {fileID: 114000012647212956}
   foodText: {fileID: 114000011992362458}
-  scrapsText: {fileID: 114000011930150034}
-  goldTeethsText: {fileID: 114000010975417040}
-  itemText: {fileID: 114000010478507956}
-  txtFood: {fileID: 114000013667391356}
-  txtScraps: {fileID: 114000010960285274}
-  txtTribes: {fileID: 114000012867351584}
   NotScoutedPanel: {fileID: 1000012816984190}
   interestPointsText: {fileID: 114000011066270746}
-  activationImages:
-  - {fileID: 21300000, guid: 2b75c63025334b64983fa81064aca1d3, type: 3}
-  - {fileID: 21300000, guid: a2c9f8b3e63d29546bd263d13874b3d0, type: 3}
-  - {fileID: 21300000, guid: a4f23f1103479624f87e8f0eb4e824c4, type: 3}
   Links: []
 --- !u!114 &114000013487973906
 MonoBehaviour:
@@ -30020,6 +29953,7 @@ MonoBehaviour:
   rigidbody: {fileID: 54000011156950144}
   playerCapsuleCollider: {fileID: 136000010321963152}
   playerSphereCollider: {fileID: 135000014040711588}
+  tapCollider: {fileID: 0}
   pushForceOnDeath: 10
   forceModePush: 1
 --- !u!114 &114000013499490406
@@ -30200,10 +30134,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStatsMultiplier: 0.25
   worldLength: 4
-  difficultyLevel: 5
+  difficultyLevel: 1
   campsNumber: 4
-  downScaleThreshold: 0.3
-  upScaleThreshold: 0.7
+  downScaleThreshold: 0
+  upScaleThreshold: 0
   isTutorial: 0
   worldIndex: 0
 --- !u!114 &114000013627495596
@@ -30381,16 +30315,13 @@ MonoBehaviour:
   increasePointsMultiplier: 2
   increasePointsAdder: 10
   damagePercentageShield: 0.28
-  healthPercentageShield: 0.58000004
-  damageSpeedPercentageShield: 0.08
+  shieldDamageSpeed: 2.5
   shieldRange: 1
   damagePercentagePolearm: 0.28
-  healthPercentagePolearm: 0.08
-  damageSpeedPercentagePolearm: 0.58000004
+  polearmDamageSpeed: 1.5
   polearmRange: 3
   damagePercentageRifle: 0.3
-  healthPercentageRifle: 0.4
-  damageSpeedPercentageRifle: 0.1
+  rifleDamageSpeed: 1.5
   rifleRange: 9
 --- !u!114 &114000013667391356
 MonoBehaviour:
@@ -31312,6 +31243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ContentPanel: {fileID: 1000013458599280}
+  ListItemPrefab: {fileID: 0}
 --- !u!114 &114000014180003726
 MonoBehaviour:
   m_ObjectHideFlags: 1

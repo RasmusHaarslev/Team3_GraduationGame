@@ -44,6 +44,7 @@ public class MoveScript : MonoBehaviour
 
 	private void StopFlee(StopFleeEvent e)
 	{
+		character.isFleeing = false;
 		isFleeing = false;
 		agent.speed = 2.75f;
 		agent.Stop();
@@ -54,7 +55,6 @@ public class MoveScript : MonoBehaviour
 		isFleeing = true;
 		agent.speed = fleeSpeed;
 	}
-
 
 	void OnApplicationQuit()
 	{
@@ -92,6 +92,11 @@ public class MoveScript : MonoBehaviour
 			if (character.currentHealth <= 0 && isDead == false)
 			{
 				EventManager.Instance.TriggerEvent(new PlayerDeathEvent());
+				if (GameController.Instance.numberOfActiveUIs == 0)
+				{
+					EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+				}
+				GameController.Instance.numberOfActiveUIs++;
 				isDead = true;
 			}
 			if (movement)
@@ -165,7 +170,7 @@ public class MoveScript : MonoBehaviour
 				}
 				else if (hit.transform.gameObject.tag == "Item")
 				{
-					EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
+					hit.transform.GetComponent<ClickableNewspaper>().Click();
 				}
 			}
 
@@ -196,11 +201,7 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-			else if (hits[0].transform.gameObject.tag == "Item")
-			{
-				EventManager.Instance.TriggerEvent(new ItemClicked(hits[0].transform.GetComponent<ClickableItem>()));
-			}
-			else
+            else
 			{
 				EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
 				agent.stoppingDistance = 1.2f;
