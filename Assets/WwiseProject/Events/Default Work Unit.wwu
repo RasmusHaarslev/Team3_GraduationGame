@@ -75,7 +75,7 @@
 							<ChildrenList>
 								<Action Name="Stop" ID="{841D59BF-EFFB-4346-B87B-F50E7246125F}" ShortID="773082448" Type="Stop" Scope="One" Global="true">
 									<PropertyList>
-										<Property Name="FadeTime" Type="Real64" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="3"/>
 									</PropertyList>
 									<ElementList>
 										<Element ID="{E8F57E79-7BAB-4788-9235-58ADB15B2BB0}" Global="true">
@@ -1063,7 +1063,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Stop_CutWind" ID="{8939141C-835F-47BE-8E20-05453ADD2200}">
+						<Event Name="Stop_CutScene" ID="{8939141C-835F-47BE-8E20-05453ADD2200}">
 							<ChildrenList>
 								<Action Name="Stop" ID="{8A8EFAB2-5EF8-451C-B3B3-3042ADB867AF}" ShortID="850998104" Type="Stop" Scope="One" Global="true">
 									<PropertyList>
@@ -1072,6 +1072,16 @@
 									<ElementList>
 										<Element ID="{55969819-687B-4AD0-BBC8-4CFFF5005DA5}" Global="true">
 											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{412A1C91-6360-434C-B606-CD15777F796B}" ShortID="60123273" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{66101F2F-7210-49C7-A0B0-52966096F47E}" Global="true">
+											<ObjectRef Name="IntroScene2" ID="{63CA1E37-B9AC-4945-83A8-0E5E706248E5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
