@@ -141,7 +141,7 @@ public class CampManager : MonoBehaviour
         Manager_Audio.PlaySound(Manager_Audio.play_buyGold, gameObject);
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = tempUpgradeName;
-        Upgrades.Gold -= FinishUpgradeCost;
+        Upgrades.Premium -= FinishUpgradeCost;
 
         // Update premium resource in GameController.
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: -FinishUpgradeCost));
@@ -246,38 +246,32 @@ public class CampManager : MonoBehaviour
     }
 }
 
+[Serializable]
 public class CampUpgrades
 {
     #region State
-    [XmlAttribute("UpgradeInProgress")]
+
     public bool UpgradeInProgress = false;
-    [XmlAttribute("UpgradeBought")]
     public string UpgradeBought = "";
 
     #endregion
 
     #region Upgradeables
 
-    [XmlAttribute("GatherLevel")]
     public int GatherLevel = 1;
-    [XmlAttribute("MaxVillages")]
     public int MaxVillages = 1;
-    [XmlAttribute("BlacksmithLevel")]
     public int BlacksmithLevel = 1;
-    [XmlAttribute("LeaderHealthLevel")]
     public int LeaderHealthLevel = 1;
-    [XmlAttribute("LeaderStrengthLevel")]
     public int LeaderStrengthLevel = 1;
 
     #endregion
 
-
     #region Currency
 
-    public int Gold = 0;
+    public int Premium = 0;
     public int Scrap = 0;
     public int Food = 0;
-    public int Villages = 0;
+    public int Villagers = 0;
 
     #endregion
 
@@ -285,9 +279,9 @@ public class CampUpgrades
 
     public void GetCurrency()
     {
-        Gold = PlayerPrefs.GetInt("Premium");
-        Food = PlayerPrefs.GetInt("Food");
-        Scrap = PlayerPrefs.GetInt("Scrap");
-        Villages = PlayerPrefs.GetInt("Villages");
+        Premium = PlayerPrefs.GetInt(StringResources.Premium);
+        Food = PlayerPrefs.GetInt(StringResources.Food);
+        Scrap = PlayerPrefs.GetInt(StringResources.Scrap);
+        Villagers = PlayerPrefs.GetInt(StringResources.Villagers);
     }
 }
