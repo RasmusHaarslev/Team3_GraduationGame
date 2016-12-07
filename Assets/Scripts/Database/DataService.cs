@@ -162,7 +162,7 @@ public class DataService : MonoBehaviour
           {
               id = 5,
               name = "Easy melee tribesman",
-              Type = CharacterValues.type.Hunter,
+              Type = CharacterValues.type.Tribesman,
               isMale = true,
               tier = 1,
               damage = 3,
@@ -354,7 +354,7 @@ public class DataService : MonoBehaviour
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },new EquippableitemValues
          {
-             id = 12,
+             id = 10,
              name = "Hard Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,

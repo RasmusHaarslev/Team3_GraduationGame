@@ -275,9 +275,11 @@ public class NodeTutorial : MonoBehaviour {
     public void AcceptPlay() {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
         EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));
-
+        
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, PaletteNumber);
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, foodAmount);
+
+        EventManager.Instance.TriggerEvent(new LevelStarted());
 
         switch (gameObject.name)
           {
