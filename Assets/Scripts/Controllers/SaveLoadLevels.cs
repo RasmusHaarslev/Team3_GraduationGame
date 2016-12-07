@@ -13,22 +13,19 @@ public class SaveLoadLevels
     public static int maxRowsCleared = -1;
     public static GameObject lastNodeCleared;
 
-    private static LevelsDatabase database;
-
     public static void SaveLevels(Dictionary<int, List<GameObject>> levelDictionary)
     {
-        database = Resources.Load("ScriptableObjects/LevelsDatabase") as LevelsDatabase;
-        database.Rows = new List<RowObject>();
+        var levels = new LevelXML();
 
         foreach (KeyValuePair<int, List<GameObject>> entry in levelDictionary)
         {
-            var row = new RowObject();
+            var row = new RowsXML();
 
             foreach (var node in entry.Value)
             {
                 var currentNode = node.GetComponent<Node>();
 
-                var xmlNode = new NodeObject();
+                var xmlNode = new NodeXML();
 
                 row.Level = currentNode.Level;
 
@@ -54,9 +51,9 @@ public class SaveLoadLevels
                 xmlNode.isOpen = currentNode.isOpen;
                 xmlNode.canPlay = currentNode.canPlay;
 
-                foreach(var link in currentNode.Links)
+                foreach (var link in currentNode.Links)
                 {
-                    var li = new LinkObject();
+                    var li = new LinkXML();
 
                     li.FromID = link.From.GetComponent<Node>().NodeId;
                     li.ToID = link.To.GetComponent<Node>().NodeId;
@@ -67,37 +64,42 @@ public class SaveLoadLevels
 
                 row.Nodes.Add(xmlNode);
             }
-            database.Rows.Add(row);
+            levels.Rows.Add(row);
         }
 
-        //var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
+        var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
 
-        //var serializer = new XmlSerializer(typeof(LevelXML));
-        //var stream = new FileStream(path, FileMode.Create);
-        //serializer.Serialize(stream, levels);
-        //stream.Close();
+        var serializer = new XmlSerializer(typeof(LevelXML));
+        var stream = new FileStream(path, FileMode.Create);
+        serializer.Serialize(stream, levels);
+        stream.Close();
     }
 
     public static Dictionary<int, List<GameObject>> LoadLevels()
     {
-        database = Resources.Load("ScriptableObjects/LevelsDatabase") as LevelsDatabase;
+        var path = Path.Combine(PersistentData.GetPath(), "levels.xml");
 
-        if (database.Rows.Count() < 1)
+        if (!File.Exists(path))
         {
             Debug.LogError("No levels generated, reset game");
             return new Dictionary<int, List<GameObject>>();
         }
 
+        var serializer = new XmlSerializer(typeof(LevelXML));
+        var stream = new FileStream(path, FileMode.Open);
+        var container = serializer.Deserialize(stream) as LevelXML;
+        stream.Close();
+
         AllLevelsLoaded = new Dictionary<int, GameObject>();
 
         var loadedLevels = new Dictionary<int, List<GameObject>>();
 
-        foreach (RowObject row in database.Rows)
+        foreach (RowsXML row in container.Rows)
         {
             foreach (var node in row.Nodes)
             {
                 var nodeObject = GameObject.Instantiate(Resources.Load("Prefabs/LevelSelection/CityNode", typeof(GameObject))) as GameObject;
-                
+
                 var currentNode = nodeObject.GetComponent<Node>();
                 currentNode.CampsInNode = node.CampsInNode;
 
@@ -125,7 +127,8 @@ public class SaveLoadLevels
                 currentNode.OnCreate(currentNode.NodeId);
 
                 // Finds the max rows
-                if (node.isCleared && row.Level > maxRowsCleared) { 
+                if (node.isCleared && row.Level > maxRowsCleared)
+                {
                     maxRowsCleared = row.Level;
                     lastNodeCleared = nodeObject;
                 }
@@ -134,7 +137,7 @@ public class SaveLoadLevels
             }
         }
 
-        foreach (RowObject row in database.Rows)
+        foreach (RowsXML row in container.Rows)
         {
             int currentRow = row.Level;
             List<GameObject> list = new List<GameObject>();
@@ -163,4 +166,77 @@ public class SaveLoadLevels
 
         return loadedLevels;
     }
+}
+
+public class LevelXML
+{
+    [XmlArray("RowXMLs")]
+    [XmlArrayItem("RowXML")]
+    public List<RowsXML> Rows = new List<RowsXML>();
+}
+
+public class RowsXML
+{
+    [XmlArray("NodeXMLs")]
+    [XmlArrayItem("NodeXML")]
+    public List<NodeXML> Nodes = new List<NodeXML>();
+
+    [XmlAttribute("level")]
+    public int Level;
+}
+
+public class NodeXML
+{
+    [XmlAttribute("nodeID")]
+    public int NodeId;
+    [XmlAttribute("travelCost")]
+    public int TravelCost;
+    [XmlAttribute("scoutCost")]
+    public int scoutCost;
+    [XmlAttribute("sceneSelection")]
+    public int sceneSelection;
+    [XmlAttribute("CampsInNode")]
+    public int CampsInNode;
+    [XmlAttribute("probabilityWolves")]
+    public int probabilityWolves;
+    [XmlAttribute("probabilityTribes")]
+    public int probabilityTribes;
+    [XmlAttribute("probabilityChoice")]
+    public int probabilityChoice;
+    [XmlAttribute("wolveCamps")]
+    public int wolveCamps;
+    [XmlAttribute("tribeCamps")]
+    public int tribeCamps;
+    [XmlAttribute("choiceCamps")]
+    public int choiceCamps;
+    [XmlAttribute("foodAmount")]
+    public int foodAmount;
+    [XmlAttribute("scrapAmount")]
+    public int scrapAmount;
+    [XmlAttribute("goldTeethAmount")]
+    public int goldTeethAmount;
+    [XmlAttribute("itemDropAmount")]
+    public int itemDropAmount;
+    [XmlAttribute("isCleared")]
+    public bool isCleared;
+    [XmlAttribute("isScouted")]
+    public bool isScouted;
+    [XmlAttribute("isOpen")]
+    public bool isOpen;
+    [XmlAttribute("canPlay")]
+    public bool canPlay;
+
+    [XmlArray("Links")]
+    [XmlArrayItem("Link")]
+    public List<LinkXML> Links = new List<LinkXML>();
+}
+
+public class LinkXML
+{
+    [XmlAttribute("FromID")]
+    public int FromID;
+    [XmlAttribute("ToID")]
+    public int ToID;
+    [XmlAttribute("Hierarchy")]
+    public int Hierarchy;
 }
