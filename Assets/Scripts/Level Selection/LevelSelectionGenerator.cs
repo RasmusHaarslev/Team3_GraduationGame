@@ -408,11 +408,6 @@ public class LevelSelectionGenerator : MonoBehaviour
             goldteethDrop -= teethAmount;
             Debug.Log("GOLD LEFT : " + goldteethDrop + " Row : " + amountOfRows + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!! : " + teethAmount);
         }
-
-        //      node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
-        /*      node.GetComponent<Node>().probabilityWolves = probabilityWolves;
-                node.GetComponent<Node>().probabilityTribes = probabilityTribes;
-                node.GetComponent<Node>().probabilityChoice = probabilityChoices; */
     }
 
     #region Helper function
