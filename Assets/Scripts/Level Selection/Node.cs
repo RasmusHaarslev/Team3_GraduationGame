@@ -129,8 +129,6 @@ public class Node : MonoBehaviour {
                     GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
                     GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
                     GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();
-
-                    //GetComponent<Node>().txtWolves.text = GetComponent<Node>().wolveCamps.ToString();
                 }
             }
 
@@ -186,8 +184,7 @@ public class Node : MonoBehaviour {
             foodAmount = scoutCost * 2;
         }
 
-        // SCRAP COULD BE A SPAN OVER LIKE 10 ROWS THERE WILL DROP 3 SCRAPS 
-        scrapAmount = Random.Range(0,6);
+        scrapAmount = Random.Range(0, 10);
     }
     #endregion
 

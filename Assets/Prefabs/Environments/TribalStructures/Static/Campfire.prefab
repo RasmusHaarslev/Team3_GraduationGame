@@ -38,7 +38,7 @@ GameObject:
   - 4: {fileID: 4000010067498736}
   - 198: {fileID: 198000014214401334}
   - 199: {fileID: 199000013417678276}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - 4: {fileID: 4000013929128880}
   - 198: {fileID: 198000011831874142}
   - 199: {fileID: 199000010845361142}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012540560746}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FirePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012797349060}
   - 95: {fileID: 95000011637552500}
-  m_Layer: 0
+  - 64: {fileID: 64000011403269688}
+  m_Layer: 13
   m_Name: bonFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +120,7 @@ GameObject:
   - 4: {fileID: 4000011178303634}
   - 33: {fileID: 33000013654854600}
   - 23: {fileID: 23000013802450560}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: geo_bonfire_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,6 +260,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013826577904}
   m_Mesh: {fileID: 4300000, guid: a54fb1e8ce2a5ab449d536f15d4a794b, type: 3}
+--- !u!64 &64000011403269688
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013366938550}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_Mesh: {fileID: 0}
 --- !u!95 &95000011637552500
 Animator:
   serializedVersion: 3
