@@ -6,12 +6,10 @@ public class ChooseLanguage : MonoBehaviour {
     public string danishCutScene;
     public string englishCutScene;
 
-    private TutorialDatabase tutorialDb;
     private UpgradesDatabase upgradesDb;
 
     void Awake()
     {
-        tutorialDb = Resources.Load("ScriptableObjects/TutorialDatabase") as TutorialDatabase;
         upgradesDb = Resources.Load("ScriptableObjects/UpgradesDatabase") as UpgradesDatabase;
     }
 
@@ -28,9 +26,9 @@ public class ChooseLanguage : MonoBehaviour {
 
     public void PlayMedia(string cutscene)
     {
-        if (!tutorialDb.GameplayTutorialCompleted) { 
+        if (!(PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1)) { 
             Handheld.PlayFullScreenMovie(cutscene + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
-            tutorialDb.GameplayTutorialCompleted = true;
+            PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
             PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, 4);
             ClearAllScriptableObject();
             GameController.Instance.LoadScene("TutorialLevel01");
@@ -50,7 +48,5 @@ public class ChooseLanguage : MonoBehaviour {
         upgradesDb.GatherLevel = 1;
         upgradesDb.LeaderHealthLevel = 1;
         upgradesDb.LeaderStrengthLevel = 1;
-
-        
     }
 }

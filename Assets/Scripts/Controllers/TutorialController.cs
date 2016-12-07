@@ -7,13 +7,24 @@ using UnityEngine;
 public class TutorialController: MonoBehaviour
 {
     public TutorialType Type;
-    private TutorialDatabase database;
+
+    private bool GameplayTutorialCompleted;
+    private bool CampTutorialCompleted;
+    private bool LevelSelectionTutorialCompleted;
+    private bool SoldierTutorialCompleted;
+    private bool UpgradesTutorialCompleted;
+    private bool RecruitTutorialCompleted;
 
     void Awake()
     {
-        if (!database)
+        if (!GameplayTutorialCompleted)
         {
-            database = Resources.Load("ScriptableObjects/TutorialDatabase") as TutorialDatabase;
+            GameplayTutorialCompleted = PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1 ? true : false;
+            CampTutorialCompleted = PlayerPrefs.GetInt("CampTutorialCompleted") == 1 ? true : false;
+            LevelSelectionTutorialCompleted = PlayerPrefs.GetInt("LevelSelectionTutorialCompleted") == 1 ? true : false;
+            SoldierTutorialCompleted = PlayerPrefs.GetInt("SoldierTutorialCompleted") == 1 ? true : false;
+            UpgradesTutorialCompleted = PlayerPrefs.GetInt("UpgradesTutorialCompleted") == 1 ? true : false;
+            RecruitTutorialCompleted = PlayerPrefs.GetInt("RecruitTutorialCompleted") == 1 ? true : false;
         }
     }
 
@@ -22,45 +33,33 @@ public class TutorialController: MonoBehaviour
         switch (Type)
         {
             case TutorialType.GameplayTutorial:
-                if (database.GameplayTutorialCompleted)
-                {
+                if (GameplayTutorialCompleted)
                     this.gameObject.SetActive(false);
-                }
                 break;
 
             case TutorialType.CampTutorial:
-                if (database.CampTutorialCompleted)
-                {
+                if (CampTutorialCompleted)
                     this.gameObject.SetActive(false);
-                }
                 break;
 
             case TutorialType.LevelSelectionTutorial:
-                if (database.LevelSelectionTutorialCompleted)
-                {
+                if (LevelSelectionTutorialCompleted)
                     this.gameObject.SetActive(false);
-                }
                 break;
 
             case TutorialType.SoldierTutorial:
-                if (database.SoldierTutorialCompleted)
-                {
+                if (SoldierTutorialCompleted)
                     this.gameObject.SetActive(false);
-                }
                 break;
 
             case TutorialType.UpgradesTutorial:
-                if (database.UpgradesTutorialCompleted)
-                {
+                if (UpgradesTutorialCompleted)
                     this.gameObject.SetActive(false);
-                }
                 break;
 
             case TutorialType.RecruitTutorial:
-                if (database.RecruitTutorialCompleted)
-                {
+                if (RecruitTutorialCompleted)
                     this.gameObject.SetActive(false);
-                }
                 break;
 
             default:
@@ -73,27 +72,27 @@ public class TutorialController: MonoBehaviour
         switch (Type)
         {
             case TutorialType.GameplayTutorial:
-                database.GameplayTutorialCompleted = true;
+                PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
                 break;
 
             case TutorialType.CampTutorial:
-                database.CampTutorialCompleted = true;
+                PlayerPrefs.SetInt("CampTutorialCompleted",1);
                 break;
 
             case TutorialType.LevelSelectionTutorial:
-                database.LevelSelectionTutorialCompleted = true;
+                PlayerPrefs.SetInt("LevelSelectionTutorialCompleted",1);
                 break;
 
             case TutorialType.SoldierTutorial:
-                database.SoldierTutorialCompleted = true;
+                PlayerPrefs.SetInt("SoldierTutorialCompleted",1);
                 break;
 
             case TutorialType.UpgradesTutorial:
-                database.UpgradesTutorialCompleted = true;
+                PlayerPrefs.SetInt("UpgradesTutorialCompleted",1);
                 break;
 
             case TutorialType.RecruitTutorial:
-                database.RecruitTutorialCompleted = true;
+                PlayerPrefs.SetInt("RecruitTutorialCompleted",1);
                 break;
 
             default:
