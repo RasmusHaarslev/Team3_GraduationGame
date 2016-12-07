@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000013753474054}
   - 33: {fileID: 33000011772281282}
   - 23: {fileID: 23000010298923162}
+  - 64: {fileID: 64000013711374140}
   m_Layer: 13
   m_Name: MetalRodCurved
   m_TagString: Untagged
@@ -48,9 +49,9 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012922856214}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
@@ -76,4 +77,16 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012922856214}
+  m_Mesh: {fileID: 4300032, guid: 3f5a6efff76daa249ac8865d14a81fc8, type: 3}
+--- !u!64 &64000013711374140
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012922856214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
   m_Mesh: {fileID: 4300032, guid: 3f5a6efff76daa249ac8865d14a81fc8, type: 3}
