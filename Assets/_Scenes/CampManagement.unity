@@ -2626,7 +2626,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 4
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -4586,7 +4586,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 30
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -4705,23 +4705,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011295604188, guid: 608ecdeb6fd6f5f4c8a9e29bd356fadd,
     type: 2}
   m_PrefabInternal: {fileID: 645294342}
---- !u!1 &403401737 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013748044874, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1103889434}
---- !u!114 &403401738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 403401737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: FighterCombat
 --- !u!1001 &426693191
 Prefab:
   m_ObjectHideFlags: 0
@@ -4930,23 +4913,6 @@ Transform:
   - {fileID: 341782910}
   m_Father: {fileID: 86189822}
   m_RootOrder: 0
---- !u!1 &534150665 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013587824656, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1103889434}
---- !u!114 &534150666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 534150665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: StatsFighter
 --- !u!1 &537866363 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000014221500894, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
@@ -6448,23 +6414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GizmoColor: {r: 0, g: 1, b: 1, a: 1}
   gizmoSize: 1.43
---- !u!1 &880900774 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013567515854, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1103889434}
---- !u!114 &880900775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 880900774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: FighterTarget
 --- !u!4 &892055002 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000014093300836, guid: e07459f840aec7945a421468faab73a5,
@@ -6908,16 +6857,13 @@ MonoBehaviour:
   increasePointsMultiplier: 2
   increasePointsAdder: 10
   damagePercentageShield: 0.25
-  healthPercentageShield: 0.6
-  damageSpeedPercentageShield: 0.1
+  shieldDamageSpeed: 2.5
   shieldRange: 2
   damagePercentagePolearm: 0.46999997
-  healthPercentagePolearm: 0.1
-  damageSpeedPercentagePolearm: 0.2
+  polearmDamageSpeed: 1.5
   polearmRange: 2
   damagePercentageRifle: 0.5500001
-  healthPercentageRifle: 0.35999998
-  damageSpeedPercentageRifle: 0.06
+  rifleDamageSpeed: 1.5
   rifleRange: 9
 --- !u!114 &999091586
 MonoBehaviour:
@@ -7048,7 +6994,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 4
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -7295,34 +7241,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1000011273044558, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011374587392, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010818425730, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012245440436, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012709842190, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011644292274, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000013282809056, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3303c9a05dc14a84591e1c3cfefdf3d5, type: 2}
   m_IsPrefabParent: 0
@@ -7470,7 +7388,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 4
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -8299,7 +8217,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1560584510}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 2}
+  m_LocalPosition: {x: 0, y: 1.2, z: 2.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children: []
@@ -8547,7 +8465,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 4
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -11048,23 +10966,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000011598344598, guid: 3d81ea6da231dc54886ec836e050306e,
     type: 2}
   m_PrefabInternal: {fileID: 1885582082}
---- !u!1 &2097034016 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000012820862212, guid: 3303c9a05dc14a84591e1c3cfefdf3d5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1103889434}
---- !u!114 &2097034017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2097034016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: AssignWeapon
 --- !u!1 &2102519120
 GameObject:
   m_ObjectHideFlags: 0
@@ -11092,7 +10993,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2102519120}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.8, z: 2}
+  m_LocalPosition: {x: 0, y: 1.1, z: 2.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children: []
