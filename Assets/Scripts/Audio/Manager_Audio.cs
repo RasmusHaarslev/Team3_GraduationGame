@@ -10,7 +10,11 @@ public class Manager_Audio : MonoBehaviour {
 
     public static bool musicToggle = true;
     public static bool fxToggle = true;
-	public static string bridgeState = "Bridge";
+
+    public static float musicValue = 0.8f;
+    public static float fxValue = 0.8f;
+
+    public static string bridgeState = "Bridge";
 	public static string bridgeOn = "OnBridge";
 	public static string bridgeOff = "OffBridge";
 	public static string leaderDeath = "Play_LeaderDeath";
