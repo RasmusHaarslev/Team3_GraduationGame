@@ -130,36 +130,36 @@ public class DataService : MonoBehaviour
                 prefabName = StringResources.follower1PrefabName,
                 materialName = StringResources.maleHuntersMaterials[1]
             },
-         //new CharacterValues
-         //   {
-         //       id = 3,
-         //       name = "Yazmin",
-         //       isMale = false,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 7,
-         //       health = 93,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Clingy,
-         //       targetTrait = CharacterValues.TargetTrait.Loyal,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.femaleHuntersMaterials[4]
-         //   },
-         //new CharacterValues
-         //   {
-         //       id = 4,
-         //       name = "Zeheb",
-         //       isMale = true,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 3,
-         //       health = 97,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Fearful,
-         //       targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.maleHuntersMaterials[8]
-         //   },
+         new CharacterValues
+            {
+                id = 3,
+                name = "Yazmin",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                damage = 7,
+                health = 93,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.Clingy,
+                targetTrait = CharacterValues.TargetTrait.Loyal,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.femaleHuntersMaterials[4]
+            },
+         new CharacterValues
+            {
+                id = 4,
+                name = "Zeheb",
+                isMale = true,
+                Type = CharacterValues.type.Wolf,
+                damage = 3,
+                health = 97,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.Fearful,
+                targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.maleHuntersMaterials[8]
+            },
           new CharacterValues
           {
               id = 5,
@@ -405,51 +405,51 @@ public class DataService : MonoBehaviour
             _connection.InsertAll(new[]
         {
             leaderValues,
-          //new CharacterValues
-          //  {
-          //      id = 2,
-          //      name = "Aleksy",
-          //      isMale = true,
-          //      Type = CharacterValues.type.Hunter,
-          //      damage = 5,
-          //      health = 95,
-          //      damageSpeed = 1f,
-          //      range = 2,
-          //      combatTrait = CharacterValues.CombatTrait.BraveFool,
-          //      targetTrait = CharacterValues.TargetTrait.NoTrait,
-          //      prefabName = StringResources.follower1PrefabName,
-          //      materialName = StringResources.maleHuntersMaterials[1]
-          //  },
-         //new CharacterValues
-         //   {
-         //       id = 3,
-         //       name = "Yazmin",
-         //       isMale = false,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 7,
-         //       health = 93,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Clingy,
-         //       targetTrait = CharacterValues.TargetTrait.Loyal,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.femaleHuntersMaterials[4]
-         //   },
-         //new CharacterValues
-         //   {
-         //       id = 4,
-         //       name = "Zeheb",
-         //       isMale = true,
-         //       Type = CharacterValues.type.Hunter,
-         //       damage = 3,
-         //       health = 97,
-         //       damageSpeed = 1f,
-         //       range = 2,
-         //       combatTrait = CharacterValues.CombatTrait.Fearful,
-         //       targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
-         //       prefabName = StringResources.follower1PrefabName,
-         //       materialName = StringResources.maleHuntersMaterials[8]
-         //   },
+          new CharacterValues
+            {
+                id = 2,
+                name = "Aleksy",
+                isMale = true,
+                Type = CharacterValues.type.Wolf,
+                damage = 5,
+                health = 95,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.BraveFool,
+                targetTrait = CharacterValues.TargetTrait.NoTrait,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.maleHuntersMaterials[1]
+            },
+         new CharacterValues
+            {
+                id = 3,
+                name = "Yazmin",
+                isMale = false,
+                Type = CharacterValues.type.Wolf,
+                damage = 7,
+                health = 93,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.Clingy,
+                targetTrait = CharacterValues.TargetTrait.Loyal,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.femaleHuntersMaterials[4]
+            },
+         new CharacterValues
+            {
+                id = 4,
+                name = "Zeheb",
+                isMale = true,
+                Type = CharacterValues.type.Wolf,
+                damage = 3,
+                health = 97,
+                damageSpeed = 1f,
+                range = 2,
+                combatTrait = CharacterValues.CombatTrait.Fearful,
+                targetTrait = CharacterValues.TargetTrait.LowAttentionSpan,
+                prefabName = StringResources.follower1PrefabName,
+                materialName = StringResources.maleHuntersMaterials[8]
+            },
           new CharacterValues
           {
               id = 5,
@@ -807,6 +807,8 @@ public class DataService : MonoBehaviour
                     //istantiate a character with the id specified in the Tier of the character spawner
                     GameObject charGameObject = GenerateCharacterFromValues(currentvalues, spawners[i].transform.position, spawners[i].transform.rotation);
                     charGameObject.transform.parent = fellowship.transform;
+                    if(currentvalues.Type == CharacterValues.type.Hunter)
+                        EventManager.Instance.TriggerEvent(new AllySpawned());
                 }
             }
         }
