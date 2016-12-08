@@ -76,7 +76,14 @@ public class RivalStateMachine : CoroutineMachine
 					distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(character.target.transform.position.x, 0, character.target.transform.position.z));
 					if (distanceToTarget < agent.stoppingDistance)
 					{
-						yield return new TransitionTo(CombatState, DefaultTransition);
+						if (character.range == 2 && Mathf.Abs(transform.position.y - character.target.transform.position.y) >= 2)
+						{
+							yield return new TransitionTo(EngageState, DefaultTransition);
+						}
+						else 
+						{
+							yield return new TransitionTo(CombatState, DefaultTransition);
+						}
 					}
 					else
 					{
@@ -145,7 +152,7 @@ public class RivalStateMachine : CoroutineMachine
 		{
 
 		}
-			aggroSphere.enabled = false;
+		aggroSphere.enabled = false;
 		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
