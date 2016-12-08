@@ -184,7 +184,15 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt(StringResources.Villagers, 10 + (CampManager.Instance.Upgrades.MaxVillages) - 1);
         PlayerPrefs.SetInt(StringResources.Scrap, 0);
         PlayerPrefs.SetInt(StringResources.Premium, _PREMIUM);
-        PlayerPrefs.SetInt(StringResources.DaysSurvived, 0);        
+        PlayerPrefs.SetInt(StringResources.DaysSurvived, 0);
+
+        PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
+        PlayerPrefs.SetInt("CampTutorialCompleted", 1);
+        PlayerPrefs.SetInt("LevelSelectionTutorialCompleted", 1);
+        PlayerPrefs.SetInt("LeaderTutorialCompleted", 1);
+        PlayerPrefs.SetInt("SoldierTutorialCompleted", 1);
+        PlayerPrefs.SetInt("UpgradesTutorialCompleted", 1);
+        PlayerPrefs.SetInt("RecruitTutorialCompleted", 1);
 
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
     }

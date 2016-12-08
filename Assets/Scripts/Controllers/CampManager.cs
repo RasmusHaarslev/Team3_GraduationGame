@@ -211,7 +211,7 @@ public class CampManager : MonoBehaviour
 
     #endregion
 
-    private int GetTimeForUpgrade(int level) {
+    public int GetTimeForUpgrade(int level) {
         switch (level)
         {
             case 1:
