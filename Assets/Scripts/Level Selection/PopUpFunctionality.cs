@@ -241,7 +241,8 @@ public class PopUpFunctionality : MonoBehaviour {
 
         EventManager.Instance.TriggerEvent(new LevelStarted());
 
-        GameController.Instance.LoadScene("LevelEnterCutscene");
+        //GameController.Instance.LoadScene("LevelEnterCutscene");
+        EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("LevelEnterCutscene"));
     }
 
     public void Deny()
