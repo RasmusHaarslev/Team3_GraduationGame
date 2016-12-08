@@ -179,7 +179,9 @@ public class GameController : MonoBehaviour
         _VILLAGERS = 10;
         _SCRAPS = 0;
         _DAYS_SURVIVED = 0;
-        
+
+        var currentDate = DateTime.Today;
+
         PlayerPrefs.SetInt(StringResources.Food, 8);
         PlayerPrefs.SetInt(StringResources.Villagers, 10 + (CampManager.Instance.Upgrades.MaxVillages) - 1);
         PlayerPrefs.SetInt(StringResources.Scrap, 0);
@@ -193,6 +195,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("SoldierTutorialCompleted", 1);
         PlayerPrefs.SetInt("UpgradesTutorialCompleted", 1);
         PlayerPrefs.SetInt("RecruitTutorialCompleted", 1);
+        PlayerPrefs.SetString("GatherDate", (currentDate.ToString()));
 
         EventManager.Instance.TriggerEvent(new ResourcesUpdated());
     }
