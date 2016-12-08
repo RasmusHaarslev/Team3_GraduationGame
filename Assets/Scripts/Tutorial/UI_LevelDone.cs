@@ -10,6 +10,7 @@ public class UI_LevelDone : MonoBehaviour {
     void OnEnable()
     {
         EventManager.Instance.StartListening<TutorialDone>(LevelDone);
+        EventManager.Instance.TriggerEvent(new LevelStarted());
     }
 
     void OnDisable()
