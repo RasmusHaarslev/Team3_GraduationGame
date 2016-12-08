@@ -123,6 +123,14 @@ public class LevelLost : GameEvent
     }
 }
 
+public class GameLost : GameEvent
+{
+    public GameLost()
+    {
+
+    }
+}
+
 public class EnemySpottedEvent : GameEvent {
 
 	public GameObject parent;

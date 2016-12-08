@@ -167,7 +167,7 @@ public class GameController : MonoBehaviour
         ResetResources();
         DataService dataService = new DataService(StringResources.databaseName);
         dataService.ResetDatabase();
-
+        Time.timeScale = 1f;
         LoadScene("CampManagement");
     }
 

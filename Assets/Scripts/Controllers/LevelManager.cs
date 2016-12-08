@@ -218,11 +218,14 @@ public class LevelManager : MonoBehaviour
 		{
 			Time.timeScale -= 0.1f;
 
-			yield return new WaitForSeconds(0.20f);
+			yield return new WaitForSeconds(0.15f);
 		}
 
-		if (!IsTutorial) { 
-			GameController.Instance.LoseGame();
+        yield return new WaitForSeconds(1.5f);
+
+        if (!IsTutorial) {
+            EventManager.Instance.TriggerEvent(new GameLost());
+            //GameController.Instance.LoseGame();
             yield break;
         }
 
@@ -231,6 +234,11 @@ public class LevelManager : MonoBehaviour
 
 		yield return new WaitForSeconds(0f);
 	}
+
+    public void RestartGame()
+    {
+        GameController.Instance.LoseGame();
+    }
 
 	public void LoseLevel()
 	{
@@ -270,11 +278,11 @@ public class LevelManager : MonoBehaviour
 		EventManager.Instance.TriggerEvent(new LevelWon());
 
         Camera.main.GetComponent<CameraController>().LockCamera = true;
-        //Time.timeScale = 1f;
 
         if (IsTutorial)
 		{
-			EventManager.Instance.TriggerEvent(new TutorialDone());
+            Time.timeScale = 1f;
+            EventManager.Instance.TriggerEvent(new TutorialDone());
 			yield break;
 		}
 
