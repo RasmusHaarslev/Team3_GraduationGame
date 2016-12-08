@@ -145,37 +145,38 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0
+  m_ReflectionIntensity: 0.173
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.173}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
-    m_IndirectOutputScale: 1
-    m_AlbedoBoost: 1
+    m_IndirectOutputScale: 1.25
+    m_AlbedoBoost: 2.18
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 0
+    m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 4
     m_Resolution: 2
-    m_BakeResolution: 40
-    m_TextureWidth: 1024
+    m_BakeResolution: 20
+    m_TextureWidth: 512
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_Padding: 2
-    m_LightmapParameters: {fileID: 0}
-    m_LightmapsBakeMode: 1
+    m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000,
+      type: 0}
+    m_LightmapsBakeMode: 0
     m_TextureCompression: 1
     m_DirectLightInLightProbes: 1
     m_FinalGather: 0
@@ -650,6 +651,11 @@ Prefab:
       propertyPath: m_Name
       value: RampCliff (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012124081982, guid: bd6a08f8a3261ce499c3388ce54529ba,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
   m_IsPrefabParent: 0
@@ -695,6 +701,11 @@ Prefab:
     - target: {fileID: 1000012296289090, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
       propertyPath: m_Name
       value: RockBig04 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010801272616, guid: c3a5e877ff1cd1848aa558cdd4ccdb44,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
@@ -784,6 +795,11 @@ Prefab:
     - target: {fileID: 4000011154464304, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 173.17201
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
@@ -1133,6 +1149,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -11.149
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010801272616, guid: c3a5e877ff1cd1848aa558cdd4ccdb44,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
   m_IsPrefabParent: 0
@@ -1384,6 +1405,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
   m_IsPrefabParent: 0
@@ -1428,6 +1454,36 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013813802996, guid: ca4766c9c50a5c24f91ce4df5958de2d, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012785924654, guid: ca4766c9c50a5c24f91ce4df5958de2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010774344728, guid: ca4766c9c50a5c24f91ce4df5958de2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010036517020, guid: ca4766c9c50a5c24f91ce4df5958de2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010910160436, guid: ca4766c9c50a5c24f91ce4df5958de2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010589434658, guid: ca4766c9c50a5c24f91ce4df5958de2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011915346382, guid: ca4766c9c50a5c24f91ce4df5958de2d,
+        type: 2}
+      propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1479,6 +1535,11 @@ Prefab:
     - target: {fileID: 4000012812185672, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
       propertyPath: m_LocalScale.x
       value: 1.1424593
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010801272616, guid: c3a5e877ff1cd1848aa558cdd4ccdb44,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
@@ -1775,6 +1836,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010388397408, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010810423586, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000014071706220, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012525213588, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012996794334, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
   m_IsPrefabParent: 0
@@ -1863,6 +1949,11 @@ Prefab:
     - target: {fileID: 1000010960281214, guid: 617fd02df95083043bd31df84fbe19f6, type: 2}
       propertyPath: m_Name
       value: MetalSheet03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013911122542, guid: 617fd02df95083043bd31df84fbe19f6,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 617fd02df95083043bd31df84fbe19f6, type: 2}
@@ -2319,6 +2410,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000012152913320, guid: 280df85200a8e3d49be71289d249a70d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 280df85200a8e3d49be71289d249a70d, type: 2}
   m_IsPrefabParent: 0
@@ -2619,6 +2715,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -190.323
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010070387820, guid: 3032e2e1b5bdf4646b4ae8b52f966e99,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
   m_IsPrefabParent: 0
@@ -2743,6 +2844,11 @@ Prefab:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012650253172, guid: b39746801c2ca0842946d7f87bf70968,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b39746801c2ca0842946d7f87bf70968, type: 2}
   m_IsPrefabParent: 0
@@ -2794,6 +2900,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000012650253172, guid: b39746801c2ca0842946d7f87bf70968,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b39746801c2ca0842946d7f87bf70968, type: 2}
   m_IsPrefabParent: 0
@@ -2840,6 +2951,31 @@ Prefab:
       propertyPath: m_Name
       value: OilDrumFurnace (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010388397408, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010810423586, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000014071706220, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012525213588, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012996794334, guid: 990b2d56035dd044db83c6e5a6ae76b7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990b2d56035dd044db83c6e5a6ae76b7, type: 2}
   m_IsPrefabParent: 0
@@ -2874,6 +3010,67 @@ Transform:
   - {fileID: 209199540}
   m_Father: {fileID: 968639894}
   m_RootOrder: 0
+--- !u!1 &236245053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 236245055}
+  - 215: {fileID: 236245054}
+  m_Layer: 0
+  m_Name: Reflection Probe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!215 &236245054
+ReflectionProbe:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 236245053}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Type: 0
+  m_Mode: 0
+  m_RefreshMode: 0
+  m_TimeSlicingMode: 0
+  m_Resolution: 128
+  m_UpdateFrequency: 0
+  m_BoxSize: {x: 110, y: 30, z: 60}
+  m_BoxOffset: {x: 0, y: 0, z: 0}
+  m_NearClip: 0.3
+  m_FarClip: 1000
+  m_ShadowDistance: 100
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  m_IntensityMultiplier: 1
+  m_BlendDistance: 1
+  m_HDR: 1
+  m_BoxProjection: 0
+  m_RenderDynamicObjects: 0
+  m_UseOcclusionCulling: 1
+  m_Importance: 1
+  m_CustomBakedTexture: {fileID: 0}
+--- !u!4 &236245055
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 236245053}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.5, y: 11.1, z: -14.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 114
 --- !u!1 &237120654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,6 +3223,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: a5ed45107318cab46b500aaaba633ae6,
         type: 3}
+    - target: {fileID: 23000010273470330, guid: 256fe20d99f09084095b75f573149365,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 256fe20d99f09084095b75f573149365, type: 2}
   m_IsPrefabParent: 0
@@ -3301,6 +3503,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 87
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013790560074, guid: dd1f3570d9b61544aae4ebab440d2b2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd1f3570d9b61544aae4ebab440d2b2d, type: 2}
   m_IsPrefabParent: 0
@@ -3376,6 +3583,11 @@ Prefab:
     - target: {fileID: 1000013371500802, guid: 87022837a7516f942bda326d8a0d8f85, type: 2}
       propertyPath: m_Name
       value: Can (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012588799518, guid: 87022837a7516f942bda326d8a0d8f85,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87022837a7516f942bda326d8a0d8f85, type: 2}
@@ -3520,6 +3732,11 @@ Prefab:
       propertyPath: m_Name
       value: MetalRod01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
   m_IsPrefabParent: 0
@@ -3591,6 +3808,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000013695681694, guid: c3151d7366b92fd4ab7902953b236f98,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3151d7366b92fd4ab7902953b236f98, type: 2}
   m_IsPrefabParent: 0
@@ -3830,6 +4052,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 81.581
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -4049,6 +4276,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -97.30801
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
   m_IsPrefabParent: 0
@@ -4106,6 +4338,11 @@ Prefab:
     - target: {fileID: 4000011318865374, guid: e460684003a89c34da382e216ef7f30e, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -72.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012543538560, guid: e460684003a89c34da382e216ef7f30e,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e460684003a89c34da382e216ef7f30e, type: 2}
@@ -4237,6 +4474,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -12.616
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
   m_IsPrefabParent: 0
@@ -4352,6 +4594,11 @@ Prefab:
     - target: {fileID: 4000012823969322, guid: 252eb25565ae3b34d9bd05265b2339a1, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 57.582993
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013384549030, guid: 252eb25565ae3b34d9bd05265b2339a1,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 252eb25565ae3b34d9bd05265b2339a1, type: 2}
@@ -4751,6 +4998,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000013455839570, guid: 2386e908843867e4b981636ebf6f99ac,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2386e908843867e4b981636ebf6f99ac, type: 2}
   m_IsPrefabParent: 0
@@ -4942,6 +5194,11 @@ Prefab:
     - target: {fileID: 4000010263889590, guid: e66fdcb00919082489f50d0b171ee608, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 148.18301
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011769823034, guid: e66fdcb00919082489f50d0b171ee608,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e66fdcb00919082489f50d0b171ee608, type: 2}
@@ -5655,6 +5912,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 15.861001
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -6007,6 +6269,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000013695681694, guid: c3151d7366b92fd4ab7902953b236f98,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3151d7366b92fd4ab7902953b236f98, type: 2}
   m_IsPrefabParent: 0
@@ -6095,6 +6362,11 @@ Prefab:
     - target: {fileID: 4000010584100276, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 337.478
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012864860402, guid: b93fc9dceeec9564eb66f4027e5d3cb7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
@@ -6436,6 +6708,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012907564330, guid: 6c461b5dcb08f694297f660be2849c8a,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
   m_IsPrefabParent: 0
@@ -6489,6 +6766,11 @@ Prefab:
     - target: {fileID: 4000010657424236, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -248.29099
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012124081982, guid: bd6a08f8a3261ce499c3388ce54529ba,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
@@ -6720,6 +7002,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -86.27801
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
   m_IsPrefabParent: 0
@@ -6783,6 +7070,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000013455839570, guid: 2386e908843867e4b981636ebf6f99ac,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2386e908843867e4b981636ebf6f99ac, type: 2}
   m_IsPrefabParent: 0
@@ -6908,6 +7200,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 28.992
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010070387820, guid: 3032e2e1b5bdf4646b4ae8b52f966e99,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
   m_IsPrefabParent: 0
@@ -6962,6 +7259,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 7.268
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011450185944, guid: 6616eac98ae132a40bbef9dc612dfdce,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6616eac98ae132a40bbef9dc612dfdce, type: 2}
   m_IsPrefabParent: 0
@@ -7007,6 +7309,11 @@ Prefab:
     - target: {fileID: 4000010658696598, guid: 87022837a7516f942bda326d8a0d8f85, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 89.981
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012588799518, guid: 87022837a7516f942bda326d8a0d8f85,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87022837a7516f942bda326d8a0d8f85, type: 2}
@@ -7094,6 +7401,11 @@ Prefab:
     - target: {fileID: 1000011889038402, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
       propertyPath: m_Name
       value: MetalRod01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
@@ -7366,6 +7678,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 9.853001
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
   m_IsPrefabParent: 0
@@ -7523,6 +7840,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000012152913320, guid: 280df85200a8e3d49be71289d249a70d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 280df85200a8e3d49be71289d249a70d, type: 2}
   m_IsPrefabParent: 0
@@ -9457,6 +9779,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: -1.1424593
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010801272616, guid: c3a5e877ff1cd1848aa558cdd4ccdb44,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
   m_IsPrefabParent: 0
@@ -9728,6 +10055,11 @@ Prefab:
         type: 2}
       propertyPath: RotationSlerp
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012248576678, guid: 6323612f4f7346d409c5b2d2cc70b4dd,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6323612f4f7346d409c5b2d2cc70b4dd, type: 2}
@@ -10339,6 +10671,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 4.353
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012543538560, guid: e460684003a89c34da382e216ef7f30e,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e460684003a89c34da382e216ef7f30e, type: 2}
   m_IsPrefabParent: 0
@@ -10587,6 +10924,11 @@ Prefab:
       propertyPath: Targets.Array.data[0]
       value: 
       objectReference: {fileID: 1732730986}
+    - target: {fileID: 23000012572886374, guid: b71f101c76c97144ca6f1c38bb92f658,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b71f101c76c97144ca6f1c38bb92f658, type: 2}
   m_IsPrefabParent: 0
@@ -10720,6 +11062,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 101
       objectReference: {fileID: 0}
+    - target: {fileID: 108000011602543756, guid: a87dbbf69e9f15243a5aabfebe949757,
+        type: 2}
+      propertyPath: m_BounceIntensity
+      value: 0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 108000011602543756, guid: a87dbbf69e9f15243a5aabfebe949757,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 108000011602543756, guid: a87dbbf69e9f15243a5aabfebe949757,
+        type: 2}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108000011602543756, guid: a87dbbf69e9f15243a5aabfebe949757,
+        type: 2}
+      propertyPath: m_ShadowAngle
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87dbbf69e9f15243a5aabfebe949757, type: 2}
   m_IsPrefabParent: 0
@@ -10773,6 +11135,11 @@ Prefab:
     - target: {fileID: 4000011154464304, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 49.789
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
@@ -11177,6 +11544,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000012152913320, guid: 280df85200a8e3d49be71289d249a70d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 280df85200a8e3d49be71289d249a70d, type: 2}
   m_IsPrefabParent: 0
@@ -11341,6 +11713,11 @@ Prefab:
     - target: {fileID: 4000011626961910, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 205.472
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013887599254, guid: 26f3973012ad6684198dbc3cedfb8545,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
@@ -11582,6 +11959,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 83
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011769823034, guid: e66fdcb00919082489f50d0b171ee608,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e66fdcb00919082489f50d0b171ee608, type: 2}
   m_IsPrefabParent: 0
@@ -11657,6 +12039,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000011702217210, guid: c1b2088177f29ba48b3ed5d56e6c8844,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1b2088177f29ba48b3ed5d56e6c8844, type: 2}
   m_IsPrefabParent: 0
@@ -12040,6 +12427,11 @@ Prefab:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013887599254, guid: 26f3973012ad6684198dbc3cedfb8545,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
   m_IsPrefabParent: 0
@@ -12186,6 +12578,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 250.594
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013790560074, guid: dd1f3570d9b61544aae4ebab440d2b2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd1f3570d9b61544aae4ebab440d2b2d, type: 2}
   m_IsPrefabParent: 0
@@ -12289,6 +12686,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1545179980c884c4aa431cc4da6d4674, type: 2}
+    - target: {fileID: 23000012907564330, guid: 6c461b5dcb08f694297f660be2849c8a,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
   m_IsPrefabParent: 0
@@ -12403,6 +12805,11 @@ Prefab:
     - target: {fileID: 4000010919123682, guid: 617fd02df95083043bd31df84fbe19f6, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 99.724
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013911122542, guid: 617fd02df95083043bd31df84fbe19f6,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 617fd02df95083043bd31df84fbe19f6, type: 2}
@@ -12521,6 +12928,11 @@ Prefab:
     - target: {fileID: 4000011847892408, guid: ca6b9ef6dc2eeed4c8ee832246d67d7d, type: 2}
       propertyPath: m_LocalScale.z
       value: 2.4153588
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013319838782, guid: ca6b9ef6dc2eeed4c8ee832246d67d7d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca6b9ef6dc2eeed4c8ee832246d67d7d, type: 2}
@@ -12780,6 +13192,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012543538560, guid: e460684003a89c34da382e216ef7f30e,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e460684003a89c34da382e216ef7f30e, type: 2}
   m_IsPrefabParent: 0
@@ -12887,6 +13304,11 @@ Prefab:
     - target: {fileID: 1000010245456918, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
       propertyPath: m_Name
       value: RockBig03 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
@@ -13003,6 +13425,11 @@ Prefab:
     - target: {fileID: 4000013377824308, guid: c3151d7366b92fd4ab7902953b236f98, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -5.083
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013695681694, guid: c3151d7366b92fd4ab7902953b236f98,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3151d7366b92fd4ab7902953b236f98, type: 2}
@@ -13201,6 +13628,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -40.553
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011288480872, guid: ebe9415c7f21e3c4f887af629e52b422,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebe9415c7f21e3c4f887af629e52b422, type: 2}
   m_IsPrefabParent: 0
@@ -13270,6 +13702,11 @@ Prefab:
     - target: {fileID: 4000011154464304, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -141.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
@@ -13512,6 +13949,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000012152913320, guid: 280df85200a8e3d49be71289d249a70d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 280df85200a8e3d49be71289d249a70d, type: 2}
   m_IsPrefabParent: 0
@@ -14141,6 +14583,11 @@ Prefab:
       propertyPath: m_Name
       value: OilDrum (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013790560074, guid: dd1f3570d9b61544aae4ebab440d2b2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd1f3570d9b61544aae4ebab440d2b2d, type: 2}
   m_IsPrefabParent: 0
@@ -14495,6 +14942,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 8.39
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
   m_IsPrefabParent: 0
@@ -14552,6 +15004,11 @@ Prefab:
     - target: {fileID: 4000011154464304, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -442.675
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
@@ -14821,6 +15278,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 03dac2e807e13f24586d1a74a6ea00f0,
         type: 3}
+    - target: {fileID: 23000010693844984, guid: 9ca803311cbc03348a6652f88a7dfbf1,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ca803311cbc03348a6652f88a7dfbf1, type: 2}
   m_IsPrefabParent: 0
@@ -14949,6 +15411,11 @@ Prefab:
       propertyPath: m_Name
       value: RampCliff (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012124081982, guid: bd6a08f8a3261ce499c3388ce54529ba,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
   m_IsPrefabParent: 0
@@ -15033,6 +15500,11 @@ Prefab:
     - target: {fileID: 4000013926895968, guid: dd1f3570d9b61544aae4ebab440d2b2d, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 14.202001
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013790560074, guid: dd1f3570d9b61544aae4ebab440d2b2d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd1f3570d9b61544aae4ebab440d2b2d, type: 2}
@@ -15141,6 +15613,11 @@ Prefab:
     - target: {fileID: 4000012744674686, guid: 361f4611a3eaf2040b00541ea8dd75a9, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 46.303
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011874119122, guid: 361f4611a3eaf2040b00541ea8dd75a9,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 361f4611a3eaf2040b00541ea8dd75a9, type: 2}
@@ -15283,6 +15760,11 @@ Prefab:
     - target: {fileID: 4000011696706106, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
       propertyPath: m_LocalScale.x
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
@@ -18581,6 +19063,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 97.426
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012864860402, guid: b93fc9dceeec9564eb66f4027e5d3cb7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
   m_IsPrefabParent: 0
@@ -18794,6 +19281,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012152913320, guid: 280df85200a8e3d49be71289d249a70d,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 280df85200a8e3d49be71289d249a70d, type: 2}
   m_IsPrefabParent: 0
@@ -18898,6 +19390,11 @@ Prefab:
     - target: {fileID: 4000010657424236, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 46.100002
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012124081982, guid: bd6a08f8a3261ce499c3388ce54529ba,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd6a08f8a3261ce499c3388ce54529ba, type: 2}
@@ -19053,6 +19550,16 @@ Prefab:
     - target: {fileID: 4000011858629220, guid: 9e3b075b90a4550428bb573ee13a4979, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 18.165
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011466485896, guid: 9e3b075b90a4550428bb573ee13a4979,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010467913398, guid: 9e3b075b90a4550428bb573ee13a4979,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e3b075b90a4550428bb573ee13a4979, type: 2}
@@ -19551,6 +20058,11 @@ Prefab:
     - target: {fileID: 4000010658696598, guid: 87022837a7516f942bda326d8a0d8f85, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 76.586006
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012588799518, guid: 87022837a7516f942bda326d8a0d8f85,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87022837a7516f942bda326d8a0d8f85, type: 2}
@@ -20086,6 +20598,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000011702217210, guid: c1b2088177f29ba48b3ed5d56e6c8844,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1b2088177f29ba48b3ed5d56e6c8844, type: 2}
   m_IsPrefabParent: 0
@@ -20422,6 +20939,11 @@ Prefab:
       propertyPath: m_Name
       value: MetalRod01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
   m_IsPrefabParent: 0
@@ -20560,6 +21082,11 @@ Prefab:
       propertyPath: m_Name
       value: RockBig04 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010801272616, guid: c3a5e877ff1cd1848aa558cdd4ccdb44,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3a5e877ff1cd1848aa558cdd4ccdb44, type: 2}
   m_IsPrefabParent: 0
@@ -20617,6 +21144,11 @@ Prefab:
     - target: {fileID: 4000011626961910, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 77.643005
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013887599254, guid: 26f3973012ad6684198dbc3cedfb8545,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
@@ -20702,6 +21234,11 @@ Prefab:
     - target: {fileID: 4000011696706106, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
       propertyPath: m_LocalScale.z
       value: 1.2469251
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
@@ -20886,6 +21423,11 @@ Prefab:
       propertyPath: m_Name
       value: RockMedium01 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -21032,6 +21574,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1.9903669
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -21169,6 +21716,11 @@ Prefab:
     - target: {fileID: 1000010118134286, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
       propertyPath: m_NavMeshLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012907564330, guid: 6c461b5dcb08f694297f660be2849c8a,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
@@ -21408,6 +21960,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -21465,6 +22022,11 @@ Prefab:
     - target: {fileID: 4000010584100276, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 5.834
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012864860402, guid: b93fc9dceeec9564eb66f4027e5d3cb7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
@@ -21969,6 +22531,16 @@ Prefab:
       propertyPath: isTutorial
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012509066030, guid: 404b6e010254b4145852a035c5b48f21,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011915191940, guid: 404b6e010254b4145852a035c5b48f21,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 404b6e010254b4145852a035c5b48f21, type: 2}
   m_IsPrefabParent: 0
@@ -22136,6 +22708,11 @@ Prefab:
     - target: {fileID: 1000011593865550, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
       propertyPath: m_Name
       value: RockSmall02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012864860402, guid: b93fc9dceeec9564eb66f4027e5d3cb7,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b93fc9dceeec9564eb66f4027e5d3cb7, type: 2}
@@ -22467,6 +23044,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: baed88a643815314fbd11ed1e24793b3, type: 2}
+    - target: {fileID: 23000011702217210, guid: c1b2088177f29ba48b3ed5d56e6c8844,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1b2088177f29ba48b3ed5d56e6c8844, type: 2}
   m_IsPrefabParent: 0
@@ -22745,6 +23327,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.0803633
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
   m_IsPrefabParent: 0
@@ -22985,6 +23572,16 @@ Prefab:
     - target: {fileID: 4000014287186408, guid: 54346278423a1134ab99a4a297e0f2d8, type: 2}
       propertyPath: m_LocalPosition.z
       value: 12.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012100854364, guid: 54346278423a1134ab99a4a297e0f2d8,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013551889986, guid: 54346278423a1134ab99a4a297e0f2d8,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54346278423a1134ab99a4a297e0f2d8, type: 2}
@@ -23406,6 +24003,11 @@ Prefab:
     - target: {fileID: 4000012204532448, guid: eaec029d7ccec7e4aae225260bbf3a5f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -55.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013191821308, guid: eaec029d7ccec7e4aae225260bbf3a5f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaec029d7ccec7e4aae225260bbf3a5f, type: 2}
@@ -24645,7 +25247,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_MotionVectors: 1
+  m_MotionVectors: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
@@ -24726,6 +25328,16 @@ Prefab:
     - target: {fileID: 4000012396154580, guid: 9aead2001e1c3444d893fd664e9bea95, type: 2}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011381855138, guid: 9aead2001e1c3444d893fd664e9bea95,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011088482606, guid: 9aead2001e1c3444d893fd664e9bea95,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9aead2001e1c3444d893fd664e9bea95, type: 2}
@@ -24976,6 +25588,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.2430061
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010070387820, guid: 3032e2e1b5bdf4646b4ae8b52f966e99,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
   m_IsPrefabParent: 0
@@ -25072,9 +25689,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 131072
+  defaultPoolSize: 1966080
   lowerPoolSize: 65536
-  streamingPoolSize: 32768
+  streamingPoolSize: 327680
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
@@ -25168,6 +25785,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23000012907564330, guid: 6c461b5dcb08f694297f660be2849c8a,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c461b5dcb08f694297f660be2849c8a, type: 2}
   m_IsPrefabParent: 0
@@ -25246,6 +25868,11 @@ Prefab:
     - target: {fileID: 1000010187254140, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
       propertyPath: m_Name
       value: RockSmall01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013887599254, guid: 26f3973012ad6684198dbc3cedfb8545,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
@@ -25945,6 +26572,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -79.233
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010298923162, guid: e8116ed1ff25f8b4396ae4257d183946,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8116ed1ff25f8b4396ae4257d183946, type: 2}
   m_IsPrefabParent: 0
@@ -26161,6 +26793,11 @@ Prefab:
     - target: {fileID: 4000011626961910, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
       propertyPath: m_LocalScale.x
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013887599254, guid: 26f3973012ad6684198dbc3cedfb8545,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26f3973012ad6684198dbc3cedfb8545, type: 2}
@@ -26387,6 +27024,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 282.779
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -26444,6 +27086,11 @@ Prefab:
     - target: {fileID: 4000012567998290, guid: 04b8cb6b9c327d74998f7b729cab013b, type: 2}
       propertyPath: m_LocalScale.x
       value: 1.7133011
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000011434108046, guid: 04b8cb6b9c327d74998f7b729cab013b,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04b8cb6b9c327d74998f7b729cab013b, type: 2}
@@ -26510,6 +27157,11 @@ Prefab:
     - target: {fileID: 4000011214460110, guid: 7fd06284e86851044af46bbd4f991524, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 119.243004
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012200310654, guid: 7fd06284e86851044af46bbd4f991524,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fd06284e86851044af46bbd4f991524, type: 2}
@@ -26775,6 +27427,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011562924686, guid: 4f6121517774b7a46b43d853544a3a81,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f6121517774b7a46b43d853544a3a81, type: 2}
   m_IsPrefabParent: 0
@@ -26911,6 +27568,11 @@ Prefab:
     - target: {fileID: 4000011466215448, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -48.435974
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010070387820, guid: 3032e2e1b5bdf4646b4ae8b52f966e99,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
@@ -27290,6 +27952,11 @@ Prefab:
       propertyPath: m_Name
       value: RockBig02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011450185944, guid: 6616eac98ae132a40bbef9dc612dfdce,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6616eac98ae132a40bbef9dc612dfdce, type: 2}
   m_IsPrefabParent: 0
@@ -27377,6 +28044,11 @@ Prefab:
     - target: {fileID: 4000011154464304, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -92.79201
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
@@ -27586,7 +28258,7 @@ MeshRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_MotionVectors: 1
+  m_MotionVectors: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
@@ -27809,6 +28481,11 @@ Prefab:
     - target: {fileID: 4000011466215448, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -164.63301
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000010070387820, guid: 3032e2e1b5bdf4646b4ae8b52f966e99,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3032e2e1b5bdf4646b4ae8b52f966e99, type: 2}
@@ -28343,6 +29020,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 9.394
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010560095220, guid: b4b78161bed685242a91dbbb355322ca,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b78161bed685242a91dbbb355322ca, type: 2}
   m_IsPrefabParent: 0
@@ -28761,6 +29443,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -138.13501
       objectReference: {fileID: 0}
+    - target: {fileID: 23000010425074090, guid: 2369dc086d3df5741aafddc2c4512d8f,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2369dc086d3df5741aafddc2c4512d8f, type: 2}
   m_IsPrefabParent: 0
@@ -29059,6 +29746,11 @@ Prefab:
     - target: {fileID: 4000010125787550, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 20.562
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000013225343622, guid: 0cf8e326ad4622940bce1be1fe1b6d03,
+        type: 2}
+      propertyPath: m_MotionVectors
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cf8e326ad4622940bce1be1fe1b6d03, type: 2}
