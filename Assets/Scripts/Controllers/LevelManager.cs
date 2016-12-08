@@ -199,6 +199,7 @@ public class LevelManager : MonoBehaviour
 
 	public void LoseGame(bool leaderDeath)
 	{
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
         EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
