@@ -125,9 +125,10 @@ public class LevelLost : GameEvent
 
 public class GameLost : GameEvent
 {
-    public GameLost()
+    public bool LeaderDeath;
+    public GameLost(bool leaderDeath)
     {
-
+        this.LeaderDeath = leaderDeath;
     }
 }
 
@@ -217,6 +218,14 @@ public class AllyDeathEvent : GameEvent
     public AllyDeathEvent(Character deadAlly)
     {
         this.deadAlly = deadAlly;
+    }
+}
+
+public class AllySpawned : GameEvent
+{
+    public AllySpawned()
+    {
+
     }
 }
 

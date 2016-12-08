@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
 	private DataService dataService = new DataService(StringResources.databaseName);
-	private int AlliesAlive;
+	private int AlliesAlive = 0;
 	private bool PlayerAlive;
 
 	[SerializeField]
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
 	void Start()
 	{
 		PlayerAlive = true;
-		AlliesAlive = 3;
+		
 		levelGenerator = GetComponent<LevelGenerator>();
 		if (levelGenerator.isTutorial)
 		{
@@ -79,10 +79,11 @@ public class LevelManager : MonoBehaviour
 		//Enemy spawn for counting
 		EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
 		EventManager.Instance.StartListening<ItemSpawned>(ItemSpawn);
+        EventManager.Instance.StartListening<AllySpawned>(AllySpawn);
 
-		// -Collecting-
-		//Loot received
-		EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
+        // -Collecting-
+        //Loot received
+        EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
 
 		// -Win-
 		//Enemy dies for progress
@@ -103,10 +104,11 @@ public class LevelManager : MonoBehaviour
 		//Enemy spawn for counting
 		EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
 		EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
+        EventManager.Instance.StartListening<AllySpawned>(AllySpawn);
 
-		// -Collecting-
-		//Loot received
-		EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
+        // -Collecting-
+        //Loot received
+        EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
 
 		// -Win-
 		//Enemy dies for progress
@@ -129,16 +131,22 @@ public class LevelManager : MonoBehaviour
 	private void EnemySpawn(EnemySpawned e)
 	{
 		EnemiesAlive++;
+        //Debug.Log("Spawned " + EnemiesAlive);
 	}
 
-	private void ItemSpawn(ItemSpawned e)
+    private void AllySpawn(AllySpawned e)
+    {
+        AlliesAlive++;
+        Debug.Log("Ally " + EnemiesAlive);
+    }
+
+    private void ItemSpawn(ItemSpawned e)
 	{
 		ItemsLeft++;
 	}
 
 	private void AllyDeath(AllyDeathEvent e)
 	{
-
 		//removing hunter from database
 		dataService.RemoveCharacter(e.deadAlly.characterBaseValues);
 
@@ -150,20 +158,13 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-
+        Debug.Log("Killed " + EnemiesAlive);
         CheckConditions();
 	}
 
 	void PlayerDeath(PlayerDeathEvent e)
 	{
-		if (!IsTutorial)
-		{
-			LoseGame("CampManagement");
-		}
-		else
-		{
-			LoseGame(SceneManager.GetActiveScene().name);
-		}
+		LoseGame(true);
 	}
 
 	void LootReceived(EnemyDeathEvent e)
@@ -188,14 +189,7 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (AlliesAlive <= 0 && GameController.Instance._VILLAGERS <= 0)
 		{
-			if (!IsTutorial)
-			{
-				LoseGame("CampManagement");
-			}
-			else
-			{
-				LoseGame(SceneManager.GetActiveScene().name);
-			}
+			LoseGame(false);
 		}
 		else if (AlliesAlive <= 0)
 		{
@@ -203,15 +197,15 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void LoseGame(string scene = "CampManagement")
+	public void LoseGame(bool leaderDeath)
 	{
         EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
         Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
-		StartCoroutine(LoseGameCoroutine(scene));
+		StartCoroutine(LoseGameCoroutine(leaderDeath));
 	}
 
-	IEnumerator LoseGameCoroutine(string scene = "CampManagement")
+	IEnumerator LoseGameCoroutine(bool leaderDeath)
 	{
 		while (Time.timeScale > 0.2f)
 		{
@@ -223,13 +217,13 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         if (!IsTutorial) {
-            EventManager.Instance.TriggerEvent(new GameLost());
+            EventManager.Instance.TriggerEvent(new GameLost(leaderDeath));
             //GameController.Instance.LoseGame();
             yield break;
         }
 
         Time.timeScale = 1f;
-        GameController.Instance.LoadScene(scene);
+        GameController.Instance.LoadScene(SceneManager.GetActiveScene().name);
 
 		yield return new WaitForSeconds(0f);
 	}
