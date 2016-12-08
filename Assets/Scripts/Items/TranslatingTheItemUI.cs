@@ -13,6 +13,6 @@ public class TranslatingTheItemUI : MonoBehaviour {
         txtHealth.text = TranslationManager.Instance.GetTranslation("Health");
         txtDamage.text = TranslationManager.Instance.GetTranslation("Damage");
         txtAttackSpeed.text = TranslationManager.Instance.GetTranslation("AttackSpeed");
-        txtRange.text = TranslationManager.Instance.GetTranslation("Range");
+        txtRange.text = TranslationManager.Instance.GetTranslation("Range");        
     }
 }
