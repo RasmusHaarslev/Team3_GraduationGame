@@ -34,6 +34,11 @@ public class CampUIController : MonoBehaviour
 
     public void PerformUpgrade()
     {
+        foreach (var button in Buttons)
+        {
+            button.interactable = false;
+        }
+
         Manager_Audio.PlaySound(Manager_Audio.play_campUpgrade, gameObject);
         DateTime End = DateTime.Now.AddSeconds(campManager.amountOfSeconds);
 
@@ -55,12 +60,23 @@ public class CampUIController : MonoBehaviour
             double timeLeft = (end - DateTime.Now).TotalSeconds;
             if (timeLeft < 0.0)
             {
+                foreach (var button in Buttons)
+                {
+                    button.interactable = true;
+                }
                 campManager.FinishUpgrade();
                 SetLevels();
                 return 0.0;
             }
             else
-                return (int) timeLeft;
+            {
+                foreach (var button in Buttons)
+                {
+                    button.interactable = false;
+                }
+                return (int)timeLeft;
+            }
+                
         }
         else
         {
@@ -89,6 +105,11 @@ public class CampUIController : MonoBehaviour
     public void FinishUpgradeNow()
     {
         campManager.FinishUpgradeNow();
+
+        foreach (var button in Buttons)
+        {
+            button.interactable = true;
+        }
 
         // Update premium resource in GameController.
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: -(campManager.FinishUpgradeCost*((int)TimeLeftInSeconds()/campManager.Level9_Above_Time) ) ) );
