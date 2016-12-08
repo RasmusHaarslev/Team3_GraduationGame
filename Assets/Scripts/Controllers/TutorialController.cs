@@ -18,6 +18,7 @@ public class TutorialController: MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1f;
         if (!GameplayTutorialCompleted)
         {
             GameplayTutorialCompleted = PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1 ? true : false;
