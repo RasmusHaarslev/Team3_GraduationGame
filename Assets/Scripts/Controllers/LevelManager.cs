@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
 	private DataService dataService = new DataService(StringResources.databaseName);
-	private int AlliesAlive = 0;
+	public int AlliesAlive = 0;
 	private bool PlayerAlive;
 
 	[SerializeField]
