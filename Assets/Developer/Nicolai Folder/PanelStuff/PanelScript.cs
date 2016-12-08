@@ -13,6 +13,7 @@ public class PanelScript : MonoBehaviour
     CampTopPanel campTopPanelScript;
     public List<GameObject> panelList = new List<GameObject>();
     public List<GameObject> soldierStatsList = new List<GameObject>();
+    public List<GameObject> playerStatsList = new List<GameObject>();
     List<GameObject> soldiersList = new List<GameObject>();
     private DataService dataService;
     public Transform solidersSpawnPosition;
@@ -207,12 +208,7 @@ public class PanelScript : MonoBehaviour
                 {
                     if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
                     {
-
-                        //soldier.animator.SetInteger("IdleAction", 8);
-
-                        //print("adding as new Character");
-                        //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
-                        //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
+                     
                         CharacterValues valuesToKeep = newSoldiersList[i].GetComponent<Character>().characterBaseValues;
                         valuesToKeep.Type = CharacterValues.type.Hunter;
                         valuesToKeep.id = soldiertrans.GetComponent<CharacterSpawner>().tier ;
@@ -222,51 +218,28 @@ public class PanelScript : MonoBehaviour
                        
                         print("updating char id "+valuesToKeep.id);
                         dataService.UpdateCharacterValuesInDb(valuesToKeep);
-                        dataService.UpdateEquipItemValues(equipValuesToKeep);
-                       
-                        /*
-                                                GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
-                                                print("id of the weapon " + newWeapon.GetComponent<EquippableItem>().itemValues.id);
-
-                                                //destroy current puppet weapon
-                                                Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
-                                                //equip weapon
-                                                print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
-
-                                                dataService.equipItemsToCharacter(new[] { newWeapon }, newSoldiersList[i].GetComponent<Character>());
-                                                */
-                        //newSoldiersList[i].transform.parent = soldiertrans;
+                        dataService.UpdateEquipItemValues(equipValuesToKeep);                     
+                    
                         newSoldiersList[i].transform.position = soldiertrans.position;
                         newSoldiersList[i].transform.rotation = soldiertrans.rotation;
-                        /* newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
-                         newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;*/
+                     
                         newSoldiersList[i].AddComponent<PanelController>();
                         newSoldiersList[i].AddComponent<shaderGlow>();
                         SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
-                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter1");
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
-                            
+                            newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter1");                                               
                         }
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(2).localPosition)
                         {
-                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
+                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");                        
                             newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter2");
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
                         if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(3).localPosition)
                         {
                             newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
-                            //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
                             newSoldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = LayerMask.NameToLayer("Hunter3");
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
                         }
                         campTopPanelScript.ScaleVillageCount();
                         EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
@@ -279,8 +252,6 @@ public class PanelScript : MonoBehaviour
             else
             {
                 Destroy(newSoldiersList[i]);
-                //TODO can improve !!
-                //dataService.DeleteCharactersValuesFromDb(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
             }
         }
         //after the hunter is placed 
@@ -289,88 +260,9 @@ public class PanelScript : MonoBehaviour
         Destroy(silhouetteGO);
 
         InitializeNewHunters(false);
-        //FillInNewSoldierStats();
-
-        print("whole thing " + (DateTime.Now - start).TotalMilliseconds);
     }
 
-    /*
-     public void SpawnNewSoldier(int index)
-    {
-        for (int i = 0; i < newSoldiersList.Count; i++)
-        {
-            if (index == i)
-            {
-                foreach (Transform soldiertrans in solidersSpawnPosition)
-                {
-                    if (silhouetteGO.transform.localPosition - Vector3.up == soldiertrans.localPosition)
-                    {
-
-                        //soldier.animator.SetInteger("IdleAction", 8);
-
-                        //print("adding as new Character");
-                        //newSoldiersList[i].GetComponent<Character>().characterBaseValues.id = dataService.AddcharacterToDbByValues(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
-                        //print("id of the new character " + newSoldiersList[i].GetComponent<Character>().characterBaseValues.id);
-                        CharacterValues valuesToKeep = newSoldiersList[i].GetComponent<Character>().characterBaseValues;
-                        valuesToKeep.Type = CharacterValues.type.Hunter;
-                        dataService.UpdateCharacterValuesInDb(valuesToKeep);
-
-                        GameObject newWeapon = dataService.GenerateNewEquippableItemFromValues(newSoldiersList[i].GetComponentInChildren<EquippableItem>().itemValues);
-                        print("id of the weapon " + newWeapon.GetComponent<EquippableItem>().itemValues.id);
-                        //destroy current puppet weapon
-                        Destroy(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
-                        //equip weapon
-                        print(newSoldiersList[i].GetComponent<Character>().characterBaseValues.name);
-                        
-                        dataService.equipItemsToCharacter(new[] { newWeapon }, newSoldiersList[i].GetComponent<Character>());
-
-                        newSoldiersList[i].transform.localPosition = soldiertrans.localPosition;
-                        newSoldiersList[i].transform.localRotation = soldiertrans.localRotation;
-                        newSoldiersList[i].AddComponent<PanelController>();
-                        SetCampAnimation(newSoldiersList[i].GetComponent<Character>());
-                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(1).localPosition)
-                        {
-                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1"); 
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter1");
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
-                        }
-                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(2).localPosition)
-                        {
-                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-                            //newWeapon.layer = LayerMask.NameToLayer("Hunter1");
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter2");
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.name);
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
-                        }
-                        if (soldiertrans.localPosition == solidersSpawnPosition.GetChild(3).localPosition)
-                        {
-                            newSoldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
-                            //newWeapon.layer = LayerMask.NameToLayer("Hunter3");
-                            //newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer = LayerMask.NameToLayer("Hunter3");
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject);
-                            //print(newSoldiersList[i].GetComponentInChildren<EquippableItem>().gameObject.layer);
-                        }
-                        EventManager.Instance.TriggerEvent(new ChangeResources(villager: -1));
-                    }
-                }
-
-
-
-            }
-            else
-            {
-                Destroy(newSoldiersList[i]);
-                
-                dataService.DeleteCharactersValuesFromDb(newSoldiersList[i].GetComponent<Character>().characterBaseValues);
-            }
-        }
-        newSoldiersList.Clear();
-        alreadyGeneratedNewSoldiers = false;
-        Destroy(silhouetteGO);
-    } 
-     * */
+    
 
     public void RerollSoldiers()
     {
@@ -378,17 +270,15 @@ public class PanelScript : MonoBehaviour
         if (GameController.Instance._PREMIUM >= 200)
         {
             reroll = true;
-            /**/
+            
             foreach (GameObject soldier in newSoldiersList)
-            {
-                //dataService.DeleteCharactersValuesFromDb(soldier.GetComponent<Character>().characterBaseValues);
+            {    
                 Destroy(soldier);
-
             }
             
             newSoldiersList.Clear();
             InitializeNewHunters(false);
-            //GetNewSoldiers();
+       
             FillInNewSoldierStats();
 
             campTopPanelScript.ScalePremiumCount();
@@ -416,87 +306,13 @@ public class PanelScript : MonoBehaviour
                 newSoldiersList.Add(GenerateNewHunterGameObject(trans));
             }
             //TODO save new values into database async
-        }/*
-        else
-        {
-            newCharacterSoldierList = newHuntersValues.ToList();
-            int i = 0;
-            foreach (Transform trans in camsAndNewSoldiersPosition)
-            { //if we have 3 new hunters values, generate them and add to the list
-
-                newSoldiersList.Add(dataService.GenerateCharacterFromValues(newHuntersValues[i], trans.position));
-                i++;
-            }
         }
-        
-        foreach (GameObject newSoldier in newSoldiersList)
-        {
-            if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
-            {
-                newSoldier.GetComponent<NavMeshAgent>().enabled = false;
-                newSoldier.GetComponent<HunterStateMachine>().enabled = false;
-            }
-        }
-        */
         FillInNewSoldierStats();
 
         reroll = false;
 
     }
-    /*
-    public void GetNewSoldiers()
-    {
-        var start = DateTime.Now;
-
-        CharacterValues[] newHuntersValues = dataService.GetNewHuntersValues();
-
-        //check if there are already new hunters into database
-        if (reroll)
-        {
-            start = DateTime.Now;
-            //add one new hunter
-            foreach (Transform trans in camsAndNewSoldiersPosition)
-            {
-                newSoldiersList.Add(GenerateNewHunterGameObject(trans));
-            }
-            //print("Generating" + (DateTime.Now - start).TotalSeconds);
-        }
-        else
-        {
-            newCharacterSoldierList = newHuntersValues.ToList<CharacterValues>();
-            int i = 0;
-            foreach (Transform trans in camsAndNewSoldiersPosition)
-            { //if we have 3 new hunters values, generate them and add to the list
-
-                newSoldiersList.Add(dataService.GenerateCharacterFromValues(newHuntersValues[i], trans.position));
-                i++;
-            }
-        }
-
-        start = DateTime.Now;
-        foreach (GameObject newSoldier in newSoldiersList)
-        {
-            if (newSoldier.GetComponent<NavMeshAgent>().enabled == true && newSoldier.GetComponent<HunterStateMachine>().enabled == true)
-            {
-                newSoldier.GetComponent<NavMeshAgent>().enabled = false;
-                newSoldier.GetComponent<HunterStateMachine>().enabled = false;
-            }
-        }
-        //print("Removing navmesh " + (DateTime.Now - start).TotalSeconds);
-        start = DateTime.Now;
-        //newSoldiersList[0].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter1");
-        //newSoldiersList[1].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter2");
-        //newSoldiersList[2].transform.GetChild(2).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Hunter3");
-
-        FillInNewSoldierStats();
-        //print("After filling " + (DateTime.Now - start).TotalSeconds);
-        reroll = false;
-
-        ItemController.SaveItem(ItemController.ItemsLoaded);
-        CharacterController.SaveCharacters(CharacterController.CharactersLoaded);
-    }
-
-*/
+   
 
     void InitializeSoldiers()
     {
@@ -550,9 +366,6 @@ public class PanelScript : MonoBehaviour
                 soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = 12;
                 soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = 12;
             }
-            //soldiersList[i].transform.GetChild(2).transform.GetChild(0).gameObject.layer = layersIndices[i];
-            //soldiersList[i].GetComponentsInChildren<EquippableItem>()[0].gameObject.layer = layersIndices[i];
-            
 
             // Switches the animator out with the camp animator.
             SetCampAnimation(soldiersList[i].GetComponent<Character>());
@@ -792,154 +605,139 @@ public class PanelScript : MonoBehaviour
     public void UpdateSoldierStats(GameObject soldier, EquippableitemValues wepValues = null)
     {
         currentSoldier = soldier.GetComponent<Character>();
-        foreach (var stat in soldierStatsList)
+
+        if (currentSoldier.characterBaseValues.Type.ToString() == "Hunter")
         {
-
-            EquippableitemValues characterWeaponValues = new EquippableitemValues();
-
-            if (wepValues == null)
-                characterWeaponValues = currentSoldier.GetComponentInChildren<EquippableItem>().itemValues;
-            else
-                characterWeaponValues = wepValues;
-
-           
-            if (currentSoldier.characterBaseValues.Type.ToString() == "Hunter")
+            foreach (var stat in soldierStatsList)
             {
-                if (stat.name == "Damage")
-                {
-                    if(stat.GetComponent<Text>().enabled == false)
-                    {
-                        stat.GetComponent<Text>().enabled = true;
-                    }
-                    
-                    stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
-                }
-                if (stat.name == "Soldier Name")
-                {
 
-                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
-                }
-                if (stat.name == "Health")
-                {
-                   
-                    stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
-                }
-                if (stat.name == "Damage Speed")
-                {
-                    
-                    stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
-                }
-                if (stat.name == "Range")
-                {
-                   
-                    stat.GetComponent<Text>().text = currentSoldier.range.ToString();
-                }
-                if (stat.name == "Combat Trait")
-                {
-                    if (stat.GetComponent<Text>().enabled == false)
+                EquippableitemValues characterWeaponValues = new EquippableitemValues();
+
+                if (wepValues == null)
+                    characterWeaponValues = currentSoldier.GetComponentInChildren<EquippableItem>().itemValues;
+                else
+                    characterWeaponValues = wepValues;
+
+
+               
+                    if (stat.name == "Damage")
                     {
-                        stat.GetComponent<Text>().enabled = true;
+                        if (stat.GetComponent<Text>().enabled == false)
+                        {
+                            stat.GetComponent<Text>().enabled = true;
+                        }
+
+                        stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
                     }
-                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString() + "Description");
-                }
-                if (stat.name == "Target Trait")
-                {
-                    if (stat.GetComponent<Text>().enabled == false)
+                    if (stat.name == "Soldier Name")
                     {
-                        stat.GetComponent<Text>().enabled = true;
+
+                        stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
                     }
-                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString() + "Description");
-                }
-                if (stat.name == "CTrait")
-                {
-                    if (stat.GetComponent<Text>().enabled == false)
+                    if (stat.name == "Health")
                     {
-                        stat.GetComponent<Text>().enabled = true;
+
+                        stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
                     }
-                    stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString()) + ":\n";
-                }
-                if (stat.name == "TTrait")
-                {
-                    if (stat.GetComponent<Text>().enabled == false)
+                    if (stat.name == "Damage Speed")
                     {
-                        stat.GetComponent<Text>().enabled = true;
+
+                        stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
                     }
-                    stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString()) + ":\n";
-                }
-                if (stat.name == "Weapon Description")
-                {
-                   
-                    stat.GetComponent<Text>().text = characterWeaponValues.Type.ToString();
-                }
-                if (stat.name == "Type")
-                {
-                    stat.GetComponent<Text>().enabled = false;
-                }
-             
+                    if (stat.name == "Range")
+                    {
+
+                        stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                    }
+                    if (stat.name == "Combat Trait")
+                    {
+                        if (stat.GetComponent<Text>().enabled == false)
+                        {
+                            stat.GetComponent<Text>().enabled = true;
+                        }
+                        stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString() + "Description");
+                    }
+                    if (stat.name == "Target Trait")
+                    {
+                        if (stat.GetComponent<Text>().enabled == false)
+                        {
+                            stat.GetComponent<Text>().enabled = true;
+                        }
+                        stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString() + "Description");
+                    }
+                    if (stat.name == "CTrait")
+                    {
+                        if (stat.GetComponent<Text>().enabled == false)
+                        {
+                            stat.GetComponent<Text>().enabled = true;
+                        }
+                        stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.combatTrait.ToString()) + ":\n";
+                    }
+                    if (stat.name == "TTrait")
+                    {
+                        if (stat.GetComponent<Text>().enabled == false)
+                        {
+                            stat.GetComponent<Text>().enabled = true;
+                        }
+                        stat.GetComponent<Text>().text = " " + TranslationManager.Instance.GetTranslation(currentSoldier.characterBaseValues.targetTrait.ToString()) + ":\n";
+                    }
+                    if (stat.name == "Weapon Description")
+                    {
+
+                        stat.GetComponent<Text>().text = characterWeaponValues.name;
+                    }
+                
             }
 
-            if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
-            {            
-                if (stat.name == "Damage")
-                {
-                        
-                    stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
-                }
-                if (stat.name == "Soldier Name")
-                {
-                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
-                }
-                if (stat.name == "Health")
-                {
-                 
-                    stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
-                }
-                if (stat.name == "Damage Speed")
-                {
-                  
-                    stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
-                }
-                if (stat.name == "Range")
-                {
-                   
-                    stat.GetComponent<Text>().text = currentSoldier.range.ToString();
-                }
-                if (stat.name == "Combat Trait")
-                {
-                  
-                    stat.GetComponent<Text>().enabled = false;
-                }
-                if (stat.name == "Target Trait")
-                {
-                 
-                    stat.GetComponent<Text>().enabled = false;
-                }
-                if (stat.name == "CTrait")
-                {
-                  
-                    stat.GetComponent<Text>().enabled = false;
-                }
-                if (stat.name == "TTrait")
-                {
-                   
-                    stat.GetComponent<Text>().enabled = false;
-                }
-                if (stat.name == "Weapon Description")
-                {
-                   
-                    stat.GetComponent<Text>().text = characterWeaponValues.Type.ToString();
-                }
-                if (stat.name == "Type")
-                {
-                    if (stat.GetComponent<Text>().enabled == false)
-                    {
-                        stat.GetComponent<Text>().enabled = true;
-                    }               
-                }
-
-            }
         }
 
+        if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
+        {
+            print("playeraaa");
+            foreach (var stat in playerStatsList)
+            {
+
+                EquippableitemValues characterWeaponValues = new EquippableitemValues();
+
+                if (wepValues == null)
+                    characterWeaponValues = currentSoldier.GetComponentInChildren<EquippableItem>().itemValues;
+                else
+                    characterWeaponValues = wepValues;
+
+
+                if (stat.name == "Damage")
+                {
+
+                    stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
+                }
+                if (stat.name == "Soldier Name")
+                {
+                    stat.GetComponent<Text>().text = currentSoldier.characterBaseValues.name;
+                }
+                if (stat.name == "Health")
+                {
+
+                    stat.GetComponent<Text>().text = (currentSoldier.health - characterWeaponValues.health).ToString() + " + " + characterWeaponValues.health;
+                }
+                if (stat.name == "Damage Speed")
+                {
+
+                    stat.GetComponent<Text>().text = currentSoldier.damageSpeed.ToString();
+                }
+                if (stat.name == "Range")
+                {
+
+                    stat.GetComponent<Text>().text = currentSoldier.range.ToString();
+                }
+
+                if (stat.name == "Weapon Description")
+                {
+
+                    stat.GetComponent<Text>().text = characterWeaponValues.name;
+                }
+            }
+
+        }
     }
 
     #region InventoryMethods
@@ -1017,65 +815,7 @@ public class PanelScript : MonoBehaviour
         print(newWeaponsSoldierList);
         return hunter;
     }
-    /*
-    public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
-    {
-        var start = DateTime.Now;
-
-        var characterGenerator = new CharacterGenerator();
-        var weaponGenerator = new WeaponGenerator();
-
-        CharacterValues newCharValues = characterGenerator.GenerateNewHunterValues();
-
-        GameObject hunter = characterGenerator.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
-
-        //create new weapon for new soldier
-        Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
-        EquippableitemValues newWeaponValues = weaponGenerator.GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
-
-        //save the weapon in db
-        //newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
-
-        //spawn weapon
-        IEnumerable<GameObject> newWeapon = characterGenerator.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
-        Character hunterChar = hunter.GetComponent<Character>();
-        //attach the weapon
-
-        characterGenerator.equipItemsToCharacter(newWeapon, hunterChar);
-        newWeaponValues.characterId = newCharValues.id;
-
-        ItemController.ItemsLoaded.Add(newWeaponValues);
-        CharacterController.CharactersLoaded.Add(newCharValues);
-
-        newCharacterSoldierList.Add(newCharValues);
-        print("Total time " + (DateTime.Now - start).TotalSeconds);
-
-        return hunter;
-    }
-    */
-    //public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
-    //{
-    //    print("---------------------------------------------------------------");
-    //    var start = DateTime.Now;
-    //    CharacterValues newCharValues = GenerateNewHunterValues();
-    //    //add to database
-    //    dataService.AddcharacterToDbByValues(newCharValues);
-    //    GameObject hunter = dataService.GenerateCharacterFromValues(newCharValues, newSoldierTrans.position);
-
-    //    //create new weapon for new soldier
-    //    Array itemValues = Enum.GetValues(typeof(EquippableitemValues.type));
-    //    EquippableitemValues newWeaponValues = GetComponent<WeaponGenerator>().GenerateEquippableItem((EquippableitemValues.type)itemValues.GetValue(UnityEngine.Random.Range(0, itemValues.Length)), 1);
-    //    //save the weapon in db
-    //    newWeaponValues.id = dataService.AddWeaponInDbByValues(newWeaponValues);
-    //    //spawn weapon
-    //    IEnumerable<GameObject> newWeapon = dataService.GenerateEquippableItemsFromValues(new[] { newWeaponValues });
-    //    Character hunterChar = hunter.GetComponent<Character>();
-    //    //attach the weapon
-
-    //    dataService.equipItemsToCharacter(newWeapon, hunterChar);
-    //    print("Total " + (DateTime.Now - start).TotalSeconds);
-    //    return hunter;
-    //}
+    
 
     public CharacterValues GenerateNewHunterValues(int points = 0, float strenghtProbab = 0)
     {
@@ -1137,9 +877,6 @@ public class PanelScript : MonoBehaviour
             }
             randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         }
-
-        //charValues.damageSpeed = 5; 
-        //charValues.range = 5;    
 
         return charValues;
 
