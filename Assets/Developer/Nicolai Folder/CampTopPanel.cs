@@ -34,7 +34,7 @@ public class CampTopPanel : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        VillageCount.text = GameController.Instance._VILLAGERS.ToString();
+        VillageCount.text = GameController.Instance._VILLAGERS >= 0 ? GameController.Instance._VILLAGERS.ToString() : "0";
         FoodCount.text = GameController.Instance._FOOD.ToString();
         ScrapCount.text = GameController.Instance._SCRAPS.ToString();
         PremiumCount.text = GameController.Instance._PREMIUM.ToString();
@@ -43,7 +43,7 @@ public class CampTopPanel : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void UpdateResources(ResourcesUpdated e) {
-        VillageCount.text = GameController.Instance._VILLAGERS.ToString();
+        VillageCount.text = GameController.Instance._VILLAGERS >= 0 ? GameController.Instance._VILLAGERS.ToString() : "0";
         FoodCount.text = GameController.Instance._FOOD.ToString();
         ScrapCount.text = GameController.Instance._SCRAPS.ToString();
         PremiumCount.text = GameController.Instance._PREMIUM.ToString();
