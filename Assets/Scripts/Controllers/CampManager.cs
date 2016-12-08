@@ -175,6 +175,7 @@ public class CampManager : MonoBehaviour
 
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = "";
+        EventManager.Instance.TriggerEvent(new UpgradeCompleted());
         SaveUpgrades();
     }
 

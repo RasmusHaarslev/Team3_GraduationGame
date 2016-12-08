@@ -271,6 +271,14 @@ public class CommandEvent : GameEvent
 	}
 }
 
+public class UpgradeCompleted : GameEvent
+{
+    public UpgradeCompleted()
+    {
+
+    }
+}
+
 public class ClearedCampEvent : GameEvent
 {
 	public ClearedCampEvent()

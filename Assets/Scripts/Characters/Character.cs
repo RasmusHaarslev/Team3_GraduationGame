@@ -204,8 +204,9 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
+        EventManager.Instance.StartListening<UpgradeCompleted>(UpdateOnUpgrades);
 
-		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
+        equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
@@ -223,9 +224,11 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
-	}
+        EventManager.Instance.StopListening<UpgradeCompleted>(UpdateOnUpgrades);
 
-	private void BeginCombatState(EnemyAttackedByLeaderEvent e)
+    }
+
+    private void BeginCombatState(EnemyAttackedByLeaderEvent e)
 	{
 		if (!isInCombat)
 		{
@@ -237,6 +240,12 @@ public class Character : MonoBehaviour
 			}
 		}
 	}
+
+    public void UpdateOnUpgrades(UpgradeCompleted e)
+    {
+        health = characterBaseValues.Type == CharacterValues.type.Player ? characterBaseValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel * 4) : characterBaseValues.health;
+        damage = characterBaseValues.Type == CharacterValues.type.Player ? characterBaseValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel * 4) : characterBaseValues.damage;
+    }
 
 	IEnumerator GetWeapon()
 	{

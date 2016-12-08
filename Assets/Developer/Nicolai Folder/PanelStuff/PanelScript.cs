@@ -593,7 +593,6 @@ public class PanelScript : MonoBehaviour
 
             foreach (var stat in newSoldierStats)
             {
-
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = newCharacterSoldierList[i].damage.ToString(); 
@@ -739,7 +738,6 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-
                     stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
                 }
                 if (stat.name == "Soldier Name")
