@@ -44,7 +44,6 @@ public class GoToLevelSelection : MonoBehaviour {
     {
         Manager_Audio.PlaySound(Manager_Audio.play_openMap, gameObject);
         levelSelectionPanel.SetActive(true);
-
         gameObject.GetComponent<LevelSelectionGenerator>().SetScrollPosition(SaveLoadLevels.maxRowsCleared);
 
         if (winAnimation && nodeCleared) {
@@ -58,10 +57,6 @@ public class GoToLevelSelection : MonoBehaviour {
             levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
             LoseAnimateMap();
             loseAnimation = !loseAnimation;
-        }
-
-        if (SaveLoadLevels.lastNodeCleared != null) { 
-            SaveLoadLevels.lastNodeCleared.transform.GetChild(2).gameObject.SetActive(true);
         }
     }
 
@@ -96,12 +91,13 @@ public class GoToLevelSelection : MonoBehaviour {
                 Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
                 childNode.GetComponent<Animator>().SetTrigger("IsUnlocked");
                 yield return new WaitForSeconds(1f);
-            } else
+            } else if (childNode.GetComponent<Node>().isCleared)
             {
                 childNode.transform.GetChild(2).gameObject.SetActive(false);
             }
         }
 
+        yield return new WaitForSeconds(1f);
         levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = true;
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
     }
@@ -111,7 +107,7 @@ public class GoToLevelSelection : MonoBehaviour {
     void LoseAnimateMap()
     {
         GameObject nodeLost = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
-        Debug.Log(nodeLost.name);
+
         StartCoroutine(initLose(nodeLost));
     }
 
@@ -119,7 +115,8 @@ public class GoToLevelSelection : MonoBehaviour {
     {
         Manager_Audio.PlaySound(Manager_Audio.play_fadeNode, gameObject);
         node.GetComponent<Animator>().SetTrigger("IsLost");
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(2f);
         levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = true;
     }
     #endregion

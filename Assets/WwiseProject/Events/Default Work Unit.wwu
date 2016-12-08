@@ -52,6 +52,9 @@
 									</ElementList>
 								</Action>
 								<Action Name="Stop" ID="{D25827F1-8A5C-4CE8-998C-6C776E4CC8E3}" ShortID="412307998" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
 									<ElementList>
 										<Element ID="{F396D04A-4960-4B7F-9E87-150326872417}" Global="true">
 											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
@@ -779,6 +782,16 @@
 								</Element>
 							</ElementList>
 						</Action>
+						<Action Name="Stop" ID="{37F2F46C-EE8B-4BF8-92D5-798BBBCACA10}" ShortID="273583143" Type="Stop" Scope="One" Global="true">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ElementList>
+								<Element ID="{FDED9ABD-1070-446D-9CEB-52E98DE56BB0}" Global="true">
+									<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+								</Element>
+							</ElementList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Stop_MenuAmbience" ID="{96180AEE-6018-4842-BDB0-2AB436C20E03}">
@@ -1082,6 +1095,60 @@
 									<ElementList>
 										<Element ID="{66101F2F-7210-49C7-A0B0-52966096F47E}" Global="true">
 											<ObjectRef Name="IntroScene2" ID="{63CA1E37-B9AC-4945-83A8-0E5E706248E5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_Scene" ID="{D4D65D61-2B7E-4684-B768-5956B20F127B}">
+							<ChildrenList>
+								<Action Name="Stop" ID="{3D119838-D006-483A-9B7D-35F20E107735}" ShortID="672224751" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{0D88A2AE-6F3B-4561-B378-DA690F487534}" Global="true">
+											<ObjectRef Name="FleeCut" ID="{CC01C434-7313-4C45-9B01-8FC233DE8D33}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{D5C47AC0-BABC-4B35-B1BA-7BC18D5A686E}" ShortID="865983163" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{F57CC6E6-4C27-4B8B-8FE9-C3E0A459093F}" Global="true">
+											<ObjectRef Name="IntoScene" ID="{1D1B6533-B8D8-4F49-AF4E-4CB3584FDA0E}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{032A0B9A-EBAD-4730-8CB2-8E06B0A702AB}" ShortID="850149906" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{5A6CD028-DF05-4D33-B8C8-BD03A7386088}" Global="true">
+											<ObjectRef Name="IntroScene1" ID="{A36F547D-29C5-4685-A8C6-088338594EB5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{8C394E5B-6A17-4B85-9E60-D961031B7D06}" ShortID="88451659" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{79F0B41A-1B75-40F5-982A-98A18A266351}" Global="true">
+											<ObjectRef Name="IntroScene2" ID="{63CA1E37-B9AC-4945-83A8-0E5E706248E5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{EF904051-44B6-4BFA-AFA2-115482EB3CED}" ShortID="1019996379" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{E2DADAF3-7E68-4ED1-B9EE-B1B0B14E607B}" Global="true">
+											<ObjectRef Name="MovingInto" ID="{D23E1BD2-45F6-47D5-A338-DF24DBA8394F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
 										</Element>
 									</ElementList>
 								</Action>
