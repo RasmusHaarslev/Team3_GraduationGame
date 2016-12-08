@@ -13,6 +13,7 @@ public class EndSceneTransition : MonoBehaviour
     float time = 0f;
 
     public Boolean loadLevel = false;
+    public Boolean stopSound = false;
 
     void OnEnable()
     {
@@ -56,6 +57,9 @@ public class EndSceneTransition : MonoBehaviour
             time += Time.deltaTime * (1.0f / transitionTime);
             yield return null;
         }
+        if (stopSound)
+            AkSoundEngine.PostEvent("Stop_Scene", gameObject);
+
         if (loadLevel)
             GameController.Instance.LoadLevel();
         else
