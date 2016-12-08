@@ -23,6 +23,15 @@ public class NewSoldierConfirmationScript : MonoBehaviour
     {
         Manager_Audio.PlaySound(Manager_Audio.play_menuClick, gameObject);
         backgroundConfirmationPanel.SetActive(true);
+
+        if (GameController.Instance._VILLAGERS <= 0)
+        {
+            backgroundConfirmationPanel.transform.GetChild(1).gameObject.SetActive(true);
+        } else
+        {
+            backgroundConfirmationPanel.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         yesButton.GetComponent<Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<Button>().onClick.RemoveAllListeners();
         noButton.GetComponent<Button>().onClick.AddListener(ConfirmNo);

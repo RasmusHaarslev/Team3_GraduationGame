@@ -52,13 +52,6 @@ public class RivalStateMachine : CoroutineMachine
 		{
 			agent.Stop();
 		}
-		if (character.target != null && !character.isFleeing)
-		{
-			if (!character.isDead)
-			{
-				character.RotateTowards(character.target.transform);
-			}
-		}
 	}
 
 	IEnumerator StartState()
@@ -147,6 +140,12 @@ public class RivalStateMachine : CoroutineMachine
 				}
 			}
 		}
+		var aggroSphere = GetComponentInChildren<AggroRange>();
+		if (aggroSphere.enabled == true)
+		{
+
+		}
+			aggroSphere.enabled = false;
 		yield return new TransitionTo(FleeState, DefaultTransition);
 	}
 
@@ -177,7 +176,6 @@ public class RivalStateMachine : CoroutineMachine
 		}
 		if (!character.isDead)
 		{
-			agent.updateRotation = false;
 			character.RotateTowards(character.target.transform);
 			character.animator.SetTrigger("Attack");
 			yield return new WaitForSeconds(0.60f);

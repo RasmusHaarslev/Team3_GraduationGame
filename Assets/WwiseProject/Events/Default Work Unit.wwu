@@ -51,6 +51,13 @@
 										</Element>
 									</ElementList>
 								</Action>
+								<Action Name="Stop" ID="{D25827F1-8A5C-4CE8-998C-6C776E4CC8E3}" ShortID="412307998" Type="Stop" Scope="One" Global="true">
+									<ElementList>
+										<Element ID="{F396D04A-4960-4B7F-9E87-150326872417}" Global="true">
+											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="Play_windNoiseQuiet" ID="{5685C146-F07F-45B7-9A71-699068F9305C}">
@@ -68,7 +75,7 @@
 							<ChildrenList>
 								<Action Name="Stop" ID="{841D59BF-EFFB-4346-B87B-F50E7246125F}" ShortID="773082448" Type="Stop" Scope="One" Global="true">
 									<PropertyList>
-										<Property Name="FadeTime" Type="Real64" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="3"/>
 									</PropertyList>
 									<ElementList>
 										<Element ID="{E8F57E79-7BAB-4788-9235-58ADB15B2BB0}" Global="true">
@@ -927,6 +934,18 @@
 										<GroupItem Name="On" ID="{993E0C17-0E99-401D-8CC3-F23E2E56BEE9}"/>
 									</SetItemParam>
 								</Action>
+								<Action Name="Set Game Parameter" ID="{8A64BC2F-7738-4270-8007-CEF29B0030B2}" ShortID="615482785" Type="SetGameParameter" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="BypassGameParameterInternalTransition" Type="bool" Value="True"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{C2CB6FD2-5400-450E-B5CC-A33D872E6D48}" Global="true">
+											<ObjectRef Name="pan" ID="{DDA5A52F-8B69-45DC-A839-5587A4E2DCD1}" WorkUnitID="{AF8BB386-55BF-49A9-970A-610545106FDF}"/>
+										</Element>
+									</ElementList>
+								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="PanUpExit" ID="{68F0B444-456B-44CC-B714-AE97F2D6FDC6}">
@@ -936,6 +955,16 @@
 										<Group Name="PanUpEvent" ID="{194E3529-202A-47EA-9310-0A276377CC72}"/>
 										<GroupItem Name="Off" ID="{43EDE367-0788-4613-853B-80CFC6744A9C}"/>
 									</SetItemParam>
+								</Action>
+								<Action Name="Set Game Parameter" ID="{BFD6257F-4E02-4527-A2F5-3D39EC9B5526}" ShortID="18209785" Type="SetGameParameter" Scope="One" Global="false">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{D17EBAC8-AB02-449F-B70B-BCD35B451FA4}" Global="false">
+											<ObjectRef Name="pan" ID="{DDA5A52F-8B69-45DC-A839-5587A4E2DCD1}" WorkUnitID="{AF8BB386-55BF-49A9-970A-610545106FDF}"/>
+										</Element>
+									</ElementList>
 								</Action>
 							</ChildrenList>
 						</Event>
@@ -956,6 +985,110 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="Empty" ID="{C5484559-C33D-4E6F-B75A-E5AFA7D0E32B}"/>
+				<Folder Name="CutScenes" ID="{6E38921F-F6A2-4AE2-A016-7CA5D690CCDD}" ShortID="556754138">
+					<ChildrenList>
+						<Event Name="Play_IntroScene1" ID="{B39643DE-565F-49C8-A18C-64C1BCFB49EB}">
+							<ChildrenList>
+								<Action Name="Play" ID="{736D6E4F-F5EE-40CC-9B3A-A6D85A1C844C}" ShortID="811030093" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{00BDFA40-10DE-4B35-9983-08FC283A2523}" Global="false">
+											<ObjectRef Name="IntroScene1" ID="{A36F547D-29C5-4685-A8C6-088338594EB5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_FleeCut" ID="{332260FB-136C-4BF2-B9DA-C61B00FC262C}">
+							<ChildrenList>
+								<Action Name="Play" ID="{CC6248FE-86DD-4F47-A324-405700068FC3}" ShortID="756647984" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{9F609CCB-506D-4E22-ABE7-D9748AF3495C}" Global="false">
+											<ObjectRef Name="FleeCut" ID="{CC01C434-7313-4C45-9B01-8FC233DE8D33}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Play" ID="{33540555-E105-443A-8280-899F63E4E5A3}" ShortID="833491403" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{B573538C-5BD8-46AD-8739-F6ED4CAE3CDB}" Global="false">
+											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_IntoScene" ID="{5B359967-DCC0-447A-AA76-BBBCD8AF6349}">
+							<ChildrenList>
+								<Action Name="Play" ID="{7C6E5A00-5620-4CA0-AC3F-FDDB4EE29050}" ShortID="801468995" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{4B76B8AD-1B68-467C-8381-34F134278A64}" Global="false">
+											<ObjectRef Name="IntoScene" ID="{1D1B6533-B8D8-4F49-AF4E-4CB3584FDA0E}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Play" ID="{2E9AA62B-7B98-45D0-B9A7-7C21AEA5D3B4}" ShortID="1065852244" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{9BBA2EC3-D313-425F-A686-C0BCB58B4A66}" Global="false">
+											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_IntroScene2" ID="{1F319CB2-6EDE-4044-9C4C-6F331EC09731}">
+							<ChildrenList>
+								<Action Name="Play" ID="{A598FF5B-35F9-4537-8161-D16CEAC1E5A5}" ShortID="876058360" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{64119B23-7F5E-4D44-80C5-571D2077401E}" Global="false">
+											<ObjectRef Name="IntroScene2" ID="{63CA1E37-B9AC-4945-83A8-0E5E706248E5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_MovingInto" ID="{25B7F304-4950-4C2C-AD5B-B991B7A1F68D}">
+							<ChildrenList>
+								<Action Name="Play" ID="{3C4FA429-B4A7-4990-BAA4-2F1BC6D617B6}" ShortID="752419570" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{E9BC6D8D-086B-47BA-9330-794A885C8281}" Global="false">
+											<ObjectRef Name="MovingInto" ID="{D23E1BD2-45F6-47D5-A338-DF24DBA8394F}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Play" ID="{47C14C4A-ACA7-496B-93C6-B07403866A87}" ShortID="404436943" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{AD4A1DB9-21B6-490C-9FD5-40FE9F84ADA5}" Global="false">
+											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_CutScene" ID="{8939141C-835F-47BE-8E20-05453ADD2200}">
+							<ChildrenList>
+								<Action Name="Stop" ID="{8A8EFAB2-5EF8-451C-B3B3-3042ADB867AF}" ShortID="850998104" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{55969819-687B-4AD0-BBC8-4CFFF5005DA5}" Global="true">
+											<ObjectRef Name="CutWind" ID="{246F3D83-4CE2-4F98-A934-C2B0B8CE3C37}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+								<Action Name="Stop" ID="{412A1C91-6360-434C-B606-CD15777F796B}" ShortID="60123273" Type="Stop" Scope="One" Global="true">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ElementList>
+										<Element ID="{66101F2F-7210-49C7-A0B0-52966096F47E}" Global="true">
+											<ObjectRef Name="IntroScene2" ID="{63CA1E37-B9AC-4945-83A8-0E5E706248E5}" WorkUnitID="{C4D12083-B419-4C5F-968F-41DE6713577F}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

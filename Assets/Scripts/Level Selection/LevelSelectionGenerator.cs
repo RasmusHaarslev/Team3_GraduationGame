@@ -60,7 +60,6 @@ public class LevelSelectionGenerator : MonoBehaviour
     int goldteethDrop = 2;
     #endregion
 
-    private LevelsDatabase database;
     public Dictionary<int, List<GameObject>> nodesInRows = new Dictionary<int, List<GameObject>>();
     List<GameObject> nodes = new List<GameObject>();
 
@@ -82,9 +81,8 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     void Awake()
     {
-        database = Resources.Load("ScriptableObjects/LevelsDatabase") as LevelsDatabase;
 
-        if (database.Rows.Count() == 0 || PlayerPrefs.GetInt("LevelsInstantiated") != 1)
+        if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
         {
             InstantiateRows(amountOfRows);
             PlayerPrefs.SetInt("LevelsInstantiated", 1);
@@ -408,11 +406,6 @@ public class LevelSelectionGenerator : MonoBehaviour
             goldteethDrop -= teethAmount;
             Debug.Log("GOLD LEFT : " + goldteethDrop + " Row : " + amountOfRows + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!! : " + teethAmount);
         }
-
-        //      node.GetComponent<Node>().sceneSelection = UnityEngine.Random.Range(2, numberOfScenes + 2);
-        /*      node.GetComponent<Node>().probabilityWolves = probabilityWolves;
-                node.GetComponent<Node>().probabilityTribes = probabilityTribes;
-                node.GetComponent<Node>().probabilityChoice = probabilityChoices; */
     }
 
     #region Helper function

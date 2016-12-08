@@ -45,7 +45,7 @@ namespace Assets.Editor
 
                     GUILayout.Label("Initial resources", EditorStyles.boldLabel);
                     gameControllerScript.InitialFood = EditorGUILayout.IntField("Initial food", gameControllerScript.InitialFood);
-                    gameControllerScript.InitialVillages = EditorGUILayout.IntField("Initial villages", gameControllerScript.InitialVillages);
+                    gameControllerScript.InitialVillagers = EditorGUILayout.IntField("Initial villages", gameControllerScript.InitialVillagers);
                     gameControllerScript.InitialScrap = EditorGUILayout.IntField("Initial scrap", gameControllerScript.InitialScrap);
                     gameControllerScript.InitialPremium = EditorGUILayout.IntField("Initial premium", gameControllerScript.InitialPremium);
 

@@ -41,9 +41,13 @@
 				<Event Id="1126010832" Name="Play_ExploreMusic" ObjectPath="\Events\Default Work Unit\Play_ExploreMusic"/>
 				<Event Id="3552896197" Name="Play_FemaleWarrior1Attack" ObjectPath="\Events\Default Work Unit\Warriors\Play_FemaleWarrior1Attack"/>
 				<Event Id="324117657" Name="Play_FemaleWarrior1Death" ObjectPath="\Events\Default Work Unit\Warriors\Play_FemaleWarrior1Death"/>
+				<Event Id="382062262" Name="Play_FleeCut" ObjectPath="\Events\Default Work Unit\CutScenes\Play_FleeCut"/>
 				<Event Id="1820147880" Name="Play_GenericHit" ObjectPath="\Events\Default Work Unit\Combat\Play_GenericHit" MaxAttenuation="15.000000"/>
 				<Event Id="3254793675" Name="Play_GroundAmbience" ObjectPath="\Events\Default Work Unit\Ambience\Play_GroundAmbience"/>
 				<Event Id="939012970" Name="Play_IntoLevel" ObjectPath="\Events\Default Work Unit\UI\Play_IntoLevel"/>
+				<Event Id="1047912240" Name="Play_IntoScene" ObjectPath="\Events\Default Work Unit\CutScenes\Play_IntoScene"/>
+				<Event Id="1933575273" Name="Play_IntroScene1" ObjectPath="\Events\Default Work Unit\CutScenes\Play_IntroScene1"/>
+				<Event Id="1933575274" Name="Play_IntroScene2" ObjectPath="\Events\Default Work Unit\CutScenes\Play_IntroScene2"/>
 				<Event Id="2412941441" Name="Play_LeaderAttack" ObjectPath="\Events\Default Work Unit\Combat\Play_LeaderAttack" MaxAttenuation="0.000000"/>
 				<Event Id="4007042469" Name="Play_LeaderDeath" ObjectPath="\Events\Default Work Unit\Play_LeaderDeath"/>
 				<Event Id="441061787" Name="Play_LeaderFootStep" ObjectPath="\Events\Default Work Unit\test\Play_LeaderFootStep" MaxAttenuation="15.000000"/>
@@ -53,6 +57,7 @@
 				<Event Id="1918433323" Name="Play_MenuAmbience" ObjectPath="\Events\Default Work Unit\Play_MenuAmbience"/>
 				<Event Id="2570041344" Name="Play_MenuMusic" ObjectPath="\Events\Default Work Unit\Play_MenuMusic" MaxAttenuation="0.000000"/>
 				<Event Id="3719726781" Name="Play_MenuUI" ObjectPath="\Events\Default Work Unit\UI\Play_MenuUI"/>
+				<Event Id="3490699058" Name="Play_MovingInto" ObjectPath="\Events\Default Work Unit\CutScenes\Play_MovingInto"/>
 				<Event Id="1694930636" Name="Play_NodeFade" ObjectPath="\Events\Default Work Unit\UI\Play_NodeFade"/>
 				<Event Id="3493304896" Name="Play_NonClearMap" ObjectPath="\Events\Default Work Unit\UI\Play_NonClearMap"/>
 				<Event Id="623878550" Name="Play_OpenMapUI" ObjectPath="\Events\Default Work Unit\UI\Play_OpenMapUI"/>
@@ -75,6 +80,7 @@
 				<Event Id="1661144613" Name="Play_windFlags" ObjectPath="\Events\Default Work Unit\Ambience\Play_windFlags" MaxAttenuation="15.000000"/>
 				<Event Id="3104904358" Name="Play_windhowl" ObjectPath="\Events\Default Work Unit\Ambience\Play_windhowl" MaxAttenuation="15.000000"/>
 				<Event Id="1938796326" Name="Play_windNoiseQuiet" ObjectPath="\Events\Default Work Unit\Ambience\Play_windNoiseQuiet" MaxAttenuation="15.000000"/>
+				<Event Id="1355168848" Name="Stop_CutScene" ObjectPath="\Events\Default Work Unit\CutScenes\Stop_CutScene" MaxAttenuation="0.000000"/>
 				<Event Id="3484799022" Name="Stop_ExploreMusic" ObjectPath="\Events\Default Work Unit\Stop_ExploreMusic" MaxAttenuation="0.000000"/>
 				<Event Id="3125842213" Name="Stop_GroundAmbience" ObjectPath="\Events\Default Work Unit\Ambience\Stop_GroundAmbience" MaxAttenuation="0.000000"/>
 				<Event Id="484731529" Name="Stop_MenuAmbience" ObjectPath="\Events\Default Work Unit\Stop_MenuAmbience" MaxAttenuation="0.000000"/>
@@ -203,6 +209,10 @@
 					<ShortName>Whoosh1_13.1.wav</ShortName>
 					<Path>SFX/Whoosh1_13.1_63DB481E.wem</Path>
 				</File>
+				<File Id="238337419" Language="SFX">
+					<ShortName>CutSceneWind.wav</ShortName>
+					<Path>SFX/CutSceneWind_52BD694B.wem</Path>
+				</File>
 				<File Id="242360598" Language="SFX">
 					<ShortName>PowerPole1.wav</ShortName>
 					<Path>SFX/PowerPole1_9FE1A03B.wem</Path>
@@ -258,6 +268,10 @@
 				<File Id="287159919" Language="SFX">
 					<ShortName>ShieldHit.wav</ShortName>
 					<Path>SFX/ShieldHit_63DB481E.wem</Path>
+				</File>
+				<File Id="287897395" Language="SFX">
+					<ShortName>FleeCut.wav</ShortName>
+					<Path>SFX/FleeCut_52BD694B.wem</Path>
 				</File>
 				<File Id="288609740" Language="SFX">
 					<ShortName>FootStepsSneak5.wav</ShortName>
@@ -323,6 +337,10 @@
 					<ShortName>FootStepsSneak7.wav</ShortName>
 					<Path>SFX/FootStepsSneak7_76A9233F.wem</Path>
 				</File>
+				<File Id="340917373" Language="SFX">
+					<ShortName>IntroScene2.wav</ShortName>
+					<Path>SFX/IntroScene2_52BD694B.wem</Path>
+				</File>
 				<File Id="342779998" Language="SFX">
 					<ShortName>HItSweet2.wav</ShortName>
 					<Path>SFX/HItSweet2_C5B73D32.wem</Path>
@@ -338,6 +356,10 @@
 				<File Id="364989889" Language="SFX">
 					<ShortName>MaleWarrior1Attack1.wav</ShortName>
 					<Path>SFX/MaleWarrior1Attack1_52BD694B.wem</Path>
+				</File>
+				<File Id="366025221" Language="SFX">
+					<ShortName>IntoScene.wav</ShortName>
+					<Path>SFX/IntoScene_52BD694B.wem</Path>
 				</File>
 				<File Id="368430150" Language="SFX">
 					<ShortName>FootStepsBoot9.wav</ShortName>
@@ -739,6 +761,10 @@
 					<ShortName>ShieldHit2.wav</ShortName>
 					<Path>SFX/ShieldHit2_63DB481E.wem</Path>
 				</File>
+				<File Id="907949770" Language="SFX">
+					<ShortName>IntroScene1.wav</ShortName>
+					<Path>SFX/IntroScene1_52BD694B.wem</Path>
+				</File>
 				<File Id="920421814" Language="SFX">
 					<ShortName>FootStepsSneak1.wav</ShortName>
 					<Path>SFX/FootStepsSneak1_76A9233F.wem</Path>
@@ -750,6 +776,10 @@
 				<File Id="934244384" Language="SFX">
 					<ShortName>MaleWarrior1Attack6.wav</ShortName>
 					<Path>SFX/MaleWarrior1Attack6_52BD694B.wem</Path>
+				</File>
+				<File Id="935382740" Language="SFX">
+					<ShortName>MovingInto.wav</ShortName>
+					<Path>SFX/MovingInto_52BD694B.wem</Path>
 				</File>
 				<File Id="936200641" Language="SFX">
 					<ShortName>Scout.wav</ShortName>

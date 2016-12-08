@@ -307,6 +307,7 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
+		agent.updateRotation = true;
 		character.animator.SetBool("isAware", false);
 		character.isInCombat = false;
 		if (!character.isDead)
@@ -391,7 +392,6 @@ public class HunterStateMachine : CoroutineMachine
 					yield return new TransitionTo(StartState, DefaultTransition);
 				}
 			}
-			agent.updateRotation = false;
 			character.RotateTowards(character.target.transform);
 			character.animator.SetTrigger("Attack");
 			yield return new WaitForSeconds(0.60f);

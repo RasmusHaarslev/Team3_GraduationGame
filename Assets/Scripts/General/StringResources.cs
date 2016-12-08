@@ -22,6 +22,11 @@ public class StringResources
         public static string PremiumDropAmountPrefsName = "PremiumDropAmount";
         public static string DaysSurvived = "DaysSurvived";
 
+        public static string Food = "Food";
+        public static string Scrap = "Scrap";
+        public static string Villagers = "Villagers";
+        public static string Premium = "Premium";
+
     #endregion
 
     #region PREFABS
@@ -219,6 +224,5 @@ public class StringResources
 
 
     #endregion
-
      
 }

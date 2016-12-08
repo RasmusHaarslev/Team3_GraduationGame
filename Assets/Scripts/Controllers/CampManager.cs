@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CampManager : MonoBehaviour
 {
-    public UpgradesDatabase Upgrades;
+    public CampUpgrades Upgrades;
     public int GatherCost;
     public int GatherCostIncrease;
 
@@ -67,13 +67,32 @@ public class CampManager : MonoBehaviour
 
     public void SaveUpgrades()
     {
-        Upgrades = Resources.Load("ScriptableObjects/UpgradesDatabase") as UpgradesDatabase;
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
+
+        var serializer = new XmlSerializer(typeof(CampUpgrades));
+        var stream = new FileStream(path, FileMode.Create);
+        serializer.Serialize(stream, Upgrades);
+        stream.Close();
     }
 
     public void LoadUpgrades()
     {
-        Upgrades = Resources.Load("ScriptableObjects/UpgradesDatabase") as UpgradesDatabase;
-        Upgrades.SetCurrency();
+        var path = Path.Combine(PersistentData.GetPath(), "upgrades.xml");
+
+        if (File.Exists(path))
+        {
+            var serializer = new XmlSerializer(typeof(CampUpgrades));
+            var stream = new FileStream(path, FileMode.Open);
+            Upgrades = serializer.Deserialize(stream) as CampUpgrades;
+            stream.Close();
+
+            Upgrades.GetCurrency();
+        }
+        else
+        {
+            Upgrades = new CampUpgrades();
+            SaveUpgrades();
+        }
     }
 
     public void PerformUpgrade()
@@ -122,7 +141,7 @@ public class CampManager : MonoBehaviour
         Manager_Audio.PlaySound(Manager_Audio.play_buyGold, gameObject);
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = tempUpgradeName;
-        Upgrades.Gold -= FinishUpgradeCost;
+        Upgrades.Premium -= FinishUpgradeCost;
 
         // Update premium resource in GameController.
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: -FinishUpgradeCost));
@@ -194,35 +213,75 @@ public class CampManager : MonoBehaviour
     private int GetTimeForUpgrade(int level) {
         switch (level)
         {
-            case 0:
+            case 2:
                 return Level1_Time;
 
-            case 1:
+            case 3:
                 return Level2_Time;
 
-            case 2:
+            case 4:
                 return Level3_Time;
 
-            case 3:
+            case 5:
                 return Level4_Time;
 
-            case 4:
+            case 6:
                 return Level5_Time;
 
-            case 5:
+            case 7:
                 return Level6_Time;
 
-            case 6:
+            case 8:
                 return Level7_Time;
 
-            case 7:
+            case 9:
                 return Level8_Time;
 
-            case 8:
+            case 10:
                 return Level9_Above_Time;
 
             default:
                 return Level9_Above_Time;
         }
+    }
+}
+
+[Serializable]
+public class CampUpgrades
+{
+    #region State
+
+    public bool UpgradeInProgress = false;
+    public string UpgradeBought = "";
+
+    #endregion
+
+    #region Upgradeables
+
+    public int GatherLevel = 1;
+    public int MaxVillages = 1;
+    public int BlacksmithLevel = 1;
+    public int LeaderHealthLevel = 1;
+    public int LeaderStrengthLevel = 1;
+
+    #endregion
+
+    #region Currency
+
+    public int Premium = 0;
+    public int Scrap = 0;
+    public int Food = 0;
+    public int Villagers = 0;
+
+    #endregion
+
+    public CampUpgrades() { }
+
+    public void GetCurrency()
+    {
+        Premium = PlayerPrefs.GetInt(StringResources.Premium);
+        Food = PlayerPrefs.GetInt(StringResources.Food);
+        Scrap = PlayerPrefs.GetInt(StringResources.Scrap);
+        Villagers = PlayerPrefs.GetInt(StringResources.Villagers);
     }
 }
