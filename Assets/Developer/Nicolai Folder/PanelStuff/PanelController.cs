@@ -25,13 +25,30 @@ public class PanelController : MonoBehaviour, IPointerClickHandler
             panel.SetActive(true);
         }
 
-        if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
+        //if (gameObject.CompareTag("Friendly") || gameObject.CompareTag("Player") && panelScript.panelList[1].activeSelf == false)
+        //{
+        //    Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
+        //    panelScript.UpdateSoldierStats(gameObject);
+        //    panelScript.ActivateCamera(gameObject);
+        //    panelScript.panelList[3].SetActive(true);
+        //    panelScript.panelList[1].SetActive(true);
+        //}
+        if (gameObject.CompareTag("Friendly") && panelScript.panelList[1].activeSelf == false)
         {
             Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
             panelScript.UpdateSoldierStats(gameObject);
             panelScript.ActivateCamera(gameObject);
             panelScript.panelList[3].SetActive(true);
             panelScript.panelList[1].SetActive(true);
+        }
+
+        if (gameObject.CompareTag("Player") && panelScript.panelList[7].activeSelf == false)
+        {
+            Manager_Audio.PlaySound(Manager_Audio.play_charSel, gameObject);
+            panelScript.UpdateSoldierStats(gameObject);
+            panelScript.ActivateCamera(gameObject);
+            panelScript.panelList[3].SetActive(true);
+            panelScript.panelList[7].SetActive(true);
         }
 
         if (gameObject.CompareTag("MapTable") && panelScript.panelList[2].activeSelf == false)

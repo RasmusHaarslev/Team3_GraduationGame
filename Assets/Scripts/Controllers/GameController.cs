@@ -12,13 +12,13 @@ public class GameController : MonoBehaviour
 	public bool isUIActive = false;
 	public int numberOfActiveUIs = 0;
 
-    public int InitialFood = 8;
-    public int InitialVillages = 10;
+    public int InitialFood = 0;
+    public int InitialVillagers = 10;
     public int InitialScrap = 0;
     public int InitialPremium = 0;
     public int InitialDaysSurvived = 0;
 
-    public int _FOOD = 8;
+    public int _FOOD = 0;
     public int _VILLAGERS = 10;
     public int _SCRAPS = 0;
     public int _PREMIUM = 0;
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
     void OnEnable()
     {
 		EventManager.Instance.StartListening<UIPanelActiveEvent>(ChangeUIState);
-		EventManager.Instance.StartListening<ChangeResources>(UpdateResources);
+		EventManager.Instance.StartListening<ChangeResources>(UpdateResources);        
     }
 
 	private void ChangeUIState(UIPanelActiveEvent e)
@@ -85,11 +85,11 @@ public class GameController : MonoBehaviour
 
     private void SaveResources()
     {
-        PlayerPrefs.SetInt("Food", _FOOD);
-        PlayerPrefs.SetInt("Villagers", _VILLAGERS);
-        PlayerPrefs.SetInt("Scraps", _SCRAPS);
-        PlayerPrefs.SetInt("Premium", _PREMIUM);
-        PlayerPrefs.SetInt("DaysSurvived", _DAYS_SURVIVED);
+        PlayerPrefs.SetInt(StringResources.Food, _FOOD);
+        PlayerPrefs.SetInt(StringResources.Villagers, _VILLAGERS);
+        PlayerPrefs.SetInt(StringResources.Scrap, _SCRAPS);
+        PlayerPrefs.SetInt(StringResources.Premium, _PREMIUM);
+        PlayerPrefs.SetInt(StringResources.DaysSurvived, _DAYS_SURVIVED);
     }
 
     void Awake()
@@ -105,24 +105,22 @@ public class GameController : MonoBehaviour
         _dataService = new DataService(StringResources.databaseName);
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, 3);
 
-        if (PlayerPrefs.HasKey("Food"))
+        if (PlayerPrefs.HasKey(StringResources.Food))
         {
-            _FOOD = PlayerPrefs.GetInt("Food");
-            _VILLAGERS = PlayerPrefs.GetInt("Villagers");
-            _SCRAPS = PlayerPrefs.GetInt("Scraps");
-            _PREMIUM = PlayerPrefs.GetInt("Premium");
-            _DAYS_SURVIVED = PlayerPrefs.GetInt("DaysSurvived");
+            _FOOD = PlayerPrefs.GetInt(StringResources.Food);
+            _VILLAGERS = PlayerPrefs.GetInt(StringResources.Villagers);
+            _SCRAPS = PlayerPrefs.GetInt(StringResources.Scrap);
+            _PREMIUM = PlayerPrefs.GetInt(StringResources.Premium);
+            _DAYS_SURVIVED = PlayerPrefs.GetInt(StringResources.DaysSurvived);
         }
         else
         {            
-            PlayerPrefs.SetInt("Food", InitialFood);
-            PlayerPrefs.SetInt("Villagers", InitialVillages);
-            PlayerPrefs.SetInt("Scraps", InitialScrap);
-            PlayerPrefs.SetInt("Premium", InitialPremium);
-            PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
-        }
-
-        Debug.Log(PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName));
+            PlayerPrefs.SetInt(StringResources.Food, InitialFood);
+            PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers);
+            PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
+            PlayerPrefs.SetInt(StringResources.Premium, InitialPremium);
+            PlayerPrefs.SetInt(StringResources.DaysSurvived, InitialDaysSurvived);
+        }        
     }
 
     public void LoadScene(string scene)
@@ -148,7 +146,6 @@ public class GameController : MonoBehaviour
 
     public void LoadLevel()
     {
-
         var sceneListTxt = Resources.Load("ScenesList", typeof(TextAsset)) as TextAsset;
 
         System.IO.StringReader reader = new System.IO.StringReader(sceneListTxt.text);
@@ -176,17 +173,18 @@ public class GameController : MonoBehaviour
 
     public void ResetResources()
     {
+        
         _FOOD = InitialFood;
-        _VILLAGERS = InitialVillages;
+        _VILLAGERS = InitialVillagers;
         _SCRAPS = InitialScrap;
          //= InitialPremium;
         _DAYS_SURVIVED = InitialDaysSurvived;
 
-        PlayerPrefs.SetInt("Food", InitialFood);
-        PlayerPrefs.SetInt("Villagers", InitialVillages + (CampManager.Instance.Upgrades.MaxVillages) - 1);
-        PlayerPrefs.SetInt("Scraps", InitialScrap);
-        PlayerPrefs.SetInt("Premium", _PREMIUM);
-        PlayerPrefs.SetInt("DaysSurvived", InitialDaysSurvived);
+        PlayerPrefs.SetInt(StringResources.Food, InitialFood);
+        PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers + (CampManager.Instance.Upgrades.MaxVillages) - 1);
+        PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
+        PlayerPrefs.SetInt(StringResources.Premium, _PREMIUM);
+        PlayerPrefs.SetInt(StringResources.DaysSurvived, InitialDaysSurvived);
 
         EventManager.Instance.TriggerEvent(new ChangeResources(food: 8));
     }
