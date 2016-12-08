@@ -243,7 +243,14 @@ public class HunterStateMachine : CoroutineMachine
 									}
 									if (distanceToTarget < agent.stoppingDistance)
 									{
-										yield return new TransitionTo(CombatState, DefaultTransition);
+										if (character.range == 2 && Mathf.Abs(transform.position.y - character.target.transform.position.y) >= 2)
+										{
+											yield return new TransitionTo(EngageState, DefaultTransition);
+										}
+										else
+										{
+											yield return new TransitionTo(CombatState, DefaultTransition);
+										}
 									}
 									else
 									{

@@ -123,6 +123,14 @@ public class LevelLost : GameEvent
     }
 }
 
+public class GameLost : GameEvent
+{
+    public GameLost()
+    {
+
+    }
+}
+
 public class EnemySpottedEvent : GameEvent {
 
 	public GameObject parent;
@@ -282,4 +290,14 @@ public class UIPanelActiveEvent : GameEvent
 	{
 		this.panelActive = panelActive;
 	}
+}
+
+public class EndSceneTransitionEvent : GameEvent
+{
+    public string scene;
+
+    public EndSceneTransitionEvent(string scene)
+    {
+        this.scene = scene;
+    }
 }

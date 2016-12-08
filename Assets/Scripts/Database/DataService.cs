@@ -166,7 +166,7 @@ public class DataService : MonoBehaviour
               isMale = true,
               tier = 1,
               damage = 3,
-              health = 45,
+              health = 65,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -180,7 +180,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 2,
               damage = 3,
-              health = 45,
+              health = 65,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -194,7 +194,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 3,
               damage = 6,
-              health = 60,
+              health = 85,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -208,7 +208,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 4,
               damage = 6,
-              health = 60,
+              health = 85,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -221,8 +221,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
-              damage = 8,
-              health = 70,
+              damage = 10,
+              health = 95,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -235,8 +235,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 6,
-              damage = 8,
-              health = 70,
+              damage = 10,
+              health = 95,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -251,7 +251,7 @@ public class DataService : MonoBehaviour
              new EquippableitemValues
          {
              id = 2,//john weapon
-             name = "Initiate Rifle",
+             name = "Makeshift Rifle",
              Type = EquippableitemValues.type.rifle,
              Slot = EquippableitemValues.slot.rightHand,
              level = 1,
@@ -260,12 +260,13 @@ public class DataService : MonoBehaviour
              damageSpeed = 1.5f,
              range = 9,
              characterId = 2,
+             materialName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][2],
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
          },
              new EquippableitemValues
          {
              id = 3, //Nicolai weapom
-             name = "Initiate Spear",
+             name = "Rusty Spear",
              Type = EquippableitemValues.type.polearm,
              Slot = EquippableitemValues.slot.rightHand,
              level = 1,
@@ -274,12 +275,13 @@ public class DataService : MonoBehaviour
              damageSpeed = 1.5f,
              range = 2,
              characterId = 3,
+             materialName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][2],
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.polearm][0][1]
          },
              new EquippableitemValues
          {
              id = 4, //Peter weapon
-             name = "Initiate Shield",
+             name = "Cracked Shield",
              Type = EquippableitemValues.type.shield,
              Slot = EquippableitemValues.slot.leftHand,
              level = 1,
@@ -288,6 +290,7 @@ public class DataService : MonoBehaviour
              damageSpeed = 2.5f,
              range = 2,
              characterId = 4,
+             materialName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][2],
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.shield][0][1]
          },
              new EquippableitemValues

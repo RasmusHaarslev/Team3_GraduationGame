@@ -10,7 +10,7 @@ public class RotateWeapon : MonoBehaviour {
         {
             transform.Rotate(0, 0, 50 * Time.deltaTime);
         }
-        if (gameObject.name.ToString() == "Shield")
+        if (gameObject.name.ToString() == "Shield" || gameObject.name.ToString() == "Shield2")
         {
             transform.Rotate(0, 50 * Time.deltaTime, 0);
         }

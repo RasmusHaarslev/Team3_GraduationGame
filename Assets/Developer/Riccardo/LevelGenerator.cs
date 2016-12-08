@@ -60,7 +60,10 @@ public class LevelGenerator : MonoBehaviour
 
         if (!isTutorial)
         {
-            dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
+            //dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentInChildren<FellowshipSpawnPoint>().transform);
+
+            int i = Random.Range(0,2);
+            dataService.GetPlayerFellowshipInPosition(gameObject.GetComponentsInChildren<FellowshipSpawnPoint>()[i].transform);
         }
         //		Manager_Audio.PlaySound(Manager_Audio.musicExploreStart, this.gameObject);
         //		Manager_Audio.PlaySound(Manager_Audio.baseAmbiencePlay, this.gameObject);
