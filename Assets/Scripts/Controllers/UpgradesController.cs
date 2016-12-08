@@ -17,7 +17,7 @@ public class UpgradesController : MonoBehaviour {
 
         if (PlayerPrefs.HasKey("GatherDate"))
         {
-            Amount.text = "+ " + (CampManager.Instance.Upgrades.GatherLevel * 2) + " Food";
+            Amount.text = "+ " + (CampManager.Instance.Upgrades.GatherLevel * 2) + " " + TranslationManager.Instance.GetTranslation("Scraps").ToLower();
 
             var lastGather = DateTime.Parse(PlayerPrefs.GetString("GatherDate"));
             PlayerPrefs.SetString("GatherDate", (currentDate.ToString()));
@@ -28,8 +28,8 @@ public class UpgradesController : MonoBehaviour {
                 Amount.gameObject.SetActive(true);
                 DailyPanel.SetActive(true);
 
-                var currentFood = PlayerPrefs.GetInt("Food");
-                PlayerPrefs.SetInt("Food", currentFood + (CampManager.Instance.Upgrades.GatherLevel * 2));
+                var currentFood = PlayerPrefs.GetInt(StringResources.Scrap);
+                PlayerPrefs.SetInt(StringResources.Scrap, currentFood + (CampManager.Instance.Upgrades.GatherLevel * 2));
             }
             else
             {

@@ -414,11 +414,11 @@ public class PanelScript : MonoBehaviour
                 soldierTierList.Add(soldier.GetComponent<Character>().characterBaseValues.id);
 
             }
-            print(soldierTierList.Count());
-            foreach (var v in soldierTierList)
-            {
-                print(v);
-            }
+            //print(soldierTierList.Count());
+            //foreach (var v in soldierTierList)
+            //{
+            //    print(v);
+            //}
  
             for (int i = 1; i < solidersSpawnPosition.childCount + 1; i++)
             {
@@ -841,7 +841,7 @@ public class PanelScript : MonoBehaviour
         hunter.transform.localPosition = Vector3.zero;
         newCharacterSoldierList.Add(newCharValues);
         newWeaponsSoldierList.Add(newWeaponValues);
-        print(newWeaponsSoldierList);
+        //print(newWeaponsSoldierList);
         return hunter;
     }
     

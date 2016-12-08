@@ -91,7 +91,11 @@ public class Node : MonoBehaviour {
 
         SetupImage();
         SetupUIText();
-    }
+
+		txtFood.text = foodAmount.ToString();
+		txtScraps.text = scrapAmount.ToString();
+		txtTribes.text = tribeCamps.ToString();
+	}
 
     public void SetupImage()
     {
@@ -127,9 +131,7 @@ public class Node : MonoBehaviour {
                 {
                     child.gameObject.SetActive(true);
 
-                    GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
-                    GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
-                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();  
+                   
                 }
             }
 
