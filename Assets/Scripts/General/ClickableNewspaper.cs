@@ -13,6 +13,7 @@ public class ClickableNewspaper : ClickableItem
 
     public void Click()
     {
+		Time.timeScale = Mathf.Epsilon;
         if (TranslationManager.Instance.English)
         {
             GameObject.Find("NewspaperPanel").GetComponent<NewspaperPanelScript>().SetNewspaperImage(pageImage_English);
