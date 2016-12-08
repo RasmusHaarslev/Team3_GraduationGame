@@ -39,6 +39,9 @@ public class CampUIController : MonoBehaviour
             button.interactable = false;
         }
 
+        SetLevels();
+        SetCosts();
+
         Manager_Audio.PlaySound(Manager_Audio.play_campUpgrade, gameObject);
         DateTime End = DateTime.Now.AddSeconds(campManager.amountOfSeconds);
 
