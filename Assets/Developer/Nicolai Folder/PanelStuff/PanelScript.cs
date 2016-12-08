@@ -77,7 +77,7 @@ public class PanelScript : MonoBehaviour
         float currentOpacity = 1f;
         float fadingTicks = 0.025f;
         shaderGlow[] glowingControllers = FindObjectsOfType<shaderGlow>();
-        print(glowingControllers.Length + " objects glowing");
+
         while (currentOpacity > 0f)
         {
             currentOpacity -= fadingTicks;
@@ -186,9 +186,7 @@ public class PanelScript : MonoBehaviour
                 newHunterEquipsValues[i].characterId = 20 + i;
                 //print(newHuntersValues[i].id);
                 i++;
-
             }
-            print("Creation of 3 models " + (DateTime.Now - start).TotalMilliseconds);
 
             dataService.UpdateCharactersValues(newHuntersValues);
             dataService.UpdateEquipItemsValues(newHunterEquipsValues);
@@ -834,7 +832,6 @@ public class PanelScript : MonoBehaviour
 
     public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
     {
-        print("helo");
         var weaponGenerator = GetComponent<WeaponGenerator>();
 
         CharacterValues newCharValues = GenerateNewHunterValues();
