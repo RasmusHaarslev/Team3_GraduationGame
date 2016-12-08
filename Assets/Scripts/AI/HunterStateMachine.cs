@@ -307,8 +307,6 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator FollowState()
 	{
-		GetComponent<NavMeshObstacle>().enabled = false;
-		agent.enabled = true;
 		agent.updateRotation = true;
 		character.animator.SetBool("isAware", false);
 		character.isInCombat = false;
@@ -323,16 +321,12 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator StayState()
 	{
-		//agent.Stop();
-		agent.enabled = false;
-		GetComponent<NavMeshObstacle>().enabled = true;
+		agent.Stop();
 		yield return new TransitionTo(StartState, DefaultTransition);
 	}
 
 	IEnumerator FleeState()
 	{
-		GetComponent<NavMeshObstacle>().enabled = false;
-		agent.enabled = true;
 		character.animator.SetBool("isAware", false);
 		agent.SetDestination(fleePosition);
 		agent.speed = fleeSpeed;
@@ -360,8 +354,6 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator EngageState()
 	{
-		GetComponent<NavMeshObstacle>().enabled = false;
-		agent.enabled = true;
 		agent.updateRotation = true;
 		character.animator.SetBool("isAware", false);
 		if (character.target != null && character.target.GetComponent<Character>() != null)
@@ -385,8 +377,6 @@ public class HunterStateMachine : CoroutineMachine
 			character.animator.SetBool("isAware", true);
 			transform.position = transform.position;
 			agent.Stop();
-			agent.enabled = false;
-			GetComponent<NavMeshObstacle>().enabled = true;
 		}
 		else
 		{
@@ -414,7 +404,6 @@ public class HunterStateMachine : CoroutineMachine
 
 	IEnumerator DeadState()
 	{
-		GetComponent<NavMeshObstacle>().enabled = false;
 		yield return new TransitionTo(DeadState, DefaultTransition);
 	}
 
@@ -424,14 +413,10 @@ public class HunterStateMachine : CoroutineMachine
 		if (character.isInCombat)
 		{
 			agent.Stop();
-			agent.enabled = false;
-			GetComponent<NavMeshObstacle>().enabled = true;
 		}
 		else
 		{
 			agent.Resume();
-			GetComponent<NavMeshObstacle>().enabled = false;
-			agent.enabled = true;
 		}
 
 		if (attacked == true)
