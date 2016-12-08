@@ -21,15 +21,39 @@ public class CampUIController : MonoBehaviour
     void Start()
     {
         campManager = GetComponent<CampManager>();
+
+        if (campManager.Upgrades.UpgradeInProgress)
+        {
+            DateTime end = DateTime.Parse(PlayerPrefs.GetString("UpgradeEnd"));
+            double timeLeft = (end - DateTime.Now).TotalSeconds;
+            if (timeLeft < 0.0)
+            {
+                foreach (var button in Buttons)
+                {
+                    button.interactable = true;
+                }
+                campManager.FinishUpgrade();
+                SetLevels();
+            }
+            else
+            {
+                foreach (var button in Buttons)
+                {
+                    button.interactable = false;
+                }
+            }
+        }
     }
 
     void OnEnable()
     {
         campManager = GetComponent<CampManager>();
         campManager.LoadUpgrades();
+        
+        FinishNow.interactable = campManager.Upgrades.UpgradeInProgress;
+
         SetLevels();
         SetCosts();
-        FinishNow.interactable = campManager.Upgrades.UpgradeInProgress;
     }
 
     public void PerformUpgrade()
@@ -38,9 +62,6 @@ public class CampUIController : MonoBehaviour
         {
             button.interactable = false;
         }
-
-        SetLevels();
-        SetCosts();
 
         Manager_Audio.PlaySound(Manager_Audio.play_campUpgrade, gameObject);
         DateTime End = DateTime.Now.AddSeconds(campManager.amountOfSeconds);
@@ -53,6 +74,9 @@ public class CampUIController : MonoBehaviour
 		EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -campManager.tempCost));
         FinishNow.interactable = true;
         campManager.SaveUpgrades();
+
+        SetLevels();
+        SetCosts();
     }
 
     public double TimeLeftInSeconds()
@@ -119,6 +143,7 @@ public class CampUIController : MonoBehaviour
 
         campManager.FinishUpgrade();
         SetLevels();
+        SetCosts();
     }
 
     #region Upgrade Buttons
