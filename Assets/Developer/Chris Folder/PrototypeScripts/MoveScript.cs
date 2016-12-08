@@ -27,11 +27,24 @@ public class MoveScript : MonoBehaviour
 
 	}
 
+	private void TakeDamage(TakeDamageEvent e)
+	{
+		if (e.target == gameObject)
+		{
+			character.animator.SetBool("isAware", true);
+			character.animator.SetTrigger("TakeDamage");
+			character.animator.SetBool("isAware", false);
+		}
+	}
+
+
+
 	void OnEnable()
 	{
 		levelManager = UnityEngine.Object.FindObjectOfType<LevelManager>();
 		EventManager.Instance.StartListening<FleeStateEvent>(Flee);
 		EventManager.Instance.StartListening<StopFleeEvent>(StopFlee);
+		EventManager.Instance.StartListening<TakeDamageEvent>(TakeDamage);
 		agent = GetComponent<NavMeshAgent>();
 		character = GetComponent<Character>();
 	}
@@ -40,6 +53,7 @@ public class MoveScript : MonoBehaviour
 	{
 		EventManager.Instance.StopListening<FleeStateEvent>(Flee);
 		EventManager.Instance.StopListening<StopFleeEvent>(StopFlee);
+		EventManager.Instance.StopListening<TakeDamageEvent>(TakeDamage);
 	}
 
 	private void StopFlee(StopFleeEvent e)
@@ -201,7 +215,7 @@ public class MoveScript : MonoBehaviour
 				attacking = false;
 				agent.stoppingDistance = 1.2f;
 			}
-            else
+			else
 			{
 				EventManager.Instance.TriggerEvent(new PositionClicked(firstGroundHitPoint, firstGroundHitTransform));
 				agent.stoppingDistance = 1.2f;
