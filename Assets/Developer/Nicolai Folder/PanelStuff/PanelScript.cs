@@ -186,7 +186,8 @@ public class PanelScript : MonoBehaviour
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
                 newSoldier.GetComponent<PlayFootStepParticles>().enabled = false;
-                
+                newSoldier.GetComponent<Character>().enabled = false;
+
                 if (newSoldier.GetComponentsInChildren<ShootRifle>().Count() > 0)
                 {
                     newSoldier.GetComponentsInChildren<ShootRifle>()[0].enabled = false;
@@ -331,6 +332,7 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
+            soldiersList[i].GetComponent<Character>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
                
@@ -385,12 +387,11 @@ public class PanelScript : MonoBehaviour
             {
                 print(v);
             }
-            //print(solidersSpawnPosition.childCount);
+ 
             for (int i = 1; i < solidersSpawnPosition.childCount + 1; i++)
             {
                 if (!soldierTierList.Contains(i))
                 {
-                    print(i);
                     Instantiate(silhouette, solidersSpawnPosition.GetChild(i - 1).position + Vector3.up, Quaternion.identity);
                 }
             }
@@ -693,7 +694,6 @@ public class PanelScript : MonoBehaviour
 
         if (currentSoldier.characterBaseValues.Type.ToString() == "Player")
         {
-            print("playeraaa");
             foreach (var stat in playerStatsList)
             {
 
