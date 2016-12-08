@@ -79,7 +79,7 @@ public class DataService : MonoBehaviour
 		if (command == 0)*/
         if (_connection.GetTableInfo("EquippableitemValues").Any(colInfo => colInfo.Name == "level"))
         {
-            print("New Database already present, continuing with the old one.");  //Databese already present, continuing with the old one. 
+            //print("New Database already present, continuing with the old one.");  //Databese already present, continuing with the old one. 
             return;
         }
 
