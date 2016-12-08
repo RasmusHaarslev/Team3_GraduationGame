@@ -224,7 +224,7 @@ public class LevelGenerator : MonoBehaviour
                         currentCharSpawners[j].tier = Mathf.Clamp(currentCharSpawners[j].tier + 2, 1, 6);
                 }
             }
-            else Debug.LogError("A Point of Interest was found with less than 5 character spawners!");
+            //else Debug.LogError("A Point of Interest was found with less than 5 character spawners!");
 
         }
 
