@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
 	void Start()
 	{
 		animator.SetFloat("isWounded", 0);
-		currentHealth = health;
+		currentHealth = GameController.Instance._VILLAGERS < 0 ? health / 2f : health; ;
 	}
 
 	void OnApplicationQuit()
@@ -285,7 +285,7 @@ public class Character : MonoBehaviour
 		range = initValues.range;
 		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel * 4) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
-		currentHealth = health;
+		currentHealth = GameController.Instance._VILLAGERS < 0 ? health /2f : health;
 		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
 		{
 			animator = GetComponent<Animator>();
