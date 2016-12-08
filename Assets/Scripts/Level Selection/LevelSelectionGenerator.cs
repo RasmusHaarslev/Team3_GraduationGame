@@ -19,23 +19,9 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     public int amountOfRows = 0;
 
-/*    [Tooltip("The distribution of wolve camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
-    [Range(0, 6)]
-    public int probabilityWolves;
-    [Tooltip("The distribution of tribe camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
-    [Range(0, 6)]
-    public int probabilityTribes;
-    [Tooltip("The distribution of choice camps as a percentage. (If x in wolves and 0 in tribes and choices, there will only spawn wolve camps")]
-    [Range(0, 6)]
-    public int probabilityChoices;
-    */
-
     [Tooltip("Determine the max amonut of items that drop within a single level")]
     [Range(2, 10)]
     public int MaxItemDropAmount;
-
-/*    [Tooltip("This should always contain the number of different levels we have")]
-    public int numberOfScenes; */
 
     [Tooltip("Lowest amount of food to use to go to a level")]
     [Range(0, 10)]
@@ -81,7 +67,6 @@ public class LevelSelectionGenerator : MonoBehaviour
 
     void Awake()
     {
-
         if (PlayerPrefs.GetInt("LevelsInstantiated") != 1)
         {
             InstantiateRows(amountOfRows);
@@ -100,6 +85,7 @@ public class LevelSelectionGenerator : MonoBehaviour
             {
                 EventManager.Instance.TriggerEvent(new LevelCleared(true));
                 GameObject nodeCleared = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
+
                 Node nodeScript = nodeCleared.GetComponent<Node>();     
 
                 nodeScript.isCleared = true;
@@ -117,9 +103,9 @@ public class LevelSelectionGenerator : MonoBehaviour
                 EventManager.Instance.TriggerEvent(new LevelCleared(false));
             }
 
-            SaveDict(new SaveLevelsToXML());
         }
 
+        SaveDict(new SaveLevelsToXML());
         EventManager.Instance.TriggerEvent(new SaveLevelsToXML());
     }
 
