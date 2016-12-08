@@ -44,8 +44,6 @@ public class LevelGenerator : MonoBehaviour
             difficultyLevel = 1;
         }
 
-        Debug.Log("DIFF : " + difficultyLevel);
-
         campsNumber = PlayerPrefs.GetInt(StringResources.TribeCampsPrefsName, campsNumber);
 
         levelStep = difficultyLevel % worldLength;
@@ -56,7 +54,6 @@ public class LevelGenerator : MonoBehaviour
         dataService = new DataService(StringResources.databaseName);
 
         dataService.CreateDB();
-
 
         if (!isTutorial)
         {
@@ -146,7 +143,6 @@ public class LevelGenerator : MonoBehaviour
                 currentCharSpawners = POI.transform.GetComponentsInChildren<CharacterSpawner>();
                 foreach (CharacterSpawner charSpawn in currentCharSpawners)
                 {
-                    print("tier of the spawn is "+ charSpawn.tier+" current tier values length "+ currentTierValues.Length+" trying to access to index "+(charSpawn.tier - 1));
                     currentCharacter = dataService.GenerateCharacterFromValues(currentTierValues[charSpawn.tier - 1],
                         charSpawn.transform.position, charSpawn.transform.rotation);
 
@@ -224,8 +220,6 @@ public class LevelGenerator : MonoBehaviour
                         currentCharSpawners[j].tier = Mathf.Clamp(currentCharSpawners[j].tier + 2, 1, 6);
                 }
             }
-            else Debug.LogError("A Point of Interest was found with less than 5 character spawners!");
-
         }
 
     }
