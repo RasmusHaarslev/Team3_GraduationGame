@@ -22,11 +22,11 @@ public class Manager_Audio : MonoBehaviour {
 	public static string exploreSnapshot = "Exploring";
 	public static string fightSnapshot = "InCombat";
 
-	public static string baseAmbiencePlay = "Empty";
+	public static string baseAmbiencePlay = "Play_GroundAmbience";
 	public static string baseAmbienceStop = "Stop_GroundAmbience";
-	public static string musicExploreStart = "Empty";
+	public static string musicExploreStart = "Play__ExploreMusic";
 	public static string musicExploreStop = "Stop_ExploreMusic";
-	public static string walkTapUISound = "Empty";
+	public static string walkTapUISound = "Play_WalkTapUI";
 
 	public static string commandWheelContainer = "CommandWheel";
 	public static string openWheel = "On";
