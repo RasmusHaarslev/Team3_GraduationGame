@@ -31,11 +31,13 @@ public class ChooseLanguage : MonoBehaviour {
             PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, 4);
             
             //ClearAllScriptableObject();
-            GameController.Instance.LoadScene("TrueIntroCutscene");
+            EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("TrueIntroCutscene"));
+            //GameController.Instance.LoadScene("TrueIntroCutscene");
         }
         else
         {
-            GameController.Instance.LoadScene("CampManagement");
+            EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("CampManagement"));
+            //GameController.Instance.LoadScene("CampManagement");
         }
     }
 
