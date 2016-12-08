@@ -129,7 +129,6 @@ public class LevelManager : MonoBehaviour
 	private void EnemySpawn(EnemySpawned e)
 	{
 		EnemiesAlive++;
-        Debug.Log("Spawned " + EnemiesAlive);
 	}
 
 	private void ItemSpawn(ItemSpawned e)
@@ -151,7 +150,7 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-        Debug.Log("Killed " + EnemiesAlive);
+
         CheckConditions();
 	}
 

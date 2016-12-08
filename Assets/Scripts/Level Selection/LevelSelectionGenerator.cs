@@ -224,7 +224,6 @@ public class LevelSelectionGenerator : MonoBehaviour
 
                 if (totalAmountRows % 10 == 0)
                 {
-                    Debug.Log("RESET GOLD TEETH" + " ROW COUNTS : " + totalAmountRows);
                     goldteethDrop = 2;                    
                 }
 
@@ -390,7 +389,6 @@ public class LevelSelectionGenerator : MonoBehaviour
             int teethAmount = UnityEngine.Random.Range(1, goldteethDrop+1);
             node.GetComponent<Node>().goldTeethAmount = teethAmount;
             goldteethDrop -= teethAmount;
-            Debug.Log("GOLD LEFT : " + goldteethDrop + " Row : " + amountOfRows + " Has GOLDTEETH!!!!!!!!!!!!!!!!!!!!!!! : " + teethAmount);
         }
     }
 
