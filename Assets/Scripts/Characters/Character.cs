@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
 		{
 			animator.SetBool("isAware", false);
 		}
-		animator?.SetFloat("Speed", agent.velocity.magnitude, 0.15f, Time.deltaTime);
+		animator?.SetFloat("Speed", agent.velocity.magnitude/**0.2f*/, 0.15f, Time.deltaTime);
 
 		if (target != null)
 		{

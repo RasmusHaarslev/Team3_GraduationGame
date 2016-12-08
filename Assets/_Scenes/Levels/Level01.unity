@@ -14416,6 +14416,53 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1081498546}
+--- !u!1001 &1081644531
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013805507274, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013998139632, guid: e33a1fcf59ee8c343a8cac4b28c08719,
+        type: 2}
+      propertyPath: OverridePalette
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1087924315
 GameObject:
   m_ObjectHideFlags: 0
@@ -29314,9 +29361,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
