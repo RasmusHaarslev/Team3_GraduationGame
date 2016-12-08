@@ -24,9 +24,9 @@ public class Manager_Audio : MonoBehaviour {
 
 	public static string baseAmbiencePlay = "Empty";
 	public static string baseAmbienceStop = "Stop_GroundAmbience";
-	public static string musicExploreStart = "Play_ExploreMusic";
+	public static string musicExploreStart = "Empty";
 	public static string musicExploreStop = "Stop_ExploreMusic";
-	public static string walkTapUISound = "Play_WalkTapUI";
+	public static string walkTapUISound = "Empty";
 
 	public static string commandWheelContainer = "CommandWheel";
 	public static string openWheel = "On";
