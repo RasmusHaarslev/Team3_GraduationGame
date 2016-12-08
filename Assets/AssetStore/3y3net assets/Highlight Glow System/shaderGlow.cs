@@ -274,7 +274,7 @@ public class shaderGlow : MonoBehaviour {
         {
             if (!singleRenderer.enabled)
                 continue;
-            Debug.Log("Renderer found");
+
             //Create material for object
             Material newMat;
             if (useNormal)
