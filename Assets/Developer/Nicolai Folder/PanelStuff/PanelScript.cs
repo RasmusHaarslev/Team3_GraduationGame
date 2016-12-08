@@ -364,7 +364,7 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
-            soldiersList[i].GetComponent<Character>().enabled = false;
+            //soldiersList[i].GetComponent<Character>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
                

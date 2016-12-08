@@ -146,7 +146,7 @@ public class CampManager : MonoBehaviour
         // Update premium resource in GameController.
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: -FinishUpgradeCost));
 
-        FinishUpgrade();
+        //FinishUpgrade();
     }
 
     public void FinishUpgrade()

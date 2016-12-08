@@ -243,8 +243,17 @@ public class Character : MonoBehaviour
 
     public void UpdateOnUpgrades(UpgradeCompleted e)
     {
-        health = characterBaseValues.Type == CharacterValues.type.Player ? characterBaseValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel * 4) : characterBaseValues.health;
-        damage = characterBaseValues.Type == CharacterValues.type.Player ? characterBaseValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel * 4) : characterBaseValues.damage;
+        if (characterBaseValues.Type == CharacterValues.type.Player)
+        {
+            var upgrades = GameObject.Find("CampUpgradesPanel").GetComponent<CampManager>().Upgrades;
+
+            var healthWeapon = health - (characterBaseValues.health + ((upgrades.LeaderHealthLevel - 1) * 4));
+            var damageWeapon = damage - (characterBaseValues.damage + ((upgrades.LeaderStrengthLevel - 1) * 4));
+
+            health = characterBaseValues.health + (upgrades.LeaderHealthLevel * 4) + healthWeapon;
+            damage = characterBaseValues.damage + (upgrades.LeaderStrengthLevel * 4) + damageWeapon;
+        }
+        
     }
 
 	IEnumerator GetWeapon()
