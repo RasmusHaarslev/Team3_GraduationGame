@@ -17,13 +17,34 @@ public class OptionsMenu : MonoBehaviour {
     void Start()
     {
         AdjustMusicVolume();
+        AdjustFXVolume();
+
         Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
         Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
         UpdateText();
     }
 
 	void OnEnable () {
-        UpdateText();
+        UpdateText();        
+
+        if (PlayerPrefs.GetInt("MusicToggle") == 0) { 
+            Music.transform.GetChild(0).GetComponent<Toggle>().isOn = false;
+        } else {
+            Music.transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+        }
+
+        if (PlayerPrefs.GetInt("FXToggle") == 0)
+        {
+            FX.transform.GetChild(0).GetComponent<Toggle>().isOn = false;
+        }
+        else
+        {
+            FX.transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+        }
+
+
+        Music.transform.GetChild(1).GetComponent<Slider>().value = Manager_Audio.musicValue;
+        FX.transform.GetChild(1).GetComponent<Slider>().value = Manager_Audio.fxValue;
     }
 
     public void UpdateText()
@@ -31,9 +52,6 @@ public class OptionsMenu : MonoBehaviour {
         MenuHeader.text = TranslationManager.Instance.GetTranslation("Menu");
         Music.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("Music");
         FX.transform.GetChild(2).GetComponent<Text>().text = TranslationManager.Instance.GetTranslation("FX");
-
-        Music.transform.GetChild(0).GetComponent<Toggle>().isOn = Manager_Audio.musicToggle;
-        FX.transform.GetChild(0).GetComponent<Toggle>().isOn = Manager_Audio.fxToggle;
 
         if(txtResourcesFound != null)
         {
@@ -51,10 +69,12 @@ public class OptionsMenu : MonoBehaviour {
         if (Manager_Audio.musicToggle)
         {
             Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
+            PlayerPrefs.SetInt("MusicToggle", 1);
         }
         else
         {
             Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, 0);
+            PlayerPrefs.SetInt("MusicToggle", 0);
         }
     }
 
@@ -62,6 +82,7 @@ public class OptionsMenu : MonoBehaviour {
     {
         currentMusicVolume = Music.transform.GetChild(1).GetComponent<Slider>().value;
         Manager_Audio.SendParameterValue(Manager_Audio.adjustMusicVolume, currentMusicVolume);
+        Manager_Audio.musicValue = currentMusicVolume;
     }
     #endregion
 
@@ -74,17 +95,20 @@ public class OptionsMenu : MonoBehaviour {
         if (Manager_Audio.fxToggle)
         {
             Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
+            PlayerPrefs.SetInt("FXToggle", 1);
         }
         else
         {
             Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, 0);
-        }
+            PlayerPrefs.SetInt("FXToggle", 0);
+        }        
     }
 
     public void AdjustFXVolume()
     {
         currentFXVolume = FX.transform.GetChild(1).GetComponent<Slider>().value;
         Manager_Audio.SendParameterValue(Manager_Audio.adjustFXVolume, currentFXVolume);
+        Manager_Audio.fxValue = currentFXVolume;
     }
     #endregion
 }

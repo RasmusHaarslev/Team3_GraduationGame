@@ -114,7 +114,9 @@ public class GameController : MonoBehaviour
             _DAYS_SURVIVED = PlayerPrefs.GetInt(StringResources.DaysSurvived);
         }
         else
-        {            
+        {
+            PlayerPrefs.SetInt("MusicToggle", 1);
+            PlayerPrefs.SetInt("FXToggle", 1);
             PlayerPrefs.SetInt(StringResources.Food, InitialFood);
             PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers);
             PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
