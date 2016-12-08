@@ -61,6 +61,7 @@ public class Node : MonoBehaviour {
     public Text txtScraps;
     public Text txtTribes;
     public Text txtWolves;
+    public Text txtItemDrops;
     public Text txtIntPoints;
 
     #endregion
