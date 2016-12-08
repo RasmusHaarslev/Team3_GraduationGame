@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
     void OnEnable()
     {
 		EventManager.Instance.StartListening<UIPanelActiveEvent>(ChangeUIState);
-		EventManager.Instance.StartListening<ChangeResources>(UpdateResources);
+		EventManager.Instance.StartListening<ChangeResources>(UpdateResources);        
     }
 
 	private void ChangeUIState(UIPanelActiveEvent e)
@@ -120,9 +120,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
             PlayerPrefs.SetInt(StringResources.Premium, InitialPremium);
             PlayerPrefs.SetInt(StringResources.DaysSurvived, InitialDaysSurvived);
-        }
-
-        Debug.Log(PlayerPrefs.GetInt(StringResources.LevelDifficultyPrefsName));
+        }        
     }
 
     public void LoadScene(string scene)
@@ -175,6 +173,7 @@ public class GameController : MonoBehaviour
 
     public void ResetResources()
     {
+        
         _FOOD = InitialFood;
         _VILLAGERS = InitialVillagers;
         _SCRAPS = InitialScrap;
