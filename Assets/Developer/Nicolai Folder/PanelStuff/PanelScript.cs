@@ -10,6 +10,7 @@ using System.Threading;
 
 public class PanelScript : MonoBehaviour
 {
+    public float glowFadingStepSeconds = 0.1f;
     CampTopPanel campTopPanelScript;
     public List<GameObject> panelList = new List<GameObject>();
     public List<GameObject> soldierStatsList = new List<GameObject>();
@@ -59,9 +60,37 @@ public class PanelScript : MonoBehaviour
         campTopPanelScript = GetComponentInChildren<CampTopPanel>();
         dataService = new DataService(StringResources.databaseName);
         dataService.CreateDB();
-        charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
+        charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition); 
+        //meanwhile continue with the rest
         InitializeSoldiers();
         InitializeNewHunters();
+
+        //starting countdown to disable the glow
+        StartCoroutine(GlowingCountdown());
+    }
+
+
+
+    private IEnumerator GlowingCountdown()
+    {
+        yield return new WaitForSeconds(2f); //wait some time
+        float currentOpacity = 1f;
+        float fadingTicks = 0.05f;
+        shaderGlow[] glowingControllers = FindObjectsOfType<shaderGlow>();
+        print(glowingControllers.Length + " objects glowing");
+        while (currentOpacity > 0f)
+        {
+            currentOpacity -= fadingTicks;
+            currentOpacity = Mathf.Clamp(currentOpacity, 0f, 1f);
+            foreach (shaderGlow glowController in glowingControllers)
+                if(glowController.glowOpacity - fadingTicks >= 0)
+                    glowController.glowOpacity -= fadingTicks;
+           // print("one fading tick!"+ currentOpacity);
+            yield return new WaitForSeconds(glowFadingStepSeconds); //wait some time
+        }
+        
+        
+        
     }
 
     public void ActivateNewSoldiers(Transform silhouetteTrans)
@@ -255,7 +284,12 @@ public class PanelScript : MonoBehaviour
                 Destroy(newSoldiersList[i]);
             }
         }
-        //after the hunter is placed 
+
+        //After the hunter is placed 
+
+        //starting countdown to disable the glow
+        StartCoroutine(GlowingCountdown());
+        //meanwhile ..
         newSoldiersList.Clear();
         alreadyGeneratedNewSoldiers = false;
         Destroy(silhouetteGO);
