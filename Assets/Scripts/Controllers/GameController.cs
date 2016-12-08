@@ -180,12 +180,10 @@ public class GameController : MonoBehaviour
          //= InitialPremium;
         _DAYS_SURVIVED = InitialDaysSurvived;
 
-        PlayerPrefs.SetInt(StringResources.Food, InitialFood);
+        PlayerPrefs.SetInt(StringResources.Food, 8);
         PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers + (CampManager.Instance.Upgrades.MaxVillages) - 1);
         PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
         PlayerPrefs.SetInt(StringResources.Premium, _PREMIUM);
         PlayerPrefs.SetInt(StringResources.DaysSurvived, InitialDaysSurvived);
-
-        EventManager.Instance.TriggerEvent(new ChangeResources(food: 8));
     }
 }
