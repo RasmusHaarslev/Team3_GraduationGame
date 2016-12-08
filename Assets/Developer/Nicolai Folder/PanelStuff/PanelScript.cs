@@ -75,7 +75,7 @@ public class PanelScript : MonoBehaviour
     {
         yield return new WaitForSeconds(2f); //wait some time
         float currentOpacity = 1f;
-        float fadingTicks = 0.05f;
+        float fadingTicks = 0.025f;
         shaderGlow[] glowingControllers = FindObjectsOfType<shaderGlow>();
         print(glowingControllers.Length + " objects glowing");
         while (currentOpacity > 0f)
@@ -84,7 +84,7 @@ public class PanelScript : MonoBehaviour
             currentOpacity = Mathf.Clamp(currentOpacity, 0f, 1f);
             foreach (shaderGlow glowController in glowingControllers)
                 if(glowController.glowOpacity - fadingTicks >= 0)
-                    glowController.glowOpacity -= fadingTicks;
+                    glowController.glowOpacity = Mathf.Clamp(glowController.glowOpacity -= fadingTicks, 0f, 1f);
            // print("one fading tick!"+ currentOpacity);
             yield return new WaitForSeconds(glowFadingStepSeconds); //wait some time
         }
