@@ -47,42 +47,10 @@ public class WeaponGenerator : MonoBehaviour
     private float strenghtIncreaseProbabLimit;
     private float healthtIncreaseProbabLimit;
 
-    /*
-    //private DataService dataService;
-    [ExecuteInEditMode]
-    void OnValidate()
-    {//adjusting probability values among the item types if some value has been changed in the editor
-        if (damagePercentageShield + healthPercentageShield + damageSpeedPercentageShield > 1)
-        {
-            damagePercentageShield = Mathf.Clamp01(damagePercentageShield - 0.02f);
-            healthPercentageShield = Mathf.Clamp01(healthPercentageShield - 0.02f);
-            damageSpeedPercentageShield = Mathf.Clamp01(damageSpeedPercentageShield - 0.02f);
-        }
-        if (damagePercentagePolearm + healthPercentagePolearm + damageSpeedPercentagePolearm > 1)
-        {
-            damagePercentagePolearm = Mathf.Clamp01(damagePercentagePolearm - 0.02f);
-            healthPercentagePolearm = Mathf.Clamp01(healthPercentagePolearm - 0.02f);
-            damageSpeedPercentagePolearm = Mathf.Clamp01(damageSpeedPercentagePolearm - 0.02f);
-        }
-        if (damagePercentageRifle + healthPercentageRifle + damageSpeedPercentageRifle > 1)
-        {
-            damagePercentageRifle = Mathf.Clamp01(damagePercentageRifle - 0.02f);
-            healthPercentageRifle = Mathf.Clamp01(healthPercentageRifle - 0.02f);
-            damageSpeedPercentageRifle = Mathf.Clamp01(damageSpeedPercentageRifle - 0.02f);
-        }
-
-    }
-    */
-
     // Use this for initialization
     void Start()
     {
         newWeaponsNumber = PlayerPrefs.GetInt(StringResources.ItemDropAmountPrefsName, 1);
-        //dataService = new DataService(StringResources.databaseName);
-        //calculate weapons parameters
-
-        //....
-
     }
 
 
