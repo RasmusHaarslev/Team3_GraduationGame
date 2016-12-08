@@ -6980,34 +6980,6 @@ Prefab:
       propertyPath: m_Name
       value: ClickableNewspaper (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010825534006, guid: 256fe20d99f09084095b75f573149365, type: 2}
-      propertyPath: m_LocalScale.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010825534006, guid: 256fe20d99f09084095b75f573149365, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -235.299
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010825534006, guid: 256fe20d99f09084095b75f573149365, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010825534006, guid: 256fe20d99f09084095b75f573149365, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 180.00002
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010049556952, guid: 256fe20d99f09084095b75f573149365,
-        type: 2}
-      propertyPath: pageImage_Danish
-      value: 
-      objectReference: {fileID: 21300000, guid: 89063f208d290fb4c89c80ea29891aca,
-        type: 3}
-    - target: {fileID: 114000010049556952, guid: 256fe20d99f09084095b75f573149365,
-        type: 2}
-      propertyPath: pageImage_English
-      value: 
-      objectReference: {fileID: 21300000, guid: 12ec933432a70bf4eb2cd20793eaeb71,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 256fe20d99f09084095b75f573149365, type: 2}
   m_IsPrefabParent: 0
@@ -13784,10 +13756,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 103
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012540311364, guid: e33a1fcf59ee8c343a8cac4b28c08719,
+    - target: {fileID: 114000013998139632, guid: e33a1fcf59ee8c343a8cac4b28c08719,
         type: 2}
-      propertyPath: m_Enabled
+      propertyPath: OverridePalette
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013998139632, guid: e33a1fcf59ee8c343a8cac4b28c08719,
+        type: 2}
+      propertyPath: CustomPalette
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e33a1fcf59ee8c343a8cac4b28c08719, type: 2}
@@ -16993,18 +16970,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012006370184, guid: 9ca803311cbc03348a6652f88a7dfbf1,
-        type: 2}
-      propertyPath: pageImage_Danish
-      value: 
-      objectReference: {fileID: 21300000, guid: c5a80bfc2e26c5b44972ac54d737f020,
-        type: 3}
-    - target: {fileID: 114000012006370184, guid: 9ca803311cbc03348a6652f88a7dfbf1,
-        type: 2}
-      propertyPath: pageImage_English
-      value: 
-      objectReference: {fileID: 21300000, guid: d8a596f45b1911e4e8d38562b6dbc995,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ca803311cbc03348a6652f88a7dfbf1, type: 2}
   m_IsPrefabParent: 0
@@ -23527,6 +23492,31 @@ Prefab:
       propertyPath: heightDensity
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013462639952, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: settings.threshold
+      value: 1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013462639952, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: settings.softKnee
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013462639952, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: settings.radius
+      value: 2.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013462639952, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: settings.intensity
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011578571112, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2e3f559e6b973c4a9dbff7b3a9bc8dc, type: 2}
   m_IsPrefabParent: 0
@@ -24309,9 +24299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 131072
-  lowerPoolSize: 65536
-  streamingPoolSize: 32768
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1

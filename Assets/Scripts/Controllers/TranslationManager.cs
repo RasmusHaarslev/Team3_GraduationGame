@@ -28,7 +28,7 @@ public class TranslationManager : MonoBehaviour
     }
     #endregion
 
-    public void LoadLanguage(bool isEnglish = false)
+    public void LoadLanguage(bool isEnglish = true)
     {
         if (LoadedTranlations.Count > 0)
         {

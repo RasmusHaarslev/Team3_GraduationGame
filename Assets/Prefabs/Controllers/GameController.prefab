@@ -26,6 +26,7 @@ GameObject:
   - 114: {fileID: 114000010681911106}
   - 114: {fileID: 114000011936170768}
   - 114: {fileID: 114000013998139632}
+  - 114: {fileID: 114000013141300564}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -121,8 +122,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0f9100af8b04c4d8dc1114596e2d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followers: []
+  followers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   output: 
+--- !u!114 &114000013141300564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010129510254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd7360a6485ec244b976f609b4ad9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  English: 0
 --- !u!114 &114000013963592910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,7 +161,7 @@ MonoBehaviour:
   _VILLAGERS: 10
   _SCRAPS: 0
   _PREMIUM: 0
-  _DAYS_SURVIVED: 0
+  _DAYS_SURVIVED: 2
   _dataService: {fileID: 0}
 --- !u!114 &114000013998139632
 MonoBehaviour:
