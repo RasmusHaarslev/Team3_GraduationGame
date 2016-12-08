@@ -26,16 +26,17 @@ public class ChooseLanguage : MonoBehaviour {
     {
         if (!(PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1)) { 
             //Handheld.PlayFullScreenMovie(cutscene + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
-
-            PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
+            
             PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, 4);
             
             //ClearAllScriptableObject();
-            GameController.Instance.LoadScene("TrueIntroCutscene");
+            EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("TrueIntroCutscene"));
+            //GameController.Instance.LoadScene("TrueIntroCutscene");
         }
         else
         {
-            GameController.Instance.LoadScene("CampManagement");
+            EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("CampManagement"));
+            //GameController.Instance.LoadScene("CampManagement");
         }
     }
 

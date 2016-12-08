@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
 	void Start()
 	{
 		animator.SetFloat("isWounded", 0);
-		currentHealth = health;
+		currentHealth = GameController.Instance._VILLAGERS < 0 ? health / 2f : health; ;
 	}
 
 	void OnApplicationQuit()
@@ -204,8 +204,9 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
+        EventManager.Instance.StartListening<UpgradeCompleted>(UpdateOnUpgrades);
 
-		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
+        equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
@@ -223,9 +224,11 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
-	}
+        EventManager.Instance.StopListening<UpgradeCompleted>(UpdateOnUpgrades);
 
-	private void BeginCombatState(EnemyAttackedByLeaderEvent e)
+    }
+
+    private void BeginCombatState(EnemyAttackedByLeaderEvent e)
 	{
 		if (!isInCombat)
 		{
@@ -237,6 +240,21 @@ public class Character : MonoBehaviour
 			}
 		}
 	}
+
+    public void UpdateOnUpgrades(UpgradeCompleted e)
+    {
+        if (characterBaseValues.Type == CharacterValues.type.Player)
+        {
+            var upgrades = GameObject.Find("CampUpgradesPanel").GetComponent<CampManager>().Upgrades;
+
+            var healthWeapon = health - (characterBaseValues.health + ((upgrades.LeaderHealthLevel - 1) * 4));
+            var damageWeapon = damage - (characterBaseValues.damage + ((upgrades.LeaderStrengthLevel - 1) * 4));
+
+            health = characterBaseValues.health + (upgrades.LeaderHealthLevel * 4) + healthWeapon;
+            damage = characterBaseValues.damage + (upgrades.LeaderStrengthLevel * 4) + damageWeapon;
+        }
+        
+    }
 
 	IEnumerator GetWeapon()
 	{
@@ -280,12 +298,12 @@ public class Character : MonoBehaviour
 		characterBaseValues = initValues;
 		//setting the first summary values for the player. Those will be then increased by weapon stats when one is quipped.
 		//Debug.Log(CampManager.Instance.Upgrades.LeaderHealthLevel);
-		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel) : initValues.health;
+		health = initValues.Type == CharacterValues.type.Player ? initValues.health + (CampManager.Instance.Upgrades.LeaderHealthLevel * 4) : initValues.health;
 
 		range = initValues.range;
-		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel) : initValues.damage;
+		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel * 4) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
-		currentHealth = health;
+		currentHealth = GameController.Instance._VILLAGERS < 0 ? health /2f : health;
 		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
 		{
 			animator = GetComponent<Animator>();

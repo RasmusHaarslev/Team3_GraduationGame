@@ -30,10 +30,8 @@ public class EquippableItemUIListController : MonoBehaviour
                 newItem.GetComponent<Image>().color = controller.selectedColor;
                 firstDrawn = true;
             }
-            
-            
-            //controller.Icon.sprite = animal.Icon;
-            controller.type.text = values.Type.ToString();
+            // polearm rifle shield
+            controller.type.text = TranslationManager.Instance.GetTranslation(values.Type.ToString());
             controller.level.text = values.level.ToString();
             controller.name.text = values.name;
             controller.damage.text =  values.damage.ToString();
@@ -42,18 +40,16 @@ public class EquippableItemUIListController : MonoBehaviour
             controller.range.text = values.range.ToString();
             controller.itemValues = values;
             
-           
-            if (values.Type.ToString() == "rifle")
+            foreach(Transform child in controller.weaponCams.transform)
             {
-                controller.Icon.texture = controller.weaponCams.transform.GetChild(0).gameObject.GetComponent<Camera>().targetTexture;
-            }
-            if (values.Type.ToString() == "shield")
-            {
-                controller.Icon.texture = controller.weaponCams.transform.GetChild(1).gameObject.GetComponent<Camera>().targetTexture;
-            }
-            if (values.Type.ToString() == "polearm")
-            {
-                controller.Icon.texture = controller.weaponCams.transform.GetChild(2).gameObject.GetComponent<Camera>().targetTexture;
+                if(child.name != "Spotlight")
+                {
+                    if (child.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.name == values.materialName)
+                    {
+                        controller.Icon.texture = child.gameObject.GetComponent<Camera>().targetTexture;
+                    }
+                }
+                
             }
 
             newItem.transform.SetParent(ContentPanel.transform);

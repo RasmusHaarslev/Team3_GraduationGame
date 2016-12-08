@@ -281,6 +281,7 @@ GameObject:
   - 224: {fileID: 224000013655177510}
   - 222: {fileID: 222000012413615228}
   - 114: {fileID: 114000012852009134}
+  - 114: {fileID: 114000011690546180}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -627,6 +628,7 @@ GameObject:
   - 224: {fileID: 224000013800553714}
   - 222: {fileID: 222000013774303448}
   - 114: {fileID: 114000011949621130}
+  - 114: {fileID: 114000011831860094}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -1493,6 +1495,7 @@ GameObject:
   - 224: {fileID: 224000010291051092}
   - 222: {fileID: 222000012214888208}
   - 114: {fileID: 114000012881614474}
+  - 114: {fileID: 114000014166812232}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -5670,6 +5673,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Yes
+--- !u!114 &114000011690546180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010491282348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Items
 --- !u!114 &114000011720180614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5726,7 +5741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3bb77550743724f85bb1897528eee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 5
+  Type: 6
 --- !u!114 &114000011794936764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5899,6 +5914,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Scout for 2
+--- !u!114 &114000011831860094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010941296642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Resources
 --- !u!114 &114000011833362602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6653,6 +6680,7 @@ MonoBehaviour:
   foodText: {fileID: 114000013542268954}
   scrapsText: {fileID: 114000011286627410}
   goldTeethsText: {fileID: 114000011527659844}
+  itemsDropText: {fileID: 114000013735799074}
   NotScoutedPanel: {fileID: 1000011841582268}
   minimumScoutCost: 2
   maximumScoutCost: 5
@@ -8662,7 +8690,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2 items
+  m_Text: items
 --- !u!114 &114000013737070012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9348,6 +9376,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You dont have enough food to scout this level!
+--- !u!114 &114000014166812232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012213718322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: Enemies
 --- !u!114 &114000014180864258
 MonoBehaviour:
   m_ObjectHideFlags: 1

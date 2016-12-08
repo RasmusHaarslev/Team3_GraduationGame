@@ -674,7 +674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000011309499818
 GameObject:
   m_ObjectHideFlags: 1
@@ -1163,7 +1163,6 @@ GameObject:
   - 224: {fileID: 224000012506824446}
   - 222: {fileID: 222000013567784486}
   - 114: {fileID: 114000012171935370}
-  - 114: {fileID: 114000012221191228}
   m_Layer: 5
   m_Name: TTrait
   m_TagString: Untagged
@@ -2062,7 +2061,6 @@ GameObject:
   - 224: {fileID: 224000010838404156}
   - 222: {fileID: 222000010522377324}
   - 114: {fileID: 114000012159160896}
-  - 114: {fileID: 114000011297972846}
   m_Layer: 5
   m_Name: CTrait
   m_TagString: Untagged
@@ -4204,7 +4202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3bb77550743724f85bb1897528eee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 3
 --- !u!114 &114000010978989096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4713,18 +4711,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000011297972846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013198183454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: CombatTrait
 --- !u!114 &114000011322341152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5945,18 +5931,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Soldier Name
---- !u!114 &114000012221191228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012110305082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: TargetTrait
 --- !u!114 &114000012240282526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6439,7 +6413,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114000010108762666}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1000011084936642}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114000012580547678
@@ -7099,7 +7084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3bb77550743724f85bb1897528eee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 4
+  Type: 5
 --- !u!114 &114000013205656052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8340,7 +8325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9743,7 +9728,7 @@ RectTransform:
   m_Children:
   - {fileID: 224000010414471396}
   m_Father: {fileID: 224000010110167890}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -678}
@@ -9782,8 +9767,8 @@ RectTransform:
   - {fileID: 224000012552144180}
   - {fileID: 224000012389861956}
   - {fileID: 224000012895915420}
-  - {fileID: 224000011525404596}
   - {fileID: 224000010095363914}
+  - {fileID: 224000011525404596}
   - {fileID: 224000010516201686}
   - {fileID: 224000012138094856}
   - {fileID: 224000011533772284}
@@ -10650,7 +10635,7 @@ RectTransform:
   - {fileID: 224000013050091096}
   - {fileID: 224000011925719526}
   m_Father: {fileID: 224000010110167890}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -10972,7 +10957,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 23, y: -6}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012043352896
@@ -11720,7 +11705,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 636}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!224 &224000012845198934
 RectTransform:
   m_ObjectHideFlags: 1
@@ -11863,7 +11848,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -66}
   m_SizeDelta: {x: 450, y: 500}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224000012925717014
@@ -11881,7 +11866,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -66}
   m_SizeDelta: {x: 450, y: 500}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224000013012357000
@@ -11977,7 +11962,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -66}
   m_SizeDelta: {x: 450, y: 500}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224000013189439666

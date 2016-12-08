@@ -10,6 +10,7 @@ using System.Threading;
 
 public class PanelScript : MonoBehaviour
 {
+    public float glowFadingStepSeconds = 0.1f;
     CampTopPanel campTopPanelScript;
     public List<GameObject> panelList = new List<GameObject>();
     public List<GameObject> soldierStatsList = new List<GameObject>();
@@ -59,9 +60,37 @@ public class PanelScript : MonoBehaviour
         campTopPanelScript = GetComponentInChildren<CampTopPanel>();
         dataService = new DataService(StringResources.databaseName);
         dataService.CreateDB();
-        charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition);
+        charactersFellowship = dataService.GetPlayerFellowshipInPosition(solidersSpawnPosition); 
+        //meanwhile continue with the rest
         InitializeSoldiers();
         InitializeNewHunters();
+
+        //starting countdown to disable the glow
+        StartCoroutine(GlowingCountdown());
+    }
+
+
+
+    private IEnumerator GlowingCountdown()
+    {
+        yield return new WaitForSeconds(2f); //wait some time
+        float currentOpacity = 1f;
+        float fadingTicks = 0.025f;
+        shaderGlow[] glowingControllers = FindObjectsOfType<shaderGlow>();
+
+        while (currentOpacity > 0f)
+        {
+            currentOpacity -= fadingTicks;
+            currentOpacity = Mathf.Clamp(currentOpacity, 0f, 1f);
+            foreach (shaderGlow glowController in glowingControllers)
+                if(glowController.glowOpacity - fadingTicks >= 0)
+                    glowController.glowOpacity = Mathf.Clamp(glowController.glowOpacity -= fadingTicks, 0f, 1f);
+           // print("one fading tick!"+ currentOpacity);
+            yield return new WaitForSeconds(glowFadingStepSeconds); //wait some time
+        }
+        
+        
+        
     }
 
     public void ActivateNewSoldiers(Transform silhouetteTrans)
@@ -157,9 +186,7 @@ public class PanelScript : MonoBehaviour
                 newHunterEquipsValues[i].characterId = 20 + i;
                 //print(newHuntersValues[i].id);
                 i++;
-
             }
-            print("Creation of 3 models " + (DateTime.Now - start).TotalMilliseconds);
 
             dataService.UpdateCharactersValues(newHuntersValues);
             dataService.UpdateEquipItemsValues(newHunterEquipsValues);
@@ -186,7 +213,7 @@ public class PanelScript : MonoBehaviour
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
                 newSoldier.GetComponent<PlayFootStepParticles>().enabled = false;
-                newSoldier.GetComponent<Character>().enabled = false;
+                //newSoldier.GetComponent<Character>().enabled = false;
 
                 if (newSoldier.GetComponentsInChildren<ShootRifle>().Count() > 0)
                 {
@@ -255,7 +282,12 @@ public class PanelScript : MonoBehaviour
                 Destroy(newSoldiersList[i]);
             }
         }
-        //after the hunter is placed 
+
+        //After the hunter is placed 
+
+        //starting countdown to disable the glow
+        StartCoroutine(GlowingCountdown());
+        //meanwhile ..
         newSoldiersList.Clear();
         alreadyGeneratedNewSoldiers = false;
         Destroy(silhouetteGO);
@@ -332,7 +364,7 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
-            soldiersList[i].GetComponent<Character>().enabled = false;
+            //soldiersList[i].GetComponent<Character>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
                
@@ -561,14 +593,13 @@ public class PanelScript : MonoBehaviour
 
             foreach (var stat in newSoldierStats)
             {
-
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = newCharacterSoldierList[i].damage.ToString(); 
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].name); 
+                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].name; 
                 }
                 if (stat.name == "Health")
                 {
@@ -707,7 +738,6 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-
                     stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
                 }
                 if (stat.name == "Soldier Name")
@@ -800,7 +830,6 @@ public class PanelScript : MonoBehaviour
 
     public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
     {
-        print("helo");
         var weaponGenerator = GetComponent<WeaponGenerator>();
 
         CharacterValues newCharValues = GenerateNewHunterValues();

@@ -12,17 +12,20 @@ public class TutorialController: MonoBehaviour
     private bool CampTutorialCompleted;
     private bool LevelSelectionTutorialCompleted;
     private bool SoldierTutorialCompleted;
+    private bool LeaderTutorialCompleted;
     private bool UpgradesTutorialCompleted;
     private bool RecruitTutorialCompleted;
 
     void Awake()
     {
+        Time.timeScale = 1f;
         if (!GameplayTutorialCompleted)
         {
             GameplayTutorialCompleted = PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1 ? true : false;
             CampTutorialCompleted = PlayerPrefs.GetInt("CampTutorialCompleted") == 1 ? true : false;
             LevelSelectionTutorialCompleted = PlayerPrefs.GetInt("LevelSelectionTutorialCompleted") == 1 ? true : false;
             SoldierTutorialCompleted = PlayerPrefs.GetInt("SoldierTutorialCompleted") == 1 ? true : false;
+            LeaderTutorialCompleted = PlayerPrefs.GetInt("LeaderTutorialCompleted") == 1 ? true : false;
             UpgradesTutorialCompleted = PlayerPrefs.GetInt("UpgradesTutorialCompleted") == 1 ? true : false;
             RecruitTutorialCompleted = PlayerPrefs.GetInt("RecruitTutorialCompleted") == 1 ? true : false;
         }
@@ -49,6 +52,11 @@ public class TutorialController: MonoBehaviour
 
             case TutorialType.SoldierTutorial:
                 if (SoldierTutorialCompleted)
+                    this.gameObject.SetActive(false);
+                break;
+
+            case TutorialType.LeaderTutorial:
+                if (LeaderTutorialCompleted)
                     this.gameObject.SetActive(false);
                 break;
 
@@ -80,7 +88,11 @@ public class TutorialController: MonoBehaviour
                 break;
 
             case TutorialType.LevelSelectionTutorial:
-                PlayerPrefs.SetInt("LevelSelectionTutorialCompleted",1);
+                PlayerPrefs.SetInt("LevelSelectionTutorialCompleted", 1);
+                break;
+
+            case TutorialType.LeaderTutorial:
+                PlayerPrefs.SetInt("LeaderTutorialCompleted", 1);
                 break;
 
             case TutorialType.SoldierTutorial:
@@ -107,6 +119,7 @@ public enum TutorialType
     CampTutorial,
     GameplayTutorial,
     SoldierTutorial,
+    LeaderTutorial,
     UpgradesTutorial,
     RecruitTutorial,
     LevelSelectionTutorial

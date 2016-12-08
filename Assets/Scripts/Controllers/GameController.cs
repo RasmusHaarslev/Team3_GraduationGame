@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour
         }
 
         _FOOD = (_FOOD + e.food < 0) ? 0 : _FOOD + e.food;
-        _VILLAGERS = (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
+        _VILLAGERS = _VILLAGERS + e.villager; // (_VILLAGERS + e.villager < 0) ? 0 : _VILLAGERS + e.villager;
         _SCRAPS = (_SCRAPS + e.scraps < 0) ? 0 : _SCRAPS + e.scraps;
         _PREMIUM = (_PREMIUM + e.premium < 0) ? 0 : _PREMIUM + e.premium;
         _DAYS_SURVIVED = (_DAYS_SURVIVED + e.daysSurvived < 0) ? 0 : _DAYS_SURVIVED + e.daysSurvived;
@@ -114,7 +114,9 @@ public class GameController : MonoBehaviour
             _DAYS_SURVIVED = PlayerPrefs.GetInt(StringResources.DaysSurvived);
         }
         else
-        {            
+        {
+            PlayerPrefs.SetInt("MusicToggle", 1);
+            PlayerPrefs.SetInt("FXToggle", 1);
             PlayerPrefs.SetInt(StringResources.Food, InitialFood);
             PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers);
             PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
@@ -167,25 +169,31 @@ public class GameController : MonoBehaviour
         ResetResources();
         DataService dataService = new DataService(StringResources.databaseName);
         dataService.ResetDatabase();
-
+        Time.timeScale = 1f;
         LoadScene("CampManagement");
     }
 
     public void ResetResources()
     {
+        _FOOD = 8;
+        _VILLAGERS = 10;
+        _SCRAPS = 0;
+        _DAYS_SURVIVED = 0;
         
-        _FOOD = InitialFood;
-        _VILLAGERS = InitialVillagers;
-        _SCRAPS = InitialScrap;
-         //= InitialPremium;
-        _DAYS_SURVIVED = InitialDaysSurvived;
-
-        PlayerPrefs.SetInt(StringResources.Food, InitialFood);
-        PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers + (CampManager.Instance.Upgrades.MaxVillages) - 1);
-        PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
+        PlayerPrefs.SetInt(StringResources.Food, 8);
+        PlayerPrefs.SetInt(StringResources.Villagers, 10 + (CampManager.Instance.Upgrades.MaxVillages) - 1);
+        PlayerPrefs.SetInt(StringResources.Scrap, 0);
         PlayerPrefs.SetInt(StringResources.Premium, _PREMIUM);
-        PlayerPrefs.SetInt(StringResources.DaysSurvived, InitialDaysSurvived);
+        PlayerPrefs.SetInt(StringResources.DaysSurvived, 0);
 
-        EventManager.Instance.TriggerEvent(new ChangeResources(food: 8));
+        PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
+        PlayerPrefs.SetInt("CampTutorialCompleted", 1);
+        PlayerPrefs.SetInt("LevelSelectionTutorialCompleted", 1);
+        PlayerPrefs.SetInt("LeaderTutorialCompleted", 1);
+        PlayerPrefs.SetInt("SoldierTutorialCompleted", 1);
+        PlayerPrefs.SetInt("UpgradesTutorialCompleted", 1);
+        PlayerPrefs.SetInt("RecruitTutorialCompleted", 1);
+
+        EventManager.Instance.TriggerEvent(new ResourcesUpdated());
     }
 }

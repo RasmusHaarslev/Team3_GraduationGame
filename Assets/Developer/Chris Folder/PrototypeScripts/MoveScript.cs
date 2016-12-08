@@ -215,7 +215,7 @@ public class MoveScript : MonoBehaviour
 		character.isInCombat = true;
 		agent.SetDestination(character.target.transform.position);
 		distanceToTarget = Vector3.Distance(transform.position, character.target.transform.position);
-		if (distanceToTarget < agent.stoppingDistance)
+		if (distanceToTarget < agent.stoppingDistance && Mathf.Abs(transform.position.y - character.target.transform.position.y) < 2)
 		{
 			agent.Stop();
 			character.RotateTowards(character.target.transform);

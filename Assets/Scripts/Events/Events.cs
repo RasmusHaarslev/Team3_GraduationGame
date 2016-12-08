@@ -123,6 +123,15 @@ public class LevelLost : GameEvent
     }
 }
 
+public class GameLost : GameEvent
+{
+    public bool LeaderDeath;
+    public GameLost(bool leaderDeath)
+    {
+        this.LeaderDeath = leaderDeath;
+    }
+}
+
 public class EnemySpottedEvent : GameEvent {
 
 	public GameObject parent;
@@ -212,6 +221,14 @@ public class AllyDeathEvent : GameEvent
     }
 }
 
+public class AllySpawned : GameEvent
+{
+    public AllySpawned()
+    {
+
+    }
+}
+
 public class ItemSpawned : GameEvent
 {
     public ItemSpawned()
@@ -254,6 +271,14 @@ public class CommandEvent : GameEvent
 	}
 }
 
+public class UpgradeCompleted : GameEvent
+{
+    public UpgradeCompleted()
+    {
+
+    }
+}
+
 public class ClearedCampEvent : GameEvent
 {
 	public ClearedCampEvent()
@@ -282,4 +307,14 @@ public class UIPanelActiveEvent : GameEvent
 	{
 		this.panelActive = panelActive;
 	}
+}
+
+public class EndSceneTransitionEvent : GameEvent
+{
+    public string scene;
+
+    public EndSceneTransitionEvent(string scene)
+    {
+        this.scene = scene;
+    }
 }
