@@ -173,17 +173,17 @@ public class GameController : MonoBehaviour
 
     public void ResetResources()
     {
+        _FOOD = 8;
+        _VILLAGERS = 10;
+        _SCRAPS = 0;
+        _DAYS_SURVIVED = 0;
         
-        _FOOD = InitialFood;
-        _VILLAGERS = InitialVillagers;
-        _SCRAPS = InitialScrap;
-         //= InitialPremium;
-        _DAYS_SURVIVED = InitialDaysSurvived;
-
         PlayerPrefs.SetInt(StringResources.Food, 8);
-        PlayerPrefs.SetInt(StringResources.Villagers, InitialVillagers + (CampManager.Instance.Upgrades.MaxVillages) - 1);
-        PlayerPrefs.SetInt(StringResources.Scrap, InitialScrap);
+        PlayerPrefs.SetInt(StringResources.Villagers, 10 + (CampManager.Instance.Upgrades.MaxVillages) - 1);
+        PlayerPrefs.SetInt(StringResources.Scrap, 0);
         PlayerPrefs.SetInt(StringResources.Premium, _PREMIUM);
-        PlayerPrefs.SetInt(StringResources.DaysSurvived, InitialDaysSurvived);
+        PlayerPrefs.SetInt(StringResources.DaysSurvived, 0);        
+
+        EventManager.Instance.TriggerEvent(new ResourcesUpdated());
     }
 }
