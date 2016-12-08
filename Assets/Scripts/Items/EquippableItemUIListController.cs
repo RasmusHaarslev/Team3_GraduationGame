@@ -30,8 +30,8 @@ public class EquippableItemUIListController : MonoBehaviour
                 newItem.GetComponent<Image>().color = controller.selectedColor;
                 firstDrawn = true;
             }
-
-            controller.type.text = values.Type.ToString();
+            // polearm rifle shield
+            controller.type.text = TranslationManager.Instance.GetTranslation(values.Type.ToString());
             controller.level.text = values.level.ToString();
             controller.name.text = values.name;
             controller.damage.text =  values.damage.ToString();
