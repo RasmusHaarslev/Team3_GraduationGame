@@ -213,7 +213,7 @@ public class PanelScript : MonoBehaviour
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
                 newSoldier.GetComponent<PlayFootStepParticles>().enabled = false;
-                newSoldier.GetComponent<Character>().enabled = false;
+                //newSoldier.GetComponent<Character>().enabled = false;
 
                 if (newSoldier.GetComponentsInChildren<ShootRifle>().Count() > 0)
                 {

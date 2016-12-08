@@ -31,8 +31,6 @@ public class EquippableItemUIListController : MonoBehaviour
                 firstDrawn = true;
             }
 
-            print("Materil name: " + values.materialName);
-            //controller.Icon.sprite = animal.Icon;
             controller.type.text = values.Type.ToString();
             controller.level.text = values.level.ToString();
             controller.name.text = values.name;
@@ -44,7 +42,6 @@ public class EquippableItemUIListController : MonoBehaviour
             
             foreach(Transform child in controller.weaponCams.transform)
             {
-                print(child.name);
                 if(child.name != "Spotlight")
                 {
                     if (child.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.name == values.materialName)
@@ -54,18 +51,6 @@ public class EquippableItemUIListController : MonoBehaviour
                 }
                 
             }
-            //if (values.materialName == "rifle")
-            //{
-            //    controller.Icon.texture = controller.weaponCams.transform.GetChild(0).gameObject.GetComponent<Camera>().targetTexture;
-            //}
-            //if (values.Type.ToString() == "shield")
-            //{
-            //    controller.Icon.texture = controller.weaponCams.transform.GetChild(1).gameObject.GetComponent<Camera>().targetTexture;
-            //}
-            //if (values.Type.ToString() == "polearm")
-            //{
-            //    controller.Icon.texture = controller.weaponCams.transform.GetChild(2).gameObject.GetComponent<Camera>().targetTexture;
-            //}
 
             newItem.transform.SetParent(ContentPanel.transform);
             newItem.transform.localScale = Vector3.one;
