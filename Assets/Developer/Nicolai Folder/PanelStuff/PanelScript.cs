@@ -600,7 +600,7 @@ public class PanelScript : MonoBehaviour
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].name); 
+                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].name; 
                 }
                 if (stat.name == "Health")
                 {
