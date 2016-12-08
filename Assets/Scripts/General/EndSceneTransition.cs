@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,8 @@ public class EndSceneTransition : MonoBehaviour
     Image fadeImg;
 
     float time = 0f;
+
+    public Boolean loadLevel = false;
 
     void OnEnable()
     {
@@ -36,7 +39,12 @@ public class EndSceneTransition : MonoBehaviour
         fadeImg.enabled = true;
         StartCoroutine(EndScene(e.scene));
     }
-    
+
+    public void StartTransition(string scene) {
+        fadeImg.enabled = true;
+        StartCoroutine(EndScene(scene));
+    }
+
     IEnumerator EndScene(string scene)
     {
         fadeImg.gameObject.SetActive(true);
@@ -48,6 +56,9 @@ public class EndSceneTransition : MonoBehaviour
             time += Time.deltaTime * (1.0f / transitionTime);
             yield return null;
         }
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        if (loadLevel)
+            GameController.Instance.LoadLevel();
+        else
+            GameController.Instance.LoadScene(scene);
     }
 }
