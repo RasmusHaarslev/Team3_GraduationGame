@@ -364,7 +364,7 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
-            soldiersList[i].GetComponent<Character>().enabled = false;
+            //soldiersList[i].GetComponent<Character>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
                
@@ -593,7 +593,6 @@ public class PanelScript : MonoBehaviour
 
             foreach (var stat in newSoldierStats)
             {
-
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = newCharacterSoldierList[i].damage.ToString(); 
@@ -739,7 +738,6 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-
                     stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
                 }
                 if (stat.name == "Soldier Name")
