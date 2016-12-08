@@ -29,7 +29,8 @@ public class NewspaperPanelScript : MonoBehaviour {
 
 	public void ClosePanel()
 	{
-        Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
+		Time.timeScale = 1;
+		Manager_Audio.ChangeState(Manager_Audio.commandWheelContainer, Manager_Audio.closeWheel);
 		if (GameController.Instance.numberOfActiveUIs == 1)
 		{
 			EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(true));
@@ -37,8 +38,4 @@ public class NewspaperPanelScript : MonoBehaviour {
 		GameController.Instance.numberOfActiveUIs--;
 	}
 
-	public void ContinueTime()
-	{
-		Time.timeScale = 1;
-	}
 }
