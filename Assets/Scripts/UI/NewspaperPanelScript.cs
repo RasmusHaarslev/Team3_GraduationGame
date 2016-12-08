@@ -36,4 +36,9 @@ public class NewspaperPanelScript : MonoBehaviour {
 		}
 		GameController.Instance.numberOfActiveUIs--;
 	}
+
+	public void ContinueTime()
+	{
+		Time.timeScale = 1;
+	}
 }
