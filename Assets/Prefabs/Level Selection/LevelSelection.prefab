@@ -1685,13 +1685,14 @@ GameObject:
   - 224: {fileID: 224000014079567652}
   - 222: {fileID: 222000013806597116}
   - 114: {fileID: 114000010400770942}
+  - 114: {fileID: 114000011748409876}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012452789158
 GameObject:
   m_ObjectHideFlags: 1
@@ -5714,6 +5715,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2 Other tribes
+--- !u!114 &114000011748409876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012316489134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3bb77550743724f85bb1897528eee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 5
 --- !u!114 &114000011794936764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6570,6 +6583,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 114000011748409876}
+        m_MethodName: TutorialSeen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1000012316489134}
         m_MethodName: SetActive
