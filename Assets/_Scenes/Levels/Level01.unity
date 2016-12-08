@@ -3676,6 +3676,22 @@ Transform:
   m_PrefabParentObject: {fileID: 4000013392414862, guid: 6c461b5dcb08f694297f660be2849c8a,
     type: 2}
   m_PrefabInternal: {fileID: 279403561}
+--- !u!1 &284831548 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011407999226, guid: 9870090bc3319654d8eb03c6612eeb25,
+    type: 2}
+  m_PrefabInternal: {fileID: 1035833614}
+--- !u!114 &284831549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284831548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996a76f34b65f0348a43674a1b514b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &285021814
 Prefab:
   m_ObjectHideFlags: 0
@@ -24172,6 +24188,7 @@ MonoBehaviour:
   timeMax: 0.25
   buttonClicked: 0
   commandPanel: {fileID: 1040134058}
+  isTutorial: 0
   buttons:
   - {fileID: 835713821}
   - {fileID: 413037824}
@@ -29297,9 +29314,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePath: Audio\GeneratedSoundBanks
   language: English(US)
-  defaultPoolSize: 65536
-  lowerPoolSize: 32768
-  streamingPoolSize: 16384
+  defaultPoolSize: 4096
+  lowerPoolSize: 2048
+  streamingPoolSize: 1024
   preparePoolSize: 0
   memoryCutoffThreshold: 0.95
   engineLogging: 1
