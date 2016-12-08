@@ -66,21 +66,21 @@ public class PaletteApplier : MonoBehaviour
                 {
                     parseColors("#7597AEFF", "#5A6E70FF", "#FFFFFF", "#BDCDFF", "#0007FF", "#A3C5FFFF", "#6B91BDFF");     //A3C5FFFF
                 }
-                Debug.Log("Color palette 1");
+
                 Manager_Audio.ChangeState("Palette", "Color3");
                 break;
             case 1: //Yellow palette | visible in tutorial 1-3 and in regular levels as 2nd "world"
                 {
                     parseColors("#97835BFF", "#5D5435FF", "#F6FFD0", "#F4FF52", "#FF4B4B", "#ECAB9CFF", "#B38861FF");     //ECAB9CFF
                 }
-                Debug.Log("Color palette 2");
+
                 Manager_Audio.ChangeState("Palette", "Color1");
                 break;
             case 2: //Red/purple palette | visible in tutorial 4-5 and in regular levels as 3rd "world"
                 {
                     parseColors("#A39ABBFF", "#61445FFF", "#FFFFFF", "#FFAEAE", "#FFCA00", "#347399FF", "#998798FF");     //347399FF
                 }
-                Debug.Log("Color palette 3");
+
                 Manager_Audio.ChangeState("Palette", "Color2");
                 break;
         }
