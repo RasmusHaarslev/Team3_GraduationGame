@@ -8,7 +8,7 @@ public class PersistentData
 {
     public static string GetPath()
     {
-        return Application.isEditor ? Application.persistentDataPath : "/data/data/com.dadiu_team_3.neonomads/files";
+        return Application.isEditor ? Application.persistentDataPath : "/data/data/dk.dadiu.neonomads/files";
     }
 
 }
