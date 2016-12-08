@@ -438,6 +438,10 @@ public class Character : MonoBehaviour
 	{
 		GameObject finalTarget;
 		finalTarget = currentOpponents[UnityEngine.Random.Range(0, currentOpponents.Count)];
+        if (finalTarget.GetComponent<HunterStateMachine>() != null && finalTarget.GetComponent<HunterStateMachine>().outOfCombatCommandState == HunterStateMachine.OutOfCombatCommandState.Stay)
+        {
+            finalTarget = FindRandomEnemy();
+        }
 		return finalTarget;
 	}
 
