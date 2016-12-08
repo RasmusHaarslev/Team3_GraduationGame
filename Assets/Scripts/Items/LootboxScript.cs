@@ -31,9 +31,9 @@ public class LootboxScript : MonoBehaviour
         {
             text.color = new Color(text.color.r, text.color.g, text.color.b, 0f);
 
-            randomizedAmount = Random.Range((int) (MinimumScrap*ScaleByLevel), (int) (MaxScrap * ScaleByLevel));
+            randomizedAmount = Random.Range((int)(MinimumScrap * ScaleByLevel), (int)(MaxScrap * ScaleByLevel));
 
-            text.text = randomizedAmount + " scrap";
+            text.text = randomizedAmount + " " + TranslationManager.Instance.GetTranslation("Scraps").ToLower();
         }
     }
 
@@ -45,9 +45,12 @@ public class LootboxScript : MonoBehaviour
             glow.Stop();
             received.Play();
             StartCoroutine(Pickup());
-            if (!isTutorial) { 
-            PlayerPrefs.SetInt("ScrapAmount", PlayerPrefs.GetInt("ScrapAmount") + randomizedAmount);
-            } else
+
+            if (!isTutorial)
+            {
+                PlayerPrefs.SetInt("ScrapAmount", PlayerPrefs.GetInt("ScrapAmount") + randomizedAmount);
+            }
+            else
             {
                 EventManager.Instance.TriggerEvent(new ChangeResources(scraps: randomizedAmount));
             }
@@ -58,7 +61,7 @@ public class LootboxScript : MonoBehaviour
     IEnumerator Pickup()
     {
         Manager_Audio.PlaySound("Play_BoxPickup", this.gameObject);
-        while (text.color.a > 0.01f)
+        while (text.color.a > 0.3f)
         {
             text.transform.position += new Vector3(0f, 0.01f, 0f);
             text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.005f);

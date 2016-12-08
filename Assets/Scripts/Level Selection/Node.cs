@@ -168,12 +168,8 @@ public class Node : MonoBehaviour {
 
     void SetupResourceForThisNode()
     {
-        // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
-        foodAmount = Random.Range(4, 10);
-        if (foodAmount < scoutCost*2)
-        {
-            foodAmount = scoutCost * 2;
-        }
+        // FOOD = TRAVELCOST + Random value between 1-3
+        foodAmount = TravelCost + Random.Range(1,4);
 
         scrapAmount = Random.Range(0, 10);
     }

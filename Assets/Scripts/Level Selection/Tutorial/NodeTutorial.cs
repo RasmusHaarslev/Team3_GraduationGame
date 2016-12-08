@@ -6,7 +6,8 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using System;
 
-public class NodeTutorial : MonoBehaviour {
+public class NodeTutorial : MonoBehaviour
+{
 
     public GameObject scrollingGrid;
 
@@ -47,7 +48,7 @@ public class NodeTutorial : MonoBehaviour {
 
     // Not scouted panel
     public GameObject NotScoutedPanel;
-    public Text interestPointsText;    
+    public Text interestPointsText;
 
     /* ROADS FROM THIS NODE */
     public List<GameObject> Links = new List<GameObject>();
@@ -178,7 +179,7 @@ public class NodeTutorial : MonoBehaviour {
     public void SetScrollPosition(int rowNumber)
     {
         /* SETUP SCROLL POSITION */
-        float rowHeight = 384*rowNumber;
+        float rowHeight = 384 * rowNumber;
 
         Vector2 initPos = new Vector2(scrollingGrid.GetComponent<RectTransform>().anchoredPosition.x, -500f);
         Vector2 desPos = new Vector2(scrollingGrid.GetComponent<RectTransform>().anchoredPosition.x, -500 + rowHeight);
@@ -272,30 +273,29 @@ public class NodeTutorial : MonoBehaviour {
         confirmPanel.GetComponent<ConfirmPanel>().btnYes.GetComponent<Button>().onClick.AddListener(AcceptPlay);
     }
 
-    public void AcceptPlay() {
+    public void AcceptPlay()
+    {
         Manager_Audio.PlaySound(Manager_Audio.play_intoLevel, gameObject);
         EventManager.Instance.TriggerEvent(new ChangeResources(-TravelCost));
-        
+
         PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, PaletteNumber);
         PlayerPrefs.SetInt(StringResources.FoodAmountPrefsName, foodAmount);
 
-        EventManager.Instance.TriggerEvent(new LevelStarted());
-
         switch (gameObject.name)
-          {
-              case "Tut1":
-                  GameController.Instance.LoadScene("TutorialLevel01");
-                  break;
-              case "Tut2":
-                  GameController.Instance.LoadScene("TutorialLevel02");
-                  break;
-              case "Tut3":
-                  GameController.Instance.LoadScene("TutorialLevel03");
-                  break;
-              case "Tut4":
-                  GameController.Instance.LoadScene("TutorialLevel04");
-                  break;
-          }
+        {
+            case "Tut1":
+                EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("TutorialLevel01"));
+                break;
+            case "Tut2":
+                EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("TutorialLevel02"));
+                break;
+            case "Tut3":
+                EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("TutorialLevel03"));
+                break;
+            case "Tut4":
+                EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("TutorialLevel04"));
+                break;
+        }
     }
 
     public void Deny()

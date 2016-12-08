@@ -694,13 +694,13 @@ public class DataService : MonoBehaviour
 
     }
 
-    public void ResetDatabase()
+    public void ResetDatabase(bool start = false)
     {
         _connection.DropTable<CharacterValues>();
         _connection.DropTable<EquippableitemValues>();
         _connection.DropTable<InventoryItem>();
 
-        CreateDB(0, false);
+        CreateDB(0, start);
     }
 
     #region character methods
