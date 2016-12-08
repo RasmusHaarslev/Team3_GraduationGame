@@ -283,3 +283,13 @@ public class UIPanelActiveEvent : GameEvent
 		this.panelActive = panelActive;
 	}
 }
+
+public class EndSceneTransitionEvent : GameEvent
+{
+    public string scene;
+
+    public EndSceneTransitionEvent(string scene)
+    {
+        this.scene = scene;
+    }
+}
