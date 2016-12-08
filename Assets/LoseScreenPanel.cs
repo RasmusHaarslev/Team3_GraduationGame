@@ -5,6 +5,8 @@ public class LoseScreenPanel : MonoBehaviour {
 
     public GameObject Panel1;
     public GameObject Panel2;
+    public GameObject Text1;
+    public GameObject Text2;
 
     void OnEnable()
     {
@@ -24,6 +26,15 @@ public class LoseScreenPanel : MonoBehaviour {
     void ShowCanvas (GameLost e) {
         Panel1.SetActive(true);
         Panel2.SetActive(true);
+
+        if (e.LeaderDeath)
+        {
+            Text1.SetActive(true);
+        }
+        else
+        {
+            Text2.SetActive(true);
+        }
     }
 
     public void Restart()
