@@ -270,7 +270,7 @@ public class LevelManager : MonoBehaviour
 		EventManager.Instance.TriggerEvent(new LevelWon());
 
         Camera.main.GetComponent<CameraController>().LockCamera = true;
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
 
         if (IsTutorial)
 		{

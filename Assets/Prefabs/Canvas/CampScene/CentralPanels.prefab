@@ -674,7 +674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000011309499818
 GameObject:
   m_ObjectHideFlags: 1
@@ -1163,7 +1163,6 @@ GameObject:
   - 224: {fileID: 224000012506824446}
   - 222: {fileID: 222000013567784486}
   - 114: {fileID: 114000012171935370}
-  - 114: {fileID: 114000012221191228}
   m_Layer: 5
   m_Name: TTrait
   m_TagString: Untagged
@@ -2062,7 +2061,6 @@ GameObject:
   - 224: {fileID: 224000010838404156}
   - 222: {fileID: 222000010522377324}
   - 114: {fileID: 114000012159160896}
-  - 114: {fileID: 114000011297972846}
   m_Layer: 5
   m_Name: CTrait
   m_TagString: Untagged
@@ -4713,18 +4711,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000011297972846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013198183454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: CombatTrait
 --- !u!114 &114000011322341152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5945,18 +5931,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Soldier Name
---- !u!114 &114000012221191228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012110305082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd9a432716dc142b4e86789bbe5123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TranslationKey: TargetTrait
 --- !u!114 &114000012240282526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6439,7 +6413,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114000010108762666}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1000011084936642}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114000012580547678
