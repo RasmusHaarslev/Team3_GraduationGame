@@ -125,9 +125,10 @@ public class LevelLost : GameEvent
 
 public class GameLost : GameEvent
 {
-    public GameLost()
+    public bool LeaderDeath;
+    public GameLost(bool leaderDeath)
     {
-
+        this.LeaderDeath = leaderDeath;
     }
 }
 
@@ -220,6 +221,14 @@ public class AllyDeathEvent : GameEvent
     }
 }
 
+public class AllySpawned : GameEvent
+{
+    public AllySpawned()
+    {
+
+    }
+}
+
 public class ItemSpawned : GameEvent
 {
     public ItemSpawned()
@@ -260,6 +269,14 @@ public class CommandEvent : GameEvent
 	{
 
 	}
+}
+
+public class UpgradeCompleted : GameEvent
+{
+    public UpgradeCompleted()
+    {
+
+    }
 }
 
 public class ClearedCampEvent : GameEvent

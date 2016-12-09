@@ -274,7 +274,7 @@ public class shaderGlow : MonoBehaviour {
         {
             if (!singleRenderer.enabled)
                 continue;
-            Debug.Log("Renderer found");
+
             //Create material for object
             Material newMat;
             if (useNormal)
@@ -306,7 +306,7 @@ public class shaderGlow : MonoBehaviour {
 
             if (gameObject.name == "SilhouetteGlow")      //if it is the silhouette TODO continue here
             {
-                print(gameObject.name + " will change the scale!");
+                //print(gameObject.name + " will change the scale!");
                 newMat.SetColor("_ScaleTrick", new Color(0.5451f, 0.161f, 0.2235f, 1f));
             }
 

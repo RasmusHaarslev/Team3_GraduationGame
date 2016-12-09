@@ -61,6 +61,7 @@ public class Node : MonoBehaviour {
     public Text txtScraps;
     public Text txtTribes;
     public Text txtWolves;
+    public Text txtItemDrops;
     public Text txtIntPoints;
 
     #endregion
@@ -90,7 +91,11 @@ public class Node : MonoBehaviour {
 
         SetupImage();
         SetupUIText();
-    }
+
+		txtFood.text = foodAmount.ToString();
+		txtScraps.text = scrapAmount.ToString();
+		txtTribes.text = tribeCamps.ToString();
+	}
 
     public void SetupImage()
     {
@@ -126,9 +131,7 @@ public class Node : MonoBehaviour {
                 {
                     child.gameObject.SetActive(true);
 
-                    GetComponent<Node>().txtFood.text = GetComponent<Node>().foodAmount.ToString();
-                    GetComponent<Node>().txtScraps.text = GetComponent<Node>().scrapAmount.ToString();
-                    GetComponent<Node>().txtTribes.text = GetComponent<Node>().tribeCamps.ToString();  
+                   
                 }
             }
 
@@ -168,12 +171,8 @@ public class Node : MonoBehaviour {
 
     void SetupResourceForThisNode()
     {
-        // FOOD NEED TO BE DEPENDENT OF THE TOTAL COST IN FOOD IT WILL DEMAND TO GO HERE.
-        foodAmount = Random.Range(4, 10);
-        if (foodAmount < scoutCost*2)
-        {
-            foodAmount = scoutCost * 2;
-        }
+        // FOOD = TRAVELCOST + Random value between 1-3
+        foodAmount = TravelCost + Random.Range(1,4);
 
         scrapAmount = Random.Range(0, 10);
     }

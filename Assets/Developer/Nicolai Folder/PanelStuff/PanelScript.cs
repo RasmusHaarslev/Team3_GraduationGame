@@ -77,7 +77,7 @@ public class PanelScript : MonoBehaviour
         float currentOpacity = 1f;
         float fadingTicks = 0.025f;
         shaderGlow[] glowingControllers = FindObjectsOfType<shaderGlow>();
-        print(glowingControllers.Length + " objects glowing");
+
         while (currentOpacity > 0f)
         {
             currentOpacity -= fadingTicks;
@@ -186,9 +186,7 @@ public class PanelScript : MonoBehaviour
                 newHunterEquipsValues[i].characterId = 20 + i;
                 //print(newHuntersValues[i].id);
                 i++;
-
             }
-            print("Creation of 3 models " + (DateTime.Now - start).TotalMilliseconds);
 
             dataService.UpdateCharactersValues(newHuntersValues);
             dataService.UpdateEquipItemsValues(newHunterEquipsValues);
@@ -215,7 +213,7 @@ public class PanelScript : MonoBehaviour
                 newSoldier.GetComponent<NavMeshAgent>().enabled = false;
                 newSoldier.GetComponent<HunterStateMachine>().enabled = false;
                 newSoldier.GetComponent<PlayFootStepParticles>().enabled = false;
-                newSoldier.GetComponent<Character>().enabled = false;
+                //newSoldier.GetComponent<Character>().enabled = false;
 
                 if (newSoldier.GetComponentsInChildren<ShootRifle>().Count() > 0)
                 {
@@ -366,7 +364,7 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
-            soldiersList[i].GetComponent<Character>().enabled = false;
+            //soldiersList[i].GetComponent<Character>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
                
@@ -416,11 +414,11 @@ public class PanelScript : MonoBehaviour
                 soldierTierList.Add(soldier.GetComponent<Character>().characterBaseValues.id);
 
             }
-            print(soldierTierList.Count());
-            foreach (var v in soldierTierList)
-            {
-                print(v);
-            }
+            //print(soldierTierList.Count());
+            //foreach (var v in soldierTierList)
+            //{
+            //    print(v);
+            //}
  
             for (int i = 1; i < solidersSpawnPosition.childCount + 1; i++)
             {
@@ -595,14 +593,13 @@ public class PanelScript : MonoBehaviour
 
             foreach (var stat in newSoldierStats)
             {
-
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = newCharacterSoldierList[i].damage.ToString(); 
                 }
                 if (stat.name == "Soldier Name")
                 {
-                    stat.GetComponent<Text>().text = TranslationManager.Instance.GetTranslation(newCharacterSoldierList[i].name); 
+                    stat.GetComponent<Text>().text = newCharacterSoldierList[i].name; 
                 }
                 if (stat.name == "Health")
                 {
@@ -741,7 +738,6 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-
                     stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
                 }
                 if (stat.name == "Soldier Name")
@@ -834,7 +830,6 @@ public class PanelScript : MonoBehaviour
 
     public GameObject GenerateNewHunterGameObject(Transform newSoldierTrans)
     {
-        print("helo");
         var weaponGenerator = GetComponent<WeaponGenerator>();
 
         CharacterValues newCharValues = GenerateNewHunterValues();
@@ -846,7 +841,7 @@ public class PanelScript : MonoBehaviour
         hunter.transform.localPosition = Vector3.zero;
         newCharacterSoldierList.Add(newCharValues);
         newWeaponsSoldierList.Add(newWeaponValues);
-        print(newWeaponsSoldierList);
+        //print(newWeaponsSoldierList);
         return hunter;
     }
     

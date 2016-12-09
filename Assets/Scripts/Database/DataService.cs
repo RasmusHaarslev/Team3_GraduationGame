@@ -74,12 +74,12 @@ public class DataService : MonoBehaviour
 
     }
 
-    public void CreateDB(int command = 0)
+    public void CreateDB(int command = 0, bool firstStart = true)
     {/*
 		if (command == 0)*/
         if (_connection.GetTableInfo("EquippableitemValues").Any(colInfo => colInfo.Name == "level"))
         {
-            print("New Database already present, continuing with the old one.");  //Databese already present, continuing with the old one. 
+            //print("New Database already present, continuing with the old one.");  //Databese already present, continuing with the old one. 
             return;
         }
 
@@ -96,7 +96,7 @@ public class DataService : MonoBehaviour
 
         //GENERATE RANDOM LEADER
         CharacterGenerator charGenerator = new CharacterGenerator();
-        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null, 125, 0.135f); //pass attributes points as parameter
+        CharacterValues leaderValues = charGenerator.GenerateNewHunterValues(null, 145, 0.132f); //pass attributes points as parameter
         leaderValues.id = 1;
         leaderValues.Type = CharacterValues.type.Player;
         leaderValues.isMale = true; //Leader can only be male!
@@ -106,7 +106,7 @@ public class DataService : MonoBehaviour
         WeaponGenerator weaponGen = new WeaponGenerator();
         EquippableitemValues leaderWeapon = weaponGen.GenerateEquippableItem(EquippableitemValues.type.polearm, 1, 0.2f, 0.7f, 0.1f); //leader will have a random level 1 spear
         leaderWeapon.characterId = 1;                                                                                   //damage, health and dmg-speed probability
-        //ENDING OF RANDOM LEADER GENERATION
+                                                                                                                        //ENDING OF RANDOM LEADER GENERATION
 
 
 
@@ -118,7 +118,7 @@ public class DataService : MonoBehaviour
                 id = 2,
                 name = "Aleksy",
                 isMale = true,
-                Type = CharacterValues.type.Hunter,
+                Type =  firstStart ? CharacterValues.type.Hunter : CharacterValues.type.Wolf,
                 damage = 5,
                 health = 95,
                 damageSpeed = 1f,
@@ -133,7 +133,7 @@ public class DataService : MonoBehaviour
                 id = 3,
                 name = "Yazmin",
                 isMale = false,
-                Type = CharacterValues.type.Hunter,
+                Type = CharacterValues.type.Wolf,
                 damage = 7,
                 health = 93,
                 damageSpeed = 1f,
@@ -148,7 +148,7 @@ public class DataService : MonoBehaviour
                 id = 4,
                 name = "Zeheb",
                 isMale = true,
-                Type = CharacterValues.type.Hunter,
+                Type = CharacterValues.type.Wolf,
                 damage = 3,
                 health = 97,
                 damageSpeed = 1f,
@@ -194,7 +194,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 3,
               damage = 6,
-              health = 85,
+              health = 75,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -208,7 +208,7 @@ public class DataService : MonoBehaviour
               Type = CharacterValues.type.Tribesman,
               tier = 4,
               damage = 6,
-              health = 85,
+              health = 75,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -221,8 +221,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 5,
-              damage = 10,
-              health = 95,
+              damage = 9,
+              health = 85,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -235,8 +235,8 @@ public class DataService : MonoBehaviour
               isMale = true,
               Type = CharacterValues.type.Tribesman,
               tier = 6,
-              damage = 10,
-              health = 95,
+              damage = 9,
+              health = 75,
               damageSpeed = 2,
               range = 2,
               prefabName = "Rival",
@@ -257,7 +257,7 @@ public class DataService : MonoBehaviour
              level = 1,
              health = 4,
              damage = 6,
-             damageSpeed = 1.5f,
+             damageSpeed = 2f,
              range = 9,
              characterId = 2,
              materialName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][2],
@@ -314,7 +314,7 @@ public class DataService : MonoBehaviour
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 1.5f,
+             damageSpeed = 2f,
              range = 9,
              characterId = 6,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
@@ -340,7 +340,7 @@ public class DataService : MonoBehaviour
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 1.5f,
+             damageSpeed = 2f,
              range = 9,
              characterId = 8,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
@@ -366,7 +366,7 @@ public class DataService : MonoBehaviour
              Slot = EquippableitemValues.slot.rightHand,
              health = 0,
              damage = 0,
-             damageSpeed = 1.5f,
+             damageSpeed = 2f,
              range = 9,
              characterId = 10,
              prefabName = StringResources.equipItemsModelsStrings[EquippableitemValues.type.rifle][0][1]
@@ -375,7 +375,7 @@ public class DataService : MonoBehaviour
         /* INVENTORY ITEMS
         _connection.InsertAll(new[]
         {
-            
+
             new InventoryItem
             {
                 Type = InventoryItem.type.equippable,
@@ -394,19 +394,19 @@ public class DataService : MonoBehaviour
                 deferredId = 6,
                 quantity = 1
             }
-            
+
 
         });*/
 
     }
 
-    public void ResetDatabase()
+    public void ResetDatabase(bool start = false)
     {
         _connection.DropTable<CharacterValues>();
         _connection.DropTable<EquippableitemValues>();
         _connection.DropTable<InventoryItem>();
 
-        CreateDB();
+        CreateDB(0, start);
     }
 
     #region character methods
@@ -500,7 +500,7 @@ public class DataService : MonoBehaviour
         CharacterSpawner[] spawners = fellowshipLocation.gameObject.GetComponentsInChildren<CharacterSpawner>().ToArray();
         GameObject fellowship = new GameObject("PlayerFellowship");
         CharacterValues[] fellowshipValues = GetFellowshipValues().ToArray(); //order by ascending ID. The first one is Always the player.
- 
+
         if (spawners.Length > 0)
         {
             CharacterValues currentvalues;
@@ -508,10 +508,13 @@ public class DataService : MonoBehaviour
             for (int i = 0; i < spawners.Length; i++)
             {
                 currentvalues = fellowshipValues.FirstOrDefault(x => x.id == spawners[i].tier);
-                if(currentvalues != null) { 
-                //istantiate a character with the id specified in the Tier of the character spawner
-                GameObject charGameObject = GenerateCharacterFromValues(currentvalues, spawners[i].transform.position, spawners[i].transform.rotation);
-                charGameObject.transform.parent = fellowship.transform;
+                if (currentvalues != null)
+                {
+                    //istantiate a character with the id specified in the Tier of the character spawner
+                    GameObject charGameObject = GenerateCharacterFromValues(currentvalues, spawners[i].transform.position, spawners[i].transform.rotation);
+                    charGameObject.transform.parent = fellowship.transform;
+                    if (currentvalues.Type == CharacterValues.type.Hunter)
+                        EventManager.Instance.TriggerEvent(new AllySpawned());
                 }
             }
         }
@@ -655,7 +658,7 @@ public class DataService : MonoBehaviour
     #region equippable items methods
 
     public IEnumerable<EquippableitemValues> GetFellowshipEquippableItemsValues()
-    { 
+    {
         return _connection.Query<EquippableitemValues>("SELECT * FROM EquippableitemValues WHERE characterId IN (1, 2, 3, 4)");
     }
     public IEnumerable<EquippableitemValues> GetCharacterEquippedItemsValues(int characterId)
@@ -886,7 +889,7 @@ public class DataService : MonoBehaviour
 
     public async void UpdateEquipItemValues(EquippableitemValues itemValues)
     {
-        
+
         await _asyncConnection.InsertOrReplaceAsync(itemValues);
     }
     public async void UpdateEquipItemsValues(EquippableitemValues[] itemsValues)

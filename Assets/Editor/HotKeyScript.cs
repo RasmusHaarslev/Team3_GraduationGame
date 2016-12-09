@@ -72,7 +72,7 @@ namespace Assets.Editor
         static void ResetDatabase() {
             PlayerPrefs.DeleteAll();
             DataService dataService = new DataService(StringResources.databaseName);
-            dataService.ResetDatabase();
+            dataService.ResetDatabase(true);
         }
     }
 }
