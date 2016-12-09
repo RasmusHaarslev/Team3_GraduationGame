@@ -133,7 +133,17 @@ public class PopUpFunctionality : MonoBehaviour {
         confirmPanel.SetActive(true);
         int value = node.GetComponent<Node>().TravelCost;
 
-        if (GameController.Instance._FOOD - value < 0)
+		if (GameController.Instance._FOOD - value < 0 && GameController.Instance._VILLAGERS == 0)
+		{
+			confirmPanel.transform.GetChild(2).gameObject.SetActive(true);
+
+			confirmPanel.GetComponent<ConfirmPanel>().btnNoNoVillages.GetComponent<Button>().onClick.RemoveAllListeners();
+			confirmPanel.GetComponent<ConfirmPanel>().btnYesNoVillages.GetComponent<Button>().onClick.RemoveAllListeners();
+
+			confirmPanel.GetComponent<ConfirmPanel>().btnNoNoVillages.GetComponent<Button>().onClick.AddListener(Deny);
+			confirmPanel.GetComponent<ConfirmPanel>().btnYesNoVillages.GetComponent<Button>().onClick.AddListener(delegate { AcceptPlay(node); });
+		}
+		else if (GameController.Instance._FOOD - value < 0)
         {
             confirmPanel.transform.GetChild(1).gameObject.SetActive(true);
 
