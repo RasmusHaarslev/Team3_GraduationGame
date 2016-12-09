@@ -24,7 +24,7 @@ public class ChooseLanguage : MonoBehaviour {
 
     public void PlayMedia(string cutscene)
     {
-        if (!(PlayerPrefs.GetInt("GameplayTutorialCompleted") == 1)) { 
+        if (PlayerPrefs.GetInt("GameplayTutorialCompleted") == 0) { 
             //Handheld.PlayFullScreenMovie(cutscene + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
             
             PlayerPrefs.SetInt(StringResources.LevelDifficultyPrefsName, 4);

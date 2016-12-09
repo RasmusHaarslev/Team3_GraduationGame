@@ -47,14 +47,14 @@ public class GoToLevelSelection : MonoBehaviour {
         gameObject.GetComponent<LevelSelectionGenerator>().SetScrollPosition(SaveLoadLevels.maxRowsCleared);
 
         if (winAnimation && nodeCleared) {
-            levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            //levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
             WinAnimateMap();
             winAnimation = !winAnimation;
         }
 
         if (loseAnimation && !nodeCleared)
         {
-            levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            //levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
             LoseAnimateMap();
             loseAnimation = !loseAnimation;
         }
@@ -67,7 +67,8 @@ public class GoToLevelSelection : MonoBehaviour {
 
         if (nodeCleared.GetComponent<Node>().isCleared)
         {
-            StartCoroutine(initWin(nodeCleared));                 
+			levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
+			StartCoroutine(initWin(nodeCleared));                 
         }
     }
 
@@ -107,8 +108,8 @@ public class GoToLevelSelection : MonoBehaviour {
     void LoseAnimateMap()
     {
         GameObject nodeLost = SaveLoadLevels.AllLevelsLoaded[PlayerPrefs.GetInt("NodeId")];
-
-        StartCoroutine(initLose(nodeLost));
+		levelSelectionPanel.transform.GetChild(0).GetComponent<Button>().enabled = false;
+		StartCoroutine(initLose(nodeLost));
     }
 
     IEnumerator initLose(GameObject node)

@@ -146,7 +146,7 @@ public class CampManager : MonoBehaviour
         // Update premium resource in GameController.
         EventManager.Instance.TriggerEvent(new ChangeResources(premium: -FinishUpgradeCost));
 
-        FinishUpgrade();
+        //FinishUpgrade();
     }
 
     public void FinishUpgrade()
@@ -175,6 +175,7 @@ public class CampManager : MonoBehaviour
 
         Upgrades.UpgradeInProgress = false;
         Upgrades.UpgradeBought = "";
+        EventManager.Instance.TriggerEvent(new UpgradeCompleted());
         SaveUpgrades();
     }
 
@@ -210,7 +211,7 @@ public class CampManager : MonoBehaviour
 
     #endregion
 
-    private int GetTimeForUpgrade(int level) {
+    public int GetTimeForUpgrade(int level) {
         switch (level)
         {
             case 1:

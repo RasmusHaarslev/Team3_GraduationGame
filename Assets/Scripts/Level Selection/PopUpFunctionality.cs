@@ -22,6 +22,7 @@ public class PopUpFunctionality : MonoBehaviour {
     public Text foodText;
     public Text scrapsText;
     public Text goldTeethsText;
+    public Text itemsDropText;
 
     // Not scouted panel
     public GameObject NotScoutedPanel;
@@ -205,10 +206,10 @@ public class PopUpFunctionality : MonoBehaviour {
             if (child.name == "InfoPanel")
             {
                 child.gameObject.SetActive(true);
-                node.GetComponent<Node>().txtFood.text = node.GetComponent<Node>().foodAmount.ToString();
-                node.GetComponent<Node>().txtScraps.text = node.GetComponent<Node>().scrapAmount.ToString();
-                node.GetComponent<Node>().txtTribes.text = node.GetComponent<Node>().tribeCamps.ToString();
-                //   node.GetComponent<Node>().txtWolves.text = node.GetComponent<Node>().wolveCamps.ToString();
+                foodText.text = node.GetComponent<Node>().foodAmount.ToString() + " " + TranslationManager.Instance.GetTranslation("Food");
+                scrapsText.text = node.GetComponent<Node>().scrapAmount.ToString() + " " + TranslationManager.Instance.GetTranslation("Scraps");
+                tribeText.text = node.GetComponent<Node>().tribeCamps.ToString() + " " + TranslationManager.Instance.GetTranslation("Tribe Camps");
+                itemsDropText.text = node.GetComponent<Node>().itemDropAmount.ToString() + " " + TranslationManager.Instance.GetTranslation("Items");
             }
             else
             {

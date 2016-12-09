@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
 	void Start()
 	{
 		PlayerAlive = true;
-		
+
 		levelGenerator = GetComponent<LevelGenerator>();
 		if (levelGenerator.isTutorial)
 		{
@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
 	}
 
 	void Update()
-	{ 
+	{
 		if (huntersAndPlayer.Count == 0)
 		{
 			huntersAndPlayer.AddRange(GameObject.FindGameObjectsWithTag("Friendly"));
@@ -79,11 +79,11 @@ public class LevelManager : MonoBehaviour
 		//Enemy spawn for counting
 		EventManager.Instance.StartListening<EnemySpawned>(EnemySpawn);
 		EventManager.Instance.StartListening<ItemSpawned>(ItemSpawn);
-        EventManager.Instance.StartListening<AllySpawned>(AllySpawn);
+		EventManager.Instance.StartListening<AllySpawned>(AllySpawn);
 
-        // -Collecting-
-        //Loot received
-        EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
+		// -Collecting-
+		//Loot received
+		EventManager.Instance.StartListening<EnemyDeathEvent>(LootReceived);
 
 		// -Win-
 		//Enemy dies for progress
@@ -104,11 +104,11 @@ public class LevelManager : MonoBehaviour
 		//Enemy spawn for counting
 		EventManager.Instance.StopListening<EnemySpawned>(EnemySpawn);
 		EventManager.Instance.StopListening<ItemSpawned>(ItemSpawn);
-        EventManager.Instance.StartListening<AllySpawned>(AllySpawn);
+		EventManager.Instance.StartListening<AllySpawned>(AllySpawn);
 
-        // -Collecting-
-        //Loot received
-        EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
+		// -Collecting-
+		//Loot received
+		EventManager.Instance.StopListening<EnemyDeathEvent>(LootReceived);
 
 		// -Win-
 		//Enemy dies for progress
@@ -131,16 +131,16 @@ public class LevelManager : MonoBehaviour
 	private void EnemySpawn(EnemySpawned e)
 	{
 		EnemiesAlive++;
-        //Debug.Log("Spawned " + EnemiesAlive);
+		//Debug.Log("Spawned " + EnemiesAlive);
 	}
 
-    private void AllySpawn(AllySpawned e)
-    {
-        AlliesAlive++;
-        Debug.Log("Ally " + EnemiesAlive);
-    }
+	private void AllySpawn(AllySpawned e)
+	{
+		AlliesAlive++;
+		Debug.Log("Ally " + EnemiesAlive);
+	}
 
-    private void ItemSpawn(ItemSpawned e)
+	private void ItemSpawn(ItemSpawned e)
 	{
 		ItemsLeft++;
 	}
@@ -148,7 +148,10 @@ public class LevelManager : MonoBehaviour
 	private void AllyDeath(AllyDeathEvent e)
 	{
 		//removing hunter from database
-		dataService.RemoveCharacter(e.deadAlly.characterBaseValues);
+		if (!IsTutorial)
+		{
+			dataService.RemoveCharacter(e.deadAlly.characterBaseValues);
+		}
 
 		AlliesAlive--;
 
@@ -158,8 +161,8 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-        Debug.Log("Killed " + EnemiesAlive);
-        CheckConditions();
+		Debug.Log("Killed " + EnemiesAlive);
+		CheckConditions();
 	}
 
 	void PlayerDeath(PlayerDeathEvent e)
@@ -193,14 +196,22 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (AlliesAlive <= 0)
 		{
-			LoseLevel();
+			if (!IsTutorial)
+			{
+				LoseLevel();
+			}
+			else
+			{
+				LoseGame(true);
+			}
 		}
 	}
 
 	public void LoseGame(bool leaderDeath)
 	{
-        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
-        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
+		EventManager.Instance.TriggerEvent(new UIPanelActiveEvent(false));
+		EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		Camera.main.GetComponent<CameraDeathEffect>().TriggerDeath();
 		StartCoroutine(LoseGameCoroutine(leaderDeath));
 	}
@@ -214,29 +225,30 @@ public class LevelManager : MonoBehaviour
 			yield return new WaitForSeconds(0.15f);
 		}
 
-        yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(1.5f);
 
-        if (!IsTutorial) {
-            EventManager.Instance.TriggerEvent(new GameLost(leaderDeath));
-            //GameController.Instance.LoseGame();
-            yield break;
-        }
+		if (!IsTutorial)
+		{
+			EventManager.Instance.TriggerEvent(new GameLost(leaderDeath));
+			//GameController.Instance.LoseGame();
+			yield break;
+		}
 
-        Time.timeScale = 1f;
-        GameController.Instance.LoadScene(SceneManager.GetActiveScene().name);
+		Time.timeScale = 1f;
+		GameController.Instance.LoadScene(SceneManager.GetActiveScene().name);
 
 		yield return new WaitForSeconds(0f);
 	}
 
-    public void RestartGame()
-    {
-        GameController.Instance.LoseGame();
-    }
+	public void RestartGame()
+	{
+		GameController.Instance.LoseGame();
+	}
 
 	public void LoseLevel()
 	{
-        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
-        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
+		EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.loseState);
 		EventManager.Instance.TriggerEvent(new LevelLost());
 		PlayerPrefs.SetInt("LevelResult", 0);
 
@@ -245,8 +257,8 @@ public class LevelManager : MonoBehaviour
 
 	public void WinLevel()
 	{
-        EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
-        Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
+		EventManager.Instance.TriggerEvent(new ChangeResources(daysSurvived: 1));
+		Manager_Audio.ChangeState(Manager_Audio.playStateGroupContainer, Manager_Audio.winState);
 		StartCoroutine(WinGameCoroutine());
 	}
 
@@ -258,8 +270,8 @@ public class LevelManager : MonoBehaviour
 		}
 		GameController.Instance.numberOfActiveUIs++;
 		Time.timeScale -= 0.1f;
-        Camera.main.GetComponent<CameraController>().TriggerWinZoom();
-        while (Time.timeScale > 0.2f)
+		Camera.main.GetComponent<CameraController>().TriggerWinZoom();
+		while (Time.timeScale > 0.2f)
 		{
 			Time.timeScale -= 0.1f;
 
@@ -270,28 +282,28 @@ public class LevelManager : MonoBehaviour
 
 		EventManager.Instance.TriggerEvent(new LevelWon());
 
-        Camera.main.GetComponent<CameraController>().LockCamera = true;
+		Camera.main.GetComponent<CameraController>().LockCamera = true;
 
-        if (IsTutorial)
+		if (IsTutorial)
 		{
-            Time.timeScale = 1f;
-            EventManager.Instance.TriggerEvent(new TutorialDone());
+			Time.timeScale = 1f;
+			EventManager.Instance.TriggerEvent(new TutorialDone());
 			yield break;
 		}
 
-        EventManager.Instance.TriggerEvent(
-            new ChangeResources(
-                food: PlayerPrefs.GetInt("FoodAmount"),
-                scraps: PlayerPrefs.GetInt("ScrapAmount"),
-                premium: PlayerPrefs.GetInt(StringResources.PremiumDropAmountPrefsName)
-            )
-        );
+		EventManager.Instance.TriggerEvent(
+			new ChangeResources(
+				food: PlayerPrefs.GetInt("FoodAmount"),
+				scraps: PlayerPrefs.GetInt("ScrapAmount"),
+				premium: PlayerPrefs.GetInt(StringResources.PremiumDropAmountPrefsName)
+			)
+		);
 
-        PlayerPrefs.SetInt("LevelResult", 1);
+		PlayerPrefs.SetInt("LevelResult", 1);
 		GameObject.FindGameObjectWithTag("Player").GetComponent<MoveScript>().enabled = false;
 		//generate and display the new items
 		GenerateNewItems();
-		
+
 
 		yield return new WaitForSeconds(0f);
 	}

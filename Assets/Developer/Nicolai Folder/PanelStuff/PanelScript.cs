@@ -364,7 +364,7 @@ public class PanelScript : MonoBehaviour
             soldiersList[i].AddComponent<shaderGlow>();
             soldiersList[i].GetComponent<NavMeshAgent>().enabled = false;
             soldiersList[i].GetComponent<PlayFootStepParticles>().enabled = false;
-            soldiersList[i].GetComponent<Character>().enabled = false;
+            //soldiersList[i].GetComponent<Character>().enabled = false;
             if (soldiersList[i].GetComponentsInChildren<ShootRifle>().Count() > 0)
             {
                
@@ -414,11 +414,11 @@ public class PanelScript : MonoBehaviour
                 soldierTierList.Add(soldier.GetComponent<Character>().characterBaseValues.id);
 
             }
-            print(soldierTierList.Count());
-            foreach (var v in soldierTierList)
-            {
-                print(v);
-            }
+            //print(soldierTierList.Count());
+            //foreach (var v in soldierTierList)
+            //{
+            //    print(v);
+            //}
  
             for (int i = 1; i < solidersSpawnPosition.childCount + 1; i++)
             {
@@ -593,7 +593,6 @@ public class PanelScript : MonoBehaviour
 
             foreach (var stat in newSoldierStats)
             {
-
                 if (stat.name == "Damage")
                 {
                     stat.GetComponent<Text>().text = newCharacterSoldierList[i].damage.ToString(); 
@@ -739,7 +738,6 @@ public class PanelScript : MonoBehaviour
 
                 if (stat.name == "Damage")
                 {
-
                     stat.GetComponent<Text>().text = (currentSoldier.damage - characterWeaponValues.damage).ToString() + " + " + characterWeaponValues.damage;
                 }
                 if (stat.name == "Soldier Name")
@@ -843,7 +841,7 @@ public class PanelScript : MonoBehaviour
         hunter.transform.localPosition = Vector3.zero;
         newCharacterSoldierList.Add(newCharValues);
         newWeaponsSoldierList.Add(newWeaponValues);
-        print(newWeaponsSoldierList);
+        //print(newWeaponsSoldierList);
         return hunter;
     }
     

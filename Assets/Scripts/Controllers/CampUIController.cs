@@ -16,20 +16,47 @@ public class CampUIController : MonoBehaviour
 	public GameObject InsufficientScrapsPanel;
 	public GameObject ConfirmationShade;
 
+    public Text finishNowCost;
+    public Text scrapCost;
+
     private CampManager campManager;
 
     void Start()
     {
         campManager = GetComponent<CampManager>();
+
+        if (campManager.Upgrades.UpgradeInProgress)
+        {
+            DateTime end = DateTime.Parse(PlayerPrefs.GetString("UpgradeEnd"));
+            double timeLeft = (end - DateTime.Now).TotalSeconds;
+            if (timeLeft < 0.0)
+            {
+                foreach (var button in Buttons)
+                {
+                    button.interactable = true;
+                }
+                campManager.FinishUpgrade();
+                SetLevels();
+            }
+            else
+            {
+                foreach (var button in Buttons)
+                {
+                    button.interactable = false;
+                }
+            }
+        }
     }
 
     void OnEnable()
     {
         campManager = GetComponent<CampManager>();
         campManager.LoadUpgrades();
+        
+        FinishNow.interactable = campManager.Upgrades.UpgradeInProgress;
+
         SetLevels();
         SetCosts();
-        FinishNow.interactable = campManager.Upgrades.UpgradeInProgress;
     }
 
     public void PerformUpgrade()
@@ -38,9 +65,6 @@ public class CampUIController : MonoBehaviour
         {
             button.interactable = false;
         }
-
-        SetLevels();
-        SetCosts();
 
         Manager_Audio.PlaySound(Manager_Audio.play_campUpgrade, gameObject);
         DateTime End = DateTime.Now.AddSeconds(campManager.amountOfSeconds);
@@ -53,6 +77,9 @@ public class CampUIController : MonoBehaviour
 		EventManager.Instance.TriggerEvent(new ChangeResources(scraps: -campManager.tempCost));
         FinishNow.interactable = true;
         campManager.SaveUpgrades();
+
+        SetLevels();
+        SetCosts();
     }
 
     public double TimeLeftInSeconds()
@@ -97,12 +124,40 @@ public class CampUIController : MonoBehaviour
 
     public void FinishUpgradeClicked()
     {
-		if (GameController.Instance._PREMIUM < campManager.FinishUpgradeCost)
-			InsufficientPremiumPanel.SetActive (true);
-		else
-			FinishConfirmationPanel.SetActive (true);
+        var level = 0;
+        switch (campManager.Upgrades.UpgradeBought)
+        {
+            case "Gather":
+                level = campManager.Upgrades.GatherLevel;
+                break;
 
-		ConfirmationShade.SetActive (true);
+            case "LeaderStrength":
+                level = campManager.Upgrades.LeaderStrengthLevel;
+                break;
+
+            case "LeaderHealth":
+                level = campManager.Upgrades.LeaderHealthLevel;
+                break;
+
+            case "Villages":
+                level = campManager.Upgrades.MaxVillages;
+                break;
+
+            default:
+                break;
+        }
+        var timeLeft = (int)TimeLeftInSeconds() * 1.0f;
+        var initialTime = campManager.GetTimeForUpgrade(level) * 1.0f;
+        var finishCost = (int) (campManager.FinishUpgradeCost * (timeLeft/initialTime));
+
+        if (GameController.Instance._PREMIUM < finishCost)
+			InsufficientPremiumPanel.SetActive (true);
+        else {
+            finishNowCost.text = finishCost+"";
+            FinishConfirmationPanel.SetActive (true);
+        }
+
+        ConfirmationShade.SetActive (true);
     }
 
     public void FinishUpgradeNow()
@@ -119,16 +174,19 @@ public class CampUIController : MonoBehaviour
 
         campManager.FinishUpgrade();
         SetLevels();
+        SetCosts();
     }
 
     #region Upgrade Buttons
 	private void OpenUpgradePopUp(int cost) {
 		if (cost > GameController.Instance._SCRAPS)
 			InsufficientScrapsPanel.SetActive (true);
-		else
+        else {
+            scrapCost.text = cost + "";
 			UpgradeConfirmationPanel.SetActive (true);
+        }
 
-		ConfirmationShade.SetActive (true);
+        ConfirmationShade.SetActive (true);
 	}
 
     public void UpgradeGather()
