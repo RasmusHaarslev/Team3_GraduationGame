@@ -204,9 +204,9 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StartListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StartListening<CommandEvent>(CommandAnimator);
 		EventManager.Instance.StartListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
-        EventManager.Instance.StartListening<UpgradeCompleted>(UpdateOnUpgrades);
+		EventManager.Instance.StartListening<UpgradeCompleted>(UpdateOnUpgrades);
 
-        equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
+		equippableSpots = new Dictionary<EquippableitemValues.slot, Transform>(){ //TODO: chage gameObject of this list
 		{EquippableitemValues.slot.head, headSlot },
 		{EquippableitemValues.slot.torso, torsoSlot },
 		{EquippableitemValues.slot.leftHand, leftHandSlot },
@@ -224,11 +224,11 @@ public class Character : MonoBehaviour
 		EventManager.Instance.StopListening<EnemyDeathEvent>(EnemyDeath);
 		EventManager.Instance.StopListening<CommandEvent>(CommandAnimator);
 		EventManager.Instance.StopListening<EnemyAttackedByLeaderEvent>(BeginCombatState);
-        EventManager.Instance.StopListening<UpgradeCompleted>(UpdateOnUpgrades);
+		EventManager.Instance.StopListening<UpgradeCompleted>(UpdateOnUpgrades);
 
-    }
+	}
 
-    private void BeginCombatState(EnemyAttackedByLeaderEvent e)
+	private void BeginCombatState(EnemyAttackedByLeaderEvent e)
 	{
 		if (!isInCombat)
 		{
@@ -241,20 +241,20 @@ public class Character : MonoBehaviour
 		}
 	}
 
-    public void UpdateOnUpgrades(UpgradeCompleted e)
-    {
-        if (characterBaseValues.Type == CharacterValues.type.Player)
-        {
-            var upgrades = GameObject.Find("CampUpgradesPanel").GetComponent<CampManager>().Upgrades;
+	public void UpdateOnUpgrades(UpgradeCompleted e)
+	{
+		if (characterBaseValues.Type == CharacterValues.type.Player)
+		{
+			var upgrades = GameObject.Find("CampUpgradesPanel").GetComponent<CampManager>().Upgrades;
 
-            var healthWeapon = health - (characterBaseValues.health + ((upgrades.LeaderHealthLevel - 1) * 4));
-            var damageWeapon = damage - (characterBaseValues.damage + ((upgrades.LeaderStrengthLevel - 1) * 4));
+			var healthWeapon = health - (characterBaseValues.health + ((upgrades.LeaderHealthLevel - 1) * 4));
+			var damageWeapon = damage - (characterBaseValues.damage + ((upgrades.LeaderStrengthLevel - 1) * 4));
 
-            health = characterBaseValues.health + (upgrades.LeaderHealthLevel * 4) + healthWeapon;
-            damage = characterBaseValues.damage + (upgrades.LeaderStrengthLevel * 4) + damageWeapon;
-        }
-        
-    }
+			health = characterBaseValues.health + (upgrades.LeaderHealthLevel * 4) + healthWeapon;
+			damage = characterBaseValues.damage + (upgrades.LeaderStrengthLevel * 4) + damageWeapon;
+		}
+
+	}
 
 	IEnumerator GetWeapon()
 	{
@@ -303,7 +303,7 @@ public class Character : MonoBehaviour
 		range = initValues.range;
 		damage = initValues.Type == CharacterValues.type.Player ? initValues.damage + (CampManager.Instance.Upgrades.LeaderStrengthLevel * 4) : initValues.damage;
 		damageSpeed = initValues.damageSpeed;
-		currentHealth = GameController.Instance._VILLAGERS < 0 ? health /2f : health;
+		currentHealth = GameController.Instance._VILLAGERS < 0 ? health / 2f : health;
 		if (characterBaseValues.Type == CharacterValues.type.Hunter || characterBaseValues.Type == CharacterValues.type.Player || characterBaseValues.Type == CharacterValues.type.Tribesman)
 		{
 			animator = GetComponent<Animator>();
@@ -438,10 +438,10 @@ public class Character : MonoBehaviour
 	{
 		GameObject finalTarget;
 		finalTarget = currentOpponents[UnityEngine.Random.Range(0, currentOpponents.Count)];
-        if (finalTarget.GetComponent<HunterStateMachine>() != null && finalTarget.GetComponent<HunterStateMachine>().outOfCombatCommandState == HunterStateMachine.OutOfCombatCommandState.Stay)
-        {
-            finalTarget = FindRandomEnemy();
-        }
+		if (finalTarget.GetComponent<HunterStateMachine>() != null && finalTarget.GetComponent<HunterStateMachine>().outOfCombatCommandState == HunterStateMachine.OutOfCombatCommandState.Stay)
+		{
+			finalTarget = FindRandomEnemy();
+		}
 		return finalTarget;
 	}
 
