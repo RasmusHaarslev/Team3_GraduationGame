@@ -10,7 +10,10 @@ public class ConfirmPanel : MonoBehaviour
     public GameObject btnYesVillage;
     public GameObject btnNoVillage;
 
-    public Text txtBtnYes;
+	public GameObject btnYesNoVillages;
+	public GameObject btnNoNoVillages;
+
+	public Text txtBtnYes;
     public Text txtBtnNo;
     public Text txtBtnYesVillage;
     public Text txtBtnNoVillage;
