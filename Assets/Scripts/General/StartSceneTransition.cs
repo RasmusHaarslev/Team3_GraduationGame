@@ -12,9 +12,20 @@ public class StartSceneTransition : MonoBehaviour {
 
     void Start() {
         fadeImg = gameObject.GetComponent<Image>();
-        StartCoroutine(StartScene());
+        //StartCoroutine(StartScene());
     }
 
+
+	void Update()
+	{
+		if(time <= 0.0f)
+		{
+			gameObject.SetActive(false);
+		}
+
+		fadeImg.color = new Color(fadeImg.color.r, fadeImg.color.g, fadeImg.color.b, time);
+		time -= Time.deltaTime * (1.0f / transitionTime);
+	}
     IEnumerator StartScene()
     {
         while (time >= 0.0f)

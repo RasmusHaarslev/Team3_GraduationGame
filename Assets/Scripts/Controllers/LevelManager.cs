@@ -161,7 +161,7 @@ public class LevelManager : MonoBehaviour
 	private void EnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesAlive--;
-		Debug.Log("Killed " + EnemiesAlive);
+		//Debug.Log("Killed " + EnemiesAlive);
 		CheckConditions();
 	}
 
