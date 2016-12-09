@@ -29,12 +29,12 @@ public class MoveScript : MonoBehaviour
 
 	private void TakeDamage(TakeDamageEvent e)
 	{
-		if (e.target == gameObject)
-		{
-			character.animator.SetBool("isAware", true);
-			character.animator.SetTrigger("TakeDamage");
-			character.animator.SetBool("isAware", false);
-		}
+		//if (e.target == gameObject)
+		//{
+		//	character.animator.SetBool("isAware", true);
+		//	character.animator.SetTrigger("TakeDamage");
+		//	character.animator.SetBool("isAware", false);
+		//}
 	}
 
 

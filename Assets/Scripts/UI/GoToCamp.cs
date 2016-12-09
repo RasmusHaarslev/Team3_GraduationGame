@@ -7,6 +7,7 @@ public class GoToCamp : MonoBehaviour {
     {
 		PlayerPrefs.SetInt("GameplayTutorialCompleted", 1);
 		EventManager.Instance.TriggerEvent(new ChangeResources(food: PlayerPrefs.GetInt(StringResources.FoodAmountPrefsName)));
-        GameController.Instance.LoadScene("CampManagement");
+		EventManager.Instance.TriggerEvent(new EndSceneTransitionEvent("CampManagement"));
+		//GameController.Instance.LoadScene("CampManagement");
     }
 }
